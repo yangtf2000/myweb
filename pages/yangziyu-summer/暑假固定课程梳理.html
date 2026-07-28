@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暑假固定课程梳理与排期方案</title>
+<style>
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "Microsoft YaHei", sans-serif; background: rgba(255,255,255,0.04); color: #e8ecf4; line-height: 1.6; padding: 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 22px; font-weight: 600; margin: 30px 0 10px; color: #1a1a1a; }
+h2 { font-size: 18px; font-weight: 600; margin: 25px 0 12px; color: #e8ecf4; padding-bottom: 8px; border-bottom: 2px solid #ddd; }
+h3 { font-size: 15px; font-weight: 600; margin: 18px 0 8px; color: #e8ecf4; }
+p { margin: 8px 0; font-size: 14px; }
+.subtitle { color: #e8ecf4; font-size: 13px; margin-bottom: 20px; }
+
+/* 课程卡片 */
+.course-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 15px 0; }
+.course-card { border-radius: 10px; padding: 18px; border: 1px solid #e0e0e0; }
+.course-card .tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; font-weight: 600; }
+.course-card h3 { margin-bottom: 6px; font-size: 16px; }
+.course-card .time { font-size: 20px; font-weight: 700; margin: 8px 0; }
+.course-card .detail { font-size: 13px; color: #e8ecf4; }
+.course-card .stat { display: flex; gap: 20px; margin-top: 10px; font-size: 12px; }
+.course-card .stat span { color: #e8ecf4; }
+.course-card .stat strong { font-size: 15px; }
+
+.c-calig { background: #FAEEDA; border-color: #EF9F27; }
+.c-calig .tag { background: #EF9F27; color: #fff; }
+.c-calig .time { color: #854F0B; }
+
+.c-chinese { background: #E1F5EE; border-color: #5DCAA5; }
+.c-chinese .tag { background: #5DCAA5; color: #fff; }
+.c-chinese .time { color: #0F6E56; }
+
+.c-eng { background: rgba(56,189,248,0.08); border-color: #85B7EB; }
+.c-eng .tag { background: #378ADD; color: #fff; }
+.c-eng .time { color: #185FA5; }
+
+.c-math { background: #FAECE7; border-color: #F0997B; }
+.c-math .tag { background: #D85A30; color: #fff; }
+.c-math .time { color: #993C1D; }
+
+/* 表格 */
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th { background: #f0f0f0; padding: 10px 8px; text-align: center; font-weight: 600; border: 1px solid #ddd; }
+td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+td.label { background: #fafafa; font-weight: 600; }
+tr.rest td { background: #fff5f5; color: #c0392b; }
+tr.rest td.label { background: #fce4ec; }
+
+/* 阶段卡 */
+.phase { border-radius: 10px; padding: 16px; margin: 12px 0; border: 1px solid #e0e0e0; background: rgba(255,255,255,0.05); }
+.phase-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.phase-badge { display: inline-block; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-size: 13px; font-weight: 700; color: #fff; }
+.phase-title { font-size: 15px; font-weight: 600; }
+.phase-dates { font-size: 12px; color: #e8ecf4; margin-left: auto; }
+.phase-body { font-size: 13px; color: #e8ecf4; }
+.phase-body ul { margin-left: 20px; margin-top: 6px; }
+.phase-body li { margin: 3px 0; }
+.free { background: #f0f7ff; border-color: #b3d4f4; }
+.travel { background: rgba(245,158,11,0.08); border-color: #ffe082; }
+.intense { background: rgba(244,63,94,0.08); border-color: #f5b0b0; }
+
+/* 警告框 */
+.alert { border-radius: 8px; padding: 14px 18px; margin: 15px 0; font-size: 13px; }
+.alert-danger { background: rgba(244,63,94,0.08); border: 1px solid #f5b0b0; color: #c0392b; }
+.alert-info { background: rgba(52,211,153,0.08); border: 1px solid #a5d6a7; color: #34d399; }
+.alert-warning { background: rgba(245,158,11,0.08); border: 1px solid #ffe082; color: #f57f17; }
+
+/* 时间线日历 */
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin: 10px 0; }
+.cal-header { text-align: center; font-size: 11px; font-weight: 600; color: #e8ecf4; padding: 4px; }
+.cal-cell { min-height: 50px; border-radius: 4px; padding: 4px; font-size: 11px; border: 1px solid #e8e8e8; }
+.cal-cell .date { font-weight: 600; font-size: 12px; }
+.cal-cell.calig { background: #FAEEDA; border-color: #EF9F27; }
+.cal-cell.chinese { background: #E1F5EE; border-color: #5DCAA5; }
+.cal-cell.eng { background: rgba(56,189,248,0.08); border-color: #85B7EB; }
+.cal-cell.math { background: #FAECE7; border-color: #F0997B; }
+.cal-cell.eng-math { background: rgba(129,140,248,0.08); border-color: #D85A30; }
+.cal-cell.calig-chinese { background: rgba(129,140,248,0.08); border-color: #1D9E75; }
+.cal-cell.rest-day { background: rgba(255,255,255,0.04); color: #ccc; }
+.cal-cell.travel { background: rgba(245,158,11,0.08); border-color: #FFC107; border-width: 2px; }
+.cal-cell.free { background: #f0f7ff; border-color: #b3d4f4; }
+.cal-cell .tag-mini { font-size: 9px; display: block; margin-top: 2px; }
+
+/* 统计 */
+.stats-row { display: flex; gap: 12px; margin: 15px 0; flex-wrap: wrap; }
+.stat-box { flex: 1; min-width: 130px; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 14px; text-align: center; border: 1px solid #e0e0e0; }
+.stat-box .num { font-size: 24px; font-weight: 700; }
+.stat-box .lbl { font-size: 12px; color: #e8ecf4; margin-top: 4px; }
+
+    </style>
+<link rel="stylesheet" href="../../assets/theme.css">
+    <link rel="stylesheet" href="../../assets/force-dark.css">
+<link rel="stylesheet" href="../../assets/yangziyu-override.css">
+</head>
+<body>
+<div class="container">
+
+<h1>暑假固定课程梳理与排期方案</h1>
+<p class="subtitle">基于家长提供的课外班具体时间 | 更新时间：2026年7月10日</p>
+
+<!-- ========== 一、四门固定课外班 ========== -->
+<h2>一、四门固定课外班（已确认）</h2>
+
+<div class="course-grid">
+  <div class="course-card c-calig">
+    <span class="tag">练字</span>
+    <h3>练字课</h3>
+    <div class="time">14:30 — 16:00</div>
+    <div class="detail">7月6日 — 7月17日（共12天）</div>
+    <div class="detail">课后练字作业：2小时/天</div>
+    <div class="stat">
+      <div><span>上课</span><br><strong>1.5h/天</strong></div>
+      <div><span>作业</span><br><strong>2h/天</strong></div>
+      <div><span>合计</span><br><strong>42h</strong></div>
+    </div>
+  </div>
+
+  <div class="course-card c-chinese">
+    <span class="tag">语文</span>
+    <h3>语文班</h3>
+    <div class="time">9:00 — 10:30</div>
+    <div class="detail">7月13日 — 7月25日（共13天，7/19休息）</div>
+    <div class="detail">课后作业：1小时/天</div>
+    <div class="stat">
+      <div><span>上课</span><br><strong>1.5h/天</strong></div>
+      <div><span>作业</span><br><strong>1h/天</strong></div>
+      <div><span>合计</span><br><strong>30h</strong></div>
+    </div>
+  </div>
+
+  <div class="course-card c-eng">
+    <span class="tag">课外英语</span>
+    <h3>课外英语班</h3>
+    <div class="time">8:30 — 11:30</div>
+    <div class="detail">8月1日 — 8月29日（共29天，8/13、8/19、8/25休息）</div>
+    <div class="detail">课后作业：3小时/天</div>
+    <div class="stat">
+      <div><span>上课</span><br><strong>3h/天</strong></div>
+      <div><span>作业</span><br><strong>3h/天</strong></div>
+      <div><span>合计</span><br><strong>156h</strong></div>
+    </div>
+  </div>
+
+  <div class="course-card c-math">
+    <span class="tag">数学</span>
+    <h3>数学班</h3>
+    <div class="time">13:30 — 15:30</div>
+    <div class="detail">8月15日 — 8月27日（共13天，8/21休息）</div>
+    <div class="detail">课后作业：2小时/天</div>
+    <div class="stat">
+      <div><span>上课</span><br><strong>2h/天</strong></div>
+      <div><span>作业</span><br><strong>2h/天</strong></div>
+      <div><span>合计</span><br><strong>48h</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-box"><div class="num" style="color:#EF9F27">42h</div><div class="lbl">练字总耗时</div></div>
+  <div class="stat-box"><div class="num" style="color:#5DCAA5">30h</div><div class="lbl">语文总耗时</div></div>
+  <div class="stat-box"><div class="num" style="color:#378ADD">156h</div><div class="lbl">英语总耗时</div></div>
+  <div class="stat-box"><div class="num" style="color:#D85A30">48h</div><div class="lbl">数学总耗时</div></div>
+  <div class="stat-box"><div class="num" style="color: #e8ecf4">276h</div><div class="lbl">固定课总耗时</div></div>
+</div>
+
+<div class="alert alert-info">
+  <strong>总工作量：</strong>四门固定课外班 + 课后作业 = <strong>276小时</strong>，占暑假总时间（62天 × 16h = 992h）的约 28%。
+  剩余约 <strong>716h</strong> 可用于：学校暑假作业、自主阅读、运动、旅行、自由活动等。
+</div>
+
+
+<!-- ========== 二、暑假日历总览 ========== -->
+<h2>二、暑假日历总览（7.1 — 8.31）</h2>
+<p>颜色标注：<span style="background:#FAEEDA;padding:2px 6px;border-radius:3px;">练字</span>
+<span style="background:#E1F5EE;padding:2px 6px;border-radius:3px;">语文</span>
+<span style="background: rgba(56,189,248,0.08);padding:2px 6px;border-radius:3px;">英语</span>
+<span style="background:#FAECE7;padding:2px 6px;border-radius:3px;">数学</span>
+<span style="background: rgba(245,158,11,0.08);padding:2px 6px;border-radius:3px;border:1px solid #FFC107;">旅行</span>
+<span style="background: rgba(255,255,255,0.04);padding:2px 6px;border-radius:3px;">休</span> = 休息/无课</p>
+
+<h3>7月</h3>
+<div class="cal-grid">
+  <div class="cal-header">日</div><div class="cal-header">一</div><div class="cal-header">二</div><div class="cal-header">三</div><div class="cal-header">四</div><div class="cal-header">五</div><div class="cal-header">六</div>
+  <div class="cal-cell free"><div class="date"> </div></div>
+  <div class="cal-cell free"><div class="date"> </div></div>
+  <div class="cal-cell free"><div class="date"> </div></div>
+  <div class="cal-cell free"><div class="date">1</div><span class="tag-mini">自由</span></div>
+  <div class="cal-cell free"><div class="date">2</div><span class="tag-mini">自由</span></div>
+  <div class="cal-cell free"><div class="date">3</div><span class="tag-mini">自由</span></div>
+  <div class="cal-cell free"><div class="date">4</div><span class="tag-mini">自由</span></div>
+  <div class="cal-cell free"><div class="date">5</div><span class="tag-mini">自由</span></div>
+  <div class="cal-cell calig"><div class="date">6</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig"><div class="date">7</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig"><div class="date">8</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig"><div class="date">9</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig"><div class="date">10</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig"><div class="date">11</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig"><div class="date">12</div><span class="tag-mini">练字</span></div>
+  <div class="cal-cell calig-chinese"><div class="date">13</div><span class="tag-mini">练字+语文</span></div>
+  <div class="cal-cell calig-chinese"><div class="date">14</div><span class="tag-mini">练字+语文</span></div>
+  <div class="cal-cell calig-chinese"><div class="date">15</div><span class="tag-mini">练字+语文</span></div>
+  <div class="cal-cell calig-chinese"><div class="date">16</div><span class="tag-mini">练字+语文</span></div>
+  <div class="cal-cell calig-chinese"><div class="date">17</div><span class="tag-mini">练字+语文</span></div>
+  <div class="cal-cell chinese"><div class="date">18</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell rest-day"><div class="date">19</div><span class="tag-mini">语文休</span></div>
+  <div class="cal-cell chinese"><div class="date">20</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell chinese"><div class="date">21</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell chinese"><div class="date">22</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell chinese"><div class="date">23</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell chinese"><div class="date">24</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell chinese"><div class="date">25</div><span class="tag-mini">语文</span></div>
+  <div class="cal-cell travel"><div class="date">26</div><span class="tag-mini">旅行</span></div>
+  <div class="cal-cell travel"><div class="date">27</div><span class="tag-mini">旅行</span></div>
+  <div class="cal-cell travel"><div class="date">28</div><span class="tag-mini">旅行</span></div>
+  <div class="cal-cell travel"><div class="date">29</div><span class="tag-mini">旅行</span></div>
+  <div class="cal-cell travel"><div class="date">30</div><span class="tag-mini">旅行</span></div>
+  <div class="cal-cell travel"><div class="date">31</div><span class="tag-mini">旅行</span></div>
+</div>
+
+<h3>8月</h3>
+<div class="cal-grid">
+  <div class="cal-header">日</div><div class="cal-header">一</div><div class="cal-header">二</div><div class="cal-header">三</div><div class="cal-header">四</div><div class="cal-header">五</div><div class="cal-header">六</div>
+  <div class="cal-cell eng"><div class="date">1</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">2</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">3</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">4</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">5</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">6</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">7</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">8</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">9</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">10</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">11</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">12</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell rest-day"><div class="date">13</div><span class="tag-mini">英语休</span></div>
+  <div class="cal-cell eng"><div class="date">14</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng-math"><div class="date">15</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng-math"><div class="date">16</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng-math"><div class="date">17</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng-math"><div class="date">18</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell math"><div class="date">19</div><span class="tag-mini">英休/数</span></div>
+  <div class="cal-cell eng-math"><div class="date">20</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng"><div class="date">21</div><span class="tag-mini">英/数休</span></div>
+  <div class="cal-cell eng-math"><div class="date">22</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng-math"><div class="date">23</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng-math"><div class="date">24</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell math"><div class="date">25</div><span class="tag-mini">英休/数</span></div>
+  <div class="cal-cell eng-math"><div class="date">26</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng-math"><div class="date">27</div><span class="tag-mini">英+数</span></div>
+  <div class="cal-cell eng"><div class="date">28</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell eng"><div class="date">29</div><span class="tag-mini">英语</span></div>
+  <div class="cal-cell free"><div class="date">30</div><span class="tag-mini">自由</span></div>
+  <div class="cal-cell free"><div class="date">31</div><span class="tag-mini">自由</span></div>
+</div>
+
+
+<!-- ========== 三、七大阶段划分 ========== -->
+<h2>三、七大阶段划分</h2>
+
+<div class="phase free">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#378ADD">1</span>
+    <span class="phase-title">自由缓冲期</span>
+    <span class="phase-dates">7.1 — 7.5（5天）</span>
+  </div>
+  <div class="phase-body">
+    无固定课外班。全天可用于：学校暑假作业启动、运动、自由活动。
+    <ul>
+      <li>建议完成学校暑假作业的 20%-30%</li>
+      <li>每天安排 1h 运动 + 自由阅读</li>
+      <li>周末（7/4-7/5）自由活动</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#EF9F27">2</span>
+    <span class="phase-title">练字单课期</span>
+    <span class="phase-dates">7.6 — 7.12（7天）</span>
+  </div>
+  <div class="phase-body">
+    仅练字课。下午 14:30-16:00 上课 + 2h 练字作业，上午和晚上充裕。
+    <ul>
+      <li>上午：学校暑假作业 + 运动约 3-4h</li>
+      <li>下午：练字课 + 作业 3.5h</li>
+      <li>晚上：自主阅读 + 预习 约 2h</li>
+      <li>7/11(六)-7/12(日)：练字课照常，其余时间自由活动</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#534AB7">3</span>
+    <span class="phase-title">练字+语文双课期（最忙7月段）</span>
+    <span class="phase-dates">7.13 — 7.17（5天）</span>
+  </div>
+  <div class="phase-body">
+    语文 9:00-10:30 + 练字 14:30-16:00，两课叠加。
+    <ul>
+      <li>上午：语文课 1.5h + 语文作业 1h</li>
+      <li>下午：练字课 1.5h + 练字作业 2h</li>
+      <li>晚上：仅剩约 1.5-2h 可用于学校作业/阅读</li>
+      <li>此段时间紧张，学校暑假作业减量推进</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#5DCAA5">4</span>
+    <span class="phase-title">语文单课期</span>
+    <span class="phase-dates">7.18 — 7.25（8天，7/19休息）</span>
+  </div>
+  <div class="phase-body">
+    仅语文课 9:00-10:30 + 1h 作业，其余时间充裕。
+    <ul>
+      <li>上午：语文课 + 作业 2.5h</li>
+      <li>下午：学校暑假作业 + 运动约 4-5h</li>
+      <li>7/19(日)全天休息 → 自由活动日</li>
+      <li>7/25(六)语文课照常</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase travel">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#FFC107;color: #e8ecf4">5</span>
+    <span class="phase-title">旅行期</span>
+    <span class="phase-dates">7.26 — 7.31（6天）</span>
+  </div>
+  <div class="phase-body">
+    全暑假唯一无固定课的连续窗口，适合安排约一周的旅行。
+    <ul>
+      <li>旅行期间暂停学校暑假作业</li>
+      <li>可带阅读书在路上/休息时看</li>
+      <li>旅行回来后 8/1 立即进入英语密集期</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#378ADD">6</span>
+    <span class="phase-title">英语单课期</span>
+    <span class="phase-dates">8.1 — 8.14（14天，8/13休息）</span>
+  </div>
+  <div class="phase-body">
+    英语 8:30-11:30 + 3h 作业，占去半天。
+    <ul>
+      <li>上午：英语课 3h</li>
+      <li>午饭后：英语作业 3h（12:30-15:30）</li>
+      <li>下午：运动/阅读 约 2h（16:00-18:00）</li>
+      <li>晚上：学校暑假作业 约 2h（19:00-21:00）</li>
+      <li>8/13(四)英语休息 → 多出 6h 可用</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase intense">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#D85A30">7</span>
+    <span class="phase-title">英+数双课期（全暑假最忙）</span>
+    <span class="phase-dates">8.15 — 8.27（13天，8/19英休、8/21数休、8/25英休）</span>
+  </div>
+  <div class="phase-body">
+    英语 8:30-11:30 + 数学 13:30-15:30，两课叠加 + 双份作业。
+    <ul>
+      <li>8:30-11:30 英语课（3h）</li>
+      <li>13:30-15:30 数学课（2h）</li>
+      <li>15:30-18:30 英语作业（3h）</li>
+      <li>19:00-21:00 数学作业（2h）</li>
+      <li>每天固定耗时 10h，仅晚饭后有约 0.5-1h 自由时间</li>
+    </ul>
+    <div class="alert alert-danger" style="margin-top:10px;">
+      <strong>警告：</strong>此阶段每天学习时间达 10 小时，几乎无法安排其他任务。
+      所有学校暑假作业、读书笔记等必须在此阶段之前完成！
+    </div>
+    <ul>
+      <li>8/19(三)：英语休息 → 仅数学，多出 6h</li>
+      <li>8/21(五)：数学休息 → 仅英语，多出 4h</li>
+      <li>8/25(一)：英语休息 → 仅数学，多出 6h</li>
+      <li>这3天是双课期间唯一的喘息窗口</li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase free">
+  <div class="phase-header">
+    <span class="phase-badge" style="background:#1D9E75">8</span>
+    <span class="phase-title">收尾调整期</span>
+    <span class="phase-dates">8.28 — 8.31（4天）</span>
+  </div>
+  <div class="phase-body">
+    英语课最后两天（8/28-8/29），之后 8/30-8/31 周末完全自由。
+    <ul>
+      <li>8/28-8/29：英语课 + 作业照常</li>
+      <li>8/30-8/31：自由活动 + 查漏补缺</li>
+      <li>逐步调整作息，准备开学</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== 四、每日可用自主时间汇总 ========== -->
+<h2>四、每日可用自主时间汇总</h2>
+<p>扣除固定课外班 + 课后作业 + 三餐/午休（约2h）后，每天可安排其他任务的时间：</p>
+
+<table>
+  <tr>
+    <th style="width:18%">阶段</th>
+    <th style="width:14%">日期</th>
+    <th style="width:10%">天数</th>
+    <th style="width:14%">固定耗时/天</th>
+    <th style="width:14%">可用自主/天</th>
+    <th style="width:15%">阶段可用总量</th>
+    <th>建议安排</th>
+  </tr>
+  <tr>
+    <td class="label">自由缓冲期</td>
+    <td>7.1-7.5</td>
+    <td>5天</td>
+    <td>0h</td>
+    <td>~12h</td>
+    <td>~60h</td>
+    <td>学校暑假作业(主)+运动+阅读</td>
+  </tr>
+  <tr>
+    <td class="label">练字单课期</td>
+    <td>7.6-7.12</td>
+    <td>7天</td>
+    <td>3.5h</td>
+    <td>~8h</td>
+    <td>~56h</td>
+    <td>学校暑假作业(主)+运动+预习</td>
+  </tr>
+  <tr>
+    <td class="label">练字+语文双课</td>
+    <td>7.13-7.17</td>
+    <td>5天</td>
+    <td>6h</td>
+    <td>~4.5h</td>
+    <td>~22h</td>
+    <td>学校暑假作业(减量)+阅读</td>
+  </tr>
+  <tr>
+    <td class="label">语文单课期</td>
+    <td>7.18-7.25</td>
+    <td>8天</td>
+    <td>2.5h</td>
+    <td>~7h</td>
+    <td>~56h</td>
+    <td>学校暑假作业+运动+读书</td>
+  </tr>
+  <tr class="rest">
+    <td class="label">旅行期</td>
+    <td>7.26-7.31</td>
+    <td>6天</td>
+    <td>0h</td>
+    <td>全天</td>
+    <td>旅行</td>
+    <td>旅行+路上阅读</td>
+  </tr>
+  <tr>
+    <td class="label">英语单课期</td>
+    <td>8.1-8.14</td>
+    <td>14天</td>
+    <td>6h</td>
+    <td>~3h</td>
+    <td>~42h</td>
+    <td>学校暑假作业(收尾)+运动</td>
+  </tr>
+  <tr style="background: rgba(244,63,94,0.08)">
+    <td class="label">英+数双课期</td>
+    <td>8.15-8.27</td>
+    <td>13天</td>
+    <td>10h</td>
+    <td>~0.5h</td>
+    <td>~6h</td>
+    <td>仅维持，不安排新任务</td>
+  </tr>
+  <tr>
+    <td class="label">收尾调整期</td>
+    <td>8.28-8.31</td>
+    <td>4天</td>
+    <td>6h(仅2天)</td>
+    <td>~6h</td>
+    <td>~24h</td>
+    <td>查漏补缺+调整作息</td>
+  </tr>
+</table>
+
+<div class="stats-row">
+  <div class="stat-box"><div class="num" style="color:#1D9E75">~266h</div><div class="lbl">总可用自主时间</div></div>
+  <div class="stat-box"><div class="num" style="color:#378ADD">~62天</div><div class="lbl">暑假总天数</div></div>
+  <div class="stat-box"><div class="num" style="color:#D85A30">276h</div><div class="lbl">固定课+作业</div></div>
+  <div class="stat-box"><div class="num" style="color:#FFC107">6天</div><div class="lbl">旅行</div></div>
+</div>
+
+<!-- ========== 五、运动/旅行/周末安排 ========== -->
+<h2>五、运动、旅行与周末自由活动</h2>
+
+<h3>运动安排</h3>
+<table>
+  <tr><th style="width:20%">阶段</th><th style="width:25%">建议时间</th><th style="width:15%">时长</th><th>运动类型</th></tr>
+  <tr><td class="label">7.1-7.12</td><td>8:00-9:00 或 17:00-18:00</td><td>1h/天</td><td>游泳/跑步/跳绳/球类</td></tr>
+  <tr><td class="label">7.13-7.17</td><td>17:00-18:00</td><td>1h/天</td><td>跳绳/室内运动</td></tr>
+  <tr><td class="label">7.18-7.25</td><td>16:30-18:00</td><td>1.5h/天</td><td>游泳/球类/户外</td></tr>
+  <tr class="rest"><td class="label">7.26-7.31</td><td>旅行中</td><td>灵活</td><td>旅行活动即运动</td></tr>
+  <tr><td class="label">8.1-8.14</td><td>16:00-17:30</td><td>1.5h/天</td><td>游泳/跳绳/球类</td></tr>
+  <tr style="background: rgba(244,63,94,0.08)"><td class="label">8.15-8.27</td><td>21:00后(仅散步)</td><td>0.5h/天</td><td>仅饭后散步放松</td></tr>
+  <tr><td class="label">8.28-8.31</td><td>16:00-18:00</td><td>2h/天</td><td>恢复运动量</td></tr>
+</table>
+
+<h3>旅行安排</h3>
+<div class="alert alert-warning">
+  <strong>旅行窗口：7月26日 — 7月31日（6天）</strong><br>
+  这是全暑假唯一没有固定课外班的连续时段。8月1日起英语课每天上课，无法出行。<br>
+  建议：7/25语文课结束后当天下午出发，7/31返回，8/1正常上英语课。
+</div>
+
+<h3>周末自由活动</h3>
+<table>
+  <tr><th style="width:15%">日期</th><th style="width:15%">星期</th><th style="width:20%">类型</th><th>说明</th></tr>
+  <tr><td class="label">7/4-7/5</td><td>六-日</td><td>完全自由</td><td>无课，全天自由活动</td></tr>
+  <tr><td class="label">7/11-7/12</td><td>六-日</td><td>练字课日</td><td>下午有练字课，上午+晚上自由</td></tr>
+  <tr><td class="label">7/18-7/19</td><td>六-日</td><td>语文+休</td><td>7/18有语文课，7/19语文休息全天自由</td></tr>
+  <tr><td class="label">7/25-7/26</td><td>六-日</td><td>语文+旅行</td><td>7/25上午语文课，下午出发旅行</td></tr>
+  <tr><td class="label">8/1-8/2</td><td>六-日</td><td>英语课日</td><td>均有英语课，下午完成作业后可自由</td></tr>
+  <tr><td class="label">8/8-8/9</td><td>六-日</td><td>英语课日</td><td>同上</td></tr>
+  <tr><td class="label">8/15-8/16</td><td>六-日</td><td>英+数双课</td><td>最忙周末，无自由时间</td></tr>
+  <tr><td class="label">8/22-8/23</td><td>六-日</td><td>英+数双课</td><td>最忙周末，无自由时间</td></tr>
+  <tr><td class="label">8/29-8/30</td><td>六-日</td><td>英语+自由</td><td>8/29有英语课，8/30全天自由</td></tr>
+  <tr><td class="label">8/30-8/31</td><td>六-日</td><td>完全自由</td><td>暑假最后周末，全天自由</td></tr>
+</table>
+
+<div class="alert alert-info">
+  <strong>说明：</strong>课外班本身安排在周末的，不算"自由活动"时间。
+  真正完全自由的周末只有：<strong>7/4-7/5</strong>、<strong>7/19</strong>、<strong>8/30-8/31</strong>。
+  其余周末均有课外班占用部分时间。
+</div>
+
+<!-- ========== 六、待插入的其他任务 ========== -->
+<h2>六、待插入的其他任务（下一步安排）</h2>
+<p>以下来自《暑假计划》中除四门课外班以外的任务，需要插入到上述可用时间内：</p>
+
+<table>
+  <tr><th style="width:20%">科目</th><th style="width:25%">任务</th><th style="width:15%">预计工作量</th><th>建议插入时段</th></tr>
+  <tr><td class="label" rowspan="4">语文</td><td>读书 + 思维导图（2本）</td><td>~40h</td><td>7.1-7.25 + 8.1-8.14 碎片时间</td></tr>
+  <tr><td>学校暑假作业本</td><td>~20h</td><td>7.1-7.12 上午为主</td></tr>
+  <tr><td>作文（2篇）</td><td>~6h</td><td>7.18-7.25 下午</td></tr>
+  <tr><td>非遗实践</td><td>~8h</td><td>7.18-7.25 或 8.28-8.31</td></tr>
+  <tr><td class="label" rowspan="2">数学</td><td>五年级上册预习（4-5单元）</td><td>~30h</td><td>7.1-7.25 为主（8月无空）</td></tr>
+  <tr><td>口算/计算练习</td><td>~15h</td><td>7.6-7.25 每天30min</td></tr>
+  <tr><td class="label" rowspan="2">英语</td><td>学校暑假作业</td><td>~15h</td><td>7.1-7.25 + 8.1-8.14 晚上</td></tr>
+  <tr><td>外研版课本预习（五上）</td><td>~20h</td><td>7.6-7.25 上午</td></tr>
+</table>
+
+<div class="alert alert-danger">
+  <strong>关键策略：</strong>
+  <ul style="margin: 8px 0 0 20px;">
+    <li>7月是完成学校暑假作业和预习的<strong>主战场</strong>（可用约 194h）</li>
+    <li>8.15-8.27 基本无法安排任何额外任务，不要在此阶段排新内容</li>
+    <li>8.1-8.14 每天仅剩约 3h，优先用于收尾学校暑假作业 + 运动</li>
+    <li>所有预习任务务必在 <strong>8月1日前</strong> 完成</li>
+  </ul>
+</div>
+
+</div>
+<script src="../../assets/nav.js" data-root="../../" data-theme="life" data-title="暑假固定课程梳理与排期方案"></script>
+</body>
+</html>

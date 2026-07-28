@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能旅行规划 — 山西深度游</title>
+<style>
+
+/* ===== Reset & Variables ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f1117;--bg2:#181b24;--bg3:#1e2230;--card:#1a1e2c;--card2:#222738;
+  --text:#e0e0e0;--text2:#a0a8b8;--text3:#6b7280;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.15);
+  --poi-scenic:#85B7EB;--poi-food:#FAC775;--poi-culture:#AFA9EC;--poi-shop:#5DCAA5;
+  --accent:#85B7EB;--radius:10px;--radius-lg:16px;
+}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+  line-height:1.6;font-size:15px;overflow-x:hidden;
+}
+
+/* ===== FORM VIEW ===== */
+.form-view{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px;
+  background:linear-gradient(160deg, #0f1117 0%, #151829 30%, #111624 70%, #0f1117 100%);
+  position:relative;overflow:hidden;
+}
+.form-view::before{
+  content:'';position:absolute;top:-30%;right:-15%;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, rgba(133,183,235,0.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+.form-view::after{
+  content:'';position:absolute;bottom:-20%;left:-10%;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle, rgba(175,169,236,0.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.form-header{text-align:center;margin-bottom:32px;position:relative;z-index:1}
+.form-header .icon{font-size:48px;margin-bottom:12px}
+.form-header h1{font-size:clamp(22px,4vw,32px);font-weight:700;color:#fff;margin-bottom:6px}
+.form-header h1 span{color:var(--accent)}
+.form-header .sub{font-size:14px;color:var(--text2)}
+.form-card{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius-lg);
+  padding:28px 32px;max-width:640px;width:100%;position:relative;z-index:1;
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+}
+.form-row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.form-row .field{flex:1;min-width:120px}
+.field label{
+  display:block;font-size:12px;color:var(--text2);margin-bottom:4px;
+  font-weight:500;text-transform:uppercase;letter-spacing:0.5px;
+}
+.field input,.field select{
+  width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:14px;outline:none;transition:border-color .2s;
+}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%236b7280'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.field select option{background:var(--bg2);color:var(--text)}
+
+/* Preference tags */
+.pref-group{margin-bottom:16px}
+.pref-group label{display:block;font-size:12px;color:var(--text2);margin-bottom:8px;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+.pref-tags{display:flex;flex-wrap:wrap;gap:8px}
+.pref-tag{
+  padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;
+  background:var(--card);border:1px solid var(--border);color:var(--text2);
+  transition:all .2s;user-select:none;
+}
+.pref-tag:hover{border-color:var(--border2);color:var(--text)}
+.pref-tag.active{border-color:var(--accent);background:rgba(133,183,235,0.12);color:var(--accent)}
+
+.btn-generate{
+  width:100%;padding:14px;margin-top:8px;border:none;border-radius:10px;
+  background:linear-gradient(135deg, #85B7EB, #5DA0E0);
+  color:#111;font-size:16px;font-weight:600;cursor:pointer;
+  transition:all .2s;letter-spacing:1px;
+}
+.btn-generate:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(133,183,235,0.25)}
+.btn-generate:active{transform:translateY(0)}
+.form-footer{text-align:center;margin-top:16px;font-size:12px;color:var(--text3);position:relative;z-index:1}
+
+/* ===== RESULT VIEW ===== */
+.result-view{display:none}
+.result-view.show{display:block}
+
+/* Banner */
+.top-banner{
+  background:linear-gradient(135deg, #1a1e2c 0%, #1e2740 40%, #1a2040 100%);
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.top-banner::before{
+  content:'';position:absolute;top:-50%;right:-20%;
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(133,183,235,0.08) 0%, transparent 70%);
+  border-radius:50%;pointer-events:none;
+}
+.banner-inner{
+  max-width:1280px;margin:0 auto;padding:28px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  flex-wrap:wrap;position:relative;z-index:1;
+}
+.banner-title h1{font-size:clamp(18px,3vw,28px);font-weight:700;color:#fff;letter-spacing:-0.5px}
+.banner-title h1 span{color:var(--accent)}
+.banner-title .sub{font-size:13px;color:var(--text2);margin-top:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.banner-actions{display:flex;gap:8px}
+.btn-back{
+  padding:8px 16px;border-radius:8px;border:1px solid var(--border2);background:transparent;
+  color:var(--text2);font-size:13px;cursor:pointer;transition:all .2s;
+}
+.btn-back:hover{border-color:var(--accent);color:var(--accent)}
+.banner-badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge-item{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);
+  padding:10px 16px;text-align:center;min-width:65px;
+}
+.badge-item .val{font-size:18px;font-weight:700;color:#fff;line-height:1.2}
+.badge-item .lbl{font-size:10px;color:var(--text3);margin-top:1px}
+
+/* Main Content */
+.content-section{max-width:1280px;margin:0 auto;padding:16px 24px}
+
+/* Day Tabs */
+.day-tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;scrollbar-width:none}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-tab{
+  flex-shrink:0;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:500;
+  cursor:pointer;border:1px solid var(--border);background:var(--card);
+  color:var(--text2);transition:all .2s;white-space:nowrap;
+}
+.day-tab:hover{border-color:var(--border2);color:var(--text)}
+.day-tab.active{border-color:var(--accent);background:rgba(133,183,235,0.12);color:var(--accent)}
+
+.main-grid{display:grid;grid-template-columns:minmax(280px,400px) 1fr;gap:16px;min-height:500px}
+@media(max-width:820px){.main-grid{grid-template-columns:1fr}}
+
+/* Timeline */
+.timeline-panel{
+  max-height:calc(100vh - 240px);overflow-y:auto;padding-right:4px;
+  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+}
+.timeline-panel::-webkit-scrollbar{width:4px}
+.timeline-panel::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
+
+.timeline-day-header{
+  font-size:14px;font-weight:600;color:#fff;margin-bottom:8px;
+  display:flex;align-items:center;gap:8px;
+}
+.timeline-day-header .day-label{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;font-size:11px;font-weight:700;
+  background:rgba(133,183,235,0.2);color:var(--accent);
+}
+.timeline-day-header .day-city{font-size:11px;color:var(--text3);font-weight:400}
+
+.timeline-card{
+  position:relative;padding:10px 12px 10px 32px;margin-bottom:8px;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  cursor:pointer;transition:all .2s;
+}
+.timeline-card:hover{border-color:var(--border2);background:var(--card2)}
+.timeline-card.active{border-color:var(--accent);box-shadow:0 0 0 1px rgba(133,183,235,0.2)}
+.timeline-card .card-dot{
+  position:absolute;left:8px;top:14px;width:8px;height:8px;border-radius:50%;
+}
+.timeline-card .card-dot.scenic{background:var(--poi-scenic)}
+.timeline-card .card-dot.food{background:var(--poi-food)}
+.timeline-card .card-dot.culture{background:var(--poi-culture)}
+.timeline-card .card-dot.shop{background:var(--poi-shop)}
+.timeline-card .card-dot.other{background:#e0e0e0}
+
+.timeline-card .card-time{font-size:10px;color:var(--text3);margin-bottom:2px}
+.timeline-card .card-name{font-size:13px;font-weight:500;color:var(--text)}
+.timeline-card .card-desc{font-size:11px;color:var(--text2);margin-top:2px}
+.timeline-card .badge-type{
+  display:inline-block;padding:1px 7px;border-radius:4px;font-size:10px;margin-top:3px;font-weight:500;
+}
+.badge-type.scenic{background:rgba(133,183,235,0.15);color:var(--poi-scenic)}
+.badge-type.food{background:rgba(250,199,117,0.15);color:var(--poi-food)}
+.badge-type.culture{background:rgba(175,169,236,0.15);color:var(--poi-culture)}
+.badge-type.shop{background:rgba(93,202,165,0.15);color:var(--poi-shop)}
+
+.timeline-card::before{
+  content:'';position:absolute;left:11px;top:26px;bottom:-10px;
+  width:1px;background:var(--border);z-index:-1;
+}
+.timeline-card:last-child::before{display:none}
+
+/* Map */
+.map-wrapper{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--bg2)}
+#mapContainer{width:100%;height:100%;min-height:500px}
+@media(max-width:820px){#mapContainer{min-height:350px;height:350px}}
+.map-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg2);z-index:2;transition:opacity .3s}
+.map-loading.hidden{opacity:0;pointer-events:none}
+.map-loading .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+.map-loading .text{font-size:13px;color:var(--text3);margin-top:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.map-legend{position:absolute;bottom:12px;left:12px;z-index:3;display:flex;flex-wrap:wrap;gap:8px}
+.map-legend .legend-item{display:flex;align-items:center;gap:4px;font-size:11px;padding:4px 8px;background:rgba(15,17,23,.85);border-radius:6px;color:var(--text2);backdrop-filter:blur(8px)}
+.map-legend .legend-dot{width:8px;height:8px;border-radius:50%}
+
+/* Toast */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:999;padding:12px 24px;border-radius:8px;font-size:14px;background:var(--card2);border:1px solid var(--border2);color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.toast.error{border-color:#F09595;color:#F09595}
+
+/* Key input section */
+.key-notice{
+  background:var(--card);border:1px solid rgba(250,199,117,0.2);border-radius:var(--radius);
+  padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--poi-food);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.key-notice .key-input{flex:1;min-width:200px;padding:6px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;outline:none}
+.key-notice .key-btn{padding:6px 14px;border-radius:6px;border:none;background:var(--poi-food);color:#111;font-size:12px;font-weight:500;cursor:pointer}
+.key-notice .key-link{color:var(--poi-scenic);text-decoration:underline;cursor:pointer;font-size:11px}
+/* Diagnostic bar */
+.diag-bar{display:flex;align-items:center;gap:16px;padding:8px 16px;background:#0a0c12;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;font-size:11px;font-family:monospace;color:var(--text3);flex-wrap:wrap}
+.diag-bar span{padding:2px 6px;background:rgba(255,255,255,.04);border-radius:4px}
+.diag-bar .ok{color:var(--teal)}.diag-bar .warn{color:var(--amber)}.diag-bar .err{color:#F09595}
+
+    </style>
+<link rel="stylesheet" href="../../assets/theme.css">
+    <link rel="stylesheet" href="../../assets/force-dark.css">
+</head>
+<body>
+
+<!-- ==================== FORM VIEW ==================== -->
+<div class="form-view" id="formView">
+  <div class="form-header">
+    <div class="icon">🗺️</div>
+    <h1>智能<span>旅行规划</span></h1>
+    <div class="sub">填入你的需求，一键生成专属行程</div>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <div class="key-notice" id="keyNotice" style="display:none">
+      <span>🔑</span>
+      <span>地图需要腾讯地图 Key，</span>
+      <a class="key-link" href="https://lbs.qq.com/dev/console/quick-register" target="_blank">前往免费申请</a>
+      <input class="key-input" id="mapKeyInput" placeholder="粘贴你的 Key 到这里...">
+      <button class="key-btn" onclick="applyMapKey()">应用</button>
+    </div>
+    <div class="diag-bar" id="diagBar">
+      <span id="diagProto">🔗 协议: --</span>
+      <span id="diagKey">🔑 Key: --</span>
+      <span id="diagServer">🖥️ 服务器: 检查中...</span>
+      <span id="diagStatus" style="margin-left:auto">⏳ 待检测</span>
+    </div>
+
+    <div class="form-row">
+      <div class="field"><label>📍 出发地</label><input type="text" id="fFrom" value="长沙" placeholder="例：长沙"></div>
+      <div class="field"><label>🎯 目的地</label><input type="text" id="fTo" value="山西" placeholder="例：山西 / 云南 / 成都"></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label>📅 出行日期</label><input type="date" id="fDate" value="2026-07-25"></div>
+      <div class="field"><label>⏱️ 旅行天数</label><select id="fDays"><option value="5">5 天</option><option value="6">6 天</option><option value="7">7 天</option><option value="8" selected>8 天</option><option value="9">9 天</option><option value="10">10 天</option><option value="12">12 天</option><option value="14">14 天</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="field"><label>👨‍👩‍👧‍👦 出行人数</label><select id="fPeople"><option value="1">1 人（独行）</option><option value="2">2 人（情侣/朋友）</option><option value="3">3 人（小家庭）</option><option value="4" selected>4 人（家庭出游）</option><option value="5">5 人以上（团体）</option></select></div>
+      <div class="field"><label>💰 人均预算</label><select id="fBudget"><option value="2000">经济型 ≈¥2000</option><option value="3000" selected>舒适型 ≈¥3000</option><option value="5000">品质型 ≈¥5000</option><option value="8000">豪华型 ≈¥8000</option></select></div>
+    </div>
+
+    <div class="pref-group">
+      <label>❤️ 旅行偏好（可多选）</label>
+      <div class="pref-tags" id="prefTags">
+        <span class="pref-tag active" data-pref="history">🏯 历史文化</span>
+        <span class="pref-tag active" data-pref="nature">🏔️ 自然风光</span>
+        <span class="pref-tag active" data-pref="food">🍜 美食打卡</span>
+        <span class="pref-tag active" data-pref="ancient">🏘️ 古村古镇</span>
+        <span class="pref-tag" data-pref="temple">🙏 朝圣祈福</span>
+        <span class="pref-tag" data-pref="photo">📸 拍照打卡</span>
+        <span class="pref-tag" data-pref="kids">🎠 亲子友好</span>
+        <span class="pref-tag" data-pref="museum">🏛️ 博物馆/展馆</span>
+        <span class="pref-tag" data-pref="shopping">🛍️ 特产购物</span>
+        <span class="pref-tag" data-pref="night">🌃 夜生活</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="field"><label>🚗 交通方式</label><select id="fTransport"><option value="plane+car" selected>✈️ 飞机 + 当地租车</option><option value="train+car">🚄 高铁 + 当地租车</option><option value="selfdrive">🚙 全程自驾</option><option value="public">🚌 公共交通</option></select></div>
+      <div class="field"><label>🏨 住宿偏好</label><select id="fHotel"><option value="mid" selected>舒适型酒店</option><option value="budget">经济连锁</option><option value="luxury">高端/特色</option><option value="mix">混搭（特色+舒适）</option></select></div>
+    </div>
+
+    <div class="field" style="margin-bottom:12px">
+      <label>💬 特殊需求 / 备注</label>
+      <input type="text" id="fNote" placeholder="例：五台山还愿、带着高三毕业生和五年级小朋友...">
+    </div>
+
+    <button class="btn-generate" onclick="generatePlan()">✨ 生成我的专属旅行计划</button>
+  </div>
+  <div class="form-footer">基于腾讯地图 · 数据仅供参考 · 建议出发前核实最新信息</div>
+</div>
+
+<!-- ==================== RESULT VIEW ==================== -->
+<div class="result-view" id="resultView">
+  <div class="top-banner">
+    <div class="banner-inner">
+      <div>
+        <div class="banner-title"><h1 id="rTitle">山西深度游 <span>8天全景</span></h1></div>
+        <div class="sub" id="rSub">长沙出发 · 一家四口 · 五台山还愿 · 自驾自由行</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="banner-badges">
+          <div class="badge-item"><div class="val" id="rDays">8</div><div class="lbl">旅行天数</div></div>
+          <div class="badge-item"><div class="val" id="rPOIs">40</div><div class="lbl">行程POI</div></div>
+          <div class="badge-item"><div class="val" id="rBudget">≈1.8万</div><div class="lbl">总预算</div></div>
+          <div class="badge-item"><div class="val" id="rTransport">飞机+租车</div><div class="lbl">交通方式</div></div>
+        </div>
+        <button class="btn-back" onclick="backToForm()">← 重新规划</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="day-tabs" id="dayTabs"></div>
+    <div class="main-grid">
+      <div class="timeline-panel" id="timelinePanel"></div>
+      <div class="map-wrapper">
+        <div class="map-loading" id="mapLoading"><div class="spinner"></div><div class="text">加载地图中...</div></div>
+        <div id="mapContainer"></div>
+        <div class="map-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--poi-scenic)"></span>景点</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--poi-food)"></span>美食</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--poi-culture)"></span>文化</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--poi-shop)"></span>购物</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================================================================
+   1. GLOBAL STATE
+   =================================================================== */
+var POI_COLORS = {scenic:'#85B7EB',food:'#FAC775',culture:'#AFA9EC',shop:'#5DCAA5',other:'#e0e0e0'};
+var POI_LABELS = {scenic:'景点',food:'美食',culture:'文化',shop:'购物',other:'其他'};
+var mapInstance=null, markerLayer=null, polylineLayer=null, infoWindow=null, currentDay=1;
+var generatedTrip=null;
+var MAP_KEY = 'TOLBZ-W7O6L-YLFPI-MGXZ3-TFGMQ-RVFUP'; // try built-in key first
+
+/* ===================================================================
+   2. PREFERENCE TAGS UI
+   =================================================================== */
+document.querySelectorAll('.pref-tag').forEach(function(tag){
+  tag.addEventListener('click',function(){ this.classList.toggle('active') });
+});
+
+/* ===================================================================
+   3. TOAST
+   =================================================================== */
+function showToast(msg, isError){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast'+(isError?' error':'')+' show';
+  clearTimeout(t._tid);t._tid=setTimeout(function(){t.classList.remove('show')},2500);
+}
+
+/* ===================================================================
+   4. MAP KEY
+   =================================================================== */
+function applyMapKey(){
+  var k=document.getElementById('mapKeyInput').value.trim();
+  if(!k) return showToast('请输入有效的 Key',true);
+  MAP_KEY=k;
+  window._tmapLoadPromise=null;
+  showToast('Key 已更新，切换后将使用新 Key 加载地图');
+}
+// Show key notice if map fails
+function showKeyNotice(){ document.getElementById('keyNotice').style.display='flex' }
+
+/* ===================================================================
+   5. MAP LOADING (FIXED)
+   =================================================================== */
+var _tmapLoadPromise=null;
+function loadTencentMap(){
+  if(window.TMap) return Promise.resolve(window.TMap);
+  if(_tmapLoadPromise) return _tmapLoadPromise;
+  _tmapLoadPromise = new Promise(function(resolve,reject){
+    // Remove any existing script
+    var old=document.getElementById('tmap-gl-script');
+    if(old) old.remove();
+    var s=document.createElement('script');
+    s.id='tmap-gl-script';
+    s.src='https://map.qq.com/api/gljs?v=1&key='+encodeURIComponent(MAP_KEY);
+    s.async=true;
+    s.onload=function(){
+      if(window.TMap){ resolve(window.TMap) }
+      else { _tmapLoadPromise=null;reject(new Error('TMap 未定义')) }
+    };
+    s.onerror=function(){
+      _tmapLoadPromise=null;
+      reject(new Error('地图脚本加载失败，请检查 Key 是否有效'));
+    };
+    document.head.appendChild(s);
+  });
+  return _tmapLoadPromise;
+}
+
+/* ===================================================================
+   6. TRIP DATA TEMPLATE — COMPREHENSIVE SHANXI DATA
+   =================================================================== */
+var SHANXI_DATA = {
+  title:'山西深度游', titleAccent:'',
+  subtitle:'', totalDays:8, totalPOIs:0, totalBudget:'', transport:'',
+  center:{lng:112.549,lat:37.857},
+  days:[
+    {
+      day:1, theme:'抵达太原 · 初识晋韵', city:'太原', date:'D1',
+      pois:[
+        {name:'太原武宿机场/太原南站',type:'other',time:'抵达',lng:112.628,lat:37.755,desc:'取车 · 开启山西之旅'},
+        {name:'晋祠',type:'scenic',time:'14:00',lng:112.445,lat:37.706,desc:'皇家祠庙园林 · 三绝：周柏·难老泉·宋塑侍女 · ¥80'},
+        {name:'太原食品街·柳巷',type:'food',time:'18:00',lng:112.562,lat:37.873,desc:'刀削面 · 过油肉 · 羊杂割 · 郝刚刚羊杂'},
+        {name:'山西博物院',type:'culture',time:'备选',lng:112.531,lat:37.866,desc:'免费 · 了解三晋文明的最佳窗口'}
+      ]
+    },
+    {
+      day:2, theme:'千年木构 · 唐代遗珍', city:'五台县', date:'D2',
+      pois:[
+        {name:'佛光寺(唐·857年)',type:'culture',time:'10:00',lng:113.365,lat:38.867,desc:'梁思成称"中国第一国宝" · 现存最完整唐代殿堂 · ¥40'},
+        {name:'南禅寺(唐·782年)',type:'culture',time:'13:30',lng:113.129,lat:38.698,desc:'中国现存最古老木构建筑 · 唐代彩塑原漆 · ¥20'},
+        {name:'延庆寺(金代)',type:'culture',time:'15:30',lng:113.172,lat:38.726,desc:'《黑神话：悟空》取景地 · 免费'},
+        {name:'五台县晚餐',type:'food',time:'18:30',lng:113.257,lat:38.728,desc:'莜面栲栳栳 · 台蘑炖汤'}
+      ]
+    },
+    {
+      day:3, theme:'五台山 · 还愿朝圣', city:'五台山', date:'D3',
+      pois:[
+        {name:'五爷庙(万佛阁)',type:'culture',time:'06:00',lng:113.599,lat:39.013,desc:'还愿首选 · 五台山香火最旺 · ¥135（进山费）'},
+        {name:'殊像寺',type:'culture',time:'08:00',lng:113.598,lat:39.010,desc:'文殊菩萨道场 · 为孩子求学业'},
+        {name:'塔院寺',type:'scenic',time:'09:30',lng:113.597,lat:39.008,desc:'大白塔·释迦牟尼舍利塔·五台山标志'},
+        {name:'黛螺顶',type:'scenic',time:'11:00',lng:113.602,lat:39.015,desc:'1080级台阶"小朝台" · 拜五方文殊'},
+        {name:'五台山素斋',type:'food',time:'12:30',lng:113.596,lat:39.006,desc:'妙吉祥素斋 · 栖贤阁素斋馆'}
+      ]
+    },
+    {
+      day:4, theme:'应县木塔 · 大同古城', city:'应县→大同', date:'D4',
+      pois:[
+        {name:'应县木塔',type:'scenic',time:'10:00',lng:113.185,lat:39.547,desc:'世界三大奇塔之一 · 辽代纯木构67.31米 · ¥50'},
+        {name:'凤临阁烧麦',type:'food',time:'13:00',lng:113.297,lat:40.092,desc:'大同百年老字号 · 百花烧麦·慈禧赞不绝口'},
+        {name:'大同古城墙',type:'scenic',time:'15:30',lng:113.302,lat:40.091,desc:'明代城墙 · 免费登城 · 夜景迷人'},
+        {name:'华严寺',type:'culture',time:'17:00',lng:113.300,lat:40.094,desc:'辽金建筑群 · 辽代最大佛殿 · ¥65'}
+      ]
+    },
+    {
+      day:5, theme:'云冈石窟 · 北魏佛国', city:'大同', date:'D5',
+      pois:[
+        {name:'云冈石窟',type:'scenic',time:'08:30',lng:113.127,lat:40.108,desc:'世界文化遗产 · 45洞窟·51000余尊佛像 · ¥120'},
+        {name:'大同刀削面',type:'food',time:'13:00',lng:113.295,lat:40.090,desc:'东方削面 · 七中刀削面 · 猪肉臊子浇头'},
+        {name:'悬空寺',type:'scenic',time:'备选D6',lng:113.706,lat:39.675,desc:'悬崖千年古寺 · 李白题"壮观" · ¥15+¥100登临'},
+        {name:'大同古城夜景',type:'scenic',time:'19:00',lng:113.300,lat:40.092,desc:'古城夜色 · 灯火星光'}
+      ]
+    },
+    {
+      day:6, theme:'雁门雄关 · 晋商遗梦', city:'代县→平遥', date:'D6',
+      pois:[
+        {name:'雁门关',type:'scenic',time:'09:00',lng:112.859,lat:39.188,desc:'中华第一关 · 杨家将传奇·李牧卫青 · ¥90'},
+        {name:'浑源凉粉',type:'food',time:'11:00',lng:113.690,lat:39.697,desc:'土豆淀粉制作 · 辣油香醋 · 夏日消暑'},
+        {name:'平遥古城',type:'scenic',time:'16:00',lng:112.180,lat:37.204,desc:'世界文化遗产 · 600年明代城墙 · ¥125通票'},
+        {name:'又见平遥',type:'culture',time:'19:00',lng:112.181,lat:37.210,desc:'大型沉浸式情景剧 · ¥238/人 · 强烈推荐'}
+      ]
+    },
+    {
+      day:7, theme:'平遥深度 · 票号风云', city:'平遥', date:'D7',
+      pois:[
+        {name:'日升昌票号',type:'culture',time:'09:00',lng:112.179,lat:37.204,desc:'中国第一家票号 · "汇通天下"发源地'},
+        {name:'平遥县衙',type:'culture',time:'10:30',lng:112.176,lat:37.205,desc:'保存最完整古代县衙 · 升堂表演'},
+        {name:'平遥牛肉·碗托',type:'food',time:'12:30',lng:112.178,lat:37.203,desc:'冠云平遥牛肉 · 平遥碗托 · 栲栳栳'},
+        {name:'双林寺',type:'scenic',time:'14:00',lng:112.148,lat:37.179,desc:'东方彩塑艺术宝库 · ¥35 · 2000余尊彩塑'},
+        {name:'镇国寺',type:'culture',time:'16:00',lng:112.134,lat:37.287,desc:'五代木构·万佛殿 · ¥25'}
+      ]
+    },
+    {
+      day:8, theme:'王家大院 · 黄河古镇', city:'灵石→碛口', date:'D8',
+      pois:[
+        {name:'王家大院',type:'scenic',time:'09:00',lng:111.874,lat:36.892,desc:'"民间故宫"25万㎡ · 123座院落1118间房 · ¥55'},
+        {name:'碛口古镇',type:'scenic',time:'15:00',lng:110.798,lat:37.643,desc:'九曲黄河第一镇 · 明清老街·黄河日落 · 免费'},
+        {name:'碛口窑洞民宿',type:'food',time:'18:30',lng:110.797,lat:37.644,desc:'黄河鲤鱼 · 碛口碗团 · 窑洞体验'},
+        {name:'李家山村',type:'scenic',time:'次日晨',lng:110.810,lat:37.651,desc:'吴冠中发现"世外桃源" · 窑洞依山层叠 · 免费'}
+      ]
+    }
+  ]
+};
+
+/* ===================================================================
+   7. GENERATION ENGINE
+   =================================================================== */
+function generatePlan(){
+  var from=document.getElementById('fFrom').value.trim()||'长沙';
+  var to=document.getElementById('fTo').value.trim()||'山西';
+  var days=parseInt(document.getElementById('fDays').value)||8;
+  var people=parseInt(document.getElementById('fPeople').value)||4;
+  var budget=parseInt(document.getElementById('fBudget').value)||3000;
+  var transport=document.getElementById('fTransport').value;
+  var hotel=document.getElementById('fHotel').value;
+  var note=document.getElementById('fNote').value.trim();
+
+  // Get active preferences
+  var prefs=[];
+  document.querySelectorAll('.pref-tag.active').forEach(function(t){ prefs.push(t.dataset.pref) });
+  if(prefs.length===0){ prefs=['history','food','nature','ancient']; showToast('请至少选择一个偏好',true); return }
+
+  // Transport label
+  var tMap={'plane+car':'飞机+租车','train+car':'高铁+租车','selfdrive':'全程自驾','public':'公共交通'};
+  var transportLabel=tMap[transport]||'飞机+租车';
+  var tBudget=budget*people;
+
+  // Use Shanxi data as base
+  var trip=JSON.parse(JSON.stringify(SHANXI_DATA));
+
+  // Adjust days
+  var allDays=trip.days;
+  if(days<allDays.length){
+    // Shorten: remove middle days or merge
+    if(days<=5){ allDays=allDays.slice(0,days) } // just first N days
+    else if(days<=7){
+      // Keep days 1-3, 6-8 (skip 4-5 or merge)
+      allDays=[allDays[0],allDays[1],allDays[2],allDays[5],allDays[6],allDays[7]];
+      if(days===7) allDays=[allDays[0],allDays[1],allDays[2],allDays[3],allDays[4],allDays[5],allDays[6]];
+      else allDays=allDays.slice(0,days);
+    } else {
+      allDays=allDays.slice(0,days);
+    }
+  } else if(days>allDays.length){
+    // Extend: add more detailed days
+    var extraDay={day:allDays.length+1,theme:'深入探索',city:to,date:'D'+(allDays.length+1),pois:[{name:'自由探索日',type:'other',time:'全天',lng:trip.center.lng,lat:trip.center.lat,desc:'根据兴趣自行安排'}]};
+    while(allDays.length<days) allDays.push(JSON.parse(JSON.stringify(extraDay)));
+  }
+
+  // Re-number days
+  allDays.forEach(function(d,i){ d.day=i+1; d.date='D'+(i+1) });
+
+  // Filter POIs based on preferences
+  if(prefs.indexOf('food')===-1){
+    allDays.forEach(function(d){ d.pois=d.pois.filter(function(p){return p.type!=='food'}) });
+  }
+  if(prefs.indexOf('temple')===-1 && prefs.indexOf('history')===-1){
+    // Keep culture but reduce
+  }
+  if(prefs.indexOf('shopping')===-1){
+    allDays.forEach(function(d){ d.pois=d.pois.filter(function(p){return p.type!=='shop'}) });
+  }
+
+  // Ensure each day has at least 2 POIs
+  allDays=allDays.filter(function(d){return d.pois.length>=1});
+
+  // Re-number again after filtering
+  allDays.forEach(function(d,i){ d.day=i+1; d.date='D'+(i+1) });
+
+  var totalPOIs=0;
+  allDays.forEach(function(d){ totalPOIs+=d.pois.length });
+  trip.days=allDays;
+  trip.totalDays=allDays.length;
+  trip.totalPOIs=totalPOIs;
+  trip.totalBudget='≈'+(tBudget/10000).toFixed(1)+'万';
+  trip.transport=transportLabel;
+  trip.subtitle=from+'出发 · '+(people+'人')+' · '+(note||'自由行');
+  trip.titleAccent=allDays.length+'天'+((prefs.indexOf('temple')>=0)?'朝圣':'深度')+'游';
+
+  generatedTrip=trip;
+  renderResult(trip);
+}
+
+/* ===================================================================
+   8. RENDER RESULT VIEW
+   =================================================================== */
+function renderResult(trip){
+  document.getElementById('formView').style.display='none';
+  document.getElementById('resultView').classList.add('show');
+
+  document.getElementById('rTitle').innerHTML=trip.title+' <span>'+trip.titleAccent+'</span>';
+  document.getElementById('rSub').textContent=trip.subtitle;
+  document.getElementById('rDays').textContent=trip.totalDays;
+  document.getElementById('rPOIs').textContent=trip.totalPOIs;
+  document.getElementById('rBudget').textContent=trip.totalBudget;
+  document.getElementById('rTransport').textContent=trip.transport;
+
+  currentDay=1;
+  renderDayTabs(trip);
+  renderTimeline(trip,0);
+  initMap(trip);
+}
+
+function backToForm(){
+  document.getElementById('resultView').classList.remove('show');
+  document.getElementById('formView').style.display='flex';
+  document.getElementById('keyNotice').style.display='none';
+  if(markerLayer){markerLayer.setMap(null);markerLayer=null}
+  if(polylineLayer){polylineLayer.setMap(null);polylineLayer=null}
+  if(mapInstance){mapInstance.destroy();mapInstance=null}
+  infoWindow=null;currentDay=1;
+}
+
+/* ===================================================================
+   9. RENDER DAY TABS & TIMELINE
+   =================================================================== */
+function renderDayTabs(trip){
+  var html='';
+  trip.days.forEach(function(d){
+    html+='<div class="day-tab'+(d.day===currentDay?' active':'')+'" onclick="switchDay('+d.day+')">D'+d.day+' '+d.city+'</div>';
+  });
+  document.getElementById('dayTabs').innerHTML=html;
+}
+function renderTimeline(trip,dayIdx){
+  var panel=document.getElementById('timelinePanel');
+  var d=trip.days[dayIdx];
+  if(!d){panel.innerHTML='<div style="color:var(--text3);padding:20px">暂无行程</div>';return}
+  var h='<div class="timeline-day-header"><span class="day-label">D'+d.day+'</span>'+d.theme+'<span class="day-city">'+d.city+'</span></div>';
+  d.pois.forEach(function(p,i){
+    h+='<div class="timeline-card" onclick="flyToPOI('+d.day+','+i+')" data-day="'+d.day+'" data-poi-idx="'+i+'">';
+    h+='<span class="card-dot '+p.type+'"></span>';
+    h+='<div class="card-time">'+p.time+'</div>';
+    h+='<div class="card-name">'+p.name+'</div>';
+    if(p.desc) h+='<div class="card-desc">'+p.desc+'</div>';
+    h+='<span class="badge-type '+p.type+'">'+(POI_LABELS[p.type]||p.type)+'</span>';
+    h+='</div>';
+  });
+  panel.innerHTML=h;panel.scrollTop=0;
+}
+function switchDay(dayNum){
+  if(!generatedTrip) return;
+  currentDay=dayNum;
+  renderDayTabs(generatedTrip);
+  var idx=generatedTrip.days.findIndex(function(d){return d.day===dayNum});
+  if(idx<0) idx=0;
+  renderTimeline(generatedTrip,idx);
+  renderMapMarkers(generatedTrip,idx);
+}
+
+/* ===================================================================
+   10. MAP MARKERS & POLYLINES
+   =================================================================== */
+function buildMarkerSvg(color,num){
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="28" height="42" viewBox="0 0 28 42">'
+    +'<path d="M14 0C6.3 0 0 6.3 0 14c0 10.6 14 28 14 28s14-17.4 14-28C28 6.3 21.7 0 14 0z" fill="'+color+'"/>'
+    +'<circle cx="14" cy="14" r="6.5" fill="#fff"/>'
+    +'<text x="14" y="17" text-anchor="middle" font-size="9" font-weight="bold" font-family="Arial" fill="'+color+'">'+num+'</text>'
+    +'</svg>';
+  // Use base64 to avoid encodeURIComponent mangling # in hex colors
+  return 'data:image/svg+xml;base64,'+btoa(svg);
+}
+
+function renderMapMarkers(trip,dayIdx){
+  if(!mapInstance||!window.TMap) return;
+  var d=trip.days[dayIdx];if(!d) return;
+  if(markerLayer){markerLayer.setMap(null);markerLayer=null}
+  if(polylineLayer){polylineLayer.setMap(null);polylineLayer=null}
+
+  var valid=d.pois.filter(function(p){return p.lng&&p.lat});
+  if(!valid.length) return;
+
+  var geos=[],styles={};
+  valid.forEach(function(p,i){
+    var c=POI_COLORS[p.type]||POI_COLORS.other;
+    styles['s'+i]={width:28,height:42,anchor:{x:14,y:42},src:buildMarkerSvg(c,i+1)};
+    geos.push({id:'p'+i,styleId:'s'+i,position:new TMap.LatLng(p.lat,p.lng),properties:{title:p.name,type:p.type,time:p.time,desc:p.desc,color:c}});
+  });
+
+  markerLayer=new TMap.MultiMarker({map:mapInstance,styles:styles,geometries:geos});
+  markerLayer.on('click',function(e){
+    var p=e.geometry.properties;
+    if(!infoWindow) return;
+    infoWindow.setContent('<div style="padding:10px 14px;min-width:150px;font-size:12px;color:#e0e0e0;background:#1a1e2c;border-radius:6px;font-family:system-ui,sans-serif;border:1px solid '+p.color+'">'
+      +'<div style="font-weight:600;font-size:13px;margin-bottom:3px;color:#fff">'+p.title+'</div>'
+      +'<div style="color:'+p.color+';font-size:11px;margin-bottom:2px">'+(POI_LABELS[p.type]||p.type)+' · '+p.time+'</div>'
+      +(p.desc?'<div style="color:#a0a8b8;font-size:11px">'+p.desc+'</div>':'')+'</div>');
+    infoWindow.setPosition(e.geometry.position);infoWindow.open();
+    document.querySelectorAll('.timeline-card').forEach(function(c){c.classList.remove('active')});
+    var idx=parseInt(e.geometry.id.replace('p',''));
+    var card=document.querySelector('.timeline-card[data-day="'+d.day+'"][data-poi-idx="'+idx+'"]');
+    if(card){card.classList.add('active');card.scrollIntoView({behavior:'smooth',block:'center'})}
+  });
+
+  if(valid.length>=2){
+    polylineLayer=new TMap.MultiPolyline({map:mapInstance,
+      styles:{'default':{color:'#85B7EB',width:3,borderWidth:0,lineCap:'round',dashArray:[10,6]}},
+      geometries:[{id:'line',styleId:'default',paths:valid.map(function(p){return new TMap.LatLng(p.lat,p.lng)})}]
+    });
+  }
+  // Fit bounds
+  var lats=valid.map(function(p){return p.lat}), lngs=valid.map(function(p){return p.lng});
+  try{
+    mapInstance.fitBounds(new TMap.LatLngBounds(
+      new TMap.LatLng(Math.min.apply(null,lats),Math.min.apply(null,lngs)),
+      new TMap.LatLng(Math.max.apply(null,lats),Math.max.apply(null,lngs))
+    ),{padding:50});
+  }catch(e){}
+}
+
+function flyToPOI(dayNum,poiIdx){
+  if(!generatedTrip||!mapInstance||!window.TMap) return;
+  var d=generatedTrip.days.find(function(dd){return dd.day===dayNum});
+  if(!d||!d.pois[poiIdx]) return;
+  var p=d.pois[poiIdx];if(!p.lng||!p.lat) return;
+  document.querySelectorAll('.timeline-card').forEach(function(c){c.classList.remove('active')});
+  var card=document.querySelector('.timeline-card[data-day="'+dayNum+'"][data-poi-idx="'+poiIdx+'"]');
+  if(card){card.classList.add('active');card.scrollIntoView({behavior:'smooth',block:'center'})}
+  try{
+    mapInstance.panTo(new TMap.LatLng(p.lat,p.lng),{duration:800});
+    if(infoWindow){
+      var c=POI_COLORS[p.type]||POI_COLORS.other;
+      infoWindow.setContent('<div style="padding:10px 14px;min-width:150px;font-size:12px;color:#e0e0e0;background:#1a1e2c;border-radius:6px;font-family:system-ui,sans-serif;border:1px solid '+c+'">'
+        +'<div style="font-weight:600;font-size:13px;margin-bottom:3px;color:#fff">'+p.name+'</div>'
+        +'<div style="color:'+c+';font-size:11px;margin-bottom:2px">'+(POI_LABELS[p.type]||p.type)+' · '+p.time+'</div>'
+        +(p.desc?'<div style="color:#a0a8b8;font-size:11px">'+p.desc+'</div>':'')+'</div>');
+      infoWindow.setPosition(new TMap.LatLng(p.lat,p.lng));infoWindow.open();
+    }
+  }catch(e){console.error(e)}
+}
+
+/* ===================================================================
+   11. INIT MAP (FIXED — no mapStyleId)
+   =================================================================== */
+function initMap(trip){
+  var ml=document.getElementById('mapLoading');
+  var protocol=location.protocol;
+  ml.classList.remove('hidden');
+  ml.innerHTML='<div class="spinner"></div><div class="text">加载地图中...<br><span style="font-size:10px;color: #e8ecf4">Key: '+MAP_KEY.substring(0,6)+'... | '+protocol+' | v=1</span></div>';
+  loadTencentMap().then(function(TMap){
+    ml.innerHTML='<div class="spinner"></div><div class="text">渲染地图中...</div>';
+    var c=document.getElementById('mapContainer');
+    var center=trip.center||{lng:112.549,lat:37.857};
+    mapInstance=new TMap.Map(c,{center:new TMap.LatLng(center.lat,center.lng),zoom:7,pitch:0});
+    infoWindow=new TMap.InfoWindow({map:mapInstance,position:new TMap.LatLng(center.lat,center.lng),offset:{x:0,y:-40},content:'',enableCustom:true});
+    infoWindow.close();
+    ml.classList.add('hidden');
+    try { renderMapMarkers(trip,0); } catch(e) { console.error('标记渲染错误:',e); }
+  }).catch(function(err){
+    console.error('地图错误:',err);
+    var em=err.message||String(err);
+    var isCsp=em.indexOf('Content Security Policy')>=0;
+    var isBlob=em.indexOf('Worker')>=0||em.indexOf('blob')>=0||em.indexOf('URL.createObjectURL')>=0;
+    var isNotDefined=em.indexOf('未定义')>=0||em.indexOf('not defined')>=0||em.indexOf('undefined')>=0;
+    var isKeyErr=em.indexOf('key')>=0||em.indexOf('Key')>=0||em.indexOf('鉴权')>=0||em.indexOf('auth')>=0||em.indexOf('授权')>=0;
+    var msg='';
+    if(isCsp||isBlob){
+      msg='⚠️ 当前协议: <b>'+protocol+'</b><br>本地文件协议(file://)无法加载地图<br><span style="font-size:11px">腾讯地图需要 Web Worker，必须通过 http:// 访问</span><br><br><span style="font-size:11px;color:#85B7EB">👉 双击 start-server.bat 启动本地服务器<br>👉 在浏览器打开 http://localhost:3456/智能旅行规划.html</span>';
+    } else if(isKeyErr){
+      msg='⚠️ Key 鉴权失败<br><span style="font-size:10px;color: #e8ecf4">Key: '+MAP_KEY.substring(0,8)+'... | 协议: '+protocol+'</span><br><span style="font-size:11px">'+em+'</span><br><br><span style="font-size:12px;color:#FAC775">🔑 去 <a href="https://lbs.qq.com/dev/console/key/manage" target="_blank" style="color:#85B7EB">控制台</a> → Key 设置 → <b>WebServiceAPI 白名单留空</b> → 保存 → Ctrl+F5</span>';
+    } else if(isNotDefined){
+      msg='⚠️ TMap 未加载<br><span style="font-size:10px;color: #e8ecf4">Key: '+MAP_KEY.substring(0,8)+'... | 协议: '+protocol+'</span><br><span style="font-size:11px">GL JS 脚本已加载但 TMap 对象未定义<br>可能原因：Key 类型不支持前端地图渲染</span><br><br><span style="font-size:11px;color:#FAC775">👉 去 <a href="https://lbs.qq.com/dev/console/key/manage" target="_blank" style="color:#85B7EB">控制台</a> 确认该 Key 的"启用产品"包含 <b>JavaScript API GL</b></span>';
+    } else {
+      msg='⚠️ 地图渲染失败<br><span style="font-size:10px;color: #e8ecf4">Key: '+MAP_KEY.substring(0,8)+'... | 协议: '+protocol+'</span><br><span style="font-size:11px">'+em+'</span><br><br><span style="font-size:11px;color:#85B7EB">👉 打开浏览器控制台(F12)查看完整错误</span>';
+    }
+    ml.innerHTML='<div class="text" style="color:#F09595">'+msg+'</div>';
+    if(!(isCsp||isBlob)) showKeyNotice();
+    showToast(isCsp||isBlob?'请用 http:// 打开':'地图加载失败',true);
+  });
+}
+
+/* ===================================================================
+   12. INITIALIZATION
+   =================================================================== */
+(function(){
+  // Diagnostic
+  var proto=location.protocol;
+  var isHttp=proto==='http:'||proto==='https:';
+  document.getElementById('diagProto').innerHTML='🔗 协议: <b class="'+(isHttp?'ok':'err')+'">'+proto+'</b>';
+  document.getElementById('diagKey').innerHTML='🔑 Key: <b>'+MAP_KEY.substring(0,8)+'...</b>';
+  document.getElementById('diagServer').innerHTML='🖥️ 服务器: '+(isHttp?'<b class="ok">HTTP ✅</b>':'<b class="err">FILE ❌</b>');
+  document.getElementById('diagStatus').innerHTML=isHttp?'<span class="ok">✅ 协议正常</span>':'<span class="err">❌ 需 HTTP 访问</span>';
+  if(!isHttp){
+    document.getElementById('diagBar').style.borderColor='#F09595';
+    document.getElementById('diagBar').style.background='rgba(240,149,149,.08)';
+  }
+})();
+</script>
+<script src="../../assets/nav.js" data-root="../../" data-theme="life" data-title="智能旅行规划 — 山西深度游"></script>
+</body>
+</html>

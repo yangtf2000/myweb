@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的工具导航</title>
+    <link rel="stylesheet" href="assets/theme.css">
+    <link rel="stylesheet" href="assets/force-dark.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0b1120;
+            --text: #e8ecf4;
+            --muted: #9aa6bf;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.09);
+            --accent1: #818cf8;
+            --accent2: #38bdf8;
+            --glow: rgba(99, 102, 241, 0.45);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* ===== 流动极光背景（酷炫感来源） ===== */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background: radial-gradient(1200px 600px at 12% -8%, rgba(56,189,248,0.12), transparent 60%),
+                        radial-gradient(1000px 520px at 100% 0%, rgba(129,140,248,0.14), transparent 55%),
+                        radial-gradient(900px 500px at 50% 120%, rgba(52,211,153,0.10), transparent 60%),
+                        var(--bg);
+        }
+        .aurora span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.55;
+            mix-blend-mode: screen;
+            animation: drift 18s ease-in-out infinite;
+        }
+        .aurora span:nth-child(1) { width: 46vw; height: 46vw; left: -10vw; top: -8vw;
+            background: radial-gradient(circle, #38bdf8, transparent 70%); }
+        .aurora span:nth-child(2) { width: 40vw; height: 40vw; right: -8vw; top: 10vh;
+            background: radial-gradient(circle, #818cf8, transparent 70%); animation-delay: -6s; }
+        .aurora span:nth-child(3) { width: 38vw; height: 38vw; left: 25vw; bottom: -14vw;
+            background: radial-gradient(circle, #34d399, transparent 70%); animation-delay: -12s; }
+        @keyframes drift {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33%     { transform: translate(6vw,4vh) scale(1.12); }
+            66%     { transform: translate(-4vw,-3vh) scale(0.92); }
+        }
+
+        /* ===== 门户主区 ===== */
+        .portal {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 86px 22px 110px;
+        }
+
+        .portal-hero {
+            text-align: center;
+            margin-bottom: 54px;
+            animation: fadeInDown .8s ease-out both;
+        }
+        .portal-hero h1 {
+            font-size: clamp(2.2rem, 6vw, 3.4rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #818cf8 0%, #38bdf8 45%, #34d399 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        .portal-hero p {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+        .portal-hero .hint {
+            margin-top: 10px;
+            font-size: .85rem;
+            color: #6b7793;
+        }
+
+        /* ===== 分类列表（首层：只显示标题） ===== */
+        .cat-list { display: flex; flex-direction: column; gap: 16px; }
+
+        .cat {
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: border-color .35s ease, box-shadow .35s ease, transform .25s ease;
+            opacity: 0; transform: translateY(24px);
+            animation: rowIn .6s ease-out forwards;
+        }
+        .cat:hover {
+            border-color: var(--accent1);
+            box-shadow: 0 18px 44px -16px var(--glow);
+            transform: translateY(-3px);
+        }
+
+        .cat-head {
+            display: flex; align-items: center; gap: 18px;
+            padding: 22px 24px;
+            cursor: pointer; user-select: none;
+        }
+        .cat-no {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--accent2);
+            opacity: .85;
+            min-width: 34px;
+        }
+        .cat-icon {
+            width: 52px; height: 52px; flex: 0 0 52px;
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.7rem;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            box-shadow: 0 8px 22px -8px var(--glow);
+        }
+        .cat-name {
+            flex: 1 1 auto;
+            font-size: 1.35rem; font-weight: 700; color: #fff;
+            letter-spacing: .5px;
+        }
+        .cat-count {
+            font-size: .8rem; color: var(--muted);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid var(--card-border);
+            padding: 3px 11px; border-radius: 999px;
+            white-space: nowrap;
+        }
+        /* 装饰性「图表」小柱 */
+        .cat-bars { display: flex; align-items: flex-end; gap: 4px; height: 26px; }
+        .cat-bars i {
+            width: 4px; border-radius: 3px;
+            background: linear-gradient(var(--accent2), var(--accent1));
+            animation: eq 1.4s ease-in-out infinite;
+        }
+        .cat-bars i:nth-child(1){ height: 40%; animation-delay: 0s; }
+        .cat-bars i:nth-child(2){ height: 80%; animation-delay: .2s; }
+        .cat-bars i:nth-child(3){ height: 55%; animation-delay: .4s; }
+        .cat-bars i:nth-child(4){ height: 100%; animation-delay: .6s; }
+        @keyframes eq { 0%,100%{ transform: scaleY(.5);} 50%{ transform: scaleY(1);} }
+
+        .cat-chev {
+            color: var(--muted); font-size: 1.2rem;
+            transition: transform .35s ease, color .35s ease;
+        }
+        .cat.open .cat-chev { transform: rotate(90deg); color: var(--accent2); }
+        .cat.open { border-color: var(--accent1); }
+
+        /* ===== 子面板（下一层：默认隐藏，展开后逐个弹出） ===== */
+        .cat-panel {
+            max-height: 0; overflow: hidden;
+            transition: max-height .5s cubic-bezier(.4,0,.2,1);
+        }
+        .cat-panel-inner {
+            padding: 6px 24px 26px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .sub-card {
+            position: relative; overflow: hidden;
+            display: block; text-decoration: none; color: inherit;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--card-border);
+            border-radius: 15px;
+            padding: 20px 18px 18px;
+            opacity: 0; transform: translateY(18px) scale(.96);
+        }
+        .cat.open .sub-card {
+            animation: subIn .5s cubic-bezier(.34,1.56,.64,1) forwards;
+            animation-delay: calc(var(--i) * 0.08s + 0.12s);
+        }
+        .sub-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--accent1), var(--accent2));
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .sub-card:hover {
+            border-color: var(--accent1);
+            transform: translateY(-6px);
+            box-shadow: 0 14px 34px -12px var(--glow);
+        }
+        .sub-card:hover::before { transform: scaleX(1); }
+        .sub-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin-bottom: 13px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            box-shadow: 0 6px 16px -6px var(--glow);
+        }
+        .sub-title { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 6px; line-height: 1.4; }
+        .sub-desc { font-size: .86rem; color: var(--muted); line-height: 1.5; }
+        .sub-go {
+            margin-top: 12px; font-size: .8rem; color: var(--accent2);
+            display: inline-flex; align-items: center; gap: 5px;
+            opacity: 0; transform: translateX(-6px);
+            transition: all .3s ease;
+        }
+        .sub-card:hover .sub-go { opacity: 1; transform: translateX(0); }
+
+        /* ===== 分类主题色 ===== */
+        .cat--ai   { --accent1:#818cf8; --accent2:#38bdf8; --glow:rgba(99,102,241,.45); }
+        .cat--city { --accent1:#a855f7; --accent2:#6366f1; --glow:rgba(168,85,247,.45); }
+        .cat--study{ --accent1:#34d399; --accent2:#2dd4bf; --glow:rgba(45,212,191,.45); }
+        .cat--life { --accent1:#fbbf24; --accent2:#fb923c; --glow:rgba(251,146,60,.45); }
+        .cat--game { --accent1:#f472b6; --accent2:#fb7185; --glow:rgba(244,114,182,.45); }
+
+        /* ===== 动画 ===== */
+        @keyframes fadeInDown { from{opacity:0;transform:translateY(-26px);} to{opacity:1;transform:translateY(0);} }
+        @keyframes rowIn { to{opacity:1;transform:translateY(0);} }
+        @keyframes subIn { to{opacity:1;transform:translateY(0) scale(1);} }
+
+        @media (max-width: 600px) {
+            .portal { padding: 64px 16px 90px; }
+            .cat-head { gap: 12px; padding: 18px 16px; }
+            .cat-name { font-size: 1.15rem; }
+            .cat-icon { width: 44px; height: 44px; flex-basis: 44px; font-size: 1.4rem; }
+            .cat-bars { display: none; }
+            .cat-count { display: none; }
+            .cat-panel-inner { grid-template-columns: 1fr; padding: 4px 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="aurora"><span></span><span></span><span></span></div>
+
+    <main class="portal">
+        <header class="portal-hero">
+            <h1>🚀 我的工具导航</h1>
+            <p>高效工作 · 品质生活</p>
+            <p class="hint">↓ 点击下方任意分类，展开查看</p>
+        </header>
+
+        <div class="cat-list" id="catList"></div>
+    </main>
+
+    <script>
+        // ============================================================
+        // 数据区：以后增删链接，只改这里即可
+        // ============================================================
+        const categories = [
+            {
+                key: 'ai', name: '通用 AI 工具', icon: '🤖', theme: 'cat--ai',
+                items: [
+                    { title: 'AI工具在策划设计工作的应用指南', desc: 'AI 工具在策划与设计工作流中的应用方法与实战技巧', icon: '🤖', url: './pages/ai-guide/' },
+                    { title: '设计院AI使用简明指南', desc: '设计院日常工作中 AI 工具的快速上手与实用技巧', icon: '📐', url: 'https://4kn89jqz266k3.feishuapp.com/app/app_17ag9ywh3qr', external: true },
+                    { title: '规划设计业务AI技术手段介绍', desc: '规划设计业务中各类 AI 技术手段的应用场景与方法', icon: '🧠', url: './pages/planning-ai-tech/' }
+                ]
+            },
+            {
+                key: 'city', name: '城市规划与更新', icon: '🏙️', theme: 'cat--city',
+                items: [
+                    { title: '城市体检报告AI生成完全指南', desc: '利用 AI 高效生成城市体检报告的完整手册与模板', icon: '🏙️', url: './pages/city-health-guide/' },
+                    { title: '城市更新资金申报查询手册', desc: '城市更新项目资金申报政策查询与申报流程指引', icon: '💰', url: './pages/fund-apply-guide/' },
+                    { title: '城市更新AI编制指南', desc: '城市更新项目方案编制的 AI 辅助方法与流程指引', icon: '🔄', url: './pages/special-plan-guide/' },
+                    { title: '片区策划AI编制指南', desc: '片区策划方案编制中的 AI 应用方法与实战模板', icon: '🗺️', url: './pages/district-plan-guide/' }
+                ]
+            },
+            {
+                key: 'study', name: '学习成长', icon: '📚', theme: 'cat--study',
+                items: [
+                    { title: '理工科新生暑假准备计划', desc: '理工科大学新生暑期学习与能力准备规划', icon: '🎓', url: './pages/freshman-summer/' },
+                    { title: '食药环新生入学指南', desc: '食品药品环境犯罪侦查技术专业新生入学指南', icon: '👮', url: './pages/food-drug-env-guide/' },
+                    { title: '编程扫盲课', desc: '零基础编程入门网络课程，轻松迈过代码门槛', icon: '💻', url: './pages/coding-course/' },
+                    { title: 'AI-Agent 入门教学', desc: '从零开始认识与搭建 AI 智能体（Agent）的入门教程', icon: '🕹️', url: './pages/ai-agent-teach/' },
+    { title: 'AI Agent 学习指南（警校食药环）', desc: '面向食药环警校新生的 AI Agent 学习完全指南', icon: '📘', url: './pages/ai-agent-teach/AI-Agent学习指南-警校食药环新生.html' }
+                ]
+            },
+            {
+                key: 'life', name: '生活类', icon: '🏠', theme: 'cat--life',
+                items: [
+                    { title: '山西旅行计划', desc: '山西旅行行程规划，含景点、路线与出行安排', icon: '🏔️', url: './pages/shanxi-travel/' },
+                    { title: '每日待办清单', desc: 'Daily TodoList，高效管理每日任务与待办事项', icon: '✅', url: './pages/daily-todo/' },
+                    { title: '暑假计划安排表', desc: '暑期学习与生活计划安排，合理规划假期时间', icon: '📅', url: './pages/yangziyu-summer/' },
+                    { title: '生日快乐', desc: '专属生日祝福站点', icon: '🎂', url: './pages/birthday/' }
+                ]
+            },
+            {
+                key: 'game', name: '趣味小游戏', icon: '🎮', theme: 'cat--game',
+                items: [
+                    { title: '职场解压小游戏', desc: '一款轻松解压的网页小游戏，工作间隙放松一下', icon: '🎮', url: './pages/cad-viewer/' }
+                ]
+            }
+        ];
+
+        // ============================================================
+        // 渲染 + 钻取交互
+        // ============================================================
+        const list = document.getElementById('catList');
+
+        categories.forEach((cat, ci) => {
+            const el = document.createElement('section');
+            el.className = 'cat ' + cat.theme;
+            el.style.animationDelay = (ci * 0.1) + 's';
+
+            const cards = cat.items.map((it, i) => `
+                <a class="sub-card" style="--i:${i}" href="${it.url}" ${it.external ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+                    <div class="sub-icon">${it.icon}</div>
+                    <div class="sub-title">${it.title}</div>
+                    <div class="sub-desc">${it.desc}</div>
+                    <span class="sub-go">${it.external ? '打开 ↗' : '打开 →'}</span>
+                </a>
+            `).join('');
+
+            el.innerHTML = `
+                <div class="cat-head">
+                    <span class="cat-no">0${ci + 1}</span>
+                    <span class="cat-icon">${cat.icon}</span>
+                    <span class="cat-name">${cat.name}</span>
+                    <span class="cat-count">${cat.items.length} 项</span>
+                    <span class="cat-bars"><i></i><i></i><i></i><i></i></span>
+                    <span class="cat-chev">❯</span>
+                </div>
+                <div class="cat-panel"><div class="cat-panel-inner">${cards}</div></div>
+            `;
+
+            // 点击展开/收起（手风琴：同时只开一个）
+            const head = el.querySelector('.cat-head');
+            const panel = el.querySelector('.cat-panel');
+            head.addEventListener('click', () => {
+                const isOpen = el.classList.contains('open');
+                // 关闭其它已展开的
+                document.querySelectorAll('.cat.open').forEach(o => {
+                    if (o !== el) { o.classList.remove('open'); o.querySelector('.cat-panel').style.maxHeight = '0px'; }
+                });
+                if (isOpen) {
+                    el.classList.remove('open');
+                    panel.style.maxHeight = '0px';
+                } else {
+                    el.classList.add('open');
+                    panel.style.maxHeight = panel.scrollHeight + 'px';
+                }
+            });
+
+            list.appendChild(el);
+        });
+
+        // 窗口尺寸变化时，若已展开则重算高度（避免内容折行后高度不对）
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.cat.open').forEach(o => {
+                const p = o.querySelector('.cat-panel');
+                p.style.maxHeight = p.scrollHeight + 'px';
+            });
+        });
+    </script>
+    <script src="assets/nav.js" data-root="./" data-theme="home" data-title="我的工具导航" data-nav="false"></script>
+</body>
+</html>

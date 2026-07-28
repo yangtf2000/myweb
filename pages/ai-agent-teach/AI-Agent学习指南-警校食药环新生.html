@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Agent 赋能大学学习生活 · 警校食药环新生完全指南</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg-card: #1a1d28;
+    --bg-card-hover: #222636;
+    --bg-code: #14161e;
+    --text: #e4e6eb;
+    --text-dim: #9ca3af;
+    --text-bright: #ffffff;
+    --accent: #5b8def;
+    --accent-light: #7aa2f7;
+    --accent-dim: #3b5998;
+    --green: #50c878;
+    --orange: #e8a838;
+    --red: #ef5b5b;
+    --purple: #a78bfa;
+    --teal: #2dd4bf;
+    --border: #2a2e3c;
+    --border-light: #353a4d;
+    --shadow: 0 4px 20px rgba(0,0,0,0.3);
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ===== 导航栏 ===== */
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 24px 0;
+    z-index: 100;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 4px; }
+
+  .sidebar-logo {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .sidebar-logo h1 {
+    font-size: 18px;
+    color: var(--text-bright);
+    font-weight: 700;
+  }
+  .sidebar-logo p {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .nav-section { margin-bottom: 8px; }
+  .nav-section-title {
+    padding: 8px 24px 4px;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .nav-item {
+    display: block;
+    padding: 7px 24px 7px 32px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+  .nav-item:hover {
+    color: var(--accent-light);
+    background: var(--bg-card-hover);
+    border-left-color: var(--accent);
+  }
+  .nav-item.active {
+    color: var(--accent-light);
+    border-left-color: var(--accent);
+  }
+
+  /* ===== 主内容区 ===== */
+  .main {
+    margin-left: 280px;
+    padding: 0;
+  }
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 48px 120px;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a1d28 0%, #1e2438 50%, #1a2040 100%);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 48px 40px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(91,141,239,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(91,141,239,0.15);
+    border: 1px solid rgba(91,141,239,0.3);
+    color: var(--accent-light);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 32px;
+    color: var(--text-bright);
+    line-height: 1.4;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero .subtitle {
+    font-size: 16px;
+    color: var(--text-dim);
+    position: relative;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 28px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .hero-meta-item span { color: var(--accent-light); font-weight: 600; }
+
+  /* ===== 章节 ===== */
+  .section {
+    margin-bottom: 64px;
+    scroll-margin-top: 24px;
+  }
+  .section-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-number {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-size: 26px;
+    color: var(--text-bright);
+    font-weight: 700;
+  }
+  .section-header p {
+    color: var(--text-dim);
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 20px;
+    color: var(--text-bright);
+    margin: 32px 0 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3 .icon { font-size: 22px; }
+
+  h4 {
+    font-size: 16px;
+    color: var(--accent-light);
+    margin: 20px 0 10px;
+    font-weight: 600;
+  }
+
+  p { margin-bottom: 14px; }
+
+  ul, ol { margin: 0 0 16px 20px; }
+  li { margin-bottom: 6px; }
+
+  strong { color: var(--text-bright); }
+  em { color: var(--orange); font-style: normal; }
+
+  a {
+    color: var(--accent-light);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--accent-dim);
+  }
+  a:hover { color: var(--accent); }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ===== 提示框 ===== */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-left: 4px solid;
+  }
+  .callout-tip {
+    background: rgba(80,200,120,0.08);
+    border-color: var(--green);
+  }
+  .callout-warn {
+    background: rgba(232,168,56,0.08);
+    border-color: var(--orange);
+  }
+  .callout-info {
+    background: rgba(91,141,239,0.08);
+    border-color: var(--accent);
+  }
+  .callout-title {
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .callout-tip .callout-title { color: var(--green); }
+  .callout-warn .callout-title { color: var(--orange); }
+  .callout-info .callout-title { color: var(--accent-light); }
+
+  /* ===== 代码块 ===== */
+  .code-block {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  .code-header {
+    background: rgba(255,255,255,0.04);
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .code-header .lang { color: var(--purple); font-weight: 600; }
+  .code-content {
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .code-content pre {
+    font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .prompt-block {
+    background: rgba(167,139,250,0.06);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+    position: relative;
+  }
+  .prompt-block::before {
+    content: 'PROMPT';
+    position: absolute;
+    top: -10px; left: 16px;
+    background: var(--bg);
+    padding: 0 8px;
+    font-size: 11px;
+    color: var(--purple);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .prompt-block p { margin-bottom: 0; color: var(--text); font-size: 14px; }
+
+  /* ===== 对比表 ===== */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .compare-table th {
+    background: var(--bg-card);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-bright);
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: 12px 16px;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: var(--bg-card-hover); }
+
+  /* ===== 场景卡片 ===== */
+  .scenario {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 24px 0;
+  }
+  .scenario-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .scenario-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .scenario-title h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--text-bright);
+  }
+  .scenario-title p {
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .scenario-body { padding: 20px 24px; }
+
+  /* ===== 步骤 ===== */
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--accent-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-content h4 { margin: 4px 0 6px; }
+  .step-content p { margin-bottom: 8px; font-size: 14px; }
+
+  /* ===== 标签 ===== */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0 4px 4px 0;
+  }
+  .tag-blue { background: rgba(91,141,239,0.15); color: var(--accent-light); }
+  .tag-green { background: rgba(80,200,120,0.15); color: var(--green); }
+  .tag-orange { background: rgba(232,168,56,0.15); color: var(--orange); }
+  .tag-purple { background: rgba(167,139,250,0.15); color: var(--purple); }
+  .tag-red { background: rgba(239,91,91,0.15); color: var(--red); }
+  .tag-teal { background: rgba(45,212,191,0.15); color: var(--teal); }
+
+  /* ===== 工具卡片网格 ===== */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .tool-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: all 0.2s;
+  }
+  .tool-card:hover { border-color: var(--border-light); background: var(--bg-card-hover); }
+  .tool-card h4 { margin: 0 0 8px; }
+  .tool-card p { font-size: 13.5px; color: var(--text-dim); margin: 0; }
+  .tool-card .tool-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  /* ===== 时间线 ===== */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border-light);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -22px; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+  }
+  .timeline-item h4 { margin: 0 0 4px; }
+  .timeline-item p { margin: 0; font-size: 14px; }
+
+  /* ===== 页脚 ===== */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
+    .content { padding: 24px; }
+    .tool-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<link rel="stylesheet" href="../../assets/theme.css">
+    <link rel="stylesheet" href="../../assets/force-dark.css">
+</head>
+<body>
+
+<!-- ============ 侧边导航 ============ -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h1>AI Agent 学习指南</h1>
+    <p>警校食药环新生 · 系列主题</p>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">第一部分 · 认识 AI Agent</div>
+    <a class="nav-item" href="#what-is-agent">什么是 AI Agent</a>
+    <a class="nav-item" href="#agent-vs-chat">Agent 与普通对话的区别</a>
+    <a class="nav-section-title">第二部分 · 工具盘点</a>
+    <a class="nav-item" href="#tools">主流 AI Agent 工具</a>
+    <a class="nav-item" href="#tool-compare">工具对比与选择</a>
+    <a class="nav-section-title">第三部分 · 新生画像</a>
+    <a class="nav-item" href="#freshman">警校食药环专业解读</a>
+    <a class="nav-item" href="#challenges">新生面临的核心挑战</a>
+    <a class="nav-section-title">第四部分 · 六大场景实战</a>
+    <a class="nav-item" href="#scenario-1">场景一：智能笔记</a>
+    <a class="nav-item" href="#scenario-2">场景二：查资料检索</a>
+    <a class="nav-item" href="#scenario-3">场景三：学习计划与四级</a>
+    <a class="nav-item" href="#scenario-4">场景四：专业研究</a>
+    <a class="nav-item" href="#scenario-5">场景五：编程实战</a>
+    <a class="nav-item" href="#scenario-6">场景六：生活管理</a>
+    <a class="nav-section-title">第五部分 · GitHub</a>
+    <a class="nav-item" href="#github-intro">为什么用 GitHub</a>
+    <a class="nav-item" href="#github-setup">从零搭建 GitHub</a>
+    <a class="nav-item" href="#github-workflow">上传项目流程</a>
+    <a class="nav-section-title">附录</a>
+    <a class="nav-item" href="#prompt-templates">Prompt 模板速查</a>
+    <a class="nav-item" href="#roadmap">四学期成长路线图</a>
+  </div>
+</nav>
+
+<!-- ============ 主内容 ============ -->
+<div class="main">
+<div class="content">
+
+<!-- ===== Hero ===== -->
+<div class="hero">
+  <span class="hero-tag">系列主题 · 第一期</span>
+  <h1>AI Agent 赋能大学学习生活<br>警校食药环新生完全指南</h1>
+  <p class="subtitle">从认识 AI Agent 到独立开发学习工具，从课堂笔记到 GitHub 作品集 —— 一份写给大学新生的系统化实战手册</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">适用对象：<span>警察院校食品药品环境专业新生</span></div>
+    <div class="hero-meta-item">推荐工具：<span>豆包 · WorkBuddy</span></div>
+    <div class="hero-meta-item">系列期数：<span>第 1 期 / 共 6 期</span></div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 第一部分：认识 AI Agent -->
+<!-- ================================================================ -->
+<div class="section" id="what-is-agent">
+  <div class="section-header">
+    <span class="section-number">PART 01</span>
+    <h2>认识 AI Agent：从"聊天机器人"到"数字助手"</h2>
+    <p>在开始一切之前，你需要真正理解 AI Agent 是什么，它和你用过的"AI 聊天"有什么本质区别</p>
+  </div>
+
+  <h3><span class="icon">🤖</span> 什么是 AI Agent</h3>
+
+  <p>你可能已经用过 ChatGPT、文心一言或者豆包跟 AI 聊过天——你问一个问题，它回答一个答案。这叫 <strong>AI 对话</strong>（Chat）。</p>
+
+  <p>但 <strong>AI Agent</strong>（人工智能智能体）不一样。打个比方：</p>
+
+  <div class="card">
+    <div class="card-title">🍳 厨房比喻</div>
+    <p><strong>AI 对话</strong>就像你问厨师"红烧肉怎么做？"，厨师告诉你步骤，但你自己动手做。</p>
+    <p><strong>AI Agent</strong>就像你跟厨师说"帮我做一份红烧肉"，厨师自己走进厨房、找食材、切肉、调味、出锅，最后把菜端到你面前。</p>
+  </div>
+
+  <p>用技术语言来说，<strong>AI Agent 是一种能够自主感知环境、理解目标、拆解任务、调用工具、执行操作并交付成果的智能系统</strong>。它不只是"回答问题"，而是"完成任务"。</p>
+
+  <h4>AI Agent 的四个核心能力</h4>
+  <div class="tool-grid">
+    <div class="tool-card">
+      <span class="tool-badge tag-blue">能力一</span>
+      <h4>🎯 目标理解</h4>
+      <p>你说"帮我准备四级考试"，它能理解这是一个包含词汇、听力、阅读、写作多个子任务的复杂目标，并自动拆解。</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-green">能力二</span>
+      <h4>🔧 工具调用</h4>
+      <p>它能使用搜索引擎查资料、读取文件、写代码、运行程序、创建文档——就像人使用各种工具一样。</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-orange">能力三</span>
+      <h4>🧠 记忆能力</h4>
+      <p>它能记住你之前的对话、偏好和项目上下文，不需要你每次都从头解释。比如记住你是食药环专业的学生。</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-purple">能力四</span>
+      <h4>🔄 自主迭代</h4>
+      <p>遇到错误它会自己修正，做完一步会自动进入下一步，不需要你一步步盯着指挥。写代码报错了？它自己读错误信息然后修复。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="agent-vs-chat">
+  <div class="section-header">
+    <span class="section-number">PART 01</span>
+    <h2>AI Agent 与普通 AI 对话的本质区别</h2>
+  </div>
+
+  <p>理解了这个区别，你就明白为什么大学学习应该用 Agent 而不只是 Chat。</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th style="width:20%">对比维度</th>
+        <th style="width:40%">普通 AI 对话（Chat）</th>
+        <th style="width:40%">AI Agent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>交互方式</strong></td>
+        <td>一问一答，你问它才答</td>
+        <td>你给目标，它主动拆解、执行、交付</td>
+      </tr>
+      <tr>
+        <td><strong>任务范围</strong></td>
+        <td>单一问题，文本回答</td>
+        <td>多步骤复杂任务，跨工具协作</td>
+      </tr>
+      <tr>
+        <td><strong>文件操作</strong></td>
+        <td>无法读写本地文件</td>
+        <td>能读文件、写代码、创建文档、部署网页</td>
+      </tr>
+      <tr>
+        <td><strong>代码执行</strong></td>
+        <td>只能给你代码片段，你自己复制运行</td>
+        <td>自己写代码、自己运行、报错自己修</td>
+      </tr>
+      <tr>
+        <td><strong>记忆能力</strong></td>
+        <td>通常只记住当前对话</td>
+        <td>跨会话记住项目上下文和个人偏好</td>
+      </tr>
+      <tr>
+        <td><strong>成果交付</strong></td>
+        <td>输出文字到聊天框</td>
+        <td>直接生成文件、文档、网页应用</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-info">
+    <div class="callout-title">💡 一句话总结</div>
+    <p>Chat 是你的"搜索引擎升级版"，Agent 是你的"数字员工"。大学学习需要的是能帮你<strong>做事</strong>的助手，而不只是<strong>说话</strong>的助手。</p>
+  </div>
+
+  <h3><span class="icon">📊</span> 一个具体例子：整理课堂笔记</h3>
+
+  <p>假设你刚上完一节《食品安全法》的课，手头有一堆零散的课堂记录。看看两种方式的差别：</p>
+
+  <div class="card">
+    <div class="card-title">方式一：用普通 AI 对话</div>
+    <p>1. 你把笔记复制粘贴到对话框</p>
+    <p>2. 问"帮我整理一下"</p>
+    <p>3. AI 输出整理后的文字</p>
+    <p>4. 你再手动复制到 Word/笔记软件里保存</p>
+    <p>5. 下次想找某个知识点，还得翻聊天记录</p>
+    <p style="color: var(--text-dim); margin-top: 8px;">→ 每次都要手动操作，效率低，且无法积累</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">方式二：用 AI Agent（如 WorkBuddy）</div>
+    <p>1. 你说"这是我今天的《食品安全法》课堂笔记，帮我整理成结构化的复习资料，保存到我的学习笔记文件夹"</p>
+    <p>2. Agent 自动：解析内容 → 提取知识点 → 生成结构化文档 → 保存为 Markdown 文件</p>
+    <p>3. 下次你说"帮我复习食品安全法第三章"，Agent 直接读取之前的笔记文件</p>
+    <p>4. 期末你说"把所有食药环专业课笔记生成一份复习大纲"，Agent 自动汇总整个学期的文件</p>
+    <p style="color: var(--green); margin-top: 8px;">→ 一次输入，持续积累，越用越聪明</p>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 第二部分：工具盘点 -->
+<!-- ================================================================ -->
+<div class="section" id="tools">
+  <div class="section-header">
+    <span class="section-number">PART 02</span>
+    <h2>主流 AI Agent 工具盘点</h2>
+    <p>了解了概念，接下来认识你手中可以使用的具体工具</p>
+  </div>
+
+  <p>市面上 AI 工具很多，但作为大学新生，你不需要全部尝试。以下是经过筛选的、<strong>最适合学生使用</strong>的 AI Agent 工具：</p>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <span class="tool-badge tag-blue">日常办公</span>
+      <h4>豆包（字节跳动）</h4>
+      <p><strong>定位：</strong>日常办公与生活助手</p>
+      <p><strong>擅长：</strong>文档处理、会议记录、日程管理、翻译、PPT 生成、数据分析。支持语音输入，适合课堂速记。</p>
+      <p><strong>适合场景：</strong>写作业、整理笔记、翻译文献、做汇报 PPT、管理日程</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-green">项目开发</span>
+      <h4>WorkBuddy</h4>
+      <p><strong>定位：</strong>项目级 AI Agent 开发平台</p>
+      <p><strong>擅长：</strong>多步骤复杂任务、代码开发、文件管理、网页应用部署。支持"项目模式"，能在一个工作区里持续积累成果。</p>
+      <p><strong>适合场景：</strong>开发背单词程序、做学习管理网页、整理学期项目、提交 GitHub</p>
+    </div>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-title">✅ 推荐组合策略</div>
+    <p><strong>豆包</strong>负责日常轻量任务：课堂速记、翻译、做 PPT、写文档、管理日程 —— 随时随地、快速响应。</p>
+    <p><strong>WorkBuddy</strong>负责深度项目任务：开发程序、管理学期项目文件、做研究报告、整理知识体系 —— 沉淀成果、持续迭代。</p>
+    <p>两者搭配使用：<em>豆包是"速记本"，WorkBuddy 是"工作台"</em>。</p>
+  </div>
+</div>
+
+<div class="section" id="tool-compare">
+  <div class="section-header">
+    <span class="section-number">PART 02</span>
+    <h2>工具对比与选择指南</h2>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th>豆包</th>
+        <th>WorkBuddy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>核心定位</strong></td>
+        <td>通用 AI 助手</td>
+        <td>项目级 AI Agent</td>
+      </tr>
+      <tr>
+        <td><strong>使用门槛</strong></td>
+        <td>极低，开箱即用</td>
+        <td>低，需理解"项目"概念</td>
+      </tr>
+      <tr>
+        <td><strong>文件管理</strong></td>
+        <td>云端文档，轻量</td>
+        <td>本地工作区，结构化管理</td>
+      </tr>
+      <tr>
+        <td><strong>代码能力</strong></td>
+        <td>基础，适合脚本片段</td>
+        <td>专业级，可开发完整应用</td>
+      </tr>
+      <tr>
+        <td><strong>成果沉淀</strong></td>
+        <td>对话记录 + 云文档</td>
+        <td>项目文件 + 版本管理</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub 集成</strong></td>
+        <td>不支持</td>
+        <td>原生支持文件导出和 Git 操作</td>
+      </tr>
+      <tr>
+        <td><strong>最佳用途</strong></td>
+        <td>日常学习辅助</td>
+        <td>项目开发与成果管理</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-warn">
+    <div class="callout-title">⚠️ 新手避坑</div>
+    <p>不要一上来就用 10 个 AI 工具。先<strong>深度使用 1-2 个</strong>，把基本功练扎实，再逐步扩展。推荐路径：豆包（入门）→ WorkBuddy（进阶）。</p>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 第三部分：新生画像 -->
+<!-- ================================================================ -->
+<div class="section" id="freshman">
+  <div class="section-header">
+    <span class="section-number">PART 03</span>
+    <h2>警校食药环专业新生画像</h2>
+    <p>工具是通用的，但使用方式必须结合你的专业特点。这一章帮你认清自己的学习生活全貌</p>
+  </div>
+
+  <h3><span class="icon">🛡️</span> 专业解读：食品药品环境专业</h3>
+
+  <p>"食品药品环境"（简称"食药环"）是近年来公安院校设立的重要专业方向，培养的是能够在公安机关从事<strong>食品、药品、环境领域犯罪侦查</strong>的专门人才。</p>
+
+  <div class="card">
+    <div class="card-title">📚 核心课程体系（典型）</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+      <div>
+        <p><span class="tag tag-blue">专业基础</span></p>
+        <ul style="margin-top: 8px;">
+          <li>食品安全学 / 食品分析</li>
+          <li>药理学 / 药品管理法</li>
+          <li>环境监测与评价</li>
+          <li>毒物分析化学</li>
+          <li>仪器分析</li>
+        </ul>
+      </div>
+      <div>
+        <p><span class="tag tag-green">侦查与法律</span></p>
+        <ul style="margin-top: 8px;">
+          <li>刑事侦查学</li>
+          <li>食药环犯罪案件侦查</li>
+          <li>刑法 / 刑事诉讼法</li>
+          <li>食品安全法</li>
+          <li>药品管理法 / 环境保护法</li>
+        </ul>
+      </div>
+      <div>
+        <p><span class="tag tag-orange">警务技能</span></p>
+        <ul style="margin-top: 8px;">
+          <li>刑事技术 / 痕迹检验</li>
+          <li>现场勘查</li>
+          <li>警务战术与体能训练</li>
+          <li>物证技术学</li>
+        </ul>
+      </div>
+      <div>
+        <p><span class="tag tag-purple">公共基础</span></p>
+        <ul style="margin-top: 8px;">
+          <li>大学英语（需过四级）</li>
+          <li>高等数学 / 统计学</li>
+          <li>计算机基础 / 信息技术</li>
+          <li>思想政治理论</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3><span class="icon">🏫</span> 警校生活的特殊性</h3>
+
+  <p>警校和普通大学有很大不同，这些特点直接影响你使用 AI Agent 的方式：</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th style="width:25%">特点</th>
+        <th style="width:40%">具体表现</th>
+        <th style="width:35%">对 AI Agent 使用的影响</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>半军事化管理</strong></td>
+        <td>统一作息、早操、列队、内务检查、手机使用受限</td>
+        <td>需要在有限自由时间内高效使用 AI，适合用豆包语音速记</td>
+      </tr>
+      <tr>
+        <td><strong>课程密集</strong></td>
+        <td>专业课 + 法律课 + 警体训练 + 公共课，课表几乎排满</td>
+        <td>需要 AI Agent 帮做学习计划、时间管理、笔记整理</td>
+      </tr>
+      <tr>
+        <td><strong>记忆量大</strong></td>
+        <td>法律法规条文、食品标准、药品分类、检验流程等大量背诵内容</td>
+        <td>需要 AI Agent 生成记忆卡片、思维导图、复习计划</td>
+      </tr>
+      <tr>
+        <td><strong>实践要求高</strong></td>
+        <td>实验操作、现场勘查模拟、案例分析</td>
+        <td>需要 AI Agent 辅助实验报告撰写、案例分析</td>
+      </tr>
+      <tr>
+        <td><strong>英语四级硬要求</strong></td>
+        <td>多数警校要求通过四级才能毕业/学位</td>
+        <td>需要 AI Agent 制定备考计划、生成背单词工具</td>
+      </tr>
+      <tr>
+        <td><strong>专业术语多</strong></td>
+        <td>食品化学、药理、环境监测等专业词汇，英文文献多</td>
+        <td>需要 AI Agent 辅助翻译、术语解释、文献阅读</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section" id="challenges">
+  <div class="section-header">
+    <span class="section-number">PART 03</span>
+    <h2>新生面临的核心挑战与 AI Agent 破局点</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <h4>挑战一：信息过载，不知从何学起</h4>
+      <p>大一刚入学，面对十几门课程、大量专业术语，很容易迷茫。<strong>破局：</strong>用 AI Agent 梳理课程知识体系，生成学习路线图，把"不知道学什么"变成"知道每周学什么"。</p>
+    </div>
+    <div class="timeline-item">
+      <h4>挑战二：笔记混乱，复习找不到东西</h4>
+      <p>课堂手写笔记、手机拍照、课本标注散落各处，期末找不到重点。<strong>破局：</strong>用豆包语音速记 + WorkBuddy 文件管理，建立结构化笔记体系。</p>
+    </div>
+    <div class="timeline-item">
+      <h4>挑战三：四级备考缺乏规划</h4>
+      <p>不知道怎么安排词汇、听力、阅读的复习节奏。<strong>破局：</strong>让 AI Agent 根据你的时间制定个性化备考计划，甚至开发专属背单词程序。</p>
+    </div>
+    <div class="timeline-item">
+      <h4>挑战四：法律条文背不住</h4>
+      <p>《食品安全法》148 条、《药品管理法》155 条……死记硬背效率极低。<strong>破局：</strong>用 AI Agent 生成案例化记忆卡片、口诀、思维导图。</p>
+    </div>
+    <div class="timeline-item">
+      <h4>挑战五：想学编程但零基础</h4>
+      <p>食药环专业对数据分析、信息化侦查有要求，但没学过编程。<strong>破局：</strong>用 WorkBuddy 的 AI 辅助编程，从"描述需求"开始，不写一行代码也能做出应用。</p>
+    </div>
+    <div class="timeline-item">
+      <h4>挑战六：学习成果无处展示</h4>
+      <p>做了笔记、写了报告、开发了小程序，但没有地方沉淀和展示。<strong>破局：</strong>用 GitHub 建立个人数字作品集，把学习成果变成可见的资产。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 第四部分：六大场景实战 -->
+<!-- ================================================================ -->
+<div class="section" id="scenario-1">
+  <div class="section-header">
+    <span class="section-number">PART 04</span>
+    <h2>六大学习场景实战</h2>
+    <p>这是本指南的核心部分。每个场景都包含：场景描述 → 传统痛点 → AI Agent 方案 → 具体操作步骤 → Prompt 示例 → 成果产出</p>
+  </div>
+
+  <!-- ===== 场景一 ===== -->
+  <div class="scenario" id="scenario-1-detail">
+    <div class="scenario-header">
+      <div class="scenario-icon" style="background: rgba(91,141,239,0.15);">📝</div>
+      <div class="scenario-title">
+        <h3>场景一：智能笔记系统</h3>
+        <p>把零散的课堂记录变成结构化的知识宝库</p>
+      </div>
+    </div>
+    <div class="scenario-body">
+      <h4>📌 场景描述</h4>
+      <p>今天上了《食品安全学》，老师讲了一堆：HACCP 体系、食品添加剂分类、GB 标准编号规则、食物中毒调查流程……你手写了一页纸的潦草笔记，拍了三张 PPT 照片。晚上回到宿舍，看着这些零散信息，不知道怎么整理。</p>
+
+      <h4>😣 传统方式</h4>
+      <p>打开 Word，把笔记敲一遍，拍照的内容手动描述，最后得到一个混乱的文档。下次复习时翻半天找不到 HACCP 的定义在哪一页。</p>
+
+      <h4>✨ AI Agent 方案</h4>
+      <p>用<strong>豆包</strong>语音输入课堂内容（甚至直接读笔记），让 AI 整理成结构化笔记；再用<strong>WorkBuddy</strong>创建笔记项目，把每节课的笔记保存为文件，形成知识体系。</p>
+
+      <h4>📋 具体操作步骤</h4>
+      <ol class="steps">
+        <li>
+          <div class="step-content">
+            <h4>课堂速记（用豆包）</h4>
+            <p>下课后立刻打开豆包，用<strong>语音输入</strong>复述课堂内容。不用管格式，想到什么说什么。豆包会自动把语音转成文字。</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>智能整理（用豆包）</h4>
+            <p>用下面的 Prompt 让豆包帮你整理：</p>
+            <div class="prompt-block">
+              <p>我是警察学院食药环专业大一学生，刚上完《食品安全学》课。以下是我的课堂速记（语音转文字），请帮我整理成结构化笔记，要求：<br>1. 按"知识点-定义-要点-案例"格式组织<br>2. 标注重点和可能考点<br>3. 食品安全相关的法规条款请标注法律名称和条款号<br>4. 生成一份适合期末复习的笔记<br><br>课堂速记内容：[粘贴你的语音转文字内容]</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>沉淀到项目（用 WorkBuddy）</h4>
+            <p>在 WorkBuddy 中创建一个"学习笔记"项目，把整理好的笔记保存为 Markdown 文件，按"课程名/章节号-主题.md"命名。例如：<code>食品安全学/03-HACCP体系.md</code></p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>期末汇总复习</h4>
+            <p>期末时对 WorkBuddy 说：</p>
+            <div class="prompt-block">
+              <p>读取我的"学习笔记"项目下所有"食品安全学"的笔记文件，帮我生成一份期末复习大纲，按章节列出所有知识点，标注重点和考点，并生成一份自测题（含答案）。</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <h4>📦 成果产出</h4>
+      <p><span class="tag tag-blue">结构化笔记文件</span> <span class="tag tag-green">期末复习大纲</span> <span class="tag tag-purple">自测题库</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 场景二 ===== -->
+  <div class="scenario" id="scenario-2">
+    <div class="scenario-header">
+      <div class="scenario-icon" style="background: rgba(80,200,120,0.15);">🔍</div>
+      <div class="scenario-title">
+        <h3>场景二：查资料与文献检索</h3>
+        <p>从海量信息中精准找到你需要的专业资料</p>
+      </div>
+    </div>
+    <div class="scenario-body">
+      <h4>📌 场景描述</h4>
+      <p>老师布置了一项作业："分析一起近年来的食品安全犯罪案例，从法律适用和侦查技术两个角度进行分析"。你打开百度搜索"食品安全犯罪案例"，结果出来几万条无关信息，根本找不到有用的。</p>
+
+      <h4>😣 传统方式</h4>
+      <p>百度搜索 → 翻很多页 → 找到新闻但缺少法律分析 → 再搜法律条文 → 手动拼凑 → 质量低、耗时长。</p>
+
+      <h4>✨ AI Agent 方案</h4>
+      <p>用 AI Agent 进行<strong>多维度检索</strong>：先让它帮你筛选典型案例，再针对性检索法律条文和侦查技术资料，最后整合成结构化的分析报告。</p>
+
+      <h4>📋 具体操作步骤</h4>
+      <ol class="steps">
+        <li>
+          <div class="step-content">
+            <h4>第一步：明确检索方向</h4>
+            <p>先让 AI Agent 帮你确定检索策略：</p>
+            <div class="prompt-block">
+              <p>我是食药环专业学生，需要完成一份食品安全犯罪案例分析作业。请帮我：<br>1. 推荐 3-5 起近年来（2020年后）有代表性的食品安全犯罪案例<br>2. 每个案例标注：案件名称、发生地、涉及食品类型、犯罪手段、适用法律<br>3. 帮我分析哪个案例最适合从"法律适用"和"侦查技术"两个角度展开分析<br>4. 给出检索关键词建议</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>第二步：深入检索法律条文</h4>
+            <p>选定案例后，针对性检索相关法律：</p>
+            <div class="prompt-block">
+              <p>关于"生产、销售不符合安全标准的食品罪"（《刑法》第143条），请帮我整理：<br>1. 法条原文及构成要件<br>2. 立案追诉标准<br>3. 与《食品安全法》的衔接关系<br>4. 典型判决中的量刑参考<br>请标注信息来源，确保法律条文准确。</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>第三步：整理成报告</h4>
+            <p>用 WorkBuddy 将检索结果整理为结构化报告：</p>
+            <div class="prompt-block">
+              <p>把以上检索到的案例信息、法律条文和分析整合成一份完整的案例分析报告，格式要求：<br>1. 案例概述（案件背景、基本事实）<br>2. 法律适用分析（涉嫌罪名、构成要件分析、量刑分析）<br>3. 侦查技术分析（现场勘查要点、物证采集、检验鉴定）<br>4. 思考与启示<br>输出为 Markdown 格式，保存到我的"课程作业"项目下。</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout callout-warn">
+        <div class="callout-title">⚠️ 重要提示：AI 检索的法律条文需要核实</div>
+        <p>AI 可能生成过时或不准确的法律条文。关键法律条文务必在<strong>北大法宝</strong>、<strong>中国法律法规数据库</strong>等权威平台核实原文。AI 是帮你找方向和整理框架，<em>法律准确性以权威来源为准</em>。</p>
+      </div>
+
+      <h4>📦 成果产出</h4>
+      <p><span class="tag tag-green">案例分析报告</span> <span class="tag tag-blue">法律条文汇编</span> <span class="tag tag-orange">检索关键词库</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 场景三 ===== -->
+  <div class="scenario" id="scenario-3">
+    <div class="scenario-header">
+      <div class="scenario-icon" style="background: rgba(232,168,56,0.15);">📅</div>
+      <div class="scenario-title">
+        <h3>场景三：学习计划制定与四级备考</h3>
+        <p>让 AI 帮你把"过四级"这个大目标拆解成每天的实际行动</p>
+      </div>
+    </div>
+    <div class="scenario-body">
+      <h4>📌 场景描述</h4>
+      <p>大一第一学期，学校要求大二上学期之前通过英语四级。你的英语基础一般（高考英语 110 分左右），词汇量大约 3500，离四级要求的 4500 词还差 1000。同时还要应付专业课和警体训练，时间很紧。</p>
+
+      <h4>✨ AI Agent 方案</h4>
+      <p>分三步走：<strong>能力诊断 → 智能排期 → 动态调整</strong>。让 AI Agent 根据你的实际水平和可用时间，制定一份可执行、可调整的备考计划。</p>
+
+      <h4>📋 第一步：能力诊断与计划制定</h4>
+      <div class="prompt-block">
+        <p>我是警察学院食药环专业大一新生，需要备考英语四级（CET-4）。<br><br>我的情况：<br>- 高考英语 110 分（满分150），基础中等<br>- 词汇量约 3500，听力较弱<br>- 每天可用英语学习时间：工作日 1.5 小时，周末 3 小时<br>- 警校有早操和晚自习，时间相对固定<br>- 距考试还有 120 天<br><br>请帮我制定一份 120 天四级备考计划，要求：<br>1. 分为"基础积累期""专项突破期""模拟冲刺期"三个阶段<br>2. 每个阶段有明确的目标和每日任务<br>3. 考虑到警校作息，给出具体到每天的时间安排<br>4. 词汇、听力、阅读、写作、翻译五项均衡安排<br>5. 每两周安排一次模拟测试节点</p>
+      </div>
+
+      <h4>📋 第二步：词汇记忆策略</h4>
+      <p>四级词汇是基础中的基础。让 AI Agent 帮你制定科学的背词策略：</p>
+      <div class="prompt-block">
+        <p>基于艾宾浩斯遗忘曲线，帮我制定一个四级核心词汇的记忆计划：<br>1. 每天新学 40 个单词，复习前一天和前几天的<br>2. 按"高频词→中频词→低频词"的优先级排列<br>3. 每个单词给出：音标、词性、中文释义、一个例句、一个记忆技巧<br>4. 按 7 天为一个周期，输出第一周的每日词汇表<br>5. 同时结合我的食药环专业，把跟食品、药品、环境相关的英文词汇也纳入（如 food safety, pharmaceutical, environmental monitoring 等）</p>
+      </div>
+
+      <h4>📋 第三步：动态调整</h4>
+      <p>每两周做一次模拟测试后，把成绩告诉 AI Agent，让它调整计划：</p>
+      <div class="prompt-block">
+        <p>我做了四级模拟测试，成绩如下：<br>- 听力：120/248.5（错误较多在新闻听力）<br>- 阅读：160/248.5（匹配题耗时过长）<br>- 写作翻译：130/248.5（翻译遇到专业词汇不会）<br>- 总分：410（差 15 分过线）<br><br>距离考试还有 60 天，请根据我的弱项调整接下来的备考计划，重点突破听力和翻译。</p>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-title">💡 进阶：自己开发背单词程序</div>
+        <p>当你的备考计划运行一段时间后，你可能会发现现有的背单词 App 不完全满足需求——比如你想加入食药环专业词汇、想自定义复习算法。这时候就可以用 WorkBuddy 开发一个<strong>专属背单词网页程序</strong>！详见<a href="#scenario-5">场景五</a>。</p>
+      </div>
+
+      <h4>📦 成果产出</h4>
+      <p><span class="tag tag-orange">120天备考计划</span> <span class="tag tag-blue">每日词汇表</span> <span class="tag tag-green">动态调整方案</span> <span class="tag tag-purple">自测成绩追踪</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 场景四 ===== -->
+  <div class="scenario" id="scenario-4">
+    <div class="scenario-header">
+      <div class="scenario-icon" style="background: rgba(167,139,250,0.15);">🔬</div>
+      <div class="scenario-title">
+        <h3>场景四：专业研究辅助</h3>
+        <p>从选题到成稿，AI Agent 全程辅助你的学术研究</p>
+      </div>
+    </div>
+    <div class="scenario-body">
+      <h4>📌 场景描述</h4>
+      <p>大二阶段，你需要完成一篇学年论文，主题方向是"食品中非法添加物的检测技术与法律规制"。但你从未写过学术论文，不知道怎么选题、怎么查文献、怎么搭框架。</p>
+
+      <h4>✨ AI Agent 方案</h4>
+      <p>把研究过程拆成<strong>五个阶段</strong>，每个阶段用 AI Agent 辅助：</p>
+
+      <ol class="steps">
+        <li>
+          <div class="step-content">
+            <h4>阶段一：选题聚焦</h4>
+            <div class="prompt-block">
+              <p>我对"食品中非法添加物"这个方向感兴趣，但不知道具体研究什么。我的专业是食药环犯罪侦查。请帮我：<br>1. 列出 5 个可行的研究角度（如：某类非法添加物的检测方法比较、检测技术在刑事侦查中的应用、法律规制的完善建议等）<br>2. 每个角度评估研究价值、可行性、资料获取难度<br>3. 推荐最适合本科学年论文的 1-2 个方向<br>4. 给出推荐方向的研究问题（Research Question）</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>阶段二：文献检索框架</h4>
+            <div class="prompt-block">
+              <p>我确定研究"三聚氰胺检测技术在食品犯罪侦查中的应用与法律问题"。请帮我：<br>1. 制定文献检索策略：推荐数据库（知网、万方等）、检索关键词组合<br>2. 筛选标准：近 5 年、核心期刊优先<br>3. 生成一份文献追踪表模板（含：作者、标题、期刊、年份、核心观点、与研究的关系）<br>4. 帮我预估需要阅读多少篇文献</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>阶段三：论文框架搭建</h4>
+            <div class="prompt-block">
+              <p>基于我的研究方向，请帮我搭建论文框架：<br>1. 生成详细的论文大纲（到三级标题）<br>2. 每个部分预估字数和核心内容<br>3. 标注哪些部分需要数据支撑、哪些需要案例分析<br>4. 建议论文总字数和各部分比例<br>论文题目：三聚氰胺检测技术在食品犯罪侦查中的应用与法律问题研究</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>阶段四：辅助写作</h4>
+            <p>注意：AI 辅助写作≠AI代写。正确用法是让 AI 帮你<strong>润色语言、检查逻辑、格式化引用</strong>，核心观点和论证必须是你自己的。</p>
+            <div class="prompt-block">
+              <p>以下是我论文"第二部分：三聚氰胺检测技术概述"的初稿。请帮我：<br>1. 检查逻辑是否连贯，指出跳跃或缺失的论证<br>2. 润色学术语言，使其更符合学术论文规范<br>3. 标注需要补充数据或引用的地方<br>4. 不要改变我的核心观点和论证结构<br><br>初稿内容：[粘贴你的初稿]</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>阶段五：格式化与引用</h4>
+            <div class="prompt-block">
+              <p>帮我把以下参考文献按照 GB/T 7714-2015 格式整理，并生成正文中的引用标注：<br>[粘贴你的参考文献原始信息]</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <div class="callout callout-warn">
+        <div class="callout-title">⚠️ 学术诚信红线</div>
+        <p>AI Agent 是你的<strong>研究助手</strong>，不是<strong>代笔者</strong>。以下行为绝对不可：<br>① 直接让 AI 生成整篇论文并提交<br>② 使用 AI 虚构文献和数据<br>③ 不标注 AI 辅助使用情况（如学校要求）<br>正确做法：AI 帮你找方向、搭框架、润色语言，但<em>思考、论证和写作的核心是你自己</em>。</p>
+      </div>
+
+      <h4>📦 成果产出</h4>
+      <p><span class="tag tag-purple">研究论文</span> <span class="tag tag-blue">文献综述表</span> <span class="tag tag-green">论文大纲</span></p>
+    </div>
+  </div>
+
+  <!-- ===== 场景五：编程实战 ===== -->
+  <div class="scenario" id="scenario-5">
+    <div class="scenario-header">
+      <div class="scenario-icon" style="background: rgba(45,212,191,0.15);">💻</div>
+      <div class="scenario-title">
+        <h3>场景五：编程实战——开发专属背单词网页程序</h3>
+        <p>零基础也能用 AI Agent 开发出可用的学习工具</p>
+      </div>
+    </div>
+    <div class="scenario-body">
+      <h4>📌 场景描述</h4>
+      <p>在场景三中你制定了四级备考计划，但市面上的背单词 App 都不够灵活——不能导入食药环专业词汇、不能自定义复习算法、不能记录你的易错词。你想要一个<strong>自己的</strong>背单词程序。</p>
+
+      <p>你从没学过编程。但这不重要——<strong>WorkBuddy 的 AI Agent 可以帮你从零开始开发一个完整的网页应用</strong>。</p>
+
+      <div class="callout callout-info">
+        <div class="callout-title">💡 为什么选 WorkBuddy 做这个？</div>
+        <p>WorkBuddy 的"项目模式"可以：<br>① 在一个工作区内管理所有代码文件<br>② AI 自动写代码、运行、调试、修复<br>③ 生成可以直接在浏览器中打开的网页应用<br>④ 最终可以把项目文件导出提交到 GitHub</p>
+      </div>
+
+      <h4>📋 完整开发流程</h4>
+
+      <ol class="steps">
+        <li>
+          <div class="step-content">
+            <h4>第一步：需求分析</h4>
+            <p>先想清楚你要什么功能，然后告诉 AI Agent：</p>
+            <div class="prompt-block">
+              <p>我想开发一个网页版背单词程序，用于备考英语四级。需求如下：<br><br>核心功能：<br>1. 单词卡片展示：正面显示英文单词，点击翻转显示中文释义、音标、例句<br>2. 学习模式：每天学习新词 + 复习旧词，按艾宾浩斯遗忘曲线安排复习<br>3. 测试模式：给出中文选英文（四选一），记录正确率<br>4. 词库管理：能导入自定义词汇（包括食药环专业词汇）<br>5. 进度统计：显示已学单词数、掌握程度、连续学习天数<br>6. 易错词本：自动收录测试中答错的单词<br><br>技术要求：<br>- 纯前端实现（HTML + CSS + JavaScript），不需要后端服务器<br>- 数据存储用 localStorage，刷新不丢失<br>- 界面简洁现代，适合手机和电脑使用<br>- 深色主题</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>第二步：AI 生成代码</h4>
+            <p>在 WorkBuddy 项目模式中，AI Agent 会根据你的需求自动生成代码。它会创建以下文件结构：</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>项目文件结构</span>
+                <span class="lang">File Tree</span>
+              </div>
+              <div class="code-content">
+<pre>vocab-app/
+├── index.html        <span style="color: #9aa6bf;">&lt;!-- 主页面 --&gt;</span>
+├── style.css         <span style="color: #9aa6bf;">&lt;!-- 样式文件 --&gt;</span>
+├── app.js            <span style="color: #9aa6bf;">&lt;!-- 核心逻辑 --&gt;</span>
+├── vocabulary.js     <span style="color: #9aa6bf;">&lt;!-- 词库数据 --&gt;</span>
+└── README.md         <span style="color: #9aa6bf;">&lt;!-- 项目说明 --&gt;</span></pre>
+              </div>
+            </div>
+            <p>AI 会逐个文件生成代码，你不需要理解每一行——但建议<strong>大致浏览</strong>，了解整体结构。比如核心的复习算法逻辑：</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>艾宾浩斯复习算法（简化版）</span>
+                <span class="lang">JavaScript</span>
+              </div>
+              <div class="code-content">
+<pre><span style="color:#c678dd;">function</span> <span style="color:#61afef;">getReviewSchedule</span>(word) {
+  <span style="color:#7f848e;">// 艾宾浩斯遗忘曲线复习间隔（天）</span>
+  <span style="color:#c678dd;">const</span> intervals = [<span style="color:#d19a66;">1</span>, <span style="color:#d19a66;">2</span>, <span style="color:#d19a66;">4</span>, <span style="color:#d19a66;">7</span>, <span style="color:#d19a66;">15</span>, <span style="color:#d19a66;">30</span>];
+  <span style="color:#c678dd;">const</span> reviewCount = word.reviewCount || <span style="color:#d19a66;">0</span>;
+
+  <span style="color:#c678dd;">if</span> (reviewCount &lt; intervals.length) {
+    <span style="color:#c678dd;">return</span> Date.now() + intervals[reviewCount] * <span style="color:#d19a66;">86400000</span>;
+  }
+  <span style="color:#c678dd;">return</span> <span style="color:#56b6c2;">null</span>; <span style="color:#7f848e;">// 已掌握，无需再复习</span>
+}
+
+<span style="color:#c678dd;">function</span> <span style="color:#61afef;">getTodayWords</span>() {
+  <span style="color:#c678dd;">const</span> today = Date.now();
+  <span style="color:#c678dd;">const</span> needReview = words.filter(w =&gt; w.nextReview &amp;&amp; w.nextReview &lt;= today);
+  <span style="color:#c678dd;">const</span> newWords = words.filter(w =&gt; !w.nextReview).slice(<span style="color:#d19a66;">0</span>, <span style="color:#d19a66;">40</span>);
+  <span style="color:#c678dd;">return</span> [...needReview, ...newWords];
+}</pre>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>第三步：测试与调试</h4>
+            <p>代码生成后，WorkBuddy 会自动在浏览器中预览。你可以实际操作：添加单词、翻转卡片、做测试、查看统计。如果发现 bug，直接告诉 AI：</p>
+            <div class="prompt-block">
+              <p>测试发现以下问题：<br>1. 翻转卡片动画在手机上卡顿<br>2. 导入词汇功能没有做格式校验，粘贴错误格式会崩溃<br>3. 统计页面的图表没有显示<br>请修复这三个问题。</p>
+            </div>
+            <p>AI 会自动定位问题代码、修改并重新预览，你只需要验证是否修复。</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>第四步：迭代优化</h4>
+            <p>基础功能完成后，可以逐步添加更多功能：</p>
+            <div class="prompt-block">
+              <p>请给背单词程序添加以下功能：<br>1. 发音功能：点击单词可以播放英式/美式发音（用 Web Speech API）<br>2. 暗黑/亮色主题切换<br>3. 导出学习数据为 CSV 文件<br>4. 添加食药环专业词汇包（我来提供词汇列表）</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="step-content">
+            <h4>第五步：部署上线</h4>
+            <p>程序开发完成后，WorkBuddy 可以一键部署到云端，生成一个网址，你在手机浏览器打开就能用。也可以把文件保存到本地，双击 <code>index.html</code> 即可运行。</p>
+          </div>
+        </li>
+      </ol>
+
+      <h4>📦 成果产出</h4>
+      <p><span class="tag tag-teal">可用的背单词网页应用</span> <span class="tag tag-blue">完整项目源代码</span> <span class="tag tag-green">可部署的在线网址</span> <span class="tag tag-purple">GitHub 可提交的项目</span></p>
+
+      <div class="callout callout-tip">
+        <div class="callout-title">✅ 你从中学到的</div>
+        <p>虽然代码是 AI 写的，但通过这个过程你会学到：<br>① 如何分析需求、拆解功能<br>② 前端开发的基本结构（HTML/CSS/JS）<br>③ 如何测试和调试程序<br>④ 如何用自然语言指挥 AI 做事<br>这些能力比"会写某行代码"更重要——你学会了<em>如何把想法变成产品</em>。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 场景六 ===== -->
+  <div class="scenario" id="scenario-6">
+    <div class="scenario-header">
+      <div class="scenario-icon" style="background: rgba(239,91,91,0.15);">🏃</div>
+      <div class="scenario-title">
+        <h3>场景六：日常生活管理</h3>
+        <p>让 AI Agent 帮你管理警校生活的方方面面</p>
+      </div>
+    </div>
+    <div class="scenario-body">
+      <h4>📌 场景描述</h4>
+      <p>警校生活不只是学习：早操、内务、值日、训练、社团活动、心理健康……这些琐事挤占了大量精力。AI Agent 可以帮你管理这些"非学习"事务，让你有更多时间专注成长。</p>
+
+      <h4>📋 六个生活场景</h4>
+
+      <div class="card">
+        <div class="card-title">⏰ 场景 A：作息与时间管理</div>
+        <div class="prompt-block">
+          <p>我是警校学生，每天作息如下：6:00 起床早操，8:00-12:00 上课，14:00-17:00 上课/训练，19:00-21:00 晚自习，22:30 熄灯。请帮我：<br>1. 在这个框架内安排英语学习、专业课复习、体能训练的时间<br>2. 生成一张可视化周计划表<br>3. 给出每周可自由支配的时间清单</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💪 场景 B：体能训练辅助</div>
+        <div class="prompt-block">
+          <p>警校体能测试要求：1000米跑 4分25秒以内、引体向上 10个以上、50米 7秒以内。我目前 1000米 5分10秒、引体向上 5个。请帮我制定一份 8 周体能提升计划，结合我的课表安排训练时间。</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🍽️ 场景 C：饮食营养管理</div>
+        <div class="prompt-block">
+          <p>作为食药环专业学生，我想结合专业知识管理饮食。请帮我：<br>1. 根据警校训练强度制定每日营养摄入建议<br>2. 列出食堂常见菜品的营养分析<br>3. 结合食品安全知识，给我一些实用的食品选购和储存建议<br>4. 生成一周健康饮食方案</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📝 场景 D：实验报告辅助</div>
+        <div class="prompt-block">
+          <p>我刚做完"食品中亚硝酸盐含量测定"的实验。实验数据如下：[粘贴数据]。请帮我：<br>1. 生成标准格式的实验报告（目的、原理、仪器试剂、步骤、数据、结果分析、讨论）<br>2. 帮我分析数据，计算亚硝酸盐含量并判断是否超标<br>3. 讨论可能的误差来源</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🧘 场景 E：心理健康与压力管理</div>
+        <div class="prompt-block">
+          <p>最近学业压力大，加上警校管理严格，感觉有点焦虑。请从认知行为角度帮我：<br>1. 分析焦虑的可能来源<br>2. 给出 5 个可以在宿舍做的快速减压方法<br>3. 制定一个简单的每日 10 分钟正念练习计划<br>注意：我需要的是日常减压建议，不是专业心理咨询。</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 场景 F：内务管理清单</div>
+        <div class="prompt-block">
+          <p>警校内务检查标准很严格，请帮我生成一份每日内务整理清单，包括：床铺整理、物品摆放、卫生打扫、个人仪容等，按"早中晚"三个时段组织，方便打印贴在床头。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 第五部分：GitHub -->
+<!-- ================================================================ -->
+<div class="section" id="github-intro">
+  <div class="section-header">
+    <span class="section-number">PART 05</span>
+    <h2>把学习成果提交到 GitHub</h2>
+    <p>为什么大学新生需要 GitHub，以及如何从零开始使用它</p>
+  </div>
+
+  <h3><span class="icon">🐙</span> 为什么大学生需要 GitHub</h3>
+
+  <p>GitHub 是全球最大的代码托管平台，但它对你来说不只是"存代码的地方"。</p>
+
+  <div class="tool-grid">
+    <div class="tool-card">
+      <span class="tool-badge tag-blue">价值一</span>
+      <h4>📊 数字作品集</h4>
+      <p>你做的背单词程序、学习笔记整理工具、数据分析项目——都可以展示在 GitHub 主页上。这是你大学四年最直观的能力证明。</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-green">价值二</span>
+      <h4>🔄 版本管理</h4>
+      <p>每次修改都保留记录，可以随时回退。不用担心改坏了找不回来，也不需要"最终版""最终版2""真的最终版"这种文件命名。</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-orange">价值三</span>
+      <h4>🤝 协作能力</h4>
+      <p>团队作业、课程项目可以多人协作。学会 Git/GitHub 是信息化时代的基本素养，对食药环专业未来的信息化侦查工作也有帮助。</p>
+    </div>
+    <div class="tool-card">
+      <span class="tool-badge tag-purple">价值四</span>
+      <h4>🚀 个人品牌</h4>
+      <p>一个维护良好的 GitHub 主页，在考研复试、求职面试中都是加分项。它展示的不只是代码，更是你持续学习和创造的能力。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="github-setup">
+  <div class="section-header">
+    <span class="section-number">PART 05</span>
+    <h2>从零搭建 GitHub 环境</h2>
+  </div>
+
+  <h3><span class="icon">1️⃣</span> 注册 GitHub 账号</h3>
+  <ol class="steps">
+    <li>
+      <div class="step-content">
+        <h4>访问 GitHub 官网</h4>
+        <p>打开 <a href="https://github.com" target="_blank">github.com</a>，点击右上角"Sign up"</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>填写注册信息</h4>
+        <p>用学校邮箱注册（<code>@xxx.edu.cn</code>），后面可以申请<strong>学生包</strong>（GitHub Education）获得免费福利。</p>
+        <p>用户名建议：用"名字拼音+专业缩写"的形式，如 <code>zhangwei-fdenv</code>，专业且好记。</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>申请 GitHub 学生包</h4>
+        <p>注册后访问 <a href="https://education.github.com" target="_blank">education.github.com</a>，用学生证申请。通过后可获得免费域名、各种开发工具高级权限等福利。</p>
+      </div>
+    </li>
+  </ol>
+
+  <h3><span class="icon">2️⃣</span> 安装 Git 工具</h3>
+  <p>Git 是 GitHub 的核心工具，用来管理代码版本。在 Windows 上安装方法：</p>
+  <ol class="steps">
+    <li>
+      <div class="step-content">
+        <h4>下载 Git for Windows</h4>
+        <p>访问 <a href="https://git-scm.com/download/win" target="_blank">git-scm.com/download/win</a>，下载安装包</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>安装（一路 Next 即可）</h4>
+        <p>默认选项就行，不需要改任何设置。安装完成后在桌面右键，应该能看到"Git Bash Here"选项。</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>配置个人信息</h4>
+        <p>打开 Git Bash，输入以下命令（替换成你的信息）：</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span>Git 全局配置</span>
+            <span class="lang">Bash</span>
+          </div>
+          <div class="code-content">
+<pre>git config --global user.name <span style="color:#98c379;">"Zhang Wei"</span>
+git config --global user.email <span style="color:#98c379;">"zhangwei@xxx.edu.cn"</span></pre>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>生成 SSH 密钥（免密码推送）</h4>
+        <div class="code-block">
+          <div class="code-header">
+            <span>生成 SSH Key</span>
+            <span class="lang">Bash</span>
+          </div>
+          <div class="code-content">
+<pre>ssh-keygen -t ed25519 -C <span style="color:#98c379;">"zhangwei@xxx.edu.cn"</span>
+<span style="color:#7f848e;"># 一路回车即可</span>
+cat ~/.ssh/id_ed25519.pub
+<span style="color:#7f848e;"># 复制输出的内容</span></pre>
+          </div>
+        </div>
+        <p>然后去 GitHub → Settings → SSH and GPG keys → New SSH key，粘贴刚才复制的内容。</p>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<div class="section" id="github-workflow">
+  <div class="section-header">
+    <span class="section-number">PART 05</span>
+    <h2>上传项目到 GitHub 的完整流程</h2>
+  </div>
+
+  <p>以你开发的<strong>背单词程序</strong>为例，演示从本地到 GitHub 的完整流程：</p>
+
+  <h3><span class="icon">📦</span> 方式一：命令行方式（推荐学习）</h3>
+
+  <ol class="steps">
+    <li>
+      <div class="step-content">
+        <h4>在 GitHub 上创建仓库</h4>
+        <p>登录 GitHub → 点击 "+" → New repository</p>
+        <p>仓库名：<code>vocab-app</code></p>
+        <p>描述：<code>英语四级背单词网页应用 - 警校食药环专业定制版</code></p>
+        <p>选择 Public（公开），勾选"Add a README file"，点击 Create。</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>克隆仓库到本地</h4>
+        <div class="code-block">
+          <div class="code-content">
+<pre>git clone git@github.com:你的用户名/vocab-app.git
+cd vocab-app</pre>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>把项目文件复制进来</h4>
+        <p>把你用 WorkBuddy 开发的背单词程序文件（index.html、style.css、app.js 等）复制到这个文件夹里。</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>编写 README.md</h4>
+        <p>README 是别人打开你项目时看到的第一样东西，非常重要：</p>
+        <div class="code-block">
+          <div class="code-header">
+            <span>README.md 模板</span>
+            <span class="lang">Markdown</span>
+          </div>
+          <div class="code-content">
+<pre><span style="color:#61afef;"># 📖 英语四级背单词应用</span>
+
+<span style="color:#98c379;">> 警校食药环专业定制版 - 支持专业词汇导入</span>
+
+<span style="color:#61afef;">## ✨ 功能特性</span>
+
+- 🔄 艾宾浩斯遗忘曲线智能复习
+- 📝 支持自定义词库导入（含食药环专业词汇）
+- 📊 学习进度可视化统计
+- 🔊 单词发音（英式/美式）
+- 📱 响应式设计，手机电脑通用
+- 🌙 深色主题
+
+<span style="color:#61afef;">## 🚀 使用方法</span>
+
+1. 下载项目文件
+2. 用浏览器打开 `index.html`
+3. 开始背单词！
+
+<span style="color:#61afef;">## 📸 截图</span>
+
+<span style="color:#7f848e;">（放几张应用截图）</span>
+
+<span style="color:#61afef;">## 🛠️ 技术栈</span>
+
+- HTML5 + CSS3 + JavaScript (ES6+)
+- LocalStorage 数据持久化
+- Web Speech API 语音合成
+
+<span style="color:#61afef;">## 📄 License</span>
+
+MIT License - 自由使用</pre>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>提交并推送</h4>
+        <div class="code-block">
+          <div class="code-header">
+            <span>Git 提交流程</span>
+            <span class="lang">Bash</span>
+          </div>
+          <div class="code-content">
+<pre><span style="color:#7f848e;"># 添加所有文件到暂存区</span>
+git add .
+
+<span style="color:#7f848e;"># 提交，写清楚做了什么</span>
+git commit -m <span style="color:#98c379;">"feat: 初始化背单词应用，支持艾宾浩斯复习算法"</span>
+
+<span style="color:#7f848e;"># 推送到 GitHub</span>
+git push origin main</pre>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <h4>后续更新</h4>
+        <p>每次修改代码后，重复这三步即可：</p>
+        <div class="code-block">
+          <div class="code-content">
+<pre>git add .
+git commit -m <span style="color:#98c379;">"fix: 修复翻转卡片动画卡顿问题"</span>
+git push origin main</pre>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <h3><span class="icon">🖥️</span> 方式二：用 GitHub Desktop（图形界面）</h3>
+  <p>如果你觉得命令行太难，可以下载 <a href="https://desktop.github.com" target="_blank">GitHub Desktop</a>，用图形界面操作，点点鼠标就能完成上传。适合刚开始过渡。</p>
+
+  <h3><span class="icon">🤖</span> 方式三：让 WorkBuddy 帮你操作</h3>
+  <p>WorkBuddy 项目模式下，你可以直接让 AI Agent 帮你执行 Git 命令：</p>
+  <div class="prompt-block">
+    <p>帮我把当前项目的所有文件用 Git 提交并推送到 GitHub。提交信息写："feat: 完成背单词应用 v1.0，含艾宾浩斯复习算法和发音功能"。如果还没有初始化 Git 仓库，请先初始化。</p>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-title">💡 Git 提交信息规范</div>
+    <p>好的提交信息让别人（和未来的你）知道每次改了什么：</p>
+    <p><code>feat:</code> 新功能 &nbsp; <code>fix:</code> 修复 bug &nbsp; <code>docs:</code> 文档修改 &nbsp; <code>refactor:</code> 重构代码 &nbsp; <code>style:</code> 样式调整</p>
+  </div>
+</div>
+
+<!-- ================================================================ -->
+<!-- 附录 -->
+<!-- ================================================================ -->
+<div class="section" id="prompt-templates">
+  <div class="section-header">
+    <span class="section-number">附录 A</span>
+    <h2>Prompt 模板速查表</h2>
+    <p>把以下模板存到手机备忘录里，随时调用</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 课堂笔记整理</div>
+    <div class="prompt-block">
+      <p>我是食药环专业学生，刚上完《[课程名]》课。以下是课堂速记：[内容]。请整理成结构化笔记，标注重点和考点，保存为文件。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔍 查资料</div>
+    <div class="prompt-block">
+      <p>帮我查找关于[主题]的资料，要求：1. 来源可靠 2. 标注出处 3. 按要点整理 4. 区分事实和观点</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 制定学习计划</div>
+    <div class="prompt-block">
+      <p>我需要在[天数]天内完成[目标]。每天可用[时长]。我的基础是[描述]。请制定详细计划，分阶段、有节点、可执行。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">💻 开发程序</div>
+    <div class="prompt-block">
+      <p>我想开发一个[描述]的网页应用。功能需求：[列举]。技术要求：纯前端、localStorage存储、响应式。请生成完整代码。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 实验报告</div>
+    <div class="prompt-block">
+      <p>实验名称：[名称]。实验数据：[数据]。请生成标准格式实验报告，含数据分析、结果判断和误差讨论。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📖 法条记忆</div>
+    <div class="prompt-block">
+      <p>帮我把《[法律名称]》第[X]条到第[Y]条的内容，用案例化、口诀化的方式生成记忆卡片，每条配一个简短案例和一个记忆口诀。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📤 提交 GitHub</div>
+    <div class="prompt-block">
+      <p>帮我把当前项目文件用 Git 提交并推送到 GitHub。提交信息：[描述本次修改内容]。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="roadmap">
+  <div class="section-header">
+    <span class="section-number">附录 B</span>
+    <h2>四学期成长路线图</h2>
+    <p>从大一到大二，系统化地掌握 AI Agent 的使用</p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <h4>📍 大一上学期 · 入门期</h4>
+      <p><strong>目标：</strong>建立 AI Agent 使用习惯</p>
+      <ul>
+        <li>注册并开始使用豆包，每天用语音记录课堂笔记</li>
+        <li>让 AI 制定四级备考计划，开始系统背单词</li>
+        <li>注册 GitHub 账号，学会基本的 clone/commit/push</li>
+        <li>用 WorkBuddy 整理第一学期的课程笔记</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <h4>📍 大一下学期 · 进阶期</h4>
+      <p><strong>目标：</strong>开始用 AI Agent 做项目</p>
+      <ul>
+        <li>参加四级考试（目标一次性通过）</li>
+        <li>用 WorkBuddy 开发背单词网页程序并提交到 GitHub</li>
+        <li>用 AI Agent 辅助完成第一份案例分析报告</li>
+        <li>建立结构化的学习笔记体系（按课程分文件夹）</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <h4>📍 大二上学期 · 深度期</h4>
+      <p><strong>目标：</strong>用 AI Agent 做学术研究</p>
+      <ul>
+        <li>用 AI Agent 辅助完成学年论文（从选题到成稿）</li>
+        <li>开发第二个项目：如法律条文查询工具、实验数据可视化工具</li>
+        <li>在 GitHub 上积累 3-5 个项目，写好 README</li>
+        <li>开始学习看懂 AI 生成的代码，逐步理解编程逻辑</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <h4>📍 大二下学期 · 输出期</h4>
+      <p><strong>目标：</strong>从使用者变成创造者</p>
+      <ul>
+        <li>能独立用 AI Agent 完成复杂项目（如食品安全数据分析平台）</li>
+        <li>GitHub 主页有完整的作品集，包含项目说明和截图</li>
+        <li>能教同学使用 AI Agent（教是最好的学）</li>
+        <li>开始探索 AI 在食药环侦查领域的专业应用</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout callout-info" style="margin-top: 32px;">
+    <div class="callout-title">🎯 系列预告</div>
+    <p>本指南是系列第一期，后续将推出：</p>
+    <ul style="margin-top: 8px;">
+      <li><strong>第 2 期：</strong>AI Agent 深度笔记术——从课堂速记到知识图谱</li>
+      <li><strong>第 3 期：</strong>AI Agent 辅助文献检索与论文写作全流程</li>
+      <li><strong>第 4 期：</strong>零基础用 AI 开发学习工具——5 个实战项目</li>
+      <li><strong>第 5 期：</strong>GitHub 作品集建设——让你的学习成果被看见</li>
+      <li><strong>第 6 期：</strong>AI Agent 在食药环侦查中的专业应用</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <p>AI Agent 赋能大学学习生活 · 警校食药环新生完全指南 · 系列第 1 期</p>
+  <p style="margin-top: 8px;">工具推荐：豆包（日常办公）· WorkBuddy（项目开发） · 持续更新中</p>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+  // 导航高亮
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.section, .scenario');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = section.id;
+      }
+    });
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.getAttribute('href') === '#' + current) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // 平滑滚动
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = item.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+<script src="../../assets/nav.js" data-root="../../" data-theme="study" data-title="AI Agent 赋能大学学习生活 · 警校食药环新生完全指南"></script>
+</body>
+</html>

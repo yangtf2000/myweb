@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>部门 AI 设计应用技术体系与规划（一页纸）</title>
+<style>
+
+  @page { size: A4; margin: 10mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+    color: #1f2a37; background: transparent; line-height: 1.45;
+    width: 794px; margin: 0 auto; padding: 14px 18px;
+  }
+  .head {
+    border-left: 6px solid #1e5eff; padding: 4px 0 4px 12px; margin-bottom: 10px;
+  }
+  .head h1 { font-size: 19px; letter-spacing: 1px; color: #14213d; }
+  .head .sub { font-size: 12px; color: #5b6b7f; margin-top: 3px; }
+  .lede {
+    background: #f2f6ff; border: 1px solid #d8e3ff; border-radius: 8px;
+    padding: 9px 12px; font-size: 12.5px; color: #38bdf8; margin-bottom: 12px;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .card {
+    border: 1px solid #e3e8ef; border-radius: 8px; padding: 8px 10px;
+    background: rgba(255,255,255,0.05); box-shadow: 0 1px 2px rgba(20,33,61,.04);
+  }
+  .card .t { font-size: 13px; font-weight: 700; color: #14213d; display: flex; align-items: center; gap: 6px; }
+  .card .n {
+    display: inline-flex; width: 18px; height: 18px; border-radius: 50%;
+    background: #1e5eff; color: #fff; font-size: 11px; align-items: center; justify-content: center; flex: none;
+  }
+  .card .lbl { font-size: 10.5px; color: #8a97a8; margin: 4px 0 1px; }
+  .card .v { font-size: 11.5px; color: #2b3a4d; }
+  .card .tech { font-size: 11px; color: #1e5eff; margin-top: 3px; }
+  .card .gain { font-size: 11px; color: #fbbf24; margin-top: 3px; }
+  .plan {
+    margin-top: 12px; border-top: 2px solid #14213d; padding-top: 8px;
+  }
+  .plan h2 { font-size: 13px; color: #14213d; margin-bottom: 6px; }
+  .plan .row { display: flex; gap: 8px; font-size: 11.5px; margin-bottom: 4px; }
+  .plan .tag {
+    flex: none; width: 92px; font-weight: 700; color: #fff; border-radius: 4px;
+    padding: 2px 6px; text-align: center; font-size: 10.5px;
+  }
+  .t1 { background: #16a34a; } .t2 { background: #1e5eff; } .t3 { background: #7c3aed; }
+  .plan .txt { color: #2b3a4d; padding-top: 1px; }
+  .foot {
+    margin-top: 10px; font-size: 10.5px; color: #6b7785;
+    border-top: 1px dashed #cbd5e1; padding-top: 6px;
+  }
+  .foot b { color: #b91c1c; }
+  .ph { background: rgba(245,158,11,0.08); border: 1px dotted #f59e0b; border-radius: 3px; padding: 0 4px; color: #fbbf24; }
+
+    </style>
+<link rel="stylesheet" href="../../assets/theme.css">
+    <link rel="stylesheet" href="../../assets/force-dark.css">
+</head>
+<body>
+
+  <div class="head">
+    <h1>部门 AI 设计应用技术体系与规划</h1>
+    <div class="sub">面向领导汇报 · 一页纸 · 能力展示 + 下一步规划</div>
+  </div>
+
+  <div class="lede">
+    部门已构建覆盖设计全流程的 AI 技术体系，<b>6 大类技术落地应用</b>，并正向 Agent 化、知识资产化持续演进；核心环节提效约 <span class="ph">【__%】</span>，数据全程走国产 / 私有化方案，合规可控。
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="t"><span class="n">1</span>大语言模型 / AIGC</div>
+      <div class="lbl">应用场景</div>
+      <div class="v">政策检索 · 大纲构建 · 报告 / 标书撰写 · 去"AI 味"润色</div>
+      <div class="tech">技术：DeepSeek / 豆包 / 通义千问 / 智谱 GLM；长上下文（1M token）、链式思考（CoT）、分章节生成</div>
+      <div class="gain">成效：资料与撰写环节提效约 <span class="ph">【__%】</span></div>
+    </div>
+
+    <div class="card">
+      <div class="t"><span class="n">2</span>知识库 + RAG 检索增强</div>
+      <div class="lbl">应用场景</div>
+      <div class="v">基于真实资料问答 · 规范查询 · 杜绝数据造假（治"幻觉"）</div>
+      <div class="tech">技术：向量数据库语义检索；腾讯 IMA / Cherry Studio（支持私有化部署）</div>
+      <div class="gain">成效：数据可溯源率 <span class="ph">【__%】</span></div>
+    </div>
+
+    <div class="card">
+      <div class="t"><span class="n">3</span>多模态生成（文生图 / 图生图）</div>
+      <div class="lbl">应用场景</div>
+      <div class="v">分析图 · 效果图 · 彩平图 · 配景补人物</div>
+      <div class="tech">技术：ControlNet 线稿约束 · LoRA 微调（8 分钟训练专属立面）· Seedream / 即梦 · D5 / Lumion 实时 AI 渲染</div>
+      <div class="gain">成效：出图周期缩短约 <span class="ph">【__%】</span></div>
+    </div>
+
+    <div class="card">
+      <div class="t"><span class="n">4</span>AI Agent 与智能体编排</div>
+      <div class="lbl">应用场景</div>
+      <div class="v">标书自动检查（格式 / 数据 / 术语三校验）· 政策抓取 + PPT 一键生成 · 重复工作批处理</div>
+      <div class="tech">技术：Coze / Dify 工作流编排 · Agent 集群 · Zapier / 集简云跨应用联动</div>
+      <div class="gain">成效：高频环节自动化率 <span class="ph">【__%】</span></div>
+    </div>
+
+    <div class="card">
+      <div class="t"><span class="n">5</span>语音识别与多模态解析</div>
+      <div class="lbl">应用场景</div>
+      <div class="v">会议纪要转写提炼 · 现场踏勘 · 音视频速读</div>
+      <div class="tech">技术：ASR 语音识别（通义听悟 / 讯飞听见）· 720 云 VR · 大疆航拍解析</div>
+      <div class="gain">成效：会议 / 踏勘整理提效约 <span class="ph">【__%】</span></div>
+    </div>
+
+    <div class="card">
+      <div class="t"><span class="n">6</span>设计垂直 AI 工具（专业模型）</div>
+      <div class="lbl">应用场景</div>
+      <div class="v">智能强排 · 指标计算 · 规范合规校验</div>
+      <div class="tech">技术：小库科技 AI 云 / 设计云 · 建筑学长 SU / Revit 插件实时渲染</div>
+      <div class="gain">成效：强排 / 指标环节提效约 <span class="ph">【__%】</span></div>
+    </div>
+
+  </div>
+
+  <div class="plan">
+    <h2>下一步规划（三档节奏）</h2>
+    <div class="row"><span class="tag t1">近期 0–3 月</span><span class="txt">搭建团队共享提示词库 + 案例库 + 规范库（IMA / 飞书），把个人经验转为团队资产</span></div>
+    <div class="row"><span class="tag t2">中期 3–6 月</span><span class="txt">上线部门专属 Agent（标书检查、政策抓取等，Coze / Dify），实现高频环节自动化</span></div>
+    <div class="row"><span class="tag t3">远期 6–12 月</span><span class="txt">私有化部署 + 设计垂直模型深入核心流程，形成院级 AI 设计底座</span></div>
+  </div>
+
+  <div class="foot">
+    合规底线：<b>国产模型优先 · 私有化部署 · 数据不出院</b>。　｜　带 <span class="ph">【__%】</span> 处为待填真实数据，请替换后再上报。
+  </div>
+
+<script src="../../assets/nav.js" data-root="../../" data-theme="work" data-title="部门 AI 设计应用技术体系与规划（一页纸）"></script>
+</body>
+</html>
