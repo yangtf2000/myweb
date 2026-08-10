@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>城建政策周报 · 2026-07-27（深色版）</title>
+<style>
+  :root{
+    --bg:#0d1117; --bg2:#11161f; --card:#161c26; --card2:#1b2230;
+    --ink:#e9eef5; --sub:#9fb0c3; --line:#2a3342; --line2:#374251;
+    --red:#ff6a55; --gold:#f5b942; --blue:#56a8ff; --green:#46d39a; --purple:#b18cff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(1100px 500px at 12% -8%, rgba(255,106,85,.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(86,168,255,.10), transparent 55%),
+      var(--bg);
+    color:var(--ink);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.72;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 18px 70px}
+  header.top{background:linear-gradient(135deg,#c0392b,#7d2018);color:#fff;border-radius:18px;padding:30px 32px;box-shadow:0 12px 36px rgba(192,57,43,.35);position:relative;overflow:hidden}
+  header.top:after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(245,185,66,.35),transparent 70%)}
+  header.top h1{margin:0 0 6px;font-size:26px;letter-spacing:2px;text-shadow:0 2px 8px rgba(0,0,0,.3)}
+  header.top .meta{font-size:13.5px;opacity:.95}
+  header.top .meta b{color:#ffe7b0;font-weight:700}
+  .byline{max-width:1000px;margin:10px auto 0;padding:0 18px;font-size:13px;color:var(--sub);text-align:right}
+  .byline b{color:var(--ink)}
+  /* 摘要 */
+  .summary{background:linear-gradient(180deg,rgba(245,185,66,.10),rgba(245,185,66,.03));border:1px solid rgba(245,185,66,.45);border-top:4px solid var(--gold);border-radius:14px;padding:22px 26px;margin:22px 0 8px;box-shadow:0 0 24px rgba(245,185,66,.10)}
+  .summary h2{margin:0 0 10px;font-size:18px;color:var(--gold)}
+  .summary ul{margin:8px 0 0;padding-left:20px}
+  .summary li{margin:7px 0}
+  .summary b{color:#fff}
+  /* 目录 */
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 22px;margin:16px 0}
+  .toc b{color:var(--blue)}
+  .toc ol{margin:8px 0 0;padding-left:22px;columns:2;column-gap:30px}
+  .toc li{margin:4px 0;break-inside:avoid}
+  .toc a{color:var(--sub);text-decoration:none}
+  .toc a:hover{color:var(--blue);text-decoration:underline}
+  /* 分篇 */
+  section.part{margin-top:34px}
+  .part-title{display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--line2);padding-bottom:9px;margin-bottom:6px}
+  .part-title .no{background:linear-gradient(135deg,#ff6a55,#c0392b);color:#fff;width:32px;height:32px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;box-shadow:0 4px 12px rgba(255,106,85,.35)}
+  .part-title h2{margin:0;font-size:21px;color:#fff}
+  .sub-h{font-size:16px;font-weight:800;color:var(--blue);margin:22px 0 8px;padding-top:8px;border-top:2px solid var(--blue)}
+  /* 卡片 */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin:14px 0;box-shadow:0 4px 16px rgba(0,0,0,.35)}
+  .card .ttl{font-size:17px;font-weight:800;margin:0 0 4px;color:#fff}
+  .card .src{font-size:12.5px;color:var(--sub);margin-bottom:10px}
+  .card .src span{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:6px;padding:1px 8px;margin-right:6px;margin-bottom:3px}
+  /* 政策文件块 */
+  .doc{background:linear-gradient(135deg,rgba(245,185,66,.16),rgba(255,106,85,.12));border:1px solid rgba(245,185,66,.55);border-radius:11px;padding:12px 16px;margin:12px 0;box-shadow:0 0 20px rgba(245,185,66,.12), inset 0 0 18px rgba(245,185,66,.05);display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+  .doc .dt{font-size:12px;letter-spacing:1px;color:var(--gold);font-weight:800;margin-bottom:5px;width:100%}
+  .doc .dt:before{content:"📄 ";}
+  .doc a{display:inline-block;color:#fff;font-weight:700;text-decoration:none;background:linear-gradient(135deg,#ff6a55,#c0392b);padding:8px 14px;border-radius:8px;font-size:13.5px;box-shadow:0 4px 14px rgba(255,106,85,.4);word-break:break-all;min-height:36px;line-height:1.3}
+  .doc a:hover{filter:brightness(1.1)}
+  .doc .meta2{font-size:12px;color:var(--sub);margin-top:6px;width:100%}
+  .kv{display:grid;grid-template-columns:92px 1fr;gap:5px 12px;margin:10px 0;font-size:14px}
+  .kv .k{color:var(--gold);font-weight:700}
+  .kv .v{color:var(--ink)}
+  .block{margin:12px 0}
+  .block .lab{font-weight:800;color:var(--red);font-size:14px;margin-bottom:4px}
+  .block .lab.b2{color:var(--blue)}
+  .block .lab.b3{color:var(--green)}
+  .chips{margin:8px 0 2px}
+  .chip{display:inline-block;background:var(--card2);border:1px solid var(--line2);border-radius:20px;padding:2px 11px;font-size:12.5px;color:#cdd9e8;margin:3px 5px 3px 0}
+  /* 湘潭焦点 */
+  .focus{background:linear-gradient(180deg,rgba(86,168,255,.10),rgba(86,168,255,.02));border:1px solid rgba(86,168,255,.5);border-top:4px solid var(--blue);border-radius:13px;padding:18px 22px;margin:16px 0;box-shadow:0 0 26px rgba(86,168,255,.12)}
+  .focus .tag{display:inline-block;background:linear-gradient(135deg,#56a8ff,#1f6feb);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 10px;margin-bottom:8px}
+  .focus.hot{background:linear-gradient(180deg,rgba(255,106,85,.12),rgba(245,185,66,.04));border-color:rgba(255,106,85,.55);border-top-color:var(--red)}
+  .focus.hot .tag{background:linear-gradient(135deg,#ff6a55,#c0392b)}
+  /* 湘潭进展看板 */
+  .board{background:linear-gradient(180deg,rgba(70,211,154,.10),rgba(70,211,154,.02));border:1px solid rgba(70,211,154,.45);border-radius:14px;padding:18px 20px;margin:16px 0;box-shadow:0 0 26px rgba(70,211,154,.10)}
+  .board .bh{font-size:17px;font-weight:800;color:var(--green);margin:0 0 4px}
+  .board .bh:before{content:"🏗️ ";}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+  .stat{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;text-align:center}
+  .stat .n{font-size:22px;font-weight:800;color:var(--gold);text-shadow:0 0 12px rgba(245,185,66,.4)}
+  .stat .t{font-size:11.5px;color:var(--sub);margin-top:2px}
+  .plist{margin:8px 0 0;padding-left:0;list-style:none}
+  .plist li{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--green);border-radius:8px;padding:9px 13px;margin:7px 0;font-size:13.5px}
+  .plist li b{color:#fff}
+  .note{background:rgba(86,168,255,.08);border:1px solid rgba(86,168,255,.4);border-radius:10px;padding:12px 16px;margin:10px 0;font-size:13.5px;color:#cfe0f5}
+  .note b{color:var(--blue)}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  th{background:var(--card2);font-weight:800;color:#fff}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+  .foot{margin-top:40px;font-size:12.5px;color:var(--sub);border-top:1px solid var(--line);padding-top:16px}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr)}.toc ol{columns:1}.kv{grid-template-columns:80px 1fr}}
+  /* 吸顶快速跳转导航 */
+  .topnav{position:sticky;top:0;z-index:99;background:rgba(13,17,23,.95);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap}
+  .topnav a{display:inline-block;padding:13px 13px;color:var(--sub);text-decoration:none;
+    font-size:13.5px;border-bottom:2px solid transparent}
+  .topnav a:active,.topnav a:focus{color:var(--gold);border-bottom-color:var(--gold)}
+  .part{scroll-margin-top:54px}
+  @media (max-width:640px){
+    body{font-size:16px}
+    .wrap{padding:16px 12px 60px}
+    header.top{padding:22px 18px}
+    header.top h1{font-size:22px}
+    table{font-size:12px}
+    .doc a{display:block;text-align:center;min-height:46px;padding:12px 16px}
+    .topnav a{padding:13px 11px}
+  }
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a href="#p1">摘要</a>
+  <a href="#p2">中央·宏观</a>
+  <a href="#p3">各部委</a>
+  <a href="#p4">资金专题</a>
+  <a href="#p5">其他省市</a>
+  <a href="#p6">智库趋势</a>
+  <a href="#p7">湖南</a>
+  <a href="#p8">长沙</a>
+  <a href="#p9">湘潭</a>
+</nav>
+<div class="wrap">
+
+<header class="top">
+  <h1>城建政策情报周报</h1>
+  <div class="meta">
+    期号：2026 年第 31 期（深色版）　|　覆盖周期：<b>2026-05 至 2026-07-27</b>（首期回溯≤3个月）<br>
+    生成：2026-07-27 17:55　|　风向标：城市更新 · 城市建设 · 各类资金 · 宏观政策　|　<b>重点区域：湖南 · 长沙 · 湘潭</b>
+  </div>
+</header>
+
+<div class="byline">整理：<b>ytf2000@sina.com</b></div>
+
+<!-- 摘要 -->
+<div class="summary">
+  <h2>📌 本周摘要（先看这里）</h2>
+  <p>本周（及近期持续有效的宏观框架）核心信号：<b style="color:#ffe7b0">国家级规划落地 + 资金闸门大开 + 湖南进入实操 + 湘潭项目加速 + 智库确认存量提质时代</b>。</p>
+  <ul>
+    <li><b>中央定调</b>：《城市更新"十五五"规划》为首部国家级专项规划；<b>政治局会议把城市更新纳入"六网"基建新方向</b>，投资闸门大开。</li>
+    <li><b>资金空前</b>：超长期特别国债 1600 亿（管网）+ 中央预算内 970 亿 + 专项债 3500 亿+ + 中央财政 160 亿 + 设备更新 2000 亿 + "两重"8000 亿（已下达 6065 亿）。</li>
+    <li><b>湖南实操</b>：省住建厅 7·20 老旧小区维修资金"绿色通道"征求意见稿（免表决、先修后补、预拨 50%、建第三方备选库）；长沙方案已施行、专项规划划出 <b>62 个重点片区</b>。</li>
+    <li><b>湘潭进展</b>：累计改造老旧小区 <b>1246 个</b>、加装电梯近 <b>900 台</b>；争取超长期特别国债等资金 <b>149 亿</b>；低效用地再开发试点落地（王老五 377 亩项目）；旅发大会 25 个重点项目推进中。</li>
+    <li><b>智库趋势</b>：头部智库一致判断——城市更新进入<b>"2.0 存量提质时代"</b>，"十五五"市场总容量约 <b>20 万亿元</b>；企业机会从"单项施工"转向"全过程更新服务"，越早具备前期策划与项目转化能力越受益。</li>
+    <li><b>对设计院结论</b>：未来 1–2 年是湖南城市更新规划设计业务爆发期，建议立即布局"政策+资金"双轮驱动的<b>项目谋划与申报服务</b>，并申请进入湖南应急维修、低效用地再开发第三方机构库。</li>
+  </ul>
+</div>
+
+<!-- 目录 -->
+<div class="toc">
+  <b>目录</b>
+  <ol>
+    <li><a href="#p1">中央 · 宏观政策背景（投资导向）</a></li>
+    <li><a href="#p2">中央 · 各部委动态</a></li>
+    <li><a href="#p3">中央 · 资金政策专题</a></li>
+    <li><a href="#p4">中央 · 其他省市标杆</a></li>
+    <li><a href="#p5">研究机构 / 行业智库 / 公众号趋势研究</a></li>
+    <li><a href="#p6">湖南 · 省级重点</a></li>
+    <li><a href="#p7">长沙 · 市级重点</a></li>
+    <li><a href="#p8">湘潭 · 市级重点 + 项目进展</a></li>
+    <li><a href="#p9">关键词 & 数据来源</a></li>
+  </ol>
+</div>
+
+<!-- ============ 中央 宏观 ============ -->
+<section class="part" id="p1">
+  <div class="part-title"><span class="no">1</span><h2>中央层面：宏观政策背景（投资导向）</h2></div>
+  <p style="color:var(--sub);margin:4px 0 12px">以下纲领性文件与高层会议，是理解本周所有部委、地方政策的"母本"，也<b style="color:var(--gold)">直接决定中央与地方的投资盘子</b>。</p>
+
+  <div class="card">
+    <div class="ttl">①《城市更新"十五五"规划》正式发布（首部国家级专项规划）</div>
+    <div class="src"><span>国务院 / 住建部等四部门</span><span>2026-05-15 国常会审议通过 · 06-08 吹风会</span></div>
+    <div class="doc">
+      <div class="dt">政策文件</div>
+      <a href="https://www.china.com.cn/zhibo/content_118531198.htm" target="_blank">🔗 国务院政策例行吹风会全文（中国网）</a>
+      <div class="meta2">发布：国务院新闻办　|　文号：国发〔2026〕城市更新十五五规划　|　状态：已公开发布</div>
+    </div>
+    <div class="kv">
+      <div class="k">核心指标</div><div class="v">10 项主要指标：城镇危旧房/老旧小区改造、老旧街区厂区、城中村、历史建筑修缮、地下管网、公园绿地等</div>
+      <div class="k">重点任务</div><div class="v">6 方面 23 项任务 + 14 项重大工程（好房子、老旧小区、完整社区、老旧街区厂区、市政提升）</div>
+      <div class="k">政策体系</div><div class="v">7 方面举措：实施机制、投融资、盘活存量土地、房屋全生命周期安全、多主体协同、法规标准、科技人才</div>
+    </div>
+    <div class="block"><div class="lab">政策分析</div>首部国家级专项规划，把城市更新从"工程"升格为"城市发展核心主线"。对设计院：未来五年规划设计需求从零散转为<b>系统性、常态化</b>。</div>
+    <div class="chips"><span class="chip">十五五规划</span><span class="chip">国家级专项规划</span><span class="chip">14项重大工程</span><span class="chip">任务书</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">②"四好建设"与"六张网"成为总抓手</div>
+    <div class="src"><span>中央城市工作会议（2025-07）+ 人民论坛（2026-07-17）</span></div>
+    <div class="doc">
+      <div class="dt">政策文件</div>
+      <a href="https://www.rmlt.com.cn/2026/0717/753347.shtml" target="_blank">🔗 人民论坛《统筹推进"四好"建设》</a>
+    </div>
+    <div class="kv">
+      <div class="k">四好建设</div><div class="v">好房子→好小区→好社区→好城区</div>
+      <div class="k">六张网</div><div class="v">水网、新型电网、算力网、通信网、<b style="color:var(--gold)">城市地下管网</b>、物流网；地下管网 2026 超长期国债 1600 亿专投</div>
+    </div>
+    <div class="block"><div class="lab">政策分析</div>"两个转向"（增量扩张→存量提质）是全部政策逻辑起点。设计院赛道应从"新建"切到"<b>存量改造+管网+数字基建</b>"。</div>
+    <div class="chips"><span class="chip">两个转向</span><span class="chip">存量提质</span><span class="chip">地下管网</span><span class="chip">好房子</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">③中央政治局会议定调：城市更新纳入"六网"基建新方向，投资闸门大开</div>
+    <div class="src"><span>中共中央政治局 4·28 会议 + 国家发改委 5·15 解读</span></div>
+    <div class="doc">
+      <div class="dt">政策文件</div>
+      <a href="https://suiyangqu.gov.cn/zwzx/zdzczz/content_305288" target="_blank">🔗 政治局会议新华社通稿</a>
+      <a href="https://so.html5.qq.com/page/real/search_news?docid=70000021_74169f0bf3f83252" target="_blank" style="margin-left:8px">🔗 "六网"成基建新方向解读</a>
+      <a href="https://www.ndrc.gov.cn/wsdwhfz/202605/t20260515_1405207.html" target="_blank" style="margin-left:8px">🔗 发改委：两重建设资金已下达 6065 亿</a>
+    </div>
+    <div class="kv">
+      <div class="k">六网基建</div><div class="v"><b style="color:var(--gold)">水网、新型电网、算力网、新一代通信网、城市地下管网、物流网</b>。"城市地下管网"直接对应<b>城市更新、韧性城市、公共安全</b>，是本轮基建稳增长最清晰的项目化抓手。</div>
+      <div class="k">两重资金</div><div class="v">2026 年"两重"建设全年 <b>8000 亿</b>，截至 5 月已下达 <b>6065 亿（占 76%）</b>；第二批清单已含城市地下管网项目。</div>
+      <div class="k">财政金融协同</div><div class="v">中央财政专设 <b>1000 亿</b>创新工具（财政金融协同促内需），预计撬动万亿级信贷投放；专项债、超长期特别国债加快发行使用。</div>
+      <div class="k">城市更新定位</div><div class="v">"扎实推进城市更新""努力稳定房地产市场"——集<b>惠民生、稳投资、扩内需</b>于一体，为房地产开辟新需求空间。</div>
+    </div>
+    <div class="block"><div class="lab">政策分析（影响投资的关键）</div>这是影响中央与地方投资政策的<b>"总开关"</b>。城市更新被正式纳入基建"六网"，意味着地方专项债、国债申报有了高层级政策口径支撑；"两重+财政金融协同"真金白银已下达，<b>争资窗口当期打开</b>。设计院应把"城市更新+地下管网"作为争资项目的核心叙事，前置谋划可研与"一案两书"。</div>
+    <div class="chips"><span class="chip">六网基建</span><span class="chip">两重8000亿</span><span class="chip">已下达6065亿</span><span class="chip">财政金融协同1000亿</span><span class="chip">稳投资扩内需</span><span class="chip">地下管网</span></div>
+  </div>
+</section>
+
+<!-- ============ 各部委 ============ -->
+<section class="part" id="p2">
+  <div class="part-title"><span class="no">2</span><h2>中央层面：各部委动态</h2></div>
+
+  <div class="card">
+    <div class="ttl">住建部：地下管网 77 万公里 + "好房子"双主线</div>
+    <div class="src"><span>住建部 秦海翔 / 陈少鹏（06-08 吹风会）</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.china.com.cn/zhibo/content_118531198.htm" target="_blank">🔗 住建部答记者问（吹风会实录）</a></div>
+    <div class="kv">
+      <div class="k">地下管网</div><div class="v">十五五改造约 <b style="color:var(--gold)">77 万公里</b>（燃气20/排水17.5/供水17.5/污水10/供热12 万）；当前总长约390万公里</div>
+      <div class="k">好房子</div><div class="v">房屋品质提升工程，推广装配式装修、适老化/无障碍改造，支持老旧住房自主更新</div>
+    </div>
+    <div class="block"><div class="lab b2">对设计院影响</div>管网设计、检测、智慧化（生命线安全工程）确定性极高；"好房子"带动既有建筑改造设计。</div>
+    <div class="chips"><span class="chip">地下管网</span><span class="chip">生命线安全工程</span><span class="chip">好房子</span><span class="chip">适老化改造</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">发改委：超长期特别国债 + 两新设备更新已下达</div>
+    <div class="src"><span>国家发改委　|　设备更新 2000 亿 07-03 全下达</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.ndrc.gov.cn" target="_blank">🔗 国家发改委官网（资金下达动态）</a></div>
+    <div class="kv">
+      <div class="k">两重建设</div><div class="v">8000 亿分批下达（截至5月已6065亿），管网/水网/电网/物流枢纽为重点</div>
+      <div class="k">设备更新</div><div class="v">2000 亿覆盖 22 领域约 1.1 万项目，已全部分三批下达</div>
+    </div>
+    <div class="block"><div class="lab b2">对设计院影响</div>设备更新多涉厂区/园区改造设计；"两重"管网项目需配套专项申报文本，是<b>项目谋划收费点</b>。</div>
+    <div class="chips"><span class="chip">超长期特别国债</span><span class="chip">两重</span><span class="chip">设备更新</span><span class="chip">项目谋划</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">财政部：50 城示范 + 税收支持</div>
+    <div class="src"><span>财政部 郭方明（06-08 吹风会）</span></div>
+    <div class="kv">
+      <div class="k">示范城市</div><div class="v">三年累计支持 <b>50 个重点城市</b>（北京/上海/成都等），东中西定额补助分别不超 8/10/12 亿</div>
+      <div class="k">资金渠道</div><div class="v">保障性安居补助+专项债+中央预算内+超长期国债；符合条件主体享税收优惠</div>
+    </div>
+    <div class="block"><div class="lab b2">对设计院影响</div>湖南暂无城市入选首批 50 城——<b>潜在机会</b>：可协助地市谋划、争取下一轮竞争性示范名额。</div>
+    <div class="chips"><span class="chip">50城示范</span><span class="chip">定额补助</span><span class="chip">税收优惠</span><span class="chip">竞争性选拔</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">自然资源部：存量挖潜 + "政策激励工具箱"潮</div>
+    <div class="src"><span>自然资源部 徐小黎（2026 上半年综述）</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.sohu.com/a/1046151581_175523" target="_blank">🔗 自然资源部谈城市更新政策演进</a></div>
+    <div class="kv">
+      <div class="k">主线</div><div class="v">刚性用地约束倒逼转向"存量挖潜"；2025底—2026上半年地方政策"井喷"</div>
+      <div class="k">趋势</div><div class="v">单宗平衡→区域统筹；静态管控→动态适应；规划土地复合利用；正面/豁免清单；过渡期延长</div>
+    </div>
+    <div class="block"><div class="lab b2">对设计院影响</div>低效用地再开发、存量建筑功能转换成新蓝海；<b>湘潭已入列湖南低效用地再开发试点</b>（见第8节）。</div>
+    <div class="chips"><span class="chip">存量挖潜</span><span class="chip">低效用地再开发</span><span class="chip">功能转换</span><span class="chip">区域统筹</span></div>
+  </div>
+</section>
+
+<!-- ============ 资金 ============ -->
+<section class="part" id="p3">
+  <div class="part-title"><span class="no">3</span><h2>中央层面：各类资金政策专题（重点）</h2></div>
+  <div class="doc">
+    <div class="dt">资金专题</div>
+    <a href="https://new.qq.com/rain/a/20260721A02FM200?refer=cp_1009" target="_blank">🔗 城市更新"钱袋子"全景盘点（腾讯 07-21）</a>
+    <a href="https://so.html5.qq.com/page/real/search_news?docid=70000021_2566a5a370775652" target="_blank" style="margin-left:8px">🔗 万亿管网（新华社 07-17）</a>
+    <a href="http://www.icci-ndrc.com/?a=index&aid=753&c=View&m=home" target="_blank" style="margin-left:8px">🔗 两债一金申报技巧</a>
+    <div class="meta2">2026 城市更新资金总盘 · 设计院争抢项目谋划/申报业务的历史窗口</div>
+  </div>
+  <table>
+    <tr><th>资金类别</th><th>2026 规模</th><th>主要投向</th><th>与设计院关联</th></tr>
+    <tr><td><b>超长期特别国债</b></td><td>1600 亿（管网）</td><td>燃气/排水/供水/供热管网</td><td>管网设计、检测、智慧化</td></tr>
+    <tr><td><b>中央预算内投资</b></td><td>城市更新专项 970 亿</td><td>老旧小区、管网、安居</td><td>可研/申报文本</td></tr>
+    <tr><td><b>地方政府专项债</b></td><td>3500 亿+</td><td>棚改、城中村、老旧小区、管网</td><td>一案两书、收益平衡</td></tr>
+    <tr><td><b>中央财政定额补助</b></td><td>50 城超 160 亿/年</td><td>示范城市样板项目</td><td>示范申报辅导</td></tr>
+    <tr><td><b>两新设备更新</b></td><td>2000 亿（已下达）</td><td>22 领域设备更新</td><td>厂区/园区改造设计</td></tr>
+    <tr><td><b>新型政策性金融</b></td><td>8000 亿（国开/农发/进出）</td><td>项目资本金、配套融资</td><td>融资方案、可研</td></tr>
+    <tr><td><b>"两重"建设</b></td><td>8000 亿（已下达 6065 亿）</td><td>水网/电网/算力/通信/<b>城市地下管网</b>/物流</td><td>专项申报文本、可研</td></tr>
+    <tr><td><b>财政金融协同工具</b></td><td>中央财政 1000 亿（创新）</td><td>撬动万亿级信贷促内需</td><td>融资方案设计</td></tr>
+  </table>
+  <div class="note"><b>申报要点（"两债一金"）：</b>3 万亿超长期国债 + 4.4 万亿专项债 + 8000 亿政策性金融 + 7550 亿中央预算内。硬性门槛：仅受理在建/续建/技改、投资完成≤80%、须纳入<b>国家重大建设项目库</b>与三年滚动计划；国债占总投一般≤30%、自筹≥40%；专项债按季审核，<b style="color:var(--gold)">Q3 截止 8 月 31 日</b>——湘潭/长沙项目务必 8 月底前完成入库。</div>
+  <div class="chips"><span class="chip">两债一金</span><span class="chip">专项债Q3截止8·31</span><span class="chip">国家重大建设项目库</span><span class="chip">一案两书</span><span class="chip">项目谋划</span><span class="chip">两重6065亿</span><span class="chip">财政金融协同</span></div>
+</section>
+
+<!-- ============ 其他省市 ============ -->
+<section class="part" id="p4">
+  <div class="part-title"><span class="no">4</span><h2>中央层面：其他省市标杆政策（可借鉴）</h2></div>
+
+  <div class="card">
+    <div class="ttl">广州：城市更新"补改投"试点（财政资金转股权）</div>
+    <div class="src"><span>广州市住建局、财政局　|　2026-06-26 印发</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.toutiao.com/article/7663283111933542952/" target="_blank">🔗 广州"补改投"试点解读</a> <a href="https://www.toutiao.com/article/7666105158866190891/" target="_blank" style="margin-left:8px">🔗 广州十五五更新规划（07-24）</a></div>
+    <div class="kv">
+      <div class="k">核心机制</div><div class="v">财政资金从"直接补助"转"股权投入"充实资本金；2026 城市更新固投目标 <b>2200 亿</b></div>
+      <div class="k">十五五</div><div class="v">推进更新片区 <b>35 个</b>，危旧房 2500 套、老旧小区 180 个、城中村 75 个</div>
+    </div>
+    <div class="block"><div class="lab b2">借鉴点</div>"补改投"破解资本金难题、撬动社会资本，是湖南下阶段可复制的投融资模式。</div>
+    <div class="chips"><span class="chip">补改投</span><span class="chip">股权投入</span><span class="chip">35个片区</span><span class="chip">2200亿固投</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">京沪深蓉津：政策工具箱与功能转换"百花齐放"</div>
+    <div class="src"><span>自然资源部综述 + 各地政府</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.sohu.com/a/1046151581_175523" target="_blank">🔗 各地政策工具箱综述</a> <a href="https://www.shanghai.gov.cn/zhengce/detail?businessId=1183fecf-8084-4ada-9aef-3115e4f9deb6&siteId=0071" target="_blank" style="margin-left:8px">🔗 上海黄浦区十五五更新规划</a></div>
+    <div class="kv">
+      <div class="k">北京</div><div class="v">《政策激励工具箱(1.0)》7 方面 75 项，41 项"非申即享"</div>
+      <div class="k">上海</div><div class="v">《2026 城市更新规划资源行动方案》"五个统筹"，深化"三师联创"</div>
+      <div class="k">深圳</div><div class="v">《既有非居住建筑功能转换实施办法》正面清单+联合审查+过渡期</div>
+      <div class="k">成都/天津</div><div class="v">工具箱梯度激励；天津低效用地再开发过渡期延至 10 年</div>
+    </div>
+    <div class="block"><div class="lab b2">借鉴点</div>长沙/湘潭可学<b>上海"三师联创"</b>与<b>深圳功能转换</b>机制，融入本地方案。</div>
+    <div class="chips"><span class="chip">政策工具箱</span><span class="chip">三师联创</span><span class="chip">功能转换</span><span class="chip">非申即享</span></div>
+  </div>
+</section>
+
+<!-- ============ 研究机构/智库 ============ -->
+<section class="part" id="p5">
+  <div class="part-title"><span class="no">5</span><h2>研究机构 / 行业智库 / 公众号 · 文章解读</h2></div>
+  <p style="color:var(--sub);margin:4px 0 12px">以下选取近期有影响力的智库、研究院与公众号文章，逐篇给出<b>文章概况、关键论点与简要分析</b>。作为常态化跟踪信源，每周自动检索其最新观点。</p>
+
+  <div class="card">
+    <div class="ttl">绣花功夫与系统统筹：读懂"十五五"城市更新的深层肌理</div>
+    <div class="src"><span>清华同衡供稿 · 中宏网专访 · 受访者：清华同衡院长 恽爽　|　2026</span></div>
+    <div class="doc"><div class="dt">阅读原文</div><a href="http://m.thupdi.com/news/view?id=3594" target="_blank">🔗 中宏网：读懂"十五五"城市更新的深层肌理</a></div>
+    <div class="block"><div class="lab">文章概况</div>围绕国务院印发的《城市更新"十五五"规划》，中宏网记者专访清华同衡院长恽爽，解读规划的脉络与落地路径。文章核心判断：本轮城市更新是从"空间修补"走向"价值再生"的重要行动，主战场由老旧小区改造扩展到老旧街区、老旧厂区、低效产业园区的改造提升。</div>
+    <div class="block"><div class="lab b3">关键论点</div>
+      <p style="margin:6px 0">· <b>"补短板"走向"育动能"</b>：老旧街区与厂区处在城市存量空间中最可能产生消费、产业、文化、资产价值的关键位置，而非单纯的形态老化。</p>
+      <p style="margin:6px 0">· <b>促进消费</b>：老旧商业与历史街区更新不再满足于店招、立面、灯光的"表面装修"，而是转向文商旅体展融合的复合消费场景。</p>
+      <p style="margin:6px 0">· <b>培育产业</b>：通过功能转换与混合利用，老旧厂区、低效园区成为新经济、新服务、新就业的承载平台。</p>
+      <p style="margin:6px 0">· <b>片区统筹</b>：以片区为单元捋顺城市肌理，在存量空间里寻找发展增量。</p>
+    </div>
+    <div class="block"><div class="lab b2">简要分析</div>标志城市更新政策主线从"民生修缮"升维到"价值创造"，对地方争资与项目包装具有直接导向意义——能否讲清"育动能"逻辑，将影响项目能否进入资金盘子。</div>
+    <div class="chips"><span class="chip">十五五规划</span><span class="chip">价值再生</span><span class="chip">育动能</span><span class="chip">片区统筹</span><span class="chip">文商旅体展融合</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">城市更新是寻找次优解的艺术</div>
+    <div class="src"><span>凤凰网房产《问渠人物》/《明日之城》· 受访者：清华同衡院长 恽爽　|　2026</span></div>
+    <div class="doc"><div class="dt">阅读原文</div><a href="https://www.sohu.com/a/1050655291_121954537" target="_blank">🔗 凤凰网：城市更新是寻找次优解的艺术</a></div>
+    <div class="block"><div class="lab">文章概况</div>文章以"城市更新2.0"为切入，探讨行业在价值标准、运作方式与组织逻辑上的系统性跃迁。恽爽以"楼道加装电梯"为例，说明看似简单的工程背后牵涉低楼层采光权、高楼层便利性等多重利益博弈，揭示存量更新的真实复杂度。</div>
+    <div class="block"><div class="lab b3">关键论点</div>
+      <p style="margin:6px 0">· <b>城市更新2.0 三大基础</b>：理论与方法迭代（以科学手段精准诊断）、现状盘整复杂性提升（权属、历史遗留、利益相关方诉求）、新技术赋能。</p>
+      <p style="margin:6px 0">· <b>目标重构</b>：不再以短期经济收益为唯一目标，更注重项目长效运营的健康性与可持续性。</p>
+      <p style="margin:6px 0">· <b>次优解思维</b>：在城市更新中追求"有限空间约束下的次优解"，而非理想化的最优解。</p>
+      <p style="margin:6px 0">· <b>技术工具</b>：AI 大模型、大数据为更新提供"CT 扫描"式的精准诊断。</p>
+    </div>
+    <div class="block"><div class="lab b2">简要分析</div>对行业能力建设提出新要求——从经验判断转向数据驱动的精准诊断与全周期运营，也解释了为何存量更新难度远高于增量开发。</div>
+    <div class="chips"><span class="chip">城市更新2.0</span><span class="chip">次优解</span><span class="chip">全周期运营</span><span class="chip">AI诊断</span><span class="chip">利益博弈</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">高质量推进城市更新</div>
+    <div class="src"><span>中国城市规划学会 · 清华同衡规划播报 · 主讲：杨保军（住建部原总经济师、全国工程勘察设计大师）　|　2026-04-03 大师讲堂</span></div>
+    <div class="doc"><div class="dt">阅读原文</div><a href="https://www.planning.org.cn/report/view?id=801" target="_blank">🔗 杨保军：高质量推进城市更新（完整实录）</a></div>
+    <div class="block"><div class="lab">文章概况</div>杨保军系统解读 2025 年中央城市工作会议提出的"两个转向"与《关于持续推进城市更新行动的意见》，结合深圳妇儿大厦、北京朝外 THE BOX、成都猛追湾、广州 T.I.T 创意园、厦门沙坡尾等案例，阐明实施城市更新行动的意义、目标与任务。</div>
+    <div class="block"><div class="lab b3">关键论点</div>
+      <p style="margin:6px 0">· <b>"两个转向"</b>：城镇化从快速增长期转向稳定发展期；城市发展从大规模增量扩张转向存量提质增效为主。</p>
+      <p style="margin:6px 0">· <b>本质变化</b>：从"重资产开发"转向"持续运营"、从"局部零碎"转向"综合系统"、从"工程思维"转向"制度政策突破"。</p>
+      <p style="margin:6px 0">· <b>顶层框架</b>：顶层设计六大亮点 + 八项重点任务 + 六项保障措施；强调需求导向、项目牵引、"项目跟着规划走、土地要素跟着项目走"。</p>
+      <p style="margin:6px 0">· <b>存量潜力</b>：我国沉淀约 <b>19 万亿</b>商业地产因用途受限而闲置，再利用空间巨大。</p>
+    </div>
+    <div class="block"><div class="lab b2">简要分析</div>权威界定了"项目牵引、避免盲目投资形成负债"的底线逻辑，是地方项目论证与资金平衡的纲领性依据，也是理解本轮政策最系统的单篇文本。</div>
+    <div class="chips"><span class="chip">两个转向</span><span class="chip">八项重点任务</span><span class="chip">六项保障</span><span class="chip">项目牵引</span><span class="chip">19万亿存量</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">2026 上半年城市更新发展总结与展望（重点业务场景透视篇）</div>
+    <div class="src"><span>中指研究院 · 雪球专栏 / 公众号　|　2026 上半年</span></div>
+    <div class="doc">
+      <div class="dt">阅读原文</div>
+      <a href="https://xueqiu.com/8600435193/400745951" target="_blank">🔗 中指研究院：上半年城市更新半年报·重点业务场景</a>
+      <a href="https://www.sohu.com/a/1051295340_415900" target="_blank" style="margin-left:8px">🔗 重点业务场景透视篇（搜狐）</a>
+    </div>
+    <div class="block"><div class="lab">文章概况</div>报告系统梳理 2026 上半年国家、地方与重点城市的政策、项目及行业进展，重点解读《城市更新"十五五"规划》，并按业务场景研判下半年政策落地、项目实施与行业趋势，分多篇连载发布。</div>
+    <div class="block"><div class="lab b3">关键论点</div>
+      <p style="margin:6px 0">· <b>八类重点场景</b>：既有建筑改造、居住小区、社区街区、城市基础设施、生态系统、历史文化空间等，覆盖民生补短板到功能转换、运营活化。</p>
+      <p style="margin:6px 0">· <b>视角升级</b>：企业需由"单一工程建设"转向"项目全生命周期"视角，系统配置策划、设计、融资、建设、招商、运营、数据能力。</p>
+      <p style="margin:6px 0">· <b>既有建筑更新</b>：由单纯工程改造转向"规划土地合规—建筑安全—功能转换—市场运营—退出安排"全过程管理（广州、深圳、上海已出配套政策）。</p>
+      <p style="margin:6px 0">· <b>能力图谱</b>：竞争力取决于建筑改造、市场运营、资本运作的协同；前端（体检/诊断/策划）、中端（建设）、后端（确权/ABS/REITs）均有机会。</p>
+    </div>
+    <div class="block"><div class="lab b2">简要分析</div>提供了从市场容量（"十五五"约 20 万亿）到企业能力图谱的实操框架，是把握行业机会最系统的一份半年报，对理解市场侧逻辑尤为关键。</div>
+    <div class="chips"><span class="chip">20万亿容量</span><span class="chip">八类场景</span><span class="chip">全生命周期</span><span class="chip">功能转换</span><span class="chip">REITs/ABS</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">城市更新多点开花：运营端长期价值被重新认识</div>
+    <div class="src"><span>光明网 · 受访：国研新经济研究院创始院长 朱克力　|　2026-05</span></div>
+    <div class="doc"><div class="dt">阅读原文</div><a href="https://m.gmw.cn/2026-05/18/content_1304460140.htm" target="_blank">🔗 光明网：因地制宜探索新模式 城市更新多点开花</a></div>
+    <div class="block"><div class="lab">文章概况</div>在"城市更新多点开花"的报道中，国研新经济研究院朱克力从扩大内需与稳就业视角，强调城市更新在运营端和消费端的长期带动作用，区别于传统建设投资的一次性拉动。</div>
+    <div class="block"><div class="lab b3">关键论点</div>
+      <p style="margin:6px 0">· "<b>城市更新在运营端和消费端的长期带动作用，远比建设端一次性投资更具持久价值</b>，是城市从'建起来'转向'活起来'的关键一跃。"</p>
+      <p style="margin:6px 0">· <b>运营端</b>：通过老旧楼宇、街区、厂房的功能重塑与专业化运营，催生商业管理、社区服务、文化策划、数字运营等稳定岗位。</p>
+      <p style="margin:6px 0">· <b>消费端</b>：将闲置空间变为便民商圈、文创街区、康养中心、夜间经济场景，带动社区/品质/体验/银发消费持续释放。</p>
+    </div>
+    <div class="block"><div class="lab b2">简要分析</div>为城市更新提供了"扩内需、稳就业"的长期价值论证，也呼应了其他文章"从建房子到造空间、重运营"的共同判断。</div>
+    <div class="chips"><span class="chip">扩内需</span><span class="chip">稳就业</span><span class="chip">运营端价值</span><span class="chip">活起来</span><span class="chip">长期带动</span></div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">💡 国研新经济研究院（朱克力）等 · 运营端长期价值</div>
+    <div class="src"><span>国研新经济研究院、业内专家　|　2026-05 城市更新多点开花</span></div>
+    <div class="doc"><div class="dt">代表观点</div><a href="http://www.senn.com.cn/Article/2026/05/18/231129.html" target="_blank">🔗 因地制宜探索新模式 城市更新多点开花</a></div>
+    <div class="kv">
+      <div class="k">需求端</div><div class="v">城市更新是<b>提振消费、扩大内需</b>的重要支点；可直接带动钢铁、建材、家具、家电等上下游产业</div>
+      <div class="k">长期价值</div><div class="v">"运营端+消费端"的长期带动远比建设端一次性投资更持久——催生商业管理、社区服务、物业运维、数字运营等稳定岗位</div>
+    </div>
+    <div class="block"><div class="lab b2">对设计院价值</div>政策叙事要讲清"运营可持续"，这关系到专项债/国债评审中的"收益平衡"得分。</div>
+    <div class="chips"><span class="chip">扩内需</span><span class="chip">运营可持续</span><span class="chip">消费场景</span><span class="chip">收益平衡</span></div>
+  </div>
+
+  <div class="board" style="background:linear-gradient(180deg,rgba(177,140,255,.10),rgba(177,140,255,.02));border-color:rgba(177,140,255,.45);box-shadow:0 0 26px rgba(177,140,255,.10)">
+    <div class="bh" style="color:var(--purple)">🧭 智库共识 · 对设计院的趋势研判</div>
+    <ul class="plist">
+      <li><b>时代判断：</b>城市更新进入<b>"2.0 存量提质时代"</b>，从"拆旧建新"转向"存量提质增效"，价值标准、运作方式、组织逻辑系统性跃迁。</li>
+      <li><b>市场空间：</b>"十五五"城市更新总容量约 <b>20 万亿元</b>，城镇住房更新需求约 49.8 亿㎡；危旧房、地下管网、老旧小区、城中村等持续释放。</li>
+      <li><b>能力重构：</b>企业机会从"单项施工"转向<b>全过程更新服务</b>（体检、策划、投资测算、设计施工一体、运营）；越早具备前期策划与项目转化能力越受益。</li>
+      <li><b>规划体系：</b>"专项规划—片区策划—项目实施方案"全链条；"项目跟着规划走、土地要素跟着项目走"，避免盲目投资形成负债。</li>
+      <li><b>争资窗口：</b>政策明确要求前期同步谋划资金方案，资金来源可靠 + 建成后持续运营能力，成为项目能否落地的关键。</li>
+      <li><b>技术赋能：</b>AI 大模型、大数据为城市更新提供"CT 扫描"式精准诊断，将重塑前期策划与体检方法。</li>
+    </ul>
+    <div class="note" style="background:rgba(177,140,255,.08);border-color:rgba(177,140,255,.4);color:#e6dcff"><b>设计院行动建议：</b>把清华同衡、中规院的方法论与中指的市场数据结合，建立"政策—市场—资金"三位一体的项目谋划能力；将公众号"清华同衡规划播报""城PLUS""中国城市科学研究会"设为每周必读。</div>
+  </div>
+</section>
+
+<!-- ============ 湖南 ============ -->
+<section class="part" id="p6">
+  <div class="part-title"><span class="no">6</span><h2>湖南 · 省级重点（深度解读）</h2></div>
+  <div class="focus hot">
+    <span class="tag">本周省级头条</span>
+    <div class="ttl">湖南省住建厅、财政厅：老旧小区物业维修资金"绿色通道"（征求意见稿）</div>
+    <div class="src"><span>湖南省住建厅 / 财政厅</span><span>2026-07-20</span><span>征求意见至 2026-08-28</span></div>
+    <div class="doc">
+      <div class="dt">政策文件</div>
+      <a href="https://zjt.hunan.gov.cn/zjt/xxgk/xinxigongkaimulu/tzgg/tzgg2zhyw/202607/t20260720_34030480.html" target="_blank">🔗 湖南省住建厅征求意见稿原文（含附件）</a>
+      <a href="https://www.hunantoday.cn/news/xhn/202607/33247880.html" target="_blank" style="margin-left:8px">🔗 三湘都市报深读</a>
+      <div class="meta2">文号：湘建函〔2026〕　|　发文：湖南省住房和城乡建设厅　|　状态：公开征求意见中</div>
+    </div>
+    <div class="kv">
+      <div class="k">适用范围</div><div class="v">2000 年前建成、维修资金交存完备、认定失管/脱管且街道确认重大安全隐患的老旧小区</div>
+      <div class="k">6 类紧急情形</div><div class="v">屋面外墙渗漏 / 消防损毁 / 电梯故障 / 外立面脱落·幕墙炸裂 / 二次供水故障 / 专用排水失效</div>
+      <div class="k">流程突破</div><div class="v"><b style="color:var(--gold)">免业主表决</b>；街道 24h 核实；1 工作日审核；可<b style="color:var(--gold)">预拨≤50%</b>；先修后补/边修边补</div>
+      <div class="k">第三方机制</div><div class="v">建立<b style="color:var(--gold)">应急维修队伍 + 造价咨询机构备选库</b>，简化招投标</div>
+    </div>
+    <div class="block"><div class="lab">政策分析</div>湖南落实中央"好房子/完整社区"的具体抓手，最大亮点是<b>打破刚性业主表决</b>与<b>预拨50%</b>，并首次明确由主管部门建第三方备选库——给设计/造价/施工机构开了制度化入口。</div>
+    <div class="block"><div class="lab b3">对设计院的影响与建议</div>① <b>立即准备入库</b>：向市州住建部门申请进入"应急维修队伍/造价咨询机构备选库"；② 前置提供"应急维修方案+预算"标准化产品对接街道/社区；③ 8·28 前反馈意见，争取把设计费计费口径明确纳入绿色通道拨付范围。</div>
+    <div class="chips"><span class="chip">先修后补</span><span class="chip">免业主表决</span><span class="chip">预拨50%</span><span class="chip">应急维修备选库</span><span class="chip">2000年前小区</span><span class="chip">造价咨询入库</span></div>
+  </div>
+</section>
+
+<!-- ============ 长沙 ============ -->
+<section class="part" id="p7">
+  <div class="part-title"><span class="no">7</span><h2>长沙 · 市级重点（深度解读）</h2></div>
+
+  <div class="focus">
+    <span class="tag">长沙五年行动纲领</span>
+    <div class="ttl">《长沙市全面推进城市更新行动方案(2026—2030年)》已施行</div>
+    <div class="src"><span>长沙市人民政府办公室</span><span>2026-03-26 印发 · 05-01 施行</span><span>依据：湘政办发〔2025〕49 号</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.changsha.gov.cn/zfxxgk/zfwjk/szfbgt/202603/t20260330_12348094.html" target="_blank">🔗 行动方案全文（长沙市政府）</a> <a href="http://rjhj.changsha.gov.cn/xwzx_46180/qxsdt/202604/t20260410_12357505.html" target="_blank" style="margin-left:8px">🔗 "画重点"专栏解读</a></div>
+    <div class="kv">
+      <div class="k">阶段目标</div><div class="v">2028 建成一批标志性示范项目；2030 基本完善可持续更新模式与法规体系</div>
+      <div class="k">5 方面 25 项</div><div class="v">高品质生活空间 / 激发活力 / 安全韧性 / 全周期实施 / 政策保障</div>
+      <div class="k">关键举措</div><div class="v">片区更新、<b style="color:var(--gold)">原拆原建</b>、成片收购存量房屋、加装电梯、完整社区、城中村改造、历史建筑保护（严禁以危房名义拆历史建筑）</div>
+    </div>
+    <div class="block"><div class="lab b3">对设计院影响与建议</div>① 围绕"全运会（2026 承办第十六届）"体育设施扩容、应急避难提前卡位；② "老城不能再拆"红线催生<b>保护性修缮+活化设计</b>；③ 关注配套《政策解读》（4·2）奖补细则。</div>
+    <div class="chips"><span class="chip">原拆原建</span><span class="chip">片区更新</span><span class="chip">存量收购</span><span class="chip">城中村改造</span><span class="chip">历史建筑保护</span><span class="chip">全运会</span></div>
+  </div>
+
+  <div class="focus">
+    <span class="tag">最大业务池</span>
+    <div class="ttl">《长沙市城市更新专项规划(2026—2030)》征求意见稿：划定 62 个重点更新片区</div>
+    <div class="src"><span>公示：长沙市人居环境局　|　结构："一带两环、一心多区"</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://k.sina.cn/article_3363163410_c875cd1202001xb22.html" target="_blank">🔗 62 个重点片区公示报道（新浪）</a></div>
+    <div class="kv">
+      <div class="k">片区分布</div><div class="v">湘江新区 9、开福 8、天心 7、雨花 6、望城 5、芙蓉 4（老城近半入列）</div>
+      <div class="k">代表片区</div><div class="v">五一商圈天心片、贺龙体育馆片、火车站片、妙高峰/第一师范老旧街区、坡子街老旧小区</div>
+    </div>
+    <div class="block"><div class="lab b3">对设计院影响与建议</div><b>62 个重点片区 = 未来 5 年长沙最大规划设计业务池。</b>① 按片区建"一区一档"跟踪表，主动对接片区策划/城市体检；② 芙蓉、天心老城历史街巷密集，优先组"保护修缮+业态策划"复合团队；③ 结合专项债 Q3 截止（8·31）抢先做片区打包申报。</div>
+    <div class="chips"><span class="chip">62个重点片区</span><span class="chip">一带两环一心多区</span><span class="chip">历史文化保护</span><span class="chip">片区策划</span><span class="chip">城市体检</span></div>
+  </div>
+</section>
+
+<!-- ============ 湘潭 ============ -->
+<section class="part" id="p8">
+  <div class="part-title"><span class="no">8</span><h2>湘潭 · 市级重点 + 项目进展（深度解读）</h2></div>
+
+  <div class="focus hot">
+    <span class="tag">湘潭最大红利</span>
+    <div class="ttl">湘潭：全省低效用地再开发试点城市（市长挂帅 + 联合审批）</div>
+    <div class="src"><span>牵头：湘潭市政府（市长任专班组长）</span><span>市资规局《联合审批工作方案》</span></div>
+    <div class="doc">
+      <div class="dt">政策文件</div>
+      <a href="https://xtrb.xtol.cn/xtrbpc/attachment/202601/23/ebca320f-18dc-4b73-967f-9cdc5b1879a3.pdf" target="_blank">🔗 湘潭低效用地再开发实践（湘潭日报 PDF）</a>
+      <a href="https://zygh.xiangtan.gov.cn/11016/11265/11287/29289/29290/content_1435610.html" target="_blank" style="margin-left:8px">🔗 省2026示范项目（湘潭经开区）</a>
+    </div>
+    <div class="kv">
+      <div class="k">审批革新</div><div class="v">"一单五制"（清单+交办/台账/销号/通报）；多部门<b style="color:var(--gold)">并联审批</b>，效率提升 50%+</div>
+      <div class="k">智慧监管</div><div class="v">"一张图"系统实现地块信息/进度/条件可视化、动态化</div>
+      <div class="k">盘活模式</div><div class="v">"先购后租+先租后让""分割转让+协议收回"（王老五项目：亩均税收 1.05万→208.9万，近 200 倍）</div>
+    </div>
+    <div class="block"><div class="lab">政策分析</div>湘潭以"低效用地再开发"为差异化突破口，比单纯老旧小区改造想象空间更大——<b>存量工业用地/闲置资产功能重构</b>恰恰需要规划设计全程参与。联合审批提速意味着设计院招投标窗口更紧凑。</div>
+    <div class="block"><div class="lab b3">对设计院影响与建议</div>① 主动对接市资规局"低效用地再开发"项目库，提供<b>一宗一策</b>策划+规划条件论证；② 学习"分割转让+协议收回"组合拳，形成可复用再开发设计模板；③ 关注湘潭大学城（长株潭·未来城/湘江科学城）片区。</div>
+    <div class="chips"><span class="chip">低效用地再开发</span><span class="chip">一单五制</span><span class="chip">并联审批</span><span class="chip">一宗一策</span><span class="chip">分割转让</span><span class="chip">协议收回</span></div>
+  </div>
+
+  <div class="board">
+    <div class="bh">湘潭城市更新 · 项目进展看板（详细落地情况）</div>
+    <div class="stats">
+      <div class="stat"><div class="n">1246</div><div class="t">累计改造老旧小区（个）</div></div>
+      <div class="stat"><div class="n">15万+</div><div class="t">惠及居民（户）</div></div>
+      <div class="stat"><div class="n">≈900</div><div class="t">既有多层住宅加装电梯（台）</div></div>
+      <div class="stat"><div class="n">149亿</div><div class="t">争取超长期国债等资金（同比+26亿）</div></div>
+    </div>
+    <ul class="plist">
+      <li><b>🏘️ 老旧小区改造：</b>累计改造 <b>1246 个</b>、惠及 15 万余户；拆除违建 35907㎡，新增文体/绿地场地；新增安防智能感知设施 900 余套。2025 中心城区改造 144 个、危旧房 297 套、无障碍设施 131 处；<b style="color:var(--gold)">2026 上半年加装电梯 58 台</b>。</li>
+      <li><b>🌿 雨湖区适老化升级：</b>已完成近 <b>700 户</b>特殊困难老年人家庭改造，总投入超 255 万元；建成智慧社区综合服务平台，31 家养老机构纳入"互联网+AI 监管"。</li>
+      <li><b>🏗️ 岳塘区：</b>在 14 个老旧小区改造项目中现场踏勘与需求摸排，累计提升休闲活动场地 24 个、加装电梯 27 台，完善无障碍/照明/健身配套。</li>
+      <li><b>💰 资金争取（政府工作报告）：</b>争取超长期特别国债、中央预算内投资等国省资金 <b>149 亿元</b>（比去年增 26 亿，其中超长期特别国债为去年 <b>3.5 倍</b>）；"四个十大"项目完成投资 242.6 亿，省市重点项目 1216 亿。</li>
+      <li><b>🕸️ 地下管网与堤防：</b>加快建设地下管网，污水收集率提升至 <b>89.5%</b>；修复治理湘江堤防 <b>38.5 公里</b>，新建改造穿堤涵闸 21 座。</li>
+      <li><b>🎡 第六届湖南旅发大会（承办地湘潭）：</b>成立市委书记、市长任指挥长的执委会；<b>25 个重点项目</b>中社会投资占 93.77%，13 个观摩项目中提质升级/盘活存量类占 <b>84.62%</b>；中心城区改造老旧小区 144 个、新增公共停车场 37 个、泊位 3276 个。</li>
+      <li><b>🔄 低效用地再开发示范：</b>湘潭经开区王老五饮品 377 亩低效用地（195 已建+182 未利用），通过"分割转让+协议收回"打造新材料产业园，亩均税收由 1.05 万跃升至 208.9 万（近 200 倍），已入省 2026 示范项目库。</li>
+      <li><b>🏙️ 三大更新片区：</b>城正街历史文化保护更新、建设路工业更新、湘潭大学城更新（长株潭·未来城/湘江科学城）已亮相 2026 长沙筑博会，形成"老城焕新+融城产城"两条路径。</li>
+    </ul>
+    <div class="note"><b>进展研判：</b>湘潭城市更新已从"规划"进入"<b>项目密集落地期</b>"——老旧小区改造、地下管网、旅发大会、低效用地再开发四条线同步推进。对设计院而言，<b>旅发大会 25 个项目（存量盘活占 84.62%）+ 低效用地再开发</b>是当前最紧迫、最可切入的两条业务线，建议立即建立项目对接清单。</div>
+  </div>
+
+  <div class="card">
+    <div class="ttl">湘潭房地产"七条新政" + 绿色生活创建</div>
+    <div class="src"><span>湘潭市政府　|　七条新政 2026-01-20 起施行（1年）</span></div>
+    <div class="doc"><div class="dt">政策文件</div><a href="https://www.xiangtan.gov.cn/109/171/172/content_1414638.html" target="_blank">🔗 湘潭房地产七条新政</a> <a href="https://xtfgw.xiangtan.gov.cn/13153/20347/content_1426075.html" target="_blank" style="margin-left:8px">🔗 绿色生活创建与更新</a></div>
+    <div class="kv">
+      <div class="k">七条要点</div><div class="v">去化困难公寓可转住宅；未约定配建地下车位<b style="color:var(--gold)">不再补签出让合同/不补缴出让金</b>；"好房子"审批绿色通道</div>
+      <div class="k">绿色建筑</div><div class="v">新建建筑装配式占 74.7%（全省第一）；国省级绿色工厂 89 家；单位 GDP 能耗累计降 16%</div>
+    </div>
+    <div class="block"><div class="lab b3">对设计院影响与建议</div>① 公寓转住宅、地下车位不补出让金，直接释放<b>存量资产改造设计</b>需求；② 装配式占比全省第一，强化装配式/绿色建筑专项能力；③ 借筑博会"全产业链"趋势，强化与本地施工/运营单位联合体投标。</div>
+    <div class="chips"><span class="chip">公寓转住宅</span><span class="chip">存量盘活</span><span class="chip">装配式74.7%</span><span class="chip">三大更新片区</span><span class="chip">城正街</span><span class="chip">建设路</span><span class="chip">大学城</span></div>
+  </div>
+</section>
+
+<!-- ============ 关键词 ============ -->
+<section class="part" id="p9">
+  <div class="part-title"><span class="no">9</span><h2>关键词索引 & 数据来源</h2></div>
+  <div class="card">
+    <div class="sub-h" style="margin-top:4px">高频关键词速查</div>
+    <div class="chips">
+      <span class="chip">城市更新十五五规划</span><span class="chip">四好建设</span><span class="chip">六张网</span><span class="chip">地下管网77万公里</span>
+      <span class="chip">政治局会议六网</span><span class="chip">两重8000亿</span><span class="chip">财政金融协同1000亿</span>
+      <span class="chip">超长期特别国债1600亿</span><span class="chip">中央预算内970亿</span><span class="chip">专项债3500亿+</span><span class="chip">两债一金</span>
+      <span class="chip">Q3截止8·31</span><span class="chip">国家重大建设项目库</span><span class="chip">补改投</span><span class="chip">政策工具箱</span>
+      <span class="chip">维修资金绿色通道</span><span class="chip">先修后补</span><span class="chip">应急维修备选库</span><span class="chip">原拆原建</span>
+      <span class="chip">62个重点片区</span><span class="chip">低效用地再开发</span><span class="chip">一宗一策</span><span class="chip">分割转让协议收回</span>
+      <span class="chip">公寓转住宅</span><span class="chip">三大更新片区</span><span class="chip">1246个小区</span><span class="chip">149亿资金</span>
+      <span class="chip">城市更新2.0</span><span class="chip">20万亿容量</span><span class="chip">全过程服务</span><span class="chip">清华同衡</span><span class="chip">中指研究院</span>
+    </div>
+    <div class="sub-h">本期主要信源</div>
+    <ul style="font-size:13px;color:var(--sub)">
+      <li>国务院政策例行吹风会（中国网）、国常会解读、人民论坛、新华社政治局会议通稿</li>
+      <li>国家发改委（两重资金）、财政部、住建部、自然资源部公开信息</li>
+      <li>腾讯新闻《钱袋子》、新华社《万亿管网》、发改委投资研究所综述</li>
+      <li>研究机构 / 智库 / 公众号：中国城市科学研究会城市更新专委会、清华同衡规划播报、中国城市规划学会（杨保军）、中指研究院、克而瑞、国研新经济研究院</li>
+      <li>湖南省住建厅/财政厅、长沙市政府/人居环境局、湘潭市政府/住建局/资规局/发改委</li>
+      <li>广州/上海/北京/深圳/成都/天津等地方政策公开报道</li>
+    </ul>
+    <div class="note"><b>去重机制说明：</b>本期为首期（回溯≤3个月），全量收录。自下一期起，系统将<b>仅收录"上一周新出且不在《已收录政策索引》中"的政策</b>，生成后自动追加新条目，避免重复。索引文件：<b>政策周报归档/已收录政策索引.json</b>。<br><b>免责：</b>本报告由 AI 自动检索公开信息汇编，地方细则以官方正式发文为准；征求意见稿请在截止日前通过官方渠道反馈。下期预计 <b>2026-08-03</b> 生成。</div>
+  </div>
+</section>
+
+<div class="foot">城建政策情报周报 · WorkBuddy 自动生成并归档 ｜ 文件：政策周报归档/城建政策周报_2026-07-27.html ｜ 覆盖 2026-05 至 2026-07-27 ｜ 深色版</div>
+
+</div>
+</body>
+</html>
