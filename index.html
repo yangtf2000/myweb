@@ -178,7 +178,7 @@
         }
         .sub-card {
             position: relative; overflow: hidden;
-            display: block; text-decoration: none; color: inherit;
+            display: flex; flex-direction: column; text-decoration: none; color: inherit;
             background: rgba(255,255,255,0.04);
             border: 1px solid var(--card-border);
             border-radius: 15px;
@@ -208,15 +208,15 @@
             background: linear-gradient(135deg, var(--accent1), var(--accent2));
             box-shadow: 0 6px 16px -6px var(--glow);
         }
-        .sub-title { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 6px; line-height: 1.4; }
-        .sub-desc { font-size: .86rem; color: var(--muted); line-height: 1.5; }
-        .sub-go {
-            margin-top: 12px; font-size: .8rem; color: var(--accent2);
-            display: inline-flex; align-items: center; gap: 5px;
-            opacity: 0; transform: translateX(-6px);
-            transition: all .3s ease;
+        .sub-title { font-size: 1.05rem; font-weight: 600; color: #fff; margin-bottom: 4px; line-height: 1.4; }
+        .sub-period { font-size: .82rem; font-weight: 600; color: var(--accent2); margin: 0 0 10px; }
+        .sub-desc { font-size: .84rem; color: var(--muted); line-height: 1.55; margin-bottom: 14px; }
+        .sub-foot {
+            margin-top: auto; display: flex; align-items: center; justify-content: flex-end; gap: 12px;
+            padding-top: 10px; border-top: 1px solid var(--card-border);
         }
-        .sub-card:hover .sub-go { opacity: 1; transform: translateX(0); }
+        .sub-date { font-size: .76rem; color: var(--muted); }
+        .sub-go { font-size: .82rem; color: var(--accent2); display: inline-flex; align-items: center; gap: 5px; }
 
         /* ===== 分类主题色 ===== */
         .cat--ai   { --accent1:#818cf8; --accent2:#38bdf8; --glow:rgba(99,102,241,.45); }
@@ -262,9 +262,9 @@
             {
                 key: 'zhoubao', name: '城建周报卡片', icon: '🏗️', theme: 'cat--city',
                 items: [
-                    { title: '城建政策周报 第一期', desc: '2026-07-20 至 2026-07-26 · 十五五规划定调 · 六张网 · 城市更新资金总盘', icon: '🏗️', url: './pages/城建周报/2026-07-27.html' },
-                    { title: '城建政策周报 第二期', desc: '2026-07-27 至 2026-08-02 · 六张网推进 · 增量政策窗口 · 地下管网 · 湘潭项目进展', icon: '🏗️', url: './pages/城建周报/2026-08-03.html' },
-                    { title: '城建政策周报 第三期', desc: '2026-08-03 至 2026-08-09 · 株洲聚焦 · 公积金新政 · 8月资金窗口', icon: '🏗️', url: './pages/城建周报/2026-08-10.html' }
+                    { title: '城建政策周报 第一期', period: '2026-07-20 至 2026-07-26', desc: '十五五规划定调 · 六张网纳入基建 · 城市更新资金总盘开启 · 长沙湘潭先行', date: '2026-07-27', icon: '🏗️', url: './pages/城建周报/2026-07-27.html' },
+                    { title: '城建政策周报 第二期', period: '2026-07-27 至 2026-08-02', desc: '六张网推进 · 增量政策窗口 · 地下管网列席 · 湘潭项目加速落地', date: '2026-08-03', icon: '🏗️', url: './pages/城建周报/2026-08-03.html' },
+                    { title: '城建政策周报 第三期', period: '2026-08-03 至 2026-08-09', desc: '株洲聚焦 · 公积金条例拓宽提取 · 8月资金窗口开启 · 城市更新项目密集', date: '2026-08-10', icon: '🏗️', url: './pages/城建周报/2026-08-10.html' }
                 ]
             },
             {
@@ -329,8 +329,12 @@
                 <a class="sub-card" style="--i:${i}" href="${it.url}" ${it.external ? 'target="_blank" rel="noopener noreferrer"' : ''}>
                     <div class="sub-icon">${it.icon}</div>
                     <div class="sub-title">${it.title}</div>
+                    <div class="sub-period">${it.period}</div>
                     <div class="sub-desc">${it.desc}</div>
-                    <span class="sub-go">${it.external ? '打开 ↗' : '打开 →'}</span>
+                    <div class="sub-foot">
+                        <span class="sub-date">上传日期：${it.date}</span>
+                        <span class="sub-go">${it.external ? '打开 ↗' : '打开 →'}</span>
+                    </div>
                 </a>
             `).join('');
 
