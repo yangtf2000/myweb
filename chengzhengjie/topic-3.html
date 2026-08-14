@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章 · 上位规划衔接与政策依据研究 | 城正街片区策划专题研究</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;500;700&family=Special+Elite&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@media print {
+  h1,h2,h3,h4,.chapter-number,.chapter-title,.section-header,.method-title{page-break-after:avoid;break-after:avoid}
+  blockquote,.highlight-box,.key-point,.abstract,.stage-item,.question-item,.game-element,.numbered-item,.list-item,.code-block,.terminal,figure,img,table,.card{page-break-inside:avoid;break-inside:avoid}
+  ul,ol,.numbered-list,.question-list,.stage-list{page-break-inside:avoid;break-inside:avoid}
+  .elegant-divider,.divider,.section-divider,.nature-divider,.vintage-divider,.art-divider,hr{page-break-after:avoid;break-after:avoid}
+  .method-section,.inner-border{page-break-inside:avoid;break-inside:avoid}
+  p{orphans:3;widows:3}
+  section.new-page{page-break-before:always;break-before:always}
+}
+blockquote,.highlight-box,.key-point,.abstract,.stage-item,.question-item,.game-element,.code-block,.terminal,.stage-list,.question-list,figure,img,table,.card{page-break-inside:avoid;break-inside:avoid}
+h1,h2,h3,h4,.chapter-number,.chapter-title,.section-header,.method-title{page-break-after:avoid;break-after:avoid}
+.elegant-divider,.divider,.section-divider,.nature-divider,.vintage-divider,.art-divider,hr{page-break-after:avoid;break-after:avoid}
+
+:root{--bg:#0E0906;--bg-page:#1A120B;--bg-card:#33271A;--bg-card2:#3D2E1F;--bg-card3:#2A1F14;--text:#F0E6D5;--text2:#C4B69E;--text3:#968870;--gold:#D4B87A;--gold-light:#E8D4A0;--cinnabar:#C25B56;--cinnabar-dark:#9A3E3A;--border:#4E3A25;--border-light:#5E4830}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lora','Noto Serif SC',serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh}
+
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,9,6,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between}
+.top-nav a{color:var(--text3);text-decoration:none;font-size:13px;transition:color .3s}
+.top-nav a:hover{color:var(--gold)}
+.nav-left{display:flex;align-items:center;gap:16px}
+.nav-back{color:var(--gold)!important}
+.nav-chapter-tag{background:var(--cinnabar);color:var(--text)!important;padding:3px 10px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:1px}
+.nav-title{color:var(--text2);font-size:14px;font-weight:600}
+.nav-right{display:flex;gap:18px}
+.nav-right a{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--text3)}
+.nav-right a.active{color:var(--gold)}
+
+.magazine-page{width:100%;max-width:1000px;background:var(--bg-page);margin:0 auto;padding-top:56px;position:relative;box-shadow:0 0 80px rgba(0,0,0,.5)}
+
+.chapter-hero{position:relative;height:70vh;min-height:500px;display:flex;align-items:center;overflow:hidden}
+.chapter-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.28) saturate(.6);animation:slowZoom 20s ease-in-out infinite alternate}
+@keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+.chapter-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,9,6,.85) 0%,rgba(14,9,6,.3) 50%,rgba(14,9,6,.95) 100%)}
+.chapter-hero-content{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 50px;width:100%}
+.chapter-big-num{font-family:'Abril Fatface','Noto Serif SC',serif;font-size:100px;color:var(--cinnabar);line-height:.9;margin-bottom:16px;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.chapter-en-label{font-family:'Special Elite',monospace;font-size:13px;color:var(--gold);letter-spacing:4px;margin-bottom:20px;display:inline-block;border:1px solid var(--gold);padding:6px 14px}
+.chapter-title{font-family:'Noto Serif SC',serif;font-size:40px;font-weight:900;color:var(--text);letter-spacing:6px;margin-bottom:14px}
+.chapter-subtitle{font-size:16px;color:var(--gold);letter-spacing:3px;margin-bottom:24px}
+.chapter-question{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--text2);border-left:3px solid var(--cinnabar);padding-left:14px}
+.chapter-question strong{color:var(--gold)}
+
+.main-content{max-width:1000px;margin:0 auto;padding:50px 50px 60px}
+
+.section-header{margin-bottom:28px;padding-bottom:16px;position:relative}
+.section-tag{font-family:'Special Elite',monospace;font-size:12px;color:var(--cinnabar);letter-spacing:3px;margin-bottom:8px;display:block}
+.section-title{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:3px;margin-bottom:12px}
+.vintage-divider{display:flex;align-items:center;margin:0}
+.vintage-divider::before{content:'';width:56px;height:2px;background:var(--gold)}
+
+.sub-section-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--text);margin:26px 0 12px;padding-left:14px;border-left:3px solid var(--cinnabar)}
+.sub-section-title .num{color:var(--gold);font-family:'Abril Fatface',serif;margin-right:8px}
+
+.content p{font-size:16px;line-height:2;color:var(--text2);margin-bottom:14px;text-indent:2em;text-align:justify}
+.drop-cap::first-letter{float:left;font-family:'Abril Fatface','Noto Serif SC',serif;font-size:56px;line-height:.85;margin:6px 12px 0 0;color:var(--gold);font-weight:700}
+
+.img-float-right{float:right;width:44%;margin:6px 0 16px 24px;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);border:1px solid var(--border);position:relative}
+.img-float-left{float:left;width:40%;margin:6px 24px 16px 0;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);border:1px solid var(--border);position:relative}
+.img-float-right img,.img-float-left img{width:100%;display:block;filter:saturate(.78) brightness(.94)}
+.img-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(14,9,6,.96),transparent);color:var(--text2);font-size:12px;padding:40px 14px 10px;line-height:1.7}
+.img-caption strong{color:var(--gold)}
+.img-full{width:100%;margin:24px 0;border-radius:2px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5);border:1px solid var(--border);position:relative}
+.img-full img{width:100%;display:block;filter:saturate(.78) brightness(.94)}
+.clearfix::after{content:'';display:table;clear:both}
+
+.highlight-box{background:var(--bg-card);border-left:3px solid var(--gold);padding:18px 22px;border-radius:2px;margin:20px 0}
+.highlight-box-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.highlight-box p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:0;text-indent:0}
+
+.policy-box{background:linear-gradient(135deg,rgba(194,91,86,.08) 0%,rgba(212,184,122,.06) 100%);border:1px solid var(--cinnabar);padding:16px 20px;border-radius:2px;margin:16px 0}
+.policy-box-title{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;color:var(--cinnabar);margin-bottom:6px}
+.policy-box p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:0;text-indent:0}
+
+blockquote{border:1px solid var(--border);padding:20px 24px;margin:24px 0;background:rgba(212,184,122,.05);font-style:italic;color:var(--text2);position:relative}
+blockquote::before{content:'"';font-family:'Abril Fatface',serif;font-size:48px;color:var(--gold);position:absolute;top:-8px;left:16px;opacity:.4}
+blockquote p{text-indent:0;margin-bottom:0;font-size:15px;padding-left:20px}
+
+.data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}
+.data-card{background:var(--bg-card);padding:18px 16px;border-radius:2px;border-top:2px solid var(--gold);text-align:center;display:flex;flex-direction:column;justify-content:center}
+.data-card.danger{border-top-color:var(--cinnabar)}
+.data-card.danger .data-num{color:var(--cinnabar)}
+.data-card.success{border-top-color:#5a9a5a}
+.data-card.success .data-num{color:#7ab87a}
+.data-num{font-family:'Abril Fatface','Noto Serif SC',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1.1}
+.data-num .unit{font-size:13px;font-weight:500}
+.data-label{font-size:12px;color:var(--text3);margin-top:8px;letter-spacing:1px}
+
+.info-card{background:var(--bg-card);border-radius:2px;padding:16px 18px;border:1px solid var(--border);margin-bottom:12px}
+.info-card-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.info-card-title::before{content:'';width:4px;height:14px;background:var(--cinnabar)}
+.info-card p{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:0;text-indent:0}
+
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(--bg-card2);color:var(--gold);padding:10px 12px;text-align:left;font-weight:700;border-bottom:2px solid var(--gold);font-family:'Noto Serif SC',serif}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+.data-table tr:nth-child(even) td{background:rgba(51,39,26,.5)}
+.data-table .highlight-row td{background:rgba(194,91,86,.15);color:var(--text);font-weight:600}
+.data-table .danger-text{color:var(--cinnabar);font-weight:700}
+.data-table .gold-text{color:var(--gold);font-weight:700}
+.data-table .success-text{color:#7ab87a;font-weight:700}
+
+/* 时间线 */
+.timeline{position:relative;padding-left:30px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:18px}
+.timeline-item::before{content:'';position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--cinnabar);border:2px solid var(--gold)}
+.timeline-year{font-family:'Special Elite',monospace;font-size:13px;color:var(--gold);font-weight:700;margin-bottom:2px}
+.timeline-title{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.timeline-desc{font-size:13px;color:var(--text3);line-height:1.7}
+
+/* 三级政策卡片 */
+.policy-level-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:20px 0}
+.policy-level-card{background:var(--bg-card);border-radius:2px;padding:18px 20px;border-top:3px solid var(--gold)}
+.policy-level-card.national{border-top-color:var(--cinnabar)}
+.policy-level-card.provincial{border-top-color:#E8A838}
+.policy-level-card.municipal{border-top-color:var(--gold)}
+.policy-level-card-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:10px}
+.policy-level-card.national .policy-level-card-title{color:var(--cinnabar)}
+.policy-level-card.provincial .policy-level-card-title{color:#E8A838}
+.policy-level-card ul{list-style:none;padding:0}
+.policy-level-card li{font-size:13px;color:var(--text2);line-height:1.8;padding-left:14px;position:relative}
+.policy-level-card li::before{content:'·';position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* 符合性状态 */
+.status-pass{color:#7ab87a;font-weight:700}
+.status-warn{color:#E8A838;font-weight:700}
+.status-fail{color:var(--cinnabar);font-weight:700}
+
+.cn-divider{text-align:center;margin:36px 0;color:var(--gold);font-size:14px;letter-spacing:16px;opacity:.6}
+
+.chapter-nav{display:flex;justify-content:space-between;gap:16px;margin:40px 0 20px;padding-top:24px;border-top:1px solid var(--border)}
+.chapter-nav a{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:16px 20px;text-decoration:none;color:var(--text2);transition:all .3s;font-size:14px}
+.chapter-nav a:hover{border-color:var(--gold);color:var(--gold);background:var(--bg-card2)}
+.chapter-nav .nav-label{font-size:11px;color:var(--text3);margin-bottom:4px;font-family:'Special Elite',monospace}
+
+.footer{text-align:center;padding:40px 50px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+.footer-title{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--gold);margin-bottom:8px;letter-spacing:3px}
+
+@media(max-width:1024px){.data-grid{grid-template-columns:repeat(2,1fr)}.policy-level-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.top-nav{padding:10px 16px}.nav-right{display:none}.chapter-big-num{font-size:70px}.chapter-title{font-size:28px;letter-spacing:3px}.main-content{padding:30px 20px 50px}.img-float-right,.img-float-left{float:none;width:100%;margin:16px 0}.data-grid{grid-template-columns:1fr 1fr}.chapter-nav{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">← 返回首页</a>
+    <span class="nav-chapter-tag">第四章</span>
+    <span class="nav-title">上位规划衔接与政策依据研究</span>
+  </div>
+  <div class="nav-right">
+    <a href="topic-0.html">壹</a>
+    <a href="topic-1.html">贰</a>
+    <a href="topic-2.html">叁</a>
+    <a href="topic-3.html" class="active">肆</a>
+    <a href="topic-4.html">伍</a>
+    <a href="topic-5.html">陆</a>
+    <a href="topic-6.html">柒</a>
+    <a href="topic-7.html">捌</a>
+  </div>
+</nav>
+
+<div class="magazine-page">
+
+  <section class="chapter-hero">
+    <div class="chapter-hero-bg" style="background-image:url('https://aka.doubaocdn.com/s/AAYggfojo8');"></div>
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <div class="chapter-big-num">肆</div>
+      <span class="chapter-en-label">CHAPTER 04 · PLANNING & POLICY FRAMEWORK</span>
+      <h1 class="chapter-title">上位规划衔接与政策依据研究</h1>
+      <div class="chapter-subtitle">国家政策 · 省级政策 · 市级政策 · 上位规划 · 政策符合性 · 资金渠道</div>
+      <div class="chapter-question"><strong>本章回答：</strong>我能做什么？——系统梳理国家/省/市三级政策体系，衔接国土空间/更新专项/保护规划，分析政策符合性，识别八大资金渠道，明确政策边界与机遇。</div>
+    </div>
+  </section>
+
+  <div class="main-content">
+
+    <!-- 引言 -->
+    <section class="clearfix" style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">INTRODUCTION</span>
+        <h2 class="section-title">引言：政策框架与研究目的</h2>
+        <div class="vintage-divider"></div>
+      </div>
+      <div class="content">
+        <p class="drop-cap">城市更新是国家战略，也是湘潭老城复兴的核心抓手。城正街历史文化街区作为湘潭城市记忆最集中、历史遗存最丰富的片区，其更新改造必须在严格的政策框架和上位规划指导下进行。本专题系统梳理国家、湖南省、湘潭市三级城市更新政策体系，衔接国土空间规划、城市更新专项规划、控制性详细规划、历史文化保护规划等上位规划要求，分析本片区的政策符合性，识别可申报的资金渠道和必须坚守的政策底线。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第一章 国家层面政策 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 01 · NATIONAL POLICIES</span>
+        <h2 class="section-title">一、国家层面城市更新政策梳理</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.1</span>政策演进时间线</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2020年</div>
+          <div class="timeline-title">"十四五"规划</div>
+          <div class="timeline-desc">首次写入"实施城市更新行动"，上升为国家战略</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021年8月</div>
+          <div class="timeline-title">建科〔2021〕63号《防止大拆大建通知》</div>
+          <div class="timeline-desc">划定三条红线：拆除比≤20%、拆建比≤2、就地安置率≥50%</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023年</div>
+          <div class="timeline-title">《扎实推进城市更新行动的通知》</div>
+          <div class="timeline-desc">明确"城市体检先行"，强调"无体检不更新"</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025年</div>
+          <div class="timeline-title">厅字〔2025〕17号《持续推进城市更新行动的意见》</div>
+          <div class="timeline-desc">建立"专项规划—片区策划—实施方案"三级体系</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025年</div>
+          <div class="timeline-title">建办科〔2025〕46号《城市更新规划编制导则》</div>
+          <div class="timeline-desc">规范片区策划编制技术要求与设计引导标准</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2026年4月</div>
+          <div class="timeline-title">财政部住建部《2026年度中央财政支持城市更新通知》</div>
+          <div class="timeline-desc">15个城市入围，中部地区补助上限10亿元，湘潭未入围可争2027</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2026年</div>
+          <div class="timeline-title">中央预算内投资城市更新专项</div>
+          <div class="timeline-desc">安排970亿元，重点支持老旧小区改造、危旧房改造</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.2</span>五大核心政策导向</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">导向一：留改拆并举</div>
+          <p>以保留利用提升为主，严禁大拆大建。拆除比≤20%、拆建比≤2、就地安置率≥50%。鼓励"绣花"功夫修补织补式更新。本片区拆除仅2674.11㎡，远低于底线。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">导向二：先体检后更新</div>
+          <p>城市更新必须以城市体检为前提。本片区已完成"一个基础、八大板块、41项指标"体检体系，识别11项未达标指标，符合政策要求。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">导向三：历史文化保护</div>
+          <p>严守历史文化保护底线，不拆除历史建筑、不拆传统民居、不破坏地形地貌、不砍老树。鼓励历史建筑合理利用和功能更新。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3)">
+          <div class="info-card-title">导向四：多元化投融资</div>
+          <p>中央财政以奖代补、中央预算内投资、政策性银行专项贷款、社会资本参与、城市更新基金、REITs等创新融资工具。</p>
+        </div>
+      </div>
+      <div class="info-card" style="border-top:3px solid #5a9a5a">
+        <div class="info-card-title">导向五：完整社区建设</div>
+        <p>以15分钟生活圈为抓手，补齐养老、托育、教育、医疗、文化、体育、便民商业等设施短板。本片区养老覆盖率仅45.14%，完整社区建设是重要任务。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.3</span>三大资金支持方向</h3>
+      <div class="data-grid">
+        <div class="data-card danger">
+          <div class="data-num">10<span class="unit">亿</span></div>
+          <div class="data-label">中部城市以奖代补上限</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">970<span class="unit">亿</span></div>
+          <div class="data-label">2026中央预算内投资</div>
+        </div>
+        <div class="data-card success">
+          <div class="data-num">15<span class="unit">城</span></div>
+          <div class="data-label">2026以奖代补入围城市</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">800<span class="unit">万户</span></div>
+          <div class="data-label">预算内投资惠及居民</div>
+        </div>
+      </div>
+      <div class="content">
+        <p>中央财政城市更新"以奖代补"：2026年度评选不超过15个城市，东部≤8亿、中部≤10亿、西部≤12亿，支持历史文化街区更新改造及活化利用等方向。湘潭2026年未入围，可积极准备2027年度申报。中央预算内投资970亿元，重点支持城镇老旧小区改造和城市危旧房改造，本片区9个老旧小区项目（9.23亿）和4个危房项目（0.76亿）符合方向。国家文物保护专项资金支持关圣殿（国家级）和10处省级文保修缮。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第二章 省级政策 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 02 · PROVINCIAL POLICIES</span>
+        <h2 class="section-title">二、湖南省层面政策梳理</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="policy-box">
+        <div class="policy-box-title">核心文件：湘政办发〔2025〕49号（2025年12月4日发布）</div>
+        <p>《关于持续推进城市更新行动的实施意见》是湖南省城市更新最新纲领性文件。总体目标：从2026年起，全省启动一批城市更新重点片区改造，实施一批补短板、惠民生、强功能项目，围绕"四好"建设（好房子、好小区、好社区、好城区）。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.1</span>五大重点任务</h3>
+      <table class="data-table">
+        <thead><tr><th>任务</th><th>核心内容</th><th>本片区对应</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:var(--cinnabar)">城市韧性提升</strong></td><td>既有建筑改造、基础设施建设、安全韧性提升</td><td>危房158栋、消防3.88%、排水防涝</td></tr>
+          <tr><td><strong style="color:#E8A838">居住空间提质</strong></td><td>老旧小区改造、城中村改造、完整社区创建</td><td>9个老旧小区、完整社区建设</td></tr>
+          <tr><td><strong style="color:var(--gold)">公共空间增效</strong></td><td>公共空间增效、城市生态修复、城市绿地</td><td>雨湖公园提升、口袋公园、滨江风光带</td></tr>
+          <tr class="highlight-row"><td><strong style="color:var(--gold)">历史文化赓续</strong></td><td>传承城市历史文化，加强重点地区风貌管控</td><td>城正街历史街区保护活化、36处文保</td></tr>
+          <tr><td><strong style="color:var(--text3)">农业转移人口市民化</strong></td><td>缩小户籍与常住人口城镇化率差距</td><td>流动人口服务、公服设施覆盖</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">对本片区的影响</div>
+        <p>城正街片区完全符合湖南省"重点片区改造"定位，历史文化赓续工程和居住空间提质工程高度匹配。湘政办发〔2025〕49号是本片区更新的直接省级政策依据。自2026年起启动重点片区改造，本片区应积极争取入选省级重点片区。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.2</span>省级配套政策</h3>
+      <div class="content">
+        <p>《湖南省深入推进以人为本的新型城镇化战略五年行动计划》提出城市更新和安全韧性提升行动。《湖南省全面推进城镇老旧小区改造工作的实施意见》明确对不涉及新增用地审批、历史建筑保护等的项目，可将立项用地规划许可、工程建设许可与施工许可合并为一个阶段，简化审批流程。湖南省城市更新专项资金申报要求：已完成城市体检、已编制片区策划方案、项目库明确、投资估算合理、资金筹措方案可行、实施主体明确——本片区已具备基础条件。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第三章 市级政策 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 03 · MUNICIPAL POLICIES</span>
+        <h2 class="section-title">三、湘潭市层面政策梳理</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="policy-box">
+        <div class="policy-box-title">核心文件：潭政办发〔2021〕31号（有效期至2026年10月11日）</div>
+        <p>《关于全面推进城市更新工作的实施意见》是本片区更新的直接市级政策依据。核心管控三条红线：拆除比≤20%、拆建比≤2、就地安置率≥50%。本片区拆除比例极低，以保留修缮为主，完全符合。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.1</span>市级政策体系</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card">
+          <div class="info-card-title">城市更新工作方案（2022-2025）</div>
+          <p>通过4年努力基本完成市城区城市更新项目，19项主要指标达标。城正街是老旧小区、老旧街区、历史文化街区三类更新对象叠加的重点实施区域。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">土地利用推进城市更新措施（2024.2）</div>
+          <p>支持市场主体收购相邻多宗低效地块集中改造；边角地夹心地插花地可一并改造；鼓励社会资本参与"自愿出资、参照监管、片区平衡、依约移交、适当奖补"；支持土地分割转让；"商改居"政策。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">历史文化保护规定</div>
+          <p>核心保护范围不得新建扩建（除必要设施）；建控地带新建须符合高度体量色彩材质；历史建筑不得擅自拆除迁移；鼓励文化展示、传统经营、创意产业等功能。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">对本片区的意义</div>
+          <p>18处闲置土地（13.11公顷）和大量零星用地，土地集中改造和零星土地利用政策为资产盘活提供操作路径。社会资本参与政策框架为引入运营商提供依据。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第四章 上位规划衔接 -->
+    <section class="clearfix" style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 04 · PLANNING INTEGRATION</span>
+        <h2 class="section-title">四、上位规划要求衔接</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-float-right">
+        <img src="https://aka.doubaocdn.com/s/hJj3Kv7mzF" alt="湘潭湘江风光">
+        <div class="img-caption"><strong>湘潭湘江段</strong> · 城正街位于湘江西岸，是"湘潭江湾"休闲旅游度假区的历史文化体验核心区</div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.1</span>六大上位规划衔接</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">国土空间总体规划（2021-2035）</div>
+          <p>定位：历史文化名城核心承载区，以历史文化保护、传统商业、居住生活为主的综合片区。管控：核心区高度≤9米，建控地带≤18米，居住容积率≤2.0，商业≤2.5，绿地率≥30%。要求：保护风貌、疏解人口（当前1.71万/km²超标）、补齐设施。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">城市更新专项规划</div>
+          <p>划定：城正街为市级城市更新重点片区，复合型（历史街区型+老旧小区型+闲置资产型）。更新单元：城正街历史街区单元、雨湖路老旧小区单元、滨江生态单元。策略：保护为前提、活化为核心、盘活资产、补短板、打造活态传承示范区。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">控制性详细规划</div>
+          <p>居住用地容积率1.5-2.5，商业服务业2.0-3.0。公服配建：幼儿园≤300米、小学≤500米、养老每百户20-30㎡、文体15分钟生活圈。道路交通保持街巷格局，不随意拓宽。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3)">
+          <div class="info-card-title">历史文化街区保护规划（2021-2035）</div>
+          <p>街区26公顷，核心保护范围9.689公顷（东片6.40+西片3.30），建控地带16.3公顷。保护要素：1处街区+77处历史文化要素（36文保+41历史建筑）+一街三片七巷+三街并行+十八总地名。核心区不得新建扩建，高度≤9米。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #5a9a5a">
+          <div class="info-card-title">江湾休闲旅游度假区专项规划</div>
+          <p>定位："湘潭江湾"重要组成部分，历史文化体验核心区。与万楼、窑湾、九华湖联动，打造湘江文化旅游带关键节点。要求：完善游客中心/停车场/旅游厕所，打造研学/体验/演艺产品，提升住宿餐饮购物接待能力。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">其他专项规划</div>
+          <p>历史文化名城保护规划：城正街与窑湾共同构成街区体系，整体保护活态传承。绿地系统规划：雨湖公园核心绿地+滨江生态廊道+增加口袋公园。综合交通规划：外围长株潭城际S1线，内部慢行交通为主，外围停车内部限制机动车。</p>
+        </div>
+      </div>
+
+      <div style="clear:both"></div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第五章 政策符合性分析（核心） -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 05 · POLICY COMPLIANCE（核心）</span>
+        <h2 class="section-title">五、本片区政策符合性分析</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.1</span>符合国家政策支持方向的领域</h3>
+      <table class="data-table">
+        <thead><tr><th>政策支持方向</th><th>本片区对应</th><th>符合性</th><th>可申报资金</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>历史文化街区更新改造及活化利用</td><td>城正街街区、36文保、41历史建筑</td><td class="gold-text">★★★★★ 高度符合</td><td>以奖代补、文保资金</td></tr>
+          <tr class="highlight-row"><td>城镇老旧小区改造</td><td>9个老旧小区，289栋28828户</td><td class="gold-text">★★★★★ 高度符合</td><td>中央预算内、省级补助</td></tr>
+          <tr class="highlight-row"><td>城市危旧房改造</td><td>C级129栋+D级29栋=158栋</td><td class="gold-text">★★★★★ 高度符合</td><td>中央预算内投资</td></tr>
+          <tr><td>完整社区建设</td><td>养老45.14%、教育不足80%</td><td>★★★★☆ 符合</td><td>以奖代补、地方财政</td></tr>
+          <tr><td>城市基础设施品质提升</td><td>消防3.88%、道路7.92、停车17.08%</td><td>★★★★☆ 符合</td><td>预算内、政策性贷款</td></tr>
+          <tr><td>闲置资产盘活利用</td><td>26处建筑+18处土地13.11公顷</td><td>★★★☆☆ 部分符合</td><td>政策性贷款、社会资本</td></tr>
+          <tr><td>既有公共建筑改造</td><td>疾控中心、税务局、印刷厂等</td><td>★★★★☆ 符合</td><td>以奖代补</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">5.2</span>八大可申报资金渠道</h3>
+      <table class="data-table">
+        <thead><tr><th>资金渠道</th><th>支持方向</th><th>预计额度</th><th>申报时间</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:var(--gold)">中央财政以奖代补</strong></td><td>重点样板片区（含历史街区活化）</td><td>中部上限10亿（全市统筹）</td><td>每年4-5月</td></tr>
+          <tr><td><strong style="color:var(--gold)">中央预算内投资</strong></td><td>老旧小区、危旧房改造</td><td>约总投资30-50%</td><td>每年9-10月</td></tr>
+          <tr><td>国家文物保护资金</td><td>国家级/省级文保修缮</td><td>数百万至数千万</td><td>每年3-4月</td></tr>
+          <tr><td>湖南省城市更新专项资金</td><td>重点片区更新改造</td><td>数千万元</td><td>每年上半年</td></tr>
+          <tr><td>湖南省历史文化保护资金</td><td>街区保护、历史建筑修缮</td><td>数百万至千万</td><td>每年申报</td></tr>
+          <tr><td>湘潭市城市更新专项资金</td><td>各类城市更新项目</td><td>按项目核定</td><td>年度计划</td></tr>
+          <tr><td>国开行城市更新贷款</td><td>片区综合更新</td><td>数亿元，15-20年</td><td>随时申报</td></tr>
+          <tr><td>农发行贷款</td><td>老旧小区、基础设施</td><td>按项目核定</td><td>随时申报</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">5.3</span>政策约束与底线核查</h3>
+      <table class="data-table">
+        <thead><tr><th>约束项</th><th>要求</th><th>本片区情况</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr><td>拆除比</td><td>≤20%</td><td>拆除2674.11㎡，占比<1%</td><td class="status-pass">✅ 远低于底线</td></tr>
+          <tr><td>拆建比</td><td>≤2</td><td>新建量极小，主要修缮</td><td class="status-pass">✅ 符合</td></tr>
+          <tr><td>就地安置率</td><td>≥50%</td><td>以原地修缮改造为主</td><td class="status-pass">✅ 符合</td></tr>
+          <tr><td>历史保护底线</td><td>77处要素严格管控</td><td>已纳入保护规划</td><td class="status-pass">✅ 有管控</td></tr>
+          <tr><td>核心区新建</td><td>不得新建扩建（除必要设施）</td><td>核心区以修缮为主</td><td class="status-pass">✅ 符合</td></tr>
+          <tr><td>核心区高度</td><td>≤9米</td><td>传统建筑多为1-3层</td><td class="status-pass">✅ 符合</td></tr>
+          <tr><td>建控地带高度</td><td>≤18米</td><td>部分不协调建筑超标</td><td class="status-warn">⚠️ 需整治</td></tr>
+          <tr><td>人口密度</td><td>0.7-1.5万/km²</td><td>1.71万/km²</td><td class="status-fail">❌ 超标需疏解</td></tr>
+          <tr><td>老龄化率</td><td><10%（建议）</td><td>25.83%</td><td class="status-fail">❌ 超标需增配养老</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">5.4</span>四大政策机遇</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">机遇一：省级2026启动重点片区</div>
+          <p>湘政办发〔2025〕49号明确2026年起启动重点片区改造。城正街作为湘潭历史文化核心区，有条件入选省级重点片区，获得省级资金和政策支持。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">机遇二：争2027中央以奖代补</div>
+          <p>2026年15城已入围，湘潭未入选但可积极准备2027年度。城正街可作为湘潭申报核心样板片区，提前完善策划方案和项目库，若入围最高获10亿。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">机遇三：历史文保投入加大</div>
+          <p>国家高度重视历史文化保护，文物保护资金逐年增加。关圣殿（国家级）、江西会馆、文庙等文保修缮可积极申报国家和省级资金。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3)">
+          <div class="info-card-title">机遇四：存量土地盘活政策</div>
+          <p>湘潭市土地利用措施为闲置土地盘活、零星土地利用、社会资本参与提供政策工具，本片区13.11公顷闲置土地有望盘活。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第六章 政策空白与协调建议 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 06 · POLICY GAPS & RECOMMENDATIONS</span>
+        <h2 class="section-title">六、政策空白与协调建议</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.1</span>三大政策空白领域</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card">
+          <div class="info-card-title">历史建筑活化产权政策</div>
+          <p>现有政策对保护要求明确，但活化利用中的产权流转、功能变更、消防审批缺乏操作细则。41处历史建筑多为私产或复杂产权。建议：推动湘潭出台历史建筑活化利用专项政策，简化功能变更和消防审批。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">社会资本参与激励政策</div>
+          <p>鼓励社会资本但缺乏具体激励（税收减免、租金补贴、运营补贴）。历史街区投资大回报周期长，社会资本意愿不足。建议：运营前3年税收减免、租金补贴、以奖代补、优先后续开发权。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">原住民利益保障政策</div>
+          <p>要求就地安置率≥50%，但对原住民参与收益分享、避免绅士化缺乏规定。建议：原住民优先就业经营、社区公共收益分红、控制租金上涨保留原住民比例。</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.2</span>跨部门协调事项</h3>
+      <table class="data-table">
+        <thead><tr><th>协调事项</th><th>涉及部门</th><th>建议</th></tr></thead>
+        <tbody>
+          <tr><td>历史建筑功能变更</td><td>自然资源局、住建局、文旅广体局、消防</td><td>建立"一站式"审批机制</td></tr>
+          <tr><td>闲置资产产权划转</td><td>国资委、财政局、各产权单位</td><td>成立市级产权协调小组，统一收储</td></tr>
+          <tr><td>文物保护与旅游开发</td><td>文旅广体局（文物/旅游）</td><td>建立保护与利用平衡机制</td></tr>
+          <tr><td>老旧小区与历史街区保护</td><td>住建局、自然资源局</td><td>制定历史街区内老旧小区改造专项标准</td></tr>
+          <tr><td>资金统筹使用</td><td>财政局、各资金主管部门</td><td>建立城市更新资金池统筹使用</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第七章 核心结论 -->
+    <section style="margin-bottom:20px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 07 · CORE CONCLUSION</span>
+        <h2 class="section-title">七、核心结论与策划支撑</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-full">
+        <img src="https://aka.doubaocdn.com/s/jTLbhO0mzA" alt="城正街老街">
+        <div class="img-caption" style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(14,9,6,.98),transparent);color:var(--text2);font-size:13px;padding:50px 20px 14px"><strong>城正街老街</strong> · 政策环境高度利好，是国家/省/市三级政策重点支持对象，应抢抓机遇积极申报</div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.1</span>政策总体环境判断</h3>
+      <div class="highlight-box" style="background:linear-gradient(135deg,rgba(212,184,122,.1) 0%,rgba(194,91,86,.08) 100%);border:1px solid var(--gold)">
+        <div class="highlight-box-title">总体判断：政策环境高度利好，本片区是国家、省、市三级政策的重点支持对象</div>
+        <p>国家层面：城市更新上升为国家战略，历史文化保护、老旧小区改造、完整社区建设都是重点支持方向，本片区高度契合。省级层面：湘政办发〔2025〕49号明确2026年启动重点片区改造，本片区符合标准。市级层面：潭政办发〔2021〕31号和土地利用政策为更新提供操作框架，本片区是市级更新重点。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.2</span>最大政策机遇</h3>
+      <div class="content">
+        <p>第一，申报2027年度中央财政城市更新以奖代补——以城正街片区为核心样板片区代表湘潭申报，若入围可获最高10亿元中央补助。第二，申报湖南省城市更新重点片区——2026年省级启动重点片区改造，应积极争取入选。第三，历史文化保护资金——关圣殿、江西会馆、文庙等文保修缮可申报国家和省级资金。第四，中央预算内投资——老旧小区和危房改造项目可申报，预计覆盖总投资30-50%。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.3</span>必须坚守的政策底线</h3>
+      <div class="content">
+        <p>拆除比≤20%（本片区<1%，继续坚持留改拆以保留为主）；就地安置率≥50%（以原地修缮改造为主，保障原住民利益）；历史保护底线（77处历史文化要素严格保护，核心保护范围不得新建扩建）；建筑高度管控（核心区≤9米，建控地带≤18米）；街巷格局保护（不随意拉直拓宽道路，不破坏传统肌理）。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.4</span>对后续定位和项目的政策边界</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid #5a9a5a">
+          <div class="info-card-title">鼓励方向</div>
+          <p>历史文化活态传承、文旅融合发展、闲置资产盘活、完整社区建设、基础设施补短板</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">限制方向</div>
+          <p>大规模房地产开发、大拆大建、破坏历史风貌、过度商业化</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">定位建议</div>
+          <p>以"历史文化活态传承+文旅融合发展+社区品质提升"为核心，符合政策导向，避免纯商业开发</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.5</span>资金申报策略</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">近期（2026年）</div>
+          <p>申报2027年度中央以奖代补（以城正街为核心样板）；申报2027年度中央预算内投资（老旧小区、危房）；申报国家文保资金（关圣殿、江西会馆）；申报湖南省重点片区。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">中期（2027-2028年）</div>
+          <p>申请国开行城市更新专项贷款；引入社会资本参与经营性项目；统筹各级各类资金建立资金池。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">远期（2029-2035年）</div>
+          <p>探索REITs等创新融资工具；建立运营反哺机制，实现可持续发展。</p>
+        </div>
+      </div>
+
+      <blockquote>
+        <p>政策是城市更新的"方向盘"和"加油站"——方向盘决定能做什么、不能做什么，加油站提供资金和政策支持。城正街片区应在坚守历史保护底线的前提下，抢抓国家和省级政策机遇，以片区策划为抓手，积极申报各级资金，推动更新项目落地实施。</p>
+      </blockquote>
+    </section>
+
+    <div class="chapter-nav">
+      <a href="topic-2.html">
+        <div class="nav-label">← 上一章</div>
+        <div>第三章 · 资源资产系统梳理</div>
+      </a>
+      <a href="topic-4.html">
+        <div class="nav-label">下一章 →</div>
+        <div>第五章 · 定位主题与产业策略</div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-title">城正街片区策划专题研究</div>
+    <p>千年城总 · 金湘潭 | 历史文化街区城市更新研究</p>
+    <p style="margin-top:8px;font-size:12px">编制时间：2026年8月 | 共八大专题研究</p>
+    <p style="margin-top:8px;font-size:12px;color:var(--gold)">联系邮箱：ytf2000@sina.com</p>
+  </div>
+
+</div>
+</body>
+</html>
