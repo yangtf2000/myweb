@@ -68,12 +68,47 @@ body {
   min-height: 100vh;
 }
 
+/* 顶部导航 */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(14, 9, 6, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav a { color: var(--text3); text-decoration: none; font-size: 13px; transition: color 0.3s; }
+.top-nav a:hover { color: var(--gold); }
+.nav-left { display: flex; align-items: center; gap: 16px; }
+.nav-home-tag {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.nav-title { color: var(--text2); font-size: 14px; font-weight: 600; }
+.nav-right { display: flex; gap: 18px; }
+.nav-right a {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--text3);
+}
+.nav-right a.active { color: var(--gold); }
+
 /* 杂志页面容器 */
 .magazine-page {
   width: 100%;
   max-width: 1000px;
   background: var(--bg-page);
   margin: 0 auto;
+  padding-top: 56px;
   position: relative;
   box-shadow: 0 0 80px rgba(0,0,0,0.5);
 }
@@ -81,11 +116,10 @@ body {
 /* 封面 */
 .hero {
   position: relative;
-  height: 100vh;
+  height: 90vh;
   min-height: 650px;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 .hero-bg {
@@ -103,113 +137,89 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(14,9,6,0.9) 0%, rgba(14,9,6,0.5) 40%, rgba(14,9,6,0.85) 100%);
+  background: linear-gradient(135deg, rgba(14,9,6,0.85) 0%, rgba(14,9,6,0.3) 50%, rgba(14,9,6,0.95) 100%);
 }
 .hero-content {
   position: relative;
   z-index: 2;
-  text-align: center;
-  padding: 0 40px;
-  max-width: 900px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 50px;
+  width: 100%;
 }
-.hero-seal {
+.hero-stamp {
   display: inline-block;
-  width: 64px;
-  height: 64px;
-  background: var(--cinnabar);
-  color: #fff;
+  border: 2px solid var(--cinnabar);
+  color: var(--cinnabar);
+  padding: 8px 18px;
   font-family: 'Noto Serif SC', serif;
   font-size: 14px;
-  font-weight: 900;
-  line-height: 1.2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 28px;
-  border-radius: 4px;
-  letter-spacing: 2px;
-  transform: rotate(-3deg);
-  box-shadow: 0 4px 20px rgba(194,91,86,0.4);
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+  transform: rotate(-2deg);
+  background: rgba(194,91,86,0.08);
 }
-.hero-en-title {
+.hero-en-label {
   font-family: 'Special Elite', monospace;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--gold);
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   margin-bottom: 20px;
-  border: 1px solid var(--gold);
-  display: inline-block;
-  padding: 6px 20px;
+  display: block;
 }
 .hero-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 56px;
+  font-size: 52px;
   font-weight: 900;
   color: var(--text);
-  letter-spacing: 10px;
+  letter-spacing: 8px;
+  line-height: 1.25;
   margin-bottom: 16px;
-  line-height: 1.3;
   text-shadow: 0 4px 30px rgba(0,0,0,0.5);
 }
+.hero-title .highlight { color: var(--gold); }
 .hero-subtitle {
   font-family: 'Noto Serif SC', serif;
-  font-size: 22px;
+  font-size: 18px;
   color: var(--gold);
-  letter-spacing: 8px;
-  margin-bottom: 36px;
+  letter-spacing: 6px;
+  margin-bottom: 28px;
 }
 .hero-desc {
   font-size: 15px;
   color: var(--text2);
   line-height: 2;
-  max-width: 600px;
-  margin: 0 auto 40px;
+  max-width: 560px;
+  margin-bottom: 32px;
 }
-.hero-data {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 700px;
-  margin: 0 auto;
+.hero-data-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
 }
 .hero-data-item {
-  text-align: center;
+  border-left: 2px solid var(--gold);
+  padding-left: 14px;
 }
 .hero-data-num {
   font-family: 'Abril Fatface', 'Noto Serif SC', serif;
-  font-size: 36px;
-  font-weight: 700;
+  font-size: 28px;
   color: var(--gold);
-  line-height: 1;
+  line-height: 1.1;
 }
-.hero-data-num .unit { font-size: 14px; }
 .hero-data-label {
   font-size: 12px;
   color: var(--text3);
-  margin-top: 8px;
-  letter-spacing: 2px;
-}
-.hero-scroll {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--text3);
-  font-size: 12px;
-  letter-spacing: 3px;
-  animation: bounce 2s infinite;
-  z-index: 2;
-}
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
+  margin-top: 4px;
+  letter-spacing: 1px;
 }
 
 /* 主内容区 */
 .main-content {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 60px 50px 80px;
+  padding: 50px 50px 80px;
 }
 
 /* 章节标题 */
@@ -246,6 +256,22 @@ body {
   background: var(--gold);
 }
 
+/* 三级标题 */
+.sub-section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 28px 0 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--cinnabar);
+}
+.sub-section-title .num {
+  color: var(--gold);
+  font-family: 'Abril Fatface', serif;
+  margin-right: 8px;
+}
+
 /* 段落 - 首字下沉 */
 .content p {
   font-size: 16px;
@@ -276,7 +302,17 @@ body {
   border: 1px solid var(--border);
   position: relative;
 }
-.img-float-right img {
+.img-float-left {
+  float: left;
+  width: 40%;
+  margin: 6px 24px 16px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-float-right img, .img-float-left img {
   width: 100%;
   display: block;
   filter: saturate(0.78) brightness(0.94);
@@ -291,6 +327,51 @@ body {
   line-height: 1.7;
 }
 .img-caption strong { color: var(--gold); }
+.img-full {
+  width: 100%;
+  margin: 24px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-full img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.78) brightness(0.94);
+}
+/* 双图网格 */
+.img-duo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.img-duo-item {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-duo-item img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.78) brightness(0.94);
+  height: 200px;
+  object-fit: cover;
+}
+.img-duo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(14,9,6,0.96), transparent);
+  color: var(--text2);
+  font-size: 11px;
+  padding: 30px 10px 8px;
+  line-height: 1.6;
+}
+.img-duo-caption strong { color: var(--gold); }
 .clearfix::after {
   content: '';
   display: table;
@@ -318,6 +399,33 @@ body {
   line-height: 1.9;
   margin-bottom: 0;
   text-indent: 0;
+}
+
+/* 引用框 */
+blockquote {
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: rgba(212, 184, 122, 0.05);
+  font-style: italic;
+  color: var(--text2);
+  position: relative;
+}
+blockquote::before {
+  content: '"';
+  font-family: 'Abril Fatface', serif;
+  font-size: 48px;
+  color: var(--gold);
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  opacity: 0.4;
+}
+blockquote p {
+  text-indent: 0;
+  margin-bottom: 0;
+  font-size: 15px;
+  padding-left: 20px;
 }
 
 /* 数据卡片网格 - 等高 */
@@ -352,8 +460,40 @@ body {
   letter-spacing: 1px;
 }
 
-/* 八章卡片网格 */
-.chapters-grid {
+/* 信息卡片 */
+.info-card {
+  background: var(--bg-card);
+  border-radius: 2px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.info-card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-card-title::before {
+  content: '';
+  width: 4px;
+  height: 14px;
+  background: var(--cinnabar);
+}
+.info-card p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 0;
+  text-indent: 0;
+}
+
+/* 八章总览卡片 */
+.chapter-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
@@ -363,130 +503,112 @@ body {
   background: var(--bg-card);
   border-radius: 2px;
   overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.3s, border-color 0.3s;
   text-decoration: none;
   color: inherit;
-  transition: all 0.4s;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
+  display: block;
 }
 .chapter-card:hover {
   transform: translateY(-3px);
   border-color: var(--gold);
-  box-shadow: 0 16px 44px rgba(0,0,0,0.4);
 }
 .chapter-card-img {
-  height: 120px;
-  overflow: hidden;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
   position: relative;
+  filter: saturate(0.75) brightness(0.85);
 }
-.chapter-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.55) saturate(0.65);
-  transition: transform 0.5s, filter 0.5s;
-}
-.chapter-card:hover .chapter-card-img img {
-  transform: scale(1.06);
-  filter: brightness(0.7) saturate(0.75);
+.chapter-card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(14,9,6,0.9) 0%, transparent 60%);
 }
 .chapter-card-num {
   position: absolute;
   top: 10px;
-  left: 12px;
+  left: 14px;
   font-family: 'Abril Fatface', serif;
-  font-size: 14px;
-  color: #fff;
-  background: var(--cinnabar);
-  padding: 2px 10px;
-  border-radius: 2px;
-  font-weight: 700;
+  font-size: 32px;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 .chapter-card-body {
   padding: 16px 18px;
-  flex: 1;
 }
 .chapter-card-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
-.chapter-card-q {
-  font-size: 12px;
+.chapter-card-question {
+  font-family: 'Special Elite', monospace;
+  font-size: 11px;
   color: var(--cinnabar);
-  margin-bottom: 7px;
+  margin-bottom: 8px;
   letter-spacing: 1px;
 }
 .chapter-card-desc {
   font-size: 13px;
-  color: var(--text3);
-  line-height: 1.8;
+  color: var(--text2);
+  line-height: 1.75;
 }
 
-/* 逻辑链条 - 等高卡片 grid 布局（修复高度不一致问题） */
-.chain-section {
-  background: var(--bg-card);
-  border-radius: 2px;
-  padding: 28px;
-  border: 1px solid var(--border);
-  margin: 24px 0;
-}
-.chain-flow {
+/* 逻辑链条 - 等高卡片 */
+.logic-chain {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 0;
+  gap: 8px;
+  margin: 24px 0;
   align-items: stretch;
 }
-.chain-node {
-  background: var(--bg-card3);
-  border: 1px solid var(--border);
+.logic-node {
+  background: var(--bg-card);
   border-radius: 2px;
-  padding: 16px 10px;
+  padding: 14px 10px;
   text-align: center;
+  border-top: 3px solid var(--gold);
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   position: relative;
-  min-height: 120px;
 }
-.chain-node:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--gold);
-  font-size: 14px;
-  z-index: 2;
+.logic-node-num {
+  font-family: 'Abril Fatface', serif;
+  font-size: 20px;
+  color: var(--cinnabar);
+  margin-bottom: 6px;
 }
-.chain-q {
-  font-size: 11px;
-  color: var(--text3);
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-.chain-name {
+.logic-node-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 8px;
-  line-height: 1.4;
+  margin-bottom: 4px;
 }
-.chain-chapter {
-  font-family: 'Special Elite', monospace;
+.logic-node-desc {
   font-size: 11px;
+  color: var(--text3);
+  line-height: 1.5;
+}
+.logic-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--gold);
+  font-size: 18px;
+  min-height: 120px;
 }
 
 /* 中式分隔符 */
 .cn-divider {
   text-align: center;
-  margin: 40px 0;
+  margin: 36px 0;
   color: var(--gold);
   font-size: 14px;
   letter-spacing: 16px;
@@ -499,29 +621,53 @@ body {
   padding: 40px 50px;
   border-top: 1px solid var(--border);
   color: var(--text3);
-  font-size: 12px;
-  line-height: 2;
+  font-size: 13px;
 }
-.footer strong { color: var(--gold); }
+.footer-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 3px;
+}
 
 /* 响应式 */
 @media (max-width: 1024px) {
   .data-grid { grid-template-columns: repeat(2, 1fr); }
-  .chain-flow { grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .chain-node:not(:last-child)::after { display: none; }
-  .chapters-grid { grid-template-columns: 1fr; }
-  .hero-data { grid-template-columns: repeat(2, 1fr); }
+  .chapter-grid { grid-template-columns: 1fr; }
+  .logic-chain { grid-template-columns: repeat(4, 1fr); }
+  .img-duo-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .hero-title { font-size: 36px; letter-spacing: 6px; }
-  .hero-subtitle { font-size: 16px; }
-  .main-content { padding: 40px 20px 60px; }
-  .img-float-right { float: none; width: 100%; margin: 16px 0; }
-  .chain-flow { grid-template-columns: repeat(2, 1fr); }
+  .top-nav { padding: 10px 16px; }
+  .nav-right { display: none; }
+  .hero-title { font-size: 32px; letter-spacing: 4px; }
+  .main-content { padding: 30px 20px 60px; }
+  .img-float-right, .img-float-left { float: none; width: 100%; margin: 16px 0; }
+  .data-grid { grid-template-columns: 1fr 1fr; }
+  .logic-chain { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
 <body>
+
+<!-- 顶部导航 -->
+<nav class="top-nav">
+  <div class="nav-left">
+    <span class="nav-home-tag">首页</span>
+    <span class="nav-title">城正街片区策划专题研究</span>
+  </div>
+  <div class="nav-right">
+    <a href="topic-0.html">壹</a>
+    <a href="topic-1.html">贰</a>
+    <a href="topic-2.html">叁</a>
+    <a href="topic-3.html">肆</a>
+    <a href="topic-4.html">伍</a>
+    <a href="topic-5.html">陆</a>
+    <a href="topic-6.html">柒</a>
+    <a href="topic-7.html">捌</a>
+  </div>
+</nav>
 
 <div class="magazine-page">
 
@@ -530,184 +676,255 @@ body {
     <div class="hero-bg" style="background-image: url('https://aka.doubaocdn.com/s/jTLbhvO0mM');"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-seal">城正街<br>专题研究</div>
-      <div class="hero-en-title">CHENGZHENGJIE · RESEARCH REPORT</div>
-      <h1 class="hero-title">城正街片区策划<br>专题研究</h1>
-      <div class="hero-subtitle">千年城总 · 金湘潭</div>
-      <p class="hero-desc">从历史文化脉络到现状问题诊断，从资源资产评估到产业发展策略，从更新项目库到风貌设计引导，八大专题系统研究，为湘潭城正街历史街区更新策划提供全方位支撑。</p>
-      <div class="hero-data">
+      <div class="hero-stamp">千年城总 · 金湘潭</div>
+      <span class="hero-en-label">SPECIAL RESEARCH · CHENGZHENGJIE HISTORICAL DISTRICT</span>
+      <h1 class="hero-title">城正街片区<br><span class="highlight">策划专题研究</span></h1>
+      <div class="hero-subtitle">历史文化街区 · 城市更新 · 产业策划</div>
+      <p class="hero-desc">基于八大专题研究，系统梳理城正街历史文化脉络、现状问题、资源资产、上位政策、定位产业、更新项目、风貌设计与实施运营，为片区更新策划提供完整的研究支撑体系。</p>
+      <div class="hero-data-row">
         <div class="hero-data-item">
-          <div class="hero-data-num">8<span class="unit">大</span></div>
-          <div class="hero-data-label">专题研究</div>
+          <div class="hero-data-num">8</div>
+          <div class="hero-data-label">大专题研究</div>
         </div>
         <div class="hero-data-item">
-          <div class="hero-data-num">29.56<span class="unit">公顷</span></div>
-          <div class="hero-data-label">规划范围</div>
+          <div class="hero-data-num">29.56<span style="font-size:14px;">公顷</span></div>
+          <div class="hero-data-label">更新规划范围</div>
         </div>
         <div class="hero-data-item">
-          <div class="hero-data-num">40<span class="unit">个</span></div>
-          <div class="hero-data-label">更新项目</div>
+          <div class="hero-data-num">40<span style="font-size:14px;">个</span></div>
+          <div class="hero-data-label">更新项目库</div>
         </div>
         <div class="hero-data-item">
-          <div class="hero-data-num">25.25<span class="unit">亿</span></div>
+          <div class="hero-data-num">25.25<span style="font-size:14px;">亿</span></div>
           <div class="hero-data-label">总投资估算</div>
         </div>
       </div>
     </div>
-    <div class="hero-scroll">向下滚动 ↓</div>
   </section>
 
   <div class="main-content">
 
     <!-- 研究说明 -->
-    <section class="clearfix" style="margin-bottom: 50px;">
+    <section class="clearfix" style="margin-bottom: 44px;">
       <div class="section-header">
         <span class="section-tag">RESEARCH OVERVIEW</span>
-        <h2 class="section-title">研究说明：为什么做这八个专题</h2>
+        <h2 class="section-title">研究说明：为什么做这八大专题</h2>
         <div class="vintage-divider"></div>
       </div>
 
       <div class="img-float-right">
         <img src="https://aka.doubaocdn.com/s/Yjsilp1VB8" alt="城正街夜景">
-        <div class="img-caption"><strong>城正街夜景</strong> · 老街夜色中，历史与现实交织</div>
+        <div class="img-caption"><strong>城正街夜景</strong> · 老街在夜色中诉说着千年商埠的辉煌与今日的沉寂</div>
       </div>
 
       <div class="content">
-        <p class="drop-cap">城正街历史街区是湘潭城市的根脉所在。2021年被列为湖南省历史文化街区后，街区的保护与更新提上日程。但城正街不是一张白纸——它有2000年的街市史、900年的县治史、400年的商业繁荣史，也有当下亟待解决的老旧小区、闲置资产、业态低端等现实问题。</p>
-        <p>本专题研究围绕"现状分析→产业策划→项目生成→实施"的逻辑链条，拆分为八个相互独立又前后衔接的专题，从历史文化到现状问题，从资源资产到上位政策，从定位产业到项目库，从风貌设计到实施运营，形成完整的研究闭环。</p>
+        <p class="drop-cap">城正街历史街区是湘潭城市的根脉所在，2000年街市史、900年县治史、400年商业繁荣史，构成了不可替代的历史文化价值。然而，随着1992年县治迁出、城市中心东移，城正街逐渐陷入衰落：建筑老化、业态低端、人口外流、文化资源沉睡。如何在保护历史文化的前提下，实现片区的有机更新与产业复兴，是本次策划需要回答的核心问题。</p>
+        <p>本专题研究体系以"问题导向+目标导向"为方法论，从历史文化脉络梳理出发，经过现状问题诊断、资源资产评估、上位政策衔接，最终落脚到定位产业策划、更新项目生成、风貌设计引导和实施运营路径，形成完整的研究闭环。八大专题相互独立又逻辑关联，共同构成城正街片区更新策划的研究支撑体系。</p>
       </div>
 
       <div style="clear: both;"></div>
 
-      <div class="highlight-box">
-        <div class="highlight-box-title">研究逻辑</div>
-        <p>八大专题层层递进：从认知（我是谁→我怎么了→我有什么）到决策（要我做什么→成为什么→做什么→什么样→怎么落地），每一章回答一个核心问题，前后衔接、相互支撑。</p>
+      <h3 class="sub-section-title"><span class="num">01</span>研究目标</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">摸清家底</div>
+          <p>系统梳理城正街的历史文化脉络、现状问题、资源资产，建立完整的基础信息数据库，为策划决策提供事实依据。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">找准方向</div>
+          <p>基于资源禀赋和市场趋势，明确片区定位、主题和产业发展方向，避免同质化竞争，打造差异化竞争力。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3);">
+          <div class="info-card-title">生成项目</div>
+          <p>将定位和策略转化为可实施的更新项目库，明确项目内容、投资估算和实施时序，确保策划可落地。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">设计引导</div>
+          <p>制定风貌提升和建筑整治的设计引导，确保更新过程中历史文化特色得到保护和彰显。</p>
+        </div>
       </div>
+
+      <h3 class="sub-section-title"><span class="num">02</span>资料来源层级</h3>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">六级资料来源体系（按优先级排序）</div>
+        <p>①官方规划文件（最高优先级）：《城正街历史街区更新规划》《城正街历史文化街区保护规划》等；②湘潭市人民政府官网公开资料；③《湘潭县志》（清嘉庆、光绪版）；④学术论文与地方史志专家研究（何歌劲、盛兆华、李海武等）；⑤网络公开资料（已交叉校对）；⑥现场实地勘察。所有数据均经过多源交叉校对，确保准确性。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">03</span>研究方法</h3>
+
+      <div class="content">
+        <p>本研究采用"文献研究+实地调研+数据分析+案例对标+专家咨询"的综合研究方法。文献研究涵盖规划文件、县志、学术论文等；实地调研包括现场踏勘、居民访谈、商户调查；数据分析包括GIS空间分析、人口经济数据统计；案例对标选取国内同类历史街区更新案例；专家咨询邀请历史文化顾问参与。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 项目概况 -->
+    <section class="clearfix" style="margin-bottom: 44px;">
+      <div class="section-header">
+        <span class="section-tag">PROJECT OVERVIEW</span>
+        <h2 class="section-title">项目概况：城正街在哪里</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-float-left">
+        <img src="https://aka.doubaocdn.com/s/hJUBWoHYer" alt="湘潭湘江航拍">
+        <div class="img-caption"><strong>湘潭湘江段航拍</strong> · 城正街位于湘江西岸C形大弯处，天然良港造就了"金湘潭"的商业繁荣</div>
+      </div>
+
+      <div class="content">
+        <p class="drop-cap">城正街历史街区位于湘潭市雨湖区，湘江西岸，是湘潭老城区的核心组成部分。保护规划范围西临瞻岳门路，北至熙春门路及规划西禅路，东至观湘门路，南接沿江东路，总面积26公顷。其中核心保护范围9.689公顷，建设控制地带16.3公顷。更新规划在此基础上向东延伸至南楼区域，总设计面积达29.56公顷（443.4亩）。</p>
+        <p>片区交通便利，距湘潭火车站约3公里，距湘潭北站（高铁）约12公里，距长沙黄花机场约60公里。周边配套完善，有湘潭市第一人民医院、湘潭市二中、湖南科技大学雨湖校区等公共服务设施。</p>
+      </div>
+
+      <div style="clear: both;"></div>
 
       <div class="data-grid">
         <div class="data-card">
-          <div class="data-num">3<span class="unit">个</span></div>
-          <div class="data-label">"最"价值</div>
+          <div class="data-num">29.56<span class="unit">公顷</span></div>
+          <div class="data-label">更新规划范围</div>
         </div>
         <div class="data-card">
-          <div class="data-num">162<span class="unit">项</span></div>
-          <div class="data-label">非遗资源</div>
+          <div class="data-num">9.689<span class="unit">公顷</span></div>
+          <div class="data-label">核心保护范围</div>
         </div>
         <div class="data-card">
-          <div class="data-num">227<span class="unit">处</span></div>
-          <div class="data-label">不协调建筑</div>
+          <div class="data-num">16.3<span class="unit">公顷</span></div>
+          <div class="data-label">建设控制地带</div>
         </div>
         <div class="data-card">
-          <div class="data-num">42<span class="unit">条</span></div>
-          <div class="data-label">适用政策</div>
+          <div class="data-num">443.4<span class="unit">亩</span></div>
+          <div class="data-label">总设计面积</div>
         </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
+        <div class="info-card">
+          <div class="info-card-title">空间结构</div>
+          <p>一街三片七巷：一街为城正街传统风貌街；三片为书院文化片区、城里头人文片区、南楼文化片区；七巷为学坪路街、泗洲庵巷、板石巷、广大香巷、城隍庙巷、新育里巷等七条历史巷道。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">文化定位</div>
+          <p>伟人故里，红色圣地；湖湘学渊，名人之乡；千年商都，繁华城总。城正街是湘潭市三大定位的集中承载地。</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">三个"最"价值（保护规划核心结论）</div>
+        <p>肌理最完整——鱼骨状街巷肌理保存完好；类型最丰富——涵盖居住、公建、商业、厂房仓库等多种建筑类型；时代最延续——跨越明、清、民国、20世纪五六十年代、八九十年代五个时期，是一部活的湘潭城市建筑史。</p>
       </div>
     </section>
 
     <div class="cn-divider">❖ ❖ ❖</div>
 
     <!-- 八章总览 -->
-    <section style="margin-bottom: 50px;">
+    <section style="margin-bottom: 44px;">
       <div class="section-header">
-        <span class="section-tag">CHAPTERS</span>
-        <h2 class="section-title">八章总览：从认知到决策的完整闭环</h2>
+        <span class="section-tag">CHAPTER OVERVIEW</span>
+        <h2 class="section-title">八章总览：研究体系的完整闭环</h2>
         <div class="vintage-divider"></div>
       </div>
 
-      <div class="chapters-grid">
+      <div class="content">
+        <p>八大专题从"我是谁"（历史文化）到"我怎么了"（现状问题），从"我有什么"（资源资产）到"我能做什么"（政策依据），从"我要成为什么"（定位产业）到"具体做什么"（更新项目），从"做成什么样"（风貌设计）到"怎么落地"（实施运营），形成完整的研究闭环。</p>
+      </div>
+
+      <div class="chapter-grid">
         <a href="topic-0.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/giNmVXC3uZ" alt="历史文化脉络">
-            <span class="chapter-card-num">壹</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/giNmVXC3uZ');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">壹</div>
           </div>
           <div class="chapter-card-body">
             <div class="chapter-card-title">历史文化脉络研究</div>
-            <div class="chapter-card-q">我是谁？</div>
-            <div class="chapter-card-desc">千年沿革、金湘潭商业文明、城总制度与十八总空间、街区价值评估（三个最+四大文化特色）</div>
+            <div class="chapter-card-question">我是谁？</div>
+            <div class="chapter-card-desc">梳理2000年街市史、900年县治史、金湘潭商业文明五维度、城总制度800年自治传统、四大文化特色、三个"最"价值、21位历史名人。</div>
           </div>
         </a>
 
         <a href="topic-1.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/f40ax0OpDb" alt="现状问题">
-            <span class="chapter-card-num">贰</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/f40ax0OpDb');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">贰</div>
           </div>
           <div class="chapter-card-body">
             <div class="chapter-card-title">现状问题专题分析</div>
-            <div class="chapter-card-q">我怎么了？</div>
-            <div class="chapter-card-desc">十章结构全面诊断，问题优先级排序（严重性×策划价值），三大核心抓手研判</div>
+            <div class="chapter-card-question">我怎么了？</div>
+            <div class="chapter-card-desc">十章结构系统诊断建筑、产业、人口、交通、市政、文化、环境、社会、管理九大领域问题，采用"严重性×策划价值"二维评估，分四级优先级，提出三大核心抓手。</div>
           </div>
         </a>
 
         <a href="topic-2.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/9Kqa6EpNk2" alt="资源资产">
-            <span class="chapter-card-num">叁</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/9x0wKmj8W7');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">叁</div>
           </div>
           <div class="chapter-card-body">
-            <div class="chapter-card-title">资源资产系统梳理与价值评估</div>
-            <div class="chapter-card-q">我有什么？</div>
-            <div class="chapter-card-desc">十大核心资源识别，162项非遗层级，老字号谱系，文物保护单位系统梳理</div>
+            <div class="chapter-card-title">资源资产系统梳理</div>
+            <div class="chapter-card-question">我有什么？</div>
+            <div class="chapter-card-desc">识别十大核心资源，梳理162项非遗（国家级2、省级27、市级64）、6家老字号、36处文保单位，建立资源资产价值评估体系。</div>
           </div>
         </a>
 
         <a href="topic-3.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/xVZAFqekyX" alt="上位规划">
-            <span class="chapter-card-num">肆</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/AAYggfojo8');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">肆</div>
           </div>
           <div class="chapter-card-body">
-            <div class="chapter-card-title">上位规划衔接与政策依据研究</div>
-            <div class="chapter-card-q">要我做什么？</div>
-            <div class="chapter-card-desc">湘政办发〔2025〕49号、潭政办发〔2021〕31号，中央财政以奖代补，2026中央预算内投资</div>
+            <div class="chapter-card-title">上位规划与政策衔接</div>
+            <div class="chapter-card-question">我能做什么？</div>
+            <div class="chapter-card-desc">衔接湘政办发〔2025〕49号、潭政办发〔2021〕31号等政策，梳理中央财政以奖代补、超长期特别国债、专项债券等八大资金渠道。</div>
           </div>
         </a>
 
         <a href="topic-4.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/FLKDHyyH32" alt="定位产业">
-            <span class="chapter-card-num">伍</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/FLKDHyyH32');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">伍</div>
           </div>
           <div class="chapter-card-body">
-            <div class="chapter-card-title">片区定位主题与产业发展策略</div>
-            <div class="chapter-card-q">成为什么？</div>
-            <div class="chapter-card-desc">综合发展型定位，"千年城总·金湘潭"主题，四大产业体系，一核两带三组团空间</div>
+            <div class="chapter-card-title">定位主题与产业策略</div>
+            <div class="chapter-card-question">我要成为什么？</div>
+            <div class="chapter-card-desc">推荐"综合发展型"定位，主题"千年城总·金湘潭"，四大产业（文创1.7万㎡+研学1.2万㎡+商业1.3万㎡+旅居180间），空间"一核两带三组团"。</div>
           </div>
         </a>
 
         <a href="topic-5.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/0vYWMarq3D" alt="更新项目">
-            <span class="chapter-card-num">陆</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/xVZAFqekyX');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">陆</div>
           </div>
           <div class="chapter-card-body">
-            <div class="chapter-card-title">更新项目库整合与投资估算</div>
-            <div class="chapter-card-q">做什么？</div>
-            <div class="chapter-card-desc">六大类40个项目，总投资25.25亿元，三期实施时序，与0601版对比分析</div>
+            <div class="chapter-card-title">更新项目库与投资估算</div>
+            <div class="chapter-card-question">具体做什么？</div>
+            <div class="chapter-card-desc">六大类40个项目，总投资25.25亿元，三期实施（近期11.28亿、中期12.50亿、远期1.97亿），较0601版项目数29→40、投资16.10亿→25.25亿。</div>
           </div>
         </a>
 
         <a href="topic-6.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/AAYggfojo8" alt="风貌设计">
-            <span class="chapter-card-num">柒</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/9Kqa6EpNk2');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">柒</div>
           </div>
           <div class="chapter-card-body">
-            <div class="chapter-card-title">风貌提升与建筑整治设计引导</div>
-            <div class="chapter-card-q">什么样？</div>
-            <div class="chapter-card-desc">湘中传统市井风貌定位，高度管控，色彩"素雅暖"，五类建筑分类整治，227处不协调建筑</div>
+            <div class="chapter-card-title">风貌提升与建筑整治</div>
+            <div class="chapter-card-question">做成什么样？</div>
+            <div class="chapter-card-desc">风貌定位"湘中传统市井风貌为底，会馆书院文化为魂，现代生活功能为用"，高度管控核心区≤9米，五类建筑分类整治，227处不协调建筑整治方案。</div>
           </div>
         </a>
 
         <a href="topic-7.html" class="chapter-card">
-          <div class="chapter-card-img">
-            <img src="https://aka.doubaocdn.com/s/hJUBWoHYer" alt="实施运营">
-            <span class="chapter-card-num">捌</span>
+          <div class="chapter-card-img" style="background-image: url('https://aka.doubaocdn.com/s/rVFHrcSW8T');">
+            <div class="chapter-card-img-overlay"></div>
+            <div class="chapter-card-num">捌</div>
           </div>
           <div class="chapter-card-body">
-            <div class="chapter-card-title">实施路径运营模式与资金筹措</div>
-            <div class="chapter-card-q">怎么落地？</div>
-            <div class="chapter-card-desc">八大类资金申报渠道，42条政策工具箱，四种运营模式，资金平衡方案</div>
+            <div class="chapter-card-title">实施路径与运营资金</div>
+            <div class="chapter-card-question">怎么落地？</div>
+            <div class="chapter-card-desc">四种实施模式对比，八大资金渠道，42条政策工具箱（按项目类型分类），资金平衡方案，运营模式设计，确保项目可落地、可持续。</div>
           </div>
         </a>
       </div>
@@ -716,70 +933,179 @@ body {
     <div class="cn-divider">❖ ❖ ❖</div>
 
     <!-- 研究逻辑链条 -->
-    <section style="margin-bottom: 50px;">
+    <section style="margin-bottom: 44px;">
       <div class="section-header">
-        <span class="section-tag">LOGIC CHAIN</span>
-        <h2 class="section-title">研究逻辑链条</h2>
+        <span class="section-tag">RESEARCH LOGIC</span>
+        <h2 class="section-title">研究逻辑链条：从问题到落地的闭环</h2>
         <div class="vintage-divider"></div>
       </div>
 
       <div class="content">
-        <p>八大章节层层递进，从认知到决策，形成完整的研究闭环。每一章回答一个核心问题，前后衔接、相互支撑。</p>
+        <p>八大专题不是孤立的研究，而是一条完整的逻辑链条：从历史文化根基出发，经过现状诊断和资源梳理，结合政策依据，形成定位产业，进而生成项目、设计风貌、落实运营。每个环节都为下一个环节提供支撑，形成"基础研究→问题诊断→策略制定→项目生成→设计引导→实施保障"的完整闭环。</p>
       </div>
 
-      <div class="chain-section">
-        <div class="chain-flow">
-          <div class="chain-node">
-            <div class="chain-q">我是谁</div>
-            <div class="chain-name">历史脉络</div>
-            <div class="chain-chapter">第一章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">我怎么了</div>
-            <div class="chain-name">现状诊断</div>
-            <div class="chain-chapter">第二章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">我有什么</div>
-            <div class="chain-name">资源梳理</div>
-            <div class="chain-chapter">第三章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">要我做什么</div>
-            <div class="chain-name">上位规划</div>
-            <div class="chain-chapter">第四章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">成为什么</div>
-            <div class="chain-name">定位产业</div>
-            <div class="chain-chapter">第五章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">做什么</div>
-            <div class="chain-name">项目库</div>
-            <div class="chain-chapter">第六章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">什么样</div>
-            <div class="chain-name">风貌设计</div>
-            <div class="chain-chapter">第七章</div>
-          </div>
-          <div class="chain-node">
-            <div class="chain-q">怎么落地</div>
-            <div class="chain-name">实施运营</div>
-            <div class="chain-chapter">第八章</div>
-          </div>
+      <div class="logic-chain">
+        <div class="logic-node">
+          <div class="logic-node-num">壹</div>
+          <div class="logic-node-title">历史文化</div>
+          <div class="logic-node-desc">我是谁</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">贰</div>
+          <div class="logic-node-title">现状问题</div>
+          <div class="logic-node-desc">怎么了</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">叁</div>
+          <div class="logic-node-title">资源资产</div>
+          <div class="logic-node-desc">有什么</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">肆</div>
+          <div class="logic-node-title">政策依据</div>
+          <div class="logic-node-desc">能做什么</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">伍</div>
+          <div class="logic-node-title">定位产业</div>
+          <div class="logic-node-desc">成为什么</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">陆</div>
+          <div class="logic-node-title">项目库</div>
+          <div class="logic-node-desc">做什么</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">柒</div>
+          <div class="logic-node-title">风貌设计</div>
+          <div class="logic-node-desc">什么样</div>
+        </div>
+        <div class="logic-node">
+          <div class="logic-node-num">捌</div>
+          <div class="logic-node-title">实施运营</div>
+          <div class="logic-node-desc">怎么落地</div>
         </div>
       </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:20px 0;">
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">基础研究层</div>
+          <p>第一章历史文化 + 第二章现状问题 + 第三章资源资产 + 第四章政策依据，摸清家底、找准问题、明确边界。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">策略制定层</div>
+          <p>第五章定位产业，基于基础研究成果，明确片区发展方向、主题定位、产业体系和空间布局。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3);">
+          <div class="info-card-title">实施保障层</div>
+          <p>第六章项目库 + 第七章风貌设计 + 第八章实施运营，将策略转化为可落地的项目、设计和资金方案。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 核心成果数据 -->
+    <section style="margin-bottom: 44px;">
+      <div class="section-header">
+        <span class="section-tag">KEY FINDINGS</span>
+        <h2 class="section-title">核心成果数据：研究的关键结论</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="content">
+        <p>经过八大专题的系统研究，形成了一系列核心成果数据，这些数据是后续策划方案编制的重要依据。</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">162<span class="unit">项</span></div>
+          <div class="data-label">湘潭非遗总量</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">36<span class="unit">处</span></div>
+          <div class="data-label">文物保护单位</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">227<span class="unit">处</span></div>
+          <div class="data-label">不协调建筑</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">40<span class="unit">个</span></div>
+          <div class="data-label">更新项目库</div>
+        </div>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">25.25<span class="unit">亿</span></div>
+          <div class="data-label">总投资估算</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">80-120<span class="unit">万</span></div>
+          <div class="data-label">年游客量预测</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">4.2<span class="unit">万㎡</span></div>
+          <div class="data-label">产业空间规模</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">180<span class="unit">间</span></div>
+          <div class="data-label">文旅旅居客房</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
+        <div class="info-card" style="background:linear-gradient(135deg, rgba(212,184,122,0.1) 0%, rgba(194,91,86,0.08) 100%); border:1px solid var(--gold);">
+          <div class="info-card-title">三大核心抓手（问题研判）</div>
+          <p>资产盘活——闲置公房和低效用地再利用；文化活化——历史文化资源转化为体验产品；业态升级——低端业态向文旅商融合转型。</p>
+        </div>
+        <div class="info-card" style="background:linear-gradient(135deg, rgba(212,184,122,0.1) 0%, rgba(194,91,86,0.08) 100%); border:1px solid var(--cinnabar);">
+          <div class="info-card-title">四大产业体系（定位策划）</div>
+          <p>文化创意1.7万㎡ + 教育研学1.2万㎡ + 商业休闲1.3万㎡ + 文旅旅居180间，形成"文-旅-商-居"融合的产业生态。</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">投资结构（六大类项目）</div>
+        <p>A历史文化保护5.60亿（22.3%）+ B闲置资产盘活3.87亿（15.4%）+ C危房改造1.13亿（4.5%）+ D老旧小区改造9.50亿（37.9%）+ E老旧街区更新0.95亿（3.8%）+ F基础设施与公共服务4.20亿（16.1%）。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 结语 -->
+    <section style="margin-bottom: 20px;">
+      <div class="section-header">
+        <span class="section-tag">EPILOGUE</span>
+        <h2 class="section-title">结语：让千年城总焕发新生</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-full">
+        <img src="https://aka.doubaocdn.com/s/jTLbhvO0mM" alt="城正街老街">
+        <div class="img-caption" style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(14,9,6,0.98), transparent); color:var(--text2); font-size:13px; padding:50px 20px 14px;"><strong>城正街老街</strong> · 每一块青石板都承载着千年的历史记忆，等待着在更新中焕发新生</div>
+      </div>
+
+      <div class="content">
+        <p class="drop-cap">城正街不是一条普通的老街，而是湘潭城市的根脉所在。2000年的街市烟火、900年的县治荣光、400年的金湘潭繁华、800年的城总自治传统，都浓缩在这条不到一公里的街道上。这里有文庙的书声、会馆的商帮、塔公祠的革命星火、曙光学校的百年育人，更有一代代湘潭人的生活记忆。</p>
+        <p>城市更新不是大拆大建，而是有机更新；不是抹去历史，而是让历史在当代生活中延续。本专题研究体系试图回答一个核心问题：如何在保护历史文化的前提下，让城正街重新焕发活力，成为湘潭的文化名片和市民的精神家园。</p>
+        <p>从历史文化脉络到现状问题诊断，从资源资产评估到上位政策衔接，从定位产业策划到更新项目生成，从风貌设计引导到实施运营路径——八大专题共同构成了一个完整的研究闭环，为城正街片区的更新策划提供坚实的研究支撑。</p>
+        <p>愿千年城总，在新时代续写金湘潭的辉煌。</p>
+      </div>
+
+      <blockquote>
+        <p>城正街从宋哲宗元符元年（1098年）至今，已有920多年历史，1995年之前一直是湘潭县治所在地，是湘潭政治、经济、文化的中心。城正街是湘潭"千年商都，繁华城总"中"城里头"的所在地，过去是两广和中原地区货物集散地，商贸业异常昌盛，"金湘潭"得名由此而来。<br>——《城正街历史街区更新规划》</p>
+      </blockquote>
     </section>
 
   </div>
 
   <!-- 底部 -->
   <div class="footer">
-    <p><strong>城正街片区策划专题研究</strong> · 湘潭市雨湖区</p>
-    <p>八大专题系统研究 · 从历史文化到实施运营的完整闭环</p>
-    <p style="margin-top:10px; color:var(--text3);">2026年8月 · 专题研究成果</p>
+    <div class="footer-title">城正街片区策划专题研究</div>
+    <p>千年城总 · 金湘潭 | 历史文化街区城市更新研究</p>
+    <p style="margin-top:8px; font-size:12px;">编制时间：2026年8月 | 共八大专题研究</p>
   </div>
 
 </div>
