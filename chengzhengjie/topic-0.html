@@ -12,15 +12,15 @@
   --bg: #1A1410;
   --bg-card: #251D16;
   --bg-card2: #2E2419;
-  --text: #E8DFD0;
-  --text2: #A89B88;
-  --text3: #7A6E5C;
-  --gold: #C9A961;
-  --gold-light: #DCC07A;
-  --cinnabar: #B84A4D;
-  --cinnabar-dark: #8B3538;
+  --text: #EDE4D3;
+  --text2: #B8AA96;
+  --text3: #8A7D6A;
+  --gold: #D4B87A;
+  --gold-light: #E8D4A0;
+  --cinnabar: #C25B56;
+  --cinnabar-dark: #9A3E3A;
   --border: #3D2E1F;
-  --border-light: #4A3A28;
+  --border-light: #4E3D2A;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +30,9 @@ body {
   font-family: 'Noto Sans SC', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.85;
+  line-height: 2;
   overflow-x: hidden;
+  font-size: 15px;
 }
 
 body::before {
@@ -39,7 +40,7 @@ body::before {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
 }
@@ -50,19 +51,19 @@ body::before {
   top: 0; left: 0;
   width: 100%;
   z-index: 999;
-  padding: 12px 40px;
+  padding: 14px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(26,20,16,0.92);
-  backdrop-filter: blur(10px);
+  background: rgba(26,20,16,0.94);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
 .topbar-left { display: flex; align-items: center; gap: 16px; }
 .topbar-back {
   text-decoration: none;
-  color: var(--text2);
-  font-size: 12px;
+  color: var(--text3);
+  font-size: 13px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -79,19 +80,19 @@ body::before {
 }
 .topbar-logo .seal {
   background: var(--cinnabar);
-  color: var(--text);
+  color: #fff;
   font-size: 10px;
   padding: 2px 7px;
   border-radius: 2px;
   margin-right: 6px;
   font-weight: 600;
 }
-.topbar-chapters { display: flex; gap: 3px; list-style: none; }
+.topbar-chapters { display: flex; gap: 2px; list-style: none; }
 .topbar-chapters a {
   text-decoration: none;
   color: var(--text3);
-  font-size: 11px;
-  padding: 5px 8px;
+  font-size: 12px;
+  padding: 5px 9px;
   border-radius: 2px;
   transition: all 0.3s;
   font-family: 'Noto Serif SC', serif;
@@ -104,22 +105,22 @@ body::before {
 /* 右侧目录 */
 .toc {
   position: fixed;
-  right: 30px;
+  right: 36px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 998;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 .toc a {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   color: var(--text3);
-  font-size: 11px;
-  padding: 4px 0;
+  font-size: 12px;
+  padding: 3px 0;
   transition: all 0.3s;
   justify-content: flex-end;
 }
@@ -130,33 +131,32 @@ body::before {
   transition: all 0.3s;
   flex-shrink: 0;
 }
-.toc a:hover, .toc a.active {
-  color: var(--gold);
-}
+.toc a:hover, .toc a.active { color: var(--gold); }
 .toc a:hover .dot, .toc a.active .dot {
   background: var(--gold);
-  transform: scale(1.4);
+  transform: scale(1.5);
 }
 .toc a .label {
   opacity: 0;
   transition: opacity 0.3s;
   white-space: nowrap;
   background: var(--bg-card);
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 2px;
   border: 1px solid var(--border);
+  font-size: 11px;
 }
 .toc a:hover .label { opacity: 1; }
 
 /* 章节封面 */
 .chapter-hero {
   position: relative;
-  height: 85vh;
-  min-height: 500px;
+  height: 78vh;
+  min-height: 480px;
   display: flex;
   align-items: center;
   overflow: hidden;
-  margin-top: 48px;
+  margin-top: 50px;
 }
 .chapter-hero-bg {
   position: absolute;
@@ -165,41 +165,41 @@ body::before {
   background-image: url('https://aka.doubaocdn.com/s/giNmVXC3uZ');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.25) saturate(0.6);
+  filter: brightness(0.28) saturate(0.55);
 }
 .chapter-hero-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(90deg, rgba(26,20,16,0.95) 0%, rgba(26,20,16,0.5) 60%, rgba(26,20,16,0.3) 100%);
+  background: linear-gradient(90deg, rgba(26,20,16,0.96) 0%, rgba(26,20,16,0.55) 55%, rgba(26,20,16,0.25) 100%);
 }
 .chapter-hero-content {
   position: relative;
   z-index: 2;
   padding: 0 80px;
-  max-width: 750px;
+  max-width: 720px;
 }
 .chapter-hero-num {
   font-family: 'Noto Serif SC', serif;
-  font-size: 120px;
+  font-size: 110px;
   font-weight: 900;
   color: var(--cinnabar);
   line-height: 0.85;
-  margin-bottom: 16px;
-  opacity: 0.9;
+  margin-bottom: 12px;
+  opacity: 0.88;
 }
 .chapter-hero-tag {
   display: inline-block;
   border: 1px solid var(--gold);
   color: var(--gold);
   font-size: 11px;
-  padding: 5px 14px;
-  letter-spacing: 3px;
-  margin-bottom: 20px;
+  padding: 5px 16px;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
 }
 .chapter-hero-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 44px;
+  font-size: 42px;
   font-weight: 700;
   letter-spacing: 5px;
   margin-bottom: 14px;
@@ -208,205 +208,205 @@ body::before {
 .chapter-hero-sub {
   font-size: 15px;
   color: var(--gold-light);
-  margin-bottom: 24px;
-  letter-spacing: 2px;
+  margin-bottom: 22px;
+  letter-spacing: 3px;
   font-weight: 300;
 }
 .chapter-hero-desc {
   font-size: 14px;
   color: var(--text2);
-  line-height: 2;
-  margin-bottom: 28px;
+  line-height: 2.1;
+  margin-bottom: 26px;
 }
 .chapter-hero-q {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: 'Noto Serif SC', serif;
-  font-size: 17px;
+  font-size: 18px;
   border-left: 3px solid var(--cinnabar);
-  padding-left: 14px;
+  padding-left: 16px;
   color: var(--text);
 }
-.chapter-hero-q span { color: var(--gold); font-size: 13px; }
+.chapter-hero-q span { color: var(--gold); font-size: 14px; }
 
-/* 主内容区 */
+/* 主内容区 - 杂志宽度 */
 .main-content {
   position: relative;
   z-index: 2;
-  max-width: 1100px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 50px 60px 80px;
+  padding: 60px 40px 100px;
 }
 
-/* 章节标题 */
+/* 章节标题 - 杂志风 */
 .section {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 .section-header {
-  margin-bottom: 24px;
-  padding-bottom: 14px;
+  margin-bottom: 30px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
+  position: relative;
+}
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
 }
 .section-num {
   font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--cinnabar);
-  letter-spacing: 2px;
-  flex-shrink: 0;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+  display: block;
 }
 .section-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: 2px;
-}
-.section-desc {
-  font-size: 12px;
-  color: var(--text3);
-  margin-left: auto;
+  line-height: 1.4;
 }
 
-/* 正文段落 */
+/* 正文 - 杂志排版 */
 .content p {
-  font-size: 14px;
-  line-height: 2.1;
+  font-size: 15px;
+  line-height: 2.15;
   color: var(--text2);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   text-indent: 2em;
 }
 .content p:first-child::first-letter {
   font-family: 'Noto Serif SC', serif;
-  font-size: 42px;
+  font-size: 52px;
   font-weight: 700;
   color: var(--gold);
   float: left;
-  line-height: 1;
-  margin: 6px 10px 0 0;
+  line-height: 0.9;
+  margin: 8px 12px 0 0;
 }
 
-/* 图文混排 - 图片右浮 */
+/* 三级标题 */
+.content h3 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 19px;
+  color: var(--gold);
+  margin: 32px 0 16px;
+  padding-left: 14px;
+  border-left: 3px solid var(--cinnabar);
+  clear: both;
+  font-weight: 600;
+}
+
+/* 图文混排 - 右浮 */
 .img-float-right {
   float: right;
-  width: 42%;
-  margin: 8px 0 16px 24px;
-  border-radius: 3px;
+  width: 44%;
+  margin: 6px 0 18px 26px;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.45);
   border: 1px solid var(--border);
 }
 .img-float-right img {
   width: 100%;
   display: block;
-  filter: saturate(0.8) brightness(0.95);
+  filter: saturate(0.78) brightness(0.94);
 }
 .img-float-right .caption {
   background: var(--bg-card);
-  padding: 8px 12px;
-  font-size: 11px;
+  padding: 10px 14px;
+  font-size: 12px;
   color: var(--text3);
-  line-height: 1.6;
+  line-height: 1.7;
   border-top: 1px solid var(--border);
 }
 
-/* 图文混排 - 图片左浮 */
+/* 图文混排 - 左浮 */
 .img-float-left {
   float: left;
-  width: 38%;
-  margin: 8px 24px 16px 0;
-  border-radius: 3px;
+  width: 40%;
+  margin: 6px 26px 18px 0;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.45);
   border: 1px solid var(--border);
 }
 .img-float-left img {
   width: 100%;
   display: block;
-  filter: saturate(0.8) brightness(0.95);
+  filter: saturate(0.78) brightness(0.94);
 }
 .img-float-left .caption {
   background: var(--bg-card);
-  padding: 8px 12px;
-  font-size: 11px;
+  padding: 10px 14px;
+  font-size: 12px;
   color: var(--text3);
-  line-height: 1.6;
+  line-height: 1.7;
   border-top: 1px solid var(--border);
 }
 
 /* 全宽图片 */
 .img-full {
   width: 100%;
-  margin: 24px 0;
-  border-radius: 3px;
+  margin: 28px 0;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 44px rgba(0,0,0,0.5);
   border: 1px solid var(--border);
   position: relative;
+  clear: both;
 }
 .img-full img {
   width: 100%;
   display: block;
-  filter: saturate(0.8) brightness(0.92);
+  filter: saturate(0.78) brightness(0.9);
 }
 .img-full .caption {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(26,20,16,0.95), transparent);
-  padding: 40px 20px 14px;
-  font-size: 12px;
+  background: linear-gradient(to top, rgba(26,20,16,0.96), transparent);
+  padding: 50px 22px 16px;
+  font-size: 13px;
   color: var(--text2);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 .img-full .caption strong { color: var(--gold); }
-
-/* 小图穿插 */
-.img-inline-small {
-  display: inline-block;
-  width: 28%;
-  margin: 4px 0 8px 16px;
-  vertical-align: top;
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-}
-.img-inline-small img {
-  width: 100%;
-  display: block;
-  filter: saturate(0.75) brightness(0.9);
-}
 
 /* 数据条 */
 .data-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 20px 0;
+  gap: 14px;
+  margin: 24px 0;
   clear: both;
 }
 .data-item {
   background: var(--bg-card);
-  padding: 16px 14px;
-  border-radius: 3px;
+  padding: 20px 16px;
+  border-radius: 2px;
   border-top: 2px solid var(--gold);
   text-align: center;
 }
 .data-num {
   font-family: 'Noto Serif SC', serif;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   color: var(--gold);
   line-height: 1;
 }
-.data-num .unit { font-size: 13px; font-weight: 500; }
+.data-num .unit { font-size: 14px; font-weight: 500; }
 .data-label {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text3);
-  margin-top: 6px;
+  margin-top: 8px;
   letter-spacing: 1px;
 }
 
@@ -414,21 +414,21 @@ body::before {
 .quote-box {
   background: var(--bg-card);
   border-left: 3px solid var(--cinnabar);
-  padding: 16px 22px;
-  margin: 18px 0;
-  border-radius: 0 3px 3px 0;
+  padding: 18px 24px;
+  margin: 22px 0;
+  border-radius: 0 2px 2px 0;
   clear: both;
 }
 .quote-box h4 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--cinnabar);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .quote-box p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text2);
-  line-height: 1.95;
+  line-height: 2;
   text-indent: 0;
   margin-bottom: 0;
 }
@@ -438,21 +438,21 @@ body::before {
   background: linear-gradient(135deg, var(--bg-card), var(--bg-card2));
   border: 1px solid var(--border-light);
   border-left: 3px solid var(--gold);
-  padding: 16px 22px;
-  margin: 18px 0;
-  border-radius: 0 3px 3px 0;
+  padding: 18px 24px;
+  margin: 22px 0;
+  border-radius: 0 2px 2px 0;
   clear: both;
 }
 .quote-gold h4 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--gold);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .quote-gold p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text2);
-  line-height: 1.95;
+  line-height: 2;
   text-indent: 0;
   margin-bottom: 0;
 }
@@ -461,65 +461,65 @@ body::before {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12.5px;
-  margin: 16px 0;
+  font-size: 13.5px;
+  margin: 20px 0;
   clear: both;
 }
 .data-table th {
   background: var(--bg-card2);
   color: var(--gold);
-  padding: 10px 12px;
+  padding: 12px 14px;
   text-align: left;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 1px;
   border-bottom: 2px solid var(--gold);
 }
 .data-table td {
-  padding: 9px 12px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--border);
   color: var(--text2);
-  line-height: 1.7;
+  line-height: 1.8;
 }
 .data-table tr:nth-child(even) td { background: var(--bg-card); }
 .data-table .highlight { color: var(--gold); font-weight: 600; }
 .data-table .cinnabar { color: var(--cinnabar); font-weight: 600; }
-.data-table tr.highlight-row td { background: rgba(184,74,77,0.1); color: var(--text); }
+.data-table tr.highlight-row td { background: rgba(194,91,86,0.12); color: var(--text); }
 
 /* 时间轴 */
 .timeline {
-  margin: 16px 0;
-  padding-left: 24px;
+  margin: 20px 0;
+  padding-left: 28px;
   border-left: 2px solid var(--border-light);
   clear: both;
 }
 .tl-item {
   position: relative;
-  padding: 8px 0 8px 20px;
+  padding: 10px 0 10px 22px;
   border-bottom: 1px dashed var(--border);
 }
 .tl-item::before {
   content: '';
   position: absolute;
-  left: -30px;
-  top: 14px;
-  width: 10px; height: 10px;
+  left: -34px;
+  top: 16px;
+  width: 11px; height: 11px;
   border-radius: 50%;
   background: var(--cinnabar);
   border: 2px solid var(--bg);
 }
 .tl-year {
   font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--gold);
   display: inline;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 .tl-text {
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: var(--text2);
-  line-height: 1.8;
+  line-height: 1.85;
   display: inline;
 }
 .tl-text strong { color: var(--text); }
@@ -527,8 +527,8 @@ body::before {
 /* 卡片网格 */
 .card-grid {
   display: grid;
-  gap: 14px;
-  margin: 18px 0;
+  gap: 16px;
+  margin: 22px 0;
   clear: both;
 }
 .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
@@ -538,8 +538,8 @@ body::before {
 
 .info-card {
   background: var(--bg-card);
-  border-radius: 3px;
-  padding: 16px;
+  border-radius: 2px;
+  padding: 20px;
   border: 1px solid var(--border);
   transition: all 0.3s;
 }
@@ -549,56 +549,56 @@ body::before {
 }
 .info-card .card-icon {
   font-family: 'Noto Serif SC', serif;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 900;
   color: var(--cinnabar);
-  margin-bottom: 6px;
-  opacity: 0.85;
+  margin-bottom: 8px;
+  opacity: 0.82;
 }
 .info-card h4 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .info-card p {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text3);
-  line-height: 1.8;
+  line-height: 1.85;
   text-indent: 0;
   margin-bottom: 0;
 }
 .info-card .card-data {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--gold);
-  margin-top: 8px;
+  margin-top: 10px;
   font-weight: 600;
 }
 
 /* 三街并行示意图 */
 .street-diagram {
   background: var(--bg-card);
-  padding: 20px;
-  border-radius: 3px;
+  padding: 24px;
+  border-radius: 2px;
   border: 1px solid var(--border);
-  margin: 16px 0;
+  margin: 22px 0;
   clear: both;
 }
 .street-diagram h4 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--gold);
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 .street-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
+  gap: 14px;
+  margin-bottom: 10px;
 }
 .street-label {
-  width: 56px;
-  font-size: 12px;
+  width: 60px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--gold);
   flex-shrink: 0;
@@ -606,76 +606,76 @@ body::before {
 }
 .street-bar {
   flex: 1;
-  height: 32px;
+  height: 38px;
   border-radius: 2px;
   display: flex;
   align-items: center;
-  padding: 0 14px;
-  font-size: 12px;
+  padding: 0 16px;
+  font-size: 13px;
   color: var(--text);
 }
-.street-bar.river { background: rgba(107,123,140,0.25); border: 1px solid rgba(107,123,140,0.4); }
-.street-bar.he { background: rgba(201,169,97,0.15); border: 1px solid rgba(201,169,97,0.3); }
-.street-bar.zheng { background: rgba(184,74,77,0.2); border: 1px solid rgba(184,74,77,0.4); }
-.street-bar.hou { background: rgba(201,169,97,0.08); border: 1px solid rgba(201,169,97,0.2); }
+.street-bar.river { background: rgba(107,123,140,0.22); border: 1px solid rgba(107,123,140,0.35); }
+.street-bar.he { background: rgba(212,184,122,0.13); border: 1px solid rgba(212,184,122,0.28); }
+.street-bar.zheng { background: rgba(194,91,86,0.18); border: 1px solid rgba(194,91,86,0.38); }
+.street-bar.hou { background: rgba(212,184,122,0.07); border: 1px solid rgba(212,184,122,0.18); }
 
 /* 诗文引用 */
 .poem-block {
   background: var(--bg-card);
-  padding: 14px 20px;
-  border-radius: 3px;
+  padding: 16px 24px;
+  border-radius: 2px;
   border-right: 3px solid var(--gold);
-  margin: 12px 0;
+  margin: 14px 0;
   text-align: right;
   clear: both;
 }
 .poem-text {
   font-family: 'Noto Serif SC', serif;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text);
-  line-height: 2;
+  line-height: 2.1;
   font-style: italic;
 }
 .poem-author {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text3);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 /* 银钱地毯故事 */
 .story-box {
-  background: linear-gradient(135deg, rgba(184,74,77,0.15), rgba(184,74,77,0.05));
-  border: 1px solid rgba(184,74,77,0.3);
-  padding: 18px 22px;
-  border-radius: 3px;
-  margin: 16px 0;
+  background: linear-gradient(135deg, rgba(194,91,86,0.14), rgba(194,91,86,0.04));
+  border: 1px solid rgba(194,91,86,0.28);
+  padding: 20px 26px;
+  border-radius: 2px;
+  margin: 20px 0;
   position: relative;
   clear: both;
 }
 .story-box::before {
   content: '"';
   font-family: 'Noto Serif SC', serif;
-  font-size: 48px;
+  font-size: 56px;
   position: absolute;
-  top: -4px; left: 12px;
+  top: -6px; left: 14px;
   color: var(--cinnabar);
-  opacity: 0.3;
+  opacity: 0.25;
 }
 .story-box p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text2);
-  line-height: 1.95;
+  line-height: 2;
   text-indent: 0;
   margin-bottom: 0;
-  padding-left: 20px;
+  padding-left: 24px;
 }
 .story-box strong { color: var(--gold); }
 
 /* 价值大卡片 */
 .value-card {
   background: var(--bg-card);
-  border-radius: 3px;
-  padding: 22px;
+  border-radius: 2px;
+  padding: 26px;
   border-top: 3px solid;
   position: relative;
   overflow: hidden;
@@ -685,23 +685,23 @@ body::before {
 .value-card:nth-child(3) { border-color: #6B7B8C; }
 .value-card .rank {
   font-family: 'Noto Serif SC', serif;
-  font-size: 12px;
-  letter-spacing: 3px;
-  margin-bottom: 8px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
 }
 .value-card:nth-child(1) .rank { color: var(--cinnabar); }
 .value-card:nth-child(2) .rank { color: var(--gold); }
 .value-card:nth-child(3) .rank { color: #6B7B8C; }
 .value-card h4 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 18px;
+  font-size: 20px;
   color: var(--text);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .value-card p {
-  font-size: 12.5px;
+  font-size: 13.5px;
   color: var(--text3);
-  line-height: 1.9;
+  line-height: 1.95;
   text-indent: 0;
   margin-bottom: 0;
 }
@@ -709,28 +709,28 @@ body::before {
 /* 四大特色卡片 */
 .feature-card {
   background: var(--bg-card);
-  border-radius: 3px;
-  padding: 18px;
+  border-radius: 2px;
+  padding: 22px;
   border-left: 3px solid var(--gold);
 }
 .feature-card .f-num {
   font-family: 'Noto Serif SC', serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 900;
   color: var(--gold);
-  margin-bottom: 4px;
-  opacity: 0.7;
+  margin-bottom: 6px;
+  opacity: 0.65;
 }
 .feature-card h4 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .feature-card p {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text3);
-  line-height: 1.85;
+  line-height: 1.9;
   text-indent: 0;
   margin-bottom: 0;
 }
@@ -739,60 +739,60 @@ body::before {
 .core-value-box {
   background: linear-gradient(135deg, var(--bg-card2), var(--bg-card));
   border: 1px solid var(--border-light);
-  padding: 24px 28px;
-  border-radius: 3px;
-  margin: 20px 0;
+  padding: 28px 32px;
+  border-radius: 2px;
+  margin: 24px 0;
   position: relative;
   clear: both;
 }
 .core-value-box::before {
   content: '核心价值';
   position: absolute;
-  top: -10px;
-  left: 20px;
+  top: -11px;
+  left: 24px;
   background: var(--gold);
   color: var(--bg);
-  font-size: 11px;
-  padding: 3px 12px;
+  font-size: 12px;
+  padding: 4px 14px;
   border-radius: 2px;
   font-weight: 600;
   letter-spacing: 1px;
 }
 .core-value-box p {
-  font-size: 13.5px;
+  font-size: 14.5px;
   color: var(--text2);
-  line-height: 2.1;
+  line-height: 2.2;
   text-indent: 2em;
   margin-bottom: 0;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 /* 小结要点 */
 .summary-points {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 16px 0;
+  gap: 12px;
+  margin: 20px 0;
   clear: both;
 }
 .summary-point {
   background: var(--bg-card);
-  padding: 12px 16px;
-  border-radius: 3px;
+  padding: 14px 20px;
+  border-radius: 2px;
   border-left: 3px solid var(--cinnabar);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text2);
-  line-height: 1.85;
+  line-height: 1.95;
 }
 .summary-point strong { color: var(--gold); }
 
 /* 章节分隔装饰 */
 .section-divider {
   text-align: center;
-  margin: 40px 0;
+  margin: 50px 0;
   color: var(--border-light);
   font-size: 18px;
-  letter-spacing: 20px;
+  letter-spacing: 28px;
   clear: both;
 }
 
@@ -800,7 +800,7 @@ body::before {
 .topic-footer {
   background: var(--bg-card);
   border-top: 1px solid var(--border);
-  padding: 24px 60px;
+  padding: 28px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -809,7 +809,7 @@ body::before {
 }
 .topic-footer a {
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text2);
   display: flex;
   align-items: center;
@@ -823,7 +823,6 @@ body::before {
   font-family: 'Noto Serif SC', serif;
 }
 
-/* 清除浮动 */
 .clearfix::after {
   content: '';
   display: table;
@@ -831,14 +830,15 @@ body::before {
 }
 
 @media (max-width: 1024px) {
-  .main-content { padding: 40px 30px 60px; }
+  .main-content { padding: 40px 24px 60px; max-width: 100%; }
   .topbar-chapters { display: none; }
   .toc { display: none; }
-  .chapter-hero-content { padding: 0 40px; }
-  .chapter-hero-num { font-size: 80px; }
-  .chapter-hero-title { font-size: 32px; }
+  .chapter-hero-content { padding: 0 30px; }
+  .chapter-hero-num { font-size: 72px; }
+  .chapter-hero-title { font-size: 30px; }
   .card-grid.cols-4, .card-grid.cols-5 { grid-template-columns: repeat(2, 1fr); }
-  .img-float-right, .img-float-left { float: none; width: 100%; margin: 16px 0; }
+  .card-grid.cols-3 { grid-template-columns: 1fr; }
+  .img-float-right, .img-float-left { float: none; width: 100%; margin: 18px 0; }
   .data-strip { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
@@ -946,7 +946,7 @@ body::before {
         <h4>校勘说明</h4>
         <p>筑城时间有万历二年/四年/明嘉靖间三说，部分网络资料称"万历四年筑城"，但湘潭市人民政府官网、新湖南2026年报道均明确记载为"万历二年筑城"。清乾隆二十一年《湘潭县志》记载"嘉靖间筑"可能为早期土城。本报告以市政府官网"万历二年（1574）吴仲筑城、六门格局"为准。</p>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); margin:24px 0 14px; clear:both;">关键历史节点（多源交叉校对）</h3>
+      <h3>关键历史节点（多源交叉校对）</h3>
       <div class="timeline">
         <div class="tl-item"><span class="tl-year">秦汉</span><span class="tl-text">即已形成街市，商业基因延续两千余年</span></div>
         <div class="tl-item"><span class="tl-year">北宋1098</span><span class="tl-text"><strong>元符元年</strong>，湘潭县治从洛口（易俗河）迁此，因水患频发迁至地势较高的城正街一带，奠定近九百年行政中心地位</span></div>
@@ -1008,10 +1008,9 @@ body::before {
     <div class="section-header">
       <span class="section-num">CHAPTER 02 · 金湘潭</span>
       <h2 class="section-title">"金湘潭"商业文明的五个维度</h2>
-      <span class="section-desc">清代民谚："金湘潭，银益阳"</span>
     </div>
     <div class="content clearfix">
-      <div class="img-float-right" style="width:35%;">
+      <div class="img-float-right" style="width:38%;">
         <img src="https://aka.doubaocdn.com/s/hJUBWoHYer" alt="湘潭湘江">
         <div class="caption">湘江C形大弯 · 水流平缓、水深浪静，是湘江流域最佳泊船之地，码头最多时达52处</div>
       </div>
@@ -1020,7 +1019,7 @@ body::before {
         <h4>商业繁荣的地理基础</h4>
         <p>湘江在此形成C形大弯，水流平缓、水深浪静，是整个湘江流域最佳的泊船之地。长沙段湘江过于平直，水流急速，缺乏避风良港；湘潭以上（衡阳、永州、宝庆）水湍急难行。湘潭恰好处于承上启下的连接点，码头最多时达52处。唐代刘晏提出"漕引潇湘"后，湘潭聚湘南谷米，经湘江、洞庭、长江、汉水转运至长安。作为商业城市，湘潭已有1300年历史，明代即有"小南京"之美誉。</p>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); margin:24px 0 14px; clear:both;">商业文明的五个维度（周磊归纳，更新规划采纳）</h3>
+      <h3>商业文明的五个维度（周磊归纳，更新规划采纳）</h3>
       <div class="card-grid cols-5">
         <div class="info-card">
           <div class="card-icon">商</div>
@@ -1066,7 +1065,7 @@ body::before {
     </div>
     <div class="content clearfix">
       <p>更新规划对明清至民国时期城正街（城里头）的商业盛景有一段生动描述："城里头作为明清至民国时期湘潭老城的商业核心，曾以'米市'和'药都'闻名全国，聚集了江西、苏杭等各地商帮，形成米行、药号、钱庄林立的繁华街市。这条青石板铺就的街道上，太真芝药店、大利生南货食品店、新多福酱菜等老字号招牌高悬，日夜人声鼎沸，茶楼戏院喧嚣，生动展现了'金湘潭'的商业盛况。"</p>
-      <div class="img-float-left" style="width:45%;">
+      <div class="img-float-left" style="width:46%;">
         <img src="https://aka.doubaocdn.com/s/YS1MaaXHQG" alt="清嘉庆湘潭城总全图">
         <div class="caption">清嘉庆丁丑岁（1817年）刊《湘潭县志》所附《城总全图》· 研究湘潭城总格局最重要史料，县治所在地宋家桥以西正是现在城正街一带</div>
       </div>
@@ -1076,7 +1075,7 @@ body::before {
         <tr><td class="highlight">大利生南货</td><td>食品</td><td>南货食品代表性商号</td></tr>
         <tr><td class="highlight">新多福酱菜</td><td>酱业</td><td>湘潭酱业代表性商号</td></tr>
       </table>
-      <p style="font-size:12px; color:var(--text3); margin-top:-8px;">* 更多老字号（龙牌酱油1740年、义和斋灯芯糕400年、左氏十八总活鱼1898年等）详见第三章资源资产梳理</p>
+      <p style="font-size:13px; color:var(--text3); margin-top:-6px; text-indent:0;">* 更多老字号（龙牌酱油1740年、义和斋灯芯糕400年、左氏十八总活鱼1898年等）详见第三章资源资产梳理</p>
       <div class="poem-block">
         <div class="poem-text">楼台金碧拥南湘，万户千门竞夕阳。<br>烟火连云雄楚塞，至今人说小南京。</div>
         <div class="poem-author">—— 清·张九镒《湘潭》（岳麓书院山长，1710—1770）</div>
@@ -1127,9 +1126,9 @@ body::before {
       <div class="story-box">
         <p><strong>为什么一至八总消失了？</strong> 明万历筑城后，一至三总因生湘门关闭被隔离在城外，四至七总被圈入城内。城内多为县衙机关、兵营、粮草仓库，商业功能受到限制。与此同时，商业沿湘江向城外上游（今湘潭一桥两侧）发展，形成新街（后称平政路）。新街商业繁荣逐渐超过城内，一至八总逐渐衰落消失。因此，今天人们熟知的只有九至十八总。而城正街（原四至七总所在的城内主街）虽然不在"九至十八总"的商业繁华带上，但它作为县治所在地，是整个"城总"体系的行政中枢和文化核心。</p>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); margin:24px 0 14px; clear:both;">十八总的空间划分（沿湘江从下游到上游）</h3>
+      <h3>十八总的空间划分（沿湘江从下游到上游）</h3>
       <table class="data-table">
-        <tr><th style="width:90px;">总号</th><th style="width:160px;">位置/标志</th><th>主要功能与特色</th></tr>
+        <tr><th style="width:90px;">总号</th><th style="width:170px;">位置/标志</th><th>主要功能与特色</th></tr>
         <tr><td class="cinnabar">一至三总</td><td>宋家桥至小东门</td><td>后因筑城隔离而衰落</td></tr>
         <tr><td class="cinnabar">四至七总</td><td>宣化街、大街、攀龙街、新街</td><td>圈入城内，多为县衙机关、兵营、粮草仓库，丧失商业功能</td></tr>
         <tr><td class="cinnabar">八总</td><td>生湘门（通济门外），大埠桥</td><td>竹木辐辏、舟楫往来</td></tr>
@@ -1144,7 +1143,7 @@ body::before {
         <tr><td class="cinnabar">十七总</td><td>鄢家巷</td><td>天后宫（福建会馆）</td></tr>
         <tr><td class="cinnabar">十八总</td><td>太平街至鼓楼门，大码头至唐兴寺</td><td>窑湾，繁华之最</td></tr>
       </table>
-      <p style="font-size:12px; color:var(--text3); margin-top:-8px;">1928年，湘潭县县长王捷俊重新命名街道，将九总至十八总的正街统一命名为"平政路"，取"平政爱民"之意。此后，"总"的界限逐渐模糊，但作为历史记忆和民间称谓，"十八总"的说法一直流传至今。</p>
+      <p style="font-size:13px; color:var(--text3); margin-top:-6px; text-indent:0;">1928年，湘潭县县长王捷俊重新命名街道，将九总至十八总的正街统一命名为"平政路"，取"平政爱民"之意。此后，"总"的界限逐渐模糊，但作为历史记忆和民间称谓，"十八总"的说法一直流传至今。</p>
     </div>
   </section>
 
@@ -1175,18 +1174,18 @@ body::before {
           <span class="street-label">后街</span>
           <div class="street-bar hou">后街 · 会馆、庙宇、住宅</div>
         </div>
-        <p style="font-size:12px; color:var(--text3); margin-top:12px; line-height:1.8;">湘潭旧城沿江街道由三条并行街道组成，这是中国商业城市中非常独特的空间形态。"前店后住""下店上住"的建筑功能形式，被保护规划列为必须严格保护的内容。</p>
+        <p style="font-size:13px; color:var(--text3); margin-top:14px; line-height:1.85; text-indent:0;">湘潭旧城沿江街道由三条并行街道组成，这是中国商业城市中非常独特的空间形态。"前店后住""下店上住"的建筑功能形式，被保护规划列为必须严格保护的内容。</p>
       </div>
-      <div class="img-float-right" style="width:38%;">
+      <div class="img-float-right" style="width:40%;">
         <img src="https://aka.doubaocdn.com/s/9x0wKmj8W7" alt="江西会馆牌楼">
         <div class="caption">江西会馆（万寿宫）牌楼 · 十总标志性建筑，省级文物保护单位，2019年实施抢救性保护修缮</div>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); margin:0 0 14px;">总与总之间的攀比竞争</h3>
+      <h3>总与总之间的攀比竞争</h3>
       <p>各总之间互相攀比争斗，尤其在赛事集会中争奇斗富。最著名的例子是乾隆、嘉庆时期，十二总新建发源殿，与十三总天符庙举行迎神比赛，遂以库平银元宝铺路，从殿庭直到门口，用该总凑集的约200万两银子铺成了真正的"银钱地毯"。直到20世纪80年代，湘潭龙舟比赛仍有以"总"组建参赛队互相竞争的习俗。这种"总际竞争"是湘潭商业文化中极为独特的现象，体现了商帮文化中的集体荣誉感和炫耀性消费。</p>
       <div class="story-box">
         <p><strong>银钱地毯：</strong>乾隆、嘉庆时期，十二总新建发源殿，与十三总天符庙举行迎神比赛，遂以库平银元宝铺路，从殿庭直到门口，用该总凑集的约<strong>200万两银子</strong>铺成了真正的"银钱地毯"。</p>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); margin:20px 0 14px; clear:both;">每总皆有标志性建筑</h3>
+      <h3>每总皆有标志性建筑</h3>
       <p>从九总到十八总，每总都有自己的标志性庙宇或会馆。这些建筑不仅是宗教场所，更是各总的"客厅"和"脸面"，承担着集会、议事、庆典、接待等多重功能。更新规划将城总文化列为街区四大文化特色之首（湖湘文化、城总文化、红色文化、名人文化），并明确提出要"彰显古城底蕴"。保护规划则将城总文化作为湘潭特色文化的重要展示内容，提出打造"城总烟火"特色游线。</p>
       <div class="data-strip">
         <div class="data-item"><div class="data-num">800<span class="unit">年</span></div><div class="data-label">城总制度延续</div></div>
@@ -1224,8 +1223,8 @@ body::before {
           <p>街区存有明代、清代、民国、20世纪五六十年代、八九十年代等各时期建筑。一条街道，跨越五个世纪，是一部活的湘潭城市建筑史。</p>
         </div>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); text-align:center; margin:30px 0 18px; letter-spacing:3px;">四 大 文 化 特 色</h3>
-      <div class="card-grid cols-4">
+      <h3 style="text-align:center; font-size:22px; color:var(--text); margin:36px 0 22px; letter-spacing:4px; border:none; padding:0;">四 大 文 化 特 色</h3>
+      <div class="card-grid cols-2">
         <div class="feature-card">
           <div class="f-num">壹</div>
           <h4>湖湘文化</h4>
@@ -1259,13 +1258,13 @@ body::before {
       <h2 class="section-title">名人文化与本章小结</h2>
     </div>
     <div class="content clearfix">
-      <div class="img-float-right" style="width:32%;">
+      <div class="img-float-right" style="width:34%;">
         <img src="https://aka.doubaocdn.com/s/AAYggfojo8" alt="关圣殿">
         <div class="caption">关圣殿 · 北五省会馆，十二总标志性建筑，全国重点文物保护单位</div>
       </div>
       <p>城里头人文荟萃，堪称近现代湖湘英才的摇篮。一条麻石路浓缩了半部湖南发展史，从晚清湘军将领到近代革命先驱，众多杰出人物在此留下足迹。</p>
       <table class="data-table">
-        <tr><th style="width:80px;">人物</th><th style="width:130px;">身份</th><th>与城正街关联</th></tr>
+        <tr><th style="width:80px;">人物</th><th style="width:140px;">身份</th><th>与城正街关联</th></tr>
         <tr><td class="highlight">毛泽东</td><td>无产阶级革命家</td><td>常途经湘潭住宿于毛福昌号；1927年在塔公祠召开农运座谈会；昭潭书院留下红色印迹</td></tr>
         <tr><td class="highlight">彭德怀</td><td>开国元帅</td><td>与其妻子在此度过蜜月</td></tr>
         <tr><td class="highlight">秋瑾</td><td>民主革命家</td><td>曾过湘潭，有《过湘潭》诗"文庙森森夜未央"</td></tr>
@@ -1282,7 +1281,7 @@ body::before {
       <div class="core-value-box">
         <p>城正街从宋哲宗元符元年（1098年）至今，已有920多年历史，1995年之前一直是湘潭县治所在地，是湘潭政治、经济、文化的中心。城正街是湘潭"千年商都，繁华城总"中"城里头"的所在地，过去是两广和中原地区货物集散地，商贸业异常昌盛，"金湘潭"得名由此而来。是湘潭老城中文化底蕴深厚、老街巷与传统民居保存较多的街区，也是千年雨湖发展的历史见证。湘潭城正街自古人文荟萃，名家云集，灿若繁星。从晚清湘军将领到近代革命先驱，众多杰出人物在此留下足迹，其思想与实践如星火燎原，深刻推动了中国现代化进程。</p>
       </div>
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:17px; color:var(--gold); margin:24px 0 14px; clear:both;">本章小结</h3>
+      <h3>本章小结</h3>
       <div class="summary-points">
         <div class="summary-point"><strong>历史脉络清晰，文化底蕴深厚：</strong>两千余年建城史，五次名称更迭，明清"金湘潭"商业文明鼎盛，城总制度延续800年，是中国城市民间自治的珍贵样本</div>
         <div class="summary-point"><strong>历史遗存丰富，价值突出：</strong>国家级文保1处（关圣殿）、省级文保10处、市级文保6处、一般文物19处，历史建筑41处，特色风貌建筑31处</div>
@@ -1308,7 +1307,6 @@ body::before {
 </div>
 
 <script>
-// 目录高亮
 const sections = document.querySelectorAll('.section');
 const tocLinks = document.querySelectorAll('.toc a');
 const observer = new IntersectionObserver((entries) => {
@@ -1320,7 +1318,7 @@ const observer = new IntersectionObserver((entries) => {
       });
     }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.25 });
 sections.forEach(sec => observer.observe(sec));
 </script>
 

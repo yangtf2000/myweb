@@ -12,15 +12,15 @@
   --bg: #1A1410;
   --bg-card: #251D16;
   --bg-card2: #2E2419;
-  --text: #E8DFD0;
-  --text2: #A89B88;
-  --text3: #7A6E5C;
-  --gold: #C9A961;
-  --gold-light: #DCC07A;
-  --cinnabar: #B84A4D;
-  --cinnabar-dark: #8B3538;
+  --text: #EDE4D3;
+  --text2: #B8AA96;
+  --text3: #8A7D6A;
+  --gold: #D4B87A;
+  --gold-light: #E8D4A0;
+  --cinnabar: #C25B56;
+  --cinnabar-dark: #9A3E3A;
   --border: #3D2E1F;
-  --border-light: #4A3A28;
+  --border-light: #4E3D2A;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +30,9 @@ body {
   font-family: 'Noto Sans SC', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.85;
+  line-height: 2;
   overflow-x: hidden;
+  font-size: 15px;
 }
 
 body::before {
@@ -39,7 +40,7 @@ body::before {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
 }
@@ -50,12 +51,12 @@ body::before {
   top: 0; left: 0;
   width: 100%;
   z-index: 999;
-  padding: 12px 40px;
+  padding: 14px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(26,20,16,0.92);
-  backdrop-filter: blur(10px);
+  background: rgba(26,20,16,0.94);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
 .topbar-logo {
@@ -70,21 +71,21 @@ body::before {
 }
 .topbar-logo .seal {
   background: var(--cinnabar);
-  color: var(--text);
+  color: #fff;
   font-size: 11px;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: 2px;
   font-weight: 600;
 }
 .topbar-links {
   display: flex;
-  gap: 28px;
+  gap: 32px;
   list-style: none;
 }
 .topbar-links a {
   text-decoration: none;
   color: var(--text3);
-  font-size: 12px;
+  font-size: 13px;
   transition: color 0.3s;
   letter-spacing: 1px;
 }
@@ -93,14 +94,14 @@ body::before {
 /* 封面 */
 .hero {
   position: relative;
-  height: 90vh;
-  min-height: 550px;
+  height: 88vh;
+  min-height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  margin-top: 48px;
+  margin-top: 50px;
 }
 .hero-bg {
   position: absolute;
@@ -109,7 +110,7 @@ body::before {
   background-image: url('https://aka.doubaocdn.com/s/jTLbhvO0mM');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.3) saturate(0.6);
+  filter: brightness(0.28) saturate(0.55);
   animation: slowZoom 25s ease-in-out infinite alternate;
 }
 @keyframes slowZoom {
@@ -120,7 +121,7 @@ body::before {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(180deg, rgba(26,20,16,0.5) 0%, rgba(26,20,16,0.85) 100%);
+  background: linear-gradient(180deg, rgba(26,20,16,0.45) 0%, rgba(26,20,16,0.88) 100%);
 }
 .hero-content {
   position: relative;
@@ -135,12 +136,12 @@ body::before {
   font-size: 12px;
   letter-spacing: 8px;
   color: var(--gold);
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   font-weight: 300;
 }
 .hero-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 88px;
+  font-size: 84px;
   font-weight: 900;
   letter-spacing: 18px;
   margin-bottom: 14px;
@@ -151,49 +152,49 @@ body::before {
   font-size: 20px;
   letter-spacing: 10px;
   color: var(--text2);
-  margin-bottom: 32px;
+  margin-bottom: 34px;
   font-weight: 300;
 }
 .hero-seal {
   display: inline-block;
   border: 2px solid var(--cinnabar);
-  background: rgba(184,74,77,0.15);
+  background: rgba(194,91,86,0.12);
   color: var(--cinnabar);
   font-family: 'Noto Serif SC', serif;
   font-size: 20px;
   font-weight: 700;
-  padding: 12px 32px;
+  padding: 12px 34px;
   letter-spacing: 8px;
-  margin-bottom: 44px;
+  margin-bottom: 48px;
   transform: rotate(-1.5deg);
-  box-shadow: 0 4px 30px rgba(184,74,77,0.3);
+  box-shadow: 0 4px 30px rgba(194,91,86,0.25);
 }
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 70px;
+  gap: 72px;
 }
 .hero-stat-num {
   font-family: 'Noto Serif SC', serif;
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 900;
   color: var(--gold);
   line-height: 1;
 }
 .hero-stat-label {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text3);
-  margin-top: 8px;
+  margin-top: 10px;
   letter-spacing: 2px;
 }
 .hero-hint {
   position: absolute;
-  bottom: 32px;
+  bottom: 34px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
   color: var(--text3);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 3px;
   animation: bounce 2s infinite;
 }
@@ -201,7 +202,7 @@ body::before {
   content: '';
   display: block;
   width: 1px;
-  height: 28px;
+  height: 30px;
   background: linear-gradient(to bottom, var(--text3), transparent);
   margin: 10px auto 0;
 }
@@ -210,124 +211,127 @@ body::before {
   50% { transform: translateX(-50%) translateY(8px); }
 }
 
-/* 主内容 */
+/* 主内容 - 杂志宽度 */
 .main-content {
   position: relative;
   z-index: 2;
-  max-width: 1150px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 60px 60px 80px;
+  padding: 70px 40px 100px;
 }
 
 /* 章节标题 */
 .section-header {
-  margin-bottom: 28px;
-  padding-bottom: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
+  position: relative;
+}
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
 }
 .section-tag {
   font-family: 'Noto Serif SC', serif;
   font-size: 12px;
   color: var(--cinnabar);
   letter-spacing: 3px;
-  flex-shrink: 0;
+  margin-bottom: 6px;
+  display: block;
 }
 .section-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--text);
   letter-spacing: 3px;
 }
-.section-desc {
-  font-size: 12px;
-  color: var(--text3);
-  margin-left: auto;
-}
 
-/* 研究说明 */
-.intro-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-.intro-text p {
-  font-size: 14px;
-  line-height: 2.1;
+/* 研究说明 - 图文混排 */
+.intro-section { margin-bottom: 60px; }
+.intro-content { overflow: hidden; }
+.intro-content p {
+  font-size: 15px;
+  line-height: 2.15;
   color: var(--text2);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   text-indent: 2em;
 }
-.intro-text p:first-child::first-letter {
+.intro-content p:first-child::first-letter {
   font-family: 'Noto Serif SC', serif;
-  font-size: 44px;
+  font-size: 52px;
   font-weight: 700;
   color: var(--gold);
   float: left;
-  line-height: 1;
-  margin: 6px 10px 0 0;
-}
-.intro-data {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 20px;
-}
-.intro-data-item {
-  background: var(--bg-card);
-  padding: 16px;
-  border-radius: 3px;
-  border-left: 3px solid var(--gold);
-}
-.intro-data-num {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--gold);
-  line-height: 1;
-}
-.intro-data-num .unit { font-size: 13px; font-weight: 500; }
-.intro-data-label {
-  font-size: 11px;
-  color: var(--text3);
-  margin-top: 6px;
+  line-height: 0.9;
+  margin: 8px 12px 0 0;
 }
 .intro-image {
-  position: relative;
-  border-radius: 3px;
+  float: right;
+  width: 44%;
+  margin: 4px 0 18px 26px;
+  border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 12px 40px rgba(0,0,0,0.5);
   border: 1px solid var(--border);
+  position: relative;
 }
 .intro-image img {
   width: 100%;
   display: block;
-  filter: saturate(0.8) brightness(0.92);
+  filter: saturate(0.78) brightness(0.92);
 }
 .intro-image-caption {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  background: linear-gradient(to top, rgba(26,20,16,0.95), transparent);
+  background: linear-gradient(to top, rgba(26,20,16,0.96), transparent);
   color: var(--text2);
   font-size: 12px;
-  padding: 40px 18px 12px;
-  line-height: 1.7;
+  padding: 50px 18px 14px;
+  line-height: 1.8;
 }
 .intro-image-caption strong { color: var(--gold); }
+.intro-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 24px 0 0;
+  clear: both;
+}
+.intro-data-item {
+  background: var(--bg-card);
+  padding: 18px 20px;
+  border-radius: 2px;
+  border-left: 3px solid var(--gold);
+}
+.intro-data-num {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.intro-data-num .unit { font-size: 14px; font-weight: 500; }
+.intro-data-label {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 8px;
+}
 
-/* 八章卡片 */
+/* 八章卡片 - 2列杂志风 */
 .chapters-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
 }
 .chapter-card {
   background: var(--bg-card);
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
@@ -337,12 +341,12 @@ body::before {
   flex-direction: column;
 }
 .chapter-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--gold);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.4);
 }
 .chapter-card-img {
-  height: 120px;
+  height: 130px;
   overflow: hidden;
   position: relative;
 }
@@ -350,86 +354,84 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.6) saturate(0.7);
-  transition: transform 0.5s;
+  filter: brightness(0.55) saturate(0.65);
+  transition: transform 0.5s, filter 0.5s;
 }
 .chapter-card:hover .chapter-card-img img {
-  transform: scale(1.08);
-  filter: brightness(0.75) saturate(0.8);
+  transform: scale(1.06);
+  filter: brightness(0.7) saturate(0.75);
 }
 .chapter-card-num {
   position: absolute;
-  top: 10px;
-  left: 12px;
+  top: 12px;
+  left: 14px;
   font-family: 'Noto Serif SC', serif;
   font-size: 12px;
-  color: var(--text);
+  color: #fff;
   background: var(--cinnabar);
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: 2px;
   letter-spacing: 1px;
   font-weight: 600;
 }
 .chapter-card-body {
-  padding: 16px;
+  padding: 18px 20px;
   flex: 1;
 }
 .chapter-card-title {
   font-family: 'Noto Serif SC', serif;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 6px;
 }
 .chapter-card-q {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--cinnabar);
   margin-bottom: 8px;
   letter-spacing: 1px;
 }
 .chapter-card-desc {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text3);
-  line-height: 1.75;
+  line-height: 1.85;
 }
 
-/* 逻辑链条 */
+/* 逻辑链条 - 紧凑横向，不要竖长条 */
 .chain-section {
   background: var(--bg-card);
-  border-radius: 4px;
-  padding: 36px;
+  border-radius: 2px;
+  padding: 32px;
   border: 1px solid var(--border);
-  margin-top: 20px;
+  margin-top: 24px;
 }
 .chain-flow {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  gap: 6px;
-  flex-wrap: nowrap;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 .chain-node {
   background: var(--bg-card2);
   border: 1px solid var(--border-light);
-  padding: 18px 12px;
-  border-radius: 3px;
+  padding: 14px 16px;
+  border-radius: 2px;
   text-align: center;
   transition: all 0.3s;
   flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-width: 80px;
+  max-width: 110px;
 }
 .chain-node:hover {
-  background: rgba(201,169,97,0.1);
+  background: rgba(212,184,122,0.1);
   border-color: var(--gold);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 .chain-node-q {
   font-size: 10px;
   color: var(--gold);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   letter-spacing: 1px;
 }
 .chain-node-a {
@@ -437,7 +439,7 @@ body::before {
   font-size: 14px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .chain-node-chapter {
   font-size: 10px;
@@ -446,47 +448,47 @@ body::before {
 }
 .chain-arrow {
   color: var(--gold);
-  font-size: 14px;
+  font-size: 13px;
   opacity: 0.5;
-  display: flex;
-  align-items: center;
   flex-shrink: 0;
+  padding: 0 2px;
 }
 
 /* 分隔装饰 */
 .section-divider {
   text-align: center;
-  margin: 50px 0;
+  margin: 55px 0;
   color: var(--border-light);
-  font-size: 16px;
-  letter-spacing: 24px;
+  font-size: 18px;
+  letter-spacing: 28px;
 }
 
 /* 页脚 */
 .site-footer {
   background: var(--bg-card);
   border-top: 1px solid var(--border);
-  padding: 30px 60px;
+  padding: 32px 40px;
   text-align: center;
   position: relative;
   z-index: 2;
 }
 .site-footer p {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text3);
-  line-height: 1.8;
+  line-height: 1.9;
 }
 .site-footer .gold { color: var(--gold); }
 
 @media (max-width: 1024px) {
-  .main-content { padding: 40px 30px 60px; }
+  .main-content { padding: 50px 24px 70px; max-width: 100%; }
   .topbar-links { display: none; }
-  .intro-grid { grid-template-columns: 1fr; }
-  .chapters-grid { grid-template-columns: repeat(2, 1fr); }
+  .intro-image { float: none; width: 100%; margin: 0 0 20px; }
+  .chapters-grid { grid-template-columns: 1fr; }
   .chain-flow { flex-wrap: wrap; }
   .chain-arrow { display: none; }
-  .hero-title { font-size: 56px; letter-spacing: 10px; }
-  .hero-stats { flex-direction: column; gap: 20px; }
+  .hero-title { font-size: 52px; letter-spacing: 10px; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+  .intro-data { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -540,38 +542,35 @@ body::before {
 <div class="main-content">
 
   <!-- 研究说明 -->
-  <section id="intro">
+  <section class="intro-section" id="intro">
     <div class="section-header">
       <span class="section-tag">RESEARCH OVERVIEW</span>
       <h2 class="section-title">研究说明</h2>
-      <span class="section-desc">从历史脉络到实施运营，八大章节系统研究</span>
     </div>
-    <div class="intro-grid">
-      <div class="intro-text">
-        <p>城正街历史文化街区位于湘潭市雨湖区，是湖南省历史文化街区之一。其历史最早可追溯至秦汉，北宋元符元年（1098年）县治迁此，此后近九百年始终是湘潭县的政治、经济、文化中心，明清时期更以"金湘潭"美名享誉四方。</p>
-        <p>本研究围绕片区城市更新策划，从历史脉络、现状问题、资源资产、上位规划、定位产业、项目库、风貌设计、实施运营八个维度展开系统分析，形成逻辑完整、相互支撑的专题研究体系，为策划方案提供专业支撑和素材库。</p>
-        <div class="intro-data">
-          <div class="intro-data-item">
-            <div class="intro-data-num">29.56<span class="unit">公顷</span></div>
-            <div class="intro-data-label">更新规划总设计面积</div>
-          </div>
-          <div class="intro-data-item">
-            <div class="intro-data-num">26<span class="unit">公顷</span></div>
-            <div class="intro-data-label">保护规划范围</div>
-          </div>
-          <div class="intro-data-item">
-            <div class="intro-data-num">9.689<span class="unit">公顷</span></div>
-            <div class="intro-data-label">核心保护范围</div>
-          </div>
-          <div class="intro-data-item">
-            <div class="intro-data-num">2021<span class="unit">年</span></div>
-            <div class="intro-data-label">列入省级历史文化街区</div>
-          </div>
-        </div>
-      </div>
+    <div class="intro-content">
       <div class="intro-image">
         <img src="https://aka.doubaocdn.com/s/AAYggfojo8" alt="关圣殿">
         <div class="intro-image-caption"><strong>关圣殿 · 北五省会馆</strong><br>全国重点文物保护单位，十二总标志性建筑，湘潭"金湘潭"商业文明的重要物质遗存</div>
+      </div>
+      <p>城正街历史文化街区位于湘潭市雨湖区，是湖南省历史文化街区之一。其历史最早可追溯至秦汉，北宋元符元年（1098年）县治迁此，此后近九百年始终是湘潭县的政治、经济、文化中心，明清时期更以"金湘潭"美名享誉四方。</p>
+      <p>本研究围绕片区城市更新策划，从历史脉络、现状问题、资源资产、上位规划、定位产业、项目库、风貌设计、实施运营八个维度展开系统分析，形成逻辑完整、相互支撑的专题研究体系，为策划方案提供专业支撑和素材库。</p>
+      <div class="intro-data">
+        <div class="intro-data-item">
+          <div class="intro-data-num">29.56<span class="unit">公顷</span></div>
+          <div class="intro-data-label">更新规划总设计面积</div>
+        </div>
+        <div class="intro-data-item">
+          <div class="intro-data-num">26<span class="unit">公顷</span></div>
+          <div class="intro-data-label">保护规划范围</div>
+        </div>
+        <div class="intro-data-item">
+          <div class="intro-data-num">9.689<span class="unit">公顷</span></div>
+          <div class="intro-data-label">核心保护范围</div>
+        </div>
+        <div class="intro-data-item">
+          <div class="intro-data-num">2021<span class="unit">年</span></div>
+          <div class="intro-data-label">列入省级历史文化街区</div>
+        </div>
       </div>
     </div>
   </section>
@@ -583,7 +582,6 @@ body::before {
     <div class="section-header">
       <span class="section-tag">EIGHT CHAPTERS</span>
       <h2 class="section-title">八大章节总览</h2>
-      <span class="section-desc">从历史到未来，从问题到方案</span>
     </div>
     <div class="chapters-grid">
 
@@ -693,8 +691,8 @@ body::before {
     <div class="section-header">
       <span class="section-tag">RESEARCH LOGIC</span>
       <h2 class="section-title">研究逻辑链条</h2>
-      <span class="section-desc">八大章节层层递进，从认知到决策的完整闭环</span>
     </div>
+    <p style="font-size:14px; color:var(--text3); margin-bottom:20px; text-indent:2em;">八大章节层层递进，从认知到决策，形成完整的研究闭环。每一章回答一个核心问题，前后衔接、相互支撑。</p>
     <div class="chain-section">
       <div class="chain-flow">
         <div class="chain-node">
@@ -757,7 +755,6 @@ body::before {
 </div>
 
 <script>
-// 数字滚动
 function animateNumbers() {
   const numbers = document.querySelectorAll('.hero-stat-num');
   numbers.forEach(num => {
