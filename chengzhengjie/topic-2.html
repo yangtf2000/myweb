@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章 · 资源资产系统梳理与价值评估 | 城正街片区策划专题研究</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;500;700&family=Special+Elite&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== 智能分页控制 ========== */
+@media print {
+  h1, h2, h3, h4, .chapter-number, .chapter-title, .section-header, .method-title { page-break-after: avoid; break-after: avoid; }
+  blockquote, .highlight-box, .key-point, .abstract, .stage-item, .question-item, .game-element, .numbered-item, .list-item, .code-block, .terminal, figure, img, table, .card { page-break-inside: avoid; break-inside: avoid; }
+  ul, ol, .numbered-list, .question-list, .stage-list { page-break-inside: avoid; break-inside: avoid; }
+  .elegant-divider, .divider, .section-divider, .nature-divider, .vintage-divider, .art-divider, hr { page-break-after: avoid; break-after: avoid; }
+  .method-section, .inner-border { page-break-inside: avoid; break-inside: avoid; }
+  p { orphans: 3; widows: 3; }
+  section.new-page { page-break-before: always; break-before: always; }
+}
+blockquote, .highlight-box, .key-point, .abstract, .stage-item, .question-item, .game-element, .code-block, .terminal, .stage-list, .question-list, figure, img, table, .card { page-break-inside: avoid; break-inside: avoid; }
+h1, h2, h3, h4, .chapter-number, .chapter-title, .section-header, .method-title { page-break-after: avoid; break-after: avoid; }
+.elegant-divider, .divider, .section-divider, .nature-divider, .vintage-divider, .art-divider, hr { page-break-after: avoid; break-after: avoid; }
+
+:root {
+  --bg: #0E0906; --bg-page: #1A120B; --bg-card: #33271A; --bg-card2: #3D2E1F; --bg-card3: #2A1F14;
+  --text: #F0E6D5; --text2: #C4B69E; --text3: #968870; --gold: #D4B87A; --gold-light: #E8D4A0;
+  --cinnabar: #C25B56; --cinnabar-dark: #9A3E3A; --border: #4E3A25; --border-light: #5E4830;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Lora', 'Noto Serif SC', serif; background: var(--bg); color: var(--text); line-height: 1.8; min-height: 100vh; }
+
+.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(14,9,6,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 12px 40px; display: flex; align-items: center; justify-content: space-between; }
+.top-nav a { color: var(--text3); text-decoration: none; font-size: 13px; transition: color 0.3s; }
+.top-nav a:hover { color: var(--gold); }
+.nav-left { display: flex; align-items: center; gap: 16px; }
+.nav-back { color: var(--gold) !important; }
+.nav-chapter-tag { background: var(--cinnabar); color: var(--text) !important; padding: 3px 10px; border-radius: 2px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+.nav-title { color: var(--text2); font-size: 14px; font-weight: 600; }
+.nav-right { display: flex; gap: 18px; }
+.nav-right a { font-family: 'Noto Serif SC', serif; font-size: 14px; color: var(--text3); }
+.nav-right a.active { color: var(--gold); }
+
+.magazine-page { width: 100%; max-width: 1000px; background: var(--bg-page); margin: 0 auto; padding-top: 56px; position: relative; box-shadow: 0 0 80px rgba(0,0,0,0.5); }
+
+.chapter-hero { position: relative; height: 70vh; min-height: 500px; display: flex; align-items: center; overflow: hidden; }
+.chapter-hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.28) saturate(0.6); animation: slowZoom 20s ease-in-out infinite alternate; }
+@keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+.chapter-hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,9,6,0.85) 0%, rgba(14,9,6,0.3) 50%, rgba(14,9,6,0.95) 100%); }
+.chapter-hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 0 50px; width: 100%; }
+.chapter-big-num { font-family: 'Abril Fatface', 'Noto Serif SC', serif; font-size: 100px; color: var(--cinnabar); line-height: 0.9; margin-bottom: 16px; text-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+.chapter-en-label { font-family: 'Special Elite', monospace; font-size: 13px; color: var(--gold); letter-spacing: 4px; margin-bottom: 20px; display: inline-block; border: 1px solid var(--gold); padding: 6px 14px; }
+.chapter-title { font-family: 'Noto Serif SC', serif; font-size: 40px; font-weight: 900; color: var(--text); letter-spacing: 6px; margin-bottom: 14px; }
+.chapter-subtitle { font-size: 16px; color: var(--gold); letter-spacing: 3px; margin-bottom: 24px; }
+.chapter-question { font-family: 'Noto Serif SC', serif; font-size: 15px; color: var(--text2); border-left: 3px solid var(--cinnabar); padding-left: 14px; }
+.chapter-question strong { color: var(--gold); }
+
+.main-content { max-width: 1000px; margin: 0 auto; padding: 50px 50px 60px; }
+
+.section-header { margin-bottom: 28px; padding-bottom: 16px; position: relative; }
+.section-tag { font-family: 'Special Elite', monospace; font-size: 12px; color: var(--cinnabar); letter-spacing: 3px; margin-bottom: 8px; display: block; }
+.section-title { font-family: 'Noto Serif SC', serif; font-size: 26px; font-weight: 700; color: var(--text); letter-spacing: 3px; margin-bottom: 12px; }
+.vintage-divider { display: flex; align-items: center; margin: 0; }
+.vintage-divider::before { content: ''; width: 56px; height: 2px; background: var(--gold); }
+
+.sub-section-title { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; color: var(--text); margin: 26px 0 12px; padding-left: 14px; border-left: 3px solid var(--cinnabar); }
+.sub-section-title .num { color: var(--gold); font-family: 'Abril Fatface', serif; margin-right: 8px; }
+
+.content p { font-size: 16px; line-height: 2; color: var(--text2); margin-bottom: 14px; text-indent: 2em; text-align: justify; }
+.drop-cap::first-letter { float: left; font-family: 'Abril Fatface', 'Noto Serif SC', serif; font-size: 56px; line-height: 0.85; margin: 6px 12px 0 0; color: var(--gold); font-weight: 700; }
+
+.img-float-right { float: right; width: 44%; margin: 6px 0 16px 24px; border-radius: 2px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); border: 1px solid var(--border); position: relative; }
+.img-float-left { float: left; width: 40%; margin: 6px 24px 16px 0; border-radius: 2px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); border: 1px solid var(--border); position: relative; }
+.img-float-right img, .img-float-left img { width: 100%; display: block; filter: saturate(0.78) brightness(0.94); }
+.img-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(14,9,6,0.96), transparent); color: var(--text2); font-size: 12px; padding: 40px 14px 10px; line-height: 1.7; }
+.img-caption strong { color: var(--gold); }
+.img-full { width: 100%; margin: 24px 0; border-radius: 2px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); border: 1px solid var(--border); position: relative; }
+.img-full img { width: 100%; display: block; filter: saturate(0.78) brightness(0.94); }
+.img-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+.img-duo-item { border-radius: 2px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.4); border: 1px solid var(--border); position: relative; }
+.img-duo-item img { width: 100%; display: block; filter: saturate(0.78) brightness(0.94); height: 200px; object-fit: cover; }
+.img-duo-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(14,9,6,0.96), transparent); color: var(--text2); font-size: 11px; padding: 30px 10px 8px; line-height: 1.6; }
+.img-duo-caption strong { color: var(--gold); }
+.clearfix::after { content: ''; display: table; clear: both; }
+
+.highlight-box { background: var(--bg-card); border-left: 3px solid var(--gold); padding: 18px 22px; border-radius: 2px; margin: 20px 0; }
+.highlight-box-title { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+.highlight-box p { font-size: 14px; color: var(--text2); line-height: 1.9; margin-bottom: 0; text-indent: 0; }
+
+blockquote { border: 1px solid var(--border); padding: 20px 24px; margin: 24px 0; background: rgba(212,184,122,0.05); font-style: italic; color: var(--text2); position: relative; }
+blockquote::before { content: '"'; font-family: 'Abril Fatface', serif; font-size: 48px; color: var(--gold); position: absolute; top: -8px; left: 16px; opacity: 0.4; }
+blockquote p { text-indent: 0; margin-bottom: 0; font-size: 15px; padding-left: 20px; }
+
+.data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
+.data-card { background: var(--bg-card); padding: 18px 16px; border-radius: 2px; border-top: 2px solid var(--gold); text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.data-card.danger { border-top-color: var(--cinnabar); }
+.data-card.danger .data-num { color: var(--cinnabar); }
+.data-num { font-family: 'Abril Fatface', 'Noto Serif SC', serif; font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1.1; }
+.data-num .unit { font-size: 13px; font-weight: 500; }
+.data-label { font-size: 12px; color: var(--text3); margin-top: 8px; letter-spacing: 1px; }
+
+.info-card { background: var(--bg-card); border-radius: 2px; padding: 16px 18px; border: 1px solid var(--border); margin-bottom: 12px; }
+.info-card-title { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.info-card-title::before { content: ''; width: 4px; height: 14px; background: var(--cinnabar); }
+.info-card p { font-size: 14px; color: var(--text2); line-height: 1.85; margin-bottom: 0; text-indent: 0; }
+
+.data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+.data-table th { background: var(--bg-card2); color: var(--gold); padding: 10px 12px; text-align: left; font-weight: 700; border-bottom: 2px solid var(--gold); font-family: 'Noto Serif SC', serif; }
+.data-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text2); }
+.data-table tr:nth-child(even) td { background: rgba(51,39,26,0.5); }
+.data-table .highlight-row td { background: rgba(194,91,86,0.15); color: var(--text); font-weight: 600; }
+.data-table .danger-text { color: var(--cinnabar); font-weight: 700; }
+.data-table .gold-text { color: var(--gold); font-weight: 700; }
+
+/* 资源分级卡片 */
+.resource-level-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.resource-level-card { background: var(--bg-card); border-radius: 2px; padding: 18px 20px; border-top: 3px solid var(--gold); }
+.resource-level-card.core { border-top-color: var(--cinnabar); }
+.resource-level-card.important { border-top-color: #E8A838; }
+.resource-level-card.general { border-top-color: var(--text3); }
+.resource-level-card-title { font-family: 'Noto Serif SC', serif; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.resource-level-card.core .resource-level-card-title { color: var(--cinnabar); }
+.resource-level-card.important .resource-level-card-title { color: #E8A838; }
+.resource-level-card ul { list-style: none; padding: 0; }
+.resource-level-card li { font-size: 13px; color: var(--text2); line-height: 1.8; padding-left: 14px; position: relative; }
+.resource-level-card li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+
+/* 十大核心资源 */
+.top10-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+.top10-item { background: var(--bg-card); border-radius: 2px; padding: 14px 16px; border-left: 3px solid var(--gold); display: flex; align-items: flex-start; gap: 12px; }
+.top10-num { font-family: 'Abril Fatface', serif; font-size: 24px; color: var(--cinnabar); line-height: 1; min-width: 28px; }
+.top10-content { flex: 1; }
+.top10-name { font-family: 'Noto Serif SC', serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.top10-desc { font-size: 12px; color: var(--text3); line-height: 1.6; }
+
+.cn-divider { text-align: center; margin: 36px 0; color: var(--gold); font-size: 14px; letter-spacing: 16px; opacity: 0.6; }
+
+.chapter-nav { display: flex; justify-content: space-between; gap: 16px; margin: 40px 0 20px; padding-top: 24px; border-top: 1px solid var(--border); }
+.chapter-nav a { flex: 1; background: var(--bg-card); border: 1px solid var(--border); border-radius: 2px; padding: 16px 20px; text-decoration: none; color: var(--text2); transition: all 0.3s; font-size: 14px; }
+.chapter-nav a:hover { border-color: var(--gold); color: var(--gold); background: var(--bg-card2); }
+.chapter-nav .nav-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; font-family: 'Special Elite', monospace; }
+
+.footer { text-align: center; padding: 40px 50px; border-top: 1px solid var(--border); color: var(--text3); font-size: 13px; }
+.footer-title { font-family: 'Noto Serif SC', serif; font-size: 16px; color: var(--gold); margin-bottom: 8px; letter-spacing: 3px; }
+
+@media (max-width: 1024px) {
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .resource-level-grid { grid-template-columns: 1fr; }
+  .top10-grid { grid-template-columns: 1fr; }
+  .img-duo-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .top-nav { padding: 10px 16px; }
+  .nav-right { display: none; }
+  .chapter-big-num { font-size: 70px; }
+  .chapter-title { font-size: 28px; letter-spacing: 3px; }
+  .main-content { padding: 30px 20px 50px; }
+  .img-float-right, .img-float-left { float: none; width: 100%; margin: 16px 0; }
+  .data-grid { grid-template-columns: 1fr 1fr; }
+  .chapter-nav { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">← 返回首页</a>
+    <span class="nav-chapter-tag">第三章</span>
+    <span class="nav-title">资源资产系统梳理与价值评估</span>
+  </div>
+  <div class="nav-right">
+    <a href="topic-0.html">壹</a>
+    <a href="topic-1.html">贰</a>
+    <a href="topic-2.html" class="active">叁</a>
+    <a href="topic-3.html">肆</a>
+    <a href="topic-4.html">伍</a>
+    <a href="topic-5.html">陆</a>
+    <a href="topic-6.html">柒</a>
+    <a href="topic-7.html">捌</a>
+  </div>
+</nav>
+
+<div class="magazine-page">
+
+  <section class="chapter-hero">
+    <div class="chapter-hero-bg" style="background-image: url('https://aka.doubaocdn.com/s/9x0wKmj8W7');"></div>
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <div class="chapter-big-num">叁</div>
+      <span class="chapter-en-label">CHAPTER 03 · RESOURCES & ASSETS EVALUATION</span>
+      <h1 class="chapter-title">资源资产系统梳理与价值评估</h1>
+      <div class="chapter-subtitle">有形资源 · 无形资源 · 旅游资源 · 五维价值评估 · 十大核心资源</div>
+      <div class="chapter-question"><strong>本章回答：</strong>我有什么？——系统梳理36处文保+41处历史建筑+26处闲置资产+162项非遗，采用五维价值评估法，识别十大核心资源，明确利用方向。</div>
+    </div>
+  </section>
+
+  <div class="main-content">
+
+    <!-- 引言 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">INTRODUCTION</span>
+        <h2 class="section-title">引言：研究范围与方法</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="content">
+        <p class="drop-cap">资源是片区更新的物质基础和文化根基。城正街片区作为湘潭城市记忆最集中的区域，拥有丰富的历史文化建筑、闲置资产、街巷格局、自然生态等有形资源，以及非物质文化遗产、红色文化、名人文化、老字号等无形资源。本专题系统梳理片区内各类资源资产，建立完整的资源清单，进行五维价值评估，明确每处重点资源的利用方向。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">01</span>资源分类体系</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">有形资源</div>
+          <p>历史文化建筑（36文保+41历史建筑+31特色风貌）、闲置资产（26处建筑+18处土地）、老旧厂区与街区、街巷格局与空间（一街三片七巷+三街并行+城门码头）、自然与生态（雨湖公园+湘江滨水带+古树古井）</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">无形资源</div>
+          <p>历史文化（城总文化+会馆文化+书院文化+商帮文化）、非物质文化遗产（162项）、红色文化、名人文化（15位）、老字号与传统商业、地名遗产与历史传说</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">02</span>五维价值评估法</h3>
+
+      <div class="content">
+        <p>采用"五维价值评估法"，对每处重点资源从五个维度进行1-5分评分：历史价值（×0.3）、艺术价值（×0.2）、科学价值（×0.15）、社会价值（×0.15）、经济价值（×0.2）。综合评分=历史价值×0.3+艺术价值×0.2+科学价值×0.15+社会价值×0.15+经济价值×0.2。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第一章 有形资源 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 01 · TANGIBLE RESOURCES</span>
+        <h2 class="section-title">一、有形资源系统梳理</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-duo-grid">
+        <div class="img-duo-item">
+          <img src="https://aka.doubaocdn.com/s/AAYggfojo8" alt="关圣殿大门">
+          <div class="img-duo-caption"><strong>关圣殿大门</strong> · 国家级文保，北五省会馆，汉白玉镂空蟠龙柱为镇馆之宝</div>
+        </div>
+        <div class="img-duo-item">
+          <img src="https://aka.doubaocdn.com/s/giNwP12yCv" alt="湘潭文庙大成殿">
+          <div class="img-duo-caption"><strong>湘潭文庙大成殿</strong> · 省级文保，南宋始建，庙学合一，儒家文化核心</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.1</span>历史文化建筑资源</h3>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">36<span class="unit">处</span></div>
+          <div class="data-label">文物保护单位</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">41<span class="unit">处</span></div>
+          <div class="data-label">历史建筑</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">31<span class="unit">处</span></div>
+          <div class="data-label">特色风貌建筑</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">306<span class="unit">处</span></div>
+          <div class="data-label">不协调建筑</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>片区内共有文物保护单位36处，其中国家级1处（关圣殿/北五省会馆）、省级10处（太真芝药室、湘潭文庙、江西会馆、夕照亭、张家祠堂、抗日阵亡将士纪念碑、南楼、毛泽东青年时代活动旧址、湘潭一大桥、天主教堂）、市级若干、一般文物19处。历史建筑41处，主要为清末民初的传统民居、商业建筑和会馆建筑。特色风貌建筑31处，包括苏式建筑、民国风格建筑等。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">不协调建筑整治方式分类</div>
+        <p>核心保护范围内86处、建设控制地带内141处、老旧小区79处，合计306处。整治方式：立面改造（约60%）、降层处理（约15%）、拆除重建（约10%）、遮挡弱化（约15%）。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.2</span>闲置资产资源</h3>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">26<span class="unit">处</span></div>
+          <div class="data-label">闲置建筑（约3.5万㎡）</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">18<span class="unit">处</span></div>
+          <div class="data-label">闲置土地</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">13.11<span class="unit">公顷</span></div>
+          <div class="data-label">闲置土地总面积</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">10+<span class="unit">个</span></div>
+          <div class="data-label">产权人（协调难度大）</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>26处闲置建筑按类型分：办公类8处（疾控中心、税务局、交通局、邮政局等）、工业类5处（食杂果品仓库、印刷厂、新多福食品厂、无线电二厂、日杂公司仓库）、商业类4处（大同世界综合楼12918㎡等）、历史建筑类5处（红楼、太真芝药室、原派出所等）、其他4处。闲置土地18处13.11公顷，其中已批未建8.69公顷、已征未用4.42公顷。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.3</span>街巷格局与空间资源</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card">
+          <div class="info-card-title">一街三片七巷</div>
+          <p>一街：城正街传统风貌街；三片：书院文化片区、城里头人文片区、南楼文化片区；七巷：学坪路街、泗洲庵巷、板石巷、广大香巷、城隍庙巷、新育里巷等。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">三街并行传统格局</div>
+          <p>河街（前街）：批发、码头服务；正街：设"总"，零售商业核心；后街：会馆、庙宇、住宅。是"金湘潭"商业文明的空间载体。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">六座古城门遗址</div>
+          <p>观湘门（南门）、熙春门（东门）、通济门（西门）、文星门（小东门）、拱极门（北门）、瞻岳门（西北门）。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">古码头遗址</div>
+          <p>小东门码头（市级文保）、十二总码头（一般文物）、其他十八总对应码头。</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.4</span>自然与生态资源</h3>
+
+      <div class="content">
+        <p>雨湖公园是片区核心绿地，湘潭老城的"绿肺"，可与城正街历史街区联动打造"公园+街区"一体化体验。湘江滨水带约2公里岸线，可发展滨江步道、码头遗址景观化、城墙遗址公园、水上旅游线路。片区内保留多棵古树名木（文庙、关圣殿、雨湖公园等地），以及三义井、由义巷古井等历史水系。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.5</span>分区域资源汇总</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:16px 0;">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">城正街核心区</div>
+          <p>文庙+昭潭书院+曙光学校、刘道一烈士祠、塔公祠、抗日纪念碑、太真芝药室、原印刷厂/税务局/派出所等闲置资产。文化资源最集中，是更新核心引擎。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">北五省/江西会馆区</div>
+          <p>关圣殿（国家级）、江西会馆万寿宫、夕照亭、关圣殿巷古建筑群、曾家巷古建筑群。会馆文化最集中，是商业文明核心展示区。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838;">
+          <div class="info-card-title">关圣殿周边区</div>
+          <p>传统民居成片、南楼、天主教堂、大同世界综合楼（12918㎡闲置）、滨江风光带。大型闲置商业资产可作为产业导入载体。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第二章 无形资源 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 02 · INTANGIBLE RESOURCES</span>
+        <h2 class="section-title">二、无形资源系统梳理</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.1</span>四大文化特色叠加</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>文化类型</th><th>核心内涵</th><th>利用方向</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td><strong style="color:var(--gold)">城总文化</strong></td><td>全国独有的街道通名制度，800年历史，十八总空间格局</td><td>城总文化超级IP、十八总主题游线、数字展示馆</td></tr>
+          <tr><td><strong style="color:var(--gold)">会馆文化</strong></td><td>明清十三省商人云集，约40处会馆，"金湘潭"见证</td><td>会馆文化展示群、商帮文化研学、建筑艺术展示</td></tr>
+          <tr><td><strong style="color:var(--gold)">书院文化</strong></td><td>文庙-昭潭书院-曙光学校延续近千年，"庙学合一"</td><td>祭孔大典、儒家文化展示、书院文化研学</td></tr>
+          <tr><td><strong style="color:var(--gold)">商帮文化</strong></td><td>持续340多年商业辉煌，五维内涵（历史久/规模大/商贾多/百业备/财赋甲）</td><td>"金湘潭"商业文化博物馆、传统业态复原、主题文创</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">文化价值总体判断</div>
+        <p>城总文化全国独有，是湘潭区别于其他历史街区的核心文化IP；会馆文化、书院文化、商帮文化叠加，形成了高密度、高独特性的文化资源集群。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.2</span>非物质文化遗产（162项）</h3>
+
+      <div class="data-grid">
+        <div class="data-card danger">
+          <div class="data-num">2<span class="unit">项</span></div>
+          <div class="data-label">国家级非遗</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">27<span class="unit">项</span></div>
+          <div class="data-label">省级非遗</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">64<span class="unit">项</span></div>
+          <div class="data-label">市级非遗</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">69<span class="unit">项</span></div>
+          <div class="data-label">县级非遗</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>国家级非遗2项：青山唢呐（传统音乐）、巫家拳（传统体育）。省级非遗与片区相关的包括：湘潭花鼓戏、纸影戏、灯芯糕制作技艺（义和斋）、龙牌酱油酿造技艺、油纸伞制作技艺、湘潭米粉制作技艺、左氏十八总活鱼烹饪技艺等。市级非遗包括湘潭虾舞、择子豆腐、老细红酱、马家河黑山羊、沙子岭猪等。传统手工艺包括木雕、石雕（关圣殿蟠龙柱为代表）、泥塑（鲁班殿门楼）、竹编。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.3</span>红色文化资源</h3>
+
+      <div class="content">
+        <p>城正街片区是湘潭红色文化的重要发源地。红色文化遗址包括：毛泽东青年时代活动旧址（毛福昌号+三义井+宽裕粮行）、塔公祠（1926年湘潭县第一次农民代表大会、1927年毛泽东农运座谈会）、刘道一烈士祠（同盟会会员，萍浏醴起义）、杨昭植就义处（湘潭地委书记，1927年就义）、抗日阵亡将士纪念碑（1938年立）。红色文化内涵涵盖毛泽东与湘潭、农民运动、辛亥革命、大革命时期、抗日战争。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.4</span>名人文化与老字号</h3>
+
+      <div class="content">
+        <p>与片区密切关联的历史名人15位：毛泽东、宋楚瑜（曙光学校母校）、秋瑾、刘道一、杨度、王闿运、黎锦晖、吕骥、梁焕奎、塔齐布、郭松林、龚承钧（状元）、张九镒、周系英、彭德怀。老字号品牌包括：龙牌酱油（1740年）、义和斋灯芯糕（400多年）、左氏十八总活鱼（1898年）、太真芝药室（清末）、协和公酱园、湘真一药号、十八总大码头米粉、郭记传统米粉。传统商业业态涵盖药都、米市、茶市、票号（8家山西票号）、酱园、绸缎店、粮行。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.5</span>地名遗产与历史传说</h3>
+
+      <div class="content">
+        <p>地名遗产包括唐氏义门（明永乐二年1404年）、三义井、洗脚桥、六座古城门、十八总地名等。历史诗文包括清·张九镒《湘潭》、清·周系英《湘潭竹枝词》、秋瑾《过湘潭》、杨昭植《就义前题壁诗》。利用方向：地名遗产标识系统、历史诗文石刻/展示、传说故事数字化展示（AR/VR）、"古城可阅读"导览系统。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第三章 旅游资源 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 03 · TOURISM RESOURCES</span>
+        <h2 class="section-title">三、旅游资源梳理</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-float-right">
+        <img src="https://aka.doubaocdn.com/s/hJj3Kv7mzF" alt="湘潭湘江风光">
+        <div class="img-caption"><strong>湘潭湘江风光</strong> · 片区南临湘江，约2公里滨江岸线，可发展水上旅游线路</div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.1</span>片区内旅游资源点（10处）</h3>
+
+      <div class="content">
+        <p>关圣殿（国家级文保，会馆文化展示+研学）、江西会馆万寿宫（省级文保，江西文化+特色餐饮）、湘潭文庙（省级文保，儒家文化+祭孔+研学）、城正街历史街区（省级历史文化街区，历史街区体验+商业）、雨湖公园（城市公园，休闲+夜间经济）、抗日阵亡将士纪念碑（省级文保，爱国主义教育）、刘道一烈士祠（市级文保，红色文化+研学）、塔公祠遗址（红色遗址，农运历史展示）、滨江风光带（城市滨水，休闲+观光）、夕照亭（省级文保，观景+历史展示）。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.2</span>周边旅游资源联动</h3>
+
+      <div class="content">
+        <p>万楼（约3公里，4A，湘江文化旅游带联动）、窑湾历史文化街区（约2公里，省级历史文化街区，差异化联动）、九华湖德文化公园（约5公里）、昭山（约15公里，4A）、盘龙大观园（约10公里，4A）、韶山（约40公里，5A，红色旅游联动）。</p>
+      </div>
+
+      <div style="clear: both;"></div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">旅游资源评价</div>
+        <p>资源品级较高（国家级文保1处+省级文保10处+省级历史文化街区1处）；资源组合良好（历史文化+红色文化+生态休闲+商业体验）；区位优势明显（长株潭半小时经济圈）；联动条件优越（与万楼、窑湾、九华湖等形成湘江文化旅游带）。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第四章 资源价值评估（核心） -->
+    <section style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 04 · VALUE EVALUATION（核心）</span>
+        <h2 class="section-title">四、资源价值评估</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.1</span>重点资源五维价值评估表</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>资源名称</th><th>历史</th><th>艺术</th><th>科学</th><th>社会</th><th>经济</th><th>综合</th><th>等级</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td>关圣殿（北五省会馆）</td><td>5</td><td>5</td><td>4</td><td>5</td><td>5</td><td class="gold-text">4.85</td><td>核心</td></tr>
+          <tr class="highlight-row"><td>城正街历史街区</td><td>5</td><td>4</td><td>4</td><td>5</td><td>5</td><td class="gold-text">4.65</td><td>核心</td></tr>
+          <tr class="highlight-row"><td>江西会馆万寿宫</td><td>5</td><td>5</td><td>4</td><td>4</td><td>4</td><td class="gold-text">4.55</td><td>核心</td></tr>
+          <tr class="highlight-row"><td>城总文化</td><td>5</td><td>3</td><td>4</td><td>5</td><td>5</td><td class="gold-text">4.45</td><td>核心</td></tr>
+          <tr class="highlight-row"><td>湘潭文庙</td><td>5</td><td>4</td><td>4</td><td>5</td><td>4</td><td class="gold-text">4.45</td><td>核心</td></tr>
+          <tr><td>会馆文化</td><td>5</td><td>4</td><td>3</td><td>4</td><td>4</td><td>4.15</td><td>重要</td></tr>
+          <tr><td>昭潭书院-曙光学校</td><td>5</td><td>3</td><td>3</td><td>5</td><td>4</td><td>4.10</td><td>重要</td></tr>
+          <tr><td>"金湘潭"商业文化</td><td>5</td><td>2</td><td>3</td><td>5</td><td>5</td><td>4.10</td><td>重要</td></tr>
+          <tr><td>红色文化资源</td><td>5</td><td>2</td><td>3</td><td>5</td><td>4</td><td>3.95</td><td>重要</td></tr>
+          <tr><td>非物质文化遗产</td><td>4</td><td>4</td><td>3</td><td>4</td><td>4</td><td>3.85</td><td>重要</td></tr>
+          <tr><td>老字号资源</td><td>4</td><td>2</td><td>2</td><td>4</td><td>5</td><td>3.50</td><td>重要</td></tr>
+          <tr><td>闲置资产（26处）</td><td>3</td><td>2</td><td>2</td><td>3</td><td>5</td><td>3.05</td><td>重要</td></tr>
+          <tr><td>雨湖公园</td><td>3</td><td>3</td><td>2</td><td>5</td><td>4</td><td>3.40</td><td>一般</td></tr>
+          <tr><td>滨江风光带</td><td>2</td><td>3</td><td>2</td><td>5</td><td>4</td><td>3.10</td><td>一般</td></tr>
+          <tr><td>名人文化资源</td><td>4</td><td>2</td><td>2</td><td>4</td><td>3</td><td>3.10</td><td>一般</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">4.2</span>资源三级分级结果</h3>
+
+      <div class="resource-level-grid">
+        <div class="resource-level-card core">
+          <div class="resource-level-card-title">核心资源（综合≥4.0）</div>
+          <ul>
+            <li>关圣殿（北五省会馆）</li>
+            <li>城正街历史街区</li>
+            <li>江西会馆万寿宫</li>
+            <li>城总文化</li>
+            <li>湘潭文庙</li>
+            <li>会馆文化</li>
+            <li>昭潭书院-曙光学校</li>
+            <li>"金湘潭"商业文化</li>
+          </ul>
+        </div>
+        <div class="resource-level-card important">
+          <div class="resource-level-card-title">重要资源（3.5-4.0）</div>
+          <ul>
+            <li>红色文化资源</li>
+            <li>非物质文化遗产</li>
+            <li>老字号资源</li>
+            <li>闲置资产（26处）</li>
+          </ul>
+        </div>
+        <div class="resource-level-card general">
+          <div class="resource-level-card-title">一般资源（<3.5）</div>
+          <ul>
+            <li>雨湖公园</li>
+            <li>滨江风光带</li>
+            <li>名人文化资源</li>
+            <li>街巷格局</li>
+            <li>古树名木</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.3</span>资源总体特征</h3>
+
+      <div class="content">
+        <p>文化资源密度高——3.16平方公里内集中了1处国家级文保、10处省级文保、41处历史建筑，文化资源密度在湖南省内罕见；文化独特性强——城总文化全国独有，会馆文化、书院文化、红色文化叠加，文化辨识度高；闲置资产集中——26处闲置建筑+13.11公顷闲置土地，为产业导入提供了空间载体；生态本底优越——雨湖公园+湘江滨水带，生态资源与文化资源叠加；产权关系复杂——闲置资产涉及十多个产权人，协调难度大；活化利用不足——多数文保和历史建筑仍为静态保护，活态利用不够。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第五章 资源利用方向 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 05 · UTILIZATION DIRECTION</span>
+        <h2 class="section-title">五、资源利用方向建议</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.1</span>四类利用方向</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">风貌提升类</div>
+          <p>36处文保（修缮保护+文化展示）、41处历史建筑（修缮+功能更新）、若干传统风貌建筑（风貌整治+居住改善）、227处不协调建筑（立面改造/降层/拆除）、一街七巷（风貌提升+慢行系统）。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">产业植入类</div>
+          <p>疾控中心3636㎡→青创办公；食杂仓库4072㎡→文创园区；大同世界12918㎡→综合商业+酒店；新多福食品厂→品牌酒店；印刷厂→古城民宿+青年创业；税务局→教研培训基地；日杂仓库3766㎡→城总记忆场。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838;">
+          <div class="info-card-title">旅游产品类</div>
+          <p>关圣殿→会馆文化博物馆；江西会馆→江西文化体验中心；文庙→儒家文化研学基地；昭潭书院→书院文化体验；塔公祠→红色文化展示馆；城正街主街→历史街区体验；滨江码头→水上旅游。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3);">
+          <div class="info-card-title">公共服务类</div>
+          <p>县人民医院1759㎡→社区医疗+养老服务；原派出所149㎡→社区邻里中心；原社区集团办公楼839㎡→社区服务+党建；闲置土地约4公顷→养老、托育、文化、体育设施。</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.2</span>26处闲置资产利用优先级</h3>
+
+      <div class="content">
+        <p>高优先级（近期启动）：市生资日杂公司仓库（城总记忆场+游客中心+米粉体验馆）、疾控中心办公楼（青创办公大楼+众创空间）、大同世界综合楼（综合商业+酒店+办公）、原食杂果品公司仓库（文创园区+市集）、原新多福食品厂（品牌酒店）。中优先级：原雨湖区税务局（教研培训基地）、原县印刷厂（古城民宿+青年创业）、太真芝药室（传统药号展示+中医药体验）、红楼（红色文化展示+研学）、老城正街派出所（社区邻里中心）。低-中优先级：其他16处约5000㎡，用于社区服务、文创、商业等。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第六章 约束条件 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 06 · CONSTRAINTS</span>
+        <h2 class="section-title">六、资源利用的约束条件</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card">
+          <div class="info-card-title">文物保护等级约束</div>
+          <p>国家级文保1处：不改变文物原状，修缮需国家文物局审批；省级文保10处：不改变原状，省文物局审批；市级文保若干：保护为主，合理利用；一般文物19处：保护历史信息，可适度改造。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">历史街区管控约束</div>
+          <p>核心保护范围9.689公顷：不得新建扩建，建筑高度≤9米；建设控制地带16.3公顷：新建须符合高度体量色彩材质要求，高度≤18米；风貌协调区：按控规执行。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">用地性质约束</div>
+          <p>闲置土地用地性质变更需规划调整程序；工业用地转商业/文旅需补缴土地出让金；居住用地内商业功能需符合"住改商"规定。</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">产权复杂约束</div>
+          <p>26处闲置资产涉及十多个产权人：城发集团约8处、机关事业单位约8处、市资产经营公司约3处、企业约5处、房管部门约2处。跨部门跨层级协调难度大，部分产权不清。建议成立市级产权协调小组。</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">资金投入估算</div>
+        <p>文保建筑修缮36处约1.5-2亿元；历史建筑修缮41处约0.8-1.5亿元；不协调建筑整治227处约1-2亿元；闲置资产改造26处约1-1.5亿元；街巷空间提升约0.5-1亿元。合计约4.8-8亿元。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第七章 核心结论 -->
+    <section style="margin-bottom: 20px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 07 · CORE CONCLUSION</span>
+        <h2 class="section-title">七、核心结论与十大核心资源</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-full">
+        <img src="https://aka.doubaocdn.com/s/jTLbhO0mzA" alt="城正街老街全景">
+        <div class="img-caption" style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(14,9,6,0.98), transparent); color:var(--text2); font-size:13px; padding:50px 20px 14px;"><strong>城正街老街全景</strong> · 文化资源密度极高、独特性强，闲置资产集中盘活潜力大，生态本底优越文旅融合条件好</div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.1</span>资源总体特征总结</h3>
+
+      <div class="content">
+        <p>文化资源密度极高，独特性强——城总文化全国独有，会馆文化、书院文化、红色文化叠加，是湘潭历史文化的核心承载区；闲置资产集中，盘活潜力大——26处闲置建筑约3.5万㎡+13.11公顷闲置土地，为产业导入提供了充足空间；生态本底优越，文旅融合条件好——雨湖公园+湘江滨水带，文化资源与生态资源叠加；产权关系复杂，协调难度大——闲置资产涉及十多个产权人，需要市级层面统筹协调；活化利用不足，价值未充分释放——多数文保和历史建筑仍为静态保护，活态利用和经济价值转化不够。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.2</span>十大核心资源识别</h3>
+
+      <div class="top10-grid">
+        <div class="top10-item">
+          <div class="top10-num">01</div>
+          <div class="top10-content">
+            <div class="top10-name">关圣殿（北五省会馆）</div>
+            <div class="top10-desc">国家级文保，会馆文化核心，汉白玉蟠龙柱镇馆之宝</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">02</div>
+          <div class="top10-content">
+            <div class="top10-name">城正街历史街区</div>
+            <div class="top10-desc">省级历史文化街区，城总文化载体，三街并行格局</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">03</div>
+          <div class="top10-content">
+            <div class="top10-name">江西会馆万寿宫</div>
+            <div class="top10-desc">省级文保，商帮文化代表，牌楼已修缮主体待修复</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">04</div>
+          <div class="top10-content">
+            <div class="top10-name">湘潭文庙</div>
+            <div class="top10-desc">省级文保，儒家文化和书院文化核心，庙学合一</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">05</div>
+          <div class="top10-content">
+            <div class="top10-name">城总文化</div>
+            <div class="top10-desc">全国独有的文化IP，800年历史，十八总空间格局</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">06</div>
+          <div class="top10-content">
+            <div class="top10-name">昭潭书院-曙光学校</div>
+            <div class="top10-desc">千年教育文脉，宋楚瑜母校，1902年创办</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">07</div>
+          <div class="top10-content">
+            <div class="top10-name">红色文化资源群</div>
+            <div class="top10-desc">毛泽东足迹+农运遗址+烈士纪念，5处红色遗址</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">08</div>
+          <div class="top10-content">
+            <div class="top10-name">26处闲置资产</div>
+            <div class="top10-desc">产业导入的空间载体，约3.5万㎡建筑+13.11公顷土地</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">09</div>
+          <div class="top10-content">
+            <div class="top10-name">非物质文化遗产</div>
+            <div class="top10-desc">162项非遗，国家级2项+省级27项，可引入展示体验</div>
+          </div>
+        </div>
+        <div class="top10-item">
+          <div class="top10-num">10</div>
+          <div class="top10-content">
+            <div class="top10-name">老字号与传统商业</div>
+            <div class="top10-desc">龙牌酱油、义和斋、左氏活鱼等8家老字号，药都米市票号遗存</div>
+          </div>
+        </div>
+      </div>
+
+      <blockquote>
+        <p>城正街片区的资源价值，不在于单处建筑的精美，而在于多种文化资源的高密度叠加和全国独有的城总文化IP。资源梳理的深度，决定了产业策划的高度——只有真正摸清家底、评估价值，才能让每一处资源都找到最合适的利用方向。</p>
+      </blockquote>
+    </section>
+
+    <div class="chapter-nav">
+      <a href="topic-1.html">
+        <div class="nav-label">← 上一章</div>
+        <div>第二章 · 现状问题专题分析</div>
+      </a>
+      <a href="topic-3.html">
+        <div class="nav-label">下一章 →</div>
+        <div>第四章 · 上位规划与政策研究</div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-title">城正街片区策划专题研究</div>
+    <p>千年城总 · 金湘潭 | 历史文化街区城市更新研究</p>
+    <p style="margin-top:8px; font-size:12px;">编制时间：2026年8月 | 共八大专题研究</p>
+    <p style="margin-top:8px; font-size:12px; color:var(--gold);">联系邮箱：ytf2000@sina.com</p>
+  </div>
+
+</div>
+
+</body>
+</html>
