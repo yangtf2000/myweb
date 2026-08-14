@@ -9,18 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #1A1410;
-  --bg-card: #251D16;
-  --bg-card2: #2E2419;
-  --text: #EDE4D3;
-  --text2: #B8AA96;
-  --text3: #8A7D6A;
+  --bg: #0E0906;
+  --bg-card: #33271A;
+  --bg-card2: #3D2E1F;
+  --bg-card3: #2A1F14;
+  --text: #F0E6D5;
+  --text2: #C4B69E;
+  --text3: #968870;
   --gold: #D4B87A;
   --gold-light: #E8D4A0;
   --cinnabar: #C25B56;
   --cinnabar-dark: #9A3E3A;
-  --border: #3D2E1F;
-  --border-light: #4E3D2A;
+  --border: #4E3A25;
+  --border-light: #5E4830;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,9 +31,9 @@ body {
   font-family: 'Noto Sans SC', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 2;
+  line-height: 1.95;
   overflow-x: hidden;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 body::before {
@@ -234,18 +235,18 @@ body::before {
 .main-content {
   position: relative;
   z-index: 2;
-  max-width: 860px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 60px 40px 100px;
+  padding: 50px 40px 80px;
 }
 
 /* 章节标题 - 杂志风 */
 .section {
-  margin-bottom: 60px;
+  margin-bottom: 44px;
 }
 .section-header {
-  margin-bottom: 30px;
-  padding-bottom: 18px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border);
   position: relative;
 }
@@ -277,10 +278,10 @@ body::before {
 
 /* 正文 - 杂志排版 */
 .content p {
-  font-size: 15px;
-  line-height: 2.15;
+  font-size: 16px;
+  line-height: 2;
   color: var(--text2);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   text-indent: 2em;
 }
 .content p:first-child::first-letter {
@@ -296,9 +297,9 @@ body::before {
 /* 三级标题 */
 .content h3 {
   font-family: 'Noto Serif SC', serif;
-  font-size: 19px;
+  font-size: 20px;
   color: var(--gold);
-  margin: 32px 0 16px;
+  margin: 26px 0 14px;
   padding-left: 14px;
   border-left: 3px solid var(--cinnabar);
   clear: both;
@@ -461,8 +462,8 @@ body::before {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
-  margin: 20px 0;
+  font-size: 14.5px;
+  margin: 18px 0;
   clear: both;
 }
 .data-table th {
@@ -619,27 +620,32 @@ body::before {
 .street-bar.zheng { background: rgba(194,91,86,0.18); border: 1px solid rgba(194,91,86,0.38); }
 .street-bar.hou { background: rgba(212,184,122,0.07); border: 1px solid rgba(212,184,122,0.18); }
 
-/* 诗文引用 */
-.poem-block {
+/* 诗文 - 2列网格，不再右对齐留空白 */
+.poem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 18px 0;
+  clear: both;
+}
+.poem-card {
   background: var(--bg-card);
-  padding: 16px 24px;
+  padding: 16px 20px;
   border-radius: 2px;
   border-right: 3px solid var(--gold);
-  margin: 14px 0;
-  text-align: right;
-  clear: both;
 }
 .poem-text {
   font-family: 'Noto Serif SC', serif;
   font-size: 15px;
   color: var(--text);
-  line-height: 2.1;
+  line-height: 2;
   font-style: italic;
 }
 .poem-author {
   font-size: 12px;
   color: var(--text3);
-  margin-top: 6px;
+  margin-top: 8px;
+  text-align: right;
 }
 
 /* 银钱地毯故事 */
@@ -1065,32 +1071,36 @@ body::before {
     </div>
     <div class="content clearfix">
       <p>更新规划对明清至民国时期城正街（城里头）的商业盛景有一段生动描述："城里头作为明清至民国时期湘潭老城的商业核心，曾以'米市'和'药都'闻名全国，聚集了江西、苏杭等各地商帮，形成米行、药号、钱庄林立的繁华街市。这条青石板铺就的街道上，太真芝药店、大利生南货食品店、新多福酱菜等老字号招牌高悬，日夜人声鼎沸，茶楼戏院喧嚣，生动展现了'金湘潭'的商业盛况。"</p>
-      <div class="img-float-left" style="width:46%;">
-        <img src="https://aka.doubaocdn.com/s/YS1MaaXHQG" alt="清嘉庆湘潭城总全图">
-        <div class="caption">清嘉庆丁丑岁（1817年）刊《湘潭县志》所附《城总全图》· 研究湘潭城总格局最重要史料，县治所在地宋家桥以西正是现在城正街一带</div>
-      </div>
       <table class="data-table">
         <tr><th>老字号</th><th>行业</th><th>历史地位</th></tr>
         <tr><td class="highlight">太真芝药店</td><td>药材</td><td>"药都"湘潭代表性药号，今列为历史建筑</td></tr>
         <tr><td class="highlight">大利生南货</td><td>食品</td><td>南货食品代表性商号</td></tr>
         <tr><td class="highlight">新多福酱菜</td><td>酱业</td><td>湘潭酱业代表性商号</td></tr>
       </table>
-      <p style="font-size:13px; color:var(--text3); margin-top:-6px; text-indent:0;">* 更多老字号（龙牌酱油1740年、义和斋灯芯糕400年、左氏十八总活鱼1898年等）详见第三章资源资产梳理</p>
-      <div class="poem-block">
-        <div class="poem-text">楼台金碧拥南湘，万户千门竞夕阳。<br>烟火连云雄楚塞，至今人说小南京。</div>
-        <div class="poem-author">—— 清·张九镒《湘潭》（岳麓书院山长，1710—1770）</div>
+      <p style="font-size:13.5px; color:var(--text3); margin-top:-4px; text-indent:0;">* 更多老字号（龙牌酱油1740年、义和斋灯芯糕400年、左氏十八总活鱼1898年等）详见第三章资源资产梳理</p>
+      <!-- 古地图全宽展示，不再左浮留空白 -->
+      <div class="img-full">
+        <img src="https://aka.doubaocdn.com/s/YS1MaaXHQG" alt="清嘉庆湘潭城总全图">
+        <div class="caption"><strong>清嘉庆丁丑岁（1817年）刊《湘潭县志》所附《城总全图》</strong> · 研究湘潭城总格局最重要史料，县治所在地宋家桥以西正是现在城正街一带</div>
       </div>
-      <div class="poem-block">
-        <div class="poem-text">县前灯火夜市开，百货喧阗杂沓来。<br>莫道长沙星沙好，湘潭城正胜蓬莱。</div>
-        <div class="poem-author">—— 清·周系英《湘潭竹枝词》（1765—1824，乾嘉时期著名官员诗人）</div>
-      </div>
-      <div class="poem-block">
-        <div class="poem-text">城郭参差倚夕阳，当年曾此驻行装。<br>书生剑气横牛斗，文庙森森夜未央。</div>
-        <div class="poem-author">—— 秋瑾《过湘潭》（1875—1907，近代民主革命家、女权运动先驱）</div>
-      </div>
-      <div class="poem-block">
-        <div class="poem-text">学坪碧血化长虹，文庙苍松卷怒风。<br>寄语湘江后来者，红旗不倒此心同。</div>
-        <div class="poem-author">—— 杨昭植《就义前题壁诗》（1902—1927，中共党员、湘潭工农运动先驱烈士）</div>
+      <!-- 诗文改2列网格，不再右对齐留空白 -->
+      <div class="poem-grid">
+        <div class="poem-card">
+          <div class="poem-text">楼台金碧拥南湘，万户千门竞夕阳。<br>烟火连云雄楚塞，至今人说小南京。</div>
+          <div class="poem-author">—— 清·张九镒《湘潭》（岳麓书院山长，1710—1770）</div>
+        </div>
+        <div class="poem-card">
+          <div class="poem-text">县前灯火夜市开，百货喧阗杂沓来。<br>莫道长沙星沙好，湘潭城正胜蓬莱。</div>
+          <div class="poem-author">—— 清·周系英《湘潭竹枝词》（1765—1824）</div>
+        </div>
+        <div class="poem-card">
+          <div class="poem-text">城郭参差倚夕阳，当年曾此驻行装。<br>书生剑气横牛斗，文庙森森夜未央。</div>
+          <div class="poem-author">—— 秋瑾《过湘潭》（1875—1907，近代民主革命家）</div>
+        </div>
+        <div class="poem-card">
+          <div class="poem-text">学坪碧血化长虹，文庙苍松卷怒风。<br>寄语湘江后来者，红旗不倒此心同。</div>
+          <div class="poem-author">—— 杨昭植《就义前题壁诗》（1902—1927，革命烈士）</div>
+        </div>
       </div>
     </div>
   </section>

@@ -9,18 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #1A1410;
-  --bg-card: #251D16;
-  --bg-card2: #2E2419;
-  --text: #EDE4D3;
-  --text2: #B8AA96;
-  --text3: #8A7D6A;
+  --bg: #0E0906;
+  --bg-card: #33271A;
+  --bg-card2: #3D2E1F;
+  --bg-card3: #2A1F14;
+  --text: #F0E6D5;
+  --text2: #C4B69E;
+  --text3: #968870;
   --gold: #D4B87A;
   --gold-light: #E8D4A0;
   --cinnabar: #C25B56;
   --cinnabar-dark: #9A3E3A;
-  --border: #3D2E1F;
-  --border-light: #4E3D2A;
+  --border: #4E3A25;
+  --border-light: #5E4830;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -215,15 +216,15 @@ body::before {
 .main-content {
   position: relative;
   z-index: 2;
-  max-width: 860px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 70px 40px 100px;
+  padding: 50px 40px 80px;
 }
 
 /* 章节标题 */
 .section-header {
-  margin-bottom: 32px;
-  padding-bottom: 18px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border);
   position: relative;
 }
@@ -253,13 +254,13 @@ body::before {
 }
 
 /* 研究说明 - 图文混排 */
-.intro-section { margin-bottom: 60px; }
+.intro-section { margin-bottom: 44px; }
 .intro-content { overflow: hidden; }
 .intro-content p {
-  font-size: 15px;
-  line-height: 2.15;
+  font-size: 16px;
+  line-height: 2;
   color: var(--text2);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   text-indent: 2em;
 }
 .intro-content p:first-child::first-letter {
@@ -392,7 +393,7 @@ body::before {
   letter-spacing: 1px;
 }
 .chapter-card-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text3);
   line-height: 1.85;
 }
