@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第七章 · 风貌提升与建筑整治 | 城正街片区策划专题研究</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;500;700&family=Special+Elite&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@media print{h1,h2,h3,h4,.chapter-number,.chapter-title,.section-header,.method-title{page-break-after:avoid;break-after:avoid}blockquote,.highlight-box,.key-point,.abstract,.stage-item,.question-item,.game-element,.numbered-item,.list-item,.code-block,.terminal,figure,img,table,.card{page-break-inside:avoid;break-inside:avoid}ul,ol,.numbered-list,.question-list,.stage-list{page-break-inside:avoid;break-inside:avoid}.elegant-divider,.divider,.section-divider,.nature-divider,.vintage-divider,.art-divider,hr{page-break-after:avoid;break-after:avoid}.method-section,.inner-border{page-break-inside:avoid;break-inside:avoid}p{orphans:3;widows:3}section.new-page{page-break-before:always;break-before:always}}
+blockquote,.highlight-box,.key-point,.abstract,.stage-item,.question-item,.game-element,.code-block,.terminal,.stage-list,.question-list,figure,img,table,.card{page-break-inside:avoid;break-inside:avoid}
+h1,h2,h3,h4,.chapter-number,.chapter-title,.section-header,.method-title{page-break-after:avoid;break-after:avoid}
+.elegant-divider,.divider,.section-divider,.nature-divider,.vintage-divider,.art-divider,hr{page-break-after:avoid;break-after:avoid}
+:root{--bg:#0E0906;--bg-page:#1A120B;--bg-card:#33271A;--bg-card2:#3D2E1F;--bg-card3:#2A1F14;--text:#F0E6D5;--text2:#C4B69E;--text3:#968870;--gold:#D4B87A;--gold-light:#E8D4A0;--cinnabar:#C25B56;--cinnabar-dark:#9A3E3A;--border:#4E3A25;--border-light:#5E4830}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lora','Noto Serif SC',serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,9,6,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between}
+.top-nav a{color:var(--text3);text-decoration:none;font-size:13px;transition:color .3s}
+.top-nav a:hover{color:var(--gold)}
+.nav-left{display:flex;align-items:center;gap:16px}
+.nav-back{color:var(--gold)!important}
+.nav-chapter-tag{background:var(--cinnabar);color:var(--text)!important;padding:3px 10px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:1px}
+.nav-title{color:var(--text2);font-size:14px;font-weight:600}
+.nav-right{display:flex;gap:18px}
+.nav-right a{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--text3)}
+.nav-right a.active{color:var(--gold)}
+.magazine-page{width:100%;max-width:1000px;background:var(--bg-page);margin:0 auto;padding-top:56px;position:relative;box-shadow:0 0 80px rgba(0,0,0,.5)}
+.chapter-hero{position:relative;height:70vh;min-height:500px;display:flex;align-items:center;overflow:hidden}
+.chapter-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.28) saturate(.6);animation:slowZoom 20s ease-in-out infinite alternate}
+@keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+.chapter-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,9,6,.85) 0%,rgba(14,9,6,.3) 50%,rgba(14,9,6,.95) 100%)}
+.chapter-hero-content{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 50px;width:100%}
+.chapter-big-num{font-family:'Abril Fatface','Noto Serif SC',serif;font-size:100px;color:var(--cinnabar);line-height:.9;margin-bottom:16px;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.chapter-en-label{font-family:'Special Elite',monospace;font-size:13px;color:var(--gold);letter-spacing:4px;margin-bottom:20px;display:inline-block;border:1px solid var(--gold);padding:6px 14px}
+.chapter-title{font-family:'Noto Serif SC',serif;font-size:40px;font-weight:900;color:var(--text);letter-spacing:6px;margin-bottom:14px}
+.chapter-subtitle{font-size:16px;color:var(--gold);letter-spacing:3px;margin-bottom:24px}
+.chapter-question{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--text2);border-left:3px solid var(--cinnabar);padding-left:14px}
+.chapter-question strong{color:var(--gold)}
+.main-content{max-width:1000px;margin:0 auto;padding:50px 50px 60px}
+.section-header{margin-bottom:28px;padding-bottom:16px;position:relative}
+.section-tag{font-family:'Special Elite',monospace;font-size:12px;color:var(--cinnabar);letter-spacing:3px;margin-bottom:8px;display:block}
+.section-title{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:3px;margin-bottom:12px}
+.vintage-divider{display:flex;align-items:center;margin:0}
+.vintage-divider::before{content:'';width:56px;height:2px;background:var(--gold)}
+.sub-section-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--text);margin:26px 0 12px;padding-left:14px;border-left:3px solid var(--cinnabar)}
+.sub-section-title .num{color:var(--gold);font-family:'Abril Fatface',serif;margin-right:8px}
+.content p{font-size:16px;line-height:2;color:var(--text2);margin-bottom:14px;text-indent:2em;text-align:justify}
+.drop-cap::first-letter{float:left;font-family:'Abril Fatface','Noto Serif SC',serif;font-size:56px;line-height:.85;margin:6px 12px 0 0;color:var(--gold);font-weight:700}
+.highlight-box{background:var(--bg-card);border-left:3px solid var(--gold);padding:18px 22px;border-radius:2px;margin:20px 0}
+.highlight-box-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.highlight-box p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:0;text-indent:0}
+.recommend-box{background:linear-gradient(135deg,rgba(194,91,86,.12) 0%,rgba(212,184,122,.08) 100%);border:1px solid var(--cinnabar);padding:18px 22px;border-radius:2px;margin:20px 0}
+.recommend-box-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--cinnabar);margin-bottom:8px}
+.recommend-box p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:0;text-indent:0}
+blockquote{border:1px solid var(--border);padding:20px 24px;margin:24px 0;background:rgba(212,184,122,.05);font-style:italic;color:var(--text2);position:relative}
+blockquote::before{content:'"';font-family:'Abril Fatface',serif;font-size:48px;color:var(--gold);position:absolute;top:-8px;left:16px;opacity:.4}
+blockquote p{text-indent:0;margin-bottom:0;font-size:15px;padding-left:20px}
+.data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}
+.data-card{background:var(--bg-card);padding:18px 16px;border-radius:2px;border-top:2px solid var(--gold);text-align:center;display:flex;flex-direction:column;justify-content:center}
+.data-card.danger{border-top-color:var(--cinnabar)}
+.data-card.danger .data-num{color:var(--cinnabar)}
+.data-num{font-family:'Abril Fatface','Noto Serif SC',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1.1}
+.data-num .unit{font-size:13px;font-weight:500}
+.data-label{font-size:12px;color:var(--text3);margin-top:8px;letter-spacing:1px}
+.info-card{background:var(--bg-card);border-radius:2px;padding:16px 18px;border:1px solid var(--border);margin-bottom:12px}
+.info-card-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.info-card-title::before{content:'';width:4px;height:14px;background:var(--cinnabar)}
+.info-card p{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:0;text-indent:0}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(--bg-card2);color:var(--gold);padding:10px 12px;text-align:left;font-weight:700;border-bottom:2px solid var(--gold);font-family:'Noto Serif SC',serif}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+.data-table tr:nth-child(even) td{background:rgba(51,39,26,.5)}
+.data-table .highlight-row td{background:rgba(194,91,86,.15);color:var(--text);font-weight:600}
+.data-table .danger-text{color:var(--cinnabar);font-weight:700}
+.data-table .gold-text{color:var(--gold);font-weight:700}
+.data-table .total-row td{background:var(--bg-card2);color:var(--gold);font-weight:700;border-top:2px solid var(--gold)}
+/* 色彩色板 */
+.color-palette{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:16px 0}
+.color-swatch{border-radius:2px;overflow:hidden;border:1px solid var(--border)}
+.color-swatch-color{height:50px}
+.color-swatch-info{padding:8px 10px;background:var(--bg-card)}
+.color-swatch-name{font-size:12px;color:var(--text);font-weight:700;margin-bottom:2px}
+.color-swatch-hex{font-size:11px;color:var(--text3);font-family:'Special Elite',monospace}
+/* 五类建筑卡 */
+.building-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.building-card{background:var(--bg-card);border-radius:2px;padding:16px 18px;border-top:3px solid var(--gold)}
+.building-card.type1{border-top-color:var(--cinnabar)}
+.building-card.type2{border-top-color:#E8A838}
+.building-card.type3{border-top-color:var(--gold)}
+.building-card.type4{border-top-color:var(--text2)}
+.building-card.type5{border-top-color:var(--text3)}
+.building-card-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;justify-content:space-between}
+.building-card-title .count{font-size:12px;color:var(--gold);font-family:'Abril Fatface',serif}
+.building-card-strategy{font-size:12px;color:var(--text3);margin-bottom:8px;font-style:italic}
+.building-card p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:0;text-indent:0}
+/* 传统元素 */
+.element-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.element-item{background:var(--bg-card);border-radius:2px;padding:12px 14px;border-left:3px solid var(--gold);display:flex;gap:12px;align-items:flex-start}
+.element-icon{width:36px;height:36px;border-radius:50%;background:var(--bg-card2);display:flex;align-items:center;justify-content:center;font-family:'Abril Fatface',serif;font-size:16px;color:var(--gold);flex-shrink:0}
+.element-content{flex:1}
+.element-name{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.element-desc{font-size:12px;color:var(--text3);line-height:1.6}
+/* 负面清单 */
+.negative-list{background:var(--bg-card);border:1px solid var(--cinnabar);border-radius:2px;padding:18px 22px;margin:16px 0}
+.negative-list-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--cinnabar);margin-bottom:10px}
+.negative-item{font-size:13px;color:var(--text2);line-height:2;padding-left:20px;position:relative}
+.negative-item::before{content:'✕';position:absolute;left:0;color:var(--cinnabar);font-weight:700}
+.cn-divider{text-align:center;margin:36px 0;color:var(--gold);font-size:14px;letter-spacing:16px;opacity:.6}
+.chapter-nav{display:flex;justify-content:space-between;gap:16px;margin:40px 0 20px;padding-top:24px;border-top:1px solid var(--border)}
+.chapter-nav a{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:16px 20px;text-decoration:none;color:var(--text2);transition:all .3s;font-size:14px}
+.chapter-nav a:hover{border-color:var(--gold);color:var(--gold);background:var(--bg-card2)}
+.chapter-nav .nav-label{font-size:11px;color:var(--text3);margin-bottom:4px;font-family:'Special Elite',monospace}
+.footer{text-align:center;padding:40px 50px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+.footer-title{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--gold);margin-bottom:8px;letter-spacing:3px}
+@media(max-width:1024px){.data-grid{grid-template-columns:repeat(2,1fr)}.building-grid{grid-template-columns:1fr}.element-grid{grid-template-columns:1fr}.color-palette{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.top-nav{padding:10px 16px}.nav-right{display:none}.chapter-big-num{font-size:70px}.chapter-title{font-size:28px;letter-spacing:3px}.main-content{padding:30px 20px 50px}.data-grid{grid-template-columns:1fr 1fr}.chapter-nav{flex-direction:column}.color-palette{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">← 返回首页</a>
+    <span class="nav-chapter-tag">第七章</span>
+    <span class="nav-title">风貌提升与建筑整治</span>
+  </div>
+  <div class="nav-right">
+    <a href="topic-0.html">壹</a>
+    <a href="topic-1.html">贰</a>
+    <a href="topic-2.html">叁</a>
+    <a href="topic-3.html">肆</a>
+    <a href="topic-4.html">伍</a>
+    <a href="topic-5.html">陆</a>
+    <a href="topic-6.html" class="active">柒</a>
+    <a href="topic-7.html">捌</a>
+  </div>
+</nav>
+
+<div class="magazine-page">
+
+  <section class="chapter-hero">
+    <div class="chapter-hero-bg" style="background-image:url('https://aka.doubaocdn.com/s/giNwP12yCv');"></div>
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <div class="chapter-big-num">柒</div>
+      <span class="chapter-en-label">CHAPTER 07 · STREETSCAPE & ARCHITECTURE</span>
+      <h1 class="chapter-title">风貌提升与建筑整治</h1>
+      <div class="chapter-subtitle">风貌定位 · 四区管控 · 五类整治 · 十大元素 · 街巷设计 · 量化指标</div>
+      <div class="chapter-question"><strong>本章回答：</strong>长成什么样？——建立"风貌定位—分区管控—分类整治—元素传承—街巷设计—量化指标"完整设计引导体系，为建筑设计和工程实施提供可操作管控依据。</div>
+    </div>
+  </section>
+
+  <div class="main-content">
+
+    <!-- 引言 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">INTRODUCTION</span>
+        <h2 class="section-title">引言：风貌是第一印象</h2>
+        <div class="vintage-divider"></div>
+      </div>
+      <div class="content">
+        <p class="drop-cap">风貌是历史街区的第一印象，也是文化价值的直观载体。城正街片区拥有"一街三片七巷"的传统格局、湘中传统民居的建筑特色、会馆庙宇的艺术精华，但也面临不协调建筑多、风貌碎片化、传统元素流失等问题。本专题建立完整的设计引导体系，为后续建筑设计、工程实施和规划审批提供可操作的管控依据。</p>
+      </div>
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">227<span class="unit">处</span></div>
+          <div class="data-label">不协调建筑</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">20<span class="unit">万㎡</span></div>
+          <div class="data-label">不协调建筑面积</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">4<span class="unit">区</span></div>
+          <div class="data-label">风貌管控分区</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">5<span class="unit">类</span></div>
+          <div class="data-label">建筑分类整治</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第一章 风貌现状 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 01 · CURRENT STATUS</span>
+        <h2 class="section-title">一、风貌现状评估</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.1</span>建筑年代与风貌</h3>
+      <table class="data-table">
+        <thead><tr><th>建筑年代</th><th>数量</th><th>占比</th><th>风貌特征</th><th>整治策略</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>清代及以前</td><td>约100栋</td><td>3.7%</td><td>传统风貌，部分文保/历史建筑</td><td class="gold-text">修缮保护</td></tr>
+          <tr class="highlight-row"><td>民国时期</td><td>约200栋</td><td>7.3%</td><td>传统或中西合璧风貌</td><td class="gold-text">修缮保护</td></tr>
+          <tr><td>1949-1979年</td><td>约500栋</td><td>18.3%</td><td>苏式或简易楼，风貌一般</td><td>立面改造</td></tr>
+          <tr><td>1980-2005年</td><td>约1378栋</td><td>50.5%</td><td>老旧小区，风貌一般</td><td>立面改造/修缮</td></tr>
+          <tr><td>2006-2010年</td><td>433栋</td><td>15.9%</td><td>较新住宅，风貌尚可</td><td>保留/微改造</td></tr>
+          <tr><td>2010年后</td><td>116栋</td><td>4.3%</td><td>新建小区，现代风格</td><td>保留</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">1.2</span>不协调建筑五大类型</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">高度超标型</div>
+          <p>建筑层数超过管控要求，破坏天际线。核心区86处中大量存在，需降层或屋顶改造。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">风格冲突型</div>
+          <p>现代风格、欧式风格等与传统风貌冲突。建设北路沿线和部分机关单位建筑为主。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">材质违和型</div>
+          <p>大面积玻璃幕墙、金属面板、彩色瓷砖等。需更换为传统材质或仿传统材质。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text2)">
+          <div class="info-card-title">色彩杂乱型</div>
+          <p>建筑色彩鲜艳或与传统色调不和谐。需统一为"素、雅、暖"基调。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3);grid-column:1/-1">
+          <div class="info-card-title">界面破碎型</div>
+          <p>沿街界面不连续，开口杂乱，广告无序。需统一店招、整治界面、连续化处理。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第二章 风貌定位与分区 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 02 · POSITIONING & ZONING</span>
+        <h2 class="section-title">二、风貌定位与分区管控</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="recommend-box">
+        <div class="recommend-box-title">总体风貌定位</div>
+        <p><strong>"湘中传统市井风貌为底，会馆书院文化为魂，现代生活功能为用"</strong></p>
+        <p style="margin-top:8px">底色：湘中传统民居风貌（小青瓦、坡屋顶、砖木结构、木排门）；灵魂：会馆、书院、庙宇等公共建筑的传统艺术精华；功能：满足现代生活、商业、旅游需求；气质：古朴而不陈旧，传统而有活力，文化与生活交融。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.1</span>四个风貌管控区</h3>
+      <table class="data-table">
+        <thead><tr><th>管控区</th><th>面积</th><th>风貌要求</th><th>管控强度</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td><strong style="color:var(--cinnabar)">核心保护区</strong></td><td>9.689公顷</td><td>严格保持传统风貌，不得新建扩建</td><td class="danger-text">★★★★★ 最严格</td></tr>
+          <tr><td><strong style="color:var(--gold)">风貌协调区</strong></td><td>16.3公顷</td><td>与传统风貌协调，高度体量受控</td><td class="gold-text">★★★★☆ 严格</td></tr>
+          <tr><td><strong style="color:var(--text2)">一般管控区</strong></td><td>约290公顷</td><td>与整体风貌协调，适度现代</td><td>★★★☆☆ 一般</td></tr>
+          <tr><td><strong style="color:var(--text3)">外围过渡区</strong></td><td>—</td><td>现代城市风貌，与老城过渡</td><td>★★☆☆☆ 宽松</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">2.2</span>建筑高度管控</h3>
+      <table class="data-table">
+        <thead><tr><th>管控区</th><th>建筑高度上限</th><th>檐口高度</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>核心保护区</td><td class="danger-text">≤9米（2-3层）</td><td>≤6米</td><td>严格控制，保持传统尺度，坡屋顶坡度≥25°</td></tr>
+          <tr><td>建设控制地带</td><td class="gold-text">≤18米（5-6层）</td><td>≤12米</td><td>靠近核心区一侧≤12米，向外逐步提高</td></tr>
+          <tr><td>一般管控区</td><td>≤24米（7-8层）</td><td>≤18米</td><td>与老城整体协调</td></tr>
+          <tr><td>外围过渡区</td><td>按控规执行</td><td>—</td><td>现代城市尺度</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第三章 色彩与材质 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 03 · COLOR & MATERIAL</span>
+        <h2 class="section-title">三、建筑色彩与材质管控</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.1</span>主色调：素、雅、暖</h3>
+      <div class="color-palette">
+        <div class="color-swatch">
+          <div class="color-swatch-color" style="background:#4A4A4A"></div>
+          <div class="color-swatch-info">
+            <div class="color-swatch-name">屋面青灰</div>
+            <div class="color-swatch-hex">#4A4A4A</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-color" style="background:#F5F0E8"></div>
+          <div class="color-swatch-info">
+            <div class="color-swatch-name">墙体米白</div>
+            <div class="color-swatch-hex">#F5F0E8</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-color" style="background:#8B8680"></div>
+          <div class="color-swatch-info">
+            <div class="color-swatch-name">青砖色</div>
+            <div class="color-swatch-hex">#8B8680</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-color" style="background:#5C3A21"></div>
+          <div class="color-swatch-info">
+            <div class="color-swatch-name">木构件深棕</div>
+            <div class="color-swatch-hex">#5C3A21</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-swatch-color" style="background:#3D2817"></div>
+          <div class="color-swatch-info">
+            <div class="color-swatch-name">门窗深棕</div>
+            <div class="color-swatch-hex">#3D2817</div>
+          </div>
+        </div>
+      </div>
+      <div class="highlight-box">
+        <div class="highlight-box-title">色彩控制要求</div>
+        <p>①单栋建筑主色调不超过3种 ②沿街连续建筑色彩协调，避免强烈对比 ③文保建筑按历史原貌恢复色彩 ④新建建筑必须使用推荐色系 ⑤现有不协调色彩建筑逐步整改。禁止：鲜艳红/黄/蓝/绿大面积使用、彩色琉璃瓦（文保除外）、彩色瓷砖外墙。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.2</span>材质管控：传统优先，现代替代</h3>
+      <table class="data-table">
+        <thead><tr><th>部位</th><th>传统材质</th><th>现代替代材质</th><th>禁止材质</th></tr></thead>
+        <tbody>
+          <tr><td>屋面</td><td>小青瓦、筒瓦</td><td>仿古陶瓦、混凝土仿瓦</td><td class="danger-text">彩钢瓦、石棉瓦、彩色塑料瓦</td></tr>
+          <tr><td>墙体</td><td>青砖、白灰抹面、土坯砖</td><td>仿古砖、真石漆、质感涂料</td><td class="danger-text">彩色瓷砖、镜面玻璃、金属面板</td></tr>
+          <tr><td>木构件</td><td>实木（杉木、樟木）</td><td>防腐木、碳化木、木纹金属</td><td class="danger-text">塑料仿木、亮面PVC</td></tr>
+          <tr><td>门窗</td><td>木门窗</td><td>断桥铝（木纹转印）、钢窗</td><td class="danger-text">彩色塑钢、亮面铝合金</td></tr>
+          <tr><td>地面</td><td>青石板、麻石、青砖</td><td>仿古石材、透水砖</td><td class="danger-text">彩色地砖、镜面石材</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第四章 五类建筑整治 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 04 · FIVE CATEGORIES</span>
+        <h2 class="section-title">四、建筑分类整治引导</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="building-grid">
+        <div class="building-card type1">
+          <div class="building-card-title">一类：文保建筑 <span class="count">36处</span></div>
+          <div class="building-card-strategy">修缮保护，不改变原状</div>
+          <p>原则：不改变文物原状，最小干预，可识别性，可逆性。内容：结构加固（传统工艺）、屋面修缮（更换小青瓦）、墙体修缮（青砖白灰）、木构件修缮（防腐处理）、门窗修缮（传统样式）、台基修缮。禁止改变结构外观、禁止现代材料替代传统材料。</p>
+        </div>
+        <div class="building-card type2">
+          <div class="building-card-title">二类：历史建筑 <span class="count">41处</span></div>
+          <div class="building-card-strategy">修缮保护，可改善内部</div>
+          <p>原则：保护历史外观，改善内部功能，适度利用。内容：外观保护（高度体量色彩不变）、结构安全、内部改善（水电消防空调）、功能更新（文化展示/非遗工作室/特色小店/精品民宿/社区服务）、环境整治。</p>
+        </div>
+        <div class="building-card type3">
+          <div class="building-card-title">三类：传统风貌建筑 <span class="count">31处+</span></div>
+          <div class="building-card-strategy">风貌整治，功能更新</div>
+          <p>原则：保留传统元素，改善居住条件，提升风貌品质。内容：屋面平改坡（小青瓦）、立面恢复传统材质色彩、门窗传统样式、阳台整治、附属设施统一（空调机位/雨棚/防盗窗）、内部厨卫改造管线更新。</p>
+        </div>
+        <div class="building-card type4">
+          <div class="building-card-title">四类：一般建筑 <span class="count">约2000栋</span></div>
+          <div class="building-card-strategy">立面改造，设施改善</div>
+          <p>原则：成本可控，效果明显，与整体协调。三档改造：轻度（统一色彩店招）、中度（外墙+门窗+附属设施）、深度（屋面+立面+门窗全面）。内容：平屋顶绿化或仿坡顶、外墙真石漆/仿古砖、统一门窗阳台、底层商铺统一店招。</p>
+        </div>
+        <div class="building-card type5" style="grid-column:1/-1">
+          <div class="building-card-title">五类：不协调建筑 <span class="count">227处</span></div>
+          <div class="building-card-strategy">分类整治：改造/降层/拆除/遮挡</div>
+          <p>四种处理方式：<strong style="color:var(--gold)">立面改造约136处（60%）</strong>——高度体量基本协调，仅立面风格不协调，做外墙门窗屋面改造；<strong style="color:#E8A838">降层处理约34处（15%）</strong>——高度超标但结构允许，拆除顶部1-2层做坡屋顶；<strong style="color:var(--cinnabar)">拆除重建约23处（10%）</strong>——严重不协调且无保留价值，拆除后按传统风貌重建；<strong style="color:var(--text3)">遮挡弱化约34处（15%）</strong>——暂时无法拆除，通过高大乔木/文化围挡弱化。整治优先级：核心区86处→主要街巷沿线→建控地带其他→一般管控区。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第五章 传统元素传承 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 05 · TRADITIONAL ELEMENTS</span>
+        <h2 class="section-title">五、湘中传统民居元素传承</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="content">
+        <p>湘中传统民居总体特征：朴素实用，因地制宜，砖木结构，小青瓦坡屋顶。建筑形制：两坡顶为主坡面缓和、青瓦竖砌正脊、悬山最广泛、三段式立面（木排门+墙身+坡屋顶）、背街长坡临街短坡形成檐下空间、砖木结构（土坯砖+条石+小青瓦+木楼板）。平面类型：大进深式（前店后宅）、内院式、联排式。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.1</span>十大传统元素传承清单</h3>
+      <div class="element-grid">
+        <div class="element-item">
+          <div class="element-icon">1</div>
+          <div class="element-content">
+            <div class="element-name">小青瓦坡屋顶</div>
+            <div class="element-desc">两坡顶，坡面缓和，青灰色小瓦。新建建筑必须采用，坡度25°-35°</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">2</div>
+          <div class="element-content">
+            <div class="element-name">木排门</div>
+            <div class="element-desc">可拆装木板门，下部为门槛。商业建筑优先采用，临街底层</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">3</div>
+          <div class="element-content">
+            <div class="element-name">三段式立面</div>
+            <div class="element-desc">木排门+墙身+坡屋顶。新建和改造建筑参考，沿街立面</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">4</div>
+          <div class="element-content">
+            <div class="element-name">青砖/白灰墙面</div>
+            <div class="element-desc">青砖清水墙或白灰抹面。外墙材质首选</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">5</div>
+          <div class="element-content">
+            <div class="element-name">木格窗</div>
+            <div class="element-desc">传统木格窗，图案简洁。门窗改造参考</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">6</div>
+          <div class="element-content">
+            <div class="element-name">条石台基</div>
+            <div class="element-desc">青石或麻石条石基座。建筑基座</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">7</div>
+          <div class="element-content">
+            <div class="element-name">青石板路</div>
+            <div class="element-desc">青石板或麻石铺装。街巷铺装，300x600mm厚50mm</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">8</div>
+          <div class="element-content">
+            <div class="element-name">檐下空间</div>
+            <div class="element-desc">背街长坡临街短坡形成。新建商业建筑可采用，适应多雨气候</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">9</div>
+          <div class="element-content">
+            <div class="element-name">封火墙</div>
+            <div class="element-desc">阶梯形山墙，防火功能。大宅或联排建筑可采用</div>
+          </div>
+        </div>
+        <div class="element-item">
+          <div class="element-icon">10</div>
+          <div class="element-content">
+            <div class="element-name">天窗</div>
+            <div class="element-desc">大进深建筑顶部采光。大进深改造建筑可采用</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第六章 街巷与公共空间 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 06 · STREET & PUBLIC SPACE</span>
+        <h2 class="section-title">六、街巷空间与公共空间设计</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.1</span>街巷分类与设计</h3>
+      <table class="data-table">
+        <thead><tr><th>类型</th><th>代表街巷</th><th>宽度</th><th>功能</th><th>设计要求</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>主街</td><td>城正街、平政路</td><td>6-12米</td><td>商业+步行+少量机动车</td><td>步行优先，限速20km/h</td></tr>
+          <tr><td>巷弄</td><td>板石巷、泗洲庵巷等七巷</td><td>2-4米</td><td>步行+生活</td><td>纯步行，禁止机动车</td></tr>
+          <tr><td>通道</td><td>各院落通道</td><td>1-2米</td><td>步行</td><td>保持传统尺度</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">6.2</span>街道家具统一设计</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">路灯</div>
+          <p>传统庭院灯样式，高度3-4米，铸铝/铸铁深色，仿古风格，暖光</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">座椅</div>
+          <p>简洁木质座椅，与绿化结合，防腐木+金属，传统风格</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">标识系统</div>
+          <p>统一设计含中/英/日/韩，金属+石材，街巷名称+历史建筑解说+导览图</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">店招广告</div>
+          <p>宽度≤店面宽度，高度≤0.8米，檐口下方，木质/金属仿木深色底浅色字</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">架空管线</div>
+          <p>电力通信有线电视全部入地，变压器配电箱美化处理</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">街巷绿化</div>
+          <p>行道树香樟桂花朴树，花箱月季杜鹃，垂直绿化爬山虎凌霄紫藤</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.3</span>公共空间体系：一园一带多点</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">一园：雨湖公园</div>
+          <p>核心公共空间。文化融入（城总文化景观小品雕塑）、夜间经济（灯光秀夜市演出）、设施完善、植物优化、水岸提升。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">一带：滨江风光带</div>
+          <p>线性公共空间。城墙遗址公园、码头遗址展示（小东门/十二总）、滨江步道贯通、观景平台、亲水平台、乡土水生植物。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">多点：口袋公园</div>
+          <p>10-20个点状公共空间。利用闲置空地街角拆违后空间，100-500㎡，休闲健身儿童活动文化展示，每个公园独特主题。</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第七章 量化指标与负面清单 -->
+    <section style="margin-bottom:20px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 07 · QUANTITATIVE INDICATORS</span>
+        <h2 class="section-title">七、量化管控指标与负面清单</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">7.1</span>12项量化管控指标</h3>
+      <table class="data-table">
+        <thead><tr><th>指标</th><th>核心保护区</th><th>建设控制地带</th><th>一般管控区</th></tr></thead>
+        <tbody>
+          <tr><td>建筑高度</td><td class="danger-text">≤9米</td><td class="gold-text">≤18米</td><td>≤24米</td></tr>
+          <tr><td>檐口高度</td><td>≤6米</td><td>≤12米</td><td>≤18米</td></tr>
+          <tr><td>建筑密度</td><td>≤60%</td><td>≤50%</td><td>≤40%</td></tr>
+          <tr><td>容积率</td><td>≤1.2</td><td>≤2.0</td><td>≤2.5</td></tr>
+          <tr><td>绿地率</td><td>≥20%</td><td>≥25%</td><td>≥30%</td></tr>
+          <tr class="highlight-row"><td>新建建筑坡屋顶比例</td><td class="gold-text">100%</td><td>≥80%</td><td>≥50%</td></tr>
+          <tr><td>传统材质使用率</td><td>≥80%</td><td>≥50%</td><td>≥30%</td></tr>
+          <tr><td>主色调符合率</td><td>100%</td><td>≥90%</td><td>≥80%</td></tr>
+          <tr><td>街巷步行化比例</td><td>100%</td><td>≥70%</td><td>≥50%</td></tr>
+          <tr><td>架空管线入地率</td><td>100%</td><td>100%</td><td>≥80%</td></tr>
+          <tr><td>店招规范率</td><td>100%</td><td>≥90%</td><td>≥80%</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">7.2</span>建筑设计负面清单</h3>
+      <div class="negative-list">
+        <div class="negative-list-title">六大类禁止行为</div>
+        <div class="negative-item"><strong>高度禁止：</strong>核心区新建超9米、建控地带超18米、随意加层搭建</div>
+        <div class="negative-item"><strong>风格禁止：</strong>欧式/地中海式/现代极简等冲突风格、大面积玻璃幕墙（核心区和风貌协调区）、彩色金属面板镜面不锈钢、仿古建筑过度装饰（假古董）</div>
+        <div class="negative-item"><strong>色彩禁止：</strong>鲜艳红黄蓝绿大面积使用、彩色琉璃瓦（文保除外）、彩色瓷砖外墙、建筑色彩超3种主色</div>
+        <div class="negative-item"><strong>材质禁止：</strong>彩钢瓦石棉瓦屋面、彩色塑料瓦、彩色塑钢门窗（外露）、马赛克彩色瓷砖外墙、镜面玻璃反光金属</div>
+        <div class="negative-item"><strong>附属设施禁止：</strong>外露空调外机（无装饰罩）、外露管线配电箱、大型LED屏（除指定区域）、悬挂式广告大型喷绘、凸出式防盗窗、彩色雨棚阳光房</div>
+        <div class="negative-item"><strong>街巷禁止：</strong>随意拓宽拉直历史街巷、核心区街巷机动车停放、现代样式路灯垃圾桶座椅、彩色地砖镜面石材铺装</div>
+      </div>
+
+      <blockquote>
+        <p>风貌管控不是要把所有建筑都做成"假古董"，而是要在保护传统肌理和文化基因的基础上，实现新旧共生。核心区严格保护传统风貌，建控地带协调过渡，一般管控区适度现代——不同区域有不同的管控强度，既守住了历史文化的底线，也给现代生活留下了空间。"绣花功夫"微改造，一栋一策精准设计，才是历史街区风貌提升的正道。</p>
+      </blockquote>
+    </section>
+
+    <div class="chapter-nav">
+      <a href="topic-5.html">
+        <div class="nav-label">← 上一章</div>
+        <div>第六章 · 更新项目库与投资估算</div>
+      </a>
+      <a href="topic-7.html">
+        <div class="nav-label">下一章 →</div>
+        <div>第八章 · 实施路径与运营资金</div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-title">城正街片区策划专题研究</div>
+    <p>千年城总 · 金湘潭 | 历史文化街区城市更新研究</p>
+    <p style="margin-top:8px;font-size:12px">编制时间：2026年8月 | 共八大专题研究</p>
+    <p style="margin-top:8px;font-size:12px;color:var(--gold)">联系邮箱：ytf2000@sina.com</p>
+  </div>
+
+</div>
+</body>
+</html>
