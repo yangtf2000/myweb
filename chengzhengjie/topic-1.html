@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二章 · 现状问题专题分析 | 城正街片区策划专题研究</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;500;700&family=Special+Elite&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ========== 智能分页控制 - magazine-layout Skill 规范 ========== */
+@media print {
+  h1, h2, h3, h4, .chapter-number, .chapter-title, .section-header, .method-title {
+    page-break-after: avoid; break-after: avoid;
+  }
+  blockquote, .highlight-box, .key-point, .abstract, .stage-item, .question-item,
+  .game-element, .numbered-item, .list-item, .code-block, .terminal, figure, img, table, .card {
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  ul, ol, .numbered-list, .question-list, .stage-list {
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .elegant-divider, .divider, .section-divider, .nature-divider, .vintage-divider, .art-divider, hr {
+    page-break-after: avoid; break-after: avoid;
+  }
+  .method-section, .inner-border {
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  p { orphans: 3; widows: 3; }
+  section.new-page { page-break-before: always; break-before: always; }
+}
+blockquote, .highlight-box, .key-point, .abstract, .stage-item, .question-item,
+.game-element, .code-block, .terminal, .stage-list, .question-list,
+figure, img, table, .card {
+  page-break-inside: avoid; break-inside: avoid;
+}
+h1, h2, h3, h4, .chapter-number, .chapter-title, .section-header, .method-title {
+  page-break-after: avoid; break-after: avoid;
+}
+.elegant-divider, .divider, .section-divider, .nature-divider, .vintage-divider, .art-divider, hr {
+  page-break-after: avoid; break-after: avoid;
+}
+
+/* ========== 深色 Vintage Retro 主题 ========== */
+:root {
+  --bg: #0E0906;
+  --bg-page: #1A120B;
+  --bg-card: #33271A;
+  --bg-card2: #3D2E1F;
+  --bg-card3: #2A1F14;
+  --text: #F0E6D5;
+  --text2: #C4B69E;
+  --text3: #968870;
+  --gold: #D4B87A;
+  --gold-light: #E8D4A0;
+  --cinnabar: #C25B56;
+  --cinnabar-dark: #9A3E3A;
+  --border: #4E3A25;
+  --border-light: #5E4830;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Lora', 'Noto Serif SC', serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* 顶部导航 */
+.top-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(14, 9, 6, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top-nav a { color: var(--text3); text-decoration: none; font-size: 13px; transition: color 0.3s; }
+.top-nav a:hover { color: var(--gold); }
+.nav-left { display: flex; align-items: center; gap: 16px; }
+.nav-back { color: var(--gold) !important; font-size: 13px; }
+.nav-chapter-tag {
+  background: var(--cinnabar);
+  color: var(--text) !important;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.nav-title { color: var(--text2); font-size: 14px; font-weight: 600; }
+.nav-right { display: flex; gap: 18px; }
+.nav-right a {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--text3);
+}
+.nav-right a.active { color: var(--gold); }
+
+/* 杂志页面容器 */
+.magazine-page {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--bg-page);
+  margin: 0 auto;
+  padding-top: 56px;
+  position: relative;
+  box-shadow: 0 0 80px rgba(0,0,0,0.5);
+}
+
+/* 章节封面 */
+.chapter-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.chapter-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.28) saturate(0.6);
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.chapter-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14,9,6,0.85) 0%, rgba(14,9,6,0.3) 50%, rgba(14,9,6,0.95) 100%);
+}
+.chapter-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 50px;
+  width: 100%;
+}
+.chapter-big-num {
+  font-family: 'Abril Fatface', 'Noto Serif SC', serif;
+  font-size: 100px;
+  color: var(--cinnabar);
+  line-height: 0.9;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+.chapter-en-label {
+  font-family: 'Special Elite', monospace;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  display: inline-block;
+  border: 1px solid var(--gold);
+  padding: 6px 14px;
+}
+.chapter-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: 6px;
+  margin-bottom: 14px;
+}
+.chapter-subtitle {
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 24px;
+}
+.chapter-question {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  color: var(--text2);
+  border-left: 3px solid var(--cinnabar);
+  padding-left: 14px;
+}
+.chapter-question strong { color: var(--gold); }
+
+/* 主内容区 */
+.main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 50px 60px;
+}
+
+/* 章节标题 */
+.section-header {
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  position: relative;
+}
+.section-tag {
+  font-family: 'Special Elite', monospace;
+  font-size: 12px;
+  color: var(--cinnabar);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+  display: block;
+}
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+.vintage-divider {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.vintage-divider::before {
+  content: '';
+  width: 56px;
+  height: 2px;
+  background: var(--gold);
+}
+
+/* 三级标题 */
+.sub-section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 26px 0 12px;
+  padding-left: 14px;
+  border-left: 3px solid var(--cinnabar);
+}
+.sub-section-title .num {
+  color: var(--gold);
+  font-family: 'Abril Fatface', serif;
+  margin-right: 8px;
+}
+
+/* 段落 */
+.content p {
+  font-size: 16px;
+  line-height: 2;
+  color: var(--text2);
+  margin-bottom: 14px;
+  text-indent: 2em;
+  text-align: justify;
+}
+.drop-cap::first-letter {
+  float: left;
+  font-family: 'Abril Fatface', 'Noto Serif SC', serif;
+  font-size: 56px;
+  line-height: 0.85;
+  margin: 6px 12px 0 0;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* 图文混排 */
+.img-float-right {
+  float: right;
+  width: 44%;
+  margin: 6px 0 16px 24px;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-float-left {
+  float: left;
+  width: 40%;
+  margin: 6px 24px 16px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-float-right img, .img-float-left img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.78) brightness(0.94);
+}
+.img-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(14,9,6,0.96), transparent);
+  color: var(--text2);
+  font-size: 12px;
+  padding: 40px 14px 10px;
+  line-height: 1.7;
+}
+.img-caption strong { color: var(--gold); }
+.img-full {
+  width: 100%;
+  margin: 24px 0;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-full img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.78) brightness(0.94);
+}
+/* 双图网格 */
+.img-duo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.img-duo-item {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-duo-item img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.78) brightness(0.94);
+  height: 200px;
+  object-fit: cover;
+}
+.img-duo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(14,9,6,0.96), transparent);
+  color: var(--text2);
+  font-size: 11px;
+  padding: 30px 10px 8px;
+  line-height: 1.6;
+}
+.img-duo-caption strong { color: var(--gold); }
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* 高亮框 */
+.highlight-box {
+  background: var(--bg-card);
+  border-left: 3px solid var(--gold);
+  padding: 18px 22px;
+  border-radius: 2px;
+  margin: 20px 0;
+}
+.highlight-box-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.highlight-box p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 0;
+  text-indent: 0;
+}
+
+/* 策划研判框 */
+.judgment-box {
+  background: linear-gradient(135deg, rgba(194,91,86,0.1) 0%, rgba(212,184,122,0.08) 100%);
+  border: 1px solid var(--cinnabar);
+  padding: 16px 20px;
+  border-radius: 2px;
+  margin: 20px 0;
+}
+.judgment-box-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cinnabar);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.judgment-box-title::before {
+  content: '策划研判';
+  background: var(--cinnabar);
+  color: var(--text);
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.judgment-box p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 0;
+  text-indent: 0;
+}
+
+/* 引用框 */
+blockquote {
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: rgba(212, 184, 122, 0.05);
+  font-style: italic;
+  color: var(--text2);
+  position: relative;
+}
+blockquote::before {
+  content: '"';
+  font-family: 'Abril Fatface', serif;
+  font-size: 48px;
+  color: var(--gold);
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  opacity: 0.4;
+}
+blockquote p {
+  text-indent: 0;
+  margin-bottom: 0;
+  font-size: 15px;
+  padding-left: 20px;
+}
+
+/* 数据卡片网格 */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 24px 0;
+}
+.data-card {
+  background: var(--bg-card);
+  padding: 18px 16px;
+  border-radius: 2px;
+  border-top: 2px solid var(--gold);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.data-card.danger { border-top-color: var(--cinnabar); }
+.data-card.danger .data-num { color: var(--cinnabar); }
+.data-num {
+  font-family: 'Abril Fatface', 'Noto Serif SC', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.1;
+}
+.data-num .unit { font-size: 13px; font-weight: 500; }
+.data-label {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* 信息卡片 */
+.info-card {
+  background: var(--bg-card);
+  border-radius: 2px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.info-card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-card-title::before {
+  content: '';
+  width: 4px;
+  height: 14px;
+  background: var(--cinnabar);
+}
+.info-card p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 0;
+  text-indent: 0;
+}
+
+/* 表格 */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+.data-table th {
+  background: var(--bg-card2);
+  color: var(--gold);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--gold);
+  font-family: 'Noto Serif SC', serif;
+}
+.data-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+}
+.data-table tr:nth-child(even) td {
+  background: rgba(51, 39, 26, 0.5);
+}
+.data-table .highlight-row td {
+  background: rgba(194, 91, 86, 0.15);
+  color: var(--text);
+  font-weight: 600;
+}
+.data-table .danger-text { color: var(--cinnabar); font-weight: 700; }
+
+/* 优先级卡片 */
+.priority-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.priority-card {
+  background: var(--bg-card);
+  border-radius: 2px;
+  padding: 18px 20px;
+  border-left: 4px solid var(--gold);
+}
+.priority-card.p1 { border-left-color: var(--cinnabar); }
+.priority-card.p2 { border-left-color: #E8A838; }
+.priority-card.p3 { border-left-color: var(--gold); }
+.priority-card.p4 { border-left-color: var(--text3); }
+.priority-card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.priority-card.p1 .priority-card-title { color: var(--cinnabar); }
+.priority-card-subtitle {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 10px;
+  font-family: 'Special Elite', monospace;
+}
+.priority-card p {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 0;
+  text-indent: 0;
+}
+
+/* 抓手卡片 */
+.grabber-card {
+  background: linear-gradient(135deg, rgba(212,184,122,0.1) 0%, rgba(194,91,86,0.08) 100%);
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+.grabber-card-num {
+  font-family: 'Abril Fatface', serif;
+  font-size: 36px;
+  color: var(--cinnabar);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.grabber-card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.grabber-card p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 6px;
+  text-indent: 0;
+}
+.grabber-card p strong { color: var(--text); }
+
+/* 中式分隔符 */
+.cn-divider {
+  text-align: center;
+  margin: 36px 0;
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 16px;
+  opacity: 0.6;
+}
+
+/* 底部章节导航 */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 40px 0 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.chapter-nav a {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 16px 20px;
+  text-decoration: none;
+  color: var(--text2);
+  transition: all 0.3s;
+  font-size: 14px;
+}
+.chapter-nav a:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--bg-card2);
+}
+.chapter-nav .nav-label {
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: 4px;
+  font-family: 'Special Elite', monospace;
+}
+
+/* 底部 */
+.footer {
+  text-align: center;
+  padding: 40px 50px;
+  border-top: 1px solid var(--border);
+  color: var(--text3);
+  font-size: 13px;
+}
+.footer-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 3px;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .priority-grid { grid-template-columns: 1fr; }
+  .img-duo-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .top-nav { padding: 10px 16px; }
+  .nav-right { display: none; }
+  .chapter-big-num { font-size: 70px; }
+  .chapter-title { font-size: 28px; letter-spacing: 3px; }
+  .main-content { padding: 30px 20px 50px; }
+  .img-float-right, .img-float-left { float: none; width: 100%; margin: 16px 0; }
+  .data-grid { grid-template-columns: 1fr 1fr; }
+  .chapter-nav { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">← 返回首页</a>
+    <span class="nav-chapter-tag">第二章</span>
+    <span class="nav-title">现状问题专题分析</span>
+  </div>
+  <div class="nav-right">
+    <a href="topic-0.html">壹</a>
+    <a href="topic-1.html" class="active">贰</a>
+    <a href="topic-2.html">叁</a>
+    <a href="topic-3.html">肆</a>
+    <a href="topic-4.html">伍</a>
+    <a href="topic-5.html">陆</a>
+    <a href="topic-6.html">柒</a>
+    <a href="topic-7.html">捌</a>
+  </div>
+</nav>
+
+<div class="magazine-page">
+
+  <!-- 章节封面 -->
+  <section class="chapter-hero">
+    <div class="chapter-hero-bg" style="background-image: url('https://aka.doubaocdn.com/s/f40ax0OpDb');"></div>
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <div class="chapter-big-num">贰</div>
+      <span class="chapter-en-label">CHAPTER 02 · CURRENT ISSUES ANALYSIS</span>
+      <h1 class="chapter-title">现状问题专题分析</h1>
+      <div class="chapter-subtitle">人口社会 · 建筑遗产 · 闲置资产 · 公共服务 · 基础设施 · 产业业态</div>
+      <div class="chapter-question"><strong>本章回答：</strong>我怎么了？——系统诊断八大领域问题，采用"严重性×策划价值"二维评估，分四级优先级，提出三大核心抓手。</div>
+    </div>
+  </section>
+
+  <div class="main-content">
+
+    <!-- 引言 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">INTRODUCTION</span>
+        <h2 class="section-title">引言：片区策划视角下的问题研判框架</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-float-right">
+        <img src="https://aka.doubaocdn.com/s/yAqG5SshaU" alt="城正街街巷">
+        <div class="img-caption"><strong>城正街街巷</strong> · 斑驳的墙面与杂乱的线缆，记录着老城的衰落与等待更新的期盼</div>
+      </div>
+
+      <div class="content">
+        <p class="drop-cap">城正街片区位于湘潭老城核心，北至韶山中路和熙春门路，西至解放南路，南邻湘江，北靠长株潭城际S1线，总用地面积316.83公顷，包含雨湖路街道（下辖6个社区）与城正街街道（下辖5个社区），是湘潭古城所在地，也是"金湘潭"商埠文化的核心承载区。</p>
+        <p>片区内各类建筑共计2727栋，居住建筑占比83.93%，总建筑密度18.21%，平均容积率1.14，是典型的低密度、高老化度老城片区。</p>
+      </div>
+
+      <div style="clear: both;"></div>
+
+      <h3 class="sub-section-title"><span class="num">01</span>0601版指标体系与体检结论</h3>
+
+      <div class="content">
+        <p>0601汇报版建立了"一个基础、八大板块、41项指标"的城市体检体系，涵盖城市功能、城市生态、基础设施、历史文化、既有建筑改造、城镇老旧小区、完整社区、老旧街区/厂区/城中村八大板块。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">体检核心结论：11项指标未达标</div>
+        <p>未达标指标主要集中在城市功能和基础设施领域。其中<strong>消防站覆盖率仅3.88%</strong>、<strong>养老服务覆盖率45.14%</strong>、<strong>60岁以上人口占比25.83%</strong>三项最为严峻。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">02</span>研判逻辑：从"问题清单"到"策划抓手"</h3>
+
+      <div class="content">
+        <p>片区策划不是简单地"有什么问题解决什么问题"，而是要识别出对片区发展具有决定性影响的核心问题，将其转化为策划的重点抓手。本报告采用"严重性×策划价值"二维评估框架：</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">严重性</div>
+          <p>问题对安全、民生、风貌的影响程度。安全底线问题（危房、消防）严重性最高。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">策划价值</div>
+          <p>问题解决后对片区振兴的带动作用。资产盘活、文化活化、业态升级策划价值最高。</p>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>据此将八大类问题分为四个优先级：第一优先级（安全底线）必须先解决；第二优先级（民生刚需）是策划的基础工程；第三优先级（策划核心）是价值创造的关键；第四优先级（品质提升）锦上添花。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第一章 人口社会问题 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 01 · DEMOGRAPHIC & SOCIAL</span>
+        <h2 class="section-title">一、人口社会问题——片区活力衰退的底层矛盾</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>人口结构问题是片区所有问题的根源，也是最突出的底层矛盾。老龄化25.83%意味着街区消费力弱、活力不足，而人口密度超标则加剧了基础设施和公共空间的承载压力。这一问题无法通过工程手段直接解决，但决定了策划的整体方向——必须通过产业导入吸引年轻人口，通过适老化改造保障存量居民。</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card danger">
+          <div class="data-num">1.71<span class="unit">万/km²</span></div>
+          <div class="data-label">人口密度（超标14%）</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">25.83<span class="unit">%</span></div>
+          <div class="data-label">60岁以上占比（超标2.58倍）</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">19.13<span class="unit">%</span></div>
+          <div class="data-label">65岁以上占比（超标2.73倍）</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">11<span class="unit">个</span></div>
+          <div class="data-label">社区数量</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.1</span>人口密度超标，公共空间与服务承载不足</h3>
+
+      <div class="content">
+        <p>片区人口密度1.71万人/km²，超出标准上限（0.7-1.5万人/km²）14%。在老旧建筑密集、公共空间匮乏的老城片区，高密度人口意味着人均公共资源严重不足。0601版明确指出："人口密度超出标准，公共空间和服务承载能力严重不足。"</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.2</span>老龄化突出，人口结构严重失衡</h3>
+
+      <div class="content">
+        <p>60岁以上人口占比25.83%，65岁以上占比19.13%，分别超标2.58倍和2.73倍。每4人中就有1位60岁以上老人，年轻人口外流严重，街区活力不足。留守老年人多，适老化设施需求突出。人口结构失衡导致消费能力弱、创新活力不足、社会参与度低。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">尖锐矛盾</div>
+        <p>60岁以上人口占比25.83%（每4人1位老人），但养老服务设施覆盖率仅45.14%，"未富先老、设施缺位"问题极为突出。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.3</span>对片区策划的影响</h3>
+
+      <div class="content">
+        <p>人口社会问题是片区策划必须面对的底层约束条件：消费市场约束——老龄化意味着本地消费以基本生活需求为主，中高端文旅消费主要依赖外来客群，策划必须"主客共享"；适老化刚需——25.83%的老年人口要求所有公共空间、公共设施、住宅改造都必须考虑适老化；活力再造目标——片区振兴的核心标志之一是年轻人口回流，策划必须通过产业导入创造年轻人愿意来、留得住的环境；社会结构风险——严重老龄化可能导致传统生活方式与市井文化失传，"活态传承"面临人的断层。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第二章 建筑遗产与风貌问题 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 02 · ARCHITECTURE & HERITAGE</span>
+        <h2 class="section-title">二、建筑遗产与风貌问题——保护与发展的核心张力</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>建筑是片区的物质载体，也是历史文化价值的核心体现。79.88%的老旧建筑、158栋危房、36.36%的遗产破损率，构成了片区最大的安全隐患和保护压力。C/D级危房清零是安全底线，历史建筑活化是价值创造，风貌不协调整治是基础工程——三者构成建筑类问题的三个层次。</p>
+      </div>
+
+      <div class="img-duo-grid">
+        <div class="img-duo-item">
+          <img src="https://aka.doubaocdn.com/s/AAYggfojo8" alt="关圣殿大门">
+          <div class="img-duo-caption"><strong>关圣殿大门</strong> · 全国重点文保单位，北五省会馆，建筑保存较好但周边环境杂乱</div>
+        </div>
+        <div class="img-duo-item">
+          <img src="https://aka.doubaocdn.com/s/9Kqa6EpNk2" alt="关圣殿春秋阁">
+          <div class="img-duo-caption"><strong>关圣殿春秋阁</strong> · 历史建筑本体较好，但活化利用率不足，长期不对外开放</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.1</span>建筑年代结构：近八成建筑超过20年</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>建筑年代</th><th>栋数</th><th>占比</th><th>主要分布</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td>2005年以前</td><td>2,178栋</td><td>79.88%</td><td>片区中部和东部（城正街核心区）</td></tr>
+          <tr><td>2006-2010年</td><td>433栋</td><td>15.87%</td><td>片区北侧</td></tr>
+          <tr><td>2010年后</td><td>116栋</td><td>4.25%</td><td>片区西侧（新建小区）</td></tr>
+        </tbody>
+      </table>
+
+      <div class="content">
+        <p>近八成建筑建成于2005年以前，意味着片区整体进入"老旧化"阶段。2010年后建筑仅占4.25%，且集中在片区边缘，核心区几乎没有新建建筑，风貌整体性较好但老化程度最高。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.2</span>建筑层数与质量</h3>
+
+      <div class="content">
+        <p>1-6层建筑合计占比85.32%，片区整体保持了老城的低多层尺度特征，这是历史风貌保护的有利条件。但低多层建筑往往配套设施不足（无电梯、无车位、管网老化）。三类建筑（较差）占比58.89%，超过一半的建筑存在不同程度的质量问题。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.3</span>C/D级危房：158栋，安全底线问题</h3>
+
+      <div class="data-grid">
+        <div class="data-card danger">
+          <div class="data-num">158<span class="unit">栋</span></div>
+          <div class="data-label">C/D级危房总数</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">129<span class="unit">栋</span></div>
+          <div class="data-label">C级（局部危房）</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">29<span class="unit">栋</span></div>
+          <div class="data-label">D级（整幢危房）</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">0<span class="unit">栋</span></div>
+          <div class="data-label">建议目标值（动态清零）</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>危房典型案例包括：市彩印厂家属（1973年建）、机械局宿舍、和平新村（1988年建）、关圣殿10栋、帆布厂生产车间等。危房改造投资0601版估算约8638万元。湖南省政府明确要求C/D级危房动态清零，是必须优先解决的政治任务。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.4</span>历史文化遗产：破损率36.36%，活化利用率67.54%</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>资源类型</th><th>数量</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>历史文化街区</td><td>1处</td><td>城正街历史文化街区</td></tr>
+          <tr><td>全国重点文保单位</td><td>1处</td><td>北五省会馆（关圣殿）</td></tr>
+          <tr><td>省级文保单位</td><td>10处</td><td>太真芝药室、湘潭文庙、江西会馆等</td></tr>
+          <tr><td>一般文物</td><td>19处</td><td>十二总码头、湘真一药号等</td></tr>
+          <tr><td>历史建筑</td><td>41处</td><td>郭东皋墓庐宅墙、板石巷2号民居等</td></tr>
+          <tr><td>特色风貌建筑</td><td>31处</td><td>通济门路居民建筑群等（拟推荐）</td></tr>
+          <tr class="highlight-row"><td>文保单位合计</td><td>36处</td><td>国家级1+省级10+市级+一般19</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">典型问题</div>
+        <p>文庙已完成本体修缮，但未完成"三防"工程、尚未布展，长期不对外开放；抗日阵亡将士纪念碑周边环境杂乱；刘道一烈士祠红色文化价值高但展陈缺乏体验性；张家祠堂、龚承钧故居本体破损严重，未修缮未利用；大量传统风貌建筑破损严重被列为危房。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.5</span>风貌不协调建筑：核心区86处</h3>
+
+      <div class="content">
+        <p>保护规划精确统计不协调建筑共306处、34.89万㎡，其中核心保护范围内86处、3.70万㎡。主要表现为：80年代后砖混建筑高度体量色彩材质与传统建筑冲突；部分风貌较好的传统建筑被拆毁；空调外机、防盗网、太阳能热水器等外挂设施杂乱；店招店牌大小不一、风格杂乱。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">策划关键判断</div>
+        <p>建筑类问题的解决不能仅靠政府投入，必须通过"修缮+活化+运营"的模式，让历史建筑产生经济收益，反哺保护修缮，形成可持续的保护机制。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第三章 闲置资产 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 03 · IDLE ASSETS</span>
+        <h2 class="section-title">三、闲置资产与低效用地问题——片区更新的核心抓手</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>这是片区策划最具价值的核心抓手。26处闲置建筑、13.11公顷闲置土地，是片区最大的存量资源，也是功能植入、产业导入的空间载体。策划的核心任务就是把这些"沉睡资产"转化为"活力空间"。但产权复杂是最大的体制障碍。</p>
+      </div>
+
+      <div class="img-float-left">
+        <img src="https://aka.doubaocdn.com/s/9x0wKmj8W7" alt="江西会馆牌楼">
+        <div class="img-caption"><strong>江西会馆牌楼</strong> · 历史建筑周边存在大量闲置公房，是资产盘活的重点区域</div>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">26<span class="unit">处</span></div>
+          <div class="data-label">闲置建筑数量</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">13.11<span class="unit">公顷</span></div>
+          <div class="data-label">闲置土地面积</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">8.69<span class="unit">公顷</span></div>
+          <div class="data-label">已批未建</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">26.77<span class="unit">%</span></div>
+          <div class="data-label">公有资产占比</div>
+        </div>
+      </div>
+
+      <div style="clear: both;"></div>
+
+      <h3 class="sub-section-title"><span class="num">3.1</span>26处闲置建筑分类特征</h3>
+
+      <div class="content">
+        <p>按建筑类型分：办公建筑约12处（原税务局、交通局、邮政局、派出所、疾控中心等），多为机关事业单位搬迁后遗留；工业/仓储建筑约5处（食杂果品仓库、无线电二厂、印刷厂、新多福食品厂等），是工业遗产改造的优质资源；商业建筑约4处（大同世界综合楼等）；历史/传统建筑约4处（红楼、太真芝药室、杜家巷民居等），需保护性利用。</p>
+        <p>按产权主体分：城发集团系约8处，是最大的公产持有者；机关事业单位约10处，跨部门协调难度大；市资产经营管理公司约2处；其他国企/私企约6处。</p>
+        <p>按面积规模分：大型（>3000㎡）3处，适合整体改造为综合体；中型（500-3000㎡）约8处，适合主题酒店、青创基地、邻里中心；小型（<500㎡）约15处，适合特色小店、非遗工坊、口袋空间。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.2</span>0601版已提出的重点盘活方案</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>资产名称</th><th>面积</th><th>拟利用方向</th><th>策划要点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>原雨湖区税务局</td><td>5,000㎡</td><td>教研培训基地</td><td>"公益+商业服务"复合模式，紧邻科大昭潭书院</td></tr>
+          <tr><td>原湘潭市印刷厂</td><td>5,500㎡</td><td>古城民宿+青年创业综合体</td><td>免租金托底，打造青年社区</td></tr>
+          <tr><td>原城正街派出所</td><td>600㎡</td><td>社区邻里中心</td><td>政务便民+未成年人活动+老年人活动+党建</td></tr>
+          <tr><td>原新多福食品厂</td><td>2,000㎡</td><td>品牌酒店</td><td>引进亚朵等知名品牌，提升住宿接待能力</td></tr>
+          <tr><td>市生资日杂公司仓库</td><td>3,650㎡</td><td>"城总记忆场"</td><td>数字沙盘+沉浸式剧场+游客中心+米粉体验馆</td></tr>
+          <tr><td>疾控中心办公楼</td><td>3,600㎡</td><td>青创办公大楼</td><td>众创空间+创业苗圃+培训教室+青年驿站</td></tr>
+          <tr><td>原县人民医院</td><td>1,759㎡</td><td>古城主题酒店</td><td>盘活闲置医院建筑，打造主题酒店</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">策划关键判断</div>
+        <p>闲置资产盘活是片区策划的核心抓手和第一优先级策划动作。建议建立统一的资产收储与运营平台，将分散的公产集中管理，整体策划、分步实施。0601版已提出的7处重点盘活方案可作为近期启动项目。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第四章 公共服务 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 04 · PUBLIC SERVICES</span>
+        <h2 class="section-title">四、公共服务设施问题——民生短板与策划切入点</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>公共服务短板是居民反映最强烈的问题，也是策划"主客共享"理念的最佳切入点。养老45.14%、教育三项均不达标、完整社区0个、老旧小区物业0%——这些短板既是民生刚需，也是闲置建筑活化的重要方向，可以实现"民生改善+资产盘活"双赢。</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card danger">
+          <div class="data-num">45.14<span class="unit">%</span></div>
+          <div class="data-label">养老服务覆盖率</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">54.44<span class="unit">%</span></div>
+          <div class="data-label">幼儿园覆盖率</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">0<span class="unit">个</span></div>
+          <div class="data-label">完整社区</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">0<span class="unit">%</span></div>
+          <div class="data-label">老旧小区物业覆盖</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.1</span>教育设施：三项覆盖率均不达标</h3>
+
+      <div class="content">
+        <p>幼儿园覆盖率54.44%、小学覆盖率63.60%、中学覆盖率71.13%，三项均未达到≥80%的标准。现状教育资源包括曙光学校（1902年创办，宋楚瑜母校，昭潭书院传承）、金太阳幼儿园、湖南科技大学昭潭书院、临丰学校等。教育设施覆盖率不足，直接影响年轻家庭的居住选择，是人口结构老化的重要诱因之一。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.2</span>养老服务：覆盖率不足一半</h3>
+
+      <div class="content">
+        <p>养老服务设施覆盖率仅45.14%，缺口34.86个百分点。片区留守老年人多，缺少日间照料中心、社区食堂等养老设施，适老化设施不足。仅有"如家老年公寓"等少量民办养老机构。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.3</span>完整社区与物业管理</h3>
+
+      <div class="content">
+        <p>完整居住社区数量占比为0，11个社区没有一个达到完整社区标准。老旧小区专业化物业管理占比0%，居民主观评价中物业管理水平（77.14分）为Ⅰ类预警指标。相对较好的公服设施包括：卫生服务覆盖率96.97%、文化设施覆盖率100%、体育设施覆盖率87.18%、社区服务中心覆盖率98.5%，但这是"有没有"的覆盖，而非"好不好"的质量评价。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">策划关键判断</div>
+        <p>公共服务补短板应与闲置资产盘活捆绑策划，优先选择面积适中、位置便利的闲置建筑改造为社区邻里中心、养老照料中心、普惠托育点，形成"民生改善+资产活化"的示范项目，争取居民支持和政策资金。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第五章 基础设施 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 05 · INFRASTRUCTURE & SAFETY</span>
+        <h2 class="section-title">五、基础设施与安全问题——底线约束</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>基础设施是片区运行的"血管神经"，安全是不可逾越的底线。消防站覆盖率3.88%是所有指标中最严峻的，几乎处于消防"盲区"，这是业态引入的硬性障碍。道路网密度不足、停车缺口、断头巷则制约了片区的可达性和体验感。基础设施必须先行，否则文旅业态无法落地。</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card danger">
+          <div class="data-num">3.88<span class="unit">%</span></div>
+          <div class="data-label">消防站覆盖率（最严峻）</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">7.92<span class="unit">km/km²</span></div>
+          <div class="data-label">道路网密度（未达标）</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">17.08<span class="unit">%</span></div>
+          <div class="data-label">公共停车场覆盖率</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">100<span class="unit">%</span></div>
+          <div class="data-label">公交站点500米覆盖</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.1</span>消防设施：覆盖率仅3.88%</h3>
+
+      <div class="content">
+        <p>消防站服务半径覆盖率仅3.88%，标准值≥80%，缺口76.12个百分点，是所有指标中最严峻的。街区内部空间狭窄，消防车难以深入；断头巷道（胜利巷、杜家巷、新育里巷）进一步限制消防救援路线；砖木结构老建筑耐火等级低，火灾风险高；消防栓等设施配备不足。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">对策划的硬性制约</div>
+        <p>餐饮、民宿、人员密集的文化场所等业态，消防审批是前置条件。现状消防条件无法满足，意味着不解决消防问题，文旅业态无法合法入驻。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.2</span>道路、停车与市政管网</h3>
+
+      <div class="content">
+        <p>道路系统对外便利、内部不畅：周边干道交通便利，但街区内部道路系统不完善，生活服务类道路过窄（1.5-3米），背街小巷与湘江联系不畅，通江可达性不足。停车设施覆盖率17.08%，街区内停车空间严重不足，车辆随意停放侵占步行空间和消防通道。</p>
+        <p>市政管网方面：给排水管道老化，雨污合流，雨季易积水；电力通信电线架空敷设，缆线杂乱无序形成"蜘蛛网"，严重影响街区风貌；部分内部街巷缺乏照明，缺乏景观照明与氛围照明，制约夜间经济。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">策划关键判断</div>
+        <p>基础设施改造应作为近期优先实施项目，与危房改造、老旧小区改造同步推进。特别是消防设施，必须在业态引入前完成基本达标。管线入地是风貌整治的必做项，但工程量大、涉及多家运营商协调。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第六章 产业业态 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 06 · INDUSTRY & BUSINESS</span>
+        <h2 class="section-title">六、产业业态与商业问题——片区振兴的动力源</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>产业业态是片区振兴的核心动力，也是策划的"重头戏"。现状业态传统低端、缺乏文化内涵、没有年轻化消费场景、旅游配套几乎空白，与城正街深厚的历史文化资源严重不匹配。0601版提出"文化+"四大产业体系，方向正确，但需要更具体的业态策划和运营模式设计。</p>
+      </div>
+
+      <div class="img-float-right">
+        <img src="https://aka.doubaocdn.com/s/rVFHrcSW8T" alt="城正街老街商铺">
+        <div class="img-caption"><strong>城正街老街商铺</strong> · 沿街商铺以服务本地居民的日用百货为主，低端同质化，缺乏文化挖掘</div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.1</span>现状业态：传统低端、缺乏特色</h3>
+
+      <div class="content">
+        <p>商铺沿城正街两侧分布，以服务本地居民的日用百货和生活服务为主。商业零售包括日用百货、小型便利店、杂货店、服装店，低端同质化；餐饮以本地家常菜馆为主，部分店铺因客流量低停止运营；生活服务以药店、理发店、五金店、维修店为主，服务中老年居民。业态整体传统，缺乏年轻化消费场景。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.2</span>旅游配套：几乎空白</h3>
+
+      <div class="content">
+        <p>现状旅游资源点7处，但缺乏串联整合，未形成完整游览线路。旅游配套缺口巨大：住宿方面无精品酒店、无特色民宿，无法发展过夜经济；餐饮方面无品牌特色餐饮、无老字号集聚；购物方面无文创店、无特色纪念品；娱乐方面无沉浸式体验、无非遗工坊；服务方面无游客中心、无导览系统、无旅游厕所。</p>
+      </div>
+
+      <div style="clear: both;"></div>
+
+      <h3 class="sub-section-title"><span class="num">6.3</span>0601版提出的"文化+"四大产业体系</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>产业方向</th><th>核心内容</th><th>空间载体</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong style="color:var(--gold)">文化创意</strong></td><td>文创市集、非遗文创、文创孵化、文化IP、青创基地</td><td>闲置厂房、疾控中心青创大楼、印刷厂青年社区</td></tr>
+          <tr><td><strong style="color:var(--gold)">商业休闲</strong></td><td>老字号、特色餐饮、文创零售、手作坊、美食坊、夜间经济</td><td>城正街主街、老字号特色街区、雨湖公园</td></tr>
+          <tr><td><strong style="color:var(--gold)">教育研学</strong></td><td>文庙书院研学、红色研学、非遗大师工作室、爱国主义教育</td><td>文庙+昭潭书院、刘道一烈士祠、税务局教研基地</td></tr>
+          <tr><td><strong style="color:var(--gold)">文旅旅居</strong></td><td>精品酒店、文旅民宿、观光体验、数智文旅平台</td><td>新多福食品厂酒店、印刷厂民宿、十三总度假酒店</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">策划关键判断</div>
+        <p>产业业态策划应采取"点状突破、线性延伸、面状激活"的策略：近期选择城正街主街作为突破口，打造老字号特色街区；中期串联文庙、会馆、历史建筑，形成文化体验线路；远期实现片区整体业态升级。"城总记忆场"是业态创新的示范项目，应优先启动。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第七章 景观绿化 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 07 · LANDSCAPE & PUBLIC SPACE</span>
+        <h2 class="section-title">七、景观绿化与公共空间问题——品质提升空间</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>景观绿化与公共空间是提升片区品质的重要手段，但不是最紧迫的问题。片区外部生态条件优越（雨湖公园+滨江风光带，公园覆盖率100%），但内部公共空间匮乏、口袋公园空白。策划应采取"见缝插绿、微空间改造"的策略，利用零星闲置用地打造口袋公园和公共节点。</p>
+      </div>
+
+      <div class="content">
+        <p>人均绿地面积9.13㎡/人（达标但有下降趋势），公园绿化活动场地覆盖率100%（达标）。但上述指标为整个片区数据，含雨湖公园和滨江风光带，历史文化街区本体内部公共绿化空间极为匮乏。口袋公园、街头绿地几乎空白，无法满足居民休闲绿地需求。</p>
+        <p>公共空间节点欠缺：仅张家祠堂前坪及南楼红盒子前坪，且面积不大；文庙、抗日纪念碑、南楼等文保单位展陈简单，长期不对外开放；城正街主街缺乏街道家具；大面积公共空间（科大昭潭书院操场、曙光学校操场）位于单位内部，不便对外开放。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">0601版提出的公共空间提升方向</div>
+        <p>口袋公园（利用零星闲置用地）、城墙遗址公园、文庙前学坪+抗日纪念碑前广场（拆除前三栋不协调建筑，打通通江轴线）、城市阳台（十八总河街存量用地）、百工非遗广场（北五省会馆片区）、街头公园（泗洲庵社区2000㎡）。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第八章 体制机制 -->
+    <section class="clearfix" style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 08 · INSTITUTIONAL BARRIERS</span>
+        <h2 class="section-title">八、体制机制障碍——策划实施的关键制约</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="judgment-box">
+        <p>体制机制问题不是显性的现状问题，但却是策划实施的最大隐性障碍。产权复杂、资金需求大、多主体协调难，这些问题不解决，再好的策划方案也难以落地。策划必须在方案设计阶段就考虑实施路径和运营模式。</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">26.77<span class="unit">%</span></div>
+          <div class="data-label">公有资产占比</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">576<span class="unit">处</span></div>
+          <div class="data-label">公产建筑</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">2151<span class="unit">栋</span></div>
+          <div class="data-label">私产建筑</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">16.10<span class="unit">亿</span></div>
+          <div class="data-label">0601版投资估算</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">8.1</span>建筑产权复杂</h3>
+
+      <div class="content">
+        <p>国有土地占比100%，公有资产占比26.77%。公产权利人构成复杂：城发集团下属潭房集团、房管所、大河西棚改公司；机关事业单位（税务、公安、卫健、交通、邮政、教育等）；市资产经营管理有限公司；其他国企。公房、私房、单位房混杂，部分建筑产权关系不清，存在历史遗留问题。26处闲置资产分属十余个不同主体。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">8.2</span>资金需求巨大</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>项目类型</th><th>项目数量</th><th>投资额度</th><th>占比</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>历史文化保护类</td><td>7个</td><td>3.13亿元</td><td>19.4%</td></tr>
+          <tr><td>闲置资产盘活类</td><td>6个</td><td>2.51亿元</td><td>15.6%</td></tr>
+          <tr><td>危房改造类</td><td>4个</td><td>0.76亿元</td><td>4.7%</td></tr>
+          <tr class="highlight-row"><td>老旧小区改造类</td><td>9个</td><td>9.23亿元</td><td>57.3%</td></tr>
+          <tr><td>老旧街区更新类</td><td>1个</td><td>0.65亿元</td><td>4.0%</td></tr>
+          <tr><td>合计</td><td>29个</td><td>16.10亿元</td><td>100%</td></tr>
+        </tbody>
+      </table>
+
+      <div class="content">
+        <p>资金来源结构：中央专项补助5.25亿元（32.6%）、地方财政配套8.43亿元（52.4%）、社会资本2.60亿元（16.0%）。分期实施：近期12个项目9.99亿元（62.0%），中期10个项目4.22亿元（26.2%），远期7个项目1.89亿元（11.8%）。</p>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">策划关键判断</div>
+        <p>体制机制问题必须在策划方案中前置考虑，不能只做空间设计不管实施路径。建议策划方案包含"实施路径与运营模式"专章，明确产权整合方案、资金筹措计划、运营主体选择、居民参与机制。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第九章 问题优先级排序（核心结论） -->
+    <section style="margin-bottom: 40px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 09 · PRIORITY RANKING（核心结论）</span>
+        <h2 class="section-title">九、问题优先级排序与策划重点研判</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="content">
+        <p>本章是报告的核心结论：基于前述八类问题的分析，从片区策划视角进行优先级排序，明确哪些问题更加突出、哪些是后面要重点解决的问题。采用"严重性×策划价值"二维评估，将问题分为四个优先级。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">9.1</span>问题突出程度评估矩阵</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>问题类别</th><th>严重性</th><th>策划价值</th><th>综合优先级</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td>C/D级危房（158栋）</td><td>★★★★★</td><td>★★★★☆</td><td class="danger-text">第一优先级</td></tr>
+          <tr class="highlight-row"><td>消防覆盖率（3.88%）</td><td>★★★★★</td><td>★★★★☆</td><td class="danger-text">第一优先级</td></tr>
+          <tr><td>养老设施（45.14%）</td><td>★★★★☆</td><td>★★★★☆</td><td>第二优先级</td></tr>
+          <tr><td>老旧小区改造（零物业）</td><td>★★★★☆</td><td>★★★☆☆</td><td>第二优先级</td></tr>
+          <tr><td>市政管网（给排水/电力）</td><td>★★★☆☆</td><td>★★☆☆☆</td><td>第二优先级</td></tr>
+          <tr class="highlight-row"><td>闲置资产盘活（26处）</td><td>★★★☆☆</td><td>★★★★★</td><td style="color:var(--gold);font-weight:700;">第三优先级</td></tr>
+          <tr class="highlight-row"><td>历史文化活化（67.54%）</td><td>★★★★☆</td><td>★★★★★</td><td style="color:var(--gold);font-weight:700;">第三优先级</td></tr>
+          <tr class="highlight-row"><td>产业业态升级</td><td>★★★★☆</td><td>★★★★★</td><td style="color:var(--gold);font-weight:700;">第三优先级</td></tr>
+          <tr><td>风貌不协调（306处）</td><td>★★★☆☆</td><td>★★★☆☆</td><td>第四优先级</td></tr>
+          <tr><td>景观绿化与公共空间</td><td>★★☆☆☆</td><td>★★★☆☆</td><td>第四优先级</td></tr>
+          <tr><td>人口老龄化（25.83%）</td><td>★★★★★</td><td>★★☆☆☆</td><td>底层约束</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">9.2</span>四级优先级详解</h3>
+
+      <div class="priority-grid">
+        <div class="priority-card p1">
+          <div class="priority-card-title">第一优先级：安全底线</div>
+          <div class="priority-card-subtitle">必须先解决，否则一切策划无从谈起</div>
+          <p>C/D级危房158栋——安全隐患突出，必须动态清零；消防站覆盖率3.88%——几乎处于消防盲区，业态引入的硬性障碍。近期完成危房鉴定与分类处置，增设微型消防站、打通消防通道。</p>
+        </div>
+        <div class="priority-card p2">
+          <div class="priority-card-title">第二优先级：民生刚需</div>
+          <div class="priority-card-subtitle">策划的基础工程，居民获得感的核心来源</div>
+          <p>养老设施覆盖率45.14%——与25.83%老龄化形成尖锐矛盾；老旧小区零物业、设施老化；教育设施三项不达标；停车缺口、市政管网老化。利用闲置建筑改造邻里中心、养老照料中心。</p>
+        </div>
+        <div class="priority-card p3">
+          <div class="priority-card-title">第三优先级：策划核心</div>
+          <div class="priority-card-subtitle">价值创造的关键，片区振兴的动力源</div>
+          <p>26处闲置建筑+13.11公顷闲置土地——片区最大的存量资源；历史文化遗产活化利用率67.54%——三分之一资源"沉睡"；产业业态传统低端——缺乏文化内涵和年轻化消费场景。</p>
+        </div>
+        <div class="priority-card p4">
+          <div class="priority-card-title">第四优先级：品质提升</div>
+          <div class="priority-card-subtitle">锦上添花，在前三类基础上推进</div>
+          <p>风貌不协调建筑306处——核心区86处需重点整治；景观绿化与公共空间匮乏——口袋公园空白；街巷空间单调杂乱——界面品质低下。可与业态升级、项目改造同步进行。</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">9.3</span>片区策划的三大核心抓手</h3>
+
+      <div class="grabber-card">
+        <div class="grabber-card-num">01</div>
+        <div class="grabber-card-title">资产盘活——把"沉睡资产"变成"活力空间"</div>
+        <p><strong>目标：</strong>26处闲置建筑、13.11公顷闲置土地实现分类活化</p>
+        <p><strong>路径：</strong>统一收储平台→分级分类策划→市场化运营</p>
+        <p><strong>近期启动：</strong>7处重点项目（税务局教研基地、印刷厂青年社区、派出所邻里中心、新多福酒店、日杂仓库城总记忆场、疾控中心青创大楼、县人民医院主题酒店）</p>
+        <p><strong>预期成效：</strong>新增文旅空间约3万㎡，引入青创、酒店、邻里中心、文化体验等业态</p>
+      </div>
+
+      <div class="grabber-card">
+        <div class="grabber-card-num">02</div>
+        <div class="grabber-card-title">文化活化——把"文化资源"变成"消费产品"</div>
+        <p><strong>目标：</strong>历史文化遗产活化利用率从67.54%提升至90%以上</p>
+        <p><strong>路径：</strong>文保单位开放→历史建筑利用→文化IP开发→文旅产品落地</p>
+        <p><strong>重点项目：</strong>文庙研学、会馆博物馆、城总记忆场、红色文化线路</p>
+        <p><strong>预期成效：</strong>形成"可看、可玩、可学、可购"的完整文旅产品体系</p>
+      </div>
+
+      <div class="grabber-card">
+        <div class="grabber-card-num">03</div>
+        <div class="grabber-card-title">业态升级——把"传统老街"变成"活力街区"</div>
+        <p><strong>目标：</strong>构建"文化+"四大产业体系，实现从"服务居民"到"主客共享"的转变</p>
+        <p><strong>路径：</strong>老字号集聚→特色餐饮引入→文创零售布局→精品酒店配套→夜间经济培育</p>
+        <p><strong>重点区域：</strong>城正街主街（老字号特色街区）、文庙片区（研学教育）、会馆片区（文化体验）</p>
+        <p><strong>预期成效：</strong>年接待游客量显著提升，旅游消费收入增长，就业岗位增加</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第十章 结论 -->
+    <section style="margin-bottom: 20px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 10 · CONCLUSION</span>
+        <h2 class="section-title">十、结论：从现状问题到策划方向</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="img-full">
+        <img src="https://aka.doubaocdn.com/s/jTLbhvO0mM" alt="城正街老街全景">
+        <div class="img-caption" style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(14,9,6,0.98), transparent); color:var(--text2); font-size:13px; padding:50px 20px 14px;"><strong>城正街老街全景</strong> · 资源丰富、问题突出、潜力巨大——等待在更新中焕发新生</div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">10.1</span>现状问题的总体判断</h3>
+
+      <div class="content">
+        <p>城正街片区是一个"资源丰富、问题突出、潜力巨大"的老城片区：资源丰富——1处历史文化街区+1处风貌街区+36处文保+41处历史建筑+31处特色风貌，是湘潭历史遗存最丰富的区域；问题突出——11项指标未达标，158栋危房，26处闲置资产，老龄化25.83%，消防覆盖率3.88%，问题交织叠加；潜力巨大——26处闲置建筑+13.11公顷闲置土地提供了更新空间，长株潭都市圈区位提供了市场空间，"文化+"产业方向提供了发展路径。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">10.2</span>最突出的三大问题</h3>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:16px 0;">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">安全底线问题</div>
+          <p>158栋C/D级危房+3.88%消防覆盖率，是必须优先解决的硬约束。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838;">
+          <div class="info-card-title">人口结构问题</div>
+          <p>25.83%老龄化+年轻人口外流，是片区活力衰退的根源。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">资产闲置问题</div>
+          <p>26处闲置建筑+产权复杂，是资源浪费也是更新机遇。</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">10.3</span>片区策划的重点方向</h3>
+
+      <div class="content">
+        <p>基于现状问题研判，片区策划应坚持"安全为先、民生为本、文化为魂、产业为核、运营为要"的总体思路，重点推进：安全清零工程（近期完成158栋危房处置和消防设施达标）、资产盘活行动（建立统一平台，分类活化26处闲置资产）、文化活化计划（推动文保单位开放和历史建筑利用，打造城总文化IP）、业态升级策略（构建"文化+"四大产业体系，打造老字号特色街区）、民生改善项目（推进老旧小区改造，补养老教育短板，建设完整社区）、运营模式创新（探索"政府引导+市场运营+居民参与"的可持续运营模式）。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">10.4</span>实施时序建议</h3>
+
+      <table class="data-table">
+        <thead>
+          <tr><th>阶段</th><th>时间</th><th>重点任务</th><th>投资占比</th></tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row"><td>近期（优先落地）</td><td>2026-2028</td><td>危房清零、老旧小区改造、基础设施提质、7处重点资产盘活</td><td>62.0%</td></tr>
+          <tr><td>中期（重点攻坚）</td><td>2029-2031</td><td>历史文化活化、业态全面升级、公共服务配套、城正街二期</td><td>26.2%</td></tr>
+          <tr><td>远期（整体提质）</td><td>2032-2035</td><td>全域风貌整治、文旅业态全面升级、城墙遗址公园、通江轴线</td><td>11.8%</td></tr>
+        </tbody>
+      </table>
+
+      <blockquote>
+        <p>城正街片区不是一个普通的老旧小区改造项目，而是一个涉及历史文化保护、产业转型升级、社会治理创新的复杂系统工程。问题诊断的深度决定了策划方案的高度，只有真正摸清问题、找准抓手，才能让千年城总在新时代焕发新生。</p>
+      </blockquote>
+    </section>
+
+    <!-- 底部章节导航 -->
+    <div class="chapter-nav">
+      <a href="topic-0.html">
+        <div class="nav-label">← 上一章</div>
+        <div>第一章 · 历史文化脉络研究</div>
+      </a>
+      <a href="topic-2.html">
+        <div class="nav-label">下一章 →</div>
+        <div>第三章 · 资源资产系统梳理</div>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="footer-title">城正街片区策划专题研究</div>
+    <p>千年城总 · 金湘潭 | 历史文化街区城市更新研究</p>
+    <p style="margin-top:8px; font-size:12px;">编制时间：2026年8月 | 共八大专题研究</p>
+    <p style="margin-top:8px; font-size:12px; color:var(--gold);">联系邮箱：ytf2000@sina.com</p>
+  </div>
+
+</div>
+
+</body>
+</html>
