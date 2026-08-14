@@ -102,7 +102,7 @@ body {
 }
 .nav-right a.active { color: var(--gold); }
 
-/* 杂志页面容器 - magazine-layout 规范 */
+/* 杂志页面容器 */
 .magazine-page {
   width: 100%;
   max-width: 1000px;
@@ -113,7 +113,7 @@ body {
   box-shadow: 0 0 80px rgba(0,0,0,0.5);
 }
 
-/* 章节封面 - 满铺 */
+/* 章节封面 */
 .chapter-hero {
   position: relative;
   height: 85vh;
@@ -209,7 +209,7 @@ body {
   padding: 50px 50px 80px;
 }
 
-/* 章节标题 - magazine-layout vintage-divider 风格 */
+/* 章节标题 */
 .section-header {
   margin-bottom: 28px;
   padding-bottom: 16px;
@@ -243,7 +243,23 @@ body {
   background: var(--gold);
 }
 
-/* 段落 - 首字下沉 drop-cap */
+/* 三级标题 */
+.sub-section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 28px 0 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--cinnabar);
+}
+.sub-section-title .num {
+  color: var(--gold);
+  font-family: 'Abril Fatface', serif;
+  margin-right: 8px;
+}
+
+/* 段落 - 首字下沉 */
 .content p {
   font-size: 16px;
   line-height: 2;
@@ -312,13 +328,44 @@ body {
   display: block;
   filter: saturate(0.78) brightness(0.94);
 }
+/* 双图网格 */
+.img-duo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.img-duo-item {
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.img-duo-item img {
+  width: 100%;
+  display: block;
+  filter: saturate(0.78) brightness(0.94);
+  height: 200px;
+  object-fit: cover;
+}
+.img-duo-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(14,9,6,0.96), transparent);
+  color: var(--text2);
+  font-size: 11px;
+  padding: 30px 10px 8px;
+  line-height: 1.6;
+}
+.img-duo-caption strong { color: var(--gold); }
 .clearfix::after {
   content: '';
   display: table;
   clear: both;
 }
 
-/* 高亮框 - highlight-box */
+/* 高亮框 */
 .highlight-box {
   background: var(--bg-card);
   border-left: 3px solid var(--gold);
@@ -341,7 +388,7 @@ body {
   text-indent: 0;
 }
 
-/* 引用框 - blockquote vintage 风格 */
+/* 引用框 */
 blockquote {
   border: 1px solid var(--border);
   padding: 20px 24px;
@@ -368,7 +415,7 @@ blockquote p {
   padding-left: 20px;
 }
 
-/* 数据卡片网格 - 等高布局 */
+/* 数据卡片网格 - 等高 */
 .data-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -426,6 +473,41 @@ blockquote p {
 }
 .info-card p {
   font-size: 14px;
+  color: var(--text2);
+  line-height: 1.85;
+  margin-bottom: 0;
+  text-indent: 0;
+}
+
+/* 五维度卡片 */
+.dimension-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.dimension-card {
+  background: var(--bg-card);
+  border-radius: 2px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+}
+.dimension-card-num {
+  font-family: 'Abril Fatface', serif;
+  font-size: 22px;
+  color: var(--cinnabar);
+  margin-bottom: 6px;
+}
+.dimension-card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.dimension-card p {
+  font-size: 13px;
   color: var(--text2);
   line-height: 1.85;
   margin-bottom: 0;
@@ -536,135 +618,36 @@ blockquote p {
   padding-top: 8px;
 }
 
-/* 逻辑链条 - 等高卡片 grid 布局 */
-.chain-section {
+/* 名人分类卡片 */
+.celebrity-category {
   background: var(--bg-card);
   border-radius: 2px;
-  padding: 28px;
+  padding: 20px 22px;
   border: 1px solid var(--border);
-  margin: 24px 0;
+  margin-bottom: 16px;
 }
-.chain-flow {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 0;
-  align-items: stretch;
-}
-.chain-node {
-  background: var(--bg-card3);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 14px 10px;
-  text-align: center;
+.celebrity-category-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  position: relative;
-  min-height: 110px;
+  gap: 10px;
 }
-.chain-node:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--gold);
-  font-size: 14px;
-  z-index: 2;
-}
-.chain-q {
-  font-size: 11px;
-  color: var(--text3);
-  margin-bottom: 6px;
-  letter-spacing: 1px;
-}
-.chain-name {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 6px;
-  line-height: 1.4;
-}
-.chain-chapter {
-  font-family: 'Special Elite', monospace;
-  font-size: 11px;
-  color: var(--gold);
-}
-
-/* 八章卡片网格 */
-.chapters-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin: 24px 0;
-}
-.chapter-card {
-  background: var(--bg-card);
-  border-radius: 2px;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.4s;
-  border: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-}
-.chapter-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
-  box-shadow: 0 16px 44px rgba(0,0,0,0.4);
-}
-.chapter-card-img {
-  height: 120px;
-  overflow: hidden;
-  position: relative;
-}
-.chapter-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.55) saturate(0.65);
-  transition: transform 0.5s, filter 0.5s;
-}
-.chapter-card:hover .chapter-card-img img {
-  transform: scale(1.06);
-  filter: brightness(0.7) saturate(0.75);
-}
-.chapter-card-num {
-  position: absolute;
-  top: 10px;
-  left: 12px;
-  font-family: 'Abril Fatface', serif;
-  font-size: 14px;
-  color: #fff;
+.celebrity-category-title::before {
+  content: '';
+  width: 6px;
+  height: 18px;
   background: var(--cinnabar);
-  padding: 2px 10px;
-  border-radius: 2px;
-  font-weight: 700;
 }
-.chapter-card-body {
-  padding: 16px 18px;
-  flex: 1;
-}
-.chapter-card-title {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 5px;
-}
-.chapter-card-q {
-  font-size: 12px;
-  color: var(--cinnabar);
-  margin-bottom: 7px;
-  letter-spacing: 1px;
-}
-.chapter-card-desc {
-  font-size: 13px;
-  color: var(--text3);
-  line-height: 1.8;
+.celebrity-category p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.9;
+  margin-bottom: 0;
+  text-indent: 0;
 }
 
 /* 中式分隔符 */
@@ -702,10 +685,9 @@ blockquote p {
 /* 响应式 */
 @media (max-width: 1024px) {
   .data-grid { grid-template-columns: repeat(2, 1fr); }
-  .chain-flow { grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  .chain-node:not(:last-child)::after { display: none; }
+  .dimension-grid { grid-template-columns: 1fr; }
   .poem-grid { grid-template-columns: 1fr; }
-  .chapters-grid { grid-template-columns: 1fr; }
+  .img-duo-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .top-nav { padding: 10px 16px; }
@@ -715,7 +697,6 @@ blockquote p {
   .main-content { padding: 30px 20px 60px; }
   .img-float-right, .img-float-left { float: none; width: 100%; margin: 16px 0; }
   .data-grid { grid-template-columns: 1fr 1fr; }
-  .chain-flow { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -777,7 +758,10 @@ blockquote p {
       <div class="content">
         <p class="drop-cap">在湘潭，若有人自称"城里头的"，语气中总带着一股难以掩饰的自豪。这"城里头"，指的便是城正街。城正街不是一条普通的老街。它自秦汉时期即已形成街市，北宋元符元年（1098年）湘潭县治迁入此地，此后直至1995年，近九百年间始终是湘潭县的政治、经济、文化中心。它是"金湘潭"商业文明的核心载体，是"千年城总"制度的物理空间，是湖湘文化教育传承的重要场域，也是近代中国革命史的见证之地。</p>
         <p>2021年，城正街被列为湖南省历史文化街区。保护规划范围西临瞻岳门路，北至熙春门路及规划西禅路，东至观湘门路，南接沿江东路，总面积26公顷。其中核心保护范围9.689公顷，建设控制地带16.3公顷。更新规划在此基础上向东延伸至南楼区域，总设计面积达29.56公顷（443.4亩）。</p>
+        <p>湘潭市作为省级历史文化名城，其定位可凝练为三句话：伟人故里，红色圣地；湖湘学渊，名人之乡；千年商都，繁华城总。城正街正是这三大定位的集中承载地。</p>
       </div>
+
+      <div style="clear: both;"></div>
 
       <div class="highlight-box">
         <div class="highlight-box-title">湘潭市三大定位 · 城正街集中承载地</div>
@@ -825,6 +809,8 @@ blockquote p {
 
       <div style="clear: both;"></div>
 
+      <h3 class="sub-section-title"><span class="num">1.1</span>名称的五次更迭</h3>
+
       <table class="data-table">
         <thead>
           <tr><th style="width:120px;">时期</th><th style="width:120px;">名称</th><th>名称含义</th></tr>
@@ -843,7 +829,7 @@ blockquote p {
         <p>筑城时间有万历二年/四年/明嘉靖间三说，部分网络资料称"万历四年筑城"，但湘潭市人民政府官网、新湖南2026年报道均明确记载为"万历二年筑城"。清乾隆二十一年《湘潭县志》记载"嘉靖间筑"可能为早期土城。本报告以市政府官网"万历二年（1574）吴仲筑城、六门格局"为准。</p>
       </div>
 
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); margin:24px 0 14px; padding-left:14px; border-left:3px solid var(--cinnabar);">关键历史节点（多源交叉校对）</h3>
+      <h3 class="sub-section-title"><span class="num">1.2</span>关键历史节点（多源交叉校对）</h3>
 
       <div class="timeline">
         <div class="timeline-item">
@@ -852,7 +838,7 @@ blockquote p {
         </div>
         <div class="timeline-item">
           <div class="timeline-year">北宋1098</div>
-          <div class="timeline-content"><strong>元符元年</strong>，湘潭县治从洛口（易俗河）迁此，因水患频发迁至地势较高的城正街一带，奠定近九百年行政中心地位</div>
+          <div class="timeline-content"><strong>元符元年</strong>，湘潭县治从洛口（易俗河）迁此，因水患频发迁至地势较高的城正街一带，奠定近九百年行政中心地位。北宋时期商品经济迅猛发展，成为南北商贸往来枢纽，城区逐渐形成依水设肆格局</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">明万历1574</div>
@@ -879,51 +865,65 @@ blockquote p {
           <div class="timeline-content">《湘潭城总全图》刊于《湘潭县志》，清晰标注各总名称、城墙城门、会馆庙宇及沿江码头</div>
         </div>
         <div class="timeline-item">
+          <div class="timeline-year">1902</div>
+          <div class="timeline-content">昭潭书院改为昭潭高等小学堂（后发展为曙光学校），废科举兴学堂的时代变革</div>
+        </div>
+        <div class="timeline-item">
           <div class="timeline-year">1926-1927</div>
-          <div class="timeline-content">工农运动兴起，湘潭县第一届学生代表大会在文庙召开；毛泽东在塔公祠召开农运座谈会，提出开办农民运动讲习所设想</div>
+          <div class="timeline-content">工农运动兴起，湘潭县第一届学生代表大会在文庙召开；8月16日湘潭县第一次全县农民代表大会在塔公祠召开，成立县农民协会；1927年1月4日毛泽东在塔公祠召开农运座谈会，提出开办农民运动讲习所设想</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">1938</div>
-          <div class="timeline-content">县长王纶奉命拆除城墙，拆城建堡，城正街与城外十八总商业区更加连通；抗日阵亡将士纪念碑始建</div>
+          <div class="timeline-content">县长王纶奉命拆除城墙，拆城建堡，城正街与城外十八总商业区更加连通；抗日阵亡将士纪念碑始建（7月7日）</div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-year">1949后</div>
-          <div class="timeline-content">更名红卫街，后恢复城正街；1995年湘潭县政府迁至易俗河，城正街结束近九百年县治中心地位</div>
+          <div class="timeline-year">1944-1945</div>
+          <div class="timeline-content">1944年湘潭沦陷，抗日阵亡将士纪念碑遭严重破坏；1945年抗战胜利后修复</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1949</div>
+          <div class="timeline-content">8月老县城成为湘潭县人民政府所在地</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1978起</div>
+          <div class="timeline-content">城正街一带拆去大片危旧房，改革开放初期城市建设对传统风貌造成一定冲击</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1985</div>
+          <div class="timeline-content">抗日阵亡将士纪念碑拆除重建</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1992</div>
+          <div class="timeline-content">湘潭县和湘潭市"分家"，县治迁出城正街，城正街行政功能终结</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2005</div>
+          <div class="timeline-content">5月9日台湾亲民党主席宋楚瑜专程回到阔别56年的母校——曙光学校（原昭潭小学）参观，题词"春风化雨，未来曙光"</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2011-2013</div>
+          <div class="timeline-content">2011年江西会馆列为省级文保；2013年抗日阵亡将士纪念碑列为省级文保，关圣殿列为全国重点文保</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2016</div>
+          <div class="timeline-content">对平政路沿线进行拆迁，建设沿江中路，打造城市滨江风光带</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2019</div>
+          <div class="timeline-content">江西会馆牌楼实施抢救性保护修缮工程</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-year">2021</div>
           <div class="timeline-content">被列为<strong>湖南省历史文化街区</strong>，保护规划编制启动</div>
         </div>
       </div>
-    </section>
 
-    <div class="cn-divider">❖ ❖ ❖</div>
-
-    <!-- 空间格局 -->
-    <section style="margin-bottom: 44px;">
-      <div class="section-header">
-        <span class="section-tag">CHAPTER 01 · 空间格局</span>
-        <h2 class="section-title">空间格局：三街九巷与城总肌理</h2>
-        <div class="vintage-divider"></div>
-      </div>
+      <h3 class="sub-section-title"><span class="num">1.3</span>从"扁担市"到鱼骨状布局</h3>
 
       <div class="content">
-        <p>城正街历史街区的空间格局是明清县城与城总制度叠加的产物。城内以"三街九巷"为骨架，城外沿湘江展开十八总商业街市，两者通过城门连通，形成"内城外市"的独特空间结构。</p>
-      </div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:20px 0;">
-        <div class="info-card">
-          <div class="info-card-title">三街</div>
-          <p>城正街（主街）、瞻岳门街、观湘门街，构成城内东西向主骨架</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">九巷</div>
-          <p>由三街向南向北分出九条巷道，连接城门与码头，形成鱼骨状肌理</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">十八总</div>
-          <p>城外沿湘江从大埠桥至石嘴垴，每总约一百丈，设总首管理，是商业核心区</p>
-        </div>
+        <p>清代至民国时期，湘潭县城以城正街为延展，形成了带状城市，被称为"扁担市"——城正街是扁担的中间支点，沿湘江向上下游延伸的十八总商业区是扁担的两端。</p>
+        <p>如今城正街内呈"一街三片七巷"的空间结构：一街为城正街传统风貌街；三片为书院文化片区、城里头人文片区、南楼文化片区；七巷为学坪路街、泗洲庵巷、板石巷、广大香巷、城隍庙巷、新育里巷等七条历史巷道。</p>
+        <p>以城正街为主脊，板石巷、泗州庵巷、胜利巷、杜家巷、新育里巷等巷道向两侧延伸，如同鱼骨的刺。这种格局是明清以来自然形成的，街巷尺度保存良好，较好地体现了老城历史格局。</p>
       </div>
 
       <div class="img-full">
@@ -938,108 +938,116 @@ blockquote p {
     <section class="clearfix" style="margin-bottom: 44px;">
       <div class="section-header">
         <span class="section-tag">CHAPTER 01 · 金湘潭</span>
-        <h2 class="section-title">金湘潭：明清商业文明的巅峰</h2>
+        <h2 class="section-title">金湘潭：明清商业文明的五个维度</h2>
         <div class="vintage-divider"></div>
       </div>
 
       <div class="img-float-right">
         <img src="https://aka.doubaocdn.com/s/hJUBWoHYer" alt="湘潭湘江">
-        <div class="img-caption"><strong>湘潭湘江段</strong> · 湘江与涟水交汇处，天然良港造就"金湘潭"</div>
+        <div class="img-caption"><strong>湘潭湘江段</strong> · 湘江与涟水交汇处，C形大弯造就天然良港</div>
       </div>
 
       <div class="content">
-        <p class="drop-cap">湘潭在明清时期享有"金湘潭"的美誉，与"银汉口"并称。这一地位的形成，首先得益于得天独厚的地理条件——湘江与涟水在此交汇，形成天然良港，是南北货运转运的关键节点。</p>
-        <p>明清时期，湘潭是全国重要的药材、茶叶、布匹、粮食交易中心。江西、江苏、福建、广东等地商人云集，建立了大量会馆。据记载，清乾隆年间湘潭有会馆20余所，其中江西会馆（万寿宫）规模最为宏大。</p>
+        <p class="drop-cap">清代民谚云："金湘潭，银益阳。"这六个字，是对湘潭商业地位的最高褒奖。湘潭名儒王闿运在光绪刊《湘潭县志》中直言："财赋甲列县""湘潭富饶为湖南第一"。民国十年（1921年）的《大公报》甚至称湘潭"繁荣实为湘省第一"。</p>
+        <p>更新规划明确指出："城正街是湘潭'千年商都，繁华城总'中'城里头'的所在地，过去是两广和中原地区货物集散地，商贸业异常昌盛，'金湘潭'得名由此而来。"</p>
       </div>
 
       <div style="clear: both;"></div>
 
-      <div class="highlight-box">
-        <div class="highlight-box-title">地理基础：湘江第一湾</div>
-        <p>湘江自南向北流至湘潭，遇高岭阻挡转而向西再向北，形成"湘江第一湾"。湾内水深流缓，是天然良港，可停泊数千艘商船。这一地理优势是"金湘潭"形成的根本原因。</p>
-      </div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
-        <div class="info-card">
-          <div class="info-card-title">药材之都</div>
-          <p>湘潭是全国四大药都之一，"药不到湘潭不齐"，药材行栈最多时达百余家，辐射西南数省</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">茶叶重镇</div>
-          <p>安化黑茶经湘潭转运至汉口、上海，湘潭是重要的茶叶加工和集散中心</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">布匹市场</div>
-          <p>江南土布、广布经湘潭分销至湖南及西南，湘潭布匹市场规模居全省之首</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">米粮集散</div>
-          <p>湖南粮食经湘潭转运至长江下游，湘潭是湘江流域最大的米市之一</p>
-        </div>
-      </div>
-
-      <blockquote>
-        <p>湘潭，楚南一大都会也。地临湘水，商贾辐辏，百货云集，虽苏州、汉口无以过之。<br>——清乾隆《湘潭县志》</p>
-      </blockquote>
-    </section>
-
-    <div class="cn-divider">❖ ❖ ❖</div>
-
-    <!-- 老字号与诗文 -->
-    <section style="margin-bottom: 44px;">
-      <div class="section-header">
-        <span class="section-tag">CHAPTER 01 · 老字号与诗文</span>
-        <h2 class="section-title">老字号与诗文：商业记忆的文字遗存</h2>
-        <div class="vintage-divider"></div>
-      </div>
+      <h3 class="sub-section-title"><span class="num">2.1</span>商业繁荣的地理基础</h3>
 
       <div class="content">
-        <p>"金湘潭"的商业繁荣，不仅留下了物质空间，也孕育了一批传承数百年的老字号，以及大量文人墨客的诗文吟咏。这些老字号和诗文，是街区商业文明的活态见证。</p>
+        <p>湘潭商业的崛起，首先得益于独特的水运地理条件。湘江在此形成一个C形大弯，水流平缓、水深浪静，是整个湘江流域最佳的泊船之地。长沙段湘江过于平直，水流急速，缺乏避风良港；湘潭以上（衡阳、永州、宝庆）水湍急难行；湘潭恰好处于承上启下的连接点，码头最多时达52处。</p>
+        <p>唐代刘晏提出"漕引潇湘"后，湘潭聚湘南谷米，经湘江、洞庭、长江、汉水转运至长安。作为商业城市，湘潭已有1300年历史，明代即有"小南京"之美誉。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.2</span>商业文明的五个维度</h3>
+
+      <div class="content">
+        <p>湘潭地方史志专家周磊将"金湘潭"的成因归纳为五个维度，更新规划与保护规划均予以采纳和深化：</p>
+      </div>
+
+      <div class="dimension-grid">
+        <div class="dimension-card">
+          <div class="dimension-card-num">01</div>
+          <div class="dimension-card-title">商业历史悠久</div>
+          <p>自唐代漕运兴起，湘潭便是南北商贸往来的枢纽。北宋县治迁入后，商品经济迅猛发展，城区逐渐形成依水设肆的格局。清嘉庆二十二年（1817年）《湘潭城总全图》显示，当时街市已极为繁盛。</p>
+        </div>
+        <div class="dimension-card">
+          <div class="dimension-card-num">02</div>
+          <div class="dimension-card-title">市肆规模宏大</div>
+          <p>城市沿湘江西岸呈带状发展，市肆商铺绵延15里，商业区规模达20余里。王闿运在《湘潭县志》中描绘："城外沿湘十余里，皆商贾列肆……前湘后湖，形势比于夏口。自前明号为小南京。"</p>
+        </div>
+        <div class="dimension-card">
+          <div class="dimension-card-num">03</div>
+          <div class="dimension-card-title">商贾云集</div>
+          <p>明代"移江西填湖广"后，江西商人大量涌入。清末十八行省中有十三省商人在此经商，会馆总数约40处。以广东岭南会馆、江西豫章会馆（万寿宫）、北五省会馆（关圣殿）规模最大。</p>
+        </div>
+        <div class="dimension-card">
+          <div class="dimension-card-num">04</div>
+          <div class="dimension-card-title">百业俱备</div>
+          <p>金融业：山西日昇昌等8家票号在湘潭设分号，"纹银通兑在湘潭县"。药材业："药不到湘潭不齐"，年购销额达800多万两白银。零售批发店庄行达5400多家。米市、茶市、猪鬃、鱼苗、蓝靛、槟榔、酱业等蜚声南北。</p>
+        </div>
+        <div class="dimension-card" style="grid-column: 1 / -1;">
+          <div class="dimension-card-num">05</div>
+          <div class="dimension-card-title">财赋甲于他县</div>
+          <p>"每总集银几百万两"，全城商业区集银约两千万两。每年捐输（买官）不下70万两白银，厘金税年约10万两白银。湘军军饷"湖南军饷出湘潭"，年占百万两以上。湘潭县所缴赋税倍于省内他县，故称"天下第一壮县"。</p>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.3</span>城里头的商业盛景与老字号</h3>
+
+      <div class="content">
+        <p>更新规划对明清至民国时期城正街（城里头）的商业盛景有一段生动描述："城里头作为明清至民国时期湘潭老城的商业核心，曾以'米市'和'药都'闻名全国，聚集了江西、苏杭等各地商帮，形成米行、药号、钱庄林立的繁华街市。这条青石板铺就的街道上，太真芝药店、大利生南货食品店、新多福酱菜等老字号招牌高悬，日夜人声鼎沸，茶楼戏院喧嚣，生动展现了'金湘潭'的商业盛况。"</p>
       </div>
 
       <table class="data-table">
         <thead>
-          <tr><th style="width:140px;">老字号</th><th style="width:100px;">创立年代</th><th>特色与传承</th></tr>
+          <tr><th style="width:160px;">老字号</th><th style="width:100px;">行业</th><th>历史地位</th></tr>
         </thead>
         <tbody>
-          <tr><td>龙牌酱油</td><td>清乾隆1740年</td><td>280余年历史，国家地理标志产品，曾获巴拿马国际博览会金奖</td></tr>
-          <tr><td>义和斋灯芯糕</td><td>明万历年间</td><td>400余年历史，湖南省非物质文化遗产，"灯芯糕"因形似灯芯可点燃而得名</td></tr>
-          <tr><td>左氏十八总活鱼</td><td>清光绪1898年</td><td>120余年历史，湘江活鱼现杀现做，是湘潭餐饮文化的代表</td></tr>
-          <tr><td>太真芝药室</td><td>清代</td><td>百年中药铺，遵循古方炮制，是湘潭药都文化的遗存</td></tr>
-          <tr><td>协和公酱园</td><td>清代</td><td>传统酱菜酿造，与龙牌酱油同为湘潭酱文化代表</td></tr>
-          <tr><td>十八总大码头米粉</td><td>民国</td><td>湘潭米粉文化代表，汤底用猪骨熬制，码子丰富</td></tr>
+          <tr><td>太真芝药店</td><td>药材</td><td>"药都"湘潭的代表性药号，今列为历史建筑</td></tr>
+          <tr><td>大利生南货食品店</td><td>食品</td><td>南货食品代表性商号</td></tr>
+          <tr><td>新多福酱菜</td><td>酱业</td><td>湘潭酱业代表性商号</td></tr>
+          <tr><td>龙牌酱油</td><td>酱业</td><td>清乾隆1740年创立，280余年历史，国家地理标志产品，曾获巴拿马国际博览会金奖</td></tr>
+          <tr><td>义和斋灯芯糕</td><td>食品</td><td>明万历年间创立，400余年历史，湖南省非物质文化遗产</td></tr>
+          <tr><td>左氏十八总活鱼</td><td>餐饮</td><td>清光绪1898年创立，120余年历史，湘江活鱼现杀现做</td></tr>
         </tbody>
       </table>
+
+      <h3 class="sub-section-title"><span class="num">2.4</span>历史诗文中的"金湘潭"</h3>
 
       <div class="img-full">
         <img src="https://aka.doubaocdn.com/s/YS1MaaXHQG" alt="清嘉庆湘潭城总全图">
         <div class="img-caption" style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(14,9,6,0.98), transparent); color:var(--text2); font-size:13px; padding:50px 20px 14px;"><strong>清嘉庆《湘潭城总全图》</strong> · 刊于清嘉庆二十二年（1817）《湘潭县志》，清晰标注十八总名称、城墙城门、会馆庙宇及沿江码头，是研究城总空间格局的核心史料</div>
       </div>
 
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); margin:24px 0 14px; padding-left:14px; border-left:3px solid var(--cinnabar);">历代诗文吟咏</h3>
-
       <div class="poem-grid">
         <div class="poem-card">
-          <div class="poem-source">明 · 李腾芳《湘潭》</div>
-          <div class="poem-text">县城分市井，烟火万家稠。<br>估客帆樯集，居人竹树幽。</div>
-          <div class="poem-note">描绘明代湘潭县城烟火万家、商船云集的繁荣景象</div>
+          <div class="poem-source">清 · 张九镒《湘潭》</div>
+          <div class="poem-text">楼台金碧拥南湘，万户千门竞夕阳。<br>烟火连云雄楚塞，至今人说小南京。</div>
+          <div class="poem-note">张九镒（1710—1770），湘潭人，清代诗人，曾任岳麓书院山长</div>
         </div>
         <div class="poem-card">
-          <div class="poem-source">清 · 王闿运《湘潭县志》</div>
-          <div class="poem-text">潭州富庶甲湖南，<br>十里帆樯接蔚蓝。</div>
-          <div class="poem-note">王闿运主修《湘潭县志》，笔下湘潭十里帆樯，富庶甲于湖南</div>
+          <div class="poem-source">清 · 周系英《湘潭竹枝词》</div>
+          <div class="poem-text">县前灯火夜市开，百货喧阗杂沓来。<br>莫道长沙星沙好，湘潭城正胜蓬莱。</div>
+          <div class="poem-note">周系英（1765—1824），湘潭人，清代乾嘉时期著名官员、诗人。"城正胜蓬莱"是对城正街商业繁华的最高赞誉</div>
         </div>
         <div class="poem-card">
-          <div class="poem-source">清 · 张九钺《湘江竹枝词》</div>
-          <div class="poem-text">十八总头江水深，<br>依家住在总中心。</div>
-          <div class="poem-note">以竹枝词形式记录十八总街市生活，"总"成为湘潭独特的地名文化</div>
+          <div class="poem-source">近代 · 秋瑾《过湘潭》</div>
+          <div class="poem-text">城郭参差倚夕阳，当年曾此驻行装。<br>书生剑气横牛斗，文庙森森夜未央。</div>
+          <div class="poem-note">秋瑾（1875—1907），近代民主革命家、女权运动先驱</div>
         </div>
         <div class="poem-card">
-          <div class="poem-source">近代 · 朱德裳《湘潭纪事》</div>
-          <div class="poem-text">金湘潭，银汉口，<br>铜长沙，铁宝庆。</div>
-          <div class="poem-note">民谚将湘潭与汉口并称"金银"，足见其商业地位之高</div>
+          <div class="poem-source">近代 · 杨昭植《就义前题壁诗》</div>
+          <div class="poem-text">学坪碧血化长虹，文庙苍松卷怒风。<br>寄语湘江后来者，红旗不倒此心同。</div>
+          <div class="poem-note">杨昭植（1902—1927），中共党员，湘潭工农运动先驱烈士，1927年就义于学坪</div>
         </div>
       </div>
+
+      <blockquote>
+        <p>湘潭，楚南一大都会也。地临湘水，商贾辐辏，百货云集，虽苏州、汉口无以过之。<br>——清乾隆《湘潭县志》</p>
+      </blockquote>
     </section>
 
     <div class="cn-divider">❖ ❖ ❖</div>
@@ -1056,58 +1064,78 @@ blockquote p {
         <p>"城总"是湘潭独有的城市管理制度，在中国城市史上具有特殊价值。"城"指城内（县衙所在的行政区域），"总"指城外沿江的商业街区（每总约一百丈，设总首管理）。城总制度是明清时期湘潭商业自治的制度保障。</p>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
-        <div class="info-card">
-          <div class="info-card-title">"总"的起源</div>
-          <p>"总"源于明代的保甲制度，每总设总首一人，负责本总治安、消防、公益事务。随着商业发展，总首逐渐演变为商界领袖，承担行业协调、纠纷调解等职能</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">城总分治</div>
-          <p>城内由县衙管理（行政），城外十八总由总首管理（商业自治）。这种"一城两制"的格局，是湘潭商业文明高度发达的制度体现</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">总首的权力</div>
-          <p>总首由本总商户公推产生，负责协调行业规则、管理公共设施（码头、道路、消防）、调解商业纠纷，具有相当大的自治权</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">城总文化遗产</div>
-          <p>"城总"不仅是制度，更是一种文化认同。至今湘潭人仍称城正街一带为"城里头"，"总"作为地名保留在十八总、九总等称谓中</p>
-        </div>
+      <h3 class="sub-section-title"><span class="num">3.1</span>"总"的起源：从总甲制到商业自治单元</h3>
+
+      <div class="content">
+        <p>"总"是湘潭独有的街道通名，在中国城市史上极为罕见。其历史可追溯至元代。元朝以蒙古人、色目人管辖市肆，称为"总爷"或"总甲"，"总甲管辖之地"即简称"总"。距今已有800年历史。</p>
+        <p>"总"本质上是一种市肆组织和民间自治单元，略似今天的居委会，但又有其独特之处：每总设"值年"或"首司"管理公共事务，由民间选举、逐年更换，多选殷实户有威望者担任；每总还有更夫，昼宿巷口更楼，夜晚开关栅门、巡更、照管街灯；总与总之间设木栅门分隔，昼启夜闭。这种制度类似唐代里坊制的商业分区，但不限制人员自由流动，使湘潭的商业街区形成了一种独特的"自我管理、自我服务"的传统，是中国城市民间自治的珍贵样本。</p>
       </div>
 
-      <div class="highlight-box">
-        <div class="highlight-box-title">银钱地毯：湘潭商业繁荣的极致体现</div>
-        <p>据《湘潭县商业志》记载，清道光年间，湘潭十八总银钱业极度发达，各总钱庄票号林立，银两交易数额巨大。有"银钱地毯"之说——形容从大埠桥到石嘴垴的十八总街市，地上铺的不是青石板，而是流淌的银钱。这一说法虽有夸张，但足以反映当时湘潭金融业的繁荣。</p>
-      </div>
+      <h3 class="sub-section-title"><span class="num">3.2</span>十八总的空间划分</h3>
 
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); margin:24px 0 14px; padding-left:14px; border-left:3px solid var(--cinnabar);">十八总空间分布</h3>
+      <div class="content">
+        <p>湘潭城在明代筑城前分为一至十八总，清代又延伸出十九总。沿湘江从下游到上游依次分布。1928年，湘潭县县长王捷俊重新命名街道，将九总至十八总的正街统一命名为"平政路"，取"平政爱民"之意。此后，"总"的界限逐渐模糊，但作为历史记忆和民间称谓，"十八总"的说法一直流传至今。</p>
+      </div>
 
       <table class="data-table">
         <thead>
-          <tr><th style="width:80px;">总别</th><th>位置与特色</th></tr>
+          <tr><th style="width:80px;">总号</th><th style="width:160px;">位置/标志</th><th>主要功能与特色</th></tr>
         </thead>
         <tbody>
-          <tr><td>一总</td><td>大埠桥附近，米粮集散中心</td></tr>
-          <tr><td>二总</td><td>粮食、油盐行栈集中</td></tr>
-          <tr><td>三总</td><td>布匹、绸缎庄</td></tr>
-          <tr><td>四总</td><td>药材行（药都核心区）</td></tr>
-          <tr><td>五总</td><td>茶叶加工与集散</td></tr>
-          <tr><td>六总</td><td>江西会馆（万寿宫）所在地，商业核心</td></tr>
-          <tr><td>七总</td><td>钱庄票号集中（银钱业）</td></tr>
-          <tr><td>八总</td><td>杂货、日用品</td></tr>
-          <tr class="highlight-row"><td>九总</td><td>关圣殿（北五省会馆）所在地，商业繁华区</td></tr>
-          <tr class="highlight-row"><td>十总</td><td>城正街延伸段，文庙附近，文化教育区</td></tr>
-          <tr class="highlight-row"><td>十一总</td><td>昭潭书院所在地，教育文化核心</td></tr>
-          <tr class="highlight-row"><td>十二总</td><td>观湘门附近，码头与餐饮</td></tr>
-          <tr><td>十三总</td><td>木材、建材</td></tr>
-          <tr><td>十四总</td><td>竹器、藤器</td></tr>
-          <tr><td>十五总</td><td>铁器、五金</td></tr>
-          <tr><td>十六总</td><td>酿酒、酱园</td></tr>
-          <tr><td>十七总</td><td>屠宰、肉食</td></tr>
-          <tr><td>十八总</td><td>石嘴垴，湘江转弯处，码头终点</td></tr>
+          <tr><td>一至三总</td><td>宋家桥至小东门（城内）</td><td>后因筑城隔离而衰落</td></tr>
+          <tr><td>四至七总</td><td>宣化街、大街、攀龙街、新街（城内）</td><td>后圈入城内，多为县衙机关、兵营、粮草仓库，丧失商业功能</td></tr>
+          <tr><td>八总</td><td>生湘门（通济门外），大埠桥</td><td>竹木辐辏、舟楫往来</td></tr>
+          <tr><td>九总</td><td>平政桥，大埠桥一带</td><td>河街有行宫、九如等五码头</td></tr>
+          <tr class="highlight-row"><td>十总</td><td>万寿宫（江西会馆）</td><td>濂溪祠、昭武宾馆</td></tr>
+          <tr class="highlight-row"><td>十一总</td><td>关圣庙</td><td>临丰宾馆</td></tr>
+          <tr class="highlight-row"><td>十二总</td><td>关圣殿（北五省会馆）</td><td>华南戏院、发源殿</td></tr>
+          <tr><td>十三总</td><td>黄龙庙</td><td>新梁街、土产行、运输业</td></tr>
+          <tr><td>十四总</td><td>水府殿</td><td>黄龙古店、坡子上</td></tr>
+          <tr><td>十五总</td><td>兴仁巷</td><td>清真寺、石阳宾馆</td></tr>
+          <tr><td>十六总</td><td>仓门前、新街口</td><td>仓储业、鲁班殿、江浙会馆</td></tr>
+          <tr><td>十七总</td><td>鄢家巷</td><td>天后宫（福建会馆）</td></tr>
+          <tr><td>十八总</td><td>太平街至鼓楼门，大码头至唐兴寺</td><td>窑湾，繁华之最</td></tr>
         </tbody>
       </table>
       <p style="font-size:12px; color:var(--text3); margin-top:-10px; text-indent:0;">注：高亮行为本次更新规划范围（十至十二总核心区）</p>
+
+      <h3 class="sub-section-title"><span class="num">3.3</span>为什么一至八总消失了？</h3>
+
+      <div class="content">
+        <p>这是理解湘潭城市空间演变的关键问题。明万历四年筑城后，一至三总因生湘门关闭被隔离在城外，四至七总被圈入城内。城内多为县衙机关、兵营、粮草仓库，商业功能受到限制。与此同时，商业沿湘江向城外上游（今湘潭一桥两侧）发展，形成新街（后称平政路）。新街商业繁荣逐渐超过城内，一至八总逐渐衰落消失。</p>
+        <p>因此，今天人们熟知的只有九至十八总。而城正街（原四至七总所在的城内主街）虽然不在"九至十八总"的商业繁华带上，但它作为县治所在地，是整个"城总"体系的行政中枢和文化核心。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.4</span>三街并行的城市格局</h3>
+
+      <div class="content">
+        <p>湘潭旧城沿江街道由三条并行街道组成，这是中国商业城市中非常独特的空间形态：湘江 → 河街（前街）→ 正街（设总）→ 后街。河街最靠江，多经营批发（油行、米行、水果杂品行）；正街居中，以零售为主，十一至十二总药材行，十三至十四总布店百货酒家，十六七总钱庄金银首饰行；后街以正街为中轴与河街对称，多为会馆、庙宇、住宅。</p>
+        <p>这种"前店后住""下店上住"的建筑功能形式，被保护规划列为必须严格保护的内容。</p>
+      </div>
+
+      <div class="highlight-box" style="background:linear-gradient(135deg, rgba(212,184,122,0.1) 0%, rgba(194,91,86,0.08) 100%); border-left:3px solid var(--gold);">
+        <div class="highlight-box-title">银钱地毯：湘潭商业繁荣的极致体现</div>
+        <p>乾隆、嘉庆时期，十二总新建发源殿，与十三总天符庙举行迎神比赛，遂以库平银元宝铺路，从殿庭直到门口，用该总凑集的约200万两银子铺成了真正的"银钱地毯"。直到20世纪80年代，湘潭龙舟比赛仍有以"总"组建参赛队互相竞争的习俗。这种"总际竞争"是湘潭商业文化中极为独特的现象，体现了商帮文化中的集体荣誉感和炫耀性消费。</p>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">800<span class="unit">年</span></div>
+          <div class="data-label">"总"制度历史</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">18<span class="unit">总</span></div>
+          <div class="data-label">商业街区划分</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">40<span class="unit">处</span></div>
+          <div class="data-label">会馆总数</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">200<span class="unit">万两</span></div>
+          <div class="data-label">银钱地毯</div>
+        </div>
+      </div>
     </section>
 
     <div class="cn-divider">❖ ❖ ❖</div>
@@ -1116,64 +1144,61 @@ blockquote p {
     <section class="clearfix" style="margin-bottom: 44px;">
       <div class="section-header">
         <span class="section-tag">CHAPTER 01 · 城总文化</span>
-        <h2 class="section-title">城总文化：会馆、书院与红色记忆</h2>
+        <h2 class="section-title">城总文化：四大文化特色叠加</h2>
         <div class="vintage-divider"></div>
       </div>
 
       <div class="content">
-        <p>城正街不仅是商业中心，也是文化汇聚之地。会馆文化、书院文化和红色文化在这里交织，形成了独特的"城总文化"体系。</p>
-      </div>
-
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); margin:20px 0 14px; padding-left:14px; border-left:3px solid var(--cinnabar);">三街并行：商业、行政、文化的空间叠合</h3>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:16px 0;">
-        <div class="info-card" style="border-top:3px solid var(--gold);">
-          <div class="info-card-title">商业街</div>
-          <p>十八总沿江街市，会馆、钱庄、行栈林立，是"金湘潭"的物质载体</p>
-        </div>
-        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
-          <div class="info-card-title">行政街</div>
-          <p>城正街（县正街），县衙、文庙、昭潭书院集中，是近九百年行政中心</p>
-        </div>
-        <div class="info-card" style="border-top:3px solid var(--text3);">
-          <div class="info-card-title">文化街</div>
-          <p>文庙—昭潭书院—关圣殿一线，是湖湘文化教育传承与红色记忆的核心</p>
-        </div>
+        <p>城正街不仅是商业中心，也是文化汇聚之地。更新规划将街区文化特色归纳为四个方面：湖湘文化、城总文化、红色文化、名人文化。这四大文化在城正街叠加交织，形成了独特的"城总文化"体系。</p>
       </div>
 
       <div class="img-float-right">
         <img src="https://aka.doubaocdn.com/s/9x0wKmj8W7" alt="江西会馆牌楼">
-        <div class="img-caption"><strong>江西会馆万寿宫牌楼</strong> · 清乾隆年间建，是湘潭规模最大的会馆建筑</div>
+        <div class="img-caption"><strong>江西会馆万寿宫牌楼</strong> · 清乾隆年间建，是湘潭规模最大的会馆建筑，2011年列为省级文保</div>
       </div>
 
+      <h3 class="sub-section-title"><span class="num">4.1</span>湖湘文化</h3>
+
       <div class="content">
-        <p><strong>会馆文化</strong>是城总文化的重要组成部分。明清时期，各地商人在湘潭建立了20余所会馆，其中江西会馆（万寿宫）、关圣殿（北五省会馆）、江南会馆等规模宏大。会馆不仅是商人聚会场所，也是地域文化交流的平台。</p>
-        <p><strong>书院文化</strong>以昭潭书院为核心。清康熙五十九年（1720）知县方伯建义学，乾隆八年（1743）知县李松倡建昭潭书院，增建学舍5斋，置学田415.5亩。昭潭书院是清代湘潭最高学府，培养了大批人才，王闿运等名士曾在此讲学。</p>
+        <p>城正街是湖湘文化经世致用思想传播的重要载体。文庙祭祀孔子、昭潭书院传承理学（祀周敦颐），构成了完整的儒家教育体系。历史上群贤汇聚（如毛泽东、齐白石等），其思想与实践光耀百年，对中国的政治革新、文化发展产生深远影响。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.2</span>城总文化</h3>
+
+      <div class="content">
+        <p>城正街是湘潭"千年城总"制度的行政中枢和文化核心。"总"的制度起源于元代，延续800年，是中国城市民间自治的珍贵样本。城总文化中的商帮精神、总际竞争、会馆制度，是湘潭商业文明的独特遗产。从九总到十八总，每总都有自己的标志性庙宇或会馆，这些建筑不仅是宗教场所，更是各总的"客厅"和"脸面"，承担着集会、议事、庆典、接待等多重功能。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.3</span>红色文化</h3>
+
+      <div class="content">
+        <p>城里头不仅是明清以来"金湘潭"的商业核心，更承载着深厚的红色革命印记。作为毛泽东早期革命活动的重要区域，这里曾见证1920年代马克思主义的传播、工农运动的蓬勃发展。文庙见证了大革命时期的革命集会，塔公祠是毛泽东湖南农民运动考察的重要一站，毛福昌号是毛泽东青年时代在湘潭的落脚点，抗日阵亡将士纪念碑是爱国主义精神的象征。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">4.4</span>名人文化</h3>
+
+      <div class="content">
+        <p>城里头人文荟萃，堪称近现代湖湘英才的摇篮。一条麻石路浓缩了半部湖南发展史。从晚清湘军将领到近代革命先驱，众多杰出人物在此留下足迹，其思想与实践如星火燎原，深刻推动了中国现代化进程。（详见下节"名人辈出"）</p>
       </div>
 
       <div style="clear: both;"></div>
 
-      <div class="highlight-box">
-        <div class="highlight-box-title">红色记忆：工农运动的重要据点</div>
-        <p>1926-1927年，湘潭工农运动蓬勃兴起。湘潭县第一届学生代表大会在文庙召开；毛泽东在塔公祠（今城正街附近）召开农运座谈会，提出开办农民运动讲习所的设想。城正街是近代中国革命史的重要见证之地。</p>
-      </div>
-
-      <div class="data-grid">
-        <div class="data-card">
-          <div class="data-num">20<span class="unit">+所</span></div>
-          <div class="data-label">明清会馆</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">湖湘文化</div>
+          <p>文庙+昭潭书院构成完整儒家教育体系，经世致用思想传播的重要载体</p>
         </div>
-        <div class="data-card">
-          <div class="data-num">415<span class="unit">.5亩</span></div>
-          <div class="data-label">昭潭书院学田</div>
+        <div class="info-card" style="border-top:3px solid var(--cinnabar);">
+          <div class="info-card-title">城总文化</div>
+          <p>800年"总"制度，商帮精神、总际竞争、会馆制度，中国城市民间自治珍贵样本</p>
         </div>
-        <div class="data-card">
-          <div class="data-num">1926</div>
-          <div class="data-label">工农运动兴起</div>
+        <div class="info-card" style="border-top:3px solid var(--text3);">
+          <div class="info-card-title">红色文化</div>
+          <p>毛泽东早期革命活动重要区域，文庙革命集会、塔公祠农运座谈会、抗日纪念碑</p>
         </div>
-        <div class="data-card">
-          <div class="data-num">3<span class="unit">大</span></div>
-          <div class="data-label">文化体系</div>
+        <div class="info-card" style="border-top:3px solid var(--gold);">
+          <div class="info-card-title">名人文化</div>
+          <p>近现代湖湘英才摇篮，一条麻石路浓缩半部湖南发展史</p>
         </div>
       </div>
     </section>
@@ -1184,97 +1209,143 @@ blockquote p {
     <section style="margin-bottom: 44px;">
       <div class="section-header">
         <span class="section-tag">CHAPTER 01 · 价值评估</span>
-        <h2 class="section-title">价值评估：三个"最"与四大文化特色</h2>
+        <h2 class="section-title">价值评估：三个"最"与核心价值</h2>
         <div class="vintage-divider"></div>
       </div>
 
       <div class="content">
-        <p>综合历史脉络、空间格局、商业文明和文化传承，城正街历史街区的价值可以概括为三个"最"和四大文化特色。这一价值评估是后续更新策划的核心依据。</p>
+        <p>《城正街历史文化街区保护规划》对街区价值给出了高度凝练的评价，即三个"最"。这一价值评估是后续更新策划的核心依据。</p>
       </div>
 
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); margin:20px 0 14px; padding-left:14px; border-left:3px solid var(--cinnabar);">三个"最"</h3>
+      <h3 class="sub-section-title"><span class="num">5.1</span>三个"最"</h3>
 
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:16px 0;">
         <div class="info-card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(194,91,86,0.15) 100%); border:1px solid var(--cinnabar);">
-          <div class="info-card-title" style="color:var(--cinnabar);">最完整的城总制度遗存</div>
-          <p>城正街是全国罕见的保存"城总"制度空间格局的历史街区，十八总肌理、三街九巷格局基本完整，是研究中国古代城市自治制度的活化石</p>
+          <div class="info-card-title" style="color:var(--cinnabar);">肌理最完整</div>
+          <p>城正街、板石巷、泗州庵巷等传统街巷及众多传统建筑构成的格局肌理完整，街巷尺度保存良好。在湘潭老城区大规模改造的背景下，城正街是少数仍保留完整鱼骨状街巷肌理的片区。</p>
         </div>
         <div class="info-card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(212,184,122,0.15) 100%); border:1px solid var(--gold);">
-          <div class="info-card-title">最深厚的商业文明底蕴</div>
-          <p>"金湘潭"商业文明的核心承载地，2000年街市史、900年县治史、400年商业繁荣史，是湘江流域商业文明的典型代表</p>
+          <div class="info-card-title">类型最丰富</div>
+          <p>街区内存有居住、公建、商业、厂房仓库等多种建筑类型。从清代传统民居、民国商业建筑，到20世纪50年代苏式教学楼、80年代居民楼，几乎涵盖了湘潭城市发展各阶段的建筑类型。</p>
         </div>
         <div class="info-card" style="background:linear-gradient(135deg, var(--bg-card) 0%, rgba(148,136,112,0.15) 100%); border:1px solid var(--text3);">
-          <div class="info-card-title">最集中的湖湘文化场域</div>
-          <p>文庙、昭潭书院、关圣殿、江西会馆等文化遗产集中分布，是湖湘文化教育传承与红色记忆的叠加区</p>
+          <div class="info-card-title">时代最延续</div>
+          <p>街区存有明代、清代、民国、20世纪五六十年代、八九十年代等各时期建筑。一条街道，跨越五个世纪，是一部活的湘潭城市建筑史。</p>
         </div>
       </div>
 
-      <h3 style="font-family:'Noto Serif SC',serif; font-size:18px; color:var(--text); margin:24px 0 14px; padding-left:14px; border-left:3px solid var(--cinnabar);">四大文化特色</h3>
+      <h3 class="sub-section-title"><span class="num">5.2</span>街区核心价值的综合表述</h3>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;">
-        <div class="info-card">
-          <div class="info-card-title">城总文化</div>
-          <p>独有的"城总分治"城市自治制度，"总"作为地名和文化认同延续至今，是中国城市史上的独特现象</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">会馆文化</div>
-          <p>20余所会馆构成的地域文化交流网络，江西会馆、关圣殿等建筑精品，是明清商业文明的物质见证</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">书院文化</div>
-          <p>昭潭书院为核心的湖湘教育传承，文庙—书院—义学的完整教育体系，是"湘学渊"的重要载体</p>
-        </div>
-        <div class="info-card">
-          <div class="info-card-title">红色文化</div>
-          <p>工农运动重要据点，毛泽东农运座谈会旧址，抗日阵亡将士纪念碑，是近代革命史的见证</p>
-        </div>
+      <div class="highlight-box" style="background:linear-gradient(135deg, rgba(212,184,122,0.1) 0%, rgba(194,91,86,0.08) 100%); border-left:3px solid var(--gold);">
+        <div class="highlight-box-title">核心价值综合表述</div>
+        <p>城正街从宋哲宗元符元年（1098年）至今，已有920多年历史，1995年之前一直是湘潭县治所在地，是湘潭政治、经济、文化的中心。城正街是湘潭"千年商都，繁华城总"中"城里头"的所在地，过去是两广和中原地区货物集散地，商贸业异常昌盛，"金湘潭"得名由此而来。是湘潭老城中文化底蕴深厚、老街巷与传统民居保存较多的街区，也是千年雨湖发展的历史见证。湘潭城正街自古人文荟萃，名家云集，灿若繁星。从晚清湘军将领到近代革命先驱，众多杰出人物在此留下足迹，其思想与实践如星火燎原，深刻推动了中国现代化进程。</p>
       </div>
     </section>
 
     <div class="cn-divider">❖ ❖ ❖</div>
 
-    <!-- 名人与小结 -->
-    <section class="clearfix" style="margin-bottom: 44px;">
+    <!-- 名人辈出 -->
+    <section style="margin-bottom: 44px;">
       <div class="section-header">
-        <span class="section-tag">CHAPTER 01 · 名人与小结</span>
-        <h2 class="section-title">名人辈出与本章小结</h2>
+        <span class="section-tag">CHAPTER 01 · 名人辈出</span>
+        <h2 class="section-title">名人辈出：一条麻石路，半部湖南史</h2>
         <div class="vintage-divider"></div>
       </div>
 
-      <div class="img-float-right">
-        <img src="https://aka.doubaocdn.com/s/AAYggfojo8" alt="关圣殿">
-        <div class="img-caption"><strong>关圣殿春秋阁</strong> · 北五省会馆核心建筑，是湘潭会馆文化的代表</div>
-      </div>
-
       <div class="content">
-        <p>城正街一带名人辈出，从明代重臣到近代革命先驱，从学术大家到商界领袖，这条街见证了湘潭人才的鼎盛。</p>
+        <p>城正街一带名人辈出，从明代重臣到近代革命先驱，从学术大家到商界领袖，这条街见证了湘潭人才的鼎盛。更新规划明确指出："湘潭城正街自古人文荟萃，名家云集，灿若繁星。从晚清湘军将领到近代革命先驱，众多杰出人物在此留下足迹，其思想与实践如星火燎原，深刻推动了中国现代化进程。"</p>
       </div>
 
-      <div style="clear: both;"></div>
+      <!-- 双图布局：文庙航拍 + 曙光学校老校门 -->
+      <div class="img-duo-grid">
+        <div class="img-duo-item">
+          <img src="https://aka.doubaocdn.com/s/HhNdIssNI6" alt="湘潭文庙航拍">
+          <div class="img-duo-caption"><strong>湘潭文庙航拍</strong> · 毛泽东、杨昭植等革命先驱活动地，湖湘文化教育传承核心</div>
+        </div>
+        <div class="img-duo-item">
+          <img src="https://aka.doubaocdn.com/s/8RKxulWHOY" alt="曙光学校老校门">
+          <div class="img-duo-caption"><strong>曙光学校老校门</strong> · 原昭潭高等小学堂，宋楚瑜母校，2005年返校题词"春风化雨，未来曙光"</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.1</span>革命先驱与红色记忆</h3>
+
+      <div class="celebrity-category">
+        <div class="celebrity-category-title">革命先驱与红色记忆</div>
+        <p>城正街是毛泽东早期革命活动的重要区域。1926年湘潭县第一届学生代表大会在文庙召开；1927年1月4日毛泽东在塔公祠与县农协委员长郭咏泉等召开座谈会，详细了解农运发展情况，提出开办农民运动讲习所的设想。毛福昌号是毛泽东青年时代在湘潭的落脚点。杨昭植1927年就义于学坪，留下"学坪碧血化长虹，文庙苍松卷怒风"的壮烈诗篇。抗日阵亡将士纪念碑始建于1938年，是爱国主义精神的象征。彭德怀元帅与其妻子曾在此度过蜜月。秋瑾曾过湘潭，留下"书生剑气横牛斗，文庙森森夜未央"的诗句。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.2</span>文化名人与学术大家</h3>
+
+      <div class="celebrity-category">
+        <div class="celebrity-category-title">文化名人与学术大家</div>
+        <p>王闿运，湘潭名儒，光绪《湘潭县志》纂者，经学大师，曾讲学昭潭书院，笔下"湘潭富饶为湖南第一"成为研究金湘潭的核心史料。张九镒，清代诗人、岳麓书院山长，湘潭人，有《湘潭》诗"至今人说小南京"。周系英，清代乾嘉时期著名官员、诗人，"湘潭城正胜蓬莱"是对城正街商业繁华的最高赞誉。杨度，政治活动家，《湖南少年歌》激扬湖湘魂魄。吕骥，音乐家，《抗日军政大学校歌》作者。黎锦晖，音乐家，以《桃花江》奠基中国流行音乐。齐白石，国画大师，早年在湘潭城总一带谋生，与会馆文化圈有交集。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.3</span>清代重臣与湘军将领</h3>
+
+      <div class="celebrity-category">
+        <div class="celebrity-category-title">清代重臣与湘军将领</div>
+        <p>李腾芳，明代官至礼部尚书，著有《湘潭》诗。郭松林，清代清廷重臣，故居在城正街。塔齐布，湘军将领，1854年率湘军与太平军激战于湘潭，塔公祠纪念他。龚承钧，清代榜眼，故居在城正街。燮理溥化，元代进士、御史，以御史之笔书写多元交融。曾国藩、左宗棠等湘军统帅均与湘潭城正街文化圈有深厚交集。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.4</span>教育实业先驱</h3>
+
+      <div class="celebrity-category">
+        <div class="celebrity-category-title">教育实业先驱</div>
+        <p>梁焕奎，教育实业先驱，创办矿务学堂，奠定湖南大学根基。刘道一，辛亥革命烈士，1906年萍浏醴起义，第一位流血牺牲的留日学生，烈士祠在城正街。宋楚瑜，台湾亲民党主席，1949年就读于曙光学校（昭潭小学），2005年5月9日专程回到阔别56年的母校参观，题词"春风化雨，未来曙光"。</p>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">6.5</span>名人一览表</h3>
 
       <table class="data-table">
         <thead>
-          <tr><th style="width:100px;">朝代</th><th style="width:100px;">名人</th><th>与城正街的关联</th></tr>
+          <tr><th style="width:80px;">朝代</th><th style="width:100px;">名人</th><th style="width:140px;">身份</th><th>与城正街的关联</th></tr>
         </thead>
         <tbody>
-          <tr><td>明</td><td>李腾芳</td><td>官至礼部尚书，著有《湘潭》诗，描绘城正街一带繁荣</td></tr>
-          <tr><td>清</td><td>王闿运</td><td>经学大师，主修《湘潭县志》，曾讲学昭潭书院</td></tr>
-          <tr><td>清</td><td>曾国藩</td><td>湘军统帅，曾在湘潭城总一带活动，与昭潭书院有渊源</td></tr>
-          <tr><td>清</td><td>左宗棠</td><td>湘军名将，曾在湘潭求学，与城正街文化圈有交集</td></tr>
-          <tr><td>近代</td><td>毛泽东</td><td>1926年在塔公祠召开农运座谈会，提出农民运动讲习所设想</td></tr>
-          <tr><td>近代</td><td>彭德怀</td><td>湘潭籍开国元帅，早年在湘潭城总一带活动</td></tr>
-          <tr><td>近代</td><td>黄公略</td><td>红军将领，曾在湘潭城正街一带从事革命活动</td></tr>
-          <tr><td>近代</td><td>齐白石</td><td>国画大师，早年在湘潭城总一带谋生，与会馆文化圈有交集</td></tr>
-          <tr><td>近代</td><td>朱德裳</td><td>学者，著《湘潭纪事》，记录城总商业文化</td></tr>
-          <tr><td>近代</td><td>黎锦熙</td><td>语言学家，湘潭黎氏八骏之一，与昭潭书院教育传统有渊源</td></tr>
-          <tr><td>现代</td><td>宋楚瑜</td><td>亲民党主席，祖籍湘潭，与城正街历史文化有渊源</td></tr>
-          <tr><td>现代</td><td>马英九</td><td>前台湾地区领导人，祖籍湘潭，曾回乡祭祖</td></tr>
+          <tr><td>元</td><td>燮理溥化</td><td>进士、御史</td><td>以御史之笔书写多元交融，湘潭人</td></tr>
+          <tr><td>明</td><td>李腾芳</td><td>礼部尚书</td><td>著有《湘潭》诗，描绘城正街一带繁荣</td></tr>
+          <tr><td>清</td><td>张九镒</td><td>诗人、岳麓书院山长</td><td>1710—1770，湘潭人，有《湘潭》诗"至今人说小南京"</td></tr>
+          <tr><td>清</td><td>周系英</td><td>官员、诗人</td><td>1765—1824，湘潭人，"湘潭城正胜蓬莱"</td></tr>
+          <tr><td>清</td><td>王闿运</td><td>经学大师</td><td>主修《湘潭县志》，曾讲学昭潭书院</td></tr>
+          <tr><td>清</td><td>龚承钧</td><td>榜眼</td><td>故居在城正街</td></tr>
+          <tr><td>清</td><td>郭松林</td><td>清廷重臣</td><td>故居在城正街</td></tr>
+          <tr><td>清</td><td>塔齐布</td><td>湘军将领</td><td>1854年率湘军与太平军激战于湘潭，塔公祠纪念他</td></tr>
+          <tr><td>清</td><td>曾国藩</td><td>湘军统帅</td><td>曾在湘潭城总一带活动，与昭潭书院有渊源</td></tr>
+          <tr><td>清</td><td>左宗棠</td><td>湘军名将</td><td>曾在湘潭求学，与城正街文化圈有交集</td></tr>
+          <tr><td>近代</td><td>毛泽东</td><td>无产阶级革命家</td><td>常途经湘潭住宿于毛福昌号；1927年在塔公祠召开农运座谈会</td></tr>
+          <tr><td>近代</td><td>杨昭植</td><td>革命烈士</td><td>1927年就义于学坪，题壁诗"文庙苍松卷怒风"</td></tr>
+          <tr><td>近代</td><td>刘道一</td><td>辛亥革命烈士</td><td>1906年萍浏醴起义，第一位流血牺牲的留日学生；烈士祠在城正街</td></tr>
+          <tr><td>近代</td><td>秋瑾</td><td>民主革命家</td><td>曾过湘潭，有《过湘潭》诗"文庙森森夜未央"</td></tr>
+          <tr><td>近代</td><td>彭德怀</td><td>开国元帅</td><td>与其妻子在此度过蜜月</td></tr>
+          <tr><td>近代</td><td>齐白石</td><td>国画大师</td><td>早年在湘潭城总一带谋生，与会馆文化圈有交集</td></tr>
+          <tr><td>近代</td><td>杨度</td><td>政治活动家</td><td>《湖南少年歌》激扬湖湘魂魄，湘潭人</td></tr>
+          <tr><td>近代</td><td>黎锦晖</td><td>音乐家</td><td>以《桃花江》奠基中国流行音乐，湘潭人</td></tr>
+          <tr><td>近代</td><td>吕骥</td><td>音乐家</td><td>《抗日军政大学校歌》作者，湘潭人</td></tr>
+          <tr><td>近代</td><td>梁焕奎</td><td>教育实业先驱</td><td>创办矿务学堂，奠定湖南大学根基，湘潭人</td></tr>
+          <tr><td>现代</td><td>宋楚瑜</td><td>亲民党主席</td><td>1949年就读于曙光学校，2005年返校参观题词</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 本章小结 -->
+    <section style="margin-bottom: 44px;">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 01 · 本章小结</span>
+        <h2 class="section-title">本章小结：历史文化根基</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="content">
+        <p>城正街历史街区是"千年城总·金湘潭"的核心承载地，具有三个"最"——肌理最完整、类型最丰富、时代最延续。其四大文化特色——湖湘文化、城总文化、红色文化、名人文化——构成了街区不可替代的历史价值。</p>
+        <p>从秦汉街市到北宋县治迁入，从明清"金湘潭"商业鼎盛到近代革命浪潮，从城总制度800年自治传统到16位名人留下的足迹，城正街的每一块青石板都承载着深厚的历史记忆。这一历史文化根基，是后续现状诊断、资源梳理、产业策划和更新设计的出发点。</p>
+      </div>
 
       <div class="highlight-box" style="background:linear-gradient(135deg, rgba(212,184,122,0.1) 0%, rgba(194,91,86,0.08) 100%); border-left:3px solid var(--gold);">
-        <div class="highlight-box-title">本章核心价值总结</div>
-        <p>城正街历史街区是"千年城总·金湘潭"的核心承载地，具有三个"最"——最完整的城总制度遗存、最深厚的商业文明底蕴、最集中的湖湘文化场域。其四大文化特色——城总文化、会馆文化、书院文化、红色文化——构成了街区不可替代的历史价值。这一价值评估是后续现状诊断、资源梳理、产业策划和更新设计的历史根基。</p>
+        <div class="highlight-box-title">本章核心结论</div>
+        <p>城正街不是一条普通的老街，而是湘潭城市的根脉所在。2000年街市史、900年县治史、400年商业繁荣史、800年城总制度、16位历史名人、四大文化特色、三个"最"价值——这些数字共同构成了城正街不可替代的历史文化价值，也是片区更新策划必须坚守的根基。</p>
       </div>
 
       <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; margin:20px 0;">
