@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第六章 · 更新项目库与投资估算 | 城正街片区策划专题研究</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lora:wght@400;500;700&family=Special+Elite&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+@media print{h1,h2,h3,h4,.chapter-number,.chapter-title,.section-header,.method-title{page-break-after:avoid;break-after:avoid}blockquote,.highlight-box,.key-point,.abstract,.stage-item,.question-item,.game-element,.numbered-item,.list-item,.code-block,.terminal,figure,img,table,.card{page-break-inside:avoid;break-inside:avoid}ul,ol,.numbered-list,.question-list,.stage-list{page-break-inside:avoid;break-inside:avoid}.elegant-divider,.divider,.section-divider,.nature-divider,.vintage-divider,.art-divider,hr{page-break-after:avoid;break-after:avoid}.method-section,.inner-border{page-break-inside:avoid;break-inside:avoid}p{orphans:3;widows:3}section.new-page{page-break-before:always;break-before:always}}
+blockquote,.highlight-box,.key-point,.abstract,.stage-item,.question-item,.game-element,.code-block,.terminal,.stage-list,.question-list,figure,img,table,.card{page-break-inside:avoid;break-inside:avoid}
+h1,h2,h3,h4,.chapter-number,.chapter-title,.section-header,.method-title{page-break-after:avoid;break-after:avoid}
+.elegant-divider,.divider,.section-divider,.nature-divider,.vintage-divider,.art-divider,hr{page-break-after:avoid;break-after:avoid}
+:root{--bg:#0E0906;--bg-page:#1A120B;--bg-card:#33271A;--bg-card2:#3D2E1F;--bg-card3:#2A1F14;--text:#F0E6D5;--text2:#C4B69E;--text3:#968870;--gold:#D4B87A;--gold-light:#E8D4A0;--cinnabar:#C25B56;--cinnabar-dark:#9A3E3A;--border:#4E3A25;--border-light:#5E4830}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lora','Noto Serif SC',serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,9,6,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;justify-content:space-between}
+.top-nav a{color:var(--text3);text-decoration:none;font-size:13px;transition:color .3s}
+.top-nav a:hover{color:var(--gold)}
+.nav-left{display:flex;align-items:center;gap:16px}
+.nav-back{color:var(--gold)!important}
+.nav-chapter-tag{background:var(--cinnabar);color:var(--text)!important;padding:3px 10px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:1px}
+.nav-title{color:var(--text2);font-size:14px;font-weight:600}
+.nav-right{display:flex;gap:18px}
+.nav-right a{font-family:'Noto Serif SC',serif;font-size:14px;color:var(--text3)}
+.nav-right a.active{color:var(--gold)}
+.magazine-page{width:100%;max-width:1000px;background:var(--bg-page);margin:0 auto;padding-top:56px;position:relative;box-shadow:0 0 80px rgba(0,0,0,.5)}
+.chapter-hero{position:relative;height:70vh;min-height:500px;display:flex;align-items:center;overflow:hidden}
+.chapter-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.28) saturate(.6);animation:slowZoom 20s ease-in-out infinite alternate}
+@keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+.chapter-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,9,6,.85) 0%,rgba(14,9,6,.3) 50%,rgba(14,9,6,.95) 100%)}
+.chapter-hero-content{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 50px;width:100%}
+.chapter-big-num{font-family:'Abril Fatface','Noto Serif SC',serif;font-size:100px;color:var(--cinnabar);line-height:.9;margin-bottom:16px;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.chapter-en-label{font-family:'Special Elite',monospace;font-size:13px;color:var(--gold);letter-spacing:4px;margin-bottom:20px;display:inline-block;border:1px solid var(--gold);padding:6px 14px}
+.chapter-title{font-family:'Noto Serif SC',serif;font-size:40px;font-weight:900;color:var(--text);letter-spacing:6px;margin-bottom:14px}
+.chapter-subtitle{font-size:16px;color:var(--gold);letter-spacing:3px;margin-bottom:24px}
+.chapter-question{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--text2);border-left:3px solid var(--cinnabar);padding-left:14px}
+.chapter-question strong{color:var(--gold)}
+.main-content{max-width:1000px;margin:0 auto;padding:50px 50px 60px}
+.section-header{margin-bottom:28px;padding-bottom:16px;position:relative}
+.section-tag{font-family:'Special Elite',monospace;font-size:12px;color:var(--cinnabar);letter-spacing:3px;margin-bottom:8px;display:block}
+.section-title{font-family:'Noto Serif SC',serif;font-size:26px;font-weight:700;color:var(--text);letter-spacing:3px;margin-bottom:12px}
+.vintage-divider{display:flex;align-items:center;margin:0}
+.vintage-divider::before{content:'';width:56px;height:2px;background:var(--gold)}
+.sub-section-title{font-family:'Noto Serif SC',serif;font-size:18px;font-weight:700;color:var(--text);margin:26px 0 12px;padding-left:14px;border-left:3px solid var(--cinnabar)}
+.sub-section-title .num{color:var(--gold);font-family:'Abril Fatface',serif;margin-right:8px}
+.content p{font-size:16px;line-height:2;color:var(--text2);margin-bottom:14px;text-indent:2em;text-align:justify}
+.drop-cap::first-letter{float:left;font-family:'Abril Fatface','Noto Serif SC',serif;font-size:56px;line-height:.85;margin:6px 12px 0 0;color:var(--gold);font-weight:700}
+.highlight-box{background:var(--bg-card);border-left:3px solid var(--gold);padding:18px 22px;border-radius:2px;margin:20px 0}
+.highlight-box-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.highlight-box p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:0;text-indent:0}
+.recommend-box{background:linear-gradient(135deg,rgba(194,91,86,.12) 0%,rgba(212,184,122,.08) 100%);border:1px solid var(--cinnabar);padding:18px 22px;border-radius:2px;margin:20px 0}
+.recommend-box-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--cinnabar);margin-bottom:8px}
+.recommend-box p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:0;text-indent:0}
+blockquote{border:1px solid var(--border);padding:20px 24px;margin:24px 0;background:rgba(212,184,122,.05);font-style:italic;color:var(--text2);position:relative}
+blockquote::before{content:'"';font-family:'Abril Fatface',serif;font-size:48px;color:var(--gold);position:absolute;top:-8px;left:16px;opacity:.4}
+blockquote p{text-indent:0;margin-bottom:0;font-size:15px;padding-left:20px}
+.data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}
+.data-card{background:var(--bg-card);padding:18px 16px;border-radius:2px;border-top:2px solid var(--gold);text-align:center;display:flex;flex-direction:column;justify-content:center}
+.data-card.danger{border-top-color:var(--cinnabar)}
+.data-card.danger .data-num{color:var(--cinnabar)}
+.data-num{font-family:'Abril Fatface','Noto Serif SC',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1.1}
+.data-num .unit{font-size:13px;font-weight:500}
+.data-label{font-size:12px;color:var(--text3);margin-top:8px;letter-spacing:1px}
+.info-card{background:var(--bg-card);border-radius:2px;padding:16px 18px;border:1px solid var(--border);margin-bottom:12px}
+.info-card-title{font-family:'Noto Serif SC',serif;font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.info-card-title::before{content:'';width:4px;height:14px;background:var(--cinnabar)}
+.info-card p{font-size:14px;color:var(--text2);line-height:1.85;margin-bottom:0;text-indent:0}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{background:var(--bg-card2);color:var(--gold);padding:10px 12px;text-align:left;font-weight:700;border-bottom:2px solid var(--gold);font-family:'Noto Serif SC',serif}
+.data-table td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+.data-table tr:nth-child(even) td{background:rgba(51,39,26,.5)}
+.data-table .highlight-row td{background:rgba(194,91,86,.15);color:var(--text);font-weight:600}
+.data-table .danger-text{color:var(--cinnabar);font-weight:700}
+.data-table .gold-text{color:var(--gold);font-weight:700}
+.data-table .total-row td{background:var(--bg-card2);color:var(--gold);font-weight:700;border-top:2px solid var(--gold)}
+/* 投资占比条 */
+.invest-bar{margin:16px 0}
+.invest-bar-item{display:flex;align-items:center;margin-bottom:10px;gap:12px}
+.invest-bar-label{width:140px;font-size:13px;color:var(--text2);text-align:right;flex-shrink:0}
+.invest-bar-track{flex:1;height:24px;background:var(--bg-card);border-radius:2px;overflow:hidden;position:relative}
+.invest-bar-fill{height:100%;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:12px;color:var(--text);font-weight:700}
+.invest-bar-value{width:80px;font-size:13px;color:var(--gold);font-weight:700;font-family:'Abril Fatface',serif;flex-shrink:0}
+/* 分期时间线 */
+.phase-timeline{margin:20px 0;position:relative;padding-left:30px}
+.phase-timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.phase-item{position:relative;margin-bottom:24px;padding:16px 20px;background:var(--bg-card);border-radius:2px;border-left:3px solid var(--gold)}
+.phase-item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--cinnabar);border:2px solid var(--gold)}
+.phase-item.mid{border-left-color:#E8A838}
+.phase-item.mid::before{background:#E8A838}
+.phase-item.far{border-left-color:var(--text3)}
+.phase-item.far::before{background:var(--text3)}
+.phase-title{font-family:'Noto Serif SC',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
+.phase-title .phase-invest{font-size:14px;color:var(--gold);font-family:'Abril Fatface',serif}
+.phase-subtitle{font-size:12px;color:var(--text3);margin-bottom:8px;font-family:'Special Elite',monospace}
+.phase-item p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:0;text-indent:0}
+.phase-achievements{margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:12px;color:var(--text3);line-height:1.8}
+.phase-achievements strong{color:var(--gold)}
+/* 捆绑组 */
+.bundle-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.bundle-card{background:var(--bg-card);border-radius:2px;padding:14px 16px;border-top:3px solid var(--cinnabar)}
+.bundle-title{font-family:'Noto Serif SC',serif;font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.bundle-row{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:4px}
+.bundle-row strong{color:var(--text)}
+.cn-divider{text-align:center;margin:36px 0;color:var(--gold);font-size:14px;letter-spacing:16px;opacity:.6}
+.chapter-nav{display:flex;justify-content:space-between;gap:16px;margin:40px 0 20px;padding-top:24px;border-top:1px solid var(--border)}
+.chapter-nav a{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:2px;padding:16px 20px;text-decoration:none;color:var(--text2);transition:all .3s;font-size:14px}
+.chapter-nav a:hover{border-color:var(--gold);color:var(--gold);background:var(--bg-card2)}
+.chapter-nav .nav-label{font-size:11px;color:var(--text3);margin-bottom:4px;font-family:'Special Elite',monospace}
+.footer{text-align:center;padding:40px 50px;border-top:1px solid var(--border);color:var(--text3);font-size:13px}
+.footer-title{font-family:'Noto Serif SC',serif;font-size:16px;color:var(--gold);margin-bottom:8px;letter-spacing:3px}
+@media(max-width:1024px){.data-grid{grid-template-columns:repeat(2,1fr)}.bundle-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.top-nav{padding:10px 16px}.nav-right{display:none}.chapter-big-num{font-size:70px}.chapter-title{font-size:28px;letter-spacing:3px}.main-content{padding:30px 20px 50px}.data-grid{grid-template-columns:1fr 1fr}.chapter-nav{flex-direction:column}.invest-bar-label{width:100px;font-size:11px}}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">← 返回首页</a>
+    <span class="nav-chapter-tag">第六章</span>
+    <span class="nav-title">更新项目库与投资估算</span>
+  </div>
+  <div class="nav-right">
+    <a href="topic-0.html">壹</a>
+    <a href="topic-1.html">贰</a>
+    <a href="topic-2.html">叁</a>
+    <a href="topic-3.html">肆</a>
+    <a href="topic-4.html">伍</a>
+    <a href="topic-5.html" class="active">陆</a>
+    <a href="topic-6.html">柒</a>
+    <a href="topic-7.html">捌</a>
+  </div>
+</nav>
+
+<div class="magazine-page">
+
+  <section class="chapter-hero">
+    <div class="chapter-hero-bg" style="background-image:url('https://aka.doubaocdn.com/s/giNwP12yCv');"></div>
+    <div class="chapter-hero-overlay"></div>
+    <div class="chapter-hero-content">
+      <div class="chapter-big-num">陆</div>
+      <span class="chapter-en-label">CHAPTER 06 · PROJECT LIBRARY & INVESTMENT</span>
+      <h1 class="chapter-title">更新项目库与投资估算</h1>
+      <div class="chapter-subtitle">六大类 · 40个项目 · 25.25亿元 · 三期实施 · 五个捆绑组</div>
+      <div class="chapter-question"><strong>本章回答：</strong>做什么？花多少钱？什么时候做？——整合各规划项目形成40个完整项目库，总投资25.25亿元，分近中远三期实施，通过五个项目捆绑组实现资金平衡。</div>
+    </div>
+  </section>
+
+  <div class="main-content">
+
+    <!-- 引言 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">INTRODUCTION</span>
+        <h2 class="section-title">引言：项目库是实施的抓手</h2>
+        <div class="vintage-divider"></div>
+      </div>
+      <div class="content">
+        <p class="drop-cap">项目库是片区更新实施的抓手，也是投资估算和资金筹措的基础。0601汇报版已形成29个项目、总投资16.10亿元的项目库，但与保护规划、更新规划、江湾规划等其他规划中的项目存在口径不一、重复遗漏等问题。本专题系统对比各规划中的项目，统一分类口径，识别重复和遗漏，补充新增项目，形成六大类共40个完整项目库，并进行投资估算和分期时序安排。</p>
+      </div>
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">40<span class="unit">个</span></div>
+          <div class="data-label">完整项目库</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">25.25<span class="unit">亿</span></div>
+          <div class="data-label">总投资估算</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">6<span class="unit">大类</span></div>
+          <div class="data-label">项目分类体系</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">3<span class="unit">期</span></div>
+          <div class="data-label">近中远实施时序</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第一章 整合方法 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 01 · INTEGRATION METHOD</span>
+        <h2 class="section-title">一、项目库整合方法与口径</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">1.1</span>六大类分类体系</h3>
+      <table class="data-table">
+        <thead><tr><th>类别</th><th>对应策略</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:var(--cinnabar)">A类</strong> 历史文化保护</td><td>历史街区保护</td><td>文保修缮、历史建筑修缮、风貌整治</td></tr>
+          <tr><td><strong style="color:var(--gold)">B类</strong> 闲置资产盘活</td><td>资产盘活利用</td><td>闲置建筑改造、闲置土地开发</td></tr>
+          <tr><td><strong style="color:#E8A838">C类</strong> 危房改造</td><td>既有建筑改造</td><td>C/D级危房改造</td></tr>
+          <tr><td><strong style="color:var(--text)">D类</strong> 老旧小区改造</td><td>老旧片区改造</td><td>老旧小区综合改造</td></tr>
+          <tr><td><strong style="color:var(--text2)">E类</strong> 老旧街区更新</td><td>老旧街区更新</td><td>建设北路老旧街区更新</td></tr>
+          <tr><td><strong style="color:var(--text3)">F类</strong> 基础设施与公共服务</td><td>城市功能提质+生态绿化</td><td>基础设施、公共服务、生态绿化</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">1.2</span>各规划项目对比</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0">
+        <div class="info-card" style="border-top:3px solid var(--cinnabar)">
+          <div class="info-card-title">0601汇报版（基准）</div>
+          <p>29个项目，总投资16.10亿。五大类：历史保护7个3.13亿、闲置盘活6个2.51亿、危房4个0.76亿、老旧小区9个9.23亿、街区更新1个0.65亿。覆盖范围316.83公顷。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="info-card-title">保护规划</div>
+          <p>文保单位36处、历史建筑41处、不协调建筑227处（核心区86+建控141）、一街七巷。范围更广，侧重保护，0601版仅列重点项目。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #E8A838">
+          <div class="info-card-title">更新规划</div>
+          <p>保留建筑66149.80㎡、拆除2674.11㎡、拆除修缮52.98㎡。范围29.56公顷，拆除量小符合"留改拆"政策。</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--text3)">
+          <div class="info-card-title">江湾规划+城市体检</div>
+          <p>江湾：游客中心、停车场、旅游厕所、文化体验、住宿。体检：养老45.14%、幼儿园54.44%、小学63.60%、消防3.88%、停车17.08%等11项未达标。</p>
+        </div>
+      </div>
+
+      <div class="recommend-box">
+        <div class="recommend-box-title">对比分析结论：7项遗漏需补充</div>
+        <p>①不协调建筑全面整治（227处）②旅游配套设施（游客中心、停车场、旅游厕所）③公共服务补短板（养老、教育、消防）④口袋公园和街头绿地⑤街巷空间提升（铺装、家具、标识）⑥智慧文旅平台⑦城墙遗址公园、滨江码头遗址展示</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第二章 完整项目库（核心） -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 02 · COMPLETE PROJECT LIBRARY（核心）</span>
+        <h2 class="section-title">二、完整项目库：六大类40个项目</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">2.1</span>A类：历史文化保护类（8个 · 5.60亿）</h3>
+      <table class="data-table">
+        <thead><tr><th>序号</th><th>项目名称</th><th>规模</th><th>投资(万元)</th><th>优先级</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>A1</td><td>关圣殿（北五省会馆）修缮及活化利用</td><td>约3000㎡</td><td class="gold-text">8000</td><td>重点</td></tr>
+          <tr class="highlight-row"><td>A2</td><td>江西会馆万寿宫修复及利用</td><td>约2000㎡</td><td class="gold-text">6000</td><td>重点</td></tr>
+          <tr class="highlight-row"><td>A3</td><td>湘潭文庙修缮及研学利用</td><td>约4000㎡</td><td class="gold-text">5000</td><td>重点</td></tr>
+          <tr><td>A4</td><td>其他省级文保修缮（7处）</td><td>约5000㎡</td><td>6000</td><td>一般</td></tr>
+          <tr><td>A5</td><td>市级及一般文保修缮（25处）</td><td>约8000㎡</td><td>5000</td><td>一般</td></tr>
+          <tr class="highlight-row"><td>A6</td><td>历史建筑修缮及活化（41处）</td><td>约15000㎡</td><td class="gold-text">8000</td><td>重点</td></tr>
+          <tr class="highlight-row"><td>A7</td><td>不协调建筑整治（227处）</td><td>约20万㎡</td><td class="danger-text">15000</td><td>重点</td></tr>
+          <tr><td>A8</td><td>街巷格局保护与提升（一街七巷）</td><td>约3000米</td><td>3000</td><td>一般</td></tr>
+          <tr class="total-row"><td colspan="3">A类小计</td><td>56000</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">2.2</span>B类：闲置资产盘活类（10个 · 3.87亿）</h3>
+      <table class="data-table">
+        <thead><tr><th>序号</th><th>项目名称</th><th>规模</th><th>投资(万元)</th><th>优先级</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>B1</td><td>城总记忆场（市生资日杂仓库）</td><td>3766㎡</td><td class="gold-text">5000</td><td>重点</td></tr>
+          <tr class="highlight-row"><td>B2</td><td>青创办公基地（原疾控中心）</td><td>3636㎡</td><td>3000</td><td>重点</td></tr>
+          <tr class="highlight-row"><td>B3</td><td>古城主题酒店（原新多福食品厂）</td><td>2000㎡/80间</td><td>4000</td><td>重点</td></tr>
+          <tr><td>B4</td><td>教研培训基地（原雨湖区税务局）</td><td>422㎡</td><td>500</td><td>一般</td></tr>
+          <tr><td>B5</td><td>古城民宿+青年创业（原县印刷厂）</td><td>667㎡</td><td>1000</td><td>一般</td></tr>
+          <tr><td>B6</td><td>社区邻里中心（原城正街派出所）</td><td>149㎡</td><td>200</td><td>一般</td></tr>
+          <tr class="highlight-row"><td>B7</td><td>文创园区（原食杂果品仓库）</td><td>4072㎡</td><td>3000</td><td>重点</td></tr>
+          <tr class="highlight-row"><td>B8</td><td>综合商业提升（大同世界综合楼）</td><td>12918㎡</td><td class="gold-text">8000</td><td>重点</td></tr>
+          <tr><td>B9</td><td>其他闲置建筑盘活（18处）</td><td>约5000㎡</td><td>4000</td><td>一般</td></tr>
+          <tr class="highlight-row"><td>B10</td><td>闲置土地开发利用（18处）</td><td>13.11公顷</td><td class="danger-text">10000</td><td>重点</td></tr>
+          <tr class="total-row"><td colspan="3">B类小计</td><td>38700</td><td>—</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub-section-title"><span class="num">2.3</span>C/D/E/F类项目概览</h3>
+      <table class="data-table">
+        <thead><tr><th>类别</th><th>项目数</th><th>代表项目</th><th>投资(万元)</th><th>占比</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:#E8A838">C类 危房改造</strong></td><td>4个</td><td>彩印厂家属区、机械局宿舍、帆布厂车间、其他150栋</td><td>11300</td><td>4.5%</td></tr>
+          <tr class="highlight-row"><td><strong style="color:var(--text)">D类 老旧小区改造</strong></td><td>9个</td><td>雨湖路片区一/二、城正街片区一/二/三、机关宿舍、完整社区、物业提升、加装电梯</td><td class="danger-text">95000</td><td>37.9%</td></tr>
+          <tr><td><strong style="color:var(--text2)">E类 老旧街区更新</strong></td><td>2个</td><td>建设北路老旧街区更新、城正街主街商业提升</td><td>9500</td><td>3.8%</td></tr>
+          <tr><td><strong style="color:var(--text3)">F类 基础设施与公共服务</strong></td><td>7个</td><td>消防补短板、公共停车场、道路完善、养老设施、教育补短板、生态绿化、文旅配套智慧化</td><td>42000</td><td>16.1%</td></tr>
+          <tr class="total-row"><td>合计</td><td>40个</td><td>—</td><td>252500</td><td>100%</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">与0601版对比：项目数29→40，投资16.10亿→25.25亿</div>
+        <p>增加11个项目、9.15亿元投资。主要补充：不协调建筑全面整治、闲置土地开发、完整社区建设、消防补短板、公共停车场、养老设施、生态绿化、文旅配套与智慧化等0601版遗漏项目。</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第三章 投资估算 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 03 · INVESTMENT ESTIMATE</span>
+        <h2 class="section-title">三、投资估算分析</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.1</span>总投资构成</h3>
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="data-num">20.2<span class="unit">亿</span></div>
+          <div class="data-label">工程费用（80%）</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">2.5<span class="unit">亿</span></div>
+          <div class="data-label">其他费用（10%）</div>
+        </div>
+        <div class="data-card">
+          <div class="data-num">2.5<span class="unit">亿</span></div>
+          <div class="data-label">预备费（10%）</div>
+        </div>
+        <div class="data-card danger">
+          <div class="data-num">797<span class="unit">万/公顷</span></div>
+          <div class="data-label">单位面积投资强度</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.2</span>分类投资占比</h3>
+      <div class="invest-bar">
+        <div class="invest-bar-item">
+          <div class="invest-bar-label">D类 老旧小区</div>
+          <div class="invest-bar-track"><div class="invest-bar-fill" style="width:37.9%;background:var(--cinnabar)">37.9%</div></div>
+          <div class="invest-bar-value">9.50亿</div>
+        </div>
+        <div class="invest-bar-item">
+          <div class="invest-bar-label">A类 历史保护</div>
+          <div class="invest-bar-track"><div class="invest-bar-fill" style="width:22.3%;background:var(--gold)">22.3%</div></div>
+          <div class="invest-bar-value">5.60亿</div>
+        </div>
+        <div class="invest-bar-item">
+          <div class="invest-bar-label">F类 基础设施</div>
+          <div class="invest-bar-track"><div class="invest-bar-fill" style="width:16.1%;background:#E8A838">16.1%</div></div>
+          <div class="invest-bar-value">4.20亿</div>
+        </div>
+        <div class="invest-bar-item">
+          <div class="invest-bar-label">B类 闲置盘活</div>
+          <div class="invest-bar-track"><div class="invest-bar-fill" style="width:15.4%;background:var(--text2)">15.4%</div></div>
+          <div class="invest-bar-value">3.87亿</div>
+        </div>
+        <div class="invest-bar-item">
+          <div class="invest-bar-label">C类 危房改造</div>
+          <div class="invest-bar-track"><div class="invest-bar-fill" style="width:4.5%;background:var(--text3)">4.5%</div></div>
+          <div class="invest-bar-value">1.13亿</div>
+        </div>
+        <div class="invest-bar-item">
+          <div class="invest-bar-label">E类 街区更新</div>
+          <div class="invest-bar-track"><div class="invest-bar-fill" style="width:3.8%;background:#6B5B4A">3.8%</div></div>
+          <div class="invest-bar-value">0.95亿</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">3.3</span>前10大重点项目（12.3亿 · 占48.7%）</h3>
+      <table class="data-table">
+        <thead><tr><th>排名</th><th>项目名称</th><th>类别</th><th>投资(万元)</th></tr></thead>
+        <tbody>
+          <tr class="highlight-row"><td>1</td><td>雨湖路街道老旧小区改造（片区一）</td><td>D类</td><td class="danger-text">25000</td></tr>
+          <tr><td>2</td><td>雨湖路街道老旧小区改造（片区二）</td><td>D类</td><td>18000</td></tr>
+          <tr><td>3</td><td>不协调建筑整治（227处）</td><td>A类</td><td>15000</td></tr>
+          <tr><td>4</td><td>城正街街道老旧小区改造（片区一）</td><td>D类</td><td>15000</td></tr>
+          <tr><td>5</td><td>闲置土地开发利用（18处）</td><td>B类</td><td>10000</td></tr>
+          <tr><td>6</td><td>关圣殿修缮及活化利用</td><td>A类</td><td>8000</td></tr>
+          <tr><td>7</td><td>历史建筑修缮及活化（41处）</td><td>A类</td><td>8000</td></tr>
+          <tr><td>8</td><td>综合商业提升（大同世界）</td><td>B类</td><td>8000</td></tr>
+          <tr><td>9</td><td>生态绿化提升</td><td>F类</td><td>8000</td></tr>
+          <tr><td>10</td><td>公共停车场建设</td><td>F类</td><td>8000</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第四章 实施时序 -->
+    <section style="margin-bottom:40px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 04 · IMPLEMENTATION SCHEDULE</span>
+        <h2 class="section-title">四、三期实施时序</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="phase-timeline">
+        <div class="phase-item">
+          <div class="phase-title">近期：保护筑基，民生优先 <span class="phase-invest">11.28亿 · 44.7%</span></div>
+          <div class="phase-subtitle">2026-2028年 · 18个项目</div>
+          <p>三大文保（关圣殿、江西会馆、文庙）修缮；重点历史建筑修缮20处；核心区不协调建筑整治86处；城总记忆场、青创基地、主题酒店建成；全部158栋危房改造；3-4个老旧小区改造；完整社区示范；消防补短板；养老设施部分；口袋公园5-8个。</p>
+          <div class="phase-achievements"><strong>标志性成果：</strong>三大文保开放运营 · 158栋危房清零 · 城总记忆场/青创基地/主题酒店运营 · 消防覆盖率3.88%→50%+</div>
+        </div>
+        <div class="phase-item mid">
+          <div class="phase-title">中期：产业导入，全面推进 <span class="phase-invest">12.50亿 · 49.5%</span></div>
+          <div class="phase-subtitle">2029-2030年 · 14个项目</div>
+          <p>其他文保和剩余历史建筑修缮；建控地带不协调建筑整治141处；文创园区、综合商业提升、教研基地；其他闲置建筑盘活和闲置土地开发部分；剩余老旧小区改造；物业提升和加装电梯；建设北路和城正街主街提升；公共停车场和道路完善；教育和养老设施补全；雨湖公园和滨江绿化；文旅配套与智慧化。</p>
+          <div class="phase-achievements"><strong>标志性成果：</strong>四大产业体系基本成型 · 年游客量80-100万人次 · 全部老旧小区改造完成 · 智慧文旅平台上线</div>
+        </div>
+        <div class="phase-item far">
+          <div class="phase-title">远期：运营优化，品质提升 <span class="phase-invest">1.97亿 · 7.8%</span></div>
+          <div class="phase-subtitle">2031-2035年 · 8个项目</div>
+          <p>历史建筑持续维护和风貌优化；剩余闲置土地开发和产业优化升级；老旧小区长效维护和社区品质提升；设施维护升级和智慧化深化。</p>
+          <div class="phase-achievements"><strong>标志性成果：</strong>年游客量稳定100-120万人次 · 运营盈亏平衡良性循环 · 湖南省历史街区更新示范</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-box-title">分期原则</div>
+        <p>①民生优先（危房、老旧小区、基础设施补短板）②示范引领（先实施重点示范项目形成效应）③先易后难（产权清晰、协调难度小的先做）④产业跟进（保护和民生项目后导入产业）⑤运营前置（产业项目建设阶段就引入运营方）</p>
+      </div>
+    </section>
+
+    <div class="cn-divider">❖ ❖ ❖</div>
+
+    <!-- 第五章 项目捆绑 -->
+    <section style="margin-bottom:20px">
+      <div class="section-header">
+        <span class="section-tag">CHAPTER 05 · PROJECT BUNDLING</span>
+        <h2 class="section-title">五、项目捆绑与统筹实施</h2>
+        <div class="vintage-divider"></div>
+      </div>
+
+      <div class="content">
+        <p>由于部分公益性项目投资大、回报低，需要与经营性项目捆绑实施，实现资金平衡。以经营性项目收益反哺公益性项目投入，同一区域或同一主题的项目捆绑，由同一实施主体统筹。</p>
+      </div>
+
+      <div class="bundle-grid">
+        <div class="bundle-card">
+          <div class="bundle-title">捆绑组一：会馆文化主题</div>
+          <div class="bundle-row"><strong>经营性：</strong>古城主题酒店 + 综合商业</div>
+          <div class="bundle-row"><strong>公益性：</strong>关圣殿修缮 + 江西会馆修复</div>
+          <div class="bundle-row" style="color:var(--gold)"><strong>逻辑：</strong>酒店商业收益反哺文保</div>
+        </div>
+        <div class="bundle-card">
+          <div class="bundle-title">捆绑组二：文创产业主题</div>
+          <div class="bundle-row"><strong>经营性：</strong>城总记忆场 + 文创园区</div>
+          <div class="bundle-row"><strong>公益性：</strong>历史建筑修缮 + 街巷提升</div>
+          <div class="bundle-row" style="color:var(--gold)"><strong>逻辑：</strong>文创产业收益反哺历史建筑保护</div>
+        </div>
+        <div class="bundle-card">
+          <div class="bundle-title">捆绑组三：民生改善主题</div>
+          <div class="bundle-row"><strong>经营性：</strong>闲置土地开发（部分商业）</div>
+          <div class="bundle-row"><strong>公益性：</strong>老旧小区改造 + 基础设施</div>
+          <div class="bundle-row" style="color:var(--gold)"><strong>逻辑：</strong>土地开发收益反哺民生投入</div>
+        </div>
+        <div class="bundle-card">
+          <div class="bundle-title">捆绑组四：街区整治主题</div>
+          <div class="bundle-row"><strong>经营性：</strong>大同世界综合商业</div>
+          <div class="bundle-row"><strong>公益性：</strong>建设北路街区更新 + 停车场</div>
+          <div class="bundle-row" style="color:var(--gold)"><strong>逻辑：</strong>商业收益反哺街区整治</div>
+        </div>
+        <div class="bundle-card" style="grid-column:1/-1">
+          <div class="bundle-title">捆绑组五：文旅研学主题</div>
+          <div class="bundle-row"><strong>经营性：</strong>民宿集群 + 特色餐饮</div>
+          <div class="bundle-row"><strong>公益性：</strong>文庙修缮 + 研学基地</div>
+          <div class="bundle-row" style="color:var(--gold)"><strong>逻辑：</strong>文旅收益反哺文化保护</div>
+        </div>
+      </div>
+
+      <h3 class="sub-section-title"><span class="num">5.1</span>实施主体安排</h3>
+      <table class="data-table">
+        <thead><tr><th>项目类型</th><th>实施主体</th><th>合作模式</th></tr></thead>
+        <tbody>
+          <tr><td>文保修缮、历史建筑保护</td><td>文旅广体局 + 平台公司</td><td>政府主导，专业团队实施</td></tr>
+          <tr><td>老旧小区改造、危房改造</td><td>住建局 + 区政府 + 平台公司</td><td>政府主导，居民参与</td></tr>
+          <tr><td>闲置资产盘活</td><td>平台公司 + 专业运营商</td><td>政企合作，市场化运营</td></tr>
+          <tr><td>产业导入项目</td><td>平台公司 + 社会资本</td><td>PPP、特许经营、租赁</td></tr>
+          <tr><td>基础设施</td><td>住建局 + 城管局 + 平台公司</td><td>政府投资，专业实施</td></tr>
+          <tr><td>公共服务设施</td><td>各主管部门 + 区政府</td><td>政府投资，专业运营</td></tr>
+        </tbody>
+      </table>
+
+      <blockquote>
+        <p>25.25亿元不是一个抽象的数字，而是40个具体项目的总和——每一处文保的修缮、每一栋危房的改造、每一个老旧小区的提升、每一处闲置资产的盘活，都对应着实实在在的民生改善和文化传承。项目库的价值不在于数字的庞大，而在于每一个项目都有明确的实施主体、清晰的时序安排和可行的资金路径。</p>
+      </blockquote>
+    </section>
+
+    <div class="chapter-nav">
+      <a href="topic-4.html">
+        <div class="nav-label">← 上一章</div>
+        <div>第五章 · 定位主题与产业发展策略</div>
+      </a>
+      <a href="topic-6.html">
+        <div class="nav-label">下一章 →</div>
+        <div>第七章 · 风貌提升与建筑整治</div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-title">城正街片区策划专题研究</div>
+    <p>千年城总 · 金湘潭 | 历史文化街区城市更新研究</p>
+    <p style="margin-top:8px;font-size:12px">编制时间：2026年8月 | 共八大专题研究</p>
+    <p style="margin-top:8px;font-size:12px;color:var(--gold)">联系邮箱：ytf2000@sina.com</p>
+  </div>
+
+</div>
+</body>
+</html>
