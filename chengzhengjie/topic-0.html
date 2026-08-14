@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>专题零 · 历史文化脉络研究 | 城正街片区策划专题研究</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1A1A1A;
+  --paper: #F5F0E8;
+  --paper-dark: #EDE6D9;
+  --cinnabar: #A63D40;
+  --celadon: #6B7B8C;
+  --gold: #C9A961;
+  --brown: #3D2817;
+  --brown-light: #5C3A21;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 顶部导航 */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 16px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s ease;
+  background: rgba(245, 240, 232, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-back {
+  text-decoration: none;
+  color: var(--celadon);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s;
+}
+
+.nav-back:hover { color: var(--cinnabar); }
+
+.nav-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.nav-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 2px;
+}
+
+.nav-logo .seal {
+  display: inline-block;
+  background: var(--cinnabar);
+  color: var(--paper);
+  font-size: 11px;
+  padding: 3px 7px;
+  border-radius: 2px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.nav-topics {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+}
+
+.nav-topics a {
+  text-decoration: none;
+  color: var(--celadon);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+
+.nav-topics a:hover,
+.nav-topics a.active {
+  color: var(--paper);
+  background: var(--cinnabar);
+}
+
+/* 专题开篇 */
+.topic-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 60px;
+}
+
+.topic-hero-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url('https://aka.doubaocdn.com/s/giNmVXC3uZ');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) saturate(0.7);
+}
+
+.topic-hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.6) 60%, rgba(26,26,26,0.3) 100%);
+}
+
+.topic-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 80px;
+  color: var(--paper);
+  max-width: 900px;
+  animation: fadeInLeft 1.2s ease;
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.topic-hero-num {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 120px;
+  font-weight: 900;
+  color: var(--cinnabar);
+  line-height: 1;
+  margin-bottom: 20px;
+  opacity: 0.9;
+  text-shadow: 0 4px 30px rgba(166,61,64,0.4);
+}
+
+.topic-hero-tag {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 12px;
+  padding: 6px 16px;
+  letter-spacing: 4px;
+  margin-bottom: 24px;
+}
+
+.topic-hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.topic-hero-sub {
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+  font-weight: 300;
+}
+
+.topic-hero-desc {
+  font-size: 15px;
+  color: rgba(245,240,232,0.7);
+  line-height: 2;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.topic-hero-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  color: var(--paper);
+  border-left: 3px solid var(--cinnabar);
+  padding-left: 16px;
+}
+
+.topic-hero-question span {
+  color: var(--gold);
+  font-size: 14px;
+}
+
+/* 通用区块 */
+.section {
+  padding: 80px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-header {
+  margin-bottom: 50px;
+}
+
+.section-tag {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12px;
+  color: var(--cinnabar);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.section-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 28px;
+  background: var(--cinnabar);
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--celadon);
+  max-width: 800px;
+  line-height: 2;
+  margin-left: 20px;
+}
+
+/* 引言区 */
+.intro-section {
+  background: var(--paper);
+  padding: 60px;
+}
+
+.intro-box {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--paper-dark);
+  border-left: 4px solid var(--cinnabar);
+  padding: 30px 40px;
+  position: relative;
+}
+
+.intro-box::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 60px;
+  color: var(--cinnabar);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.intro-box p {
+  font-size: 15px;
+  line-height: 2.2;
+  color: var(--brown);
+  text-indent: 2em;
+}
+
+.intro-box .highlight {
+  color: var(--cinnabar);
+  font-weight: 600;
+}
+
+/* 时间轴 */
+.timeline-section {
+  background: var(--paper-dark);
+}
+
+.timeline {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 120px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--cinnabar), var(--gold));
+}
+
+.timeline-item {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+  position: relative;
+  align-items: flex-start;
+}
+
+.timeline-year {
+  width: 100px;
+  flex-shrink: 0;
+  text-align: right;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cinnabar);
+  padding-top: 4px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 114px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  background: var(--paper);
+  border: 3px solid var(--cinnabar);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.timeline-content {
+  flex: 1;
+  background: var(--paper);
+  padding: 20px 24px;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-content:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 30px rgba(61,40,23,0.12);
+}
+
+.timeline-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.timeline-text {
+  font-size: 14px;
+  color: var(--celadon);
+  line-height: 1.9;
+}
+
+/* 五维卡片 */
+.dimensions-section {
+  background: var(--paper);
+}
+
+.dimensions-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.dimension-card {
+  background: var(--paper-dark);
+  border-radius: 4px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: all 0.4s;
+  border-top: 3px solid transparent;
+  position: relative;
+}
+
+.dimension-card:hover {
+  transform: translateY(-6px);
+  border-top-color: var(--cinnabar);
+  box-shadow: 0 12px 30px rgba(61,40,23,0.1);
+}
+
+.dimension-icon {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--cinnabar);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.dimension-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.dimension-desc {
+  font-size: 12px;
+  color: var(--celadon);
+  line-height: 1.8;
+}
+
+/* 城总制度 */
+.chengzong-section {
+  background: var(--brown);
+  color: var(--paper);
+}
+
+.chengzong-section .section-title { color: var(--paper); }
+.chengzong-section .section-desc { color: rgba(245,240,232,0.6); }
+.chengzong-section .section-tag { color: var(--gold); }
+
+.chengzong-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.chengzong-text p {
+  font-size: 15px;
+  line-height: 2.2;
+  color: rgba(245,240,232,0.8);
+  margin-bottom: 20px;
+  text-indent: 2em;
+}
+
+.chengzong-text .gold {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.shibazong-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.zong-item {
+  background: rgba(245,240,232,0.08);
+  border: 1px solid rgba(201,169,97,0.2);
+  padding: 12px 8px;
+  text-align: center;
+  border-radius: 2px;
+  font-size: 13px;
+  color: rgba(245,240,232,0.8);
+  transition: all 0.3s;
+}
+
+.zong-item:hover {
+  background: rgba(201,169,97,0.15);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.zong-item .num {
+  display: block;
+  font-size: 10px;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+/* 价值评估 */
+.value-section {
+  background: var(--paper-dark);
+}
+
+.value-three {
+  max-width: 1000px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.value-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cinnabar), var(--gold));
+}
+
+.value-rank {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--cinnabar);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.value-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.value-desc {
+  font-size: 13px;
+  color: var(--celadon);
+  line-height: 1.9;
+}
+
+.value-four {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.feature-card {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 24px 20px;
+  border-left: 3px solid var(--gold);
+  transition: all 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(61,40,23,0.1);
+}
+
+.feature-num {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.feature-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.feature-desc {
+  font-size: 12px;
+  color: var(--celadon);
+  line-height: 1.8;
+}
+
+/* 数据突出区 */
+.data-section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 70px 60px;
+}
+
+.data-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.data-item {
+  padding: 20px;
+}
+
+.data-num {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.data-unit {
+  font-size: 18px;
+  color: var(--cinnabar);
+  font-weight: 600;
+}
+
+.data-label {
+  font-size: 13px;
+  color: rgba(245,240,232,0.6);
+  letter-spacing: 2px;
+}
+
+/* 本章小结 */
+.summary-section {
+  background: var(--paper);
+}
+
+.summary-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.summary-card {
+  background: var(--paper-dark);
+  border-radius: 4px;
+  padding: 30px 40px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--cinnabar);
+}
+
+.summary-card h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  color: var(--cinnabar);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-card h4::before {
+  content: '◆';
+  font-size: 10px;
+}
+
+.summary-card p {
+  font-size: 14px;
+  color: var(--brown);
+  line-height: 2;
+  padding-left: 20px;
+}
+
+.support-box {
+  background: var(--brown);
+  color: var(--paper);
+  border-radius: 4px;
+  padding: 30px 40px;
+  margin-top: 30px;
+}
+
+.support-box h4 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.support-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.support-box li {
+  font-size: 14px;
+  line-height: 2.2;
+  color: rgba(245,240,232,0.85);
+  padding-left: 24px;
+  position: relative;
+}
+
+.support-box li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* 底部导航 */
+.topic-nav {
+  background: var(--paper-dark);
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.topic-nav-link {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  background: var(--paper);
+  padding: 24px 30px;
+  border-radius: 4px;
+  transition: all 0.3s;
+  display: block;
+}
+
+.topic-nav-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(61,40,23,0.1);
+}
+
+.topic-nav-link.next {
+  text-align: right;
+  border-right: 3px solid var(--cinnabar);
+}
+
+.topic-nav-link.prev {
+  border-left: 3px solid var(--celadon);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.nav-label {
+  font-size: 12px;
+  color: var(--celadon);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.nav-topic-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* 页脚 */
+.footer {
+  background: var(--ink);
+  color: rgba(245,240,232,0.5);
+  padding: 40px 60px 24px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 16px;
+  color: var(--paper);
+  margin-bottom: 8px;
+  letter-spacing: 3px;
+}
+
+.footer-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 16px auto;
+  opacity: 0.5;
+}
+
+.footer-copy {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* 滚动渐入 */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .navbar { padding: 12px 20px; }
+  .nav-topics { display: none; }
+  .topic-hero-content { padding: 0 40px; }
+  .topic-hero-num { font-size: 80px; }
+  .topic-hero-title { font-size: 32px; }
+  .dimensions-grid { grid-template-columns: repeat(3, 1fr); }
+  .value-four { grid-template-columns: repeat(2, 1fr); }
+  .data-grid { grid-template-columns: repeat(2, 1fr); }
+  .chengzong-content { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .section { padding: 50px 20px; }
+  .intro-section { padding: 40px 20px; }
+  .timeline::before { left: 60px; }
+  .timeline-year { width: 50px; font-size: 14px; }
+  .timeline-dot { left: 54px; }
+  .dimensions-grid { grid-template-columns: 1fr 1fr; }
+  .value-three { grid-template-columns: 1fr; }
+  .shibazong-list { grid-template-columns: repeat(2, 1fr); }
+  .topic-nav { flex-direction: column; padding: 30px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="index.html" class="nav-back">← 返回首页</a>
+    <span class="nav-divider"></span>
+    <span class="nav-logo"><span class="seal">专题零</span>历史文化脉络研究</span>
+  </div>
+  <ul class="nav-topics">
+    <li><a href="topic-0.html" class="active">零</a></li>
+    <li><a href="#">一</a></li>
+    <li><a href="#">二</a></li>
+    <li><a href="#">三</a></li>
+    <li><a href="#">四</a></li>
+    <li><a href="#">五</a></li>
+    <li><a href="#">六</a></li>
+    <li><a href="#">七</a></li>
+  </ul>
+</nav>
+
+<!-- 专题开篇 -->
+<section class="topic-hero">
+  <div class="topic-hero-bg"></div>
+  <div class="topic-hero-overlay"></div>
+  <div class="topic-hero-content">
+    <div class="topic-hero-num">零</div>
+    <div class="topic-hero-tag">TOPIC 00 · HISTORICAL CONTEXT</div>
+    <h1 class="topic-hero-title">城正街历史文化脉络研究</h1>
+    <div class="topic-hero-sub">千年沿革 · 金湘潭 · 城总制度 · 价值评估</div>
+    <p class="topic-hero-desc">
+      从秦汉古县到明清商埠，从十八总街市到历史文化街区，
+      梳理城正街两千余年的历史脉络，挖掘"金湘潭"商业文明的深厚底蕴，
+      为片区更新策划提供历史文化根基。
+    </p>
+    <div class="topic-hero-question">
+      本专题回答：<span>我是谁？</span>
+    </div>
+  </div>
+</section>
+
+<!-- 引言区 -->
+<section class="intro-section">
+  <div class="intro-box fade-in">
+    <p>历史文化是历史街区的灵魂。城正街片区的价值，不仅在于现存的古建筑和街巷格局，更在于其背后承载的<span class="highlight">两千余年城市记忆</span>和<span class="highlight">明清时期"金湘潭"的商业文明</span>。本专题从千年沿革、商业文明、城总制度、价值评估四个维度，系统梳理城正街的历史文化脉络，为后续的定位策划、项目设计和运营推广提供文化根基。</p>
+  </div>
+</section>
+
+<!-- 千年沿革时间轴 -->
+<section class="section timeline-section">
+  <div class="section-header fade-in">
+    <div class="section-tag">CHAPTER 01</div>
+    <h2 class="section-title">千年沿革</h2>
+    <p class="section-desc">五次名称更迭，从秦汉古县到历史文化街区，两千余年城市发展脉络</p>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">秦汉</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">湘南县治 · 城市起源</div>
+        <div class="timeline-text">城正街一带历史可追溯至秦汉时期，为湘南县治所在地，是湘潭城市发展的源头，至今已有两千余年历史。</div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">唐天宝</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">湘潭县定名 · 洛口迁治</div>
+        <div class="timeline-text">唐天宝八年（749年），湘潭县正式定名。宋元年间，因洛口（今易俗河）水患频发，县治迁至城正街一带，自此成为湘潭政治、经济、文化中心。</div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">明清</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">"金湘潭" · 商业鼎盛</div>
+        <div class="timeline-text">明清时期，湘潭成为长江中游重要商埠，有"小南京""金湘潭"美誉。城正街一带形成"十八总"街市格局，会馆林立、商贾云集，是全国著名的药材、粮食、布匹交易中心。</div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">近代</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">红色记忆 · 文化传承</div>
+        <div class="timeline-text">近代以来，城正街片区承载了丰富的红色记忆。辛亥革命时期革命党人在此活动，解放前夕湘潭地下党组织常在文庙开展活动。文庙先后作为县立简易师范、湘北建设学院、湘潭地委党校等校址。</div>
+      </div>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <div class="timeline-year">当代</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-title">历史文化街区 · 保护更新</div>
+        <div class="timeline-text">2011年，城正街被公布为湖南省历史文化街区。片区内现存关圣殿（国家级文保）、文庙（省级文保）、江西会馆牌楼（省级文保）等重要历史遗存，进入保护与更新并重的新阶段。</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 金湘潭商业文明 -->
+<section class="section dimensions-section">
+  <div class="section-header fade-in">
+    <div class="section-tag">CHAPTER 02</div>
+    <h2 class="section-title">"金湘潭"商业文明</h2>
+    <p class="section-desc">明清时期湘潭被誉为"金湘潭""小南京"，是长江中游重要的商业都会，商业文明从五个维度深刻塑造了城正街片区</p>
+  </div>
+  <div class="dimensions-grid">
+
+    <div class="dimension-card fade-in">
+      <div class="dimension-icon">商</div>
+      <div class="dimension-name">商业都会</div>
+      <div class="dimension-desc">明清时期湘潭是湖南最大商埠，"城总"区域商铺林立，是全国重要的药材、粮食、布匹、茶叶交易中心</div>
+    </div>
+
+    <div class="dimension-card fade-in">
+      <div class="dimension-icon">会</div>
+      <div class="dimension-name">会馆文化</div>
+      <div class="dimension-desc">各省商人在潭建会馆，关圣殿（北五省）、江西会馆、鲁班殿等，是商业繁荣和商帮文化的实物见证</div>
+    </div>
+
+    <div class="dimension-card fade-in">
+      <div class="dimension-icon">码</div>
+      <div class="dimension-name">码头经济</div>
+      <div class="dimension-desc">沿湘江形成多个码头，"十八总"每一总对应一个码头，水运便利催生了繁荣的街市经济</div>
+    </div>
+
+    <div class="dimension-card fade-in">
+      <div class="dimension-icon">字</div>
+      <div class="dimension-name">老字号</div>
+      <div class="dimension-desc">龙牌酱油（1740年）、义和斋灯芯糕（400年）、左氏十八总活鱼（1898年）等，传承至今的商业品牌</div>
+    </div>
+
+    <div class="dimension-card fade-in">
+      <div class="dimension-icon">市</div>
+      <div class="dimension-name">市井生活</div>
+      <div class="dimension-desc">"三街并行"的空间格局孕育了独特的市井文化，前店后坊、商住混合，至今保留着鲜活的生活气息</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 城总制度与十八总 -->
+<section class="section chengzong-section">
+  <div class="section-header fade-in">
+    <div class="section-tag">CHAPTER 03</div>
+    <h2 class="section-title">城总制度与十八总空间</h2>
+    <p class="section-desc">"城总"是湘潭独有的城市管理制度，"十八总"是明清时期湘潭商业街区的空间组织形式</p>
+  </div>
+  <div class="chengzong-content">
+    <div class="chengzong-text fade-in">
+      <p><span class="gold">"总"</span>是湘潭独有的城市基层管理单位，起源于明代，是商业繁荣背景下形成的街区自治制度。每一"总"有独立的码头、街市和管理机构，相当于一个商业街区。</p>
+      <p>明清时期湘潭城区沿湘江形成<span class="gold">"十八总"</span>的空间格局，从大埠桥到窑湾依次排列，每一总对应一个湘江码头，形成"前街后港、三街并行"的独特空间结构——正街上接县署，平政路临码头，河边街沿江分布。</p>
+      <p>城正街片区涵盖了<span class="gold">九总至十二总</span>的核心区域，是"城总"制度保存最完整的片区，关圣殿（十一总）、文庙（十二总）、江西会馆（十总）等重要历史建筑均分布于此。</p>
+    </div>
+    <div class="shibazong-list fade-in">
+      <div class="zong-item"><span class="num">一总</span>大埠桥</div>
+      <div class="zong-item"><span class="num">二总</span>观湘门</div>
+      <div class="zong-item"><span class="num">三总</span>三义井</div>
+      <div class="zong-item"><span class="num">四总</span>瞻岳门</div>
+      <div class="zong-item"><span class="num">五总</span>熙春门</div>
+      <div class="zong-item"><span class="num">六总</span>通济门</div>
+      <div class="zong-item"><span class="num">七总</span>洗脚桥</div>
+      <div class="zong-item"><span class="num">八总</span>泗洲庵</div>
+      <div class="zong-item"><span class="num">九总</span>大同世界</div>
+      <div class="zong-item" style="border-color: var(--gold); color: var(--gold);"><span class="num">十总</span>江西会馆</div>
+      <div class="zong-item" style="border-color: var(--gold); color: var(--gold);"><span class="num">十一总</span>关圣殿</div>
+      <div class="zong-item" style="border-color: var(--gold); color: var(--gold);"><span class="num">十二总</span>文庙</div>
+      <div class="zong-item"><span class="num">十三总</span>喇叭街</div>
+      <div class="zong-item"><span class="num">十四总</span>白马湖</div>
+      <div class="zong-item"><span class="num">十五总</span>石塔庵</div>
+      <div class="zong-item"><span class="num">十六总</span>永定门</div>
+      <div class="zong-item"><span class="num">十七总</span>唐兴寺</div>
+      <div class="zong-item"><span class="num">十八总</span>窑湾</div>
+    </div>
+  </div>
+</section>
+
+<!-- 街区价值评估 -->
+<section class="section value-section">
+  <div class="section-header fade-in">
+    <div class="section-tag">CHAPTER 04</div>
+    <h2 class="section-title">街区价值评估</h2>
+    <p class="section-desc">从历史价值、艺术价值、科学价值、社会价值、经济价值五个维度评估，提炼三大核心价值和四大文化特色</p>
+  </div>
+
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 20px; color: var(--ink); text-align: center; margin-bottom: 30px; letter-spacing: 2px;">三个"最"</h3>
+  <div class="value-three">
+
+    <div class="value-card fade-in">
+      <div class="value-rank">最 完 整</div>
+      <div class="value-title">城总制度空间格局</div>
+      <div class="value-desc">片区内九总至十二总"三街并行"的传统格局保存完整，是研究明清湘潭"城总"制度的活化石，在全国范围内具有独特性。</div>
+    </div>
+
+    <div class="value-card fade-in">
+      <div class="value-rank">最 集 中</div>
+      <div class="value-title">会馆庙宇建筑群</div>
+      <div class="value-desc">关圣殿（国家级文保）、文庙（省级文保）、江西会馆牌楼（省级文保）等重要历史建筑集中分布，是湘潭会馆文化和书院文化的核心承载区。</div>
+    </div>
+
+    <div class="value-card fade-in">
+      <div class="value-rank">最 鲜 活</div>
+      <div class="value-title">市井生活延续性</div>
+      <div class="value-desc">街区至今仍保持着传统的商住混合功能和市井生活气息，老字号、传统手艺、街巷社交等活态文化传承至今，是"活着的历史街区"。</div>
+    </div>
+
+  </div>
+
+  <h3 style="font-family: 'Noto Serif SC', serif; font-size: 20px; color: var(--ink); text-align: center; margin: 50px 0 30px; letter-spacing: 2px;">四大文化特色</h3>
+  <div class="value-four">
+
+    <div class="feature-card fade-in">
+      <div class="feature-num">壹</div>
+      <div class="feature-name">城总文化</div>
+      <div class="feature-desc">独有的"总"级街区管理制度，十八总空间格局，三街并行的街巷肌理，是湘潭城市文明的核心标识。</div>
+    </div>
+
+    <div class="feature-card fade-in">
+      <div class="feature-num">贰</div>
+      <div class="feature-name">会馆文化</div>
+      <div class="feature-desc">北五省会馆关圣殿、江西会馆万寿宫、鲁班殿等，见证了明清商帮文化和"金湘潭"的商业繁荣。</div>
+    </div>
+
+    <div class="feature-card fade-in">
+      <div class="feature-num">叁</div>
+      <div class="feature-name">书院文化</div>
+      <div class="feature-desc">文庙（孔庙）作为儒家文化载体，承载湖湘学派传承，近代以来更是教育革命的重要场所。</div>
+    </div>
+
+    <div class="feature-card fade-in">
+      <div class="feature-num">肆</div>
+      <div class="feature-name">市井文化</div>
+      <div class="feature-desc">老字号、传统美食、民间手艺、街巷社交，构成了鲜活的市井生活图景，是街区最动人的部分。</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 数据突出区 -->
+<section class="data-section">
+  <div class="data-grid">
+    <div class="data-item fade-in">
+      <div class="data-num" data-target="2000">0</div>
+      <div class="data-label">余年建城史</div>
+    </div>
+    <div class="data-item fade-in">
+      <div class="data-num" data-target="18">0</div>
+      <div class="data-label">总街市格局</div>
+    </div>
+    <div class="data-item fade-in">
+      <div class="data-num" data-target="36">0</div>
+      <div class="data-label">处文保单位</div>
+    </div>
+    <div class="data-item fade-in">
+      <div class="data-num" data-target="4">0</div>
+      <div class="data-label">大文化特色</div>
+    </div>
+  </div>
+</section>
+
+<!-- 本章小结 -->
+<section class="section summary-section">
+  <div class="section-header fade-in">
+    <div class="section-tag">SUMMARY</div>
+    <h2 class="section-title">本章小结</h2>
+  </div>
+  <div class="summary-content">
+
+    <div class="summary-card fade-in">
+      <h4>历史脉络清晰，文化底蕴深厚</h4>
+      <p>城正街片区拥有两千余年建城史，经历了五次名称更迭，是湘潭城市发展的核心区域。明清时期"金湘潭"商业文明在此达到鼎盛，形成了独特的"城总"制度和"十八总"空间格局。</p>
+    </div>
+
+    <div class="summary-card fade-in">
+      <h4>历史遗存丰富，价值突出</h4>
+      <p>片区内现存国家级文保1处（关圣殿）、省级文保多处（文庙、江西会馆牌楼等），历史建筑41处，特色风貌建筑31处。三个"最"和四大文化特色构成了街区的核心价值。</p>
+    </div>
+
+    <div class="summary-card fade-in">
+      <h4>活态传承，市井气息浓郁</h4>
+      <p>街区至今保持着商住混合的传统功能，老字号、传统手艺、街巷社交等活态文化延续至今，是"活着的历史街区"，这是其区别于其他历史街区的重要特征。</p>
+    </div>
+
+    <div class="support-box fade-in">
+      <h4>对策划方案的支撑作用</h4>
+      <ul>
+        <li>为片区主题定位提供历史文化根基——"千年城总·金湘潭"</li>
+        <li>为文化展示项目提供内容素材——城总文化体验馆、会馆文化展示、文庙研学</li>
+        <li>为空间设计提供历史依据——"三街并行"格局保护、"十八总"标识系统</li>
+        <li>为运营推广提供IP资源——城总文化节、老字号复兴、非遗体验</li>
+        <li>为其他专题研究提供历史背景支撑——资源评估、风貌设计、产业策划</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 底部专题导航 -->
+<div class="topic-nav">
+  <a href="#" class="topic-nav-link prev">
+    <div class="nav-label">上一专题</div>
+    <div class="nav-topic-name">已是首个专题</div>
+  </a>
+  <a href="#" class="topic-nav-link next">
+    <div class="nav-label">下一专题</div>
+    <div class="nav-topic-name">专题一 · 现状问题专题分析 →</div>
+  </a>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="footer-logo">城正街历史文化街区 · 片区策划专题研究</div>
+  <div class="footer-divider"></div>
+  <div class="footer-copy">© 2026 专题零 · 历史文化脉络研究 · 仅供内部研究使用</div>
+</footer>
+
+<script>
+// 滚动渐入
+const fadeElements = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+fadeElements.forEach(el => observer.observe(el));
+
+// 数字滚动动画
+function animateNumbers() {
+  const numbers = document.querySelectorAll('.data-num');
+  numbers.forEach(num => {
+    const target = parseInt(num.dataset.target);
+    const duration = 2000;
+    const start = performance.now();
+    
+    function update(currentTime) {
+      const elapsed = currentTime - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      num.textContent = Math.floor(easeOut * target);
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+// 数据区进入视口时触发
+const dataSection = document.querySelector('.data-section');
+const dataObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateNumbers();
+      dataObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+if (dataSection) dataObserver.observe(dataSection);
+</script>
+
+</body>
+</html>
