@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>散场 · 记忆</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+Pro:wght@300;400;600&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== 智能分页（PDF 导出用） ===== */
+@media print {
+  h1,h2,h3 { page-break-after: avoid; break-after: avoid; }
+  blockquote,figure,img,.plate,.cover { page-break-inside: avoid; break-inside: avoid; }
+  p { orphans: 3; widows: 3; }
+}
+blockquote,figure,img,.plate { page-break-inside: avoid; break-inside: avoid; }
+h1,h2,h3 { page-break-after: avoid; break-after: avoid; }
+
+/* ===== 主题：暗色 · 冷峻 ===== */
+:root{
+  --bg:#12181f;
+  --panel:#18212b;
+  --line:#2a3746;
+  --text:#c2ccd7;
+  --dim:#7f93a6;
+  --title:#e6edf3;
+  --accent:#6f92ab;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Source Serif Pro','Noto Serif SC',Georgia,'Songti SC',serif;
+  font-size:17px;
+  line-height:1.8;
+  letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;
+}
+.magazine-page{
+  max-width:780px;
+  margin:0 auto;
+  background:var(--panel);
+  border-left:1px solid var(--line);
+  border-right:1px solid var(--line);
+  padding:0 64px 56px;
+}
+h1,h2{ font-family:'Playfair Display','Noto Serif SC',serif; color:var(--title); font-weight:700; }
+
+/* ===== 封面（背景图铺满 · 标题压在上层） ===== */
+.cover{
+  position:relative;
+  height:460px;
+  display:flex; align-items:flex-start; justify-content:center;
+  overflow:hidden;
+  margin:0 -64px;
+  padding-top:96px;
+}
+.cover-bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+}
+.cover-inner{
+  position:relative; z-index:1;
+  text-align:center;
+  padding:0 24px;
+}
+.kicker{
+  font-family:'Playfair Display',serif;
+  font-size:.72rem; letter-spacing:.42em;
+  text-transform:uppercase;
+  color:#dfe7ee; opacity:.85;
+  margin-bottom:1.2rem;
+}
+.cover h1{
+  font-size:3.6rem; font-weight:900; letter-spacing:.6em;
+  text-indent:.6em;
+  color:#f2f6fa;
+  text-shadow:0 2px 18px rgba(10,16,22,.55);
+}
+.epigraph{
+  font-style:italic; color:#dfe7ee; font-size:1rem; line-height:2;
+  text-shadow:0 1px 10px rgba(10,16,22,.5);
+}
+.epigraph .cite{
+  display:block; font-size:.78rem; color:#dfe7ee; opacity:.75;
+  font-style:normal; margin-top:.1rem; letter-spacing:.1em;
+}
+
+/* ===== 正文（左对齐 · 段距=行距 · 节距分隔线） ===== */
+.content{ padding-top:1.4em; }
+p{ margin:0 0 1.2em; text-indent:2em; }
+.cover p{ text-indent:0; margin:0; }
+.part{
+  margin:2.6em 0;
+  border-top:1px solid var(--line);
+  opacity:.75;
+}
+
+/* ===== 封底（文字在前 · 图收尾） ===== */
+.ending{ margin-top:2.2em; }
+.ending p{ text-indent:2em; }
+.plate{ margin:1.4em 0 0; }
+.plate img{
+  display:block; width:100%; height:170px;
+  object-fit:cover; object-position:center;
+}
+.ending .fin{
+  margin-top:2.2em; text-align:center;
+  color:var(--dim); font-size:.75rem; letter-spacing:.4em; opacity:.8;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width:640px){
+  .magazine-page{ padding:0 26px 40px; border:none; }
+  .cover{ height:330px; margin:0 -26px; }
+  .cover h1{ font-size:2.5rem; }
+  .plate img{ height:140px; }
+}
+</style>
+</head>
+<body>
+<main class="magazine-page">
+
+  <!-- ======== 封面（背景图铺满） ======== -->
+  <header class="cover">
+    <img class="cover-bg" src="散场杂志_图片/cover.png" alt="远送于野：旷野尽头一个远去的黑点">
+    <div class="cover-inner">
+      <div class="kicker">Memoir · 记忆</div>
+      <h1>散场</h1>
+      <p class="epigraph">远送于野　瞻望弗及
+        <span class="cite">——《诗经·邶风·燕燕》</span>
+      </p>
+    </div>
+  </header>
+
+  <!-- ======== 正文 ======== -->
+  <div class="content">
+
+  <p>儿子考上了大学，要去外地念书。</p>
+  <p>妈妈忙了好些天：打电话问学校，拉着单子采购，毛巾、牙刷、肥皂盒一样样往家搬。收拾那天，清单压在箱盖上，码几样，对一下。开学她还要跟着去铺铺盖——儿子是她的偶像，也是她的宝贝，她跟着去，是应当的。</p>
+  <p>我无所事事。从他出生起，学习上的事归我管，其他的，都是他妈妈在操劳。该说的话，早在还能说上话的时候讲完了。我能做的，就是到处找资料，希望为他大学四年帮上点忙。他像当年的我一样，正沉浸在不用上学的喜悦里，不知道有没有看。</p>
+  <p>墙角立着一只带轮子的硬壳箱，黑亮亮的，四只小轮子，一根拉杆。行李早就收好了——拉杆一抽，咕噜一声就能走，不用我搬，也不用谁扛。</p>
+  <p>我忽然想起，三十多年前，我考上大学去念书的时候，是有一只箱子的。</p>
+
+  <div class="part"></div>
+
+  <p>那只箱子黑黢黢的。</p>
+  <p>黑樟木的箱子。黑漆剥落得差不多了，四角包着生铁的角，边上几个铁环，麻绳穿过去，拢起来，用一个铜扣子扣住。</p>
+  <p>它是母亲的陪嫁。两口黑樟木箱，扁担挑着进门，一前一后，走得稳当。</p>
+  <p>我去学校读书，只有这个箱子能装点东西，家里就让我带走一口。只剩一口，没法用扁担挑——一头悬着，走不稳路。只能肩扛。</p>
+
+  <div class="part"></div>
+
+  <p>箱子一直是父亲扛着，从乡下倒腾上车。</p>
+  <p>那年他四十出头，正当年。干过农活的人，肩宽，背厚，胳膊上绷着劲，一双手全是老茧，平日里挑担、扛粮都不在话下。这口箱子压在他肩上，他起初没当回事，走得稳稳当当。</p>
+  <p>从乡下到那座城，如今高铁半小时。那时候，绿皮火车摇摇晃晃，走了三个多钟头。</p>
+  <p>车窗外一帧一帧往后抛，车轮碾着铁轨，哐当哐当。对面坐着抱孩子的妇女，孩子哭了一路。我半睡半醒，看见父亲始终醒着，手护着那只箱子，像护着什么要紧的东西。</p>
+  <p>其实那里面没什么要紧的——几件换洗衣服，一床薄被，通知书，还有农转非的户口材料。可他护了一路。</p>
+  <p>到地方的时候，天已经黑透了。站台雾气蒙蒙，灯是老式的白炽灯管，嗡嗡响，把人脸照得蜡黄。他从车上把箱子倒腾下来，我要搭把手，他推开我伸出的手，示意我走前面找路。</p>
+  <p>又倒腾了几次车，到了一个黑乎乎的牌楼跟前。我们站在路边打听，往学校里怎么走。</p>
+  <p>后来我才知道，那是学校有名的正门。白天很气派。那天夜里，全都藏在黑里，什么也没看见。</p>
+
+  <div class="part"></div>
+
+  <p>夜已经深了，学校的路灯隔老远才一盏，光晕昏黄。父亲扛着箱子，在黑里摸。那姿势怪，怪得我现在还记得清清楚楚——</p>
+  <p>灯在他身后，把他和箱子照成一道剪影：头偏向一边，一只手从底下托着箱底，另一只手从头顶弯过去，扯着绳。那姿势不像扛——头埋着，背弓着，一步一步往黑里拱。</p>
+  <p>箱子沉。走几步，往下滑一点。他停住，腰往外一胯，把箱子顶回肩上，再走。</p>
+  <p>绳是潮的，夜里浸软了，手一打滑，箱子溜得更快。他耸一耸肩，把腰送出去，绳子绷紧，箱子才算稳住。</p>
+  <p>走走停停。遇到岔路就停下问路，也不肯放箱子，歪着身子，问一句，道声谢，再走。</p>
+  <p>到一盏路灯下，他站住，喘匀了气，才又走。汗顺着下巴往下滴，后背的衣裳湿透了，贴在背上。</p>
+  <p>我跟在后面，一声不响，只听见他喘。</p>
+  <p>他一路没把箱子放下来过。</p>
+  <p>到宿舍，箱子卸下来，他的手指已经伸不直了。身上脸上全是汗，额前的头发粘成一绺一绺的。</p>
+  <p>他没说累。</p>
+  <p>那一夜，我们挤在宿舍光板铺上。九月的城市，在发高烧。</p>
+  <p>同宿舍的人陆续到了，大家互相打听是哪里人，考了多少分，兴奋得很。我也跟着聊了几句，年轻，刚进大学，什么都新鲜。回头看父亲，他靠在墙边，闭着眼——这些，他插不上嘴，也陌生。</p>
+  <p>我迷迷糊糊的，很多事翻上来。</p>
+
+  <div class="part"></div>
+
+  <p>我上初中那年，父母就离了婚。他虽然心气正盛，跑过销售，做过生意，见过世面，但终究亏在文化程度不高，最后都不了了之，还要东奔西跑给我凑学费和生活费。</p>
+  <p>有一次他带我去借钱。人家说手头紧，要去凑凑，让我们过几天来。</p>
+  <p>过了几天，他让我一个人去拿。</p>
+  <p>我站在人家堂屋里，等着，等着，不敢坐。</p>
+  <p>这些话，我从来没跟他说过。</p>
+  <p>天还没有亮，父亲就悄然起身说要走。走到走廊，又回头说了声注意安全，不要担心钱的事情，我回了一句 噢。</p>
+  <p>他不让我送，说认得路。出了宿舍门，我在窗口看着，他回头招了招手，就转身沿小路走。</p>
+  <p>他一侧肩膀沉，到路口，左右看看，迟疑了一下，拐进了梧桐影里，我也不确定是不是我们来时的路。</p>
+  <p>他再没去过这所学校。它什么模样，他应该不知道。可他逢人便说，校园美。</p>
+
+  <div class="part"></div>
+
+  <p>一个乡下的父亲，能有什么见识呢。他能做的，就是卖一点苦力，然后为了钱放下脸面。</p>
+  <p>我读什么学校，他不太在乎——不是不想在乎，是没有那个能力在乎。</p>
+  <p>大学生活他不会知道，我工作什么样子他也没办法想象。</p>
+  <p>寒暑假也曾经回去。那是他们的家，那个地方虽然客气，但终究不属于我。那里没有母亲，只有父亲——两个人相对，是没什么可聊的：生活难，不好开口；工作难，更不好开口。</p>
+  <p>我工作后，早先他还来省城看我们。转几趟车，两个多小时，扛一麻袋东西来——青菜、萝卜，有时候是一只鸡，家里要忙着收拾半天。</p>
+  <p>他一个人坐在客厅，我们上班了没人陪，下楼也不认路。后来就很少来了，有事打个电话问问。</p>
+
+  <div class="part"></div>
+
+  <p>父亲现在老了。背驼了，走路颤颤巍巍。</p>
+  <p>他住在小县城里面不习惯，收拾着要回乡下住，老房早塌了，只好住叔叔家空着的房子，我花钱把地坪和房间收拾了一番，房前屋后能种个菜，养个鸡，有活儿干了。</p>
+  <p>他常搬个小马扎，倚着门框坐，一坐一下午。坐久了，要扶着门框才能站起来。</p>
+  <p>太阳一点一点偏，影子一点一点长，从他脚背爬到膝盖上——他不动，由着它们。</p>
+  <p>每次回去，人还在高速公路上，电话就来了：快到了吗？吃饭了。</p>
+  <p>到家了，他又忙自己的去了。看着小孩们疯玩，偶尔喊一句，小心。</p>
+  <p>陪他坐在门槛边。他话不多，有一搭没一搭地念叨：隔壁村谁发财了，谁家小孩考上了大学，谁家砌了新房。都是旁人的事——他不讲自己，也不讲我。我应一声，噢。</p>
+  <p>走的时候，他送到田埂，挥了挥手，胳膊没举过肩。</p>
+
+  <div class="part"></div>
+
+  <p>儿子也要走了。</p>
+  <p>初中那几年，他的学习是我陪着，一道题一道题地讲，还能坐在一起说说话。</p>
+  <p>上了高中，连见面的机会都少了。好不容易说上话，我讲，他听着，说知道了。</p>
+  <p>高考结束，要他做好计划，把暑假过充实，为大学做准备。他说好。</p>
+  <p>那个暑假，同学聚会、旅游、学车排得满满当当。计划的事情怎么样，我也不知道。</p>
+  <p>久了，我不讲了。</p>
+  <p>我开车送他们去高铁站。车停在落客区，他拖着箱子下车。</p>
+  <p>我说注意安全。他摇摇手，回了一个字：噢。</p>
+  <p>往进站口深处走，他妈妈和外婆跟在身后。</p>
+  <p>轮子咕噜咕噜响，渐行渐远，随着高铁的呼啸远去。</p>
+
+  </div>
+
+  <!-- ======== 封底（文字在前 · 图收尾） ======== -->
+  <footer class="ending">
+    <p>我忽然想起三十多年前那个夜晚——父亲扛着黑箱子，头歪着，在梧桐影里，一步一挪，把我送出去。然后，够不着了。</p>
+    <p>此刻我坐在车里，没动。</p>
+    <figure class="plate">
+      <img src="散场杂志_图片/back.png" alt="孤灯，长影，车窗内静止的人">
+    </figure>
+    <div class="fin">— 完 —</div>
+  </footer>
+
+</main>
+</body>
+</html>

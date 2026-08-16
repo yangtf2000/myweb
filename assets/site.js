@@ -26,6 +26,7 @@
     'wechat':         S + '<rect x="9" y="10" width="22" height="16" rx="4"/><path d="M15 26 L15 32 L21 26"/><rect x="19" y="20" width="20" height="15" rx="4"/><path d="M25 35 L25 40 L30 35"/>' + E,
     'changxin':       S + '<path d="M10 34 L20 26 L28 30 L40 16"/><path d="M33 16 H40 V23"/><circle cx="20" cy="26" r="1.6" fill="currentColor"/><circle cx="28" cy="30" r="1.6" fill="currentColor"/>' + E,
     'yuanchai':       S + '<rect x="9" y="18" width="12" height="22" rx="1"/><path d="M9 18 L15 12 L21 18"/><rect x="27" y="20" width="12" height="20" rx="1" stroke-dasharray="2 3"/><path d="M27 20 L33 14 L39 20"/><path d="M24 8 A16 16 0 0 1 24 40" opacity=".5"/>' + E,
+    'sanchang':       S + '<rect x="12" y="20" width="24" height="17" rx="2"/><path d="M12 28.5 H36"/><path d="M17 37 V42"/><path d="M31 37 V42"/><path d="M36 20 L40 15"/><path d="M8 43 C14 40 20 46 28 43 C34 41 38 44 42 42" opacity=".45"/>' + E,
     '_fallback':     S + '<circle cx="24" cy="24" r="6"/>' + E
   };
 

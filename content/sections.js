@@ -93,6 +93,17 @@ window.SECTIONS = [
     ]
   },
   {
+    id: 'essays',
+    title: '散文 · 手记',
+    subtitle: '写给自己的字。关于父亲，关于送别，关于散场。',
+    tag: '散文',
+    visibility: 'public',
+    zone: 'private',
+    articles: [
+      { slug: 'sanchang', title: '散场', date: '2026.08', tag: '散文', icon: 'sanchang', desc: '父子一场的记忆：父亲扛着黑箱子送我上学，我坐在车里送儿子离开。', detail: '从三十多年前父亲肩上的黑樟木箱，到如今带轮子的硬壳箱；从一个"噢"，到另一个"噢"。远送于野，瞻望弗及。' }
+    ]
+  },
+  {
     id: 'private',
     title: '私人手记',
     subtitle: '不愿示人的字，仅直链可达。',
