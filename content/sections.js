@@ -70,7 +70,8 @@ window.SECTIONS = [
       { slug: 'fund-apply',    title: '城市更新资金申报查询手册',        date: '2026.07', tag: '手册', icon: 'fund-apply',    desc: '资金申报口径与查询要点，便于随时备查。', detail: '归集专项债、政策性金融工具、中央预算内投资等资金渠道的申报口径与查询路径，做成可随时翻查的手册。' },
       { slug: 'district-plan', title: '城市更新片区策划 AI 指南',       date: '2026.06', tag: '指南', icon: 'district-plan', desc: '片区策划报告的 AI 生成思路、结构与范例。', detail: '围绕片区策划的定位、容量、业态与实施，给出 AI 生成的思路、报告结构与可套用范例。' },
       { slug: 'ai-design',     title: 'AI 工具策划设计指南',   date: '2026.07', tag: '指南', icon: 'ai-design',     desc: '梳理策划、设计环节里能落地的 AI 工具与用法。', detail: '面向策划与设计环节，盘点可用的 AI 工具与组合打法，附实操路径与产出示例，让 AI 真正进到工作流里。' },
-      { slug: 'planning-ai',   title: '规划设计 AI 一页纸', date: '2026.06', tag: '笔记', icon: 'planning-ai',   desc: '规划设计业务里的 AI 技术要点，一页速览。', detail: '把规划设计业务的 AI 技术要点压缩成一页：能力边界、适用场景、工具清单与落地建议，方便快速建立全局认知。' }
+      { slug: 'planning-ai',   title: '规划设计 AI 一页纸', date: '2026.06', tag: '笔记', icon: 'planning-ai',   desc: '规划设计业务里的 AI 技术要点，一页速览。', detail: '把规划设计业务的 AI 技术要点压缩成一页：能力边界、适用场景、工具清单与落地建议，方便快速建立全局认知。' },
+      { slug: 'community-report', title: '完整社区建设策划与实施研究报告', date: '2026.08', tag: '报告', icon: 'district-plan', desc: '政策依据 · 技术标准 · 经验案例 · 编制大纲。', detail: '完整社区建设从政策到落地的系统研究报告：政策沿革、技术标准、申报流程、资金来源、经验案例与策划编制大纲，含湘国差异对比与住建部可复制经验清单，多章节深色高对比网页版。' }
     ]
   },
   {

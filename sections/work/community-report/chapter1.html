@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第1章 完整社区的来由</title><style>
+:root{
+  --bg0:#070d1a;          /* 页面外背景 */
+  --bg1:#0b1424;          /* 卡片/主内容背景 */
+  --bg2:#0f1b30;          /* 表格表头/斑马 */
+  --bg3:#14213a;          /* 引用/高亮块底 */
+  --line:#1e2f4d;         /* 分隔线 */
+  --text:#dbe4f0;         /* 正文亮字 */
+  --text-dim:#8fa3bd;     /* 次要文字 */
+  --cyan:#22d3ee;         /* 主强调 */
+  --purple:#a78bfa;       /* 次强调 */
+  --gold:#f5c76a;         /* 金/警示 */
+  --red:#f87171;          /* 警示红 */
+  --green:#34d399;        /* 达标绿 */
+  --ink:#071020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(34,211,238,.08), transparent 60%),
+    radial-gradient(1000px 500px at 85% 0%, rgba(167,139,250,.08), transparent 55%),
+    var(--bg0);
+  color:var(--text);
+  line-height:1.85;
+  min-height:100vh;
+}
+.mag-shell{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+.magazine-page{
+  background:linear-gradient(180deg,#0d1830 0%,var(--bg1) 100%);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:48px 56px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  position:relative;
+  overflow:hidden;
+}
+.magazine-page::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));
+}
+/* ===== 顶部导航条 ===== */
+.topnav{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.brand{font-size:.8rem;letter-spacing:.18em;color:var(--cyan);font-weight:600}
+.brand b{color:var(--text)}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap}
+.topnav a{
+  color:var(--text-dim);text-decoration:none;font-size:.78rem;
+  padding:4px 10px;border:1px solid var(--line);border-radius:20px;transition:.2s;
+}
+.topnav a:hover,.topnav a.cur{color:#0a1220;background:var(--cyan);border-color:var(--cyan);font-weight:600}
+/* ===== 章节头部 ===== */
+.ch-head{margin-bottom:30px}
+.ch-tag{
+  display:inline-block;padding:3px 12px;border-radius:20px;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;border:1px solid var(--cyan);color:var(--cyan);background:rgba(34,211,238,.08);
+  margin-bottom:14px;
+}
+h1{font-size:2rem;color:#fff;line-height:1.3;font-weight:800;letter-spacing:.01em}
+.subtitle{color:var(--text-dim);font-size:1.02rem;margin-top:10px}
+/* ===== 正文标题层级 ===== */
+h2{font-size:1.45rem;color:#fff;margin:34px 0 14px;padding-left:14px;border-left:4px solid var(--cyan);font-weight:700}
+h3{font-size:1.15rem;color:var(--cyan);margin:24px 0 12px;font-weight:700}
+h4{font-size:1rem;color:var(--purple);margin:20px 0 10px;font-weight:700}
+p{margin:12px 0;color:var(--text)}
+strong{color:#fff;font-weight:700}
+/* 指标数值高亮 */
+.hl-cyan{color:var(--cyan);font-weight:700}
+.hl-purple{color:var(--purple);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+/* ===== 引用块 ===== */
+blockquote{
+  background:var(--bg3);border-left:4px solid var(--purple);
+  padding:14px 20px;margin:16px 0;border-radius:0 10px 10px 0;color:var(--text-dim);
+}
+blockquote p{margin:4px 0}
+blockquote a{color:var(--cyan)}
+/* 官方链接引用块特殊处理 */
+.ref-block{background:rgba(167,139,250,.07)}
+.ref-block::before{content:'🔗 官方链接';display:block;font-size:.72rem;letter-spacing:.1em;color:var(--purple);font-weight:700;margin-bottom:8px}
+/* ===== 表格 ===== */
+.table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px}
+thead th{
+  background:linear-gradient(180deg,#1a2a4a,#152239);color:#fff;text-align:left;
+  padding:12px 14px;font-weight:700;border-bottom:2px solid var(--cyan);
+  white-space:nowrap;letter-spacing:.02em;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+tbody tr:nth-child(even){background:rgba(15,27,48,.5)}
+tbody tr:hover{background:rgba(34,211,238,.06)}
+/* ===== 列表 ===== */
+ul,ol{margin:10px 0 10px 24px}
+li{margin:7px 0;color:var(--text)}
+li::marker{color:var(--cyan);font-weight:700}
+/* ===== 链接 ===== */
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(34,211,238,.4)}
+a:hover{color:#fff;border-bottom-color:var(--cyan)}
+/* ===== 分隔线 ===== */
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+/* ===== 页脚导航 ===== */
+.pagenav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.pagenav a{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;font-weight:600;
+  border:1px solid var(--line);color:var(--text-dim);transition:.2s;font-size:.9rem;
+}
+.pagenav a:hover{color:#0a1220;background:var(--cyan);border-color:var(--cyan)}
+.pagenav a.next{margin-left:auto}
+/* ===== 封面 ===== */
+.cover-hero{text-align:center;padding:70px 10px 50px}
+.cover-badge{display:inline-block;padding:5px 18px;border:1px solid var(--gold);color:var(--gold);border-radius:30px;font-size:.78rem;letter-spacing:.22em;margin-bottom:26px;font-weight:600}
+.cover-title{font-size:2.6rem;line-height:1.25;color:#fff;font-weight:900;letter-spacing:.02em}
+.cover-sub{color:var(--text-dim);font-size:1.15rem;margin-top:18px;letter-spacing:.06em}
+.cover-line{width:120px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));margin:30px auto;border-radius:2px}
+.cover-meta{color:var(--text-dim);font-size:.9rem}
+.toc{margin-top:46px;text-align:left}
+.toc h2{text-align:center;border:none;padding:0;font-size:1.3rem}
+.toc-list{list-style:none;margin:22px 0 0;padding:0}
+.toc-list li{margin:0 0 10px}
+.toc-list a{
+  display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--line);
+  border-radius:12px;color:var(--text);text-decoration:none;transition:.2s;background:rgba(15,27,48,.35);
+}
+.toc-list a:hover{border-color:var(--cyan);background:rgba(34,211,238,.06);transform:translateX(4px)}
+.toc-num{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:700;font-size:1rem;min-width:52px}
+.toc-title{font-weight:700;color:#fff}
+.toc-desc{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+/* ===== 智能分页控制 ===== */
+@media print{
+  h1,h2,h3,h4{page-break-after:avoid;break-after:avoid}
+  blockquote,table,.table-wrap,figure,.ref-block{page-break-inside:avoid;break-inside:avoid}
+  ul,ol{page-break-inside:avoid;break-inside:avoid}
+  hr{page-break-after:avoid;break-after:avoid}
+  p{orphans:3;widows:3}
+  .magazine-page{box-shadow:none;border:none}
+}
+/* ===== 响应式 ===== */
+@media (max-width:720px){
+  .magazine-page{padding:28px 20px}
+  .cover-title{font-size:1.9rem}
+  h1{font-size:1.5rem}
+  .table-wrap{font-size:.84rem}
+  .pagenav{flex-direction:column}
+  .pagenav a.next{margin-left:0}
+}
+</style></head>
+<body><div class="mag-shell"><article class="magazine-page">
+<div class="topnav">
+  <div class="brand">完整社区建设<b> · 策划与实施研究</b></div>
+  <div class="topnav-links">
+    <a href="index.html">目录</a>
+    <a href="chapter1.html">壹</a><a href="chapter2.html">贰</a><a href="chapter3.html">叁</a>
+    <a href="chapter4.html">肆</a><a href="chapter5.html">伍</a><a href="chapter6.html">陆</a>
+    <a href="chapter7.html">柒</a>
+  </div>
+</div>
+<div class="ch-head"><div class="ch-tag">第1章</div><h1>第1章 完整社区的来由</h1></div>
+<h3>1.1 完整社区的概念与内涵</h3>
+<p><strong>完整居住社区</strong>，是指在一个社区单元内，以居民步行5—10分钟可及的基本公共服务设施为核心，统筹布局公共服务、便民商业、市政配套、公共活动空间，配套完善物业管理与社区管理机制，实现"幼有所育、学有所教、病有所医、老有所养、弱有所扶"等基本生活需求全覆盖的居住生活单元。这一概念首次以"标准"形式固化于住建部等13部门2020年印发的《完整居住社区建设标准（试行）》。</p>
+<h4>完整社区的核心要义</h4>
+<p>完整社区建设的实质，是<strong>把"社区"当作城市治理与生活服务的基本细胞来整体营造</strong>，而非零散的单项设施补建。其核心要义可概括为三个字：</p>
+<ol><li><strong>补短板</strong>：对照建设标准逐项核算设施缺口，优先补齐养老、托育、健身、停车等群众"急难愁盼"短板。这是完整社区建设的出发点——绝大多数既有社区的短板集中在"一老一小"设施与市政配套上。</li><li><strong>促共享</strong>：推动设施开放共享、功能复合、空间融合，提高资源利用效率。完整的标志不是"每个小区都配全"，而是"一个生活圈内共享齐全"。</li><li><strong>强管理</strong>：实现物业管理全覆盖、社区管理机制健全，解决"重建设、轻管理"的痼疾，保障社区可持续运行。</li></ol>
+<h4>与相邻概念的关系</h4>
+<p>完整社区常常与"老旧小区改造""城市更新""15分钟生活圈"等概念混用，需厘清边界：</p>
+<div class="table-wrap"><table><thead><tr><th>概念</th><th>侧重</th><th>与完整社区关系</th></tr></thead><tbody><tr><td>老旧小区改造</td><td>建筑本体与小区内部环境的整治</td><td>完整社区的<strong>组成部分之一</strong>，侧重"房"与"小区"层面</td></tr><tr><td>城市更新</td><td>存量空间整体提质</td><td>完整社区是城市更新行动的<strong>重要内容</strong>（八大任务第三项）</td></tr><tr><td>15分钟生活圈</td><td>公共服务设施的可达性布局</td><td>完整社区按5—10分钟生活圈布局基本设施，15分钟圈层统筹片区级设施</td></tr><tr><td>完整社区</td><td>一个社区单元内设施与服务整体齐全</td><td>是上述概念的<strong>集成与落点</strong></td></tr></tbody></table></div>
+<p><strong>关键区分</strong>：完整社区是"细胞"（社区单元），15分钟生活圈是"组织"（由若干社区构成的生活圈层）。一个15分钟生活圈通常由城市干路或用地边界围合，居住人口5万—10万人，服务半径800—1000米，内含若干个完整社区。</p>
+<h3>1.2 提出背景与发展脉络</h3>
+<h4>提出背景：从"有没有"到"好不好"</h4>
+<p>城市发展由增量扩张转向存量提质，居民需求由"有没有"转向"好不好"。社区作为城市治理的"最后一公里"，长期以来存在<strong>规模不合理、设施不完善、公共活动空间不足、物业管理覆盖面不高、管理机制不健全</strong>等突出问题（住建部2020年《开展城市居住社区建设补短板行动的意见》开篇即指出的五类短板）。完整社区正是针对这些问题的系统性回应。</p>
+<p>从"四好"建设的逻辑看，完整社区<strong>向下统筹好房子、好小区，向上衔接好街区、好城区</strong>，是落实"好房子、好小区、好社区、好城区"四好建设、推进城市更新行动的重要任务。</p>
+<h4>发展脉络（大事记）</h4>
+<div class="table-wrap"><table><thead><tr><th>时间</th><th>事项</th><th>文号/依据</th><th>意义</th></tr></thead><tbody><tr><td>2020-08-18</td><td>住建部等13部门印发《完整居住社区建设标准（试行）》</td><td>建科规〔2020〕7号</td><td>首次以标准形式确立完整社区<strong>20项建设指标</strong></td></tr><tr><td>2021-12-17</td><td>住建部印发《完整居住社区建设指南》</td><td>建办科〔2021〕55号</td><td>明确完整社区内涵、基本要求与建设指引</td></tr><tr><td>2022-10-09</td><td>住建部、民政部开展完整社区建设试点</td><td>建办科〔2022〕48号</td><td>启动试点，聚焦"一老一小"设施</td></tr><tr><td>2023-07-20</td><td>确定106个完整社区建设试点名单</td><td>七部门联合</td><td>试点落地，为期2年</td></tr><tr><td>2025-05-02</td><td>中办、国办印发《关于持续推进城市更新行动的意见》</td><td>中央文件</td><td>将"开展完整社区建设"列为城市更新八大任务第三项，并明确构建一刻钟便民生活圈</td></tr></tbody></table></div>
+<blockquote class="ref-block"><strong>政策原文链接</strong> - 《完整居住社区建设标准（试行）》（住建部官网）：<a href="https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2020/art_17339_246923.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2020/art_17339_246923.html</a> - 《完整居住社区建设指南》（建办科〔2021〕55号，住建部官网）：<a href="https://www.mohurd.gov.cn/tsgb/wjk/art/2022/art_1740222871.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/tsgb/wjk/art/2022/art_1740222871.html</a>；中国政府网：<a href="https://www.gov.cn/zhengce/zhengceku/2022-01/12/content_5667815.htm" target="_blank" rel="noopener">https://www.gov.cn/zhengce/zhengceku/2022-01/12/content_5667815.htm</a> - 完整社区建设试点通知（建办科〔2022〕48号，中国政府网）：<a href="https://www.gov.cn/zhengce/zhengceku/2022-11/01/content_5723231.htm" target="_blank" rel="noopener">https://www.gov.cn/zhengce/zhengceku/2022-11/01/content_5723231.htm</a> - 106个试点名单（住建部官网）：<a href="https://www.mohurd.gov.cn/tsgb/wjk/art/2023/art_1521335532.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/tsgb/wjk/art/2023/art_1521335532.html</a> - 《关于持续推进城市更新行动的意见》（中国政府网）：<a href="https://www.gov.cn/zhengce/202505/content_7023880.htm" target="_blank" rel="noopener">https://www.gov.cn/zhengce/202505/content_7023880.htm</a></blockquote>
+<h3>1.3 完整社区的核心特征</h3>
+<p>综合国家《完整居住社区建设指南》与湖南绿色完整居住社区系列文件，完整社区具备四项核心特征：</p>
+<ol><li><strong>"一老一小"友好、全龄友好</strong>：以老年人和儿童需求为优先，兼顾全龄段居民。这是完整社区区别于一般社区建设最鲜明的价值取向——养老、托育设施是硬性配置底线。</li><li><strong>六大建设项、设施配套齐全</strong>：基本公共服务设施、便民商业服务设施、市政配套基础设施、公共活动空间、物业管理全覆盖、社区管理机制健全六项齐备。这六项构成完整社区的"规定动作"。</li><li><strong>绿色低碳</strong>：绿地率、可再生能源、海绵化、绿色出行等绿色指标达标。湖南在此基础上进一步加码，将"绿色"与"完整"并列为创建要求，形成"绿色完整居住社区"。</li><li><strong>15分钟生活圈</strong>：设施按步行可达圈层布局，5—10分钟达基本公共服务，15分钟达片区级公共服务。</li></ol>
+<hr>
+<div class="pagenav"><a href="index.html">← 目录</a><a href="chapter2.html" class="next">下一章 →</a></div>
+</article></div></body></html>

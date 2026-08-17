@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第3章 资金与申报</title><style>
+:root{
+  --bg0:#070d1a;          /* 页面外背景 */
+  --bg1:#0b1424;          /* 卡片/主内容背景 */
+  --bg2:#0f1b30;          /* 表格表头/斑马 */
+  --bg3:#14213a;          /* 引用/高亮块底 */
+  --line:#1e2f4d;         /* 分隔线 */
+  --text:#dbe4f0;         /* 正文亮字 */
+  --text-dim:#8fa3bd;     /* 次要文字 */
+  --cyan:#22d3ee;         /* 主强调 */
+  --purple:#a78bfa;       /* 次强调 */
+  --gold:#f5c76a;         /* 金/警示 */
+  --red:#f87171;          /* 警示红 */
+  --green:#34d399;        /* 达标绿 */
+  --ink:#071020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(34,211,238,.08), transparent 60%),
+    radial-gradient(1000px 500px at 85% 0%, rgba(167,139,250,.08), transparent 55%),
+    var(--bg0);
+  color:var(--text);
+  line-height:1.85;
+  min-height:100vh;
+}
+.mag-shell{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+.magazine-page{
+  background:linear-gradient(180deg,#0d1830 0%,var(--bg1) 100%);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:48px 56px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  position:relative;
+  overflow:hidden;
+}
+.magazine-page::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));
+}
+/* ===== 顶部导航条 ===== */
+.topnav{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.brand{font-size:.8rem;letter-spacing:.18em;color:var(--cyan);font-weight:600}
+.brand b{color:var(--text)}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap}
+.topnav a{
+  color:var(--text-dim);text-decoration:none;font-size:.78rem;
+  padding:4px 10px;border:1px solid var(--line);border-radius:20px;transition:.2s;
+}
+.topnav a:hover,.topnav a.cur{color:#0a1220;background:var(--cyan);border-color:var(--cyan);font-weight:600}
+/* ===== 章节头部 ===== */
+.ch-head{margin-bottom:30px}
+.ch-tag{
+  display:inline-block;padding:3px 12px;border-radius:20px;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;border:1px solid var(--cyan);color:var(--cyan);background:rgba(34,211,238,.08);
+  margin-bottom:14px;
+}
+h1{font-size:2rem;color:#fff;line-height:1.3;font-weight:800;letter-spacing:.01em}
+.subtitle{color:var(--text-dim);font-size:1.02rem;margin-top:10px}
+/* ===== 正文标题层级 ===== */
+h2{font-size:1.45rem;color:#fff;margin:34px 0 14px;padding-left:14px;border-left:4px solid var(--cyan);font-weight:700}
+h3{font-size:1.15rem;color:var(--cyan);margin:24px 0 12px;font-weight:700}
+h4{font-size:1rem;color:var(--purple);margin:20px 0 10px;font-weight:700}
+p{margin:12px 0;color:var(--text)}
+strong{color:#fff;font-weight:700}
+/* 指标数值高亮 */
+.hl-cyan{color:var(--cyan);font-weight:700}
+.hl-purple{color:var(--purple);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+/* ===== 引用块 ===== */
+blockquote{
+  background:var(--bg3);border-left:4px solid var(--purple);
+  padding:14px 20px;margin:16px 0;border-radius:0 10px 10px 0;color:var(--text-dim);
+}
+blockquote p{margin:4px 0}
+blockquote a{color:var(--cyan)}
+/* 官方链接引用块特殊处理 */
+.ref-block{background:rgba(167,139,250,.07)}
+.ref-block::before{content:'🔗 官方链接';display:block;font-size:.72rem;letter-spacing:.1em;color:var(--purple);font-weight:700;margin-bottom:8px}
+/* ===== 表格 ===== */
+.table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px}
+thead th{
+  background:linear-gradient(180deg,#1a2a4a,#152239);color:#fff;text-align:left;
+  padding:12px 14px;font-weight:700;border-bottom:2px solid var(--cyan);
+  white-space:nowrap;letter-spacing:.02em;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+tbody tr:nth-child(even){background:rgba(15,27,48,.5)}
+tbody tr:hover{background:rgba(34,211,238,.06)}
+/* ===== 列表 ===== */
+ul,ol{margin:10px 0 10px 24px}
+li{margin:7px 0;color:var(--text)}
+li::marker{color:var(--cyan);font-weight:700}
+/* ===== 链接 ===== */
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(34,211,238,.4)}
+a:hover{color:#fff;border-bottom-color:var(--cyan)}
+/* ===== 分隔线 ===== */
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+/* ===== 页脚导航 ===== */
+.pagenav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.pagenav a{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;font-weight:600;
+  border:1px solid var(--line);color:var(--text-dim);transition:.2s;font-size:.9rem;
+}
+.pagenav a:hover{color:#0a1220;background:var(--cyan);border-color:var(--cyan)}
+.pagenav a.next{margin-left:auto}
+/* ===== 封面 ===== */
+.cover-hero{text-align:center;padding:70px 10px 50px}
+.cover-badge{display:inline-block;padding:5px 18px;border:1px solid var(--gold);color:var(--gold);border-radius:30px;font-size:.78rem;letter-spacing:.22em;margin-bottom:26px;font-weight:600}
+.cover-title{font-size:2.6rem;line-height:1.25;color:#fff;font-weight:900;letter-spacing:.02em}
+.cover-sub{color:var(--text-dim);font-size:1.15rem;margin-top:18px;letter-spacing:.06em}
+.cover-line{width:120px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));margin:30px auto;border-radius:2px}
+.cover-meta{color:var(--text-dim);font-size:.9rem}
+.toc{margin-top:46px;text-align:left}
+.toc h2{text-align:center;border:none;padding:0;font-size:1.3rem}
+.toc-list{list-style:none;margin:22px 0 0;padding:0}
+.toc-list li{margin:0 0 10px}
+.toc-list a{
+  display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--line);
+  border-radius:12px;color:var(--text);text-decoration:none;transition:.2s;background:rgba(15,27,48,.35);
+}
+.toc-list a:hover{border-color:var(--cyan);background:rgba(34,211,238,.06);transform:translateX(4px)}
+.toc-num{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:700;font-size:1rem;min-width:52px}
+.toc-title{font-weight:700;color:#fff}
+.toc-desc{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+/* ===== 智能分页控制 ===== */
+@media print{
+  h1,h2,h3,h4{page-break-after:avoid;break-after:avoid}
+  blockquote,table,.table-wrap,figure,.ref-block{page-break-inside:avoid;break-inside:avoid}
+  ul,ol{page-break-inside:avoid;break-inside:avoid}
+  hr{page-break-after:avoid;break-after:avoid}
+  p{orphans:3;widows:3}
+  .magazine-page{box-shadow:none;border:none}
+}
+/* ===== 响应式 ===== */
+@media (max-width:720px){
+  .magazine-page{padding:28px 20px}
+  .cover-title{font-size:1.9rem}
+  h1{font-size:1.5rem}
+  .table-wrap{font-size:.84rem}
+  .pagenav{flex-direction:column}
+  .pagenav a.next{margin-left:0}
+}
+</style></head>
+<body><div class="mag-shell"><article class="magazine-page">
+<div class="topnav">
+  <div class="brand">完整社区建设<b> · 策划与实施研究</b></div>
+  <div class="topnav-links">
+    <a href="index.html">目录</a>
+    <a href="chapter1.html">壹</a><a href="chapter2.html">贰</a><a href="chapter3.html">叁</a>
+    <a href="chapter4.html">肆</a><a href="chapter5.html">伍</a><a href="chapter6.html">陆</a>
+    <a href="chapter7.html">柒</a>
+  </div>
+</div>
+<div class="ch-head"><div class="ch-tag">第3章</div><h1>第3章 资金与申报</h1></div>
+<blockquote class="">本章讲"怎么报、钱从哪来"，聚焦可操作的程序与渠道。</blockquote>
+<h3>3.1 申报程序与范围</h3>
+<p>完整社区（湖南为绿色完整居住社区）创建申报，采用\*\*"省级组织、市级统筹、区县落实、社区实施"\*\*的层级推进机制：</p>
+<ol><li><strong>组织主体</strong>：由省级住建部门会同民政部门组织实施，市级统筹、区县落实；</li><li><strong>申报范围</strong>：以社区居委会辖区为基本单元，湖南按每市州3—5个社区确定创建试点（其中结合城镇老旧小区改造试点不少于2个）；</li><li><strong>申报材料</strong>：创建工作方案、社区现状调查、建设方案、资金测算、实施时序与运营方式；</li><li><strong>申报流程</strong>：社区申报 → 区县推荐 → 市级初审 → 省级审定 → 纳入创建名单。</li></ol>
+<p><strong>申报要点</strong>：申报前必须先开展<strong>社区专项体检</strong>，摸清设施配套、环境建设、服务治理等问题短板，分清轻重缓急，制定完整社区建设项目清单——"先体检、后申报"是硬前提。</p>
+<h3>3.2 资金渠道与筹措</h3>
+<div class="table-wrap"><table><thead><tr><th>资金来源</th><th>额度/要求</th><th>用途</th></tr></thead><tbody><tr><td>中央财政</td><td>城市更新行动补助（中部城市<span class="hl-cyan">≤10</span>亿元）</td><td>公共设施、基础设施、基础类改造</td></tr><tr><td>专项债券</td><td>收益覆盖<span class="hl-cyan">≥1.2</span>倍，可作资本金</td><td>重大项目、收益性项目</td></tr><tr><td>社会资本</td><td>引入专业运营、产业投资</td><td>商业、养老、健身等经营性设施</td></tr><tr><td>居民自筹</td><td>户内改造、加装电梯等</td><td>居民自主更新、参与共建</td></tr></tbody></table></div>
+<p><strong>投融资模式</strong>：构建"中央补助 + 专项债 + 社会资本 + 运营收益"组合模式。中央预算内投资、超长期特别国债对符合条件项目给予支持；地方政府通过专项债券支持，<strong>严禁违法违规举债融资</strong>；鼓励REITs、资产证券化等市场化工具盘活存量资产，实现资金平衡与滚动发展。</p>
+<h3>3.3 资金共担模式</h3>
+<p>完整社区建设的资金难题，核心在于\*\*"政府单打独斗不可持续"<strong>。可行的破解思路是建立</strong>财政资金、产权单位、专营单位、社会资本、居民自筹五方共担\*\*机制。</p>
+<h4>参考样板：长沙金科园（全国完整社区样板）</h4>
+<p>长沙雨花区砂子塘街道金科园社区，结合城镇老旧小区改造创建绿色完整社区，入选<strong>国家第一批完整社区样板</strong>，总投资约<strong>1.28亿元</strong>，形成五方共担的"教科书式"结构：</p>
+<div class="table-wrap"><table><thead><tr><th>资金方</th><th>金额（万元）</th><th>用途</th><th>占比约</th></tr></thead><tbody><tr><td>中央及省级财政</td><td>3735</td><td>基础类改造，解决功能性问题</td><td><span class="hl-cyan">29%</span></td></tr><tr><td>原产权单位（闲置资产折价）</td><td>2246</td><td>盘活闲置资产</td><td><span class="hl-cyan">18%</span></td></tr><tr><td>专营单位</td><td>558</td><td>水电气改造</td><td><span class="hl-cyan">4%</span></td></tr><tr><td>社会资本</td><td>4744</td><td>养老、健身、商业等社区服务设施</td><td><span class="hl-cyan">37%</span></td></tr><tr><td>居民自筹</td><td>1470</td><td>拆违、室内装修、加装电梯</td><td><span class="hl-cyan">11%</span></td></tr></tbody></table></div>
+<blockquote class="ref-block"><strong>案例来源（湖南住建厅官网）</strong>：<a href="https://zjt.hunan.gov.cn/zjt/ztzl/ljxqgz1/msjyjlu/202406/t20240626_33699918.html" target="_blank" rel="noopener">https://zjt.hunan.gov.cn/zjt/ztzl/ljxqgz1/msjyjlu/202406/t20240626_33699918.html</a></blockquote>
+<p><strong>金科园模式的启示</strong>：</p>
+<ol><li><strong>财政"四两拨千斤"</strong>：3735万财政投入（占<span class="hl-cyan">29%</span>）撬动总盘子1.28亿，关键在于财政资金先行解决基础类功能性问题，带动多方跟进；</li><li><strong>存量盘活是关键</strong>：原产权单位提供2246万闲置资产、社会资本建设养老健身等经营性设施并持续运营盈利（盈利<span class="hl-cyan">10%</span>反哺社区慈善基金），实现"自我造血"；</li><li><strong>居民共建</strong>：1470万居民出资用于拆违、装修、电梯加装，体现"共建共享"；</li><li><strong>机制可持续</strong>：物业费0.8元/㎡、缴费率从<span class="hl-cyan">50%—60%</span>提升至<span class="hl-cyan">90%</span>，社会资本运营实现长效收益。</li></ol>
+<hr>
+<div class="pagenav"><a href="chapter2.html">← 上一章</a><a href="chapter4.html" class="next">下一章 →</a></div>
+</article></div></body></html>

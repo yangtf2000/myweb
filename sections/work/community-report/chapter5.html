@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第5章 完整社区建设技术要求</title><style>
+:root{
+  --bg0:#070d1a;          /* 页面外背景 */
+  --bg1:#0b1424;          /* 卡片/主内容背景 */
+  --bg2:#0f1b30;          /* 表格表头/斑马 */
+  --bg3:#14213a;          /* 引用/高亮块底 */
+  --line:#1e2f4d;         /* 分隔线 */
+  --text:#dbe4f0;         /* 正文亮字 */
+  --text-dim:#8fa3bd;     /* 次要文字 */
+  --cyan:#22d3ee;         /* 主强调 */
+  --purple:#a78bfa;       /* 次强调 */
+  --gold:#f5c76a;         /* 金/警示 */
+  --red:#f87171;          /* 警示红 */
+  --green:#34d399;        /* 达标绿 */
+  --ink:#071020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(34,211,238,.08), transparent 60%),
+    radial-gradient(1000px 500px at 85% 0%, rgba(167,139,250,.08), transparent 55%),
+    var(--bg0);
+  color:var(--text);
+  line-height:1.85;
+  min-height:100vh;
+}
+.mag-shell{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+.magazine-page{
+  background:linear-gradient(180deg,#0d1830 0%,var(--bg1) 100%);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:48px 56px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  position:relative;
+  overflow:hidden;
+}
+.magazine-page::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));
+}
+/* ===== 顶部导航条 ===== */
+.topnav{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.brand{font-size:.8rem;letter-spacing:.18em;color:var(--cyan);font-weight:600}
+.brand b{color:var(--text)}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap}
+.topnav a{
+  color:var(--text-dim);text-decoration:none;font-size:.78rem;
+  padding:4px 10px;border:1px solid var(--line);border-radius:20px;transition:.2s;
+}
+.topnav a:hover,.topnav a.cur{color:#0a1220;background:var(--cyan);border-color:var(--cyan);font-weight:600}
+/* ===== 章节头部 ===== */
+.ch-head{margin-bottom:30px}
+.ch-tag{
+  display:inline-block;padding:3px 12px;border-radius:20px;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;border:1px solid var(--cyan);color:var(--cyan);background:rgba(34,211,238,.08);
+  margin-bottom:14px;
+}
+h1{font-size:2rem;color:#fff;line-height:1.3;font-weight:800;letter-spacing:.01em}
+.subtitle{color:var(--text-dim);font-size:1.02rem;margin-top:10px}
+/* ===== 正文标题层级 ===== */
+h2{font-size:1.45rem;color:#fff;margin:34px 0 14px;padding-left:14px;border-left:4px solid var(--cyan);font-weight:700}
+h3{font-size:1.15rem;color:var(--cyan);margin:24px 0 12px;font-weight:700}
+h4{font-size:1rem;color:var(--purple);margin:20px 0 10px;font-weight:700}
+p{margin:12px 0;color:var(--text)}
+strong{color:#fff;font-weight:700}
+/* 指标数值高亮 */
+.hl-cyan{color:var(--cyan);font-weight:700}
+.hl-purple{color:var(--purple);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+/* ===== 引用块 ===== */
+blockquote{
+  background:var(--bg3);border-left:4px solid var(--purple);
+  padding:14px 20px;margin:16px 0;border-radius:0 10px 10px 0;color:var(--text-dim);
+}
+blockquote p{margin:4px 0}
+blockquote a{color:var(--cyan)}
+/* 官方链接引用块特殊处理 */
+.ref-block{background:rgba(167,139,250,.07)}
+.ref-block::before{content:'🔗 官方链接';display:block;font-size:.72rem;letter-spacing:.1em;color:var(--purple);font-weight:700;margin-bottom:8px}
+/* ===== 表格 ===== */
+.table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px}
+thead th{
+  background:linear-gradient(180deg,#1a2a4a,#152239);color:#fff;text-align:left;
+  padding:12px 14px;font-weight:700;border-bottom:2px solid var(--cyan);
+  white-space:nowrap;letter-spacing:.02em;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+tbody tr:nth-child(even){background:rgba(15,27,48,.5)}
+tbody tr:hover{background:rgba(34,211,238,.06)}
+/* ===== 列表 ===== */
+ul,ol{margin:10px 0 10px 24px}
+li{margin:7px 0;color:var(--text)}
+li::marker{color:var(--cyan);font-weight:700}
+/* ===== 链接 ===== */
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(34,211,238,.4)}
+a:hover{color:#fff;border-bottom-color:var(--cyan)}
+/* ===== 分隔线 ===== */
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+/* ===== 页脚导航 ===== */
+.pagenav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.pagenav a{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;font-weight:600;
+  border:1px solid var(--line);color:var(--text-dim);transition:.2s;font-size:.9rem;
+}
+.pagenav a:hover{color:#0a1220;background:var(--cyan);border-color:var(--cyan)}
+.pagenav a.next{margin-left:auto}
+/* ===== 封面 ===== */
+.cover-hero{text-align:center;padding:70px 10px 50px}
+.cover-badge{display:inline-block;padding:5px 18px;border:1px solid var(--gold);color:var(--gold);border-radius:30px;font-size:.78rem;letter-spacing:.22em;margin-bottom:26px;font-weight:600}
+.cover-title{font-size:2.6rem;line-height:1.25;color:#fff;font-weight:900;letter-spacing:.02em}
+.cover-sub{color:var(--text-dim);font-size:1.15rem;margin-top:18px;letter-spacing:.06em}
+.cover-line{width:120px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));margin:30px auto;border-radius:2px}
+.cover-meta{color:var(--text-dim);font-size:.9rem}
+.toc{margin-top:46px;text-align:left}
+.toc h2{text-align:center;border:none;padding:0;font-size:1.3rem}
+.toc-list{list-style:none;margin:22px 0 0;padding:0}
+.toc-list li{margin:0 0 10px}
+.toc-list a{
+  display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--line);
+  border-radius:12px;color:var(--text);text-decoration:none;transition:.2s;background:rgba(15,27,48,.35);
+}
+.toc-list a:hover{border-color:var(--cyan);background:rgba(34,211,238,.06);transform:translateX(4px)}
+.toc-num{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:700;font-size:1rem;min-width:52px}
+.toc-title{font-weight:700;color:#fff}
+.toc-desc{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+/* ===== 智能分页控制 ===== */
+@media print{
+  h1,h2,h3,h4{page-break-after:avoid;break-after:avoid}
+  blockquote,table,.table-wrap,figure,.ref-block{page-break-inside:avoid;break-inside:avoid}
+  ul,ol{page-break-inside:avoid;break-inside:avoid}
+  hr{page-break-after:avoid;break-after:avoid}
+  p{orphans:3;widows:3}
+  .magazine-page{box-shadow:none;border:none}
+}
+/* ===== 响应式 ===== */
+@media (max-width:720px){
+  .magazine-page{padding:28px 20px}
+  .cover-title{font-size:1.9rem}
+  h1{font-size:1.5rem}
+  .table-wrap{font-size:.84rem}
+  .pagenav{flex-direction:column}
+  .pagenav a.next{margin-left:0}
+}
+</style></head>
+<body><div class="mag-shell"><article class="magazine-page">
+<div class="topnav">
+  <div class="brand">完整社区建设<b> · 策划与实施研究</b></div>
+  <div class="topnav-links">
+    <a href="index.html">目录</a>
+    <a href="chapter1.html">壹</a><a href="chapter2.html">贰</a><a href="chapter3.html">叁</a>
+    <a href="chapter4.html">肆</a><a href="chapter5.html">伍</a><a href="chapter6.html">陆</a>
+    <a href="chapter7.html">柒</a>
+  </div>
+</div>
+<div class="ch-head"><div class="ch-tag">第5章</div><h1>第5章 完整社区建设技术要求</h1></div>
+<blockquote class="">本章执行以《湖南省绿色完整居住社区建设指南》（湘建设函〔2023〕41号）为基准口径，国家标准《完整居住社区建设标准（试行）》（建科规〔2020〕7号）作为"不低于"底数兜底，湖南指标为准、国标作底线。</blockquote>
+<h3>5.1 技术标准体系总览</h3>
+<p>完整社区技术标准体系由"<strong>六大建设项 × 20项指标 × 八大场景 × AA/AAA型</strong>"四维构成，四者层层递进——"<strong>建设项定框架、指标定底线、场景定组织、分类定等级</strong>"：</p>
+<div class="table-wrap"><table><thead><tr><th>建设项</th><th>对应指标要点</th><th>对应湖南场景</th><th>关键指标（节选）</th></tr></thead><tbody><tr><td>基本公共服务设施</td><td>综合站、幼儿园、托儿所、老年站、卫生站</td><td>老少皆宜</td><td>综合站<span class="hl-cyan">≥800</span>㎡、幼儿园<span class="hl-cyan">≥6</span>班、养老<span class="hl-cyan">≥350</span>㎡</td></tr><tr><td>便民商业服务设施</td><td>超市、快递、社区食堂</td><td>生活便利</td><td>超市<span class="hl-cyan">≥300</span>㎡、快递格口1—1.3倍</td></tr><tr><td>市政配套基础设施</td><td>停车、慢行、无障碍、智慧化</td><td>智慧智能、安全韧性</td><td>停车<span class="hl-cyan">≥1</span>车位/户、绿色出行<span class="hl-cyan">≥75%</span></td></tr><tr><td>公共活动空间</td><td>活动场地、运动场地、绿地</td><td>环境舒适</td><td>运动场<span class="hl-cyan">≥800</span>㎡、绿地率<span class="hl-cyan">≥30%</span></td></tr><tr><td>物业管理全覆盖</td><td>物业覆盖率<span class="hl-cyan">100%</span></td><td>便民惠民</td><td>物业全覆盖</td></tr><tr><td>社区管理机制</td><td>机制健全、多方参与</td><td>共享创新</td><td>共建共治共享</td></tr></tbody></table></div>
+<p><strong>口径关系</strong>：<strong>国家标准为底数基准（"不低于"底线），湖南标准在其上做增量加码</strong>。实操以湖南标准为直接执行口径，无需逐项再对照国家版核查；湘国逐项差异表见 5.2。</p>
+<h3>5.2 湖南标准与国家标准的关系及差异对比</h3>
+<p><strong>一句话结论</strong>：<strong>湖南标准＝国家标准＋增量加码</strong>。国家《完整居住社区建设标准（试行）》给出的是<strong>六大建设项、20项指标</strong>的"通用底数"；湖南《绿色完整居住社区建设指南》在其上扩展为<strong>八大方面、31项要求</strong>（长沙落地进一步细化为 <strong>8大类33项建设内容、149项指标</strong>），既覆盖国家标准又抬高要求。所以<strong>执行湖南项目，以湖南标准为直接基准，国家标准仅作"底线不破"的兜底核查</strong>。</p>
+<p><strong>体系对应关系</strong>：</p>
+<div class="table-wrap"><table><thead><tr><th>维度</th><th>国家标准（建科规〔2020〕7号）</th><th>湖南标准（湘建设函〔2023〕41号）</th><th>差异性质</th></tr></thead><tbody><tr><td>文件定位</td><td>全国通用"试行标准"，定底线</td><td>省级"建设指南"，在国标上做增量</td><td>湖南=国标的省级落地+加码</td></tr><tr><td>建设项维度</td><td><strong>6大建设项</strong>（基本公共服务/便民商业/市政配套/公共活动空间/物业管理/社区管理机制）</td><td><strong>8大方面</strong>（在国标6项基础上，<strong>拆分"绿色低碳"、"特色风貌"为独立方面</strong>）</td><td>湖南<strong>扩展+强化绿色、风貌</strong></td></tr><tr><td>指标数量</td><td><strong>20项</strong>指标</td><td><strong>31项</strong>要求（长沙细化<strong>149项</strong>）</td><td>湖南<strong>指标颗粒更细</strong></td></tr><tr><td>分级</td><td>无明确分级</td><td><strong>AA型/AAA型</strong>两级（约束76+引导66+特色7）</td><td>湖南<strong>新增分级评价</strong></td></tr><tr><td>组织抓手</td><td>按建设项组织</td><td><strong>八大生活场景</strong>组织（生活便利/老少皆宜/智慧智能/共享创新/资源节约/环境舒适/便民惠民/安全韧性）</td><td>湖南<strong>新增场景抓手</strong></td></tr><tr><td>绿色低碳</td><td>一般性要求</td><td><strong>更严加码</strong>：可再生能源<span class="hl-cyan">>1.5%</span>、非传统水源<span class="hl-cyan">≥3%</span>、径流控制<span class="hl-cyan">≥70%</span>、面源污染<span class="hl-cyan">≥50%</span>等</td><td>湖南<strong>量化加严</strong></td></tr></tbody></table></div>
+<p><strong>"湖南到底加码了哪些"逐项对照（本章各节的判定基准）</strong>：</p>
+<div class="table-wrap"><table><thead><tr><th>指标</th><th>国家标准底线</th><th>湖南达标线</th><th>湖南是否加码</th></tr></thead><tbody><tr><td>社区人口规模</td><td>0.5—1.2万人</td><td>0.5—1.2万人</td><td>一致</td></tr><tr><td>步行到达公共服务</td><td>步行5—10分钟</td><td>步行5—10分钟</td><td>一致</td></tr><tr><td>社区综合服务站</td><td>建设社区综合服务站</td><td><strong><span class="hl-cyan">≥800</span>㎡</strong>（明确量化）</td><td>加码（明确面积）</td></tr><tr><td>幼儿园</td><td>配建幼儿园</td><td><strong><span class="hl-cyan">≥6</span>班、建面<span class="hl-cyan">≥2200</span>㎡、用地<span class="hl-cyan">≥3500</span>㎡</strong></td><td>加码（明确规模）</td></tr><tr><td>老年人日间照料中心</td><td>设置养老服务站</td><td><strong><span class="hl-cyan">≥350</span>㎡</strong>、新建小区人均<span class="hl-cyan">≥0.1</span>㎡</td><td>加码（明确面积）</td></tr><tr><td>快递末端站</td><td>设置快递设施</td><td><strong>格口=日均投递量1—1.3倍、末端站<span class="hl-cyan">≥15</span>㎡</strong></td><td>加码（明确量化）</td></tr><tr><td>机动车停车</td><td>配建停车位</td><td><strong><span class="hl-cyan">≥1</span>车位/户、<span class="hl-cyan">100%</span>充电设施或预留</strong></td><td>加码（明确量化）</td></tr><tr><td>绿色出行</td><td>绿色出行方式</td><td><strong><span class="hl-cyan">≥75%</span></strong></td><td>加码（明确比例）</td></tr><tr><td>无障碍</td><td>无障碍改造</td><td><strong><span class="hl-cyan">100%</span></strong></td><td>加码（明确比例）</td></tr><tr><td>可再生能源</td><td>鼓励利用</td><td><strong>占比<span class="hl-cyan">>1.5%</span></strong></td><td>加码（明确比例）</td></tr><tr><td>径流总量控制</td><td>海绵理念</td><td><strong><span class="hl-cyan">≥70%</span></strong></td><td>加码（明确比例）</td></tr><tr><td>垃圾分类</td><td>推行分类</td><td><strong>参与度<span class="hl-cyan">≥90%</span>、收集率<span class="hl-cyan">≥65%</span></strong></td><td>加码（明确比例）</td></tr></tbody></table></div>
+<blockquote class=""><strong>实操提醒</strong>：上表是<strong>湘国差异的判定基准</strong>。做湖南申报时，每一格的"达标线"以<strong>湖南达标线</strong>列为准；国家标准列仅用于向评审方说明"为什么湖南要求更高"以及跨省对标时使用。</blockquote>
+<h3>5.3 社区规模与分类</h3>
+<blockquote class=""><strong>标准来源</strong>：本节为湘国一致项，湖南与国家标准口径相同；执行以湖南《建设指南》（湘建设函〔2023〕41号）为准。</blockquote>
+<p><strong>社区单元规模</strong>：</p>
+<ul><li>以居民<strong>步行5—10分钟</strong>到达幼儿园、老年服务站等基本公共服务设施为原则；</li><li>以城市道路网、自然地形地貌和现状居住小区为基础，与社区居委会管理服务范围对接；</li><li>单个社区人口规模原则上<strong>0.5—1.2万人</strong>；</li><li>若干个相邻社区可统筹规划建设中小学、养老院、社区医院、运动场馆、公园等设施，与<strong>15分钟生活圈</strong>相衔接（15分钟圈一般由城市干路围合，人口5—10万，服务半径800—1000米）。</li></ul>
+<p><strong>湖南分类</strong>：分为<strong>AA型、AAA型</strong>两级，AAA型为更高标准（含约束性、引导性、特色性三类指标）。详细达标清单见 5.10。</p>
+<h3>5.4 基本公共服务设施技术要求</h3>
+<blockquote class=""><strong>标准来源</strong>：本节为<strong>湖南加码项</strong>——国家标准仅要求"建设社区综合服务站/幼儿园/养老服务站"，湖南在《建设指南》中明确了具体量化底线。<strong>执行以湖南指标为准</strong>。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>设施</th><th>达标要求</th><th>备注</th></tr></thead><tbody><tr><td>社区综合服务站</td><td><span class="hl-cyan">≥800</span>㎡</td><td>含社区服务大厅、警务室、居委会办公室、居民活动用房、阅览室、党群活动中心</td></tr><tr><td>幼儿园</td><td><span class="hl-cyan">≥6</span>班、<span class="hl-cyan">≥2200</span>㎡、用地<span class="hl-cyan">≥3500</span>㎡</td><td>为3—6岁幼儿提供普惠性学前教育</td></tr><tr><td>托儿所</td><td><span class="hl-cyan">≥200</span>㎡</td><td>为0—3岁婴幼儿提供托育，可结合综合站、卫生站、住宅楼等建设</td></tr><tr><td>老年人日间照料中心</td><td><span class="hl-cyan">≥350</span>㎡</td><td>新建小区按人均<span class="hl-cyan">≥0.1</span>㎡养老用地设置；与综合服务站统筹建设</td></tr><tr><td>卫生服务站</td><td>达标，结合建筑首层设置</td><td>提供预防、医疗、计生、康复、防疫等服务</td></tr><tr><td>多功能运动场地</td><td><span class="hl-cyan">≥800</span>㎡</td><td>配置5人制足球、篮球、排球、乒乓球等，紧急时可转为应急避难场所</td></tr></tbody></table></div>
+<h3>5.5 便民商业服务设施技术要求</h3>
+<blockquote class=""><strong>标准来源</strong>：本节为<strong>湖南加码项</strong>——国家标准仅要求"设置便民商业网点"，湖南明确了量化底线（超市面积、快递格口等）。<strong>执行以湖南指标为准</strong>。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>设施</th><th>达标要求</th><th>备注</th></tr></thead><tbody><tr><td>综合超市</td><td><span class="hl-cyan">≥300</span>㎡</td><td>提供蔬菜、水果、生鲜、日用品销售；受场地约束的既有社区可建2—3个50—100㎡便利店</td></tr><tr><td>快递末端综合服务站</td><td><span class="hl-cyan">≥15</span>㎡</td><td>智能信包箱、智能快递箱，格口=社区日均投递量1—1.3倍</td></tr><tr><td>其他便民商业网点</td><td>健全</td><td>理发店、洗衣店、药店、维修点、家政服务网点、餐饮店、社区食堂等</td></tr></tbody></table></div>
+<h3>5.6 市政配套基础设施技术要求</h3>
+<blockquote class=""><strong>标准来源</strong>：本节为<strong>湖南加码项</strong>——国家标准为方向性要求，湖南明确了量化底线（停车<span class="hl-cyan">≥1</span>车位/户、绿色出行<span class="hl-cyan">≥75%</span>、无障碍<span class="hl-cyan">100%</span>等）。<strong>执行以湖南指标为准</strong>。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>项目</th><th>达标要求</th><th>备注</th></tr></thead><tbody><tr><td>机动车停车位</td><td><span class="hl-cyan">≥1</span>车位/户，<span class="hl-cyan">100%</span>充电设施或预留</td><td>新建居住小区硬性要求</td></tr><tr><td>绿色出行比例</td><td><span class="hl-cyan">≥75%</span></td><td>慢行系统连续贯通、安全便捷</td></tr><tr><td>无障碍建设率</td><td><span class="hl-cyan">100%</span></td><td>全龄友好底线</td></tr><tr><td>智慧化</td><td>5G进社区、光纤入户、多网融合</td><td>网络覆盖主要公共活动区，社区智能安防</td></tr><tr><td>排水防涝</td><td>内涝点24小时排空<span class="hl-cyan">100%</span>、雨污混错接清零</td><td>优先实施排水防涝改造</td></tr><tr><td>垃圾收集</td><td>分类参与度<span class="hl-cyan">≥90%</span>、收集率<span class="hl-cyan">≥65%</span></td><td>收集站用地<span class="hl-cyan">≥120</span>㎡，约300户设一个投放厢房</td></tr></tbody></table></div>
+<h3>5.7 公共活动空间技术要求</h3>
+<blockquote class=""><strong>标准来源</strong>：本节为<strong>湖南加码项</strong>——国家标准为方向性要求，湖南明确了量化底线（活动场地、运动场、绿地率等）。<strong>执行以湖南指标为准</strong>。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>项目</th><th>达标要求</th></tr></thead><tbody><tr><td>活动场地</td><td><span class="hl-cyan">≥150</span>㎡</td></tr><tr><td>运动场地</td><td><span class="hl-cyan">≥800</span>㎡，可兼作应急避难</td></tr><tr><td>绿地率</td><td><span class="hl-cyan">≥30%</span></td></tr><tr><td>乡土植物</td><td><span class="hl-cyan">≥70%</span></td></tr><tr><td>人均公共绿地</td><td><span class="hl-cyan">≥1</span>㎡</td></tr></tbody></table></div>
+<h3>5.8 绿色低碳技术要求</h3>
+<blockquote class=""><strong>标准来源</strong>：本节为<strong>湖南核心加码项</strong>——绿色低碳是湖南在国家标准之上最突出的增量（国家标准仅"鼓励利用可再生能源、推行海绵理念"等方向性表述，湖南全部量化加严）。<strong>执行以湖南指标为准</strong>。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>绿色低碳指标</th><th>达标要求</th></tr></thead><tbody><tr><td>可再生能源占比</td><td><span class="hl-cyan">>1.5%</span></td></tr><tr><td>非传统水源</td><td><span class="hl-cyan">≥3%</span></td></tr><tr><td>径流总量控制率</td><td><span class="hl-cyan">≥70%</span></td></tr><tr><td>面源污染控制</td><td><span class="hl-cyan">≥50%</span></td></tr><tr><td>建筑节能</td><td>按湖南居住建筑节能设计标准，降低运行能耗</td></tr></tbody></table></div>
+<h3>5.9 八大生活场景·设施配置与指标对照表</h3>
+<blockquote class="">依据《长沙市"绿色完整"居住社区创建实施方案》（长政办发〔2022〕58号）与雨花区落地口径（雨政办发〔2023〕20号），八大场景分四组，每组对应明确的设施与量化指标。编制申报材料或做社区自体检时，逐场景对照下表"差什么、差多少、放哪补"，生成补短板清单。</blockquote>
+<div class="table-wrap"><table><thead><tr><th>场景组</th><th>生活场景</th><th>应配设施（具体到点）</th><th>量化指标（达标线）</th></tr></thead><tbody><tr><td><strong>一、宜居友好</strong></td><td><strong>生活便利</strong></td><td>供水、排水、供电、道路、供气、通信等市政设施完好运行；停车位、停车场、非机动车停放棚（架）；新能源充电桩、智能充电站</td><td>步行10—15分钟达各类公共服务；绿色出行比例<span class="hl-cyan">≥75%</span>；停车<span class="hl-cyan">≥1</span>车位/户、<span class="hl-cyan">100%</span>充电设施或预留</td></tr><tr><td></td><td><strong>老少皆宜</strong></td><td>幼儿园、托儿所、居家养老服务站（老年人日间照料中心）、社区卫生服务站、社区综合服务站、社区游园/小微绿地/"口袋公园"、无障碍设施、健身场地</td><td>步行5—10分钟达基本公共服务；幼儿园<span class="hl-cyan">≥6</span>班/<span class="hl-cyan">≥2200</span>㎡/用地<span class="hl-cyan">≥3500</span>㎡；日照中心<span class="hl-cyan">≥350</span>㎡；托儿所<span class="hl-cyan">≥200</span>㎡；每千人口婴幼儿托位4.5个；无障碍建设率<span class="hl-cyan">100%</span>；人均公共绿地<span class="hl-cyan">≥1</span>㎡</td></tr><tr><td><strong>二、智慧未来</strong></td><td><strong>智慧智能</strong></td><td>智能道闸、智能门禁、智能快递柜、智能车棚、智能充电桩、公共区域视频监控、智能安防设备、社区智慧化平台</td><td>5G进社区、网络覆盖主要公共活动区；依托"雪亮工程"实现安防数据联网汇聚；居民办事基本不出社区</td></tr><tr><td></td><td><strong>共享创新</strong></td><td>议事平台、党群服务中心、"互联网+共建共治共享"渠道、社区众创空间、设计师/工程师驻社区机制</td><td>形成"党建引领、居民参与、民主协商、科技支撑"治理格局；设计师、工程师进社区常态化</td></tr><tr><td><strong>三、绿色宜居</strong></td><td><strong>资源节约</strong></td><td>绿色建筑、装配式建筑、近零能耗建筑；可再生能源利用设施；海绵设施（生物滞留、屋顶绿化、植被浅沟、雨水利用）</td><td>可再生能源占比<span class="hl-cyan">>1.5%</span>；非传统水源<span class="hl-cyan">≥3%</span>；径流总量控制率<span class="hl-cyan">≥70%</span>；面源污染控制<span class="hl-cyan">≥50%</span>；既有建筑节能改造降低运行能耗</td></tr><tr><td></td><td><strong>环境舒适</strong></td><td>宅间绿地、公共活动场地、立体景观绿化、垃圾分类设施（投放厢房、收集站）、垃圾密闭收运</td><td>绿地率<span class="hl-cyan">≥30%</span>；人均公共绿地<span class="hl-cyan">≥1</span>㎡；公共活动场地<span class="hl-cyan">≥150</span>㎡；垃圾分类参与度<span class="hl-cyan">≥90%</span>、收集率<span class="hl-cyan">≥65%</span>；约300户设1投放厢房</td></tr><tr><td><strong>四、美好家园</strong></td><td><strong>便民惠民</strong></td><td>便利店、菜店、快递取寄点、家政服务网点、社区食堂、理发店、洗衣店、24小时药店、维修点、银行网点、社区文化活动站、图书馆</td><td>综合超市<span class="hl-cyan">≥300</span>㎡（受场地约束可建2—3个50—100㎡便利店）；快递格口=日均投递量1—1.3倍、末端站<span class="hl-cyan">≥15</span>㎡；物业覆盖<span class="hl-cyan">100%</span></td></tr><tr><td></td><td><strong>安全韧性</strong></td><td>社区消防预警预防体系、应急机制、安防全覆盖、无障碍通道、应急避难场所（运动场兼用）</td><td>消防通道畅通、消防设施完好、应急反应迅速；安防全覆盖；运动场地<span class="hl-cyan">≥800</span>㎡兼作应急避难</td></tr></tbody></table></div>
+<blockquote class=""><strong>编制提示</strong>：上表"应配设施"列＝申报书里的"现状盘点对象"；"量化指标"列＝申报书里的"达标判定依据"。对照上表逐项勾选，有缺即入补短板清单，是编制社区体检报告和创建方案最直接的操作路径。</blockquote>
+<h3>5.10 AA型与AAA型达标清单（含约束/引导/特色指标）</h3>
+<blockquote class=""><strong>AA与AAA的判定</strong>：<strong>AA＝约束性指标全部达标</strong>（补齐硬件底线，保障基本生活）；<strong>AAA＝约束性＋引导性＋特色性指标全部达标</strong>（在补齐基础上实现设施共享、功能复合、空间融合，满足更高层次需求）。<strong>认定路径是先创AA、再从达标AA中优选评定AAA</strong>，AAA不是另起炉灶的独立通道。</blockquote>
+<p>湖南创建标准细化到<strong>8大类33项建设内容149项指标</strong>（长沙落地口径，含约束性指标76项、引导性指标66项、特色性指标7项）。具体到申报时的操作判断：</p>
+<div class="table-wrap"><table><thead><tr><th>指标类型</th><th>含义（要解决什么问题）</th><th>达标要求</th><th>对应等级</th></tr></thead><tbody><tr><td><strong>约束性指标</strong>（76项）</td><td>一刻钟步行范围内补齐公共服务、市政基础、便民商业等<strong>硬件设施</strong>，是"有没有"的底线</td><td>全部达标，缺一不可</td><td><strong>AA</strong></td></tr><tr><td><strong>引导性指标</strong>（66项）</td><td>整合资源实现<strong>设施共享、功能复合、空间融合</strong>，是"好不好"的提升</td><td>在约束性达标基础上逐项达成</td><td><strong>AAA</strong></td></tr><tr><td><strong>特色性指标</strong>（7项）</td><td>结合社区自身人文、地域特点的<strong>品牌文化、特色场景</strong>，是"优不优"的加分</td><td>在约束＋引导基础上达成</td><td><strong>AAA</strong></td></tr></tbody></table></div>
+<p><strong>分级实操对照（编申报材料时怎么判定目标等级）</strong>：</p>
+<ol><li><strong>先定目标等级</strong>：新申报社区一般先奔<strong>AA</strong>（约束性76项硬件达标）；已在建且有基础、或争创示范的社区奔<strong>AAA</strong>（约束76＋引导66＋特色7全部达标）。</li><li><strong>AA必达硬件清单</strong>（约束性，对应上表"宜居友好"场景）：综合站、幼儿园、托儿所、日照中心、卫生站、运动场、超市/便利店、快递站、停车充电、无障碍、绿地、垃圾分类、物业全覆盖、消防应急——<strong>以上任意一项缺位，AA即不达标</strong>。</li><li><strong>AAA的"共享、复合、融合"加分项</strong>（引导性+特色性，对应"智慧未来、绿色宜居、美好家园"三组场景）：多社区统筹设施共享、医养结合、社区食堂＋助餐、口袋公园串联、智慧安防平台、社区文化品牌、党建引领治理、社区社会组织培育、适老适幼细节——<strong>这是AA与AAA拉开差距的地方</strong>。</li><li><strong>数据来源</strong>：约束/引导/特色具体指标项，以属地住建部门下发的《绿色完整居住社区创建标准》指标表为准（长沙已细化至149项）；编制时逐项填报"现状值—目标值—缺口—对策"。</li></ol>
+<blockquote class=""><strong>对照省级与市级口径</strong>：省级《建设指南》为"8大方面31项"（基本口径），长沙落地细化为"8大类33项建设内容149项指标"（操作口径）。<strong>编制申报材料以市级149项指标表为直接依据</strong>，省级31项作为兜底核对。</blockquote>
+<h3>5.11 物业管理与社区管理机制要求</h3>
+<ul><li><strong>物业管理</strong>：实现物业管理全覆盖（覆盖率达<span class="hl-cyan">100%</span>），引入专业物业或建立有效管理机制；</li><li><strong>社区管理机制</strong>：健全社区管理、多方参与机制，推动共建共治共享；开展"美好环境与幸福生活共同缔造"活动，发动居民决策共谋、发展共建、建设共管、效果共评、成果共享。</li></ul>
+<hr>
+<div class="pagenav"><a href="chapter4.html">← 上一章</a><a href="chapter6.html" class="next">下一章 →</a></div>
+</article></div></body></html>

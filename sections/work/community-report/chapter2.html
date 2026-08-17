@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第2章 政策依据与标准体系</title><style>
+:root{
+  --bg0:#070d1a;          /* 页面外背景 */
+  --bg1:#0b1424;          /* 卡片/主内容背景 */
+  --bg2:#0f1b30;          /* 表格表头/斑马 */
+  --bg3:#14213a;          /* 引用/高亮块底 */
+  --line:#1e2f4d;         /* 分隔线 */
+  --text:#dbe4f0;         /* 正文亮字 */
+  --text-dim:#8fa3bd;     /* 次要文字 */
+  --cyan:#22d3ee;         /* 主强调 */
+  --purple:#a78bfa;       /* 次强调 */
+  --gold:#f5c76a;         /* 金/警示 */
+  --red:#f87171;          /* 警示红 */
+  --green:#34d399;        /* 达标绿 */
+  --ink:#071020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(34,211,238,.08), transparent 60%),
+    radial-gradient(1000px 500px at 85% 0%, rgba(167,139,250,.08), transparent 55%),
+    var(--bg0);
+  color:var(--text);
+  line-height:1.85;
+  min-height:100vh;
+}
+.mag-shell{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+.magazine-page{
+  background:linear-gradient(180deg,#0d1830 0%,var(--bg1) 100%);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:48px 56px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  position:relative;
+  overflow:hidden;
+}
+.magazine-page::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));
+}
+/* ===== 顶部导航条 ===== */
+.topnav{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.brand{font-size:.8rem;letter-spacing:.18em;color:var(--cyan);font-weight:600}
+.brand b{color:var(--text)}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap}
+.topnav a{
+  color:var(--text-dim);text-decoration:none;font-size:.78rem;
+  padding:4px 10px;border:1px solid var(--line);border-radius:20px;transition:.2s;
+}
+.topnav a:hover,.topnav a.cur{color:#0a1220;background:var(--cyan);border-color:var(--cyan);font-weight:600}
+/* ===== 章节头部 ===== */
+.ch-head{margin-bottom:30px}
+.ch-tag{
+  display:inline-block;padding:3px 12px;border-radius:20px;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;border:1px solid var(--cyan);color:var(--cyan);background:rgba(34,211,238,.08);
+  margin-bottom:14px;
+}
+h1{font-size:2rem;color:#fff;line-height:1.3;font-weight:800;letter-spacing:.01em}
+.subtitle{color:var(--text-dim);font-size:1.02rem;margin-top:10px}
+/* ===== 正文标题层级 ===== */
+h2{font-size:1.45rem;color:#fff;margin:34px 0 14px;padding-left:14px;border-left:4px solid var(--cyan);font-weight:700}
+h3{font-size:1.15rem;color:var(--cyan);margin:24px 0 12px;font-weight:700}
+h4{font-size:1rem;color:var(--purple);margin:20px 0 10px;font-weight:700}
+p{margin:12px 0;color:var(--text)}
+strong{color:#fff;font-weight:700}
+/* 指标数值高亮 */
+.hl-cyan{color:var(--cyan);font-weight:700}
+.hl-purple{color:var(--purple);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+/* ===== 引用块 ===== */
+blockquote{
+  background:var(--bg3);border-left:4px solid var(--purple);
+  padding:14px 20px;margin:16px 0;border-radius:0 10px 10px 0;color:var(--text-dim);
+}
+blockquote p{margin:4px 0}
+blockquote a{color:var(--cyan)}
+/* 官方链接引用块特殊处理 */
+.ref-block{background:rgba(167,139,250,.07)}
+.ref-block::before{content:'🔗 官方链接';display:block;font-size:.72rem;letter-spacing:.1em;color:var(--purple);font-weight:700;margin-bottom:8px}
+/* ===== 表格 ===== */
+.table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px}
+thead th{
+  background:linear-gradient(180deg,#1a2a4a,#152239);color:#fff;text-align:left;
+  padding:12px 14px;font-weight:700;border-bottom:2px solid var(--cyan);
+  white-space:nowrap;letter-spacing:.02em;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+tbody tr:nth-child(even){background:rgba(15,27,48,.5)}
+tbody tr:hover{background:rgba(34,211,238,.06)}
+/* ===== 列表 ===== */
+ul,ol{margin:10px 0 10px 24px}
+li{margin:7px 0;color:var(--text)}
+li::marker{color:var(--cyan);font-weight:700}
+/* ===== 链接 ===== */
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(34,211,238,.4)}
+a:hover{color:#fff;border-bottom-color:var(--cyan)}
+/* ===== 分隔线 ===== */
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+/* ===== 页脚导航 ===== */
+.pagenav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.pagenav a{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;font-weight:600;
+  border:1px solid var(--line);color:var(--text-dim);transition:.2s;font-size:.9rem;
+}
+.pagenav a:hover{color:#0a1220;background:var(--cyan);border-color:var(--cyan)}
+.pagenav a.next{margin-left:auto}
+/* ===== 封面 ===== */
+.cover-hero{text-align:center;padding:70px 10px 50px}
+.cover-badge{display:inline-block;padding:5px 18px;border:1px solid var(--gold);color:var(--gold);border-radius:30px;font-size:.78rem;letter-spacing:.22em;margin-bottom:26px;font-weight:600}
+.cover-title{font-size:2.6rem;line-height:1.25;color:#fff;font-weight:900;letter-spacing:.02em}
+.cover-sub{color:var(--text-dim);font-size:1.15rem;margin-top:18px;letter-spacing:.06em}
+.cover-line{width:120px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));margin:30px auto;border-radius:2px}
+.cover-meta{color:var(--text-dim);font-size:.9rem}
+.toc{margin-top:46px;text-align:left}
+.toc h2{text-align:center;border:none;padding:0;font-size:1.3rem}
+.toc-list{list-style:none;margin:22px 0 0;padding:0}
+.toc-list li{margin:0 0 10px}
+.toc-list a{
+  display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--line);
+  border-radius:12px;color:var(--text);text-decoration:none;transition:.2s;background:rgba(15,27,48,.35);
+}
+.toc-list a:hover{border-color:var(--cyan);background:rgba(34,211,238,.06);transform:translateX(4px)}
+.toc-num{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:700;font-size:1rem;min-width:52px}
+.toc-title{font-weight:700;color:#fff}
+.toc-desc{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+/* ===== 智能分页控制 ===== */
+@media print{
+  h1,h2,h3,h4{page-break-after:avoid;break-after:avoid}
+  blockquote,table,.table-wrap,figure,.ref-block{page-break-inside:avoid;break-inside:avoid}
+  ul,ol{page-break-inside:avoid;break-inside:avoid}
+  hr{page-break-after:avoid;break-after:avoid}
+  p{orphans:3;widows:3}
+  .magazine-page{box-shadow:none;border:none}
+}
+/* ===== 响应式 ===== */
+@media (max-width:720px){
+  .magazine-page{padding:28px 20px}
+  .cover-title{font-size:1.9rem}
+  h1{font-size:1.5rem}
+  .table-wrap{font-size:.84rem}
+  .pagenav{flex-direction:column}
+  .pagenav a.next{margin-left:0}
+}
+</style></head>
+<body><div class="mag-shell"><article class="magazine-page">
+<div class="topnav">
+  <div class="brand">完整社区建设<b> · 策划与实施研究</b></div>
+  <div class="topnav-links">
+    <a href="index.html">目录</a>
+    <a href="chapter1.html">壹</a><a href="chapter2.html">贰</a><a href="chapter3.html">叁</a>
+    <a href="chapter4.html">肆</a><a href="chapter5.html">伍</a><a href="chapter6.html">陆</a>
+    <a href="chapter7.html">柒</a>
+  </div>
+</div>
+<div class="ch-head"><div class="ch-tag">第2章</div><h1>第2章 政策依据与标准体系</h1></div>
+<blockquote class="ref-block">本章梳理完整社区建设的政策依据，分国家层面、湖南层面两部分，所有文件标注官方链接。</blockquote>
+<h3>2.1 国家层面政策与标准</h3>
+<p>国家层面形成了"<strong>意见统领—标准定型—指南指导—试点先行</strong>"的政策链条：</p>
+<div class="table-wrap"><table><thead><tr><th>文件</th><th>文号/日期</th><th>定位与作用</th></tr></thead><tbody><tr><td>《关于持续推进城市更新行动的意见》</td><td>中办、国办，2025-05-02</td><td>顶层统领，将完整社区建设列为城市更新八大任务第三项</td></tr><tr><td>《完整居住社区建设标准（试行）》</td><td>住建部等13部门，2020-08-18</td><td>确立完整社区<strong>20项建设指标</strong>，是技术口径的基准</td></tr><tr><td>《完整居住社区建设指南》</td><td>建办科〔2021〕55号，2021-12-17</td><td>明确完整社区内涵、基本要求与建设指引，附典型案例</td></tr><tr><td>完整社区建设试点通知</td><td>建办科〔2022〕48号，2022-10-09</td><td>部署试点，聚焦"一老一小"设施建设</td></tr><tr><td>《城市更新规划编制导则》</td><td>建办科〔2025〕46号，2025-07-17</td><td>明确城市更新"专项规划—片区策划—项目实施方案"规划实施体系及片区策划内容与成果</td></tr></tbody></table></div>
+<h4>政策要点解读</h4>
+<ul><li><strong>20项建设指标</strong>：涵盖六大建设项，其中基本公共服务设施5项（综合服务站、幼儿园、托儿所、老年服务站、卫生服务站）、便民商业设施3项、市政配套若干项、公共活动空间与物业管理、社区管理机制等。这是全国统一的"最低达标线"。</li><li><strong>试点经验</strong>：106个试点社区为期2年，要求"先体检后建设、无体检不建设"，摸清短板、制定项目清单、补齐养老托育健身停车充电等设施短板，推进适老化适儿化改造。</li><li><strong>城市更新规划编制导则</strong>：将完整社区建设纳入"好社区"层面，建立"专项规划—片区策划—项目实施方案"三级规划实施体系——完整社区策划成果属于"片区策划"层，向上落实专项规划、向下牵引项目实施方案、横向衔接详细规划。</li></ul>
+<blockquote class="ref-block"><strong>官方链接</strong> - 城市更新行动意见：<a href="https://www.gov.cn/zhengce/202505/content_7023880.htm" target="_blank" rel="noopener">https://www.gov.cn/zhengce/202505/content_7023880.htm</a> - 完整社区建设标准（试行）：<a href="https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2020/art_17339_246923.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2020/art_17339_246923.html</a> - 完整居住社区建设指南：<a href="https://www.mohurd.gov.cn/tsgb/wjk/art/2022/art_1740222871.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/tsgb/wjk/art/2022/art_1740222871.html</a> - 完整社区试点通知：<a href="https://www.gov.cn/zhengce/zhengceku/2022-11/01/content_5723231.htm" target="_blank" rel="noopener">https://www.gov.cn/zhengce/zhengceku/2022-11/01/content_5723231.htm</a> - 106个试点名单：<a href="https://www.mohurd.gov.cn/tsgb/wjk/art/2023/art_1521335532.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/tsgb/wjk/art/2023/art_1521335532.html</a> - 城市更新规划编制导则：<a href="https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2025/art_c2f8e25bece84825bd3d469ed24e6f35.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2025/art_c2f8e25bece84825bd3d469ed24e6f35.html</a></blockquote>
+<h3>2.2 湖南省落地政策与标准</h3>
+<p>湖南省将国家"完整社区"升级为"<strong>绿色完整居住社区</strong>"，在国家标准之上叠加了绿色低碳、AA/AAA分级、八大生活场景等湖南特色要求，形成一套更严密的落地口径。<strong>做湖南项目，核心依据就是下表的省级、市级、区级三级文件。</strong></p>
+<div class="table-wrap"><table><thead><tr><th>文件</th><th>文号/日期</th><th>定位与作用</th></tr></thead><tbody><tr><td>《湖南省绿色完整居住社区创建行动方案》</td><td>湘建设〔2023〕61号，18部门</td><td>省级创建行动的总纲，明确创建内涵、目标、重点任务、保障机制</td></tr><tr><td>《湖南省绿色完整居住社区建设指南》</td><td>湘建设函〔2023〕41号</td><td>省级技术指南，从8大方面31项规范建设要求与量化指标</td></tr><tr><td>《长沙市"绿色完整"居住社区创建实施方案（2022—2026年）》</td><td>长政办发〔2022〕58号</td><td>市级落地口径，确立AA型/AAA型两级分类、八大生活场景</td></tr><tr><td>雨花区创建实施方案（2023—2025年）</td><td>雨政办发〔2023〕20号</td><td>区级落地，聚焦"一老一小"友好、绿色低碳达标</td></tr></tbody></table></div>
+<h4>湖南创建要求的具体内容</h4>
+<p><strong>（1）创建内涵（什么是"绿色完整"）</strong></p>
+<p>省住建厅等18部门《创建行动方案》将绿色完整居住社区定义为：将绿色发展、绿色生活理念贯穿居住社区<strong>设计、建设、管理和服务全过程</strong>，实现在居民适宜步行范围内——基本公共服务设施、便民商业服务设施和市政配套基础设施完善，活动空间、公共安全保障、绿色建造、特色风貌、社区管理水平和共建共治共享管理机制不断提升，绿色消费、绿色出行、绿色居住等绿色生活方式成为人们自觉行动的居住社区。要点在"<strong>绿色</strong>"与"<strong>完整</strong>"并重。湖南的规模划定、AA/AAA分级、八大场景等技术性要求详见第五章。</p>
+<p><strong>（2）创建目标（分年度量化）</strong></p>
+<div class="table-wrap"><table><thead><tr><th>年度</th><th>创建目标</th></tr></thead><tbody><tr><td>2023</td><td>每个市州开展<strong>3—5个</strong>创建试点（其中结合城镇老旧小区改造试点<strong>不少于2个</strong>），全省形成<strong>30个左右</strong>示范</td></tr><tr><td>2024</td><td>全省约<strong>160个</strong>绿色完整居住社区完成创建并达标，其中长沙<strong>不少于30个</strong>、其他地级市每市<strong>不少于10个</strong></td></tr><tr><td>2025</td><td>确保城市（地级市、县级市）建成区绿色完整居住社区覆盖率<strong>达<span class="hl-cyan">50%</span>以上</strong></td></tr><tr><td>2026</td><td>（长沙口径）力争<strong>121个</strong>城市居住社区"生活圈"达标（AA型121个，从中优选评定AAA型49个）</td></tr></tbody></table></div>
+<p><strong>（3）重点任务（创建做什么）</strong></p>
+<ol><li><strong>完善基本公共服务设施</strong>：统筹利用公有房屋、社区办公用房、综合服务设施等存量资源，重点补齐"<strong>一老一小</strong>"养老托育设施短板，统筹建设共享幼儿园、托儿所、老年人日间照料中心、社区卫生服务站等。</li><li><strong>健全便民商业服务设施</strong>：通过补建、购置、置换、租赁、改造等方式，因地制宜建设便利店、菜店、快递取寄点、家政服务网点、社区食堂等。</li><li><strong>完善市政配套基础设施</strong>：推进机动车停车、充电、既有建筑节能改造等。</li><li><strong>保障公共活动空间</strong>：加强公共活动场地和公共绿地规划建设管理，鼓励在社区公园、闲置空地、楼群间布局健身场地设施；推进适幼化、适老化改造，因地制宜配备休憩、文化、康体设施。</li><li><strong>推进社区智能安防</strong>：建设社区智能安防设施系统，确保公共场所安防全覆盖，建立完善的社区消防预警预防体系及应急机制。</li><li><strong>绿色低碳加码</strong>：绿地率、可再生能源、非传统水源、径流总量控制率、垃圾分类等指标从紧设置。</li></ol>
+<p>各项任务的<strong>具体技术指标与达标数值，统一以第五章湖南省标准为准</strong>（见 5.3—5.8 各节）。</p>
+<p><strong>（4）责任机制与实施路径</strong></p>
+<ul><li><strong>省级</strong>：省住建厅等18部门统筹，定目标、定标准、抓考核；</li><li><strong>市级（长沙口径）</strong>："<strong>市级引导、区县负责、街道落实、社区实施、居民参与</strong>"五级责任体系；</li><li><strong>工作机制</strong>：创新"<strong>圈长</strong>"制、设计师进社区等机制，形成"<strong>摸底数、建机制、编规划、推更新、问实效、促宜居</strong>"工作闭环；通过约束性指标引导补硬件、引导性和特色性指标鼓励促共享；</li><li><strong>实施路径</strong>：统筹老旧小区改造、既有小区改造、重点片区城市更新、"街区微改造"、棚户区改造、城中村改造等各类更新项目，以"多改合一"方式一体推进。</li></ul>
+<p><strong>（5）保障措施</strong></p>
+<p>一是<strong>强化组织</strong>（市级引导、区县负责、街道落实、社区实施、居民参与）；二是<strong>完善配套政策</strong>（出台创建工作奖补方案、实施"补短板"行动、发布"促共享"文件等）；三是<strong>加强要素保障</strong>（向上争取政策资金，市、区两级财政加大投入，整合各条线资金，盘活整合现有设施）。</p>
+<blockquote class="ref-block"><strong>官方链接</strong> - 湖南全面推进绿色完整居住社区创建（湖南省政府门户网站）：<a href="https://www.hunan.gov.cn/hnyw/zwdt/202305/t20230505_29329068.html" target="_blank" rel="noopener">https://www.hunan.gov.cn/hnyw/zwdt/202305/t20230505_29329068.html</a> - 湖南绿色完整居住社区创建行动方案（湖南省住建厅）：<a href="http://zjt.hunan.gov.cn/xxgk/xinxigongkaimulu/tzgg/tzgg2kcsj/202304/t20230428_29326590.html" target="_blank" rel="noopener">http://zjt.hunan.gov.cn/xxgk/xinxigongkaimulu/tzgg/tzgg2kcsj/202304/t20230428_29326590.html</a>（官网原文链接若失效，以省政府门户、红网转载为准） - 湖南绿色完整社区建设指南（红网转载全文）：<a href="https://zfhcxjs.rednet.cn/content/646749/59/12654802.html" target="_blank" rel="noopener">https://zfhcxjs.rednet.cn/content/646749/59/12654802.html</a> - 长沙"绿色完整"居住社区创建实施方案政策解读（长沙市政府）：<a href="https://www.changsha.gov.cn/jdhy/zcjd/202302/t20230209_10987216.html" target="_blank" rel="noopener">https://www.changsha.gov.cn/jdhy/zcjd/202302/t20230209_10987216.html</a> - 雨花区创建实施方案（雨花区政府）：<a href="https://www.yuhua.gov.cn/zwgk97/jcxxgk/ghjh/zxgh/202308/t20230816_11193369.html" target="_blank" rel="noopener">https://www.yuhua.gov.cn/zwgk97/jcxxgk/ghjh/zxgh/202308/t20230816_11193369.html</a></blockquote>
+<hr>
+<div class="pagenav"><a href="chapter1.html">← 上一章</a><a href="chapter3.html" class="next">下一章 →</a></div>
+</article></div></body></html>

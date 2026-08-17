@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第4章 可复用经验与案例</title><style>
+:root{
+  --bg0:#070d1a;          /* 页面外背景 */
+  --bg1:#0b1424;          /* 卡片/主内容背景 */
+  --bg2:#0f1b30;          /* 表格表头/斑马 */
+  --bg3:#14213a;          /* 引用/高亮块底 */
+  --line:#1e2f4d;         /* 分隔线 */
+  --text:#dbe4f0;         /* 正文亮字 */
+  --text-dim:#8fa3bd;     /* 次要文字 */
+  --cyan:#22d3ee;         /* 主强调 */
+  --purple:#a78bfa;       /* 次强调 */
+  --gold:#f5c76a;         /* 金/警示 */
+  --red:#f87171;          /* 警示红 */
+  --green:#34d399;        /* 达标绿 */
+  --ink:#071020;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter','Noto Sans SC','Microsoft YaHei',system-ui,sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(34,211,238,.08), transparent 60%),
+    radial-gradient(1000px 500px at 85% 0%, rgba(167,139,250,.08), transparent 55%),
+    var(--bg0);
+  color:var(--text);
+  line-height:1.85;
+  min-height:100vh;
+}
+.mag-shell{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+.magazine-page{
+  background:linear-gradient(180deg,#0d1830 0%,var(--bg1) 100%);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:48px 56px;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  position:relative;
+  overflow:hidden;
+}
+.magazine-page::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));
+}
+/* ===== 顶部导航条 ===== */
+.topnav{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--line);
+}
+.brand{font-size:.8rem;letter-spacing:.18em;color:var(--cyan);font-weight:600}
+.brand b{color:var(--text)}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap}
+.topnav a{
+  color:var(--text-dim);text-decoration:none;font-size:.78rem;
+  padding:4px 10px;border:1px solid var(--line);border-radius:20px;transition:.2s;
+}
+.topnav a:hover,.topnav a.cur{color:#0a1220;background:var(--cyan);border-color:var(--cyan);font-weight:600}
+/* ===== 章节头部 ===== */
+.ch-head{margin-bottom:30px}
+.ch-tag{
+  display:inline-block;padding:3px 12px;border-radius:20px;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;border:1px solid var(--cyan);color:var(--cyan);background:rgba(34,211,238,.08);
+  margin-bottom:14px;
+}
+h1{font-size:2rem;color:#fff;line-height:1.3;font-weight:800;letter-spacing:.01em}
+.subtitle{color:var(--text-dim);font-size:1.02rem;margin-top:10px}
+/* ===== 正文标题层级 ===== */
+h2{font-size:1.45rem;color:#fff;margin:34px 0 14px;padding-left:14px;border-left:4px solid var(--cyan);font-weight:700}
+h3{font-size:1.15rem;color:var(--cyan);margin:24px 0 12px;font-weight:700}
+h4{font-size:1rem;color:var(--purple);margin:20px 0 10px;font-weight:700}
+p{margin:12px 0;color:var(--text)}
+strong{color:#fff;font-weight:700}
+/* 指标数值高亮 */
+.hl-cyan{color:var(--cyan);font-weight:700}
+.hl-purple{color:var(--purple);font-weight:700}
+.hl-gold{color:var(--gold);font-weight:700}
+.hl-green{color:var(--green);font-weight:700}
+.hl-red{color:var(--red);font-weight:700}
+/* ===== 引用块 ===== */
+blockquote{
+  background:var(--bg3);border-left:4px solid var(--purple);
+  padding:14px 20px;margin:16px 0;border-radius:0 10px 10px 0;color:var(--text-dim);
+}
+blockquote p{margin:4px 0}
+blockquote a{color:var(--cyan)}
+/* 官方链接引用块特殊处理 */
+.ref-block{background:rgba(167,139,250,.07)}
+.ref-block::before{content:'🔗 官方链接';display:block;font-size:.72rem;letter-spacing:.1em;color:var(--purple);font-weight:700;margin-bottom:8px}
+/* ===== 表格 ===== */
+.table-wrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:560px}
+thead th{
+  background:linear-gradient(180deg,#1a2a4a,#152239);color:#fff;text-align:left;
+  padding:12px 14px;font-weight:700;border-bottom:2px solid var(--cyan);
+  white-space:nowrap;letter-spacing:.02em;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+tbody tr:nth-child(even){background:rgba(15,27,48,.5)}
+tbody tr:hover{background:rgba(34,211,238,.06)}
+/* ===== 列表 ===== */
+ul,ol{margin:10px 0 10px 24px}
+li{margin:7px 0;color:var(--text)}
+li::marker{color:var(--cyan);font-weight:700}
+/* ===== 链接 ===== */
+a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(34,211,238,.4)}
+a:hover{color:#fff;border-bottom-color:var(--cyan)}
+/* ===== 分隔线 ===== */
+hr{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:30px 0}
+/* ===== 页脚导航 ===== */
+.pagenav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:40px;padding-top:22px;border-top:1px solid var(--line)}
+.pagenav a{
+  display:inline-block;padding:9px 18px;border-radius:8px;text-decoration:none;font-weight:600;
+  border:1px solid var(--line);color:var(--text-dim);transition:.2s;font-size:.9rem;
+}
+.pagenav a:hover{color:#0a1220;background:var(--cyan);border-color:var(--cyan)}
+.pagenav a.next{margin-left:auto}
+/* ===== 封面 ===== */
+.cover-hero{text-align:center;padding:70px 10px 50px}
+.cover-badge{display:inline-block;padding:5px 18px;border:1px solid var(--gold);color:var(--gold);border-radius:30px;font-size:.78rem;letter-spacing:.22em;margin-bottom:26px;font-weight:600}
+.cover-title{font-size:2.6rem;line-height:1.25;color:#fff;font-weight:900;letter-spacing:.02em}
+.cover-sub{color:var(--text-dim);font-size:1.15rem;margin-top:18px;letter-spacing:.06em}
+.cover-line{width:120px;height:3px;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--gold));margin:30px auto;border-radius:2px}
+.cover-meta{color:var(--text-dim);font-size:.9rem}
+.toc{margin-top:46px;text-align:left}
+.toc h2{text-align:center;border:none;padding:0;font-size:1.3rem}
+.toc-list{list-style:none;margin:22px 0 0;padding:0}
+.toc-list li{margin:0 0 10px}
+.toc-list a{
+  display:flex;align-items:center;gap:16px;padding:15px 18px;border:1px solid var(--line);
+  border-radius:12px;color:var(--text);text-decoration:none;transition:.2s;background:rgba(15,27,48,.35);
+}
+.toc-list a:hover{border-color:var(--cyan);background:rgba(34,211,238,.06);transform:translateX(4px)}
+.toc-num{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-weight:700;font-size:1rem;min-width:52px}
+.toc-title{font-weight:700;color:#fff}
+.toc-desc{font-size:.82rem;color:var(--text-dim);margin-top:2px}
+/* ===== 智能分页控制 ===== */
+@media print{
+  h1,h2,h3,h4{page-break-after:avoid;break-after:avoid}
+  blockquote,table,.table-wrap,figure,.ref-block{page-break-inside:avoid;break-inside:avoid}
+  ul,ol{page-break-inside:avoid;break-inside:avoid}
+  hr{page-break-after:avoid;break-after:avoid}
+  p{orphans:3;widows:3}
+  .magazine-page{box-shadow:none;border:none}
+}
+/* ===== 响应式 ===== */
+@media (max-width:720px){
+  .magazine-page{padding:28px 20px}
+  .cover-title{font-size:1.9rem}
+  h1{font-size:1.5rem}
+  .table-wrap{font-size:.84rem}
+  .pagenav{flex-direction:column}
+  .pagenav a.next{margin-left:0}
+}
+</style></head>
+<body><div class="mag-shell"><article class="magazine-page">
+<div class="topnav">
+  <div class="brand">完整社区建设<b> · 策划与实施研究</b></div>
+  <div class="topnav-links">
+    <a href="index.html">目录</a>
+    <a href="chapter1.html">壹</a><a href="chapter2.html">贰</a><a href="chapter3.html">叁</a>
+    <a href="chapter4.html">肆</a><a href="chapter5.html">伍</a><a href="chapter6.html">陆</a>
+    <a href="chapter7.html">柒</a>
+  </div>
+</div>
+<div class="ch-head"><div class="ch-tag">第4章</div><h1>第4章 可复用经验与案例</h1></div>
+<blockquote class="">本章先归纳全国可复制经验，再展开湖南案例，案例均标注官方来源。 <strong>本章核心依据</strong>：住房城乡建设部办公厅2026年7月印发的《完整社区建设可复制经验做法清单（第一批）》（<strong>建办科函〔2026〕178号</strong>，2026-07-22发文、07-28发布）。清单从全国实践中优选30个标杆案例，围绕"健全工作体制机制、完善社区设施和服务、探索投融资和可持续运营模式"三大维度、9类举措、30条具体做法展开。本章以该清单为主线逐类展开，并保留湖南金科园作为省内深度案例。</blockquote>
+<h3>4.1 全国样板案例</h3>
+<p>住建部完整社区建设经历了"<strong>标准定底→试点探路→案例集成→清单推广</strong>"四个阶段的演进：</p>
+<ol><li><strong>试点探路</strong>：2023年7月住建部会同多部门确定106个完整社区建设试点（建办科〔2022〕48号），为期2年；</li><li><strong>案例集成</strong>：2024—2025年先后印发三批《完整社区建设案例集》，集中展示样板（首批10个社区含金科园）；</li><li><strong>清单推广</strong>：2026年7月印发《完整社区建设可复制经验做法清单（第一批）》，将样板经验抽象为可复制的"方法矩阵"，全国推广。</li></ol>
+<p><strong>国家清单三大维度总览</strong>：</p>
+<div class="table-wrap"><table><thead><tr><th>维度</th><th>解决的命题</th><th>涉及做法（条）</th></tr></thead><tbody><tr><td>一、健全工作体制机制</td><td>"谁来建、怎么建"</td><td>第1—9条</td></tr><tr><td>二、完善社区设施和服务</td><td>从"有没有"到"好不好"</td><td>第10—19条</td></tr><tr><td>三、探索投融资和可持续运营模式</td><td>钱从哪来、怎么长效</td><td>第20—30条</td></tr></tbody></table></div>
+<blockquote class="ref-block"><strong>官方链接</strong> - 清单原文（住建部官网）：<a href="https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2026/art_2d1e3416ee0a4efb8baaf6583180f1a6.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2026/art_2d1e3416ee0a4efb8baaf6583180f1a6.html</a> - 106个试点名单：<a href="https://www.mohurd.gov.cn/tsgb/wjk/art/2023/art_1521335532.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/tsgb/wjk/art/2023/art_1521335532.html</a> - 首批案例集（住建部）：<a href="https://www.mohurd.gov.cn/xinwen/gzdt/art/2024/art_304_776643.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/xinwen/gzdt/art/2024/art_304_776643.html</a></blockquote>
+<h3>4.2 住建部《可复制经验做法清单（第一批）》30条做法展开</h3>
+<p>住建部清单从全国实践中优选30个标杆案例，归纳为<strong>3维度、9类、30条具体做法</strong>。这是当前最权威、最可直接对接学习的"国家经验库"，湖南及各地可按本地实际择优借鉴。以下逐类展开：</p>
+<h4>维度一　健全工作体制机制（解决"谁来建、怎么建"，第1—9条）</h4>
+<p><strong>（一）强化工作统筹</strong></p>
+<ol><li><strong>纳入城市重点工作范畴全面部署</strong>（上海）：将完整社区建设纳入市委、市政府一揽子文件，发布《上海市完整社区建设实施方案》，明确目标、任务、分工、资金、建设内容，部署到2027年底主城区和5个新城完整社区覆盖率达<span class="hl-cyan">60%</span>。</li><li><strong>作为重要民生工程持续推进</strong>（宁夏）：连续4年将完整社区建设写入政府工作报告、列入为民办实事清单，聚焦停车、充电、养老、托育、智慧化服务等急难愁盼，持续补齐民生短板。</li><li><strong>建立多部门统筹工作机制</strong>（江西）：建立省级"好社区"建设工作专班，省政府分管领导任召集人，统筹住建、发改、财政等20余个部门，统筹居民"需求清单"、部门"资源清单"形成"项目清单"，构建"需求—资源—更新"一体化闭环。</li><li><strong>整合多方力量协同推进</strong>（广东）：结合城中村改造分类提出规划建设要求（拆除新建/整治提升/拆整结合），搭建政府、银行、企业、社区协作平台，强化金融与国企参与，培育规模化实施运营主体。</li></ol>
+<p><strong>（二）完善法规政策制度</strong></p>
+<ol><li><strong>颁布出台社区更新地方法规</strong>（浙江/江苏）：浙江出台《浙江省城镇社区更新条例》，明确部门职责、实施主体与各类更新活动实施路径；江苏南通14部门联合印发实施意见，探索完整社区连片建设模式，统筹配建养老托育商业，破解服务功能碎片化。</li><li><strong>建立既有建筑改造消防审验制度标准体系</strong>（北京）：发布"一通知、一指南、一标准"，建立"审验机制+技术指引+社会化培训"消防治理体系，为既有建筑改造扫清制度障碍。</li><li><strong>健全居住区配套设施建设改造法规政策</strong>（江西九江）：出台居住区配套设施管理条例、低效用地再开发政策、低效存量建筑用途转换管理办法等，明确土地混合使用、存量建筑改公共服务设施、零星用地简化供应等政策。</li></ol>
+<p><strong>（三）因地制宜探索实施路径</strong></p>
+<ol><li><strong>建立"社区体检—规划统筹—片区更新—滚动实施"路径</strong>（重庆）：开展社区专项体检，搭建完整社区基础数据"一张图"系统；将完整社区纳入城市更新专项规划，打破行政边界；印发完整社区建设计划、建立项目库；按"区位相邻、资源互补"实施连片更新。截至2026年7月重庆已有662个社区启动建设、覆盖率达<span class="hl-cyan">33.9%</span>。</li><li><strong>探索"投建管营"全链条推进机制</strong>（广州）：坚持系统思维、运营前置，投资立项阶段统筹专项债、政策性金融、城中村改造专项借款；规划建设阶段完善设施、推广绿色智能建筑；交付治理阶段明晰权责、协同共治；运营阶段盘活政府移交与企业自持空间、增强"造血"功能。</li></ol>
+<h4>维度二　完善社区设施和服务（从"有没有"到"好不好"，第10—19条）</h4>
+<p><strong>（四）推动社区公共服务补短板</strong></p>
+<ol><li><strong>统筹多个社区公共服务配置打造完整社区</strong>（重庆九龙坡民主村）：统筹相邻3个社区，打捆推进棚改、旧改、治违、除危，居中建设党群服务中心、社区客厅、卫生服务站、社区食堂、社区公园，激活底层商业空间。</li><li><strong>聚焦不同人群需求完善公共服务</strong>（湖南长沙金科园，详见4.3）：打造儿童友好、青年向往、老年关爱的全龄共享社区。</li><li><strong>落实医养结合模式</strong>（新疆奎屯海纳尔）：同一建筑内统筹建设卫生服务站和老年人日间照料中心，实现医疗、护理、空间、床位共享；引入"白天入托、晚上回家"模式，提供助餐、助浴、助洁、助行、助急、助医"六助"服务。</li><li><strong>一站式集成布局社区公共服务设施</strong>（雄安容西贤溪）：一站式集成中小学、幼儿园、社区食堂、卫生服务中心、养老驿站、党群中心、图书馆；以学径道路串联小区、设施与绿地，建设慢行生活环。</li></ol>
+<p><strong>（五）提升社区生活环境品质</strong></p>
+<ol><li><strong>多措并举改善社区生活环境</strong>（沈阳皇姑区牡丹）：改造污水雨水管网实现雨污分流，线缆入地消除"蜘蛛网"，优化道路增设无障碍，适老化改造，废弃锅炉房改建为集养老、食堂、幸福教育课堂于一体的综合服务体。</li><li><strong>综合整治提升社区居住环境</strong>（北京海淀华清园）：统筹节能改造、上下水改造、室外环境整治、增设停车充电设施；将周边腾退服装城改造为便民商业综合体；统筹相邻小区闲置场地共建儿童游乐设施和公共绿地。</li><li><strong>聚力打造绿色低碳人居环境</strong>（天津中新生态城）：制定完整社区建设评价标准，全域推行绿色建筑标准，配套下凹式绿地、透水铺装、雨水调蓄池等海绵设施，建设无障碍绿色慢行系统，配套垃圾气力管道输送系统。</li></ol>
+<p><strong>（六）推进社区智能化服务</strong></p>
+<ol><li><strong>推动数字服务融入社区治理和居民生活</strong>（杭州）：印发《杭州市完整社区数字化建设指南》，搭建统一数字化社区治理服务平台；管理端强化"人、房、设施"全要素感知，市民端打造线上线下一体化便民服务门户（社区活动、报事报修、空间预约）。</li><li><strong>以数字化手段赋能社区建设与服务提质</strong>（青岛西海岸）：打造公共资源管理平台，集成信息公示、登记备案、动态监管、公共交易、全程追溯、智慧分析等全生命周期管理，通过市场化盘活存量资源。</li><li><strong>推进社区智能感知、安防设施建设</strong>（河南鹤壁奔流街二巷）：与社会企业合作建设集照明、监控、一键报警、广播、宣传、充电于一体的智慧合杆，打造智慧云药房和智慧社区管理服务平台。</li></ol>
+<h4>维度三　探索投融资和可持续运营模式（钱从哪来、怎么长效，第20—30条）</h4>
+<p><strong>（七）构建多元化资金保障机制</strong></p>
+<ol><li><strong>探索"外部输血+内部造血"资金保障模式</strong>（福建福安阳春）：对外统筹财政专项补助、共建单位募资、社会资本、居民自筹；对内将充电桩利润分成、停车收费、广告收入等经营性收益反哺社区运维。</li><li><strong>健全政府、社会、居民多方协同出资共建机制</strong>（云南开远南正街）："政府托底、银行支撑、社会赋能、居民共担"，统筹政策资金保公益工程、银行贷款改造商业以租金还贷、社会资本建养老农贸市场、运用住宅专项维修资金，按"谁受益谁出资"引导居民自筹。</li><li><strong>探索以市场化方式实现社区"自我造血"</strong>（四川成都）：青羊区清源社区创办社区社会企业，运营食堂、菜市、社区农场、物业等13项便民项目、吸纳就业260余人，收益用于修缮和帮扶；成华区下涧槽推行"社区合伙人"、"空间换服务"模式，设立社区发展基金投向养老助残和公共设施管护。</li></ol>
+<p><strong>（八）创新社区运营模式</strong></p>
+<ol><li><strong>凝聚社会力量、激发社区活力</strong>（上海黄浦淡水路）：成立"商铺联盟"开展"街巷小店改造计划"，以"政府牵线、企业共建、商家承担"推动特色小店微更新，联合小红书建立"线上种草、线下拔草"宣传机制。</li><li><strong>因地制宜构建社区运营模式</strong>（宁波）：镇海招宝山推行国企全域统一运营（覆盖10个社区、250个服务场景）；鄞州和丰搭建共建共享平台吸纳企业、商户、居民成为社区合伙人；高新区明珠采用"党建引领+第三方运营"。</li><li><strong>建立"街道统筹、国资管理、专业运营"模式</strong>（南京建邺兴隆）：街道无偿提供闲置资源，区国资集团投资建设邻里中心和医养综合体并统一管理，引入专业机构运营；对养老助餐托育采用"保底租金+收益分成"，对商业业态收租，实现公益与商业互补。</li><li><strong>探索街区一体化运营模式</strong>（武汉江汉）：政府平台公司与物业企业联合成立合资公司，下设智慧调度指挥中心、街区服务中心，组建综合、环境、防控、养护多支队伍，对老旧小区物业、市政及片区资源一体化运营。</li><li><strong>构建建设、运营一体化推进模式</strong>（洛阳西工行署路）：采取"公建民营"建设和"公益+微利+商业"组合业态运营，建设改造邻里中心和养老中心，以经营收益覆盖改造成本、微利可持续循环。</li><li><strong>针对不同业态属性实施差异化运营</strong>（马鞍山珍珠园）：公益服务引入第三方企业开放公益课程、市场化自我造血；便民商业创新城市驿站运营；物业服务探索多个连片小区统一管理、总体平衡。</li></ol>
+<p><strong>（九）完善多元主体协同治理机制</strong></p>
+<ol><li><strong>激发居民"主人翁"意识</strong>（上海浦东三林苑）：培育有专业技术的居民担任社区规划师，构建"议题征集、民主协商、方案制定、落地实施、群众评议"全链条闭环，破解空间统筹、加装电梯、停车等难题。</li><li><strong>发挥专业机构和人员作用、全周期协同治理</strong>（无锡滨湖稻香）：聘请规划院校教授团队和相关专家、公益组织代表、街道居民代表担任社区规划师、社区营造师、百姓设计师，全过程参与前期策划、规划设计、方案编制、建设实施和运营，通过"听诉求、找问题、聚焦点、挖潜力、重实施、促参与"推进实施。</li></ol>
+<h4>30条做法对湖南的启示</h4>
+<p>对照湖南绿色完整社区创建实际，湖南最值得优先借鉴的方向：</p>
+<ul><li><strong>机制端</strong>：借鉴上海"纳入城市重点工作"、江西"三单联动"、重庆"体检—规划—更新—滚动"路径，健全省级统筹与连片更新机制；</li><li><strong>设施端</strong>：借鉴重庆民主村"统筹多社区"、雄安"一站式集成"、新疆"医养结合"，在AA/AAA创建中统筹设施布局；</li><li><strong>资金运营端</strong>：借鉴福建"外部输血+内部造血"、成都"自我造血"、南京"街道统筹国资运营"，破解湖南社区资金与运营可持续难题——金科园五方共担正是此类路径的湖南样板。</li></ul>
+<blockquote class="ref-block"><strong>官方链接</strong>：完整社区建设可复制经验做法清单（第一批）（建办科函〔2026〕178号）：<a href="https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2026/art_2d1e3416ee0a4efb8baaf6583180f1a6.html" target="_blank" rel="noopener">https://www.mohurd.gov.cn/gongkai/zc/wjk/art/2026/art_2d1e3416ee0a4efb8baaf6583180f1a6.html</a></blockquote>
+<h3>4.3 湖南省内案例</h3>
+<p>湖南已创建<strong>205个绿色完整社区</strong>，以长沙金科园为标杆，雨花区等系统推进AA/AAA型创建。金科园亦被住建部清单第11条收录为国家样板，此处作湖南视角的深度展开。</p>
+<h4>长沙金科园（全国样板·深度）</h4>
+<p>金科园建于20世纪60—80年代，是原单位型社区，房屋25栋、总建筑面积约8.32万平方米、居民1205户、人口近5100人，60岁以上老人占比<span class="hl-cyan">30%</span>。改造前存在房屋老旧、基础设施破损、户外活动场地与停车泊位缺失、社区服务供给不足等突出问题。</p>
+<p><strong>改造内容（六类）</strong>：</p>
+<ol><li><strong>基础设施</strong>：25栋屋面防水与老旧管线更新，道路"白改黑"，加装电梯23台，新增停车位80—161个（官方口径存在差异，需按实际测量核实），新增雨水管道3897米、改造污水管道1566米、雨水回收系统全覆盖；</li><li><strong>"一老一小"设施</strong>：适老化改造（无障碍扶手、楼道折叠椅），建设卫生服务中心、综合养老服务中心、康复理疗中心；幼儿园增设托幼班、建设户外儿童乐园、引入青少年心理健康发展中心；</li><li><strong>公共空间</strong>：改造3处口袋公园（"快乐星球"公园、彩虹公园、廉政广场），建设室内外全民健身场所2000㎡；</li><li><strong>便民商业</strong>：便民服务中心（菜市场、超市）、社区食堂、残疾人就业服务站；</li><li><strong>青年公寓</strong>：利用两处5500㎡闲置资产改造成216套青年公寓，低价租给创业青年；</li><li><strong>智慧治理</strong>：智能感知设施、社区智慧物业平台、"安和爱心管家"APP。</li></ol>
+<p><strong>经验做法（可复制）</strong>：</p>
+<ul><li><strong>党建先行、居民参与</strong>：开展"书记会谈日"、设立"书记会客室"，组建"片长、组长、邻长"三长队伍，发放2000余份问卷、收集200余条意见；创新"三员"模式（民情收集员、改造监督员、项目验收员）；</li><li><strong>多元筹资</strong>（见3.3节五方共担）；</li><li><strong>运营前置、自我造血</strong>：社会资本运营养老、青年公寓、体育场馆，盈利反哺社区；</li><li><strong>长效管理</strong>：专业物业+0.8元/㎡物业费+缴费率提升至<span class="hl-cyan">90%</span>，邻长制度105名邻长分片联系居民。</li></ul>
+<blockquote class="ref-block"><strong>案例官方来源</strong>：湖南住建厅官网 <a href="https://zjt.hunan.gov.cn/zjt/ztzl/ljxqgz1/msjyjlu/202406/t20240626_33699918.html" target="_blank" rel="noopener">https://zjt.hunan.gov.cn/zjt/ztzl/ljxqgz1/msjyjlu/202406/t20240626_33699918.html</a>；红网/湖南日报报道 <a href="http://hunantoday.cn/news/xhn/202508/30334492.html" target="_blank" rel="noopener">http://hunantoday.cn/news/xhn/202508/30334492.html</a>；雨花区政府 <a href="https://www.yuhua.gov.cn/zwgk97/xxgkml/384213/qrjhjj14/zwdt6270/zwyw19/202501/t20250120_11723572.html" target="_blank" rel="noopener">https://www.yuhua.gov.cn/zwgk97/xxgkml/384213/qrjhjj14/zwdt6270/zwyw19/202501/t20250120_11723572.html</a></blockquote>
+<h4>雨花区（区域推进）</h4>
+<p>雨花区制定2023—2025年实施方案，以AA/AAA型分类推进，聚焦"一老一小"友好与绿色低碳达标，统筹老旧小区改造、既有小区改造、重点片区城市更新、"街区微改造"、棚户区改造、城中村改造等各类更新工作。</p>
+<blockquote class="ref-block"><strong>官方链接</strong>：<a href="https://www.yuhua.gov.cn/zwgk97/jcxxgk/ghjh/zxgh/202308/t20230816_11193369.html" target="_blank" rel="noopener">https://www.yuhua.gov.cn/zwgk97/jcxxgk/ghjh/zxgh/202308/t20230816_11193369.html</a></blockquote>
+<hr>
+<div class="pagenav"><a href="chapter3.html">← 上一章</a><a href="chapter5.html" class="next">下一章 →</a></div>
+</article></div></body></html>
