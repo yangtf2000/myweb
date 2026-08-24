@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>城建政策周报 第五期（2026-08-17 至 2026-08-23）</title>
+<style>
+  :root{
+    --bg:#0d1117; --bg2:#151b24; --card:#1a2230; --line:#2a3444;
+    --text:#e6edf3; --muted:#9aa7b8; --gold:#e8b93a; --red:#ff5d5d;
+    --blue:#4ea1ff; --green:#46d39a; --purple:#b58cff;
+    --teal:#2f7d76; --teal-d:#1f5c57;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:16px;line-height:1.7;padding-bottom:40px}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(13,17,23,.95);
+    border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+  .nav a{display:inline-block;padding:12px 14px;color:var(--muted);
+    text-decoration:none;font-size:14px;border-bottom:2px solid transparent}
+  .nav a:active,.nav a:focus{color:var(--gold);border-bottom-color:var(--gold)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 14px}
+  header.top{padding:22px 0 6px;border-top:5px solid var(--teal)}
+  header.top h1{font-size:25px;letter-spacing:1px;margin:0 0 6px;color:#fff}
+  .meta{color:var(--muted);font-size:13px;line-height:1.8;margin:4px 0}
+  .meta b{color:var(--teal-d);font-weight:700}
+  .byline{text-align:right;font-size:13px;color:var(--muted);margin:8px 2px 0}
+  .byline b{color:var(--gold)}
+  .summary{background:linear-gradient(135deg,#1a2230,#16202e);border:1px solid var(--line);
+    border-radius:14px;padding:16px;margin:16px 0}
+  .summary h2{margin:.2em 0 .6em;font-size:17px;color:var(--gold)}
+  .summary li{margin:.5em 0}
+  .summary li b{color:var(--gold)}
+  section.part{margin:26px 0;scroll-margin-top:56px}
+  .part-title{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding-left:10px;
+    border-left:4px solid var(--teal);}
+  .part-title .no{display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:9px;background:var(--teal);color:#fff;font-weight:800;font-size:16px}
+  .part-title h2{font-size:20px;margin:0;color:#fff}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .card.focus{border-left:5px solid var(--teal)}
+  .card.focus.hot{border-left-color:var(--red)}
+  .card .tag{display:inline-block;background:var(--teal);color:#fff;font-size:12px;font-weight:800;
+    border-radius:6px;padding:2px 10px;margin-bottom:8px}
+  .card .tag.hot{background:var(--red)}
+  .ttl{font-size:18px;font-weight:800;color:#fff;margin:0 0 4px;line-height:1.45}
+  .src{margin:4px 0 10px}
+  .src span{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:6px;
+    padding:2px 8px;margin:2px 6px 2px 0;font-size:12.5px;color:var(--muted)}
+  .doc{background:linear-gradient(135deg,#211b08,#1a1606);border:1px solid var(--gold);border-radius:10px;
+    padding:12px;margin:10px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+  .doc .dt{font-size:12px;color:var(--gold);letter-spacing:.5px;margin-bottom:6px;width:100%}
+  .doc .tt{font-weight:600;margin-bottom:8px;width:100%}
+  .doc a{display:inline-block;background:var(--gold);color:#1a1606;font-weight:700;text-decoration:none;
+    padding:9px 16px;border-radius:8px;font-size:14px;min-height:44px;line-height:1.3}
+  .kv{margin:6px 0}
+  .kv .k{color:var(--teal-d);font-weight:700;font-size:14px;margin-right:8px}
+  .block{margin:10px 0}
+  .block .lab{font-weight:800;color:var(--teal);font-size:14px;margin-bottom:4px}
+  .block .lab.b2{color:var(--teal-d)}
+  .block .lab.b3{color:var(--red)}
+  .block p{margin:6px 0;color:var(--text);font-size:16px}
+  .chips{margin:8px 0 2px}
+  .chip{display:inline-block;background:var(--bg2);border:1px solid var(--line);border-radius:20px;
+    padding:3px 11px;font-size:12.5px;color:#9aa7b8;margin:3px 5px 3px 0}
+  .board{background:var(--card);border:1px solid var(--teal);border-radius:14px;padding:16px 18px;margin:16px 0}
+  .board .bh{font-size:17px;font-weight:800;color:var(--teal-d);margin:0 0 10px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0}
+  .stat{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+  .stat .n{font-size:22px;font-weight:700;color:var(--gold)}
+  .stat .t{font-size:12px;color:var(--muted);margin-top:4px}
+  .note{background:#16202e;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;
+    padding:12px 15px;margin:10px 0;font-size:14.5px;color:var(--muted)}
+  .sub-h{font-size:17px;font-weight:800;color:var(--teal-d);margin:22px 0 8px;padding-left:11px;border-left:4px solid var(--teal)}
+  .plist{margin:8px 0}
+  .plist li{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--teal);
+    border-radius:8px;padding:10px 13px;margin:8px 0;font-size:14px}
+  table.tbl-wrap{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+  table.tbl-wrap th,table.tbl-wrap td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
+  table.tbl-wrap th{background:var(--bg2);color:var(--gold)}
+  footer.foot{color:var(--muted);font-size:12px;text-align:center;margin-top:30px;line-height:1.8}
+  .focus-tag{display:inline-block;background:var(--red);color:#fff;font-size:12px;font-weight:800;border-radius:6px;padding:2px 10px;margin-left:8px}
+  .auto-tag{display:inline-block;background:var(--purple);color:#1a1030;font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 9px;margin:6px 0}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="#summary">摘要</a>
+  <a href="#p1">中央·宏观</a>
+  <a href="#p2">各部委</a>
+  <a href="#p3">资金专题</a>
+  <a href="#p4">其他省市</a>
+  <a href="#p5">智库趋势</a>
+  <a href="#p6">湖南</a>
+  <a href="#p7">长株潭</a>
+  <a href="#p8">其他州市</a>
+</nav>
+<div class="wrap">
+  <header class="top">
+    <h1>城建政策周报 第五期</h1>
+    <div class="meta"><b>期号：第五期</b></div>
+    <div class="meta">信息收集时间：2026-08-17 至 2026-08-23　更新日期：2026-08-24</div>
+    <div class="meta">简要介绍：本周住房公积金条例正式落地、国常会部署清欠与财政金融协同促内需、房地产投资转向城市更新；岳阳（本周重点州市）城市更新资源密集发布，长沙、株洲同步推进存量盘活与管网更新。</div>
+    <div class="meta">关键字：住房公积金条例国令844 · 国常会清欠连环清 · 财政金融协同促内需 · 房地产转向城市更新 · 上海十五五城更住房规划 · 岳阳39片区72.25km² · 岳阳楼19.56亿 · 长沙经开区6733亩</div>
+    <div class="meta">重点区域：湖南 · 长株潭（本周聚焦 · 岳阳）</div>
+  </header>
+
+  <div class="byline">整理：<b>ytf2000@sina.com</b></div>
+
+  <div class="summary" id="summary">
+    <h2>本周摘要</h2>
+    <div class="auto-tag">以下为重点自动选取，如需调整请告知</div>
+    <ul>
+      <li><b>公积金条例落地</b>：8月18日李强签署国务院令<b>第844号</b>，正式公布《国务院关于修改〈住房公积金管理条例〉的决定》，<b>9月20日</b>起施行；提取范围拓宽（房租免比例门槛、新增装修/物业费提取、可购政策性金融债），灵活就业人员自愿缴存。</li>
+      <li><b>国常会清欠"连环清"</b>：8月21日国常会部署加快加力清理拖欠企业账款，督促地方用好<b>专项债券、专项再贷款</b>打通"连环清"链条；同日财政部等三部门发文（财金〔2026〕71号）扩大财政金融协同促内需。</li>
+      <li><b>房地产投资转向城市更新</b>：住建部8月20日刊《经济日报》署名文章，1—7月全国房地产开发投资<b>43009亿元</b>、同比降<b>19.2%</b>，待售面积<b>75911万㎡</b>连续5月减少，稳投资重心转向城中村、危旧房、老旧小区更新。</li>
+      <li><b>上海城更住房"十五五"合编</b>：8月20日发布全国首个城市更新与住房发展合并规划，<b>23项</b>任务、<b>19个</b>指标，老旧小区改造<b>3000—4000万㎡</b>、更新商办楼宇≥<b>150栋</b>。</li>
+      <li><b>岳阳资源发布登场</b>：省住建厅"城市更新资源发布"岳阳篇——科学划定<b>39个</b>片区、<b>72.25km²</b>；岳阳楼片区总投资<b>19.56亿</b>（社会资本20%）、洞麻厂<b>14亿</b>（社会资本65.39%）。</li>
+    </ul>
+  </div>
+
+  <section class="part" id="p1">
+    <div class="part-title"><span class="no">一</span><h2>中央层面 · 宏观政策（影响投资的总开关）</h2></div>
+    <div class="card focus hot">
+      <div class="tag hot">重中之重</div>
+      <div class="ttl">国务院令844号公布《住房公积金管理条例》修改决定：提取扩围、灵活就业自愿缴存</div>
+      <div class="src"><span>中国政府网 / 新华社</span><span>2026-08-18公布 · 9-20施行</span><span>国令第844号</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.gov.cn/zhengce/zhengceku/202608/content_7078478.htm">🔗 中国政府网（条例全文）</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月18日，新华社受权发布：国务院总理李强签署国务院令（第844号），公布《国务院关于修改〈住房公积金管理条例〉的决定》，自2026年9月20日起施行，共20条。该决定7月31日已获国务院第93次常务会议通过，本次为正式公布落地。核心修改有四点：一是拓宽提取和使用范围——提取支付房租不再设置"房租超过家庭工资收入规定比例"门槛，新增装修自住住房、支付自住住房物业费、国务院批准的其他住房消费情形等提取情形，并明确公积金可购买政策性金融债；二是提升管理服务效能——简化提取手续，提取审查时限缩至3日、贷款审查缩至10日，推动缴存记录全国互信互认与异地贷款；三是强化风险防控，建立信用记录并纳入全国信用信息共享平台；四是扩大覆盖面，明确个体工商户、非全日制从业人员及其他灵活就业人员可自愿缴存并享受政策支持。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>这是7月31日国常会"审议草案"的正式落地，对城市更新最直接的意义在居民端：过去老旧小区、危旧房自主更新"居民出资意愿低、资金来源窄"，现在装修、物业费可提、灵活就业自愿缴存，等于把居民的"沉睡存量"激活为更新资金。湖南各市县推"原拆原建""自主更新"时，应把公积金新政写进居民出资方案——这是比单纯财政补贴更可持续的杠杆。</p></div>
+      <div class="chips"><span class="chip">国令844号</span><span class="chip">9月20日施行</span><span class="chip">提取扩围</span><span class="chip">灵活就业缴存</span></div>
+    </div>
+    <div class="card focus">
+      <div class="tag">宏观定调</div>
+      <div class="ttl">国常会8月21日部署清欠"连环清"，督促地方用好专项债券、专项再贷款</div>
+      <div class="src"><span>新华社 / 人民网</span><span>2026-08-21</span><span>国务院常务会议</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://cpc.people.com.cn/BIG5/n1/2026/0822/c64094-40784195.html">🔗 人民网（国常会报道）</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月21日，国务院总理李强主持召开国务院常务会议，听取新一代通信网建设情况汇报，部署进一步清理拖欠企业账款工作，研究持续改善空气质量有关工作，审议通过《电力安全事故应急处置和调查处理条例（修订草案）》和《市场监督管理所条例（草案）》。会议指出，要实施好加快加力清理拖欠企业账款行动，压实主体责任，督促指导地方用好专项债券、专项再贷款等政策，打通"连环清"链条，切实提升清欠质量、严防新增拖欠；要大力整治大企业拖欠中小企业账款问题，健全行业账款支付规则，分行业明确合理账期和支付条件。会议将清欠逻辑从"政府欠企业"扩展至"大企业欠中小企业"，政策脉络与此前7月底中央政治局会议"常态化解决企业账款拖欠"一脉相承。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>对湖南城投、城建类国企这是真金白银的利好——大量平台被"连环债"压住现金流，专项债/再贷款打通"连环清"等于给应收账款"回血"开通道。但要提醒：清欠资金须对应真实工程欠款，城投不能用此掩盖隐性债务；湘江新区、长株潭各平台应趁窗口梳理应付未付清单，主动对接财政的专项债清欠额度。</p></div>
+      <div class="chips"><span class="chip">国常会</span><span class="chip">连环清</span><span class="chip">专项债券</span><span class="chip">专项再贷款</span></div>
+    </div>
+    <div class="note">【本章小结】宏观层本周"一落一拉"：公积金条例落地激活居民端资金，国常会清欠激活企业端现金流。两股水流都指向同一目标——让城市更新"钱从哪来"从口号变通道。</div>
+  </section>
+
+  <section class="part" id="p2">
+    <div class="part-title"><span class="no">二</span><h2>中央层面 · 各部委动态</h2></div>
+    <div class="card focus">
+      <div class="tag">住建部 / 经济日报</div>
+      <div class="ttl">房地产拉动投资方式转向城市更新：存量时代稳投资重心转移</div>
+      <div class="src"><span>住建部官网（刊《经济日报》）</span><span>2026-08-20</span><span>趋势定调</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.mohurd.gov.cn/xinwen/gzdt/art/2026/art_f96a8306110e4ea6a15071536a0320a1.html">🔗 住建部官网</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月20日住建部官网头条刊发《经济日报》署名文章《房地产拉动投资方式转向城市更新》，系"十五五"规划后住建部对投资逻辑的权威阐释。文章援引国家统计局数据：7月末商品房待售面积75911万平方米、同比下降0.8%，自今年3月起连续5个月减少；1—7月全国房地产开发投资43009亿元、同比下降19.2%，开发投资、施工、新开工、竣工、新建商品房销售等指标均下行。文章判断，房地产进入存量时代后仍是支柱产业，但贡献方式从"大规模增量建设"转向"存量提质增效和相关服务"，其中房地产拉动投资的方式将转向城市更新，城中村、危旧房、老旧小区更新改造将成为稳投资的重要力量。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>这是住建部首次把"城市更新=稳投资新引擎"写进署名文章，等于给地方吃定心丸：做大更新盘子不违"严控增量"，反而契合导向。对湖南意味深长——衡阳390个老旧小区、株洲/湘潭连片更新、岳阳39个片区，都是"稳投资"的现成载体。各城投应从"开发商思维"切到"更新运营商思维"，项目测算里把"拉动投资"指标做足。</p></div>
+      <div class="chips"><span class="chip">住建部</span><span class="chip">43009亿</span><span class="chip">存量时代</span><span class="chip">稳投资</span></div>
+    </div>
+    <div class="card">
+      <div class="tag">住建部 · 最高法</div>
+      <div class="ttl">两部门发文：住房城乡建设领域民事纠纷"总对总"在线诉调对接机制扩面提质增效</div>
+      <div class="src"><span>住建部办公厅 / 最高法办公厅</span><span>2026-08-20</span><span>纠纷化解</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.mohurd.gov.cn">🔗 住建部官网</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月20日住建部官网显示，住房城乡建设部办公厅、最高人民法院办公厅近日联合印发通知，推动住房城乡建设领域民事纠纷"总对总"在线诉调对接机制扩面提质增效，促进矛盾纠纷源头化解。该机制将老旧小区改造、物业服务、房屋征收、工程建设合同等高频纠纷纳入在线诉调，意在降低更新项目的社会摩擦成本。对批量推进老旧小区改造的市州而言，这项机制能减少"改到一半居民闹、停工上法院"的断点。</p></div>
+      <div class="block"><div class="lab b2">解读</div><p>更新不是纯工程，群众工作才是难点。湖南"无体检不更新""六步工作法"本就重群众参与，叠加最高法诉调机制，等于给基层加装"减震器"。建议市县住建局把诉调入口写进老旧小区改造实施方案的纠纷处置章节。</p></div>
+      <div class="chips"><span class="chip">诉调对接</span><span class="chip">最高法</span><span class="chip">源头化解</span></div>
+    </div>
+    <div class="note">【本章小结】部委本周一"重"一"细"：住建部重提"更新即稳投资"的投资逻辑，最高法补上"纠纷减震"的底层机制。两头都在为大规模更新扫清障碍。</div>
+  </section>
+
+  <section class="part" id="p3">
+    <div class="part-title"><span class="no">三</span><h2>资金政策专题（经济资金置顶）</h2></div>
+    <div class="card focus">
+      <div class="tag">资金专题</div>
+      <div class="ttl">财政金融协同促内需（财金〔2026〕71号）：消费贷贴息提至5000元、信用卡分期纳入</div>
+      <div class="src"><span>财政部 / 人民银行 / 金融监管总局</span><span>2026-08-21</span><span>三部门通知</span></div>
+      <div class="doc"><div class="dt">原文 / 政策</div><a href="https://www.gov.cn/zhengce/202608/content_7078478.htm">🔗 国务院政策文件库（相关）</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月21日，财政部、中国人民银行、金融监管总局联合发布《关于进一步做好财政金融协同促内需政策有关工作的通知》（财金〔2026〕71号）。核心举措：一是扩大贴息范围，将符合条件的中小微民营企业新发放流动资金贷款纳入贴息，中央财政按本金给予年化1个百分点、期限不超2年的贴息；将信用卡专项分期、消费分期、预借现金分期等新发生信用卡分期业务纳入个人消费贷财政贴息，贴息比例年化1个百分点，并将个人消费贷和信用卡分期业务贴息上限从此前3000元提升至5000元。二是与同日国常会清欠部署形成组合拳——地方用好专项债券、专项再贷款打通"连环清"。下半年还有2万多亿元地方政府专项债券和超长期特别国债待发行使用，构成充足"弹药"。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>这条对湖南城建是"间接输血"：中小微企业流贷贴息直接缓解建材、施工、运维类配套企业现金流，让更新项目供应链不再"三角债"卡死；消费端贴息则提振家装、适老化改造等"更新后消费"。但最硬的仍是国常会那句——专项债/再贷款清欠。湖南各平台应把应付中小企业账款清单，对齐专项债清欠额度优先清偿，既合规又盘活产业链。</p></div>
+      <table class="tbl-wrap">
+        <tr><th>资金渠道</th><th>本周新动向</th><th>更新关联</th></tr>
+        <tr><td>地方专项债券</td><td>国常会督促用于清欠"连环清"</td><td>城投应收账款回血、腾出投资能力</td></tr>
+        <tr><td>专项再贷款</td><td>同上述清欠组合拳</td><td>缓解大企业欠中小企业链条</td></tr>
+        <tr><td>中小微流贷贴息</td><td>财金71号，年化1%、≤2年</td><td>更新供应链企业现金流</td></tr>
+        <tr><td>消费贷/信用卡贴息</td><td>上限3000→5000元，分期纳入</td><td>家装、适老化改造等更新后消费</td></tr>
+        <tr><td>超长期特别国债</td><td>下半年2万亿+待发</td><td>地下管网等生命线工程主通道</td></tr>
+      </table>
+      <div class="chips"><span class="chip">财金71号</span><span class="chip">消费贴息5000</span><span class="chip">专项债清欠</span><span class="chip">专项再贷款</span></div>
+    </div>
+    <div class="note">【本章小结】资金窗口本周"加了三道菜"：清欠专项债、中小微流贷贴息、消费端贴息。湖南平台要学会把"清欠回款"和"更新投资"绑定申报，别让到账的钱又沉淀在往来款里。</div>
+  </section>
+
+  <section class="part" id="p4">
+    <div class="part-title"><span class="no">四</span><h2>其他省市标杆政策</h2></div>
+    <div class="card focus">
+      <div class="tag">省级规划 · 标杆</div>
+      <div class="ttl">上海发布城市更新和住房发展"十五五"规划：全国首个两篇合编</div>
+      <div class="src"><span>上海市人民政府办公厅</span><span>印发2026-07-28 / 发布2026-08-20</span><span>沪府办发〔2026〕15号</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.shanghai.gov.cn/nw12344/20260820/f584d873f87045148c7eccce1ae637b3.html">🔗 上海市政府网</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月20日，上海市人民政府办公厅印发《上海市城市更新和住房发展"十五五"规划》（沪府办发〔2026〕15号，7月28日印发），这是全国首个将"城市更新"与"住房发展"两篇合并编制的五年规划。规划围绕"惠民生、促发展、提品质、续文脉、优生态、强韧性"六个维度，排出23项重点任务、19个关键指标和一揽子保障措施。量化目标：到2030年实施老旧小区改造3000万至4000万平方米；新增保障性租赁住房25万—27万套（间），新增新时代建设者管理者之家床位12万张以上；到2026年底全面启动城中村整体改造、力争完成剩余约2万平方米小梁薄板房屋改造；推动不少于150栋商办楼宇更新提升、更新商业设施面积500万平方米；新增黄浦江滨水贯通岸线52公里。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>上海给全国打了个样：把"更新"和"住房"并表，意味着更新不再是独立工程，而是与住房保障、好房子建设一体谋划。湖南三年行动（2026—2028）可借鉴其"指标体系化"——把老旧小区、保租房、商圈更新、滨水岸线都拧成一把尺子考核，避免部门各自为战。岳阳楼片区、长沙火车站片区都可对标"文脉+更新"的上海路径。</p></div>
+      <div class="chips"><span class="chip">上海</span><span class="chip">两篇合编</span><span class="chip">23项任务</span><span class="chip">19指标</span><span class="chip">150栋商办</span></div>
+    </div>
+    <div class="note">【本章小结】标杆城市的共识是"更新=系统工程"。上海用合并规划、指标绑定给出范本，湖南市县最该抄的不是项目清单，而是"一张图考核"的治理方法。</div>
+  </section>
+
+  <section class="part" id="p5">
+    <div class="part-title"><span class="no">五</span><h2>研究机构 / 行业智库 / 公众号 · 文章解读</h2></div>
+    <div class="card">
+      <div class="ttl">陈林、许钧沂（南方+）：通过城市更新重塑房地产发展新格局</div>
+      <div class="src"><span>南方+客户端 / 今日头条</span><span>2026-08-20</span><span>智库文章</span></div>
+      <div class="doc"><div class="dt">阅读原文</div><a href="https://www.toutiao.com/article/7675947645210329627/">🔗 今日头条转载</a></div>
+      <div class="block"><div class="lab">文章概况</div><p>8月20日南方+刊发陈林、许钧沂署名文章《通过城市更新重塑房地产发展新格局》。文章指出，房地产发展新突破不再主要体现为开发规模扩大和投资增量提升，而应体现为通过城市更新释放存量空间价值、提升资源配置效率，通过品质化转型培育新需求增长点。文章援引数据：2026年5月国务院印发《城市更新"十五五"规划》重点推进11.5万个城镇老旧小区、1500个老旧街区厂区、50万套危旧房改造提升；上半年全国房地产开发投资同比下降18%，传统增量模式难以为继，城市更新日益成为房地产转型升级与促进有效投资的关键。</p></div>
+      <div class="block"><div class="lab b3">关键论点</div><p>· 从"空间供给"跃升为"城市发展"：更新不再是旧城改造的同义词，而是对空间形态、功能布局、城市治理的综合调整；· 扩大内需抓手：老旧小区、城中村、保障房、既有建筑改造、完整社区都存在巨大潜力；· 与住建部8月20日"房地产拉动投资转向城市更新"定调高度互证。</p></div>
+      <div class="block"><div class="lab b2">简要分析</div><p>这篇文章把"住建部定调"落到了理论框架：更新不是救楼市，而是重塑房地产的价值逻辑。湖南城投应读懂信号——片区策划要从"卖地回款"转向"运营存量资产"，岳阳楼文旅片区、建湘文创园都是这个逻辑的试验田。</p></div>
+      <div class="chips"><span class="chip">南方+</span><span class="chip">存量价值</span><span class="chip">品质化转型</span><span class="chip">与住建部互证</span></div>
+    </div>
+    <div class="card">
+      <div class="ttl">住建部专家解读：房地产市场进入存量时代，控增量、去库存、优供给</div>
+      <div class="src"><span>中国建设新闻网 / 专家解读</span><span>2026-08-19 / 08-20</span><span>智库观点</span></div>
+      <div class="doc"><div class="dt">阅读原文</div><a href="https://www.chinajsb.cn/important/index.html?channel=important_01">🔗 中国建设新闻网</a></div>
+      <div class="block"><div class="lab">文章概况</div><p>8月19—20日中国建设新闻网连续刊发专家解读：易成栋指出"从两个重要转变看房地产高质量发展"，陈杰认为"房地产市场已进入存量时代，控增量、去库存、优供给取得积极成效"。与住建部8月20日署名文章形成"官媒+专家"的同频定调，核心判断一致——房地产市场正经历从增量扩张到存量提质的历史性转变，城市更新成为衔接两者的关键抓手。</p></div>
+      <div class="block"><div class="lab b2">简要分析</div><p>专家解读补上了住建部文章的"为什么"：不是房地产不行了，而是发展模式切换了。对湖南市县领导的启示很直接——"严控增量"已是硬约束，再想靠卖地冲GDP不现实，城市更新+存量运营才是未来三年的政绩与资金主战场。</p></div>
+      <div class="chips"><span class="chip">中国建设报</span><span class="chip">存量时代</span><span class="chip">控增量</span><span class="chip">优供给</span></div>
+    </div>
+    <div class="note">【本章小结】智库与官媒本周罕见同频：房地产"增量时代"终结、"存量运营"开启。这不再是讨论，而是被写进规划与署名文章的方向。湖南各主体应尽快完成认知切换。</div>
+  </section>
+
+  <section class="part" id="p6">
+    <div class="part-title"><span class="no">六</span><h2>湖南省 · 政策与解读</h2></div>
+    <div class="card focus">
+      <div class="tag">省级部署</div>
+      <div class="ttl">湖南省政府第十次全体会议系统谋划城市更新，与"六张网"一体推进</div>
+      <div class="src"><span>湖南省政府 / 红网</span><span>2026年8月</span><span>省政府全体会议</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.hunan.gov.cn">🔗 湖南省政府门户网站</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月湖南省政府召开第十次全体会议，省长毛伟明在部署下半年工作时系统谋划城市更新，将其与"六张网"（水网、新型电网、物流网等）建设、生命线安全工程统筹部署，强调以城市更新带动投资结构优化与城市内涵式发展。这与8月10日省政府第97次常务会议原则通过《湖南省城市更新三年行动实施方案（2026—2028年）》形成连续动作——省级已从"规划定调"进入"系统施工"阶段。岳阳、衡阳、湘西等市州项目库同步做大，政银企合作平台（全省城市更新资源发布会）持续运转。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>省政府把城市更新和"六张网"捆在一起讲，信号很清楚：更新不是住建一家的事，而是"更新+管网+土地+财政"四本账一起算。市县报项目时若只写"改多少小区"，过不了省政府这关；必须体现管网进国债、土地怎么盘活、财政怎么闭环。</p></div>
+      <div class="chips"><span class="chip">省政府全会</span><span class="chip">系统谋划</span><span class="chip">六张网</span><span class="chip">三年行动</span></div>
+    </div>
+    <div class="card">
+      <div class="tag">资源发布</div>
+      <div class="ttl">省住建厅"城市更新资源发布"系列推进：14市州逐一解码，岳阳本周登场</div>
+      <div class="src"><span>湖南省住建厅 · 更新保障处</span><span>2026年7月8日起</span><span>政银企平台</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://zjt.hunan.gov.cn/">🔗 湖南省住建厅</a></div>
+      <div class="block"><div class="lab">综述</div><p>自7月8日起，湖南省住建厅推出"城市更新资源发布"系列稿件，逐一解码14个市州城市更新重点片区，搭建全省政银企合作交流平台。背景是6月17日全省城市更新资源（项目）发布会集中推出133个重点更新片区、2478个近期实施项目，总投资达2215亿元；"十五五"期间全省城市更新领域预计带动投资约1万亿元、年均约2000亿元。系列发布旨在以重点片区突破带动全省更新整体提质增效。本周岳阳篇正式登场（详见第八节），永州篇此前已发，长沙、株洲、衡阳、张家界等市均在发布会推介本地重点片区。</p></div>
+      <div class="block"><div class="lab b2">解读</div><p>省住建厅这套"资源发布"是湖南版的"机会清单"——把片区、资产、资金缺口直接摆到政银企面前。对城投和投资人而言，这是难得的"项目超市"；对市县而言，谁先把片区策划和招商包做扎实，谁就能在1万亿份额里多切一块。</p></div>
+      <div class="chips"><span class="chip">14市州</span><span class="chip">133片区</span><span class="chip">2215亿</span><span class="chip">政银企平台</span></div>
+    </div>
+    <div class="note">【本章小结】省级层面"规划—会议—发布"三件套已就位。湖南城市更新进入系统施工期，下一阶段比的是市州县的项目成熟度，而非口号响度。</div>
+  </section>
+
+  <section class="part" id="p7">
+    <div class="part-title"><span class="no">七</span><h2>长株潭 · 城市更新（常驻骨架 + 本周聚焦 岳阳）</h2></div>
+
+    <div class="board">
+      <h3 class="bh">岳阳 · 项目进展数据看板（本周聚焦）</h3>
+      <div class="stats">
+        <div class="stat"><div class="n">39个</div><div class="t">科学划定更新片区</div></div>
+        <div class="stat"><div class="n">72.25km²</div><div class="t">更新片区总用地</div></div>
+        <div class="stat"><div class="n">19.56亿</div><div class="t">岳阳楼片区总投资</div></div>
+        <div class="stat"><div class="n">20%</div><div class="t">岳阳楼社会资本占比</div></div>
+        <div class="stat"><div class="n">14亿</div><div class="t">洞麻厂片区总投资</div></div>
+        <div class="stat"><div class="n">65.39%</div><div class="t">洞麻厂社会资本占比</div></div>
+        <div class="stat"><div class="n">2.25亿</div><div class="t">临湘城南地下管线招商</div></div>
+        <div class="stat"><div class="n">5个</div><div class="t">本周重点推介片区</div></div>
+      </div>
+    </div>
+
+    <div class="sub-h">本周聚焦 · 岳阳</div>
+    <div class="card focus">
+      <div class="tag">岳阳·资源发布</div>
+      <div class="ttl">岳阳城市更新资源发布篇：39个片区72.25km²，岳阳楼19.56亿、洞麻厂14亿</div>
+      <div class="src"><span>湖南省住建厅 · 更新保障处</span><span>2026年8月（系列发布）</span><span>政银企合作</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://zjt.hunan.gov.cn/">🔗 湖南省住建厅</a></div>
+      <div class="block"><div class="lab">综述</div><p>本周省住建厅"城市更新资源发布"岳阳篇正式登场。岳阳综合资源特征、更新潜力、更新诉求和意愿，科学划定39个城市更新片区，总用地面积约72.25平方公里，并重点推介岳阳楼历史文化保护利用片区、洞庭苎麻纺织印染厂（洞麻）等5个片区。岳阳楼片区西临洞庭湖、北起岳阳楼北门渡口，总用地3.19平方公里，以岳阳楼为核心地标，片区内闲置资产包括小港粮库和3517旧厂区（权属归岳阳市城投集团和市土地储备中心），意向项目含北门片区提质改造、南岳坡旅游廊桥、红船厂巷环境提质、洞庭湖水上旅游及"文旅+低空"项目，项目总投资19.56亿元、社会资本投入占20%。洞麻厂片区约34.21公顷，权属归湖南华升股份，现存大量工业厂房，意向项目含老旧厂区改造提升、户外运动设施、体育公园、配套地下管网，总投资14亿元、社会资本占65.39%。</p></div>
+      <div class="block"><div class="lab b3">核心解读</div><p>岳阳把"文旅地标+工业遗存活化"两类资产摆上货架，且社会资本占比差异巨大（岳阳楼20%靠财政托盘、洞麻65.39%靠市场），说明片区策划已按资金属性分流。对湖南其他市州是范本：能市场化的一律走社会资本（洞麻模式），纯民生文旅的财政兜一半（岳阳楼模式）。岳阳城投应抓紧把两个片区的"招商包+实施主体"做实，抢省里1万亿份额。</p></div>
+      <div class="chips"><span class="chip">岳阳</span><span class="chip">39片区</span><span class="chip">岳阳楼19.56亿</span><span class="chip">洞麻14亿</span><span class="chip">文旅+工业遗存</span></div>
+    </div>
+    <div class="card focus">
+      <div class="tag">岳阳·临湘招商</div>
+      <div class="ttl">临湘城南地下管线更新改造项目招商，总投资约2.25亿元</div>
+      <div class="src"><span>临湘市 / 岳阳市招商发布</span><span>2026-08-18至08-25招商期</span><span>基础设施更新</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.yueyang.gov.cn">🔗 岳阳市政府网</a></div>
+      <div class="block"><div class="lab">综述</div><p>本周临湘市推出城南地下管线更新改造项目招商，总投资约2.25亿元，招商对接窗口为8月18日至8月25日。项目属城市生命线安全工程范畴，对应国家超长期特别国债1600亿元地下管网专项支持的申报方向，也是岳阳"六张网"中地下管网建设的具体落地。与岳阳楼、洞麻两个"面子"片区不同，临湘管线是"里子"工程，资金更可能走国债+预算内通道。</p></div>
+      <div class="block"><div class="lab b2">解读</div><p>临湘这条线提醒岳阳：面子（文旅）抢社会资本、里子（管网）抢国债，两条线要分账申报。2.25亿规模适中，若按"先体检、后更新"把管网普查报告做扎实，拿到国债额度概率不低。建议临湘直接对接省住建厅管网专项体检要求，别等到招商期过了才补材料。</p></div>
+      <div class="chips"><span class="chip">临湘</span><span class="chip">2.25亿</span><span class="chip">地下管线</span><span class="chip">国债申报</span></div>
+    </div>
+    <div class="card">
+      <div class="tag">岳阳·市级推进</div>
+      <div class="ttl">岳阳楼区"逆生长"：227个城中村、供水管网更新230公里、排水管网改造383公里</div>
+      <div class="src"><span>岳阳市政府 / 红网"城市更新进行时"</span><span>2026年8月</span><span>区级更新</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.yueyang.gov.cn">🔗 岳阳市政府网</a></div>
+      <div class="block"><div class="lab">综述</div><p>据岳阳城市更新系列报道，岳阳楼区作为中心城区更新主战场推进"逆生长"：辖区内推进城中村类更新（公开报道口径约227个相关更新单元），实施供水管网更新约230公里、排水管网改造约383公里，并推进岳阳楼历史文化保护利用示范片区二期、中心城区污水系统治理PPP项目二期。岳阳市政府第十次全体会议亦将推进"六张网"与城市更新列为下半年重点，东风湖、城陵矶老港、建设北路、八字门亚华市场等片区开发同步提速。</p></div>
+      <div class="block"><div class="lab b2">解读</div><p>岳阳楼区的"230+383公里"管网数据是实打实的国债申报体量——这正是超长期特别国债1600亿地下管网专项的对应标的。岳阳应在全市层面把各区管网更新打包成"城市更新管网专项"，统一抢国债，避免分散单报被稀释。</p></div>
+      <div class="chips"><span class="chip">岳阳楼区</span><span class="chip">供水230km</span><span class="chip">排水383km</span><span class="chip">PPP二期</span></div>
+    </div>
+
+    <div class="sub-h">骨架 · 长沙</div>
+    <div class="card">
+      <div class="tag">长沙·存量盘活</div>
+      <div class="ttl">长沙经开区盘活闲置低效用地6733亩，存量时代"向存量要空间"</div>
+      <div class="src"><span>长沙晚报 / 长沙经开区</span><span>2026-08-21</span><span>低效用地再开发</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://www.changsha.gov.cn">🔗 长沙市政府网</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月21日长沙晚报报道，长沙经开区推进存量土地集约利用，累计盘活闲置低效用地约6733亩，通过"腾笼换鸟"、弹性年期出让、混合用地等方式导入新产业。这与自然资源部"存量土地盘活+政策激励工具箱"导向一致，也是湖南"支持存量土地盘活增效"文件的落地实践。在房地产增量受限背景下，长沙经开区把"沉睡土地"变"产业载体"，为城市更新提供了"产城融合"样本。</p></div>
+      <div class="block"><div class="lab b2">解读</div><p>6733亩盘活是长沙给全省的"存量答卷"——不靠新征地、靠激活既有低效用地。株洲天元区控规修改（500亩工业用地优化）、湘潭低效用地再开发试点都可对标。湖南三年行动里"土地怎么盘活"这一本账，长沙经开区已交出可复制模板。</p></div>
+      <div class="chips"><span class="chip">长沙经开区</span><span class="chip">6733亩</span><span class="chip">低效用地</span><span class="chip">产城融合</span></div>
+    </div>
+
+    <div class="sub-h">骨架 · 株洲</div>
+    <div class="card">
+      <div class="tag">株洲·项目进展</div>
+      <div class="ttl">株洲天元区四/五期改造招标、渌口城中村二期688万、供水管网一期招标</div>
+      <div class="src"><span>株洲市公共资源交易中心</span><span>2026-08-20集中挂网</span><span>片区+管网</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="http://www.zzzyjy.cn">🔗 株洲市公共资源交易中心</a></div>
+      <div class="block"><div class="lab">综述</div><p>8月20日前后株洲城市更新项目集中推进：天元区老旧小区改造四期、五期工程发布招标，渌口区城中村改造二期（约688万元）进入实施、计划8月27日开工，中心城区地下供水管网更新改造一期同步挂网招标。株洲延续"片区更新+生命线管网"双线打法，与衡阳、岳阳同属长株潭都市圈外溢的更新主场，资金端分别对应中央预算内老旧小区专项与超长期国债管网专项。</p></div>
+      <div class="block"><div class="lab b2">解读</div><p>株洲本周的密集挂网显示其项目库成熟度在提升——这正是中指"项目成熟度=资金准入证"的印证。但提醒：渌口二期仅688万属小微项目，单独申报不经济，应与天元区片区、供水管网一期捆绑成"株洲城市更新包"统一争资，否则零散项目容易被额度稀释。</p></div>
+      <div class="chips"><span class="chip">株洲</span><span class="chip">天元四/五期</span><span class="chip">渌口688万</span><span class="chip">供水管网一期</span></div>
+    </div>
+
+    <div class="sub-h">骨架 · 湘潭</div>
+    <div class="card">
+      <div class="tag">湘潭·延续</div>
+      <div class="ttl">湘潭"十四五"改造老旧小区逾千个、惠及超50万户，16个片区率先起跑</div>
+      <div class="src"><span>红网"城市更新进行时·湘潭篇③"</span><span>2026-08-11（上期收录·本周延续）</span><span>市级更新盘点</span></div>
+      <div class="doc"><div class="dt">原文</div><a href="https://k.sina.com.cn/article_3363163410_c875cd1202001zfwq.html">🔗 红网时刻</a></div>
+      <div class="block"><div class="lab">综述</div><p>湘潭"十四五"累计完成老旧小区改造逾千个、惠及群众超50万户，"集中连片、系统改造、共建共享"模式获住建部点名表扬；"十五五"识别51平方公里更新潜力空间、16个更新片区率先起跑，重点推介韶山老城、雨湖区城正街、岳塘区建设南路三片区。本周窗口内湘潭无新增重大政策，延续上期盘点态势，其"连片+系统"经验仍是全省参照。</p></div>
+      <div class="block"><div class="lab b2">提示</div><p>湘潭经验已成熟，本周无新动作属正常。下一阶段看点在其16个片区的项目实施方案是否按"湘西四步工作法"做实——这是争取明年国债/预算内额度的关键。</p></div>
+      <div class="chips"><span class="chip">湘潭</span><span class="chip">逾千个小区</span><span class="chip">50万户</span><span class="chip">16片区</span></div>
+    </div>
+
+    <div class="note">【重点关注 · 岳阳更新登场】<br><b>为什么重要</b>：岳阳是本周轮换重点州市，恰逢省住建厅"资源发布"系列登场、省政府系统谋划城市更新双重窗口；39个片区、72.25km²的盘子，叠加岳阳楼19.56亿（文旅地标）、洞麻14亿（工业遗存）、临湘管线2.25亿（生命线），构成"面子+里子"完整招商矩阵，是湘北体量最大的更新主场。<br><b>关键信息点</b>：岳阳楼片区社会资本仅20%（财政托盘）、洞麻厂65.39%（市场主导），已按资金属性分流策划；岳阳楼区供水管网更新230公里、排水383公里对应国债1600亿管网专项；临湘管线招商窗口8月18—25日。<br><b>对湖南的影响</b>：岳阳给全省示范了"片区按资金属性分账"——能市场化的走社会资本、纯民生的抢国债。各城投当务之急是把片区策划与招商包做实，在省里1万亿份额里多切一块；下一期（8月31日）轮换重点州市为常德。<br><b>参考</b>：<a href="https://zjt.hunan.gov.cn/">省住建厅资源发布</a> · <a href="https://www.yueyang.gov.cn">岳阳市政府网</a></div>
+  </section>
+
+  <section class="part" id="p8">
+    <div class="part-title"><span class="no">八</span><h2>湖南其他州市 · 重要动态</h2></div>
+    <div class="card">
+      <div class="ttl">本期其他市州窗口内未见重大新增城建政策</div>
+      <div class="src"><span>覆盖周期 2026-08-17 至 2026-08-23</span><span>跨期去重已比对</span><span>略</span></div>
+      <div class="block"><div class="lab">综述</div><p>本期（8月17日至8月23日）严格7天窗口内，常德、郴州、益阳、永州、衡阳、湘西等其他市州未见超出已收录范围（三年行动、湘西152项目、衡阳资源发布、永州篇等已于前三期覆盖）的重大新增城建政策。按"严格7天窗口+跨期去重"原则，不重复收录前期已覆盖事项。下期（生成日8月31日）轮换重点州市为常德，将深度展开常德城市更新动态。</p></div>
+      <div class="block"><div class="lab b2">提示</div><p>其他市州并非无动静，而是本周窗口内新增信息不足以构成独立卡。若陛下关注特定市州，可告知，臣妾下一期优先深挖。</p></div>
+      <div class="chips"><span class="chip">跨期去重</span><span class="chip">7天窗口</span><span class="chip">下期·常德</span></div>
+    </div>
+    <div class="note">【本章小结】本期重心在岳阳（本周重点州市）与中央资金信号，其他市州处于"项目库酝酿期"。下一期常德登场，将补足湘西北更新拼图。</div>
+  </section>
+
+  <footer class="foot">数据来源：中国政府网、新华社、人民网、住建部官网、上海市政府网、湖南省政府门户网站、湖南省住建厅、岳阳市政府网、长沙晚报、株洲市公共资源交易中心、南方+ / 今日头条、中国建设新闻网等公开发布<br>本期报由城建政策情报系统生成 · 覆盖周期 2026-08-17 至 2026-08-23 · 期号：第五期</footer>
+</div>
+</body>
+</html>
