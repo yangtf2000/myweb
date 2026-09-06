@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>现场调研与资料调取指导手册 | 老火车站片区城市更新</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f1115;
+    color: #e8eaed;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== 封面 ===== */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(26,115,232,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: -20%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(234,67,53,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover-tag {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 6px 18px;
+    background: rgba(138,180,248,0.1);
+    border: 1px solid rgba(138,180,248,0.3);
+    border-radius: 20px;
+    font-size: 12px;
+    color: #8ab4f8;
+    letter-spacing: 3px;
+    margin-bottom: 28px;
+  }
+  .cover-project {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    color: #9aa0a6;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .cover-title {
+    position: relative;
+    z-index: 1;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff 0%, #8ab4f8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cover-subtitle {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    color: #9aa0a6;
+    max-width: 400px;
+    margin-bottom: 40px;
+  }
+  .cover-divider {
+    position: relative;
+    z-index: 1;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #1a73e8, #ea4335);
+    border-radius: 2px;
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cover-meta-item {
+    text-align: center;
+  }
+  .cover-meta-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #8ab4f8;
+  }
+  .cover-meta-label {
+    font-size: 12px;
+    color: #5f6368;
+    margin-top: 2px;
+  }
+  .cover-scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    font-size: 12px;
+    color: #5f6368;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== 内容区 ===== */
+  .content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* 目录 */
+  .toc {
+    background: rgba(32,33,36,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 40px;
+  }
+  .toc-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #fff;
+  }
+  .toc-list {
+    list-style: none;
+  }
+  .toc-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list a {
+    color: #9aa0a6;
+    text-decoration: none;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .toc-list a:hover { color: #8ab4f8; }
+  .toc-num {
+    color: #5f6368;
+    font-size: 12px;
+  }
+
+  /* 章节 */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    padding: 16px 0;
+    border-bottom: 2px solid #1a73e8;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #1a73e8;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .sub-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #8ab4f8;
+    margin: 28px 0 14px;
+    padding-left: 12px;
+    border-left: 3px solid #1a73e8;
+  }
+  .sub-sub-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e8eaed;
+    margin: 20px 0 10px;
+  }
+
+  .desc {
+    font-size: 14px;
+    color: #9aa0a6;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: rgba(138,180,248,0.05);
+    border-radius: 8px;
+    border-left: 3px solid rgba(138,180,248,0.3);
+  }
+
+  /* 折叠面板 */
+  .collapse {
+    background: rgba(32,33,36,0.5);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .collapse-header {
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .collapse-header:hover {
+    background: rgba(255,255,255,0.03);
+  }
+  .collapse-header .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e8eaed;
+  }
+  .collapse-header .arrow {
+    color: #5f6368;
+    font-size: 12px;
+    transition: transform 0.3s;
+  }
+  .collapse.open .collapse-header .arrow {
+    transform: rotate(90deg);
+  }
+  .collapse-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .collapse.open .collapse-body {
+    max-height: 2000px;
+  }
+  .collapse-inner {
+    padding: 0 16px 16px;
+  }
+
+  /* 表格 */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 400px;
+  }
+  th {
+    background: #1a73e8;
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: #c5c8ce;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .imp { font-size: 14px; text-align: center; white-space: nowrap; }
+  .doc-name { font-weight: 600; color: #e8eaed; white-space: nowrap; }
+
+  /* 列表 */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .bullet-list li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 14px;
+    color: #c5c8ce;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .bullet-list li::before {
+    content: '•';
+    position: absolute;
+    left: 8px;
+    color: #8ab4f8;
+    font-weight: bold;
+  }
+  .bullet-list li:last-child { border-bottom: none; }
+
+  /* 流程 */
+  .flow-list {
+    list-style: none;
+    padding: 0;
+  }
+  .flow-list li {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .flow-list li:last-child { border-bottom: none; }
+  .flow-step {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: rgba(26,115,232,0.15);
+    border: 1px solid rgba(26,115,232,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #8ab4f8;
+  }
+  .flow-content {
+    flex: 1;
+  }
+  .flow-stage {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e8eaed;
+    margin-bottom: 4px;
+  }
+  .flow-desc {
+    font-size: 13px;
+    color: #9aa0a6;
+  }
+
+  /* 提示框 */
+  .tip-box {
+    background: rgba(251,188,4,0.08);
+    border: 1px solid rgba(251,188,4,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    color: #fbbc04;
+  }
+
+  /* 返回顶部 */
+  .back-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: #1a73e8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(26,115,232,0.4);
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s;
+    text-decoration: none;
+  }
+  .back-top.show { opacity: 1; }
+
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: #5f6368;
+  }
+
+  /* 手机适配 */
+  @media (max-width: 640px) {
+    .cover-title { font-size: 28px; }
+    .cover-project { font-size: 14px; }
+    .cover-subtitle { font-size: 13px; }
+    .cover-meta { gap: 20px; }
+    .cover-meta-num { font-size: 20px; }
+    .section-title { font-size: 19px; }
+    .section-title .num { width: 28px; height: 28px; font-size: 14px; }
+    .sub-title { font-size: 15px; }
+    .content { padding: 0 16px 50px; }
+    .collapse-header .name { font-size: 14px; }
+    table { font-size: 12px; }
+    th, td { padding: 8px 10px; }
+    .back-top { bottom: 16px; right: 16px; width: 40px; height: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="cover">
+  <div class="cover-tag">FIELD RESEARCH GUIDE</div>
+  <div class="cover-project">永州市冷水滩区老火车站片区城市更新项目</div>
+  <h1 class="cover-title">现场调研与<br>资料调取指导手册</h1>
+  <p class="cover-subtitle">部门函调 · 街道社区座谈 · 现场踏勘 · 全流程指导</p>
+  <div class="cover-divider"></div>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">10</div>
+      <div class="cover-meta-label">主要部门</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">3+4</div>
+      <div class="cover-meta-label">街道+社区</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">6</div>
+      <div class="cover-meta-label">踏勘对象</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-num">60</div>
+      <div class="cover-meta-label">老旧小区</div>
+    </div>
+  </div>
+  <div class="cover-scroll">↓ 向下滑动</div>
+</div>
+
+<div class="content">
+
+  <!-- 目录 -->
+  <div class="toc">
+    <div class="toc-title">📑 目录</div>
+    <ul class="toc-list">
+      <li><a href="#part1">第一部分 · 部门资料调取清单 <span class="toc-num">10+5部门</span></a></li>
+      <li><a href="#part2">第二部分 · 街道与社区调研 <span class="toc-num">3街道4社区</span></a></li>
+      <li><a href="#part3">第三部分 · 现场踏勘清单 <span class="toc-num">6类对象</span></a></li>
+      <li><a href="#part4">第四部分 · 调研流程与注意事项 <span class="toc-num">5阶段</span></a></li>
+    </ul>
+  </div>
+
+  <!-- 第一部分 -->
+  <div class="section" id="part1">
+    <div class="section-title"><span class="num">1</span>部门资料调取清单</div>
+    <div class="desc">原则：只向部门索要他们能提供的文件、图纸、台账、批复等正式资料。需要现场核实的内容不在此列，详见第三部分。</div>
+
+    <div class="sub-title">主要部门（10个）</div>
+
+    <!-- 自然资源局 -->
+    <div class="collapse open">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏛️ 自然资源局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：规划、用地、控规、地形、影像、权属</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🔴</td><td class="doc-name">国土空间总体规划</td><td>涉及片区的功能定位、用地布局、三条控制线、重大设施布局</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">城市更新专项规划</td><td>专项规划全文+图纸+项目清单（片区定位、更新策略、更新单元划分）</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">控制性详细规划</td><td>控规文本+分图图则+矢量数据（核实版本是否最新）</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">各类专项规划</td><td>综合交通/环境卫生/历史文化保护/公共服务设施/住房发展/消防/防洪排涝</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">片区现状高清地形图</td><td>CAD格式，含标高、现状地物（已有：老火车站1(全).dwg）</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">片区现状影像资料</td><td>高清航拍图（已有：影像图20260305.pdf），可补充历史影像</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">现状用地数据</td><td>GIS矢量数据，各地块用地性质、面积</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">土地权属数据</td><td>国有/集体土地权属、宗地划分、已出让/划拨情况</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">存量资源清单</td><td>闲置低效用地、闲置建筑台账</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 住建局 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏗️ 住建局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：城市更新、老旧小区、危房、建筑、物业</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🔴</td><td class="doc-name">危房鉴定数据</td><td>C/D级危房及疑似危房的详细位置、面积、结构、年代、鉴定等级</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">老旧小区改造计划</td><td>本片区已改造/正在改造/计划改造的小区清单及改造内容</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">加装电梯数据</td><td>片区内已加装电梯数量、4-6层住宅清单、加装条件评估</td></tr>
+                <tr><td class="imp">🔴</td><td class="doc-name">基础设施更新改造实施方案</td><td>已有PDF（267页），需提取86个项目完整Excel清单+附表</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">各部门建设项目计划</td><td>住建系统十四五及近期涉及本片区的建设项目</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">违章建筑数据</td><td>违章建筑清单（位置、面积、类型、建设时间、处理情况）</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公安局/统计局 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">👥 公安局 / 统计局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：人口、户籍数据</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🔴</td><td class="doc-name">人口资料</td><td>分社区：居住户数、户籍人口、常住人口、老年人口、租住人口、流动人口</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 教育局 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🎓 教育局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：教育设施</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🟡</td><td class="doc-name">教育设施数据</td><td>片区内幼儿园、小学、中学名单、位置、规模、学位数、招生范围</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卫健局 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏥 卫健局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：医疗卫生设施</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🟡</td><td class="doc-name">医疗卫生设施数据</td><td>片区内医院、社区卫生服务中心、诊所名单、位置、床位数、服务人口</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 民政局 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🤝 民政局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：养老、社区服务</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🟡</td><td class="doc-name">养老服务设施数据</td><td>片区内养老院、日间照料中心、养老服务站名单、位置、床位数</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">社区服务设施配置</td><td>各社区服务中心位置、面积、功能配置</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 文旅局 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🎭 文旅局</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：历史文化、文保单位</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🔴</td><td class="doc-name">历史建筑/文保单位</td><td>片区内文保单位、历史建筑名单、位置、保护等级、保护范围、修缮记录</td></tr>
+                <tr><td class="imp">🟢</td><td class="doc-name">非物质文化遗产/老字号</td><td>片区内非遗项目、老字号名单及现状</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 交通局/交警 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🚦 交通局 / 交警大队</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：道路交通、公交、停车</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🟡</td><td class="doc-name">道路交通数据</td><td>片区内道路等级、宽度、交叉口、交通量数据</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">公交站点数据</td><td>片区内公交站点位置、线路、发车频率</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">停车设施数据</td><td>片区内公共停车场位置、泊位数量、收费标准</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 市政公用 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">💧 市政公用事业</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：自来水/排水/燃气/电力/电信</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🟡</td><td class="doc-name">给水排水管网</td><td>片区内给水管网、雨水管网、污水管网走向、管径、泵站位置</td></tr>
+                <tr><td class="imp">🟡</td><td class="doc-name">燃气电力管网</td><td>燃气管网走向、调压站；电力管网走向、变电站</td></tr>
+                <tr><td class="imp">🟢</td><td class="doc-name">环卫设施</td><td>垃圾转运站、公厕、垃圾分类设施位置</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 消防大队 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🚒 消防大队</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：消防设施</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>需获取的具体内容</th></tr></thead>
+              <tbody>
+                <tr><td class="imp">🟢</td><td class="doc-name">消防设施数据</td><td>片区内消防站、消防栓位置、消防通道情况</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-title">建议咨询的部门（非必须，视情况了解）</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:120px">部门</th><th>建议咨询内容</th></tr></thead>
+        <tbody>
+          <tr><td class="doc-name">发改局</td><td>各部门十四五及近期涉及本片区的建设项目计划汇总</td></tr>
+          <tr><td class="doc-name">商务局</td><td>商业网点规划、重点市场经营数据</td></tr>
+          <tr><td class="doc-name">城管局</td><td>环卫设施、户外广告、市容管理情况</td></tr>
+          <tr><td class="doc-name">各专项规划编制单位</td><td>涉及本片区的交通、市政、公服等专项规划具体要求</td></tr>
+          <tr><td class="doc-name">体检报告编制单位</td><td>57项指标Excel原始数据+附图矢量</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 第二部分 -->
+  <div class="section" id="part2">
+    <div class="section-title"><span class="num">2</span>街道与社区调研</div>
+
+    <div class="sub-title">一、街道层面（3个街道）</div>
+    <p style="font-size:14px;color:#9aa0a6;margin-bottom:14px;">涉及：梧桐街道（白竹亭社区）、肖家园街道（又一村社区）、菱角山街道（活龙井、文昌阁社区）</p>
+
+    <div class="sub-sub-title">向街道索要的资料</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>具体内容</th></tr></thead>
+        <tbody>
+          <tr><td class="imp">🔴</td><td class="doc-name">社区详细情况</td><td>各社区面积、人口户数、包含小区数量、辖区单位</td></tr>
+          <tr><td class="imp">🔴</td><td class="doc-name">人口资料</td><td>分社区：居住户数、户籍/常住/老年/租住人口</td></tr>
+          <tr><td class="imp">🔴</td><td class="doc-name">小区清单</td><td>片区内所有小区/宿舍名称、地址、户数、楼栋数、建成年代、产权单位</td></tr>
+          <tr><td class="imp">🟡</td><td class="doc-name">街道建设项目计划</td><td>街道牵头或涉及的老旧小区改造、环境整治、基础设施项目</td></tr>
+          <tr><td class="imp">🟢</td><td class="doc-name">低保/特困/残疾人数据</td><td>脱敏统计数据，用于社会民生分析</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-sub-title">街道座谈重点了解</div>
+    <ul class="bullet-list">
+      <li>片区整体定位和发展思路</li>
+      <li>人口结构特点（老龄化、流动人口比例）</li>
+      <li>最突出的老旧小区和主要问题</li>
+      <li>居民对城市更新的意愿和诉求集中点</li>
+      <li>已开展的更新工作和进展</li>
+      <li>推进更新的矛盾难点（产权、资金、居民协调）</li>
+      <li>公共服务设施最缺什么</li>
+      <li>安全隐患（危房、消防、内涝）</li>
+    </ul>
+
+    <div class="sub-title">二、社区层面（4个社区）</div>
+    <p style="font-size:14px;color:#9aa0a6;margin-bottom:14px;">涉及：白竹亭、又一村、活龙井、文昌阁社区</p>
+
+    <div class="sub-sub-title">向社区索要的资料</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:60px">重要程度</th><th style="width:120px">资料名称</th><th>具体内容</th></tr></thead>
+        <tbody>
+          <tr><td class="imp">🔴</td><td class="doc-name">小区逐栋台账</td><td>每个小区：楼栋数、单元数、户数、建成年代、结构、质量、产权</td></tr>
+          <tr><td class="imp">🔴</td><td class="doc-name">小区基础设施现状</td><td>供水、排水、供电、燃气、道路、照明、环卫、消防情况</td></tr>
+          <tr><td class="imp">🟡</td><td class="doc-name">小区物业情况</td><td>有无物业、物业费标准、业委会、收缴率</td></tr>
+          <tr><td class="imp">🟡</td><td class="doc-name">特殊群体台账</td><td>低保户、特困户、残疾人、独居老人数量（脱敏）</td></tr>
+          <tr><td class="imp">🟢</td><td class="doc-name">社区历史与文化</td><td>老地名、特色街巷、历史故事</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-sub-title">社区座谈重点了解</div>
+    <ul class="bullet-list">
+      <li>辖区内最老旧的小区是哪几个？主要问题是什么？</li>
+      <li>哪些小区供水/排水/供电问题最突出？有没有内涝点？</li>
+      <li>居民最需要什么公共服务设施？</li>
+      <li>哪些小区有物业？哪些没有？物业费收缴情况？</li>
+      <li>居民改造意愿如何？愿意出资吗？最希望改什么？</li>
+      <li>有没有危房？消防通道是否畅通？</li>
+      <li>独居老人、残疾人、低保户多不多？主要分布在哪些小区？</li>
+      <li>社区工作中最难的是什么？居民反映最集中的问题？</li>
+    </ul>
+  </div>
+
+  <!-- 第三部分 -->
+  <div class="section" id="part3">
+    <div class="section-title"><span class="num">3</span>现场踏勘清单</div>
+
+    <div class="sub-title">一、踏勘前准备</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th style="width:120px">准备事项</th><th>具体要求</th><th style="width:70px">状态</th></tr></thead>
+        <tbody>
+          <tr><td class="doc-name">片区影像图</td><td>打印高清卫星影像（A3/A2），标注片区边界、社区边界、主要道路</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
+          <tr><td class="doc-name">小区名单</td><td>60个老旧小区清单，按社区分组，标注地址</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
+          <tr><td class="doc-name">POI点位图</td><td>168个公共服务设施点位，按类别着色</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
+          <tr><td class="doc-name">控规图纸</td><td>土地利用规划图、道路交通规划图</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
+          <tr><td class="doc-name">体检报告摘要</td><td>关键指标打印核心页</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
+          <tr><td class="doc-name">踏勘记录表</td><td>小区/建筑/设施各一套模板</td><td style="text-align:center;color:#fbbc04">需准备</td></tr>
+          <tr><td class="doc-name">拍照设备</td><td>手机/相机+充电宝</td><td style="text-align:center;color:#9aa0a6">自备</td></tr>
+          <tr><td class="doc-name">测量工具</td><td>卷尺（5m）、激光测距仪（可选）</td><td style="text-align:center;color:#9aa0a6">自备</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-title">二、踏勘对象与内容</div>
+
+    <!-- 老旧小区 -->
+    <div class="collapse open">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏘️ 老旧小区（重点，60个）</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:100px">调查类别</th><th>具体调查内容</th></tr></thead>
+              <tbody>
+                <tr><td class="doc-name">基本信息</td><td>小区名称、地址、社区、建成年代、产权单位、占地面积</td></tr>
+                <tr><td class="doc-name">建筑状况</td><td>楼栋数、层数、结构、外墙、屋面、明显破损（疑似危房重点标记）</td></tr>
+                <tr><td class="doc-name">基础设施</td><td>供水方式、排水（雨污分流/合流）、供电、燃气有无</td></tr>
+                <tr><td class="doc-name">道路交通</td><td>出入口、内部道路宽度、消防通道、停车方式、停车位</td></tr>
+                <tr><td class="doc-name">公共服务</td><td>养老、托幼、健身、文化活动、便利店、快递柜</td></tr>
+                <tr><td class="doc-name">环境卫生</td><td>垃圾分类、公厕、保洁、乱堆乱放、污水外溢</td></tr>
+                <tr><td class="doc-name">消防安全</td><td>消防通道、消防栓、灭火器、电动车充电、电线私拉</td></tr>
+                <tr><td class="doc-name">适老化</td><td>无障碍设施、扶手、坡道、楼道照明</td></tr>
+                <tr><td class="doc-name">物业管理</td><td>有无物业、物业用房、门卫、物业费、业委会、监控</td></tr>
+                <tr><td class="doc-name">居民意愿</td><td>随机询问2-3户：改造意愿、最希望改什么、出资意愿</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 老旧厂区 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏭 老旧厂区/工业遗产（6处）</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:100px">调查类别</th><th>具体调查内容</th></tr></thead>
+              <tbody>
+                <tr><td class="doc-name">基本信息</td><td>厂区名称、位置、占地面积、建筑面积、产权单位</td></tr>
+                <tr><td class="doc-name">建筑状况</td><td>厂房结构、层数、年代、质量、是否闲置</td></tr>
+                <tr><td class="doc-name">利用现状</td><td>当前用途、出租情况、经营状况</td></tr>
+                <tr><td class="doc-name">改造潜力</td><td>层高、跨度、结构安全、可改造方向</td></tr>
+                <tr><td class="doc-name">历史价值</td><td>有无工业遗产价值、特色建构筑物</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公共服务设施 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏥 公共服务设施（168个POI）</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:100px">调查类别</th><th>具体调查内容</th></tr></thead>
+              <tbody>
+                <tr><td class="doc-name">教育设施</td><td>幼儿园、小学、中学是否真实存在、规模、学位、是否对外开放</td></tr>
+                <tr><td class="doc-name">医疗设施</td><td>医院、社区卫生中心、诊所位置、服务范围</td></tr>
+                <tr><td class="doc-name">养老设施</td><td>养老院、日间照料中心位置、床位数、运营情况</td></tr>
+                <tr><td class="doc-name">文体设施</td><td>文化活动中心、体育场馆、健身场地位置和使用情况</td></tr>
+                <tr><td class="doc-name">商业服务</td><td>菜市场、超市、便利店位置、经营状况</td></tr>
+                <tr><td class="doc-name">交通设施</td><td>公交站点、公共停车场位置、泊位数量</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 市政基础设施 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">💧 市政基础设施</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:100px">调查类别</th><th>具体调查内容</th></tr></thead>
+              <tbody>
+                <tr><td class="doc-name">道路交通</td><td>道路等级、宽度、路面状况、交叉口、拥堵点</td></tr>
+                <tr><td class="doc-name">停车设施</td><td>路内停车、公共停车场、小区停车矛盾</td></tr>
+                <tr><td class="doc-name">给水排水</td><td>管网老化、积水点、内涝点</td></tr>
+                <tr><td class="doc-name">燃气电力</td><td>管网走向、调压站、变电站</td></tr>
+                <tr><td class="doc-name">环卫设施</td><td>垃圾收集点、公厕、转运站</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 历史文化资源 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🏛️ 历史文化资源</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:100px">调查类别</th><th>具体调查内容</th></tr></thead>
+              <tbody>
+                <tr><td class="doc-name">历史建筑</td><td>3处历史建筑（惜字塔、渡口公房、原基建队办公楼）现状、保护情况</td></tr>
+                <tr><td class="doc-name">铁路工业遗产</td><td>老火车站站房、铁路线、仓库等遗存现状</td></tr>
+                <tr><td class="doc-name">历史街巷</td><td>特色街巷格局、传统风貌建筑</td></tr>
+                <tr><td class="doc-name">古树名木</td><td>有无古树、位置、生长状况</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 滨水空间 -->
+    <div class="collapse">
+      <div class="collapse-header" onclick="toggleCollapse(this)">
+        <span class="name">🌳 滨水空间与生态绿地</span>
+        <span class="arrow">▶</span>
+      </div>
+      <div class="collapse-body">
+        <div class="collapse-inner">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th style="width:100px">调查类别</th><th>具体调查内容</th></tr></thead>
+              <tbody>
+                <tr><td class="doc-name">湘江西岸</td><td>岸线现状、亲水性、防洪堤、滨水空间利用</td></tr>
+                <tr><td class="doc-name">公园绿地</td><td>现有公园、街头绿地位置、面积、使用情况</td></tr>
+                <tr><td class="doc-name">铁路沿线</td><td>铁路沿线空间利用、防护绿地</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第四部分 -->
+  <div class="section" id="part4">
+    <div class="section-title"><span class="num">4</span>调研流程与注意事项</div>
+
+    <div class="sub-title">一、调研总体流程</div>
+    <ul class="flow-list">
+      <li>
+        <div class="flow-step">1</div>
+        <div class="flow-content">
+          <div class="flow-stage">前期准备（1-2天）</div>
+          <div class="flow-desc">收集已有资料、打印图纸名单、准备记录表、预约部门和街道社区</div>
+        </div>
+      </li>
+      <li>
+        <div class="flow-step">2</div>
+        <div class="flow-content">
+          <div class="flow-stage">部门函调（3-5天）</div>
+          <div class="flow-desc">向主要部门发正式函调，同步网络补充，跟踪回复</div>
+        </div>
+      </li>
+      <li>
+        <div class="flow-step">3</div>
+        <div class="flow-content">
+          <div class="flow-stage">街道社区座谈（2-3天）</div>
+          <div class="flow-desc">3个街道+4个社区座谈，当天整理纪要</div>
+        </div>
+      </li>
+      <li>
+        <div class="flow-step">4</div>
+        <div class="flow-content">
+          <div class="flow-stage">现场踏勘（5-7天）</div>
+          <div class="flow-desc">按社区分区，老旧小区逐小区踏勘，设施逐点核实</div>
+        </div>
+      </li>
+      <li>
+        <div class="flow-step">5</div>
+        <div class="flow-content">
+          <div class="flow-stage">资料整理（2-3天）</div>
+          <div class="flow-desc">汇总台账、对比差异、电话补充、形成成果</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="sub-title">二、部门走访注意事项</div>
+    <ul class="bullet-list">
+      <li>提前电话预约，带项目介绍信和资料清单</li>
+      <li>正式函调加盖公章，明确回复时限和联系人</li>
+      <li>重点关注数据的年份、口径、范围</li>
+      <li>GIS/CAD矢量数据务必索要原始文件，不要只要截图</li>
+      <li>人口数据区分户籍/常住/居住，年份要一致</li>
+      <li>控规数据确认版本和是否已批复</li>
+      <li>能当场拷贝的数据当场拷贝</li>
+      <li>离开前确认联系人姓名和电话</li>
+    </ul>
+
+    <div class="sub-title">三、街道社区座谈注意事项</div>
+    <ul class="bullet-list">
+      <li>提前对接，明确座谈时间、参加人员、内容</li>
+      <li>人口数据追问到社区级别，不要只要街道汇总</li>
+      <li>小区清单逐社区核对，注意"有名无实"和"有实无名"</li>
+      <li>居民意愿多问"为什么"，了解真实诉求</li>
+      <li>当天整理纪要，24小时内发给对方确认</li>
+      <li>与社区保持良好关系，后续踏勘需要带路协调</li>
+    </ul>
+
+    <div class="sub-title">四、现场踏勘注意事项</div>
+    <ul class="bullet-list">
+      <li>安全第一：不进入危险建筑，注意头顶脚下</li>
+      <li>拍照规范：每个小区至少4张（入口、整体、典型问题、周边），照片命名含小区名</li>
+      <li>位置记录：用GPS或GIS平台记录每个调查点经纬度</li>
+      <li>疑似危房重点标记：位置、照片、破损情况</li>
+      <li>公共服务设施核实：是否真实存在、是否开放、服务半径</li>
+      <li>不要只看主干道，深入背街小巷和小区内部</li>
+      <li>遇到居民询问耐心解释，不随意承诺</li>
+      <li>厂区/铁路区域注意安全，不擅自进入生产区</li>
+      <li>每天踏勘结束立即整理照片和记录</li>
+      <li>与已有资料不符的当场拍照，后续核实</li>
+    </ul>
+
+    <div class="sub-title">五、数据质量控制</div>
+    <ul class="bullet-list">
+      <li>所有数据标注来源、年份、口径</li>
+      <li>人口数据统一口径，不一致的标注</li>
+      <li>面积数据统一单位，GIS实测与官方有差异时说明</li>
+      <li>现场核实数据优先级高于书面资料</li>
+      <li>照片分类存储，文件名含日期和地点</li>
+      <li>关键数据两个以上来源交叉验证</li>
+      <li>不确定的数据标注"待核实"，不凭猜测填入</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- 返回顶部 -->
+<a href="#" class="back-top" id="backTop">↑</a>
+
+<!-- 页脚 -->
+<div class="footer">
+  永州市冷水滩区老火车站片区城市更新项目 · 现场调研与资料调取指导手册<br>
+  编制日期：2026年9月6日
+</div>
+
+<script>
+  // 折叠面板
+  function toggleCollapse(header) {
+    const collapse = header.parentElement;
+    collapse.classList.toggle('open');
+  }
+
+  // 返回顶部
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backTop.classList.add('show');
+    } else {
+      backTop.classList.remove('show');
+    }
+  });
+  backTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 平滑滚动
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
