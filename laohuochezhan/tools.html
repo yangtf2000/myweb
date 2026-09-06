@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目工具集 - 老火车站片区城市更新</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:30px 20px}
+.back{display:inline-block;margin-bottom:20px;color:#4a9eff;text-decoration:none;font-size:13px}
+.back:hover{text-decoration:underline}
+h1{color:#fff;font-size:26px;margin-bottom:10px;border-left:4px solid #e94560;padding-left:15px}
+.subtitle{color:#888;font-size:13px;margin-bottom:30px;padding-left:19px}
+.tool-card{background:#15151f;border-radius:12px;padding:30px;margin-bottom:25px;border:1px solid #2a2a3e;display:flex;gap:25px;align-items:flex-start;transition:all .3s}
+.tool-card:hover{border-color:#e94560;transform:translateY(-3px);box-shadow:0 10px 30px rgba(233,69,96,.1)}
+.tool-icon{flex-shrink:0;width:80px;height:80px;background:linear-gradient(135deg,#e94560,#c23152);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:36px}
+.tool-info{flex:1}
+.tool-info h2{color:#fff;font-size:20px;margin-bottom:8px}
+.tool-info .version{display:inline-block;padding:3px 10px;background:rgba(233,69,96,.2);color:#e94560;border-radius:3px;font-size:11px;margin-bottom:12px}
+.tool-info p{color:#aaa;font-size:13px;line-height:1.8;margin-bottom:15px}
+.tool-features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:15px}
+.tool-features span{padding:4px 12px;background:#1a1a2e;border-radius:15px;font-size:11px;color:#888;border:1px solid #2a2a3e}
+.tool-buttons{display:flex;gap:10px}
+.btn{padding:10px 25px;border-radius:6px;font-size:13px;text-decoration:none;transition:all .3s;cursor:pointer;border:none;display:inline-block}
+.btn-primary{background:#e94560;color:#fff}
+.btn-primary:hover{background:#d63850}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}
+.btn-outline:hover{border-color:#e94560;color:#e94560}
+.section{background:#15151f;border-radius:8px;padding:25px;margin-bottom:20px;border:1px solid #2a2a3e}
+.section h2{color:#fff;font-size:18px;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #2a2a3e}
+ul{font-size:13px;color:#aaa;line-height:2;padding-left:20px}
+.note-box{background:rgba(233,69,96,.1);border-left:3px solid #e94560;padding:12px 15px;border-radius:0 4px 4px 0;margin:15px 0;font-size:12px;color:#ccc}
+@media(max-width:768px){.tool-card{flex-direction:column}.tool-icon{width:60px;height:60px;font-size:28px}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back">← 返回首页</a>
+<h1>项目工具集</h1>
+<div class="subtitle">老火车站片区城市更新项目 · 专业工具与平台</div>
+
+<div class="tool-card">
+<div class="tool-icon">🗺️</div>
+<div class="tool-info">
+<h2>GIS分析平台</h2>
+<span class="version">V2.1</span>
+<p>基于WebGIS的片区空间分析平台，支持多源底图切换、边界管理、图层控制、POI兴趣点管理、GIS分析、人工标注等功能，是片区城市更新项目的空间分析核心工具。</p>
+<div class="tool-features">
+<span>高德/天地图双底图</span>
+<span>卫星/街道切换</span>
+<span>片区边界管理</span>
+<span>社区边界管理</span>
+<span>POI兴趣点图层</span>
+<span>GIS分析功能</span>
+<span>人工标注</span>
+<span>数据内嵌HTML</span>
+</div>
+<div class="tool-buttons">
+<a href="gis.html" class="btn btn-primary">打开GIS平台</a>
+</div>
+</div>
+</div>
+
+<div class="tool-card">
+<div class="tool-icon">📱</div>
+<div class="tool-info">
+<h2>现场调研工具</h2>
+<span class="version">V2.0</span>
+<p>面向现场踏勘的移动端调研工具，支持GPS定位、点位标注、照片上传、调查表填写、数据导出等功能，适用于老旧小区、闲置建筑、公共服务设施等各类现状调查。</p>
+<div class="tool-features">
+<span>GPS定位</span>
+<span>点位标注</span>
+<span>照片上传</span>
+<span>调查表填写</span>
+<span>数据导出</span>
+<span>多类型调查</span>
+<span>离线可用</span>
+<span>移动端适配</span>
+</div>
+<div class="tool-buttons">
+<a href="survey.html" class="btn btn-primary">打开调研工具</a>
+</div>
+</div>
+</div>
+
+<div class="section">
+<h2>工具使用说明</h2>
+<ul>
+<li><strong>GIS分析平台：</strong>主要用于室内分析阶段，查看片区空间数据、进行GIS分析、生成分析图。支持在电脑端浏览器中打开使用。</li>
+<li><strong>现场调研工具：</strong>主要用于现场踏勘阶段，在手机或平板浏览器中打开，进行点位标注、拍照、填写调查表。建议提前下载离线地图包。</li>
+<li><strong>数据互通：</strong>现场调研工具收集的数据可导出为JSON/Excel格式，导入GIS分析平台进行空间分析和可视化展示。</li>
+<li><strong>浏览器兼容：</strong>推荐使用Chrome、Edge、Firefox等现代浏览器，不建议使用IE浏览器。</li>
+</ul>
+</div>
+
+<div class="note-box">
+📌 <strong>说明：</strong>本项目工具集为网页应用，无需安装，直接在浏览器中打开即可使用。所有数据均存储在本地浏览器中，清除浏览器数据会导致数据丢失，请定期导出备份。GIS平台的基础数据已内嵌到HTML文件中，无需额外调用外部数据库。
+</div>
+
+</div>
+</body>
+</html>

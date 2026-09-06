@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>部门资料收集 - 老火车站片区城市更新</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:30px 20px}
+.back{display:inline-block;margin-bottom:20px;color:#4a9eff;text-decoration:none;font-size:13px}
+.back:hover{text-decoration:underline}
+h1{color:#fff;font-size:26px;margin-bottom:10px;border-left:4px solid #e94560;padding-left:15px}
+.subtitle{color:#888;font-size:13px;margin-bottom:30px;padding-left:19px}
+.nav-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:30px}
+.nav-card{background:#15151f;border:1px solid #2a2a3e;border-radius:6px;padding:12px;text-align:center;text-decoration:none;color:#ccc;font-size:12px;transition:all .2s}
+.nav-card:hover{border-color:#e94560;color:#fff}
+.nav-card.active{border-color:#e94560;background:rgba(233,69,96,.1);color:#e94560}
+.dept-card{background:#15151f;border-radius:8px;margin-bottom:15px;border:1px solid #2a2a3e;overflow:hidden}
+.dept-header{padding:15px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#1a1a2e;transition:all .2s}
+.dept-header:hover{background:#22223a}
+.dept-header h3{color:#fff;font-size:15px;margin:0}
+.dept-header .count{color:#888;font-size:12px}
+.dept-header .arrow{color:#e94560;transition:transform .3s;font-size:12px}
+.dept-card.open .arrow{transform:rotate(90deg)}
+.dept-content{display:none;padding:20px;background:#15151f}
+.dept-card.open .dept-content{display:block}
+.dept-content table{width:100%;border-collapse:collapse;font-size:12px}
+.dept-content th{background:#1a1a2e;color:#ddd;padding:8px;text-align:left;border-bottom:2px solid #2a2a3e}
+.dept-content td{padding:8px;border-bottom:1px solid #222;color:#aaa}
+.dept-content td:first-child{width:40px;color:#e94560;font-weight:600}
+.note-box{background:rgba(233,69,96,.1);border-left:3px solid #e94560;padding:12px 15px;border-radius:0 4px 4px 0;margin:15px 0;font-size:12px;color:#ccc}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px}
+.tag-main{background:rgba(233,69,96,.2);color:#e94560}
+.tag-consult{background:rgba(74,158,255,.2);color:#4a9eff}
+.tag-utility{background:rgba(46,204,113,.2);color:#2ecc71}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back">← 返回首页</a>
+<h1>部门资料收集清单</h1>
+<div class="subtitle">老火车站片区城市更新项目 · 各部门资料需求清单 V1.0</div>
+
+<div class="nav-cards">
+<a href="survey_work.html" class="nav-card">📋 总体计划</a>
+<a href="dept_survey.html" class="nav-card active">🏢 部门资料</a>
+<a href="community_survey.html" class="nav-card">👥 街道社区</a>
+<a href="field_manual.html" class="nav-card">📝 踏勘手册</a>
+<a href="checklist.html" class="nav-card">📑 资料清单</a>
+</div>
+
+<div class="note-box">
+📌 <strong>说明：</strong>本清单为老火车站片区城市更新项目需向各相关部门调取的资料清单，分为<strong>主要部门（10个）</strong>、<strong>建议咨询部门（8个）</strong>、<strong>公用事业企业（2个）</strong>三类。除本清单所列资料以外，如各部门还有其他对本片区城市更新工作有用的资料，也请一并提供。
+</div>
+
+<h2 style="color:#fff;font-size:18px;margin:25px 0 15px"><span class="tag tag-main">主要部门</span> 需重点调取资料</h2>
+
+<div class="dept-card open">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>1. 永州市自然资源和规划局</h3>
+<span class="count">7项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>永州市国土空间总体规划（现行版）</td><td>涉及本片区的用地布局、功能定位、管控要求</td></tr>
+<tr><td>2</td><td>冷水滩区老火车站片区控制性详细规划</td><td>含用地布局、指标、道路系统、配套设施等</td></tr>
+<tr><td>3</td><td>第三次全国国土调查数据及年度变更数据</td><td>含现状用地分类、权属、面积等基础数据（三调资料）</td></tr>
+<tr><td>4</td><td>各类专项规划</td><td>综合交通、公共服务设施、绿地系统、市政基础设施等专项规划</td></tr>
+<tr><td>5</td><td>存量资源清单</td><td>闲置土地、低效用地清单及相关数据</td></tr>
+<tr><td>6</td><td>片区现状高清影像图</td><td>最新卫星影像或航拍影像</td></tr>
+<tr><td>7</td><td>片区地形图纸</td><td>含等高线、高程等地形数据（CAD格式优先）</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>2. 永州市住房和城乡建设局</h3>
+<span class="count">14项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>永州市城市更新专项规划</td><td>含附件、附表，涉及本片区的更新目标、策略、项目</td></tr>
+<tr><td>2</td><td>永州市城市体检报告</td><td>含附件、附表，涉及本片区的体检指标、问题诊断</td></tr>
+<tr><td>3</td><td>住房发展规划</td><td>涉及本片区的住房发展目标、政策、项目</td></tr>
+<tr><td>4</td><td>历史文化保护规划</td><td>含历史文化街区、历史建筑、文保单位等保护要求</td></tr>
+<tr><td>5</td><td>住建系统"十五五"期间项目清单</td><td>涉及本片区的建设项目及建设内容</td></tr>
+<tr><td>6</td><td>老旧小区改造计划及台账</td><td>本片区已改造、正在改造、计划改造的老旧小区清单</td></tr>
+<tr><td>7</td><td>危房鉴定数据</td><td>针对本片区范围的危房鉴定报告及台账</td></tr>
+<tr><td>8</td><td>闲置建筑台账</td><td>本片区闲置公共建筑、企业厂房等台账（市国资委管的部分）</td></tr>
+<tr><td>9</td><td>市政基础设施现状资料</td><td>供水、排水、燃气、供热等管网现状图及台账</td></tr>
+<tr><td>10</td><td>园林绿化现状资料</td><td>公园绿地、防护绿地、道路绿化等现状台账</td></tr>
+<tr><td>11</td><td>城市黑臭水体清单</td><td>本片区及周边黑臭水体治理情况</td></tr>
+<tr><td>12</td><td>生活污水集中收集率数据</td><td>本片区污水收集处理现状</td></tr>
+<tr><td>13</td><td>老旧排水（污水）管网清单</td><td>本片区老旧管网改造计划及台账（注：不同城市管理部门可能不同）</td></tr>
+<tr><td>14</td><td>老旧泵站清单（如有）</td><td>本片区及周边排水泵站现状及改造计划</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>3. 永州市城市管理和综合执法局</h3>
+<span class="count">10项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>环境卫生专项规划</td><td>涉及本片区的环卫设施布局、垃圾收运体系</td></tr>
+<tr><td>2</td><td>市政公用设施现状资料</td><td>给水、排水、燃气、电力、电信等老旧管网现状（暂按城管局归口）</td></tr>
+<tr><td>3</td><td>停车设施现状资料</td><td>本片区路内、路外停车场现状及台账</td></tr>
+<tr><td>4</td><td>公厕现状台账</td><td>本片区公厕位置、数量、等级、改造计划</td></tr>
+<tr><td>5</td><td>垃圾收集设施台账</td><td>垃圾收集点、转运站、分类设施现状</td></tr>
+<tr><td>6</td><td>户外广告及招牌设置规划</td><td>本片区广告招牌设置管理要求</td></tr>
+<tr><td>7</td><td>城市照明设施现状</td><td>本片区路灯、景观照明现状及改造计划</td></tr>
+<tr><td>8</td><td>占道经营及违章搭建台账</td><td>本片区重点整治区域及处理情况</td></tr>
+<tr><td>9</td><td>园林绿化管养资料</td><td>本片区公共绿地管养现状及问题</td></tr>
+<tr><td>10</td><td>数字城管平台数据</td><td>本片区城市管理问题高发区域及类型统计</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>4. 永州市教育局</h3>
+<span class="count">4项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>教育设施专项规划</td><td>涉及本片区的中小学、幼儿园布局规划</td></tr>
+<tr><td>2</td><td>片区教育统计数据</td><td>本片区中小学、幼儿园数量、规模、学位、班额等</td></tr>
+<tr><td>3</td><td>本片区教育设施改造计划</td><td>涉及本片区学校的改扩建、提质改造计划</td></tr>
+<tr><td>4</td><td>学校办学条件评估数据</td><td>本片区学校用地、建筑面积、设施设备等达标情况</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>5. 永州市卫生健康委员会</h3>
+<span class="count">4项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>医疗卫生设施专项规划</td><td>涉及本片区的医院、社区卫生服务中心、卫生站布局</td></tr>
+<tr><td>2</td><td>片区医疗统计数据</td><td>本片区医疗机构数量、床位、人员、服务半径等</td></tr>
+<tr><td>3</td><td>本片区医疗设施改造计划</td><td>涉及本片区医疗机构的改扩建、提质改造计划</td></tr>
+<tr><td>4</td><td>公共卫生服务数据</td><td>本片区基本公共卫生服务覆盖情况、重点人群健康数据</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>6. 永州市民政局</h3>
+<span class="count">5项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>养老服务设施专项规划</td><td>涉及本片区的养老院、日间照料中心、养老驿站布局</td></tr>
+<tr><td>2</td><td>片区养老统计数据</td><td>本片区养老机构数量、床位、人员、服务覆盖等</td></tr>
+<tr><td>3</td><td>社区服务设施现状</td><td>本片区社区服务用房、政务服务点等现状台账</td></tr>
+<tr><td>4</td><td>特殊群体数据</td><td>本片区低保户、特困人员、残疾人、留守儿童等统计数据</td></tr>
+<tr><td>5</td><td>社会组织及社区治理数据</td><td>本片区社会组织、业委会、志愿者队伍等现状</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>7. 永州市消防救援支队</h3>
+<span class="count">2项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>消防设施专项规划</td><td>涉及本片区的消防站、消防通道、消防供水等布局规划</td></tr>
+<tr><td>2</td><td>片区消防安全现状数据</td><td>本片区消防站、消防栓、消防通道现状，火灾高发区域，重大火灾隐患台账</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>8. 永州市水利局 <span style="font-size:11px;color:#888">（归口待确认）</span></h3>
+<span class="count">3项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>防洪排涝专项规划</td><td>涉及本片区的防洪标准、排涝设施布局、易涝点整治</td></tr>
+<tr><td>2</td><td>片区防洪排涝现状数据</td><td>本片区防洪堤、排涝泵站、易涝点现状及治理情况</td></tr>
+<tr><td>3</td><td>湘江流域相关规划</td><td>涉及本片区湘江西岸的岸线利用、防洪要求、生态保护</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>9. 永州市人民政府国有资产监督管理委员会</h3>
+<span class="count">2项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>市属国有企业闲置资产台账</td><td>本片区市属国企闲置土地、厂房、办公用房等资产清单</td></tr>
+<tr><td>2</td><td>国有企业改制及搬迁资料</td><td>本片区已改制、已搬迁或计划搬迁的国有企业相关资料</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>10. 永州市公安局 / 永州市统计局</h3>
+<span class="count">2项资料 <span class="arrow">▶</span></span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>资料名称</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>片区人口统计数据（统计局）</td><td>本片区常住人口、户籍人口、年龄结构、就业情况等</td></tr>
+<tr><td>2</td><td>片区治安及交通数据（公安局）</td><td>本片区治安状况、交通事故多发点、人口流动等数据（注：如社区有相应资料，不需要去）</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h2 style="color:#fff;font-size:18px;margin:30px 0 15px"><span class="tag tag-consult">建议咨询部门</span> 视情况了解，非必须</h2>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>建议咨询部门清单（8个）</h3>
+<span class="arrow">▶</span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>部门名称</th><th>建议了解内容</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>永州市文化旅游广电体育局</td><td>文旅设施现状、体育设施规划、非物质文化遗产保护</td></tr>
+<tr><td>2</td><td>永州市商务局</td><td>商业网点规划、农贸市场现状、招商引资政策</td></tr>
+<tr><td>3</td><td>永州市科学技术和工业信息化局</td><td>工业企业现状、老旧厂区改造、科技创新政策</td></tr>
+<tr><td>4</td><td>永州市应急管理局</td><td>安全生产现状、应急避难场所、防灾减灾规划</td></tr>
+<tr><td>5</td><td>永州市交通运输局</td><td>综合交通规划、公交线网优化、客运枢纽布局</td></tr>
+<tr><td>6</td><td>永州市发展和改革委员会</td><td>国民经济和社会发展规划、重点项目计划、投资政策</td></tr>
+<tr><td>7</td><td>永州市生态环境局</td><td>环境质量数据、污染地块清单、生态保护红线</td></tr>
+<tr><td>8</td><td>永州市公安局交通警察支队</td><td>交通组织优化、停车管理、交通拥堵治理</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<h2 style="color:#fff;font-size:18px;margin:30px 0 15px"><span class="tag tag-utility">公用事业企业</span> 需协调获取资料</h2>
+
+<div class="dept-card">
+<div class="dept-header" onclick="this.parentElement.classList.toggle('open')">
+<h3>公用事业企业清单（2个）</h3>
+<span class="arrow">▶</span>
+</div>
+<div class="dept-content">
+<table>
+<thead><tr><th>序号</th><th>企业名称</th><th>需获取资料</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>永州市自来水公司</td><td>供水管网现状图、供水压力数据、二次供水设施台账、消防栓位置（注：消防栓一般在水务公司）</td></tr>
+<tr><td>2</td><td>永州市燃气公司</td><td>燃气管网现状图、燃气安全隐患台账、燃气普及率数据</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="note-box">
+📌 <strong>调取要求：</strong>
+<br>1. 请各部门提供的文件格式优先为电子版（CAD、GIS、PDF、Word、Excel等），纸质版请加盖公章。
+<br>2. 涉及本片区范围的数据请尽量提取片区范围的专题数据，如无法提取请提供全区数据并标注。
+<br>3. 除本清单所列资料以外，如各部门还有其他对本片区城市更新工作有用的资料，也请一并提供。
+<br>4. 资料提供联系人及联系方式：__________（待填写）
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll('.dept-header').forEach(h => {
+  h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+});
+</script>
+</body>
+</html>

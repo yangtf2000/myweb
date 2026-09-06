@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>现场踏勘工作手册 - 老火车站片区城市更新</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:30px 20px}
+.back{display:inline-block;margin-bottom:20px;color:#4a9eff;text-decoration:none;font-size:13px}
+.back:hover{text-decoration:underline}
+h1{color:#fff;font-size:26px;margin-bottom:10px;border-left:4px solid #e94560;padding-left:15px}
+.subtitle{color:#888;font-size:13px;margin-bottom:30px;padding-left:19px}
+.nav-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:30px}
+.nav-card{background:#15151f;border:1px solid #2a2a3e;border-radius:6px;padding:12px;text-align:center;text-decoration:none;color:#ccc;font-size:12px;transition:all .2s}
+.nav-card:hover{border-color:#e94560;color:#fff}
+.nav-card.active{border-color:#e94560;background:rgba(233,69,96,.1);color:#e94560}
+.type-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:25px}
+.type-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:6px;padding:15px;text-align:center;color:#ccc;font-size:12px;transition:all .2s;cursor:pointer}
+.type-card:hover{border-color:#e94560;color:#fff;background:rgba(233,69,96,.1)}
+.type-card .icon{font-size:24px;margin-bottom:8px}
+.section{background:#15151f;border-radius:8px;padding:25px;margin-bottom:20px;border:1px solid #2a2a3e}
+.section h2{color:#fff;font-size:18px;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #2a2a3e}
+.section h3{color:#ddd;font-size:15px;margin:15px 0 10px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#1a1a2e;color:#ddd;padding:10px 8px;text-align:left;border-bottom:2px solid #2a2a3e}
+td{padding:8px;border-bottom:1px solid #222;color:#aaa}
+tr:hover td{background:rgba(233,69,96,.05)}
+ul{font-size:13px;color:#aaa;line-height:2;padding-left:20px}
+.tag{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;margin-right:5px}
+.tag-red{background:rgba(233,69,96,.2);color:#e94560}
+.tag-blue{background:rgba(74,158,255,.2);color:#4a9eff}
+.tag-green{background:rgba(46,204,113,.2);color:#2ecc71}
+.flow-box{background:#1a1a2e;border-radius:6px;padding:20px;margin:15px 0}
+.flow-step{display:flex;align-items:flex-start;gap:15px;margin-bottom:15px}
+.flow-step:last-child{margin-bottom:0}
+.flow-num{flex-shrink:0;width:30px;height:30px;background:#e94560;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+.flow-content h4{color:#fff;font-size:14px;margin-bottom:5px}
+.flow-content p{color:#aaa;font-size:12px;line-height:1.6}
+.note-box{background:rgba(233,69,96,.1);border-left:3px solid #e94560;padding:12px 15px;border-radius:0 4px 4px 0;margin:15px 0;font-size:12px;color:#ccc}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back">← 返回首页</a>
+<h1>现场踏勘工作手册</h1>
+<div class="subtitle">老火车站片区城市更新项目 · 现场调查全流程指引 V1.0</div>
+
+<div class="nav-cards">
+<a href="survey_work.html" class="nav-card">📋 总体计划</a>
+<a href="dept_survey.html" class="nav-card">🏢 部门资料</a>
+<a href="community_survey.html" class="nav-card">👥 街道社区</a>
+<a href="field_manual.html" class="nav-card active">📝 踏勘手册</a>
+<a href="checklist.html" class="nav-card">📑 资料清单</a>
+</div>
+
+<div class="section">
+<h2>一、调查类型总览</h2>
+<div class="type-grid">
+<div class="type-card"><div class="icon">🏠</div>老旧小区</div>
+<div class="type-card"><div class="icon">🏚️</div>闲置建筑</div>
+<div class="type-card"><div class="icon">🏛️</div>历史建筑</div>
+<div class="type-card"><div class="icon">🏥</div>公共服务设施</div>
+<div class="type-card"><div class="icon">💧</div>市政基础设施</div>
+<div class="type-card"><div class="icon">🚗</div>道路交通</div>
+<div class="type-card"><div class="icon">🌳</div>绿化景观</div>
+<div class="type-card"><div class="icon">🏪</div>商业商务</div>
+<div class="type-card"><div class="icon">🏭</div>工业用地</div>
+<div class="type-card"><div class="icon">🚧</div>违章建筑</div>
+<div class="type-card"><div class="icon">⚠️</div>安全隐患</div>
+<div class="type-card"><div class="icon">👥</div>人口与社会</div>
+</div>
+</div>
+
+<div class="section">
+<h2>二、现场踏勘工作流程</h2>
+<div class="flow-box">
+<div class="flow-step"><div class="flow-num">1</div><div class="flow-content"><h4>前期准备</h4><p>收集基础资料（影像图、小区名单、控规图、GIS数据）；制定踏勘计划；准备调查表格和工具；与街道社区对接。</p></div></div>
+<div class="flow-step"><div class="flow-num">2</div><div class="flow-content"><h4>分组踏勘</h4><p>片区策划组（4人）：重点调查闲置建筑、历史文化、公共服务、道路交通、绿化景观、商业商务、工业用地；老旧小区组（6人）：逐小区逐栋精细化调查。</p></div></div>
+<div class="flow-step"><div class="flow-num">3</div><div class="flow-content"><h4>现场记录</h4><p>使用现场调研小工具记录位置、拍照、填写调查表；每个调查对象至少拍摄3张照片（全景、近景、细节）；标注拍摄方向和时间。</p></div></div>
+<div class="flow-step"><div class="flow-num">4</div><div class="flow-content"><h4>当日整理</h4><p>每日踏勘结束后，整理当日调查数据；核对调查表填写完整性；上传照片并标注；汇总发现的问题和需补充调查的内容。</p></div></div>
+<div class="flow-step"><div class="flow-num">5</div><div class="flow-content"><h4>补勘核实</h4><p>对调查中发现的疑问、遗漏进行补充踏勘；对关键数据进行交叉核实；与街道社区确认相关信息。</p></div></div>
+<div class="flow-step"><div class="flow-num">6</div><div class="flow-content"><h4>数据汇总</h4><p>汇总所有调查数据；建立片区现状数据库；生成现状分析图表；形成现状调查报告。</p></div></div>
+</div>
+</div>
+
+<div class="section">
+<h2>三、各类调查详细内容</h2>
+
+<h3><span class="tag tag-red">类型1</span>老旧小区调查</h3>
+<table>
+<thead><tr><th style="width:120px">调查项</th><th>调查内容</th><th style="width:80px">资料来源</th></tr></thead>
+<tbody>
+<tr><td>基本信息</td><td>小区完整名称、所在社区、建成年代、建筑面积、户数、楼栋数、单元数、产权单位</td><td>社区台账/现场</td></tr>
+<tr><td>建筑质量</td><td>结构类型、层数、外立面状况、屋顶渗漏、墙体开裂、地基沉降、危房情况</td><td>现场调查</td></tr>
+<tr><td>基础设施</td><td>供水、排水、供电、燃气、通信管线状况；化粪池、检查井；路灯；消防设施</td><td>现场调查</td></tr>
+<tr><td>公共空间</td><td>小区道路、停车场地、活动场地、绿化空间、宣传栏、健身设施</td><td>现场调查</td></tr>
+<tr><td>环境卫生</td><td>垃圾收集点、公厕、污水排放、乱堆乱放、牛皮癣、鼠蟑情况</td><td>现场调查</td></tr>
+<tr><td>安全隐患</td><td>消防通道、电气线路、燃气使用、危房、围墙、护坡、电梯（如有）</td><td>现场调查</td></tr>
+<tr><td>适老化</td><td>无障碍设施、扶手、坡道、老年活动空间、特殊困难老年人情况</td><td>现场/社区</td></tr>
+<tr><td>物业管理</td><td>物业类型（专业化/单位自管/自治/无物业）、物业费标准、收缴率、服务内容</td><td>社区/现场</td></tr>
+<tr><td>改造需求</td><td>居民最关心的改造内容、加装电梯需求、停车需求、加装充电桩需求</td><td>座谈/问卷</td></tr>
+<tr><td>照片要求</td><td>小区入口、典型楼栋、公共空间、管线问题、安全隐患、特色元素，每小区不少于10张</td><td>现场拍摄</td></tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:25px"><span class="tag tag-blue">类型2</span>闲置建筑调查</h3>
+<table>
+<thead><tr><th style="width:120px">调查项</th><th>调查内容</th><th style="width:80px">资料来源</th></tr></thead>
+<tbody>
+<tr><td>基本信息</td><td>建筑完整名称、所在社区、具体地点、建筑类型、建成年代、建筑面积、层数、结构类型</td><td>社区/现场</td></tr>
+<tr><td>权属信息</td><td>产权单位、产权性质（国有/集体/私人）、是否有抵押、是否有纠纷</td><td>社区/自规局</td></tr>
+<tr><td>现状用途</td><td>当前使用状态（完全闲置/部分使用/出租）、原用途、现用途、使用单位</td><td>现场调查</td></tr>
+<tr><td>建筑质量</td><td>结构安全状况、外立面、屋顶、门窗、内部空间、是否有危房鉴定</td><td>现场调查</td></tr>
+<tr><td>闲置原因</td><td>企业改制/搬迁/经营不善/政策原因/其他</td><td>座谈了解</td></tr>
+<tr><td>改造潜力</td><td>可改造用途建议（文创/商业/办公/公共服务/居住/其他）、改造难度评估</td><td>专业判断</td></tr>
+<tr><td>照片要求</td><td>建筑全景、入口、外立面、内部空间（如可进入）、周边环境，每栋不少于5张</td><td>现场拍摄</td></tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:25px"><span class="tag tag-green">类型3</span>历史建筑与工业遗产调查</h3>
+<table>
+<thead><tr><th style="width:120px">调查项</th><th>调查内容</th><th style="width:80px">资料来源</th></tr></thead>
+<tbody>
+<tr><td>基本信息</td><td>名称、地址、建成年代、建筑风格、结构类型、建筑面积、层数</td><td>住建局/现场</td></tr>
+<tr><td>保护级别</td><td>文保单位（国/省/市/区）、历史建筑、历史文化街区、工业遗产、未认定但有价值</td><td>住建局</td></tr>
+<tr><td>历史价值</td><td>历史沿革、重要事件、名人轶事、建筑特色、工艺价值、社会记忆</td><td>资料/座谈</td></tr>
+<tr><td>现状状况</td><td>使用状态、保护状况、修缮情况、损坏程度、周边环境变化</td><td>现场调查</td></tr>
+<tr><td>保护要求</td><td>保护范围、建设控制地带、保护规定、修缮要求、利用限制</td><td>保护规划</td></tr>
+<tr><td>照片要求</td><td>全景、立面、细部（门窗、装饰、构件）、内部空间、周边环境，每处不少于8张</td><td>现场拍摄</td></tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:25px"><span class="tag tag-red">类型4</span>公共服务设施调查</h3>
+<table>
+<thead><tr><th style="width:120px">调查项</th><th>调查内容</th><th style="width:80px">资料来源</th></tr></thead>
+<tbody>
+<tr><td>教育设施</td><td>幼儿园、小学、中学名称、位置、规模、学位、班额、服务半径、办学条件</td><td>教育局/现场</td></tr>
+<tr><td>医疗设施</td><td>社区卫生服务中心、卫生站、诊所名称、位置、床位、人员、服务半径</td><td>卫健委/现场</td></tr>
+<tr><td>养老设施</td><td>养老院、日间照料中心、养老驿站名称、位置、床位、人员、服务内容</td><td>民政局/现场</td></tr>
+<tr><td>文化设施</td><td>文化站、图书室、活动中心、文化广场名称、位置、面积、设施、使用情况</td><td>社区/现场</td></tr>
+<tr><td>体育设施</td><td>健身路径、球场、健身房、体育场地名称、位置、面积、设施、使用情况</td><td>社区/现场</td></tr>
+<tr><td>社区服务</td><td>社区服务用房、政务服务点、警务室、物业用房位置、面积、使用情况</td><td>社区/现场</td></tr>
+<tr><td>商业服务</td><td>菜市场、超市、便利店、餐饮店、药店等便民商业网点分布</td><td>现场调查</td></tr>
+<tr><td>照片要求</td><td>设施外观、入口、内部空间、设施设备，每处不少于3张</td><td>现场拍摄</td></tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:25px"><span class="tag tag-blue">类型5</span>市政基础设施调查</h3>
+<table>
+<thead><tr><th style="width:120px">调查项</th><th>调查内容</th><th style="width:80px">资料来源</th></tr></thead>
+<tbody>
+<tr><td>供水设施</td><td>供水管网走向、管径、材质、年代；泵站、水阀；漏损点；二次供水设施</td><td>自来水公司/现场</td></tr>
+<tr><td>排水设施</td><td>排水体制（雨污合流/分流）、管网走向、管径、年代；检查井、化粪池；易涝点；老旧泵站</td><td>城管局/现场</td></tr>
+<tr><td>燃气设施</td><td>燃气管网走向、管径、材质、年代；调压站；安全隐患点；燃气普及率</td><td>燃气公司/现场</td></tr>
+<tr><td>电力设施</td><td>配电房、变压器、架空线路、电缆通道；用电负荷；安全隐患</td><td>供电局/现场</td></tr>
+<tr><td>通信设施</td><td>通信机房、基站、架空线路、光缆通道；5G覆盖情况</td><td>通信公司/现场</td></tr>
+<tr><td>环卫设施</td><td>公厕、垃圾收集点、垃圾转运站、分类设施；保洁人员配置</td><td>城管局/现场</td></tr>
+<tr><td>消防设施</td><td>消防站、消防栓、消防通道、消防水池；消防设施完好率</td><td>消防支队/现场</td></tr>
+<tr><td>照片要求</td><td>管线外露、检查井、泵站、设施设备、问题点，每类不少于5张</td><td>现场拍摄</td></tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:25px"><span class="tag tag-green">类型6</span>道路交通调查</h3>
+<table>
+<thead><tr><th style="width:120px">调查项</th><th>调查内容</th><th style="width:80px">资料来源</th></tr></thead>
+<tbody>
+<tr><td>道路系统</td><td>各级道路名称、走向、宽度、断面形式、路面状况、等级；断头路、瓶颈路</td><td>自规局/现场</td></tr>
+<tr><td>铁路影响</td><td>废弃铁路走向、平交道口、分割影响、可利用空间；铁路用地范围</td><td>现场调查</td></tr>
+<tr><td>停车设施</td><td>路内停车位、路外停车场、配建停车场、占道停车；停车缺口</td><td>城管局/现场</td></tr>
+<tr><td>公交设施</td><td>公交站点位置、线路、班次、候车设施；公交覆盖率</td><td>交通局/现场</td></tr>
+<tr><td>慢行系统</td><td>人行道、非机动车道、步行连续性、无障碍设施、过街设施</td><td>现场调查</td></tr>
+<tr><td>交通拥堵</td><td>拥堵点、拥堵时段、交通事故多发点、交通组织问题</td><td>交警/现场</td></tr>
+<tr><td>照片要求</td><td>道路全景、交叉口、路面状况、停车、公交站、拥堵点，每类不少于5张</td><td>现场拍摄</td></tr>
+</tbody>
+</table>
+
+<h3 style="margin-top:25px"><span class="tag tag-red">类型7-12</span>其他调查类型（简要）</h3>
+<table>
+<thead><tr><th style="width:100px">类型</th><th>主要调查内容</th></tr></thead>
+<tbody>
+<tr><td>绿化景观</td><td>公园绿地、道路绿化、滨水空间、小区绿化、古树名木；位置、面积、质量、使用情况</td></tr>
+<tr><td>商业商务</td><td>商业网点、商务办公、酒店住宿、餐饮娱乐、空置商铺；位置、规模、业态、经营状况</td></tr>
+<tr><td>工业用地</td><td>企业信息、用地状况、建筑状况、经营状况、环保安全、改造潜力；位置、面积、行业类型</td></tr>
+<tr><td>违章建筑</td><td>位置、建设年代、面积、层数、结构、用途、违章类型、处理情况、影响评估</td></tr>
+<tr><td>安全隐患</td><td>房屋安全、消防安全、地质灾害、防洪排涝、其他隐患；位置、类型、严重程度、处理建议</td></tr>
+<tr><td>人口与社会</td><td>人口结构、特殊群体、就业情况、住房情况、社会网络、诉求意愿；数据来源社区/统计局/问卷</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2>四、与现场调研小工具结合</h2>
+<ul>
+<li>使用现场调研工具V2.0记录调查点位、拍照、填写调查表</li>
+<li>GIS平台V2.1用于查看片区边界、用地、建筑、POI等基础数据</li>
+<li>每日踏勘结束后，将工具收集的数据导出整理</li>
+<li>关键点位在GIS平台中标注，便于后续分析</li>
+<li>照片按"社区-小区-类型-序号"命名，建立照片台账</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>五、数据整理与汇总要求</h2>
+<ul>
+<li>所有调查表中的小区、建筑、单位名称必须填写<strong>完整全称</strong>，不得使用简称、俗称、缩写</li>
+<li>建立"社区-小区-建筑"三级名称体系，确保名称唯一性</li>
+<li>每个调查对象建立独立档案，包含基本信息表、照片、现场记录</li>
+<li>数据按类型分类汇总，生成统计表和分析图</li>
+<li>关键数据需与部门资料、社区台账交叉核实</li>
+<li>发现的数据缺口需列出清单，安排补充调查</li>
+<li>所有原始资料（调查表、照片、记录）需归档保存</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>六、注意事项</h2>
+<ul>
+<li>现场踏勘需佩戴工作证，着装整齐，注意言行举止</li>
+<li>进入小区、单位需提前联系，征得同意后方可进入</li>
+<li>拍摄居民、商铺需征得同意，注意保护隐私</li>
+<li>注意人身安全，不进入危房、施工现场等危险区域</li>
+<li>高温天气注意防暑，合理安排踏勘时间</li>
+<li>每日踏勘需制定路线，避免重复和遗漏</li>
+<li>遇到居民询问，耐心解答，不随意承诺</li>
+<li>发现重大安全隐患或紧急情况，及时报告</li>
+<li>保持通讯畅通，各组之间保持联系</li>
+<li>踏勘车辆需提前安排，注意停车安全</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>
