@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>老火车站片区资料需求清单</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --card2:#273449;
+  --bg2:#1e293b;
+  --bg3:#334155;
+  --line:#334155;
+  --line2:#273449;
+  --text:#f1f5f9;
+  --text2:#cbd5e1;
+  --text3:#94a3b8;
+  --rust:#22c55e;
+  --rust2:#16a34a;
+  --rust-bg:rgba(34,197,94,.15);
+  --blue:#4d96ff;
+  --green:#22c55e;
+  --green-bg:rgba(34,197,94,.15);
+  --yellow:#fbbf24;
+  --yellow-bg:rgba(251,191,36,.15);
+  --red:#ff6b6b;
+  --red-bg:rgba(255,107,107,.15);
+  --purple:#a78bfa;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Noto Sans SC',sans-serif;
+  --serif:'Noto Serif SC',serif;
+  --maxw:1180px;
+  --shadow:0 4px 16px rgba(0,0,0,.3),0 2px 6px rgba(0,0,0,.2);
+  --shadow-hover:0 8px 32px rgba(34,197,94,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.65;
+}
+.container{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 24px;
+}
+/* ===== 顶部封面 ===== */
+.hero{
+  border-bottom:1px solid var(--line);
+  padding:40px 0 32px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#0f172a 0%,#1a2744 50%,#0f172a 100%);
+}
+.hero .container{position:relative}
+.hero-inner{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:32px 36px;
+  box-shadow:0 12px 40px rgba(0,0,0,.4),0 0 0 1px rgba(34,197,94,.1);
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--rust),var(--rust2),transparent);
+}
+.hero-eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:3px;
+  color:var(--rust2);
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(28px,4vw,42px);
+  font-weight:900;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+.hero-sub{
+  color:var(--text2);
+  font-size:14px;
+  max-width:680px;
+}
+.hero-meta{
+  display:flex;
+  gap:32px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+.hero-meta-item{
+  display:flex;
+  flex-direction:column;
+}
+.hero-meta-item .num{
+  font-family:var(--mono);
+  font-size:28px;
+  font-weight:700;
+  color:var(--rust2);
+}
+.hero-meta-item .label{
+  font-size:11px;
+  color:var(--text3);
+  letter-spacing:1px;
+}
+/* ===== 统计条 ===== */
+.stats-bar{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:8px;
+  max-width:var(--maxw);
+  margin:20px auto 0;
+  padding:0 24px;
+}
+.stat-cell{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:16px 20px;
+  box-shadow:var(--shadow);
+  transition:all .2s;
+}
+.stat-cell:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px);border-color:rgba(34,197,94,.3)}
+.stat-cell .val{
+  font-family:var(--mono);
+  font-size:22px;
+  font-weight:700;
+}
+.stat-cell .lbl{
+  font-size:11px;
+  color:var(--text3);
+  margin-top:2px;
+}
+.stat-cell.core .val{color:var(--red)}
+.stat-cell.done .val{color:var(--green)}
+.stat-cell.part .val{color:var(--yellow)}
+.stat-cell.miss .val{color:var(--text3)}
+.stat-cell.net .val{color:var(--blue)}
+/* ===== 筛选栏 ===== */
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(15,23,42,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  padding:10px 0;
+  box-shadow:0 2px 12px rgba(0,0,0,.3);
+}
+.toolbar .container{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.toolbar label{
+  font-size:11px;
+  color:var(--text3);
+  font-family:var(--mono);
+  letter-spacing:1px;
+}
+.filter-group{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.filter-btn{
+  background:var(--card);
+  border:1px solid var(--line);
+  color:var(--text2);
+  padding:5px 12px;
+  font-size:12px;
+  font-family:var(--sans);
+  cursor:pointer;
+  border-radius:6px;
+  transition:all .15s;
+}
+.filter-btn:hover{border-color:var(--rust);color:var(--rust)}
+.filter-btn.active{
+  background:rgba(34,197,94,.15);
+  border-color:#22c55e;
+  color:#22c55e;
+  font-weight:600;
+}
+.search-box{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.search-box input{
+  background:var(--card);
+  border:1px solid var(--line);
+  color:var(--text);
+  padding:6px 12px;
+  font-size:12px;
+  font-family:var(--sans);
+  width:220px;
+  border-radius:6px;
+  outline:none;
+}
+.search-box input:focus{border-color:var(--rust)}
+.search-box input::placeholder{color:var(--text3)}
+.result-count{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--text3);
+  min-width:80px;
+}
+/* ===== 章节 ===== */
+.section{
+  padding:20px 0;
+}
+.section-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:24px 28px;
+  box-shadow:var(--shadow);
+  transition:box-shadow .2s,border-color .2s;
+}
+.section-card:hover{box-shadow:var(--shadow-hover);border-color:rgba(34,197,94,.3)}
+.section-header{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+.section-num{
+  font-family:var(--mono);
+  font-size:36px;
+  font-weight:700;
+  color:var(--rust);
+  opacity:.5;
+  line-height:1;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:22px;
+  font-weight:700;
+}
+.section-count{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--text3);
+  margin-left:auto;
+}
+/* ===== 子章节 ===== */
+.sub-header{
+  font-family:var(--mono);
+  font-size:13px;
+  color:#22c55e;
+  padding:10px 0 8px;
+  border-left:3px solid #22c55e;
+  padding-left:12px;
+  margin:16px 0 8px;
+  letter-spacing:1px;
+  font-weight:600;
+  background:linear-gradient(90deg,rgba(34,197,94,.12),transparent);
+  border-radius:0 4px 4px 0;
+}
+/* ===== 表格 ===== */
+.table-wrap{
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--card);
+  box-shadow:var(--shadow);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
+  table-layout:fixed;
+}
+thead th{
+  background:linear-gradient(180deg,#16a34a 0%,#15803d 100%);
+  color:#000000 !important;
+  font-weight:700;
+  font-size:11px;
+  font-family:var(--mono);
+  letter-spacing:.5px;
+  text-align:left;
+  padding:12px 8px;
+  border-bottom:2px solid #166534;
+  white-space:nowrap;
+  position:sticky;
+  top:0;
+}
+thead th.col-id,
+thead th.col-name,
+thead th.col-imp,
+thead th.col-status,
+thead th.col-existing,
+thead th.col-verify,
+thead th.col-need,
+thead th.col-source{
+  color:#000000 !important;
+}
+tbody td{
+  padding:11px 8px;
+  border-bottom:1px solid var(--line2);
+  vertical-align:top;
+  line-height:1.6;
+  background:var(--card);
+  word-wrap:break-word;
+  word-break:break-word;
+  overflow-wrap:break-word;
+  color:var(--text2);
+}
+tbody tr:nth-child(even) td{background:#243044}
+tbody tr:hover td{background:rgba(34,197,94,.1)}
+tbody tr:last-child td{border-bottom:none}
+.col-id{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--text3);
+  white-space:nowrap;
+  width:5%;
+}
+.col-name{
+  font-weight:600;
+  width:13%;
+  color:var(--text);
+}
+.col-imp{width:7%;text-align:center}
+.col-status{width:7%;text-align:center}
+.col-existing{width:25%;color:var(--text2)}
+.col-verify{width:13%;color:#fbbf24;font-size:12px}
+.col-need{width:22%;color:var(--text)}
+.col-source{width:8%;color:var(--text3);font-size:11.5px}
+/* 现场调研类6列 */
+.field-table .col-id{width:5%}
+.field-table .col-name{width:14%}
+.field-table .col-imp{width:8%}
+.field-table .col-existing{width:19%}
+.field-table .col-need{width:40%}
+.field-table .col-source{width:14%}
+/* 标签 */
+.tag{
+  display:inline-block;
+  padding:2px 8px;
+  font-size:10px;
+  font-family:var(--mono);
+  border-radius:2px;
+  letter-spacing:.5px;
+  white-space:nowrap;
+}
+.tag-core{background:rgba(255,107,107,.15);color:#ff6b6b;border:1px solid rgba(255,107,107,.4)}
+.tag-important{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.4)}
+.tag-general{background:rgba(148,163,184,.15);color:#94a3b8;border:1px solid rgba(148,163,184,.3)}
+.tag-done{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.4)}
+.tag-part{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.4)}
+.tag-miss{background:rgba(255,107,107,.15);color:#ff6b6b;border:1px solid rgba(255,107,107,.4)}
+.tag-net{
+  background:rgba(77,150,255,.15);
+  color:#4d96ff;
+  border:1px solid rgba(77,150,255,.4);
+  font-size:9px;
+  padding:1px 5px;
+  margin-left:4px;
+  vertical-align:middle;
+}
+/* 现场调研类表格不同 */
+.field-table .col-existing{min-width:180px}
+.field-table .col-need{min-width:300px}
+/* ===== 底部 ===== */
+.footer{
+  padding:24px 0 32px;
+  text-align:center;
+  color:var(--text3);
+  font-size:11px;
+  font-family:var(--mono);
+  letter-spacing:1px;
+}
+.footer span{color:var(--rust)}
+.footer span{color:var(--rust2)}
+/* ===== 响应式 ===== */
+@media(max-width:768px){
+  .container{padding:0 14px}
+  .hero{padding:20px 0}
+  .hero-inner{padding:20px}
+  .hero h1{font-size:22px}
+  .hero-sub{font-size:13px}
+  .hero-meta{gap:14px}
+  .hero-meta-item .num{font-size:20px}
+  .section{padding:14px 0}
+  .section-card{padding:16px}
+  .section-num{font-size:26px}
+  .section-title{font-size:17px}
+  .section-header{margin-bottom:14px;padding-bottom:10px}
+  .toolbar{padding:8px 0}
+  .toolbar .container{gap:8px}
+  .filter-group{flex-wrap:wrap}
+  .filter-btn{padding:4px 10px;font-size:11px}
+  .search-box{margin-left:0;width:100%}
+  .search-box input{width:100%}
+  .stats-bar{grid-template-columns:repeat(2,1fr);gap:6px;padding:0 14px;margin-top:14px}
+  .stat-cell{padding:12px 14px}
+  .stat-cell .val{font-size:18px}
+  table{font-size:11px;table-layout:fixed}
+  thead th{padding:7px 5px;font-size:9px;letter-spacing:0}
+  tbody td{padding:7px 5px;line-height:1.5}
+  .col-name{font-size:11px}
+  .col-existing{font-size:11px}
+  .col-need{font-size:11px}
+  .col-source{font-size:10px}
+  .tag{font-size:9px;padding:1px 5px}
+  .sub-header{font-size:12px;padding:8px 0 6px 10px;margin:14px 0 6px}
+}
+/* 滚动条 */
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--rust)}
+</style>
+</head>
+<body>
+
+<!-- ===== 封面 ===== -->
+<header class="hero">
+  <div class="container">
+  <div class="hero-inner">
+  <div class="hero-eyebrow">YONGZHOU · LAO HUOCHEZHAN · URBAN RENEWAL</div>
+  <h1>老火车站片区资料需求清单</h1>
+  <p class="hero-sub">永州市冷水滩区老火车站片区更新项目 — 已有数据与待获取数据交叉核实版，涵盖各部门文件、基础数据、八大方向专项、产业商业与现场调研五大类，共66项资料需求。</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><span class="num">66</span><span class="label">资料项总数</span></div>
+    <div class="hero-meta-item"><span class="num">27</span><span class="label">核心项</span></div>
+    <div class="hero-meta-item"><span class="num">12</span><span class="label">网络补充项</span></div>
+    <div class="hero-meta-item"><span class="num">13</span><span class="label">待部门函调</span></div>
+  </div>
+  </div>
+  </div>
+</header>
+
+<!-- ===== 统计条 ===== -->
+<div class="stats-bar">
+  <div class="stat-cell core"><div class="val">27</div><div class="lbl">核心项 必须获取</div></div>
+  <div class="stat-cell done"><div class="val">16</div><div class="lbl">已有完整资料</div></div>
+  <div class="stat-cell part"><div class="val">34</div><div class="lbl">部分已有需补充</div></div>
+  <div class="stat-cell miss"><div class="val">7</div><div class="lbl">完全缺失</div></div>
+  <div class="stat-cell net"><div class="val">12</div><div class="lbl">网络搜索补充</div></div>
+</div>
+
+<!-- ===== 筛选栏 ===== -->
+<div class="toolbar">
+  <div class="container">
+  <div class="filter-group">
+    <label>类别</label>
+    <button class="filter-btn active" data-filter="cat" data-val="all">全部</button>
+    <button class="filter-btn" data-filter="cat" data-val="1">文件类</button>
+    <button class="filter-btn" data-filter="cat" data-val="2">基础数据</button>
+    <button class="filter-btn" data-filter="cat" data-val="3">八大方向</button>
+    <button class="filter-btn" data-filter="cat" data-val="4">产业商业</button>
+    <button class="filter-btn" data-filter="cat" data-val="5">现场调研</button>
+  </div>
+  <div class="filter-group">
+    <label>重要性</label>
+    <button class="filter-btn active" data-filter="imp" data-val="all">全部</button>
+    <button class="filter-btn" data-filter="imp" data-val="core">核心</button>
+    <button class="filter-btn" data-filter="imp" data-val="important">重要</button>
+    <button class="filter-btn" data-filter="imp" data-val="general">一般</button>
+  </div>
+  <div class="filter-group">
+    <label>状态</label>
+    <button class="filter-btn active" data-filter="status" data-val="all">全部</button>
+    <button class="filter-btn" data-filter="status" data-val="done">已有</button>
+    <button class="filter-btn" data-filter="status" data-val="part">部分</button>
+    <button class="filter-btn" data-filter="status" data-val="miss">缺失</button>
+  </div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索资料项名称 / 内容...">
+    <span class="result-count" id="resultCount">66 项</span>
+  </div>
+  </div>
+</div>
+
+<!-- ===== 内容区由JS渲染 ===== -->
+<div class="container"><div id="content"></div></div>
+
+<footer class="footer">
+  <div class="container">
+  老火车站片区更新项目 · 资料需求清单 V1.0 · 生成于 <span>2026.09</span> · 数据来源：体检报告 / GIS数据库 / 实施方案 / 公开网络交叉验证
+  </div>
+</footer>
+
+<script>
+// ===== 数据 =====
+const DATA = [
+// 一、各部门文件类
+{id:"1.1",cat:"1",catName:"各部门文件类",sub:"",name:"国土空间总体规划",imp:"core",status:"part",hasNet:true,
+existing:"2023年1月初步成果公示，2026年5月动态维护方案公示；一江两岸、南北联城、带状组团、中部崛起；中心城区483.69km²，含梧桐/肖家园/菱角山街道；体检报告引用：全域纳入城镇开发边界，以居住商业为核心",
+verify:"片区功能定位是否准确",
+need:"涉及片区的详细功能定位、用地布局图纸、三条控制线、重大设施布局",
+source:"自然资源局，正式函调"},
+{id:"1.2",cat:"1",catName:"各部门文件类",sub:"",name:"城市更新专项规划",imp:"core",status:"part",hasNet:true,
+existing:"《永州市城市更新专项规划（2021—2035）》已编制；国土空间总规划定13个更新片区（整治/调整/重构型），计划更新360万㎡、保租房5000套、燃气管网330km；2021年市政府常务会议：湘江西岸更新（一期）含文昌阁、菱角山等5个单元约4.43km²；总体城市设计：保留老火车站原址和铁路线，建火车集市/记忆花园/遗址博物馆/文创街坊/铁道慢行",
+verify:"老火车站片区是否在13个更新片区内、属于哪种类型",
+need:"专项规划全文+图纸+项目清单（老火车站片区定位、更新策略、更新单元划分）",
+source:"住建局—城市更新股，正式函调"},
+{id:"1.3",cat:"1",catName:"各部门文件类",sub:"",name:"控制性详细规划",imp:"core",status:"part",hasNet:false,
+existing:"体检报告列出《河西老城区片控规》《零陵北路片控规》；GDB有控规用地77图斑；控规落实率66.31%，未落实78.98ha",
+verify:"控规版本是否最新、图斑是否完整",
+need:"控规文本+分图图则+矢量数据核实",
+source:"自然资源局，正式函调"},
+{id:"1.4",cat:"1",catName:"各部门文件类",sub:"",name:"各类专项规划",imp:"important",status:"part",hasNet:true,
+existing:"已明确4个——燃气（2022-2035，覆盖率100%未成环）、排水（2021-2035，覆盖率100%）、停车（2021-2035，统筹集中停车场）、绿地系统（2021-2035，规划铁路文化公园）",
+verify:"各专项规划是否有最新版本",
+need:"综合交通/环境卫生/历史文化保护/公共服务设施/住房发展/消防/防洪排涝专项规划",
+source:"自然资源局牵头，正式函调"},
+{id:"1.5",cat:"1",catName:"各部门文件类",sub:"",name:"与本片区相关的各类专项规划",imp:"important",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"涉及本片区的交通、市政、公服、生态等专项规划中对本片区的具体要求",
+source:"各专项规划编制单位，询问"},
+{id:"1.6",cat:"1",catName:"各部门文件类",sub:"",name:"既有策划/规划/研究成果",imp:"important",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"已开展的相关策划、概念方案、可研、前期研究",
+source:"住建局/发改局，询问"},
+{id:"1.7",cat:"1",catName:"各部门文件类",sub:"",name:"片区体检报告及附表",imp:"core",status:"done",hasNet:false,
+existing:"PDF（92页57项指标全有数值）",
+verify:"专业化物业覆盖率（报告写不足40%，之前记录24.64%有差异）；片区面积（体检234.43ha vs GIS实测250.31ha差15.88ha）",
+need:"57项指标Excel原始数据+附图矢量",
+source:"向编制单位索要"},
+{id:"1.8",cat:"1",catName:"各部门文件类",sub:"",name:"基础设施更新改造实施方案",imp:"core",status:"done",hasNet:false,
+existing:"PDF（267页），已提取18项重点项目+约70个小区名称",
+verify:"70个小区哪些在片区范围内；河西片区范围是否含本片区",
+need:"86个项目完整Excel清单+附表",
+source:"已获取PDF，提取附表第190页起"},
+{id:"1.9",cat:"1",catName:"各部门文件类",sub:"",name:"各部门建设项目计划",imp:"core",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"各部门十四五及近期涉及本片区的建设项目计划（住建/城管/交通/文旅/教育/卫健/民政等）",
+source:"发改局牵头汇总，正式函调"},
+
+// 二、基础数据类
+{id:"2.1",cat:"2",catName:"基础数据类",sub:"",name:"片区现状高清地形图",imp:"core",status:"done",hasNet:false,
+existing:"已有（老火车站1(全).dwg）",
+verify:"版本精度和坐标系统",
+need:"—",
+source:"已有"},
+{id:"2.2",cat:"2",catName:"基础数据类",sub:"",name:"片区现状影像资料",imp:"important",status:"done",hasNet:false,
+existing:"已有（影像图20260305.pdf）",
+verify:"拍摄时间和分辨率",
+need:"可补充历史影像对比",
+source:"已有"},
+{id:"2.3",cat:"2",catName:"基础数据类",sub:"",name:"社区详细情况",imp:"core",status:"part",hasNet:true,
+existing:"梧桐街道：5.3km²，常住29480户84666人，户籍25848人，辖梧桐/紫荆/白竹亭3社区；菱角山街道：常住5.8万人+暂住6500人，辖忠烈/文昌阁/下河线/活龙井4社区，老工业城区；肖家园街道：4.4km²，总人口2.5万人，辖又一村/通化街2社区",
+verify:"各社区在片区内的实际管辖范围和人口",
+need:"4个社区逐社区：面积/人口户数/包含小区数量/工作人员/面临问题/闲置资源/社区组织和动员能力/以往改造项目经验教训",
+source:"各街道办+社区，座谈+书面材料"},
+{id:"2.4",cat:"2",catName:"基础数据类",sub:"",name:"人口资料",imp:"core",status:"part",hasNet:true,
+existing:"冷水滩区2025年末常住55.99万人、户籍55.3万、19.4万户、城镇化率67.01%；3个街道人口如上；七普：菱角山42830人、肖家园23551人",
+verify:"街道人口数据年份不一致（政府网2024年写5.8万，七普4.28万）",
+need:"分社区：居住户数/户籍/常住/老年/租住/单位宿舍人口；原铁路职工台账；年龄结构明细",
+source:"公安局+统计局+街道办，正式函调"},
+{id:"2.5",cat:"2",catName:"基础数据类",sub:"",name:"现状用地数据",imp:"core",status:"done",hasNet:false,
+existing:"GDB（59图斑）+体检报告详细分类：居住139.32ha(55.66%)、商业39.46ha(15.76%)、交通场站24.38ha(9.74%)、绿地12.05ha(4.81%)、仓储10.81ha(4.32%)",
+verify:"面积差异（GDB 250.31ha vs 体检234.43ha）",
+need:"用地权属属性补充",
+source:"GDB已有+现场核实"},
+{id:"2.6",cat:"2",catName:"基础数据类",sub:"",name:"建筑普查数据",imp:"core",status:"done",hasNet:false,
+existing:"GDB（1529栋446.73万㎡）+体检报告：2005年前1212栋(79.16%)、砖混926栋(60.48%)、质量差208栋(13.59%)、平均容积率1.66",
+verify:"建筑使用功能和产权性质缺失",
+need:"逐栋使用功能+产权性质+危房等级+违建标注",
+source:"GDB+现场+住建局"},
+{id:"2.7",cat:"2",catName:"基础数据类",sub:"",name:"土地权属数据",imp:"core",status:"part",hasNet:false,
+existing:"房地产评估xlsx有铁路站场21个宗地（63.49公顷，授权经营19宗+划拨2宗，含不动产权证号/位置/面积/容积率/评估价）",
+verify:"21个宗地是否全部在片区范围内",
+need:"非铁路用地宗地矢量+权属属性（权利人/性质/面积/用途）",
+source:"不动产登记中心，正式函调"},
+{id:"2.8",cat:"2",catName:"基础数据类",sub:"",name:"老火车站历史资料",imp:"important",status:"part",hasNet:true,
+existing:"1938年9月湘桂铁路建成投用，原名冷水滩站；1995/1996年更名永州站，广州局一等站；2004年4月18日新站启用后老站停客运改货运，后更名永州东站；位于零陵中路，距衡阳站141km",
+verify:"更名年份有1995和1996两种说法",
+need:"历史照片/文保认定文件/重要历史事件/铁路职工社区历史",
+source:"档案馆+铁路部门+老职工访谈"},
+{id:"2.9",cat:"2",catName:"基础数据类",sub:"",name:"存量资源清单",imp:"core",status:"part",hasNet:false,
+existing:"闲置用地46.14ha（9宗）、闲置建筑约3.2万㎡（7类）、废弃铁轨1460m分段（珊瑚西路260m+向阳路480m+建材大道720m）；房地产评估有站场房屋详细栋号",
+verify:"9宗闲置用地和7类闲置建筑的具体位置和面积",
+need:"9宗闲置用地+7类闲置建筑逐处详细属性（位置/面积/产权/现状/改造潜力）",
+source:"自然资源局+产权单位+现场踏勘"},
+
+// 三、八大方向专项 - ①既有建筑
+{id:"3.1",cat:"3",catName:"八大方向专项",sub:"①既有建筑改造利用",name:"危房鉴定数据",imp:"core",status:"done",hasNet:false,
+existing:"C/D级危房0栋；疑似危房7栋（文昌阁5栋-原耐火厂宿舍4栋1栋已劝离，活龙井2栋-铁路沿线已竖标牌）",
+verify:"7栋疑似危房的鉴定进展",
+need:"7栋详细位置/面积/结构/年代/鉴定等级/鉴定时间/处理建议/处置进展",
+source:"住建局—房屋安全股，正式函调"},
+{id:"3.2",cat:"3",catName:"八大方向专项",sub:"①既有建筑改造利用",name:"违章建筑数据",imp:"important",status:"part",hasNet:false,
+existing:"体检报告提到部分小区存在违章搭建",
+verify:"—",
+need:"违章建筑清单（位置/面积/类型/建设时间/处理状态）",
+source:"城管局，正式函调"},
+{id:"3.3",cat:"3",catName:"八大方向专项",sub:"①既有建筑改造利用",name:"既有建筑改造潜力",imp:"important",status:"part",hasNet:false,
+existing:"闲置建筑约3.2万㎡，工业建筑群6处",
+verify:"—",
+need:"可改造利用建筑逐处评估（结构安全/层高/面积/产权/改造方向）",
+source:"现场踏勘+产权单位"},
+{id:"3.4",cat:"3",catName:"八大方向专项",sub:"①既有建筑改造利用",name:"加装电梯数据",imp:"important",status:"part",hasNet:true,
+existing:"全区已批准168台，2025年74台计划全部签合同（66台开工16台验收），轿厢升级高2.8m宽1.65m",
+verify:"片区内已加装电梯数量",
+need:"片区内4-6层住宅清单+加装条件评估+既有电梯运行状况",
+source:"住建局—老旧小区改造办+现场"},
+
+// ②老旧小区
+{id:"3.5",cat:"3",catName:"八大方向专项",sub:"②城镇老旧小区整治改造",name:"老旧小区完整清单",imp:"core",status:"done",hasNet:false,
+existing:"69个小区，2005年前52个有完整明细（181栋/6112户/64.9万㎡）",
+verify:"2005年后17个小区明细缺失；实施方案70个小区需核实是否在片区内",
+need:"69个小区逐小区：名称/位置/建成年代/栋数/户数/面积/结构/产权",
+source:"体检报告+住建局+现场"},
+{id:"3.6",cat:"3",catName:"八大方向专项",sub:"②城镇老旧小区整治改造",name:"老旧小区改造计划",imp:"core",status:"part",hasNet:true,
+existing:"全区共241个小区纳入改造计划，已完成111个惠及约4万户；2025年计划改造22个惠及10社区6536户；2025年河西片区改造已完工2835万；2026年河西片改造前期立项中；2026年谢家安置小区项目涉及18小区195栋2462户26.45万㎡",
+verify:"本片区69个小区哪些已改/在改/未改",
+need:"本片区69个小区逐小区：已改/在改/未改状态、改造内容（基础/完善/提升类）、投资、完成时间、资金补助标准",
+source:"住建局—老旧小区改造办，正式函调"},
+{id:"3.7",cat:"3",catName:"八大方向专项",sub:"②城镇老旧小区整治改造",name:"小区基础设施现状",imp:"important",status:"part",hasNet:false,
+existing:"体检报告有给水/排水/燃气覆盖率100%，但燃气未管网成环",
+verify:"—",
+need:"逐小区：管网老化情况/道路破损/停车位/充电桩/照明/监控",
+source:"现场踏勘+小区物业"},
+{id:"3.8",cat:"3",catName:"八大方向专项",sub:"②城镇老旧小区整治改造",name:"小区公共服务设施",imp:"important",status:"part",hasNet:false,
+existing:"便民驿站5个（2社区服务中心+3工会驿站）",
+verify:"—",
+need:"逐小区：养老/托育/文化/体育/便民商业设施配置情况",
+source:"现场踏勘+社区"},
+{id:"3.9",cat:"3",catName:"八大方向专项",sub:"②城镇老旧小区整治改造",name:"小区物业情况",imp:"important",status:"done",hasNet:false,
+existing:"专业化物业覆盖率不足40%",
+verify:"覆盖率具体数值（不足40% vs 之前记录24.64%）",
+need:"逐小区：物业模式（专业/自治/无物业）/物业费/服务内容/满意度",
+source:"住建局+社区+现场"},
+{id:"3.10",cat:"3",catName:"八大方向专项",sub:"②城镇老旧小区整治改造",name:"完整社区评估基础数据",imp:"important",status:"part",hasNet:false,
+existing:"体检报告有公服覆盖率数据",
+verify:"—",
+need:"按完整社区标准逐项评估所需的基础数据（社区综合服务站/卫生服务站/幼儿园/老年服务站/便民超市/邮件快件寄递点/便利店/食堂等）",
+source:"社区+现场踏勘"},
+
+// ③完整社区
+{id:"3.11",cat:"3",catName:"八大方向专项",sub:"③完整社区建设",name:"社区服务设施配置",imp:"important",status:"part",hasNet:false,
+existing:"2个社区服务中心（活龙井/文昌阁），3个工会驿站",
+verify:"—",
+need:"4个社区逐社区：综合服务站面积/功能/开放时间/服务人口",
+source:"民政局+社区"},
+{id:"3.12",cat:"3",catName:"八大方向专项",sub:"③完整社区建设",name:"一刻钟便民生活圈",imp:"important",status:"part",hasNet:false,
+existing:"体检报告有公服覆盖率（文化20.94%最低、中学47.01%、小学55.98%、体育54.27%、医疗76.50%、养老79.49%、幼儿园71.37%）",
+verify:"—",
+need:"便民商业网点清单（便利店/菜市场/早餐店/药店/洗衣/理发等）",
+source:"现场踏勘+商务局"},
+{id:"3.13",cat:"3",catName:"八大方向专项",sub:"③完整社区建设",name:"社区治理能力",imp:"general",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"社区工作者数量/业委会成立情况/物业管理覆盖率/居民参与度",
+source:"社区座谈"},
+{id:"3.14",cat:"3",catName:"八大方向专项",sub:"③完整社区建设",name:"智慧社区建设",imp:"general",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"现有智慧设施（监控/门禁/智能充电桩/智慧停车等）",
+source:"现场踏勘+社区"},
+
+// ④老旧街区厂区城中村
+{id:"3.15",cat:"3",catName:"八大方向专项",sub:"④老旧街区/厂区/城中村",name:"老旧厂区清单",imp:"core",status:"done",hasNet:false,
+existing:"3处9.5ha（玻璃厂21亩/特种水泥厂14亩/下河粮库等），需改造道路4.9万㎡；实施方案有玻璃厂转型500万、特种水泥厂转型400万",
+verify:"3处厂区具体位置和边界",
+need:"逐厂：占地面积/建筑面积/产权/经营状态/职工人数/搬迁意愿/改造潜力",
+source:"工信局+企业走访+现场"},
+{id:"3.16",cat:"3",catName:"八大方向专项",sub:"④老旧街区/厂区/城中村",name:"老旧商业街区",imp:"important",status:"done",hasNet:false,
+existing:"1处（德源路3.9ha，1990年建）",
+verify:"—",
+need:"商铺数量/经营业态/空置率/租金/客流量/产权",
+source:"现场踏勘+商务局"},
+{id:"3.17",cat:"3",catName:"八大方向专项",sub:"④老旧街区/厂区/城中村",name:"老旧生活街区",imp:"important",status:"done",hasNet:false,
+existing:"2处（铁路工人村19.1ha+零陵中路南侧22.4ha）",
+verify:"—",
+need:"街区范围/建筑状况/居民构成/改造需求",
+source:"现场踏勘+社区"},
+{id:"3.18",cat:"3",catName:"八大方向专项",sub:"④老旧街区/厂区/城中村",name:"城中村",imp:"important",status:"done",hasNet:false,
+existing:"1处（清桥路6.7ha）",
+verify:"—",
+need:"宅基地/集体土地/人口/建筑/租赁情况",
+source:"自然资源局+社区+现场"},
+{id:"3.19",cat:"3",catName:"八大方向专项",sub:"④老旧街区/厂区/城中村",name:"风貌不协调道路",imp:"important",status:"done",hasNet:false,
+existing:"8条3.7km（向阳路0.60/天桥路0.55/觅湘街0.56/观音街0.32/中山路0.35/菱角山一巷0.27/清泉路0.50/文昌阁路0.53）",
+verify:"—",
+need:"逐路：路面状况/沿街建筑风貌/管线情况",
+source:"现场踏勘"},
+
+// ⑤城市功能
+{id:"3.20",cat:"3",catName:"八大方向专项",sub:"⑤城市功能（公共服务设施）",name:"教育设施",imp:"core",status:"done",hasNet:false,
+existing:"幼儿园16个、小学2个（舜德/菱角山）、中学0个；覆盖率：幼儿园71.37%、小学55.98%、中学47.01%",
+verify:"16个幼儿园名称和位置",
+need:"逐校：名称/位置/班级数/学位数/服务半径/办学性质",
+source:"教育局，正式函调+现场"},
+{id:"3.21",cat:"3",catName:"八大方向专项",sub:"⑤城市功能（公共服务设施）",name:"医疗卫生设施",imp:"important",status:"done",hasNet:false,
+existing:"活龙井社区卫生健康服务站1处；覆盖率76.50%",
+verify:"—",
+need:"逐处：名称/位置/面积/科室/服务人口/运行状况",
+source:"卫健局，正式函调+现场"},
+{id:"3.22",cat:"3",catName:"八大方向专项",sub:"⑤城市功能（公共服务设施）",name:"养老服务设施",imp:"important",status:"done",hasNet:false,
+existing:"活龙井社区居家养老服务中心1处；覆盖率79.49%",
+verify:"—",
+need:"逐处：名称/位置/面积/床位数/服务内容/运营模式",
+source:"民政局，正式函调+现场"},
+{id:"3.23",cat:"3",catName:"八大方向专项",sub:"⑤城市功能（公共服务设施）",name:"文化设施",imp:"core",status:"done",hasNet:false,
+existing:"文化设施0个，覆盖率20.94%（最低）",
+verify:"—",
+need:"现有文化活动场地/图书室/文化站情况",
+source:"文旅局+社区+现场"},
+{id:"3.24",cat:"3",catName:"八大方向专项",sub:"⑤城市功能（公共服务设施）",name:"体育设施",imp:"important",status:"done",hasNet:true,
+existing:"潇湘体育公园1处；覆盖率54.27%；湘超冠军交叉验证：2025年12月27日永州队1:0常德夺冠，队名永冲锋，全网流量210亿拉动消费21亿",
+verify:"—",
+need:"逐处：名称/位置/面积/设施类型/开放时间/使用频率",
+source:"文旅局+现场"},
+{id:"3.25",cat:"3",catName:"八大方向专项",sub:"⑤城市功能（公共服务设施）",name:"公共服务设施GIS点位",imp:"core",status:"part",hasNet:false,
+existing:"有名称和覆盖率，缺GIS矢量点位",
+verify:"—",
+need:"所有公服设施的GIS点位矢量（含名称/类型/地址/坐标）",
+source:"自然资源局GIS库，正式函调"},
+
+// ⑥城市生态
+{id:"3.26",cat:"3",catName:"八大方向专项",sub:"⑥城市生态",name:"公园绿地",imp:"important",status:"done",hasNet:false,
+existing:"公园绿地覆盖率17.90%，绿地面积8.7ha，口袋公园1个（凤凰路与珊瑚路交界处3400㎡），滨水岸线2.3km",
+verify:"—",
+need:"逐处：名称/位置/面积/设施/使用状况",
+source:"城管局+现场"},
+{id:"3.27",cat:"3",catName:"八大方向专项",sub:"⑥城市生态",name:"滨水空间",imp:"important",status:"done",hasNet:false,
+existing:"湘江西岸2.3km",
+verify:"—",
+need:"岸线现状/防洪标准/亲水平台/慢行系统",
+source:"水利局+城管局+现场"},
+{id:"3.28",cat:"3",catName:"八大方向专项",sub:"⑥城市生态",name:"生态敏感区",imp:"general",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"防洪排涝风险区/地质灾害点/生态保护红线",
+source:"自然资源局+水利局"},
+{id:"3.29",cat:"3",catName:"八大方向专项",sub:"⑥城市生态",name:"古树名木",imp:"general",status:"done",hasNet:false,
+existing:"挂牌古树名木0棵",
+verify:"—",
+need:"未挂牌大树/有保护价值的树木",
+source:"现场踏勘"},
+
+// ⑦基础设施
+{id:"3.30",cat:"3",catName:"八大方向专项",sub:"⑦基础设施",name:"道路交通",imp:"core",status:"done",hasNet:false,
+existing:"控规道路总长20.02km，落实率82.77%，未落实3.45km；公交站点覆盖率99.20%，线网密度4.0km/km²",
+verify:"未落实3.45km具体是哪些路段",
+need:"道路GIS矢量（等级/名称/宽度/断面）+未落实道路清单",
+source:"自然资源局GIS库+住建局，正式函调"},
+{id:"3.31",cat:"3",catName:"八大方向专项",sub:"⑦基础设施",name:"停车设施",imp:"important",status:"done",hasNet:false,
+existing:"停车场覆盖率69.7%，公共停车位1563个（路侧占60%），充电桩75个（4个充电站）",
+verify:"—",
+need:"逐处停车场：位置/车位数/收费/利用率；充电桩位置和数量",
+source:"城管局+现场"},
+{id:"3.32",cat:"3",catName:"八大方向专项",sub:"⑦基础设施",name:"给水排水",imp:"important",status:"done",hasNet:false,
+existing:"覆盖率100%；内涝点6个（活龙井4+文昌阁2）",
+verify:"—",
+need:"管网走向/管径/材质/年限；6个内涝点详细情况",
+source:"住建局+水务公司"},
+{id:"3.33",cat:"3",catName:"八大方向专项",sub:"⑦基础设施",name:"燃气电力",imp:"important",status:"done",hasNet:false,
+existing:"燃气覆盖率100%但未管网成环",
+verify:"—",
+need:"燃气管网走向/成环情况；电力设施/线路",
+source:"燃气公司+供电公司"},
+{id:"3.34",cat:"3",catName:"八大方向专项",sub:"⑦基础设施",name:"环卫设施",imp:"general",status:"done",hasNet:false,
+existing:"公厕13处覆盖率65.80%，垃圾站4处覆盖率100%",
+verify:"—",
+need:"逐处：位置/面积/等级/运行状况",
+source:"城管局+现场"},
+{id:"3.35",cat:"3",catName:"八大方向专项",sub:"⑦基础设施",name:"消防设施",imp:"important",status:"done",hasNet:false,
+existing:"消防隐患23小区",
+verify:"—",
+need:"消火栓位置/完好率；消防通道堵塞情况；23个隐患小区明细",
+source:"消防救援大队，正式函调+现场"},
+
+// ⑧历史文化
+{id:"3.36",cat:"3",catName:"八大方向专项",sub:"⑧历史文化",name:"历史建筑/文保单位",imp:"core",status:"done",hasNet:false,
+existing:"历史建筑3处：惜字塔（清代，湘江西路225号）、渡口公房（民国，湘江西路235号）、原冷水滩基建队办公楼（1960年代，湘江西路与德源路交叉口）；周边市级文保1处（名称待核实）",
+verify:"周边1处市级文保单位名称和位置",
+need:"3处历史建筑详细档案（面积/结构/保护级别/修缮记录）；周边文保单位名称位置",
+source:"文旅局—文物科，正式函调"},
+{id:"3.37",cat:"3",catName:"八大方向专项",sub:"⑧历史文化",name:"历史街巷格局",imp:"important",status:"part",hasNet:true,
+existing:"活龙井800多米街巷；风貌不协调道路8条",
+verify:"—",
+need:"传统街巷名称/走向/宽度/历史沿革/建筑风貌",
+source:"现场踏勘+文旅局"},
+{id:"3.38",cat:"3",catName:"八大方向专项",sub:"⑧历史文化",name:"铁路工业遗产",imp:"core",status:"done",hasNet:true,
+existing:"老火车站1938年建/2004年停运（网络交叉验证）、废弃铁轨1460m分段、工业建筑群6处、活龙井文创已运营（20余家店铺，年接待15万人次）",
+verify:"6处工业建筑群具体名称和位置",
+need:"逐处：位置/面积/结构/年代/产权/现状/改造潜力",
+source:"铁路部门+现场+产权单位"},
+{id:"3.39",cat:"3",catName:"八大方向专项",sub:"⑧历史文化",name:"非物质文化遗产/老字号",imp:"general",status:"miss",hasNet:false,
+existing:"无",
+verify:"—",
+need:"片区内非遗项目/老字号/传统技艺/口述历史",
+source:"文旅局+社区+老居民访谈"},
+
+// 四、产业商业类
+{id:"4.1",cat:"4",catName:"产业与商业类",sub:"",name:"产业经济基础数据",imp:"important",status:"part",hasNet:false,
+existing:"业态8大类，文旅休闲不足10%，客单价10-30元",
+verify:"—",
+need:"企业数量/行业分布/产值/就业/税收",
+source:"市场监管局+统计局+税务局"},
+{id:"4.2",cat:"4",catName:"产业与商业类",sub:"",name:"活龙井文创运营数据",imp:"core",status:"part",hasNet:true,
+existing:"集聚20余家文旅创意企业/特色店铺；年接待游客超15万人次；首届打卡节5万游客；单店平时客流200-300人/天，节假日500-600人/天；800多米街巷；2019年起微改造，2025年6月青年创业孵化基地运营；累计带动就业53人；一街一园一站一场一馆一廊阵地",
+verify:"运营面积/商户明细/营业额等运营方核心数据",
+need:"运营面积/入驻商户明细（名称/业态/面积/租金）/营业额/运营模式/品牌活动/拓展需求",
+source:"运营方（壹禾生态文创）访谈+社区"},
+{id:"4.3",cat:"4",catName:"产业与商业类",sub:"",name:"桥头市场经营数据",imp:"important",status:"part",hasNet:false,
+existing:"大量商铺闲置，集聚效应减弱",
+verify:"—",
+need:"商铺数量/空置率/租金水平/客流量/产权/经营业态",
+source:"市场管理方+现场"},
+{id:"4.4",cat:"4",catName:"产业与商业类",sub:"",name:"居民消费需求",imp:"important",status:"part",hasNet:false,
+existing:"超90%受访居民支持更新",
+verify:"—",
+need:"消费习惯/业态需求/支付能力/外出消费目的地",
+source:"社区访谈+现场观察"},
+
+// 五、现场调研类
+{id:"5.1",cat:"5",catName:"现场调研类",sub:"",name:"闲置用地和闲置建筑现场核实",imp:"core",status:"",hasNet:false,
+existing:"9宗闲置用地46.14ha、7类闲置建筑3.2万㎡",
+verify:"",
+need:"逐处拍照记录：实际位置/面积/围挡情况/内部现状/周边环境/可达性/改造条件",
+source:"现场踏勘"},
+{id:"5.2",cat:"5",catName:"现场调研类",sub:"",name:"7栋疑似危房现场核实",imp:"core",status:"",hasNet:false,
+existing:"文昌阁5栋+活龙井2栋",
+verify:"",
+need:"逐栋拍照：结构状况/裂缝/倾斜/居住情况/警示标识/周边影响",
+source:"现场踏勘"},
+{id:"5.3",cat:"5",catName:"现场调研类",sub:"",name:"老旧小区逐小区踏勘",imp:"core",status:"",hasNet:false,
+existing:"69个小区，52个有明细",
+verify:"",
+need:"每小区：大门/楼栋/道路/管网/停车位/充电桩/宣传栏/物业用房/公共活动空间/违章搭建",
+source:"现场踏勘"},
+{id:"5.4",cat:"5",catName:"现场调研类",sub:"",name:"公服设施现场核实",imp:"important",status:"",hasNet:false,
+existing:"幼儿园16/小学2/医疗1/养老1/文化0/体育1",
+verify:"",
+need:"逐处：实际位置/面积/设施/开放时间/使用状况/服务半径内覆盖情况",
+source:"现场踏勘"},
+{id:"5.5",cat:"5",catName:"现场调研类",sub:"",name:"3处老旧厂区现场踏勘",imp:"core",status:"",hasNet:false,
+existing:"玻璃厂/特种水泥厂/下河粮库9.5ha",
+verify:"",
+need:"逐厂：大门/厂房/办公楼/宿舍/设备/场地/出入口/周边交通/职工安置情况",
+source:"现场踏勘"},
+{id:"5.6",cat:"5",catName:"现场调研类",sub:"",name:"老火车站及铁路遗产现场",imp:"core",status:"",hasNet:false,
+existing:"站房/废弃铁轨1460m/工业建筑群6处",
+verify:"",
+need:"站房现状/铁轨保存状况/铁路建筑群/周边环境/可进入性/改造潜力",
+source:"现场踏勘"},
+{id:"5.7",cat:"5",catName:"现场调研类",sub:"",name:"3处历史建筑现场记录",imp:"important",status:"",hasNet:false,
+existing:"惜字塔/渡口公房/基建队办公楼",
+verify:"",
+need:"逐处：建筑现状/保护标识/周边环境/修缮需求/安全状况",
+source:"现场踏勘"},
+{id:"5.8",cat:"5",catName:"现场调研类",sub:"",name:"道路和基础设施现场",imp:"important",status:"",hasNet:false,
+existing:"8条风貌不协调道路3.7km、6个内涝点、未落实道路3.45km",
+verify:"",
+need:"逐路：路面/人行道/管线/沿街建筑/行道树；内涝点：积水范围/排水设施/影响居民",
+source:"现场踏勘"},
+{id:"5.9",cat:"5",catName:"现场调研类",sub:"",name:"社区座谈和居民访谈",imp:"core",status:"",hasNet:false,
+existing:"超90%支持更新",
+verify:"",
+need:"4个社区分别座谈：社区基本情况/面临问题/改造意愿/需求优先级/闲置资源/以往改造经验/社区动员能力；重点访谈原铁路职工、活龙井商户、老旧小区居民",
+source:"社区座谈+居民访谈"}
+];
+
+// ===== 渲染 =====
+const content = document.getElementById('content');
+const resultCount = document.getElementById('resultCount');
+const searchInput = document.getElementById('searchInput');
+
+let filters = {cat:'all', imp:'all', status:'all'};
+let searchText = '';
+
+function tagImp(v){
+  if(v==='core') return '<span class="tag tag-core">核心</span>';
+  if(v==='important') return '<span class="tag tag-important">重要</span>';
+  if(v==='general') return '<span class="tag tag-general">一般</span>';
+  return '';
+}
+function tagStatus(v){
+  if(v==='done') return '<span class="tag tag-done">已有</span>';
+  if(v==='part') return '<span class="tag tag-part">部分</span>';
+  if(v==='miss') return '<span class="tag tag-miss">缺失</span>';
+  return '<span class="tag tag-general">现场</span>';
+}
+
+function render(){
+  let filtered = DATA.filter(d=>{
+    if(filters.cat!=='all' && d.cat!==filters.cat) return false;
+    if(filters.imp!=='all' && d.imp!==filters.imp) return false;
+    if(filters.status!=='all' && d.status!==filters.status) return false;
+    if(searchText){
+      const s = searchText.toLowerCase();
+      return d.name.toLowerCase().includes(s) || d.existing.toLowerCase().includes(s) || d.need.toLowerCase().includes(s) || d.source.toLowerCase().includes(s);
+    }
+    return true;
+  });
+
+  resultCount.textContent = filtered.length + ' 项';
+
+  if(filtered.length===0){
+    content.innerHTML = '<div style="padding:60px;text-align:center;color:var(--text3);font-family:var(--mono)">NO MATCHING ITEMS</div>';
+    return;
+  }
+
+  // 按类别分组
+  const cats = {};
+  filtered.forEach(d=>{
+    if(!cats[d.cat]) cats[d.cat] = {name:d.catName, subs:{}, items:[]};
+    if(d.sub){
+      if(!cats[d.cat].subs[d.sub]) cats[d.cat].subs[d.sub]=[];
+      cats[d.cat].subs[d.sub].push(d);
+    } else {
+      cats[d.cat].items.push(d);
+    }
+  });
+
+  let html = '';
+  const catOrder = ['1','2','3','4','5'];
+  const catNums = {'1':'01','2':'02','3':'03','4':'04','5':'05'};
+
+  catOrder.forEach(cat=>{
+    if(!cats[cat]) return;
+    const c = cats[cat];
+    const total = filtered.filter(d=>d.cat===cat).length;
+
+    html += `<section class="section" id="cat-${cat}">
+      <div class="section-card">
+      <div class="section-header">
+        <span class="section-num">${catNums[cat]}</span>
+        <span class="section-title">${c.name}</span>
+        <span class="section-count">${total} 项</span>
+      </div>`;
+
+    // 无子类的直接出表
+    if(c.items.length>0){
+      html += renderTable(c.items, cat==='5');
+    }
+
+    // 有子类的
+    Object.keys(c.subs).forEach(sub=>{
+      html += `<div class="sub-header">${sub}</div>`;
+      html += renderTable(c.subs[sub], false);
+    });
+
+    html += `</div></section>`;
+  });
+
+  content.innerHTML = html;
+}
+
+function renderTable(items, isField){
+  const cls = isField ? 'field-table' : '';
+  let h = `<div class="table-wrap ${cls}"><table><thead><tr>
+    <th class="col-id">编号</th>
+    <th class="col-name">资料项</th>
+    <th class="col-imp">重要性</th>`;
+  if(!isField) h += `<th class="col-status">状态</th>`;
+  h += `<th class="col-existing">已有数据</th>`;
+  if(!isField) h += `<th class="col-verify">需核实</th>`;
+  h += `<th class="col-need">${isField?'现场核实要点':'需获取数据'}</th>
+    <th class="col-source">获取途径</th>
+  </tr></thead><tbody>`;
+
+  items.forEach(d=>{
+    const netTag = d.hasNet ? '<span class="tag-net">网络</span>' : '';
+    h += `<tr>
+      <td class="col-id">${d.id}</td>
+      <td class="col-name">${d.name}${netTag}</td>
+      <td class="col-imp">${tagImp(d.imp)}</td>`;
+    if(!isField) h += `<td class="col-status">${tagStatus(d.status)}</td>`;
+    h += `<td class="col-existing">${d.existing}</td>`;
+    if(!isField) h += `<td class="col-verify">${d.verify==='—'?'<span style="color:var(--text3)">—</span>':d.verify}</td>`;
+    h += `<td class="col-need">${d.need}</td>
+      <td class="col-source">${d.source}</td>
+    </tr>`;
+  });
+
+  h += `</tbody></table></div>`;
+  return h;
+}
+
+// ===== 筛选事件 =====
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const f = btn.dataset.filter;
+    const v = btn.dataset.val;
+    filters[f] = v;
+    document.querySelectorAll(`.filter-btn[data-filter="${f}"]`).forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+
+searchInput.addEventListener('input',e=>{
+  searchText = e.target.value.trim();
+  render();
+});
+
+// 初始渲染
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>老火车站片区 · 现场调研工具 V2.0</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.css">
+<script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<style>
+:root{
+  --bg:#0f172a;--card:#1e293b;--card2:#243044;--line:#334155;
+  --text:#f1f5f9;--text2:#cbd5e1;--text3:#94a3b8;
+  --green:#22c55e;--green-bg:rgba(34,197,94,.1);--green-dark:#15803d;
+  --red:#ff6b6b;--yellow:#fbbf24;--blue:#4d96ff;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft YaHei',sans-serif;min-height:100vh;}
+.page{display:none;min-height:100vh;padding-bottom:80px;}
+.page.active{display:block;}
+.topbar{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;}
+.topbar .back{background:none;border:none;color:var(--text2);font-size:16px;cursor:pointer;padding:4px 8px;}
+.topbar .title{font-size:16px;font-weight:600;flex:1;text-align:center;}
+.topbar .progress{font-size:12px;color:var(--text3);}
+.container{padding:16px;max-width:600px;margin:0 auto;}
+
+/* 首页 */
+.hero{text-align:center;padding:30px 0 20px;}
+.hero h1{font-size:22px;color:var(--green);margin-bottom:6px;}
+.hero p{font-size:13px;color:var(--text3);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0;}
+.stat-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 6px;text-align:center;}
+.stat-card .num{font-size:20px;font-weight:bold;}
+.stat-card .label{font-size:11px;color:var(--text3);margin-top:2px;}
+.section-title{font-size:14px;color:var(--text3);margin:20px 0 10px;font-weight:600;}
+.big-btn{display:block;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin-bottom:12px;cursor:pointer;text-align:left;transition:all .2s;}
+.big-btn:active{transform:scale(.98);border-color:var(--green);}
+.big-btn .icon{font-size:28px;margin-bottom:6px;}
+.big-btn .name{font-size:16px;font-weight:600;color:var(--text);}
+.big-btn .desc{font-size:12px;color:var(--text3);margin-top:4px;}
+.big-btn .count{float:right;font-size:12px;color:var(--green);background:var(--green-bg);padding:2px 8px;border-radius:10px;}
+
+/* 分类列表 */
+.cat-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;}
+.cat-card:active{border-color:var(--green);}
+.cat-card .cat-header{display:flex;justify-content:space-between;align-items:center;}
+.cat-card .cat-name{font-size:15px;font-weight:600;}
+.cat-card .cat-icon{font-size:20px;margin-right:8px;}
+.cat-card .cat-stats{font-size:12px;color:var(--text3);margin-top:6px;}
+.cat-card .cat-stats span{margin-right:12px;}
+.cat-card .done{color:var(--green);}
+.cat-card .issue{color:var(--yellow);}
+.search-box{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--text);font-size:14px;margin-bottom:14px;}
+.search-box::placeholder{color:var(--text3);}
+
+/* 项目列表 */
+.item-list .item-row{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.item-row:active{border-color:var(--green);}
+.item-row .item-name{font-size:14px;}
+.item-row .item-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+.status-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;}
+.status-dot.done{background:var(--green);}
+.status-dot.issue{background:var(--yellow);}
+.status-dot.pending{background:var(--text3);}
+.add-btn{width:100%;background:var(--green-bg);border:1px dashed var(--green);color:var(--green);border-radius:10px;padding:12px;font-size:14px;cursor:pointer;margin-top:8px;}
+
+/* 详情页 */
+.data-section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px;}
+.data-section h3{font-size:14px;color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.data-section.inline{display:grid;grid-template-columns:70px 1fr;gap:12px;align-items:start;}
+.data-section.inline h3{margin-bottom:0;padding-top:3px;font-size:13px;}
+.data-table{width:100%;border-collapse:collapse;}
+.data-table td{padding:6px 0;font-size:13px;border-bottom:1px solid var(--line);}
+.data-table td:first-child{color:var(--text3);width:90px;}
+.data-table td:last-child{color:var(--text);}
+.data-with-loc{display:block;}
+.data-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 10px;}
+.data-grid .data-item{padding:5px 0;border-bottom:1px solid var(--line);font-size:12px;display:flex;gap:6px;align-items:baseline;}
+.data-grid .data-item .k{color:var(--text3);font-size:10px;flex-shrink:0;min-width:36px;}
+.data-grid .data-item .v{color:var(--text);word-break:break-all;font-size:12px;flex:1;}
+.data-grid .data-item.renew{grid-column:1/-1;background:var(--green-bg);border-radius:6px;padding:8px;margin-top:4px;display:block;}
+.data-grid .data-item.renew .k{color:var(--green);font-weight:600;font-size:11px;display:block;margin-bottom:4px;}
+.data-grid .data-item.renew .v{color:var(--green);font-size:12px;line-height:1.5;display:block;}
+#map{height:300px;width:100%;background:#1a1a2e;}
+.loc-top{background:var(--card2);border-radius:10px;padding:12px;margin-bottom:14px;border:1px solid var(--line);}
+.loc-top .loc-title{color:var(--green);font-weight:600;font-size:13px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.loc-top .loc-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;}
+.loc-top .loc-col{text-align:center;}
+.loc-top .loc-col .lk{color:var(--text3);font-size:10px;margin-bottom:2px;}
+.loc-top .loc-col .lv{color:var(--text);font-size:11px;font-family:monospace;word-break:break-all;}
+.loc-top .loc-col .lv.green{color:var(--green);font-weight:600;}
+.loc-top .loc-col .lv.yellow{color:#fbbf24;font-weight:600;}
+.loc-top .loc-col .lv.gray{color:var(--text3);}
+.loc-status{font-size:9px;padding:1px 4px;border-radius:3px;margin-left:2px;}
+.loc-status.calibrated{background:var(--green-bg);color:var(--green);}
+.loc-status.estimated{background:rgba(251,191,36,.1);color:#fbbf24;}
+.loc-status.none{background:var(--card2);color:var(--text3);}
+.loc-top .loc-btns{display:grid;grid-template-columns:1fr;gap:8px;}
+.loc-top .loc-btns button{padding:10px;border-radius:8px;font-size:13px;cursor:pointer;border:1px solid;}
+.loc-top .loc-btns .btn-map{background:var(--green-dark);border-color:var(--green);color:#fff;font-weight:600;}
+
+/* 核实结论 */
+.conclusion-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.conc-btn{padding:12px 6px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--text3);font-size:13px;cursor:pointer;text-align:center;}
+.conc-btn.active.done{border-color:var(--green);background:var(--green-bg);color:var(--green);}
+.conc-btn.active.issue{border-color:var(--yellow);background:rgba(251,191,36,.1);color:var(--yellow);}
+.conc-btn.active.none{border-color:var(--red);background:rgba(255,107,107,.1);color:var(--red);}
+.issue-options{display:none;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;}
+.issue-options.show{display:grid;}
+.issue-opt{padding:8px 4px;border-radius:8px;border:1px solid var(--line);background:var(--card2);color:var(--text2);font-size:12px;cursor:pointer;text-align:center;}
+.issue-opt:active{background:var(--green-bg);border-color:var(--green);color:var(--green);}
+
+/* 备注 */
+.note-textarea{width:100%;min-height:180px;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:14px;resize:vertical;line-height:1.6;}
+.note-tools{display:flex;gap:8px;margin-top:8px;}
+.note-tool{background:var(--card2);border:1px solid var(--line);color:var(--text2);padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;}
+.note-tool.recording{background:var(--red);color:#fff;border-color:var(--red);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+
+/* 照片 */
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
+.photo-item{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--card2);}
+.photo-item img{width:100%;height:100%;object-fit:cover;}
+.photo-item .del{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:none;width:20px;height:20px;border-radius:50%;font-size:12px;cursor:pointer;}
+.photo-add{aspect-ratio:1;border:2px dashed var(--line);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text3);cursor:pointer;font-size:11px;gap:4px;}
+.photo-add:active{border-color:var(--green);color:var(--green);}
+
+/* 定位 */
+.loc-btn{background:var(--green-bg);border:1px solid var(--green);color:var(--green);padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;width:100%;}
+.loc-info{display:none;margin-top:10px;background:var(--card2);border-radius:8px;padding:10px;font-size:12px;}
+.loc-info.show{display:block;}
+.loc-info .row{display:flex;padding:3px 0;}
+.loc-info .key{color:var(--text3);width:60px;}
+.loc-info .val{color:var(--text);font-family:monospace;flex:1;}
+.loc-actions{display:flex;gap:8px;margin-top:8px;}
+.loc-actions button{background:var(--card);border:1px solid var(--line);color:var(--text2);padding:6px 10px;border-radius:6px;font-size:11px;cursor:pointer;}
+#map{height:320px !important;width:100%;background:#1a2332;}
+.map-tools{display:flex;gap:6px;padding:8px;background:var(--card2);border-top:1px solid var(--line);}
+.map-tool{flex:1;background:var(--card);border:1px solid var(--line);color:var(--text2);padding:8px 4px;border-radius:6px;font-size:11px;cursor:pointer;text-align:center;}
+.map-tool:active{background:var(--green-bg);border-color:var(--green);color:var(--green);}
+.map-tool.close{background:rgba(255,107,107,.1);border-color:#ff6b6b;color:#ff6b6b;}
+
+/* 底部切换 */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--line);padding:12px 16px;display:flex;justify-content:space-between;z-index:100;}
+.bottom-nav button{background:var(--card2);border:1px solid var(--line);color:var(--text2);padding:10px 20px;border-radius:8px;font-size:14px;cursor:pointer;}
+.bottom-nav button:active{border-color:var(--green);color:var(--green);}
+.bottom-nav .save-tip{font-size:11px;color:var(--text3);align-self:center;}
+
+/* 资料调取 */
+.dept-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:10px;cursor:pointer;transition:all .2s;}
+.dept-card:active{transform:scale(.98);background:rgba(34,197,94,.1);}
+.dept-card .dept-name{font-size:17px;font-weight:600;margin-bottom:6px;}
+.dept-card .dept-count{font-size:13px;color:var(--text3);}
+.dept-card .dept-progress{font-size:12px;color:var(--text2);margin-top:6px;}
+.doc-item{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;}
+.doc-item .doc-name{font-size:16px;font-weight:600;margin-bottom:8px;line-height:1.4;}
+.doc-item .doc-priority{font-size:13px;margin-right:6px;}
+.doc-item .doc-content{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:6px;}
+.doc-item .doc-use{font-size:13px;color:var(--text3);margin-bottom:10px;}
+.doc-item .doc-status-row{display:flex;gap:8px;margin-bottom:10px;}
+.doc-item .status-btn{flex:1;padding:8px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;}
+.doc-item .status-btn.active{background:rgba(34,197,94,.2);border-color:#22c55e;color:#22c55e;}
+.doc-item .status-btn.part{background:rgba(251,191,36,.2);border-color:#fbbf24;color:#fbbf24;}
+.doc-item .status-btn.no{background:rgba(239,68,68,.2);border-color:#ef4444;color:#ef4444;}
+.doc-item .doc-remark{width:100%;min-height:60px;background:rgba(0,0,0,.2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text1);font-size:14px;resize:vertical;box-sizing:border-box;}
+.doc-item .doc-remark-label{font-size:13px;color:var(--text3);margin-bottom:6px;}
+.doc-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);}
+.doc-row:last-child{border-bottom:none;}
+.doc-row .doc-name{font-size:13px;flex:1;}
+.doc-row .doc-use{font-size:11px;color:var(--text3);margin-top:2px;}
+.doc-status{padding:3px 8px;border-radius:10px;font-size:11px;cursor:pointer;}
+.doc-status.got{background:var(--green-bg);color:var(--green);}
+.doc-status.part{background:rgba(251,191,36,.1);color:var(--yellow);}
+.doc-status.no{background:var(--card2);color:var(--text3);}
+
+/* Toast */
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.85);color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;z-index:9999;display:none;}
+.toast.show{display:block;}
+</style>
+</head>
+<body>
+
+<!-- 首页 -->
+<div class="page active" id="pageHome">
+  <div class="container">
+    <div class="hero">
+      <h1>老火车站片区</h1>
+      <p>现场调研核实工具 V2.0</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="num" id="statTotal">0</div><div class="label">总项目</div></div>
+      <div class="stat-card"><div class="num" id="statDone" style="color:var(--green)">0</div><div class="label">已核实</div></div>
+      <div class="stat-card"><div class="num" id="statIssue" style="color:var(--yellow)">0</div><div class="label">有出入</div></div>
+      <div class="stat-card"><div class="num" id="statPending" style="color:var(--text3)">0</div><div class="label">未核实</div></div>
+    </div>
+    <div class="section-title">工作板块</div>
+    <div class="big-btn" onclick="showPage('pageProject')">
+      <span class="count" id="projectCount">0项</span>
+      <div class="icon">🏗️</div>
+      <div class="name">项目现场核实</div>
+      <div class="desc">老旧小区、厂区、闲置资源、公服设施等逐个核实</div>
+    </div>
+    <div class="big-btn" onclick="showPage('pageDept')">
+      <span class="count" id="deptCount">0项</span>
+      <div class="icon">📂</div>
+      <div class="name">部门资料调取</div>
+      <div class="desc">各部门、街道、社区资料清单，照着要就行</div>
+    </div>
+    <div class="section-title">数据管理</div>
+    <div class="big-btn" onclick="exportFullReport()">
+      <div class="icon">📤</div>
+      <div class="name">导出完整报告</div>
+      <div class="desc">HTML格式，分门别类，含照片和备注</div>
+    </div>
+  </div>
+</div>
+
+<!-- 项目分类页 -->
+<div class="page" id="pageProject">
+  <div class="topbar">
+    <button class="back" onclick="showPage('pageHome')">← 返回</button>
+    <div class="title">项目现场核实</div>
+    <div class="progress"></div>
+  </div>
+  <div class="container">
+    <input class="search-box" placeholder="🔍 搜索项目名称..." oninput="filterItems(this.value)">
+    <div id="categoryList"></div>
+  </div>
+</div>
+
+<!-- 项目列表页 -->
+<div class="page" id="pageItemList">
+  <div class="topbar">
+    <button class="back" onclick="showPage('pageProject')">← 返回</button>
+    <div class="title" id="listTitle">项目列表</div>
+    <div class="progress" id="listProgress"></div>
+  </div>
+  <div class="container">
+    <div class="item-list" id="itemList"></div>
+    <button class="add-btn" onclick="addNewItem()">➕ 新增项目</button>
+  </div>
+</div>
+
+<!-- 项目详情页 -->
+<div class="page" id="pageDetail">
+  <div class="topbar">
+    <button class="back" onclick="showPage('pageItemList')">← 返回</button>
+    <div class="title" id="detailTitle">项目详情</div>
+    <div class="progress" id="detailProgress"></div>
+  </div>
+  <div class="container">
+    <!-- 位置信息（最顶部） -->
+    <div class="loc-top">
+      <div class="loc-btns">
+        <button class="btn-map" onclick="showMap()">🗺️ 查看地图与定位</button>
+      </div>
+      <div id="mapPanel" style="display:none;margin-top:10px;">
+        <div class="loc-row">
+          <div class="loc-col">
+            <div class="lk">项目位置</div>
+            <div class="lv green" id="projectLocTop">—</div>
+          </div>
+          <div class="loc-col">
+            <div class="lk">我的位置</div>
+            <div class="lv" id="myLocTop">未定位</div>
+          </div>
+          <div class="loc-col">
+            <div class="lk">距离</div>
+            <div class="lv" id="distTop">—</div>
+          </div>
+        </div>
+        <div id="setLocBtn" style="display:block;margin:8px 0;">
+          <button style="width:100%;background:rgba(251,191,36,.1);border:1px solid #fbbf24;color:#fbbf24;padding:8px;border-radius:8px;font-size:12px;cursor:pointer;" onclick="setAsProjectLocation()">📌 我就站在项目处，设此位置为项目坐标</button>
+        </div>
+        <div id="mapContainer" style="border-radius:8px;overflow:hidden;border:2px solid red;min-height:360px;background:#1a2332;">
+          <div id="map" style="height:320px;width:100%;background:#1a2332;"></div>
+          <div class="map-tools">
+            <button class="map-tool" onclick="fitMapToBoth()">🎯 归位</button>
+            <button class="map-tool" onclick="navigateToProject()">🧭 导航</button>
+            <button class="map-tool" onclick="toggleSatellite()">🛰️ <span id="satBtnText">卫星</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 项目信息 -->
+    <div class="data-section">
+      <h3>📋 项目信息</h3>
+      <div class="data-grid" id="dataGrid"></div>
+    </div>
+    <!-- 核实结论 -->
+    <div class="data-section">
+      <h3>✅ 核实结论</h3>
+      <div class="conclusion-btns">
+        <div class="conc-btn done" onclick="setConclusion('done')">✅ 属实</div>
+        <div class="conc-btn issue" onclick="setConclusion('issue')">⚠️ 有出入</div>
+        <div class="conc-btn none" onclick="setConclusion('none')">❌ 不存在</div>
+      </div>
+      <div class="issue-options" id="issueOptions">
+        <div class="issue-opt" onclick="insertIssue('位置')">位置</div>
+        <div class="issue-opt" onclick="insertIssue('面积')">面积</div>
+        <div class="issue-opt" onclick="insertIssue('栋数')">栋数</div>
+        <div class="issue-opt" onclick="insertIssue('户数')">户数</div>
+        <div class="issue-opt" onclick="insertIssue('建成年代')">建成年代</div>
+        <div class="issue-opt" onclick="insertIssue('结构')">结构</div>
+        <div class="issue-opt" onclick="insertIssue('质量')">质量</div>
+        <div class="issue-opt" onclick="insertIssue('其他')">其他</div>
+      </div>
+    </div>
+    <!-- 现场备注 -->
+    <div class="data-section">
+      <h3>✏️ 现场备注</h3>
+      <textarea class="note-textarea" id="noteText" placeholder="现场看到的情况、问题、补充信息..." oninput="saveNote()"></textarea>
+      <div class="note-tools">
+        <button class="note-tool" id="voiceBtn" onclick="toggleVoice()">🎤 语音</button>
+        <button class="note-tool" onclick="insertLocationToNote()">📋 插入位置</button>
+        <button class="note-tool" onclick="clearNote()">🔤 清空</button>
+      </div>
+    </div>
+    <!-- 现场照片 -->
+    <div class="data-section">
+      <h3>📷 现场照片 (<span id="photoCount">0</span>/9)</h3>
+      <div class="photo-grid" id="photoGrid">
+        <div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
+        <div class="photo-add" onclick="pickPhotos()">🖼️<span>相册</span></div>
+      </div>
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="handlePhotos(this.files)">
+      <input type="file" id="albumInput" accept="image/*" multiple style="display:none" onchange="handlePhotos(this.files)">
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <button onclick="prevItem()">← 上一个</button>
+    <span class="save-tip" id="saveTip">已自动保存</span>
+    <button onclick="nextItem()">下一个 →</button>
+  </div>
+</div>
+
+<!-- 资料调取页 -->
+<div class="page" id="pageDept">
+  <div class="topbar">
+    <button class="back" onclick="showPage('pageHome')">← 返回</button>
+    <div class="title">部门资料调取</div>
+    <div class="progress"></div>
+  </div>
+  <div class="container" id="deptList"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== 数据 =====
+const CATEGORIES = [
+  {id:'communities',icon:'🏘️',name:'片区内小区清单（核心核实）',items:[
+    {id:'XQ001',name:"包装厂宿舍",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "已改造", "体检发现问题": "强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ002',name:"工商所宿舍",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ003',name:"海事局宿舍",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患、强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ004',name:"湘江西路52号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ005',name:"湘江西路75号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ006',name:"湘江西路92号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ007',name:"湘江西路99号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ008',name:"百货站宿舍小区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患、强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ009',name:"纺织站小区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患、强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ010',name:"耐火材料厂宿舍",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ011',name:"觅湘路111号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ012',name:"觅湘路129号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "消防隐患、照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ013',name:"觅湘路199号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "立面脱落、消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ014',name:"觅湘路2巷",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患、照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ015',name:"觅湘路87号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ016',name:"觅香大市场",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ017',name:"觅香路142号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "立面脱落、消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ018',name:"觅香路142号小区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ019',name:"觅香路158号小区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患、照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ020',name:"觅香路166号",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ021',name:"觅香路166号小区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ022',name:"觅香路27号商品房",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ023',name:"觅香路35号商品房",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ024',name:"铁路向阳一村",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ025',name:"铁路向阳村一区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ026',name:"铁路向阳村二区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ027',name:"铁路小区",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ028',name:"铁路湘阳二村",sub:"活龙井社区",data:{"所属社区": "活龙井社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ029',name:"万利小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ030',name:"嘉信悦江府",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ031',name:"嘉信西城香山A区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ032',name:"嘉信西城香山B区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ033',name:"嘉信西城香山C区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ034',name:"嘉信西城香山小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ035',name:"城中丽景小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ036',name:"天桥南路107号",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ037',name:"天桥南路48号",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ038',name:"安福家园",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ039',name:"文昌广场安置小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ040',name:"文昌路89号",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ041',name:"文昌阁59号",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ042',name:"文昌阁88号",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ043',name:"水岸丽都小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ044',name:"永粮国际东区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "立面脱落", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ045',name:"永粮国际西区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ046',name:"花果山小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "屋面漏水、立面脱落、消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ047',name:"面粉厂宿舍",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "无需改造", "体检发现问题": "立面脱落、消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ048',name:"面粉厂小区",sub:"文昌阁社区",data:{"所属社区": "文昌阁社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "屋面漏水", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ049',name:"又一村城中村",sub:"又一村社区",data:{"所属社区": "又一村社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ050',name:"清桥路城中村",sub:"又一村社区",data:{"所属社区": "又一村社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ051',name:"潇湘丽景小区",sub:"又一村社区",data:{"所属社区": "又一村社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ052',name:"金穗大厦小区",sub:"又一村社区",data:{"所属社区": "又一村社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ053',name:"银龙电脑城宿舍",sub:"又一村社区",data:{"所属社区": "又一村社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ054',name:"零陵中路399号",sub:"又一村社区",data:{"所属社区": "又一村社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ055',name:"春江安置小区",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ056',name:"玻璃厂宿舍",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ057',name:"舜德摩尔小区",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ058',name:"舜德湘江小区",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ059',name:"舜德花园",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ060',name:"舜德花园小区",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ061',name:"香河一品小区",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ062',name:"鸿泰佳园",sub:"白竹亭社区",data:{"所属社区": "白竹亭社区（推测）", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ063',name:"下河粮库",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ064',name:"中医药宿舍",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ065',name:"中医院宿舍",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ066',name:"中诚家园",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ067',name:"劳保公司小区",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ068',name:"卫健局宿舍",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ069',name:"旧货市场宿舍",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ070',name:"旧货市场宿舍楼",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ071',name:"武警宿舍",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ072',name:"永州市劳保公司小区",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ073',name:"永泰小区",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ074',name:"珊雅小区",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "待核实", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ075',name:"电力公司宿舍",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "强弱电线隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ076',name:"荣兴小区",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "未改造", "体检发现问题": "消防隐患", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+    {id:'XQ077',name:"菱角山一巷",sub:"需现场核实所属社区",data:{"所属社区": "需现场核实所属社区", "建成年代": "待核实", "改造情况": "待核实", "体检发现问题": "照明设施破损", "核实重点": "核实小区是否存在、具体位置、楼栋数、户数、现状问题", "数据来源": "老火车站片区体检报告（2025）"}},
+  ]},
+  {id:'projects',icon:'📋',name:'上层次规划项目核实',items:[
+    {id:'XM001',name:"冷水滩区2024年河西片老旧小区改造及配套基础设施建设项目",sub:"（一）城镇老旧小区改造（合计11 个项目，计划总投资8.46 亿元）",data:{"建设内容": "本项目对永州市冷水滩区水泥二厂家属宿 舍（老小区）、石牌楼粮站小区等，共18 个小区进行基础配套设施改造，改造涉及 178 栋楼，总户数4738 户，总建筑面积47 万平方米。改造DN500 污水管网4610 米、 污水检查井84 个、DN800 雨水管网5660 米、雨水口102 个，雨水检查井52 个、DN200 给水管网4790 米，DN300 燃气管道2980 米，改造小区内路面（沥青路面", "总投资": "3371万元", "工期": "2024.09-2025.12", "实施范围": "永州市冷 水滩区中 心城区", "片区相关性": "❓ 河西片区范围较广，需核实是否涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM002',name:"永州市冷水滩区2025 年河西片区城镇老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计11 个项目，计划总投资8.46 亿元）",data:{"建设内容": "冷水滩区河西片区老旧小区改造涉及12 个 小区，123 栋，1375 户，改造面积31.86 万 ㎡。改造DN500 污水管网5320 米、污水检 查井106 个、DN800 雨水管网6080 米、雨 水口120 个，雨水检查井61 个、DN200 给 水管网4940 米，DN300 燃气管道2929.04 米，改造小区沥青路面约3173.81 米 (28564.29 ㎡)、消防设施24 项、环卫", "总投资": "4867万元", "工期": "2025.05-2026.05", "实施范围": "永州市冷 水滩区中 心城区", "片区相关性": "❓ 河西片区范围较广，需核实是否涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM003',name:"永州市冷水滩区梧桐街道梧桐社区杨家园片区老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计11 个项目，计划总投资8.46 亿元）",data:{"建设内容": "杨家园片区老旧小区配套道路、凤支二路、 排水、土石方、绿化、亮化、配电、供水、 供电、消防等。", "总投资": "2600万元", "工期": "2025.06-2026.12", "实施范围": "永州市冷 水滩区中 心城区， 项目四 至：银象 路以东、 梧桐路以 南、吉发 路以西、 凤支二路 以北。", "片区相关性": "❌ 可能不在本片区（梧桐社区/紫金社区，非白竹亭社区）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM004',name:"冷水滩区2025年老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计11 个项目，计划总投资8.46 亿元）",data:{"建设内容": "项目涉及菱角山街道、梧桐街道、珊瑚街道、 肖家园街道、凤凰街道、梅湾街道、杨家桥 街道7 个街道，42 个小区，共9083 户，335 栋，总建筑面积97.16 万平方米，主要改造 内容改造DN500 污水管网8320 米、污水检 查井87 个、DN800 雨水管网11218 米、雨 水口153 个、雨水检查井92 个、DN200 给 水管网5126 米、DN300 燃气管道5189 米、 改造小", "总投资": "7872万元", "工期": "2025.01-2025.12", "实施范围": "永州市冷 水滩区中 心城区菱 角山、梧 桐、珊瑚、 肖家园、 凤凰、梅 湾、杨家 桥街道", "片区相关性": "⚠️ 覆盖多街道，需核实本片区内具体小区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM005',name:"永州市冷水滩区文昌阁棚改安置小区配套道路改扩建工程",sub:"（二）棚户区（城市危旧房）改造（合计13 个项目，总投资3.39 亿元）",data:{"建设内容": "主要建设内容包括路基路面、管网、强弱电、 燃气、绿化、亮化、安防等配套设施改造。 文昌阁路（春江路-湘江西路）长1100 米， 宽14 米。清泉路（零陵北路-文昌阁路）长 858 米，宽14 米。", "总投资": "5874万元", "工期": "2025.01-2027.12", "实施范围": "文昌阁路 （春江路- 湘江西 路） 清泉路 （零陵北 路-文昌阁 路）", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM006',name:"永州市冷水滩区杨家桥棚改安置小区配套道路改扩建工程",sub:"（二）棚户区（城市危旧房）改造（合计13 个项目，总投资3.39 亿元）",data:{"建设内容": "主要建设内容包括路基路面、管网、强弱电、 燃气、绿化、亮化、安防等配套设施改造。 狮岩路（零陵中路-湘江西路）长916 米， 宽14 米。杨家巷路（零陵中路-湘江西路） 长916 米，宽14 米。", "总投资": "2748万元", "工期": "2025.01-2027.12", "实施范围": "狮岩路 （零陵中 路-湘江西 路） 杨家巷路 （零陵中 路-湘江西 路）", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM007',name:"永州市冷水滩区潇湘棚改安置小区配套道路改扩建工程",sub:"（二）棚户区（城市危旧房）改造（合计13 个项目，总投资3.39 亿元）",data:{"建设内容": "主要建设内容包括路基路面、管网、强弱电、 燃气、绿化、亮化、安防等配套设施改造。 规划路（零陵北路-湘江西路）长430 米， 宽14 米。", "总投资": "1720万元", "工期": "2025.01-2027.12", "实施范围": "规划路 （零陵北 路-湘江西 路）", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM008',name:"冷水滩区文昌阁路、清泉路老旧街区改造提升项目",sub:"（二）棚户区（城市危旧房）改造（合计13 个项目，总投资3.39 亿元）",data:{"建设内容": "主要建设内容包括路基路面、管网、强弱电、 燃气、绿化、亮化、安防等配套设施改造。 文昌阁路（永州大道-湘江西路）长2000 米， 宽14 米。清泉路（零陵北路-文昌阁路）长 858 米，宽14 米。", "总投资": "8574万元", "工期": "2025.01-2027.12", "实施范围": "文昌阁路 （永州大 道-湘江西 路） 清泉路 （零陵北 路-文昌阁 路）", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM009',name:"永州市冷水滩区河西片2022年老旧小区老旧小区升级改造及配套基础设施建设项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "冷水滩区冷水滩区轻纺局宿舍、车站新村2 区、珊瑚巷、煤勘三队、金秋公司等共12 个老旧小区基础配套设施改造；改造涉及 91 栋楼，总户数1289 户，总建筑面积11.53 万平方米；改造内容包括：道路、排水、护 坡、管线、绿化、亮化、电梯、充电桩等若 干配套设施。", "总投资": "3775.08万元", "工期": "2022.09-2026.12", "实施范围": "永州市冷 水滩区冷 水滩区轻 纺局宿 舍、车站 新村2区、 珊瑚巷、 煤勘三 队、金秋 公司等共 12 个老旧 小区", "片区相关性": "❓ 河西片区范围较广，需核实是否涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM010',name:"永州市冷水滩区2023 年河西片老旧小区升级改造及配套基础设施建设项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "冷水滩区区妇幼保健院宿舍、市外贸良种场 宿舍、市金属回收公司宿舍等12 个老旧小 区进行基础配套设施改造；改造涉及74 栋 楼，总户数1725 户，总建筑面积15.82 万 平方米；改造内容包括：雨污分流、道路白 改黑、绿化、亮化、管线等若干配套设施。", "总投资": "956.47万元", "工期": "2023.09-2026.12", "实施范围": "冷水滩区 区妇幼保 健院宿 舍、市外 贸良种场 宿舍、市 金属回收 公司宿舍 等12个老 旧小区", "片区相关性": "❓ 河西片区范围较广，需核实是否涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM011',name:"永州市冷水滩区2023 年湘江西路片区老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "冷水滩区杨家桥街道狮子口、伍家院社区肖 家园街道又一村、活龙井社区辖区内45 栋 小区进行基础配套设施改造；改造涉及45 栋楼，总户数 1280 户，总建筑面积11.52 万平方米；改造内容包括：雨污分流、道路 白改黑、绿化、亮化、管线等若干配套设施。", "总投资": "4799.81万元", "工期": "2023.09-2026.12", "实施范围": "冷水滩区 杨家桥街 道狮子 口、伍家 院社区肖 家园街道 又一村、 活龙井社 区辖区内", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM012',name:"冷水滩区湘江西路老旧小区城市更新项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "对冷水滩区湘江西路老旧小区进行改造，涉 及19 个小区，共152 栋、3936 户，改造面 积37.22 万平方米。建设污水管网10696m， 雨水管网12835m,雨污水检查井390 个、给 水 管 网 5280m ， 小 区 内 路 面 改 造 955358.24m 、小区周边配套道路改造 4490m，新建小区内停车位1120 个，配套 建设充电桩336 套，消防改造35 处、环卫 设施改造3", "总投资": "26388万元", "工期": "2024.01-2026.12", "实施范围": "永州市冷 水滩区中 心城区", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM013',name:"永州市冷水滩区梧桐街道紫金社区银象北路片区老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "银象北路片区老旧小区配套道路、盘王路、 湘跃路、湖跃路、排水、土石方、绿化、亮 化、配电、供水、供电、消防等。", "总投资": "10000万元", "工期": "2026.01-2028.12", "实施范围": "永州市冷 水滩区中 心城区， 项目四 至：珍珠 路以东、 湖塘路以", "片区相关性": "❌ 可能不在本片区（梧桐社区/紫金社区，非白竹亭社区）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM014',name:"冷水滩区2026年老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "项目涉及菱角山街道、梧桐街道、珊瑚街道、 肖家园街道、凤凰街道、梅湾街道、杨家桥 街道、工业园区8 个街道，36 个小区，共 5074 户，219 栋，总建筑面积50.06 万平方 米，主要改造内容房屋道路、排水、管线、 燃气、绿化、亮化等基础配套设施。", "总投资": "6327.22万元", "工期": "2026.01-2026.12", "实施范围": "永州市冷 水滩区中 心城区菱 角山、梧 桐、珊瑚、 肖家园、 凤凰、梅 湾、杨家 桥街道、 工业园区", "片区相关性": "⚠️ 覆盖多街道，需核实本片区内具体小区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM015',name:"永州市冷水滩区2026 年河西片老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "建设与冷水滩区16 个小区（涉及94 栋楼， 2837 户，总建筑面积417200 平方米）相配 套的基础设施，主要包括：1、改造污水管 网7419.6 米，污水检查井418 个，雨水管 网6818.4 米，雨水检查井349 个，给水管", "总投资": "5468.46万元", "工期": "2026.06-2027.05", "实施范围": "冷水滩区 春江花园 二区、十 四中宿 舍、市疾", "片区相关性": "❓ 河西片区范围较广，需核实是否涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM016',name:"永州市冷水滩区 2026年河西片区老旧街区提升改造项目",sub:"（一）城镇老旧小区改造（合计19 个项目，计划总投资9.99 亿元）",data:{"建设内容": "项目围绕基础设施升级、公共服务完善两大 维度，聚焦河河西片区活龙井、又一巷、新 华街、新建街、伍家院、杨家巷等 6 条老 旧街区，涉及用地范围 276479.72 平方米 （约 414.72 亩），系统开展各项改造建 设工作，具体建设内容及规模如下：1.改造 配套基础设施，包括改造配套道路 24000 平方米、供电通信管网 12550 米、雨污分 流 6000 米、消防给水管网 3000 米、整治", "总投资": "5440万元", "工期": "2027.01-2027.12", "实施范围": "河西片区 活龙井、 又一巷、 新华 街、新建 街、伍家 院、杨家 巷等 6 条老旧街 区", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM017',name:"冷水滩区河西片棚改区设施更新项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "轻机六分厂、玻璃厂、湘南罐头厂、羽绒厂、 纺织厂棚改等项目道路、绿化等基础设施及 小区文化体育、无障碍和适老化等便民公共 服务设施。", "总投资": "5000万元", "工期": "2026.01-2026.12", "实施范围": "冷水滩区 肖家园街 道、梧桐 街道、菱 角山街道 内", "片区相关性": "❓ 河西片区范围较广，需核实是否涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM018',name:"冷水滩区河西片区危旧住房改造项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "杨家桥街道、肖家园街道、菱角山街道2000 年前部分危旧房抗震加固、加装电梯、燃气 入户、雨污分流等。", "总投资": "18000万元", "工期": "2026.01-2027.12", "实施范围": "冷水滩区 杨家桥街 道、肖家 园街道、 菱角山街 道2000年 前部分危 旧房", "片区相关性": "⚠️ 覆盖多街道，需核实本片区内具体小区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM019',name:"冷水滩区张家组城中村改造项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "改造区域包括东至九嶷大道、西至刘家组、 南至木材总厂空地、北至下河线路，住房的 道路、下水道、消防、绿化、安防等基础设 施。", "总投资": "700万元", "工期": "2026.01-2026.12", "实施范围": "冷水滩区 菱角山街 道下河线 社区", "片区相关性": "❓ 需进一步核实", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM020',name:"冷水滩区刘家组城中村改造项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "改造区域包括东至张家组、西至市木材总厂 空地、南至木材总厂空地、北至下河线路， 住房的道路、下水道、消防、绿化、安防等 基础设施。", "总投资": "1220万元", "工期": "2026.01-2026.12", "实施范围": "冷水滩区 菱角山街 道下河线 社区", "片区相关性": "❓ 需进一步核实", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM021',name:"冷水滩区河边组城中村改造项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "改造区域包括东至文家岭组、西至市忠烈社 区、南至湘纸空地、北至嘉信水果市场，住 房的道路、下水道、消防、绿化、安防等基 础设施。", "总投资": "1070万元", "工期": "2026.01-2026.12", "实施范围": "冷水滩区 菱角山街 道下河线 社区", "片区相关性": "❓ 需进一步核实", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM022',name:"冷水滩区竹头组城中村改造项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "改造区域包括东至蒋家组、西至纺织厂小 区、南至嘉信水果市场、北至九嶷大道，住 房的道路、下水道、消防、绿化、安防等基 础设施。", "总投资": "1100万元", "工期": "2026.01-2026.12", "实施范围": "冷水滩区 菱角山街 道下河线 社区", "片区相关性": "❓ 需进一步核实", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM023',name:"冷水滩区零陵中路单键式平急两用人防工程",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "项目改造主要内容是紧急情况下作为人员 掩蔽部、物资储备部、人防固定电站等紧急 救灾避难场所；平时作为经营场所及过街通 道、人行步道，实现人车分流，构建中心城 区立体交通网络。", "总投资": "5000万元", "工期": "2026.01-2027.05", "实施范围": "冷水滩区 肖家园街 道又一村 社区", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM024',name:"永州市冷水滩区老火车站片改造项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "项目改造主要内容为以铁路北角铁路沿线 工务段为基础改造室内外研学体验火车文 化博物馆；以老火车站候车室、铁路站台和 铁道工务设施组合形成影视文化产业区（影 视基地）等。", "总投资": "3000万元", "工期": "2026.01-2026.12", "实施范围": "冷水滩区 菱角山街 道老火车 站片", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM025',name:"冷水滩区特种水泥厂、玻璃厂、后街等街区改造提升项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "项目改造主要内容为后街老旧街区道路、人 行道改造提升；玻璃厂特色文化街区改造提 升；特种水泥厂改造公益性服务设施。", "总投资": "1400万元", "工期": "2025.12-2027.02", "实施范围": "冷水滩区 梧桐街道 白竹亭社 区与梅湾 街道翠竹 园社区", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM026',name:"冷水滩区杨家巷路老旧街区改造提升项目",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "主要建设内容包括路基路面、管网、强弱电、 燃气、绿化、亮化、安防等配套设施改造。 杨家巷路（零陵中路-湘江西路）长1003 米， 宽14 米。", "总投资": "3009万元", "工期": "2025.01-2027.12", "实施范围": "杨家巷路 （零陵中 路-湘江 西路）", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM027',name:"活龙井街区基础设施进行提质改造",sub:"（二）棚户区（城市危旧房）改造（合计4 个项目，总投资4.1 亿元）",data:{"建设内容": "项目拟对活龙井街区基础设施进行提质改 造，改造范围12.32 万平方米。改造范围内 道路16420 平方米；照明设施56 处；综合 服务中心2561 平方米；停车场改造14212 平方米（停车位165 个，加装充电桩45 个）； 配套改造供电设施23 处、绿化11234 平方", "总投资": "13821万元", "工期": "2026.01-2027.05", "实施范围": "活龙井街 区", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM028',name:"冷水滩区2027年老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计5 个项目，计划总投资2.10 亿元）",data:{"建设内容": "项目涉及菱角山街道、梧桐街道、珊瑚街道、 肖家园街道、凤凰街道、梅湾街道、杨家桥 街道、曲河街道8 个街道，80 个小区，共 6338 户，351 栋，总建筑面积63.31 万平方 米，主要改造内容房屋道路、排水、管线、 燃气、绿化、亮化等基础配套设施。", "总投资": "10541.62万元", "工期": "2027.01-2028.12", "实施范围": "永州市冷水 滩区中心城 区菱角山、 梧桐、珊瑚、 肖家园、凤 凰、梅湾、 杨家桥、曲 河街道", "片区相关性": "⚠️ 覆盖多街道，需核实本片区内具体小区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM029',name:"永州市冷水滩区梧桐街道梧桐社区白泥塘片区老旧小区改造项目",sub:"（一）城镇老旧小区改造（合计5 个项目，计划总投资2.10 亿元）",data:{"建设内容": "白泥塘片区老旧小区配套道路、虹桥路、排 水、土石方、绿化、亮化、配电、供水、供 电、消防等。", "总投资": "2100万元", "工期": "2026.06-2027.12", "实施范围": "永州市冷水 滩区中心城 区，项目四 至：珍珠路 以东、虹桥 路以南、盘 王路以西、 梧桐路以 北。", "片区相关性": "❌ 可能不在本片区（梧桐社区/紫金社区，非白竹亭社区）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM030',name:"冷水滩区凤凰园片区危旧住房改造项目",sub:"（二）棚户区（城市危旧房）改造（合计2 个项目，总投资1.48 亿元）",data:{"建设内容": "凤凰街道、梧桐街道2000 年前部分危旧房 抗震加固、加装电梯、燃气入户、雨污分流 等。", "总投资": "14000万元", "工期": "2027.01-2028.12", "实施范围": "冷水滩区凤 凰街道、梧 桐街道2000 年前部分危 旧房", "片区相关性": "❓ 需进一步核实", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM031',name:"冷水滩区社塘与珊瑚巷城中村改造项目",sub:"（二）棚户区（城市危旧房）改造（合计2 个项目，总投资1.48 亿元）",data:{"建设内容": "改造区域包括梧桐街道梧桐社区社塘城中 村与珊瑚巷城中村，住房的道路、绿化、消 防、安防等基础设施", "总投资": "1281万元", "工期": "2026.11-2027.12", "实施范围": "梧桐街道梧 桐社区", "片区相关性": "❌ 可能不在本片区（梧桐社区/紫金社区，非白竹亭社区）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM032',name:"永州市冷水滩区菱角山街道下河线社区清泉片区城中村改造项目",sub:"（二）棚户区（城市危旧房）改造（合计2 个项目，总投资1.48 亿元）",data:{"建设内容": "清泉片区城中村改造项目，房屋征收、配套 道路清泉路、文昌阁路道路、排水、土石方、 绿化、亮化等。", "总投资": "6000万元", "工期": "2027.01-2028.12", "实施范围": "菱角山街道 下河线社 区，项目四 至：规划支 路以东、零 陵路以南， 清泉路以 西、文昌阁 以北，规模： 41.8 亩。", "片区相关性": "✅ 明确涉及本片区", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM033',name:"冷水滩区铁路宿舍向阳村一区、二区城市公共空间改造项目",sub:"（二）棚户区（城市危旧房）改造（合计2 个项目，总投资1.48 亿元）",data:{"建设内容": "利用城市公共空间进行文旅项目打造。", "总投资": "1200万元", "工期": "2026.12-2027.12", "实施范围": "冷水滩区梧 桐街道白竹 亭社区", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+    {id:'XM034',name:"冷水滩区铁路三角线城市公共空间改造项目",sub:"（二）棚户区（城市危旧房）改造（合计2 个项目，总投资1.48 亿元）",data:{"建设内容": "利用城市公共空间进行文旅项目打造。", "总投资": "1500万元", "工期": "2026.11-2027.12", "实施范围": "冷水滩区梧 桐街道白竹 亭社区", "片区相关性": "✅ 明确涉及本片区（地标匹配）", "核实重点": "【上层次规划项目】核实是否涉及本片区具体小区，涉及哪些小区，改造内容是否准确", "数据来源": "永州市冷水滩区城市基础设施更新改造重点领域实施方案（2025-2027）"}},
+  ]},
+  {id:'factory',icon:'🏭',name:'老旧厂区',items:[
+    {id:'FA01',name:'玻璃厂',sub:'白竹亭社区',data:{'位置':'白竹亭社区','面积':'21亩','建成年代':'1970年代','现状':'停产','土地性质':'工业','核实重点':'核实现状和产权','数据来源':'体检报告'}},
+    {id:'FA02',name:'特种水泥厂',sub:'文昌阁社区',data:{'位置':'文昌阁社区','面积':'14亩','建成年代':'1980年代','现状':'停产','土地性质':'工业','核实重点':'核实现状和产权','数据来源':'体检报告'}},
+    {id:'FA03',name:'下河粮库',sub:'活龙井社区',data:{'位置':'活龙井社区','面积':'约15亩','建成年代':'1960年代','现状':'部分闲置','土地性质':'仓储','核实重点':'核实现状和保护要求','数据来源':'体检报告'}},
+  ]},
+  {id:'idle',icon:'🏚️',name:'闲置用地/建筑',items:[
+    {id:'ID01',name:'闲置用地（9宗汇总）',sub:'全片区',data:{'总面积':'46.14公顷','宗数':'9宗','主要分布':'铁路沿线、站场周边','核实重点':'逐宗核实位置、面积、权属','数据来源':'体检报告'}},
+    {id:'ID02',name:'闲置建筑（7类）',sub:'全片区',data:{'总面积':'约3.2万㎡','类型':'厂房、仓库、宿舍、商业等','核实重点':'逐个核实位置、现状、可利用性','数据来源':'体检报告'}},
+    {id:'ID03',name:'废弃铁轨-珊瑚西路',sub:'活龙井社区',data:{'长度':'260米','位置':'珊瑚西路','现状':'废弃','核实重点':'核实现状和改造可行性','数据来源':'体检报告'}},
+  ]},
+  {id:'service',icon:'🏛️',name:'公共服务设施',items:[
+    {id:'SV01',name:'舜德小学',sub:'活龙井社区',data:{'类型':'小学','位置':'活龙井社区','规模':'待核实','核实重点':'核实办学规模、学位数、服务半径','数据来源':'体检报告'}},
+    {id:'SV02',name:'菱角山小学',sub:'文昌阁社区',data:{'类型':'小学','位置':'文昌阁社区','规模':'待核实','核实重点':'核实办学规模、学位数、设施完好情况','数据来源':'体检报告'}},
+    {id:'SV03',name:'幼儿园（16个汇总）',sub:'全片区',data:{'类型':'幼儿园','数量':'16个','覆盖率':'71.37%','核实重点':'逐个核实位置、性质（公办/民办）、学位数','数据来源':'体检报告'}},
+  ]},
+  {id:'history',icon:'🏛️',name:'历史文化资源',items:[
+    {id:'HI01',name:'惜字塔',sub:'湘江西路225号',data:{'年代':'清代','地址':'湘江西路225号','保护级别':'历史建筑','核实重点':'核实现状和保护要求','数据来源':'体检报告'}},
+    {id:'HI02',name:'渡口公房',sub:'湘江西路235号',data:{'年代':'民国','地址':'湘江西路235号','保护级别':'历史建筑','核实重点':'核实结构安全和保护要求','数据来源':'体检报告'}},
+    {id:'HI03',name:'老火车站站房',sub:'车站路',data:{'年代':'1938年建','停运':'2004年','运营史':'66年','保护级别':'待核实','核实重点':'核实现状、产权、保护要求','数据来源':'体检报告'}},
+  ]},
+];
+
+const DEPTS = [
+  {name:'🏢 自然资源局',docs:[
+    {name:'永州市国土空间总体规划（2021-2035）',content:'片区功能定位、用地布局、开发强度、管控要求',use:'第1章规划传导、第5章功能定位',priority:'🔴核心',status:'no'},
+    {name:'冷水滩区控制性详细规划',content:'片区内地块用地性质、容积率、建筑高度、配套设施要求',use:'第2章用地现状、第5章空间塑造',priority:'🔴核心',status:'part'},
+    {name:'城市更新专项规划',content:'片区更新目标、策略、项目库、资金安排',use:'第1章规划传导、第6章更新策略',priority:'🔴核心',status:'no'},
+    {name:'相关专项规划（交通/市政/公服/生态）',content:'与本片区相关的各类专项规划全文及图纸',use:'第1章规划传导、各专项设计',priority:'🟡重要',status:'no'},
+    {name:'土地权属数据',content:'片区内非铁路用地的权属单位、面积、用地性质、取得方式',use:'第2章存量资源、第6章更新模式',priority:'🔴核心',status:'no'},
+    {name:'闲置用地清单',content:'片区内闲置/低效用地的位置、面积、权属、规划用途',use:'第2章存量资源、第6章项目生成',priority:'🔴核心',status:'no'},
+    {name:'公服设施GIS点位数据',content:'教育/医疗/养老/文化/体育等设施的名称、位置、等级、规模',use:'第2章公服设施体检、第5章公服提升',priority:'🟡重要',status:'no'},
+    {name:'不动产登记数据',content:'片区内建筑的产权登记信息、面积、用途',use:'第2章建筑本底、第6章更新模式',priority:'🟡重要',status:'no'},
+    {name:'用地审批数据',content:'近5年片区内建设用地审批、规划许可情况',use:'第2章建设动态、第6章项目生成',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏢 住建局',docs:[
+    {name:'城市基础设施更新改造重点领域实施方案',content:'86个项目清单（名称/位置/建设内容/投资/工期），需筛选片区内项目',use:'第6章项目清单、项目核实',priority:'🔴核心',status:'yes'},
+    {name:'老旧小区改造计划（近3年）',content:'已改造/在改造/待改造小区名单，改造内容（基础/完善/提升类）、投资、完成时间、资金补助标准',use:'第2章老旧小区体检、第6章更新项目',priority:'🔴核心',status:'no'},
+    {name:'危房鉴定数据',content:'C/D级危房清单：位置/面积/结构/年代/鉴定等级/鉴定时间/处理建议/处置进展；疑似危房清单（7栋）',use:'第2章既有建筑体检、第6章更新项目',priority:'🔴核心',status:'no'},
+    {name:'完整社区建设相关资料',content:'完整社区试点名单、建设标准、已实施内容',use:'第2章完整社区评估、第5章社区提升',priority:'🟡重要',status:'no'},
+    {name:'棚户区改造计划',content:'片区内棚户区改造范围、户数、投资、安置方式',use:'第6章更新模式、资金测算',priority:'🟡重要',status:'no'},
+    {name:'保障性住房建设计划',content:'片区内保障房/安置房建设计划、位置、规模',use:'第5章住房改善、第6章项目生成',priority:'🟢一般',status:'no'},
+    {name:'各部门建设项目计划',content:'各部门对于本片区的建设项目计划汇总',use:'第6章项目清单补充',priority:'🟡重要',status:'no'},
+    {name:'物业管理现状数据',content:'片区内小区物业覆盖情况、物业费标准、业委会成立情况',use:'第2章小区治理、第5章管理提升',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏢 发改局',docs:[
+    {name:'重点项目清单',content:'市区两级重点项目中涉及本片区的项目',use:'第6章项目清单、资金来源',priority:'🟡重要',status:'no'},
+    {name:'专项债项目储备',content:'可申报专项债的城市更新项目清单及要求',use:'第6章资金拼盘',priority:'🟡重要',status:'no'},
+    {name:'中央预算内投资项目',content:'老旧小区/棚户区/排水等可申报中央资金的项目',use:'第6章资金拼盘',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏢 民政局',docs:[
+    {name:'社区详细情况（4个社区）',content:'活龙井/文昌阁/又一村/白竹亭社区的人口、户数、小区数量、面积、面临问题',use:'第2章基础数据、第5章社区提升',priority:'🔴核心',status:'no'},
+    {name:'社区人口数据',content:'各社区常住人口、户籍人口、年龄结构、流动人口',use:'第2章人口本底、需求分析',priority:'🔴核心',status:'no'},
+    {name:'养老设施清单',content:'养老院/日间照料中心/长者食堂的位置、床位数、运营情况',use:'第2章公服设施、第5章养老提升',priority:'🟡重要',status:'no'},
+    {name:'社区组织和动员能力',content:'社区工作人员数量、网格员配置、志愿者队伍、以往改造动员经验',use:'第5章社区治理、实施保障',priority:'🟡重要',status:'no'},
+    {name:'以往改造项目经验教训',content:'本片区已实施改造项目的经验、问题、居民反馈',use:'第6章实施策略、风险防控',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏢 教育局',docs:[
+    {name:'中小学清单及学位情况',content:'片区内中小学名称、位置、班级数、学位数、招生范围、缺口情况',use:'第2章公服设施、第5章教育提升',priority:'🟡重要',status:'no'},
+    {name:'幼儿园清单',content:'公办/民办幼儿园名称、位置、规模、收费、覆盖率（体检报告16所）',use:'第2章公服设施、第5章教育提升',priority:'🟡重要',status:'part'},
+  ]},
+  {name:'🏢 卫健委',docs:[
+    {name:'医疗机构清单',content:'医院/社区卫生服务中心/诊所的名称、位置、等级、床位数、服务人口',use:'第2章公服设施、第5章医疗提升',priority:'🟡重要',status:'no'},
+  ]},
+  {name:'🏢 文旅局',docs:[
+    {name:'历史文化资源清单',content:'文保单位/历史建筑/传统街巷/古树名木的名称、位置、等级、保护要求',use:'第2章历史文化体检、第5章文化传承',priority:'🟡重要',status:'no'},
+    {name:'非物质文化遗产',content:'片区内非遗项目、传承人、展示空间',use:'第5章文化传承、产业策划',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏢 商务局',docs:[
+    {name:'商业网点规划',content:'片区内商业网点布局规划、农贸市场/菜市场清单',use:'第5章商业提升、产业策划',priority:'🟡重要',status:'no'},
+    {name:'农贸市场清单',content:'农贸市场/生鲜超市的位置、面积、经营情况、改造需求',use:'第2章公服设施、第6章更新项目',priority:'🟡重要',status:'no'},
+  ]},
+  {name:'🏢 交通局',docs:[
+    {name:'道路建设计划',content:'片区内道路新建/改造计划、等级、宽度、断面',use:'第5章交通组织、第6章项目生成',priority:'🟡重要',status:'no'},
+    {name:'公交站点数据',content:'公交线路、站点位置、发车频率、覆盖情况',use:'第2章交通体检、第5章交通提升',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏢 城管局',docs:[
+    {name:'市政设施数据',content:'供水/排水/供电/燃气/通信管网的走向、管径、建设年代',use:'第2章基础设施体检、第6章更新项目',priority:'🟡重要',status:'no'},
+    {name:'园林绿化数据',content:'公园/绿地/行道树的位置、面积、等级、养护情况',use:'第2章生态体检、第5章生态提升',priority:'🟢一般',status:'no'},
+    {name:'垃圾分类设施',content:'垃圾收集点/转运站/分类设施的位置、运行情况',use:'第2章基础设施、第5章环境提升',priority:'🟢一般',status:'no'},
+  ]},
+  {name:'🏘️ 菱角山街道',docs:[
+    {name:'活龙井社区详细情况',content:'社区人口、户数、小区数量、面积、主要问题、改造需求',use:'第2章基础数据、现场调研',priority:'🔴核心',status:'no'},
+    {name:'文昌阁社区详细情况',content:'社区人口、户数、小区数量、面积、主要问题、改造需求',use:'第2章基础数据、现场调研',priority:'🔴核心',status:'no'},
+    {name:'社区居民改造意愿',content:'居民对改造的支持度、需求优先级、出资意愿',use:'第3章需求分析、第6章实施策略',priority:'🟡重要',status:'no'},
+  ]},
+  {name:'🏘️ 肖家园街道',docs:[
+    {name:'又一村社区详细情况',content:'社区人口、户数、小区数量、面积、主要问题、改造需求',use:'第2章基础数据、现场调研',priority:'🔴核心',status:'no'},
+  ]},
+  {name:'🏘️ 梧桐街道',docs:[
+    {name:'白竹亭社区详细情况',content:'社区人口、户数、小区数量、面积、主要问题、改造需求',use:'第2章基础数据、现场调研',priority:'🔴核心',status:'no'},
+  ]},
+];
+
+// ===== 状态 =====
+let currentCategory = null;
+let currentItem = null;
+let currentItemIndex = 0;
+let filteredItems = [];
+let itemData = {};
+let itemPhotos = {};
+let recognition = null;
+let isRecording = false;
+let currentLocation = null;
+let mapInstance = null;
+let watchId = null;
+let isWatching = false;
+const AMAP_KEY = '235c9e12ecf45d31a52124153dcd722a';
+
+// ===== 初始化 =====
+function init(){
+  loadData();
+  loadProjectLocs();
+  updateStats();
+  renderCategories();
+  renderDepts();
+}
+
+function loadProjectLocs(){
+  try{
+    const saved = localStorage.getItem('survey_project_locs');
+    if(saved){
+      const locs = JSON.parse(saved);
+      // 部门资料调取部分
+  let deptGot=0, deptPart=0, deptNo=0, deptTotal=0;
+  DEPTS.forEach(dept=>{
+    dept.docs.forEach(doc=>{
+      deptTotal++;
+      if(doc.status==='yes') deptGot++;
+      else if(doc.status==='part') deptPart++;
+      else deptNo++;
+    });
+  });
+  html += `\n<h2>📋 部门资料调取 (${deptTotal}项)</h2>\n`;
+  html += `<div class="summary"><div style="font-size:13px;color:#666;">已获取：${deptGot}项 | 部分获取：${deptPart}项 | 未获取：${deptNo}项</div></div>`;
+  DEPTS.forEach(dept=>{
+    html += `<h3>${dept.name} (${dept.docs.length}项)</h3>`;
+    html += `<table class="data-table">`;
+    dept.docs.forEach(doc=>{
+      const statusText = doc.status==='yes'?'✅已获取':doc.status==='part'?'⚠️部分':'❌未获取';
+      html += `<tr><td style="width:30%;">${doc.priority || ''} ${doc.name}</td><td style="width:50%;">${doc.content || ''}<br><small style="color:#888;">用途：${doc.use}</small></td><td style="width:20%;">${statusText}</td></tr>`;
+    });
+    html += `</table>`;
+  });
+  
+  CATEGORIES.forEach(cat=>{
+        cat.items.forEach(item=>{
+          if(locs[item.id]){
+            item.lat = locs[item.id].lat;
+            item.lng = locs[item.id].lng;
+            item.locStatus = locs[item.id].status || 'calibrated';
+          }
+        });
+      });
+    }
+  }catch(e){}
+}
+
+// 高德地理编码：地址转坐标
+function geocodeAddress(address, callback){
+  if(!address || !AMAP_KEY) return;
+  const url = `https://restapi.amap.com/v3/geocode/geo?address=${encodeURIComponent(address)}&city=永州&key=${AMAP_KEY}`;
+  fetch(url)
+    .then(r=>r.json())
+    .then(data=>{
+      if(data.status === '1' && data.geocodes && data.geocodes.length > 0){
+        const loc = data.geocodes[0].location.split(',');
+        callback({lng: parseFloat(loc[0]), lat: parseFloat(loc[1]), formatted: data.geocodes[0].formatted_address});
+      } else {
+        callback(null);
+      }
+    })
+    .catch(()=>callback(null));
+}
+
+// 打开项目时自动地理编码（如果没有坐标但有地址）
+function autoGeocodeItem(item){
+  if(item.lat && item.lng && item.locStatus !== 'none') return; // 已有坐标，跳过
+  if(item.locStatus === 'geocoding') return; // 正在编码，跳过
+  
+  // 合并关键字：名称 + 小区/社区 + 位置/地址
+  const name = item.name || '';
+  const sub = item.sub || '';
+  const address = item.data['地址'] || item.data['位置'] || '';
+  const keyword = [name, sub, address].filter(Boolean).join(' ');
+  
+  if(!keyword) return;
+  
+  item.locStatus = 'geocoding';
+  const fullAddress = '永州市冷水滩区 ' + keyword;
+  
+  geocodeAddress(fullAddress, result=>{
+    if(result){
+      item.lat = result.lat;
+      item.lng = result.lng;
+      item.locStatus = 'geocoded';
+      // 保存到localStorage
+      const projectLocs = JSON.parse(localStorage.getItem('survey_project_locs') || '{}');
+      projectLocs[item.id] = {lat: result.lat, lng: result.lng, status: 'geocoded'};
+      localStorage.setItem('survey_project_locs', JSON.stringify(projectLocs));
+      // 如果当前正在看这个项目，只更新位置显示，不重新渲染整页（避免关闭地图）
+      if(currentItem && currentItem.id === item.id){
+        updateProjectLocDisplay();
+        updateDistance();
+      }
+      showToast(`${item.name} 已自动定位`);
+    } else {
+      item.locStatus = 'none';
+      if(currentItem && currentItem.id === item.id){
+        updateProjectLocDisplay();
+      }
+    }
+  });
+}
+
+function updateProjectLocDisplay(){
+  const locStatus = currentItem.locStatus || 'none';
+  const projLocEl = document.getElementById('projectLocTop');
+  if(!projLocEl) return;
+  if(locStatus === 'calibrated' && currentItem.lat){
+    projLocEl.innerHTML = `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}<span class="loc-status calibrated">已校准</span>`;
+    projLocEl.className = 'lv green';
+  } else if(locStatus === 'geocoded' && currentItem.lat){
+    projLocEl.innerHTML = `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}<span class="loc-status estimated">地址定位</span>`;
+    projLocEl.className = 'lv yellow';
+  } else if(locStatus === 'geocoding'){
+    projLocEl.innerHTML = `定位中...<span class="loc-status none">编码中</span>`;
+    projLocEl.className = 'lv gray';
+  } else if(locStatus === 'estimated' && currentItem.lat){
+    projLocEl.innerHTML = `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}<span class="loc-status estimated">估算</span>`;
+    projLocEl.className = 'lv yellow';
+  } else {
+    projLocEl.innerHTML = `待现场校准<span class="loc-status none">无坐标</span>`;
+    projLocEl.className = 'lv gray';
+  }
+}
+
+function loadData(){
+  try{
+    const saved = localStorage.getItem('survey_item_data');
+    if(saved) itemData = JSON.parse(saved);
+    const photos = localStorage.getItem('survey_item_photos');
+    if(photos) itemPhotos = JSON.parse(photos);
+  }catch(e){}
+}
+
+function saveData(){
+  localStorage.setItem('survey_item_data', JSON.stringify(itemData));
+  localStorage.setItem('survey_item_photos', JSON.stringify(itemPhotos));
+}
+
+function getAllItems(){
+  return CATEGORIES.flatMap(c=>c.items.map(i=>({...i, categoryId:c.id, categoryName:c.name})));
+}
+
+function updateStats(){
+  const all = getAllItems();
+  let done=0, issue=0, pending=0;
+  all.forEach(item=>{
+    const d = itemData[item.id];
+    if(d && d.conclusion==='done') done++;
+    else if(d && d.conclusion==='issue') issue++;
+    else pending++;
+  });
+  document.getElementById('statTotal').textContent = all.length;
+  document.getElementById('statDone').textContent = done;
+  document.getElementById('statIssue').textContent = issue;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('projectCount').textContent = all.length + '项';
+  const docCount = DEPTS.reduce((sum,d)=>sum+d.docs.length,0);
+  document.getElementById('deptCount').textContent = docCount + '项';
+}
+
+// ===== 页面切换 =====
+function showPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===== 分类列表 =====
+function renderCategories(){
+  const container = document.getElementById('categoryList');
+  container.innerHTML = CATEGORIES.map(cat=>{
+    let done=0, issue=0;
+    cat.items.forEach(item=>{
+      const d = itemData[item.id];
+      if(d && d.conclusion==='done') done++;
+      else if(d && d.conclusion==='issue') issue++;
+    });
+    return `<div class="cat-card" onclick="openCategory('${cat.id}')">
+      <div class="cat-header">
+        <span><span class="cat-icon">${cat.icon}</span><span class="cat-name">${cat.name}</span></span>
+        <span style="color:var(--text3);font-size:12px">${cat.items.length}项</span>
+      </div>
+      <div class="cat-stats">
+        <span class="done">已核实 ${done}</span>
+        <span class="issue">有出入 ${issue}</span>
+        <span>未核实 ${cat.items.length-done-issue}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openCategory(catId){
+  currentCategory = CATEGORIES.find(c=>c.id===catId);
+  filteredItems = [...currentCategory.items];
+  document.getElementById('listTitle').textContent = currentCategory.name;
+  renderItemList();
+  showPage('pageItemList');
+}
+
+function renderItemList(){
+  const container = document.getElementById('itemList');
+  let done=0;
+  filteredItems.forEach(item=>{
+    const d = itemData[item.id];
+    if(d && d.conclusion==='done') done++;
+  });
+  document.getElementById('listProgress').textContent = `${done}/${filteredItems.length}`;
+  container.innerHTML = filteredItems.map((item,idx)=>{
+    const d = itemData[item.id];
+    const status = d?.conclusion || 'pending';
+    const statusText = status==='done'?'已核实':status==='issue'?'有出入':'未核实';
+    return `<div class="item-row" onclick="openItem(${idx})">
+      <div>
+        <div class="item-name"><span class="status-dot ${status}"></span>${item.id} - ${item.name}</div>
+        <div class="item-sub">${item.sub}</div>
+      </div>
+      <div style="font-size:11px;color:var(--text3)">${statusText} ›</div>
+    </div>`;
+  }).join('');
+}
+
+function filterItems(keyword){
+  if(!currentCategory) return;
+  if(!keyword){ filteredItems = [...currentCategory.items]; }
+  else{
+    filteredItems = currentCategory.items.filter(i=>
+      i.name.includes(keyword) || i.id.includes(keyword) || i.sub.includes(keyword)
+    );
+  }
+  renderItemList();
+}
+
+// ===== 项目详情 =====
+function openItem(index){
+  currentItemIndex = index;
+  currentItem = filteredItems[index];
+  renderDetail();
+  showPage('pageDetail');
+  // 打开项目时自动地理编码（如果没有坐标但有地址）
+  autoGeocodeItem(currentItem);
+}
+
+function renderDetail(){
+  if(!currentItem) return;
+  document.getElementById('detailTitle').textContent = currentItem.name;
+  document.getElementById('detailProgress').textContent = `${currentItemIndex+1}/${filteredItems.length}`;
+  
+  // 已有数据：建设内容单独一栏，其他分两栏，去掉来源
+  const grid = document.getElementById('dataGrid');
+  const data = {...currentItem.data};
+  const buildContent = data['建设内容'] || '';
+  delete data['建设内容'];
+  delete data['来源'];
+  
+  let html = '';
+  if(buildContent){
+    html += `<div class="data-item renew" style="grid-column:1/-1;">
+      <div class="k">🎯 建设内容</div>
+      <div class="v" style="line-height:1.7;">${buildContent}</div>
+    </div>`;
+  }
+  Object.entries(data).forEach(([k,v])=>{
+    html += `<div class="data-item">
+      <div class="k">${k}</div>
+      <div class="v">${v}</div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+  
+  // 核实结论
+  const d = itemData[currentItem.id] || {};
+  document.querySelectorAll('.conc-btn').forEach(b=>b.classList.remove('active'));
+  if(d.conclusion){
+    document.querySelector(`.conc-btn.${d.conclusion==='none'?'none':d.conclusion}`).classList.add('active');
+  }
+  document.getElementById('issueOptions').classList.toggle('show', d.conclusion==='issue');
+  
+  // 备注
+  document.getElementById('noteText').value = d.note || '';
+  
+  // 照片
+  renderPhotos();
+  
+  // 定位
+  currentLocation = d.location || null;
+  if(currentLocation){
+    showLocationInfo(currentLocation);
+  } else {
+    document.getElementById('myLocTop').textContent = '未定位';
+    document.getElementById('distTop').textContent = '—';
+  }
+  
+  // 项目位置（根据状态显示）
+  const locStatus = currentItem.locStatus || 'none';
+  const projLocEl = document.getElementById('projectLocTop');
+  if(locStatus === 'calibrated' && currentItem.lat){
+    projLocEl.innerHTML = `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}<span class="loc-status calibrated">已校准</span>`;
+    projLocEl.className = 'lv green';
+  } else if(locStatus === 'geocoded' && currentItem.lat){
+    projLocEl.innerHTML = `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}<span class="loc-status estimated">地址定位</span>`;
+    projLocEl.className = 'lv yellow';
+  } else if(locStatus === 'geocoding'){
+    projLocEl.innerHTML = `定位中...<span class="loc-status none">编码中</span>`;
+    projLocEl.className = 'lv gray';
+  } else if(locStatus === 'estimated' && currentItem.lat){
+    projLocEl.innerHTML = `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}<span class="loc-status estimated">估算</span>`;
+    projLocEl.className = 'lv yellow';
+  } else {
+    projLocEl.innerHTML = `待现场校准<span class="loc-status none">无坐标</span>`;
+    projLocEl.className = 'lv gray';
+  }
+  
+  // 重置地图
+  mapOpen = false;
+  if(mapInstance){ mapInstance.remove(); mapInstance = null; }
+  document.getElementById('mapPanel').style.display = 'none';
+  document.querySelector('.btn-map').textContent = '🗺️ 查看地图与定位';
+  if(isWatching){ stopWatch(); }
+}
+
+function setConclusion(status){
+  if(!currentItem) return;
+  const d = itemData[currentItem.id] || {};
+  d.conclusion = status;
+  itemData[currentItem.id] = d;
+  saveData();
+  document.querySelectorAll('.conc-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`.conc-btn.${status==='none'?'none':status}`).classList.add('active');
+  document.getElementById('issueOptions').classList.toggle('show', status==='issue');
+  
+  const textarea = document.getElementById('noteText');
+  
+  // 选"属实"时自动插入备注
+  if(status === 'done'){
+    if(!textarea.value.includes('【信息属实】')){
+      textarea.value = `【信息属实】该项目信息与现场核实一致（${new Date().toLocaleString('zh-CN')}）\n` + textarea.value;
+      saveNote();
+    }
+  }
+  
+  // 选"不存在"时自动插入备注
+  if(status === 'none'){
+    if(!textarea.value.includes('【不存在】')){
+      textarea.value = `【不存在】该项目/信息现场未找到（${new Date().toLocaleString('zh-CN')}）\n` + textarea.value;
+      saveNote();
+    }
+  }
+  
+  updateStats();
+  showToast('已保存');
+}
+
+function insertIssue(field){
+  if(!currentItem) return;
+  const original = currentItem.data[field] || '待核实';
+  const unit = field==='面积'?'万㎡':field==='栋数'?'栋':field==='户数'?'户':field==='建成年代'?'年':'';
+  const text = `【有出入】${field}：原数据${original}，现场核实为____${unit}\n`;
+  const textarea = document.getElementById('noteText');
+  textarea.value = text + textarea.value;
+  textarea.focus();
+  // 光标定位到填空处
+  const pos = text.indexOf('____');
+  if(pos>-1){ textarea.setSelectionRange(pos, pos+4); }
+  saveNote();
+  showToast(`已插入"${field}"`);
+}
+
+function saveNote(){
+  if(!currentItem) return;
+  const d = itemData[currentItem.id] || {};
+  d.note = document.getElementById('noteText').value;
+  itemData[currentItem.id] = d;
+  saveData();
+  document.getElementById('saveTip').textContent = '已自动保存 ' + new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
+}
+
+function clearNote(){
+  if(!confirm('确定清空备注吗？')) return;
+  document.getElementById('noteText').value = '';
+  saveNote();
+}
+
+function insertLocationToNote(){
+  if(!currentLocation){
+    showToast('请先现场定位');
+    return;
+  }
+  const text = `📍 定位：${currentLocation.lat}, ${currentLocation.lng}（精度${currentLocation.acc}，${currentLocation.time}）\n`;
+  const textarea = document.getElementById('noteText');
+  textarea.value = text + textarea.value;
+  saveNote();
+  showToast('位置已插入备注');
+}
+
+function prevItem(){
+  if(currentItemIndex > 0){
+    openItem(currentItemIndex - 1);
+  } else {
+    showToast('已经是第一个了');
+  }
+}
+
+function nextItem(){
+  if(currentItemIndex < filteredItems.length - 1){
+    openItem(currentItemIndex + 1);
+  } else {
+    showToast('已经是最后一个了');
+  }
+}
+
+function addNewItem(){
+  const name = prompt('请输入新项目名称：');
+  if(!name) return;
+  const newId = (currentCategory?.id || 'NEW') + '_' + Date.now();
+  const newItem = {id:newId, name:name, sub:'（现场新增）', data:{'备注':'现场新增项目，请补充详细信息'}};
+  currentCategory.items.push(newItem);
+  filteredItems.push(newItem);
+  renderItemList();
+  renderCategories();
+  updateStats();
+  showToast('已新增项目');
+}
+
+// ===== 照片 =====
+function renderPhotos(){
+  const photos = itemPhotos[currentItem.id] || [];
+  document.getElementById('photoCount').textContent = photos.length;
+  const grid = document.getElementById('photoGrid');
+  let html = photos.map((p,i)=>
+    `<div class="photo-item">
+      <img src="${p}" alt="照片${i+1}">
+      <button class="del" onclick="deletePhoto(${i})">×</button>
+    </div>`
+  ).join('');
+  if(photos.length < 9){
+    html += `<div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
+             <div class="photo-add" onclick="pickPhotos()">🖼️<span>相册</span></div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function takePhoto(){ document.getElementById('cameraInput').click(); }
+function pickPhotos(){ document.getElementById('albumInput').click(); }
+
+function handlePhotos(files){
+  if(!currentItem) return;
+  const photos = itemPhotos[currentItem.id] || [];
+  Array.from(files).forEach(file=>{
+    if(photos.length >= 9) return;
+    const reader = new FileReader();
+    reader.onload = e=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const canvas = document.createElement('canvas');
+        const maxSize = 1280;
+        let w = img.width, h = img.height;
+        if(w > h && w > maxSize){ h = h * maxSize / w; w = maxSize; }
+        else if(h > maxSize){ w = w * maxSize / h; h = maxSize; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        photos.push(canvas.toDataURL('image/jpeg', 0.7));
+        itemPhotos[currentItem.id] = photos;
+        saveData();
+        renderPhotos();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+  showToast('照片已添加');
+}
+
+function deletePhoto(index){
+  if(!confirm('确定删除这张照片吗？')) return;
+  const photos = itemPhotos[currentItem.id] || [];
+  photos.splice(index, 1);
+  itemPhotos[currentItem.id] = photos;
+  saveData();
+  renderPhotos();
+}
+
+// ===== 语音 =====
+function toggleVoice(){
+  const btn = document.getElementById('voiceBtn');
+  if(isRecording){
+    if(recognition) recognition.stop();
+    isRecording = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 语音输入';
+    return;
+  }
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    alert('您的浏览器不支持语音识别，请用Chrome/Edge');
+    return;
+  }
+  recognition = new SpeechRecognition();
+  recognition.lang = 'zh-CN';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  let finalText = '';
+  recognition.onresult = e=>{
+    let interim = '';
+    for(let i=e.resultIndex; i<e.results.length; i++){
+      if(e.results[i].isFinal) finalText += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
+    }
+    const textarea = document.getElementById('noteText');
+    const base = textarea.value.replace(/\u200B/g,'');
+    textarea.value = base + finalText + interim;
+    saveNote();
+  };
+  recognition.onerror = e=>{
+    isRecording = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 语音输入';
+    if(e.error !== 'no-speech') alert('语音识别错误：' + e.error);
+  };
+  recognition.onend = ()=>{
+    isRecording = false;
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 语音输入';
+  };
+  recognition.start();
+  isRecording = true;
+  btn.classList.add('recording');
+  btn.textContent = '⏹️ 停止录音';
+  showToast('开始录音，请说话');
+}
+
+// ===== GPS定位 =====
+function toggleWatch(){
+  if(isWatching){
+    stopWatch();
+  } else {
+    startWatch();
+  }
+}
+
+function startWatch(){
+  if(!navigator.geolocation){ alert('您的浏览器不支持GPS定位'); return; }
+  isWatching = true;
+  const locBtnText = document.getElementById('locBtnText');
+  if(locBtnText) locBtnText.textContent = '停止追踪';
+  showToast('实时追踪已开启');
+  
+  watchId = navigator.geolocation.watchPosition(
+    position=>{
+      const {latitude, longitude, accuracy} = position.coords;
+      currentLocation = {
+        lat: latitude.toFixed(6), lng: longitude.toFixed(6),
+        acc: Math.round(accuracy) + '米', time: new Date().toLocaleString('zh-CN')
+      };
+      const d = itemData[currentItem.id] || {};
+      d.location = currentLocation;
+      itemData[currentItem.id] = d;
+      saveData();
+      showLocationInfo(currentLocation);
+      updateDistance();
+      // 如果地图打开了，实时更新我的位置标记
+      if(mapInstance){
+        updateMapMyPosition();
+      }
+    },
+    error=>{
+      if(error.code !== 3){ // 超时不算错误
+        let msg = '定位失败';
+        if(error.code === 1) msg = '请允许浏览器获取位置权限';
+        else if(error.code === 2) msg = '位置不可用';
+        showToast(msg);
+      }
+    },
+    {enableHighAccuracy:true, timeout:10000, maximumAge:0}
+  );
+}
+
+function stopWatch(){
+  if(watchId !== null){
+    navigator.geolocation.clearWatch(watchId);
+    watchId = null;
+  }
+  isWatching = false;
+  const locBtnText = document.getElementById('locBtnText');
+  if(locBtnText) locBtnText.textContent = '现场定位';
+  showToast('实时追踪已停止');
+}
+
+function getLocation(){
+  if(!navigator.geolocation){ alert('您的浏览器不支持GPS定位'); return; }
+  showToast('定位中...');
+  navigator.geolocation.getCurrentPosition(
+    async position=>{
+      const {latitude, longitude, accuracy} = position.coords;
+      currentLocation = {
+        lat: latitude.toFixed(6), lng: longitude.toFixed(6),
+        acc: Math.round(accuracy) + '米', time: new Date().toLocaleString('zh-CN')
+      };
+      const d = itemData[currentItem.id] || {};
+      d.location = currentLocation;
+      itemData[currentItem.id] = d;
+      saveData();
+      showLocationInfo(currentLocation);
+      showToast('定位成功');
+      // 如果地图打开着，重新渲染以显示我的位置
+      if(mapInstance){
+        closeMap();
+        setTimeout(()=>showMap(), 100);
+      }
+    },
+    error=>{
+      let msg = '定位失败';
+      if(error.code === 1) msg = '请允许浏览器获取位置权限';
+      else if(error.code === 2) msg = '位置不可用';
+      else if(error.code === 3) msg = '定位超时';
+      alert(msg);
+    },
+    {enableHighAccuracy:true, timeout:10000, maximumAge:0}
+  );
+}
+
+function calcDistance(lat1, lng1, lat2, lng2){
+  const R = 6371000;
+  const dLat = (lat2-lat1) * Math.PI/180;
+  const dLng = (lng2-lng1) * Math.PI/180;
+  const a = Math.sin(dLat/2)*Math.sin(dLat/2) +
+    Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*
+    Math.sin(dLng/2)*Math.sin(dLng/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+function showLocationInfo(loc){
+  document.getElementById('myLocTop').textContent = `${loc.lat}, ${loc.lng}`;
+  // 显示"设为项目位置"按钮
+  document.getElementById('setLocBtn').style.display = 'block';
+  // 计算与项目位置的距离
+  if(currentItem && currentItem.lat && currentItem.lng){
+    const dist = calcDistance(
+      parseFloat(loc.lat), parseFloat(loc.lng),
+      currentItem.lat, currentItem.lng
+    );
+    const distText = dist < 1000 ? Math.round(dist) + '米' : (dist/1000).toFixed(2) + '公里';
+    document.getElementById('distTop').textContent = distText + 
+      (dist < 50 ? '✓范围内' : dist < 200 ? '接近' : '较远');
+  } else {
+    document.getElementById('distTop').textContent = '—';
+  }
+}
+
+function setAsProjectLocation(){
+  if(!currentItem) return;
+  if(!currentLocation){
+    showToast('正在定位中，请稍候...');
+    getLocation();
+    return;
+  }
+  if(!confirm('确定把当前位置设为该项目的准确位置吗？')) return;
+  currentItem.lat = parseFloat(currentLocation.lat);
+  currentItem.lng = parseFloat(currentLocation.lng);
+  currentItem.locStatus = 'calibrated';
+  const locs = JSON.parse(localStorage.getItem('survey_project_locs') || '{}');
+  locs[currentItem.id] = {lat: currentItem.lat, lng: currentItem.lng, status: 'calibrated'};
+  localStorage.setItem('survey_project_locs', JSON.stringify(locs));
+  document.getElementById('projectLocTop').textContent = 
+    `${currentItem.lat.toFixed(4)}, ${currentItem.lng.toFixed(4)}（已校准）`;
+  document.getElementById('distTop').textContent = '0米（已校准）';
+  showToast('项目位置已校准');
+  if(mapInstance && projectMarker){
+    projectMarker.setLatLng([currentItem.lat, currentItem.lng]);
+  }
+  // 保存到localStorage
+  const projectLocs = JSON.parse(localStorage.getItem('survey_project_locs') || '{}');
+  projectLocs[currentItem.id] = {lat: currentItem.lat, lng: currentItem.lng};
+  localStorage.setItem('survey_project_locs', JSON.stringify(projectLocs));
+  showToast('项目位置已校准');
+}
+
+function showMap(){
+  if(mapOpen){
+    closeMap();
+    return;
+  }
+  mapOpen = true;
+  const panel = document.getElementById('mapPanel');
+  panel.style.display = 'block';
+  document.querySelector('.btn-map').textContent = '✖ 关闭地图与定位';
+  // 先显示加载中，确保地图区域可见
+  document.getElementById('map').innerHTML = '<div style="padding:60px 20px;text-align:center;color:#94a3b8;">⏳ 地图加载中...</div>';
+  
+  // 如果没有坐标，自动地理编码
+  if(!currentItem || !currentItem.lat){
+    autoGeocodeItem(currentItem);
+  }
+  
+  // 打开地图时如果还没定位，自动开始定位
+  if(!currentLocation){
+    getLocation();
+  }
+  // 打开地图时自动开启实时追踪
+  if(!isWatching){
+    startWatch();
+  }
+  
+  setTimeout(()=>{
+    try {
+    if(typeof L === 'undefined'){ 
+      document.getElementById('map').innerHTML = '<div style="padding:40px;text-align:center;color:#ff6b6b;">❌ 地图库加载失败<br><small>请检查网络连接后刷新</small></div>';
+      return; 
+    }
+    if(mapInstance) mapInstance.remove();
+    
+    // 高德地图瓦片
+    gaodeLayer = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',{
+      subdomains:['1','2','3','4'],
+      attribution:'© 高德地图',
+      maxZoom:19
+    });
+    satelliteLayer = L.tileLayer('https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',{
+      subdomains:['1','2','3','4'],
+      attribution:'© 高德卫星',
+      maxZoom:19
+    });
+    
+    if(currentLocation && currentItem.lat){
+      const myLat = parseFloat(currentLocation.lat);
+      const myLng = parseFloat(currentLocation.lng);
+      const projLat = currentItem.lat;
+      const projLng = currentItem.lng;
+      
+      mapInstance = L.map('map').setView([(myLat+projLat)/2, (myLng+projLng)/2], 15);
+      isSatellite = false;
+      gaodeLayer.addTo(mapInstance);
+      
+      projectMarker = L.marker([projLat, projLng], {
+        draggable: true,
+        icon: L.divIcon({
+          className:'',
+          html:`<div style="background:#22c55e;color:#000;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:bold;white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;">📍 ${currentItem.name.substring(0,10)}</div>`,
+          iconSize:[160,24], iconAnchor:[80,12]
+        })
+      }).addTo(mapInstance).bindPopup(currentItem.name + '<br><small>拖动标记可校准位置</small>');
+      
+      projectMarker.on('dragend', function(e){
+        const pos = e.target.getLatLng();
+        currentItem.lat = pos.lat;
+        currentItem.lng = pos.lng;
+        currentItem.locStatus = 'calibrated';
+        document.getElementById('projectLocTop').textContent = 
+          `${pos.lat.toFixed(4)}, ${pos.lng.toFixed(4)}`;
+        const projectLocs = JSON.parse(localStorage.getItem('survey_project_locs') || '{}');
+        projectLocs[currentItem.id] = {lat: pos.lat, lng: pos.lng, status: 'calibrated'};
+        localStorage.setItem('survey_project_locs', JSON.stringify(projectLocs));
+        updateDistance();
+        showToast('项目位置已校准');
+      });
+      
+      L.marker([myLat, myLng], {
+        icon: L.divIcon({
+          className:'',
+          html:'<div style="background:#4d96ff;color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;white-space:nowrap;">👤 我</div>',
+          iconSize:[50,24], iconAnchor:[25,12]
+        })
+      }).addTo(mapInstance).bindPopup('当前位置');
+      myMarker = mapInstance._layers[Object.keys(mapInstance._layers).pop()];
+      
+      const accNum = parseInt(currentLocation.acc);
+      if(!isNaN(accNum)){
+        myCircle = L.circle([myLat, myLng], {radius: accNum, color:'#4d96ff', fillColor:'#4d96ff', fillOpacity:0.1}).addTo(mapInstance);
+      }
+      L.polyline([[myLat,myLng],[projLat,projLng]], {color:'#fbbf24', dashArray:'5,5'}).addTo(mapInstance);
+      const dist = calcDistance(myLat, myLng, projLat, projLng);
+      const distText = dist < 1000 ? Math.round(dist) + '米' : (dist/1000).toFixed(2) + '公里';
+      L.marker([(myLat+projLat)/2, (myLng+projLng)/2], {
+        icon: L.divIcon({
+          className:'',
+          html:`<div style="background:rgba(0,0,0,.75);color:#fbbf24;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:bold;white-space:nowrap;">📏 ${distText}</div>`,
+          iconSize:[80,20], iconAnchor:[40,10]
+        })
+      }).addTo(mapInstance);
+      mapInstance.fitBounds([[myLat,myLng],[projLat,projLng]], {padding:[50,50]});
+    } else if(currentLocation){
+      // 只有我的位置，没有项目坐标
+      const myLat = parseFloat(currentLocation.lat);
+      const myLng = parseFloat(currentLocation.lng);
+      mapInstance = L.map('map').setView([myLat, myLng], 16);
+      isSatellite = false;
+      gaodeLayer.addTo(mapInstance);
+      L.marker([myLat, myLng], {
+        icon: L.divIcon({
+          className:'',
+          html:'<div style="background:#4d96ff;color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;font-weight:bold;white-space:nowrap;">👤 我</div>',
+          iconSize:[50,24], iconAnchor:[25,12]
+        })
+      }).addTo(mapInstance).bindPopup('当前位置');
+      myMarker = mapInstance._layers[Object.keys(mapInstance._layers).pop()];
+      const accNum = parseInt(currentLocation.acc);
+      if(!isNaN(accNum)){
+        myCircle = L.circle([myLat, myLng], {radius: accNum, color:'#4d96ff', fillColor:'#4d96ff', fillOpacity:0.1}).addTo(mapInstance);
+      }
+    } else if(currentItem.lat){
+      // 只有项目坐标，还没定位
+      mapInstance = L.map('map').setView([currentItem.lat, currentItem.lng], 16);
+      isSatellite = false;
+      gaodeLayer.addTo(mapInstance);
+      projectMarker = L.marker([currentItem.lat, currentItem.lng], {
+        draggable: true,
+        icon: L.divIcon({
+          className:'',
+          html:`<div style="background:#22c55e;color:#000;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:bold;white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;">📍 ${currentItem.name.substring(0,10)}</div>`,
+          iconSize:[160,24], iconAnchor:[80,12]
+        })
+      }).addTo(mapInstance).bindPopup(currentItem.name + '<br><small>拖动标记可校准位置</small>');
+      projectMarker.on('dragend', function(e){
+        const pos = e.target.getLatLng();
+        currentItem.lat = pos.lat;
+        currentItem.lng = pos.lng;
+        currentItem.locStatus = 'calibrated';
+        document.getElementById('projectLocTop').textContent = 
+          `${pos.lat.toFixed(4)}, ${pos.lng.toFixed(4)}`;
+        const projectLocs = JSON.parse(localStorage.getItem('survey_project_locs') || '{}');
+        projectLocs[currentItem.id] = {lat: pos.lat, lng: pos.lng, status: 'calibrated'};
+        localStorage.setItem('survey_project_locs', JSON.stringify(projectLocs));
+        showToast('项目位置已校准');
+      });
+    } else {
+      // 都没有，显示永州默认位置
+      mapInstance = L.map('map').setView([26.445, 111.605], 14);
+      isSatellite = false;
+      gaodeLayer.addTo(mapInstance);
+    }
+    
+    setTimeout(()=>mapInstance.invalidateSize(), 300);
+    } catch(e) {
+      document.getElementById('map').innerHTML = '<div style="padding:40px;text-align:center;color:#ff6b6b;">❌ 地图初始化失败<br><small>' + e.message + '</small></div>';
+      console.error('地图初始化错误:', e);
+    }
+  }, 300);
+}
+
+function closeMap(){
+  mapOpen = false;
+  const panel = document.getElementById('mapPanel');
+  panel.style.display = 'none';
+  document.querySelector('.btn-map').textContent = '🗺️ 查看地图与定位';
+  if(mapInstance){ mapInstance.remove(); mapInstance = null; }
+  // 关闭地图时停止实时追踪
+  if(isWatching){
+    stopWatch();
+  }
+}
+
+function toggleSatellite(){
+  if(!mapInstance) return;
+  if(isSatellite){
+    mapInstance.removeLayer(satelliteLayer);
+    gaodeLayer.addTo(mapInstance);
+    document.getElementById('satBtnText').textContent = '卫星';
+  } else {
+    mapInstance.removeLayer(gaodeLayer);
+    satelliteLayer.addTo(mapInstance);
+    document.getElementById('satBtnText').textContent = '标准';
+  }
+  isSatellite = !isSatellite;
+}
+
+function fitMapToBoth(){
+  if(!mapInstance) return;
+  if(currentLocation && currentItem && currentItem.lat){
+    const myLat = parseFloat(currentLocation.lat);
+    const myLng = parseFloat(currentLocation.lng);
+    mapInstance.fitBounds([[myLat,myLng],[currentItem.lat,currentItem.lng]], {padding:[50,50]});
+    showToast('已归位：同时显示我和项目');
+  } else if(currentItem && currentItem.lat){
+    mapInstance.setView([currentItem.lat, currentItem.lng], 16);
+    showToast('已定位到项目');
+  } else if(currentLocation){
+    const myLat = parseFloat(currentLocation.lat);
+    const myLng = parseFloat(currentLocation.lng);
+    mapInstance.setView([myLat, myLng], 16);
+    showToast('已定位到我的位置');
+  }
+}
+
+function navigateToProject(){
+  if(!currentItem) return;
+  const name = currentItem.name;
+  const address = currentItem.data['地址'] || currentItem.data['位置'] || currentItem.sub || '';
+  
+  // 有坐标用坐标导航，没有坐标用名称+地址搜索
+  if(currentItem.lat && currentItem.lng){
+    const url = `https://uri.amap.com/navigation?to=${currentItem.lng},${currentItem.lat},${encodeURIComponent(name)}&mode=car&policy=1&src=survey&coordinate=gaode&callnative=1`;
+    window.open(url, '_blank');
+  } else {
+    const keyword = encodeURIComponent(name + ' ' + address);
+    const url = `https://uri.amap.com/search?keyword=${keyword}&city=永州&src=survey&callnative=1`;
+    window.open(url, '_blank');
+  }
+  showToast('正在打开高德地图导航...');
+}
+
+let myMarker = null;
+let myCircle = null;
+let projectMarker = null;
+let gaodeLayer = null;
+let satelliteLayer = null;
+let isSatellite = false;
+let mapOpen = false;
+function updateMapMyPosition(){
+  if(!mapInstance || !currentLocation) return;
+  const myLat = parseFloat(currentLocation.lat);
+  const myLng = parseFloat(currentLocation.lng);
+  
+  if(myMarker){
+    myMarker.setLatLng([myLat, myLng]);
+  }
+  if(myCircle){
+    myCircle.setLatLng([myLat, myLng]);
+    const accNum = parseInt(currentLocation.acc);
+    if(!isNaN(accNum)) myCircle.setRadius(accNum);
+  }
+}
+
+function updateDistance(){
+  if(!currentItem || !currentItem.lat || !currentLocation) return;
+  const dist = calcDistance(
+    parseFloat(currentLocation.lat), parseFloat(currentLocation.lng),
+    currentItem.lat, currentItem.lng
+  );
+  const distText = dist < 1000 ? Math.round(dist) + '米' : (dist/1000).toFixed(2) + '公里';
+  document.getElementById('distTop').textContent = distText + 
+    (dist < 50 ? '✓范围内' : dist < 200 ? '接近' : '较远');
+}
+
+// ===== 资料调取 =====
+let currentDeptIndex = -1;
+let deptRemarks = {};
+
+// 加载部门备注
+try{
+  const saved = localStorage.getItem('survey_dept_remarks');
+  if(saved) deptRemarks = JSON.parse(saved);
+}catch(e){}
+
+function saveDeptRemarks(){
+  localStorage.setItem('survey_dept_remarks', JSON.stringify(deptRemarks));
+}
+
+function renderDepts(){
+  currentDeptIndex = -1;
+  document.getElementById('deptPageTitle').textContent = '部门资料调取';
+  document.getElementById('deptBackBtn').onclick = function(){ showPage('pageHome'); };
+  const container = document.getElementById('deptList');
+  container.innerHTML = DEPTS.map((dept,di)=>{
+    let got=0, part=0, no=0;
+    dept.docs.forEach(doc=>{
+      if(doc.status==='yes') got++;
+      else if(doc.status==='part') part++;
+      else no++;
+    });
+    return `
+    <div class="dept-card" onclick="openDeptDetail(${di})">
+      <div class="dept-name">${dept.name}</div>
+      <div class="dept-count">${dept.docs.length}项资料</div>
+      <div class="dept-progress">✅已获取${got} | ⚠️部分${part} | ❌未获取${no}</div>
+    </div>`;
+  }).join('');
+}
+
+function openDeptDetail(di){
+  currentDeptIndex = di;
+  const dept = DEPTS[di];
+  document.getElementById('deptPageTitle').textContent = dept.name;
+  document.getElementById('deptBackBtn').onclick = function(){ renderDepts(); };
+  const container = document.getElementById('deptList');
+  container.innerHTML = dept.docs.map((doc,ci)=>{
+    const remarkKey = `${di}_${ci}`;
+    const remark = deptRemarks[remarkKey] || '';
+    return `
+    <div class="doc-item">
+      <div class="doc-name"><span class="doc-priority">${doc.priority || ''}</span>${doc.name}</div>
+      <div class="doc-content">${doc.content || ''}</div>
+      <div class="doc-use">📌 用途：${doc.use}</div>
+      <div class="doc-status-row">
+        <button class="status-btn ${doc.status==='yes'?'active':''}" onclick="setDocStatus(${di},${ci},'yes')">✅ 已获取</button>
+        <button class="status-btn ${doc.status==='part'?'part':''}" onclick="setDocStatus(${di},${ci},'part')">⚠️ 部分</button>
+        <button class="status-btn ${doc.status==='no'?'no':''}" onclick="setDocStatus(${di},${ci},'no')">❌ 未获取</button>
+      </div>
+      <div class="doc-remark-label">📝 备注（调取情况、联系人、问题等）：</div>
+      <textarea class="doc-remark" placeholder="在此记录调取情况..." oninput="saveDocRemark(${di},${ci},this.value)">${remark}</textarea>
+    </div>`;
+  }).join('');
+  window.scrollTo(0,0);
+}
+
+function deptBack(){
+  if(currentDeptIndex >= 0){
+    renderDepts();
+  } else {
+    showPage('pageHome');
+  }
+}
+
+function setDocStatus(di, ci, status){
+  DEPTS[di].docs[ci].status = status;
+  localStorage.setItem('survey_dept_data', JSON.stringify(DEPTS));
+  openDeptDetail(di); // 重新渲染当前部门
+}
+
+function saveDocRemark(di, ci, value){
+  const key = `${di}_${ci}`;
+  deptRemarks[key] = value;
+  saveDeptRemarks();
+}
+
+// 加载部门数据
+try{
+  const saved = localStorage.getItem('survey_dept_data');
+  if(saved){
+    const savedDepts = JSON.parse(saved);
+    savedDepts.forEach((sd,i)=>{
+      if(DEPTS[i]){
+        sd.docs.forEach((d,j)=>{
+          if(DEPTS[i].docs[j]) DEPTS[i].docs[j].status = d.status;
+        });
+      }
+    });
+  }
+}catch(e){}
+
+// ===== 导出 =====
+async function exportFullReport(){
+  showToast('正在生成报告...');
+  const allItems = getAllItems();
+  let html = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8">
+<title>老火车站片区现场调研报告</title>
+<style>
+body{font-family:-apple-system,'Microsoft YaHei',sans-serif;background:#f5f5f5;color:#333;line-height:1.6;padding:20px;}
+.container{max-width:900px;margin:0 auto;background:#fff;padding:30px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+h1{color:#15803d;border-bottom:3px solid #22c55e;padding-bottom:10px;}
+h2{color:#15803d;margin-top:30px;border-left:4px solid #22c55e;padding-left:10px;}
+h3{color:#333;margin-top:20px;}
+.summary{background:#f0fdf4;padding:15px;border-radius:8px;margin:20px 0;}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center;}
+.summary-item .num{font-size:24px;font-weight:bold;}
+.summary-item .label{font-size:12px;color:#666;}
+.item-card{border:1px solid #e5e5e5;border-radius:8px;padding:15px;margin:15px 0;}
+.item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.item-name{font-size:16px;font-weight:bold;}
+.status{padding:3px 10px;border-radius:12px;font-size:12px;}
+.status-done{background:#dcfce7;color:#16a34a;}
+.status-issue{background:#fef9c3;color:#ca8a04;}
+.status-none{background:#fee2e2;color:#dc2626;}
+.status-pending{background:#f3f4f6;color:#6b7280;}
+.meta{font-size:12px;color:#888;margin-bottom:10px;}
+.data-table{width:100%;border-collapse:collapse;margin:10px 0;}
+.data-table td{padding:6px 10px;border-bottom:1px solid #f0f0f0;font-size:13px;}
+.data-table td:first-child{color:#888;width:100px;}
+.note{background:#fffbeb;padding:10px;border-radius:6px;margin:10px 0;font-size:13px;white-space:pre-wrap;}
+.location{background:#eff6ff;padding:10px;border-radius:6px;margin:10px 0;font-size:13px;}
+.photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0;}
+.photos img{width:100%;border-radius:6px;}
+.empty{color:#999;font-size:13px;font-style:italic;}
+.footer{margin-top:40px;padding-top:20px;border-top:1px solid #e5e5e5;font-size:12px;color:#999;text-align:center;}
+</style></head><body><div class="container">
+<h1>老火车站片区现场调研报告</h1>
+<p>导出时间：${new Date().toLocaleString('zh-CN')}</p>`;
+  
+  let done=0,issue=0,none=0,pending=0,totalPhotos=0;
+  allItems.forEach(item=>{
+    const d = itemData[item.id] || {};
+    if(d.conclusion==='done') done++;
+    else if(d.conclusion==='issue') issue++;
+    else if(d.conclusion==='none') none++;
+    else pending++;
+    totalPhotos += (itemPhotos[item.id]||[]).length;
+  });
+  
+  html += `<div class="summary"><div class="summary-grid">
+    <div class="summary-item"><div class="num">${allItems.length}</div><div class="label">总项数</div></div>
+    <div class="summary-item"><div class="num" style="color:#16a34a">${done}</div><div class="label">属实</div></div>
+    <div class="summary-item"><div class="num" style="color:#ca8a04">${issue}</div><div class="label">有出入</div></div>
+    <div class="summary-item"><div class="num" style="color:#6b7280">${pending}</div><div class="label">未核实</div></div>
+  </div><div style="margin-top:10px;font-size:13px;color:#666;">不存在：${none}项 | 照片：${totalPhotos}张</div></div>`;
+  
+  CATEGORIES.forEach(cat=>{
+    html += `\n<h2>${cat.icon} ${cat.name} (${cat.items.length}项)</h2>\n`;
+    cat.items.forEach(item=>{
+      const d = itemData[item.id] || {};
+      const status = d.conclusion || 'pending';
+      const statusText = status==='done'?'属实':status==='issue'?'有出入':status==='none'?'不存在':'未核实';
+      const photos = itemPhotos[item.id] || [];
+      html += `<div class="item-card">
+        <div class="item-header"><span class="item-name">${item.id} - ${item.name}</span>
+        <span class="status status-${status}">${statusText}</span></div>
+        <div class="meta">编号：${item.id} | 所属：${item.sub} | 类别：${cat.name}</div>`;
+      if(item.data && Object.keys(item.data).length>0){
+        html += `<table class="data-table">`;
+        Object.entries(item.data).forEach(([k,v])=>{
+          html += `<tr><td>${k}</td><td>${v}</td></tr>`;
+        });
+        html += `</table>`;
+      }
+      if(d.location){
+        html += `<div class="location">📍 定位：${d.location.lat}, ${d.location.lng}（精度${d.location.acc}）${d.location.time}</div>`;
+      }
+      if(d.note){
+        html += `<div class="note"><strong>📝 现场备注：</strong>\n${d.note}</div>`;
+      } else {
+        html += `<div class="empty">暂无备注</div>`;
+      }
+      if(photos.length>0){
+        html += `<div><strong>📷 现场照片 (${photos.length}张)：</strong></div><div class="photos">`;
+        photos.forEach(p=>{ html += `<img src="${p}" alt="现场照片">`; });
+        html += `</div>`;
+      }
+      html += `</div>\n`;
+    });
+  });
+  
+  html += `<div class="footer">本报告由老火车站片区现场调研工具自动生成 | ${new Date().toLocaleDateString('zh-CN')}</div></div></body></html>`;
+  
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `现场调研报告_${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.html`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('完整报告已导出');
+}
+
+// ===== 工具 =====
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1500);
+}
+
+// 启动
+init();
+</script>
+</body>
+</html>
