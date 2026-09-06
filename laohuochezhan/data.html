@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>已有资料清单 | 老火车站片区城市更新</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f1115;
+    color: #e8eaed;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .bg-grid {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(138,180,248,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(138,180,248,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+  .container {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* 头部 */
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 13px;
+    color: #8ab4f8;
+    text-decoration: none;
+    margin-bottom: 16px;
+  }
+  .back-link:hover { text-decoration: underline; }
+  .title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, #8ab4f8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #9aa0a6;
+  }
+
+  /* 统计 */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .stat-card {
+    background: rgba(32,33,36,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 24px;
+    font-weight: 700;
+    color: #8ab4f8;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: #9aa0a6;
+    margin-top: 4px;
+  }
+
+  /* 分类 */
+  .category {
+    margin-bottom: 32px;
+  }
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: rgba(32,33,36,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .cat-header:hover { background: rgba(40,42,46,0.9); }
+  .cat-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .cat-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    flex: 1;
+  }
+  .cat-count {
+    font-size: 12px;
+    color: #5f6368;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 10px;
+    border-radius: 10px;
+  }
+  .cat-arrow {
+    color: #5f6368;
+    font-size: 12px;
+    transition: transform 0.3s;
+  }
+  .category.open .cat-arrow { transform: rotate(90deg); }
+  .cat-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .category.open .cat-body { max-height: 3000px; }
+  .cat-inner { padding: 4px 0; }
+
+  /* 资料项 */
+  .item {
+    background: rgba(32,33,36,0.5);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+  }
+  .item-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .item-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #e8eaed;
+  }
+  .item-status {
+    flex-shrink: 0;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  .status-complete {
+    background: rgba(52,168,83,0.15);
+    color: #34a853;
+    border: 1px solid rgba(52,168,83,0.3);
+  }
+  .status-partial {
+    background: rgba(251,188,4,0.15);
+    color: #fbbc04;
+    border: 1px solid rgba(251,188,4,0.3);
+  }
+  .status-pending {
+    background: rgba(234,67,53,0.15);
+    color: #ea4335;
+    border: 1px solid rgba(234,67,53,0.3);
+  }
+  .item-desc {
+    font-size: 13px;
+    color: #9aa0a6;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meta-tag {
+    font-size: 11px;
+    color: #5f6368;
+    background: rgba(255,255,255,0.04);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: #5f6368;
+  }
+
+  @media (max-width: 640px) {
+    .title { font-size: 22px; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat-num { font-size: 20px; }
+    .cat-name { font-size: 14px; }
+    .item-name { font-size: 14px; }
+    .item-desc { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+
+  <div class="header">
+    <a href="index.html" class="back-link">← 返回首页</a>
+    <h1 class="title">已有资料清单</h1>
+    <p class="subtitle">老火车站片区城市更新项目 · 数据与资料台账</p>
+  </div>
+
+  <!-- 统计 -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num">6</div>
+      <div class="stat-label">资料大类</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">30+</div>
+      <div class="stat-label">资料项</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">1529</div>
+      <div class="stat-label">现状建筑（栋）</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">168</div>
+      <div class="stat-label">POI设施点</div>
+    </div>
+  </div>
+
+  <!-- GIS空间数据 -->
+  <div class="category open">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">🗺️</span>
+      <span class="cat-name">GIS空间数据</span>
+      <span class="cat-count">7项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">现状建筑数据</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">共1529栋建筑，包含建筑轮廓、层数、结构类型、建成年代等属性。来源于ArcGIS文件地理数据库（temp.gdb，EPSG:3857），已转换为WGS84 GeoJSON并内嵌至GIS平台。</div>
+          <div class="item-meta">
+            <span class="meta-tag">来源：temp.gdb</span>
+            <span class="meta-tag">格式：GeoJSON</span>
+            <span class="meta-tag">坐标系：WGS84</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">现状用地数据</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">共59个用地斑块，包含用地性质代码（GB/T 21010-2017）、用地面积、权属等属性。已转换为WGS84并内嵌至GIS平台，可一键生成现状用地图。</div>
+          <div class="item-meta">
+            <span class="meta-tag">来源：temp.gdb</span>
+            <span class="meta-tag">59个斑块</span>
+            <span class="meta-tag">已内嵌</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">控规用地数据</div>
+            <span class="item-status status-partial">⚠️ 待核实</span>
+          </div>
+          <div class="item-desc">共77个控规地块，包含用地性质、容积率、建筑密度、绿地率、建筑高度等控制指标。来源于2019版控规，需核实是否覆盖本片区及是否为最新版本。</div>
+          <div class="item-meta">
+            <span class="meta-tag">来源：2019版控规</span>
+            <span class="meta-tag">77个地块</span>
+            <span class="meta-tag">范围待核实</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">片区边界</div>
+            <span class="item-status status-complete">✅ 已确认</span>
+          </div>
+          <div class="item-desc">42个边界点，北至珊瑚路、东至春江路、南至湘江西路、西至车站路，面积约234.4公顷。经用户手动调整确认，已保存至localStorage和GeoJSON文件。</div>
+          <div class="item-meta">
+            <span class="meta-tag">42个边界点</span>
+            <span class="meta-tag">234.4公顷</span>
+            <span class="meta-tag">已确认</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">社区边界</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">4个社区边界：白竹亭社区（梧桐街道，西北）、又一村社区（肖家园街道，西侧）、活龙井社区（菱角山街道，西南）、文昌阁社区（菱角山街道，东侧）。</div>
+          <div class="item-meta">
+            <span class="meta-tag">4个社区</span>
+            <span class="meta-tag">3个街道</span>
+            <span class="meta-tag">已内嵌</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">POI公共服务设施</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">共168个公共服务设施点，按完整社区体检标准分为7大类16小类：教育设施19（幼儿园14/小学2/中学3）、医疗卫生42、文化体育16、商业服务47、金融邮电10、交通设施33、社会福利1。已去重、清理、按片区范围筛选。</div>
+          <div class="item-meta">
+            <span class="meta-tag">来源：高德POI</span>
+            <span class="meta-tag">168个点</span>
+            <span class="meta-tag">7大类16小类</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">地名/小区图层</div>
+            <span class="item-status status-partial">⚠️ 部分待核实</span>
+          </div>
+          <div class="item-desc">从实施方案提取60个老旧小区+6个重点项目，通过高德地理编码定位58个，其中片区范围内32个，范围外26个标注"位置待核实"，9个编码失败（珊瑚办事处宿舍、市建行宿舍、凤凰二村等）。</div>
+          <div class="item-meta">
+            <span class="meta-tag">60个小区+6项目</span>
+            <span class="meta-tag">范围内32个</span>
+            <span class="meta-tag">9个待补充</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 上位规划与政策 -->
+  <div class="category">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">📋</span>
+      <span class="cat-name">上位规划与政策文件</span>
+      <span class="cat-count">5项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">控制性详细规划（2019版）</div>
+            <span class="item-status status-partial">⚠️ 范围待核实</span>
+          </div>
+          <div class="item-desc">完整资料包723MB，包含：批复文件（187MB PDF）、规划说明书、10张规划图（土地利用、道路交通、绿地系统、市政工程等）、44张分图图则（各地块容积率/建筑密度/绿地率/建筑高度等指标）。需核实是否覆盖本片区。</div>
+          <div class="item-meta">
+            <span class="meta-tag">2019年批复</span>
+            <span class="meta-tag">723MB</span>
+            <span class="meta-tag">10图+44图则</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">城市更新专项规划</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">冷水滩区城市更新专项规划全文+图纸+项目清单，包含片区定位、更新策略、更新单元划分、项目库等内容。</div>
+          <div class="item-meta">
+            <span class="meta-tag">区级专项规划</span>
+            <span class="meta-tag">含项目清单</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">城市体检报告</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">冷水滩区城市体检报告，含57项指标数据（生态宜居、健康舒适、安全韧性、交通便捷、风貌特色、整洁有序、多元包容、创新活力8大维度），含指标数值、评价结论、问题清单。</div>
+          <div class="item-meta">
+            <span class="meta-tag">57项指标</span>
+            <span class="meta-tag">8大维度</span>
+            <span class="meta-tag">含问题清单</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">基础设施更新改造实施方案</div>
+            <span class="item-status status-partial">⚠️ 数据待提取</span>
+          </div>
+          <div class="item-desc">267页PDF，包含86个基础设施更新改造项目（供水、排水、燃气、电力、道路、照明等），含项目位置、内容、投资、工期。需从PDF提取完整Excel清单。</div>
+          <div class="item-meta">
+            <span class="meta-tag">267页PDF</span>
+            <span class="meta-tag">86个项目</span>
+            <span class="meta-tag">待提取Excel</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">城市更新项目实施方案</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">包含60个老旧小区改造项目清单（按4个社区分组：白竹亭15/又一村11/活龙井25/文昌阁9）+6个重点项目，含小区名称、地址、户数、改造内容、投资估算。</div>
+          <div class="item-meta">
+            <span class="meta-tag">60个老旧小区</span>
+            <span class="meta-tag">6个重点项目</span>
+            <span class="meta-tag">含投资估算</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 基础图件 -->
+  <div class="category">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">🖼️</span>
+      <span class="cat-name">基础图件</span>
+      <span class="cat-count">3项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">片区现状地形图</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">CAD格式（老火车站1(全).dwg），含等高线、标高、现状地物、道路、建筑等信息，是现场踏勘和方案设计的基础底图。</div>
+          <div class="item-meta">
+            <span class="meta-tag">格式：DWG</span>
+            <span class="meta-tag">含标高</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">片区高清影像图</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">2026年3月5日高清航拍影像（影像图20260305.pdf），可用于现状建筑识别、用地核实、现场踏勘对照。可补充历史影像做对比分析。</div>
+          <div class="item-meta">
+            <span class="meta-tag">2026年3月</span>
+            <span class="meta-tag">高清航拍</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">片区范围图</div>
+            <span class="item-status status-complete">✅ 已确认</span>
+          </div>
+          <div class="item-desc">用户提供的片区范围卫星图，含红色边界标注、4个社区名称、老火车站位置、234.4万㎡面积标注。已用于边界对齐和确认。</div>
+          <div class="item-meta">
+            <span class="meta-tag">含社区标注</span>
+            <span class="meta-tag">已对齐确认</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 人口与社会数据 -->
+  <div class="category">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">👥</span>
+      <span class="cat-name">人口与社会数据</span>
+      <span class="cat-count">3项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">街道级人口数据</div>
+            <span class="item-status status-partial">⚠️ 待补充</span>
+          </div>
+          <div class="item-desc">梧桐街道、肖家园街道、菱角山街道的户籍人口、常住人口、老年人口比例等数据。目前仅有体检报告中的区级汇总数据，需向街道/公安/统计部门获取分街道分社区详细数据。</div>
+          <div class="item-meta">
+            <span class="meta-tag">3个街道</span>
+            <span class="meta-tag">待函调获取</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">社区级人口数据</div>
+            <span class="item-status status-pending">❌ 待获取</span>
+          </div>
+          <div class="item-desc">白竹亭、又一村、活龙井、文昌阁4个社区的居住户数、户籍人口、常住人口、老年人口、租住人口、流动人口等详细数据。需向社区居委会或街道获取。</div>
+          <div class="item-meta">
+            <span class="meta-tag">4个社区</span>
+            <span class="meta-tag">待座谈获取</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">特殊群体数据</div>
+            <span class="item-status status-pending">❌ 待获取</span>
+          </div>
+          <div class="item-desc">低保户、特困户、残疾人、独居老人等特殊群体数量及分布（脱敏统计），用于社会民生分析和完整社区建设。需向民政部门/社区获取。</div>
+          <div class="item-meta">
+            <span class="meta-tag">脱敏数据</span>
+            <span class="meta-tag">待民政/社区获取</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 建筑与小区台账 -->
+  <div class="category">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">🏘️</span>
+      <span class="cat-name">建筑与小区台账</span>
+      <span class="cat-count">4项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">老旧小区清单（60个）</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">从实施方案提取的60个老旧小区，按社区分组：白竹亭15个、又一村11个、活龙井25个、文昌阁9个。含小区名称、地址、户数、改造内容。部分小区位置已通过高德地理编码确认。</div>
+          <div class="item-meta">
+            <span class="meta-tag">60个小区</span>
+            <span class="meta-tag">4个社区</span>
+            <span class="meta-tag">含改造内容</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">危房鉴定数据</div>
+            <span class="item-status status-pending">❌ 待获取</span>
+          </div>
+          <div class="item-desc">片区内C/D级危房及疑似危房的详细位置、面积、结构、年代、鉴定等级。需向住建局获取。现场踏勘时需重点标记疑似危房。</div>
+          <div class="item-meta">
+            <span class="meta-tag">C/D级危房</span>
+            <span class="meta-tag">待住建局函调</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-name">历史建筑/文保单位</div>
+          <span class="item-status status-partial">⚠️ 部分获取</span>
+          </div>
+          <div class="item-desc">已确认3处历史建筑：惜字塔、渡口公房、原基建队办公楼。需向文旅局获取完整的文保单位/历史建筑名单、保护等级、保护范围、修缮记录。老火车站站房等铁路工业遗产需单独核实。</div>
+          <div class="item-meta">
+            <span class="meta-tag">已确认3处</span>
+            <span class="meta-tag">待文旅局补充</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">老旧厂区/工业遗产</div>
+            <span class="item-status status-partial">⚠️ 待核实</span>
+          </div>
+          <div class="item-desc">片区内约6处老旧厂区/工业用地，含老火车站站房、铁路仓库、原工业企业厂房等。需现场踏勘核实位置、面积、建筑质量、产权单位、当前使用状况、改造潜力。</div>
+          <div class="item-meta">
+            <span class="meta-tag">约6处</span>
+            <span class="meta-tag">待现场核实</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 市政与交通 -->
+  <div class="category">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">💧</span>
+      <span class="cat-name">市政与交通设施</span>
+      <span class="cat-count">5项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">道路交通数据</div>
+            <span class="item-status status-partial">⚠️ 部分获取</span>
+          </div>
+          <div class="item-desc">片区内主要道路（珊瑚路、春江路、湘江西路、车站路等）的等级、宽度、路面状况已通过影像和现场初步了解。详细的交通量数据、交叉口渠化、公交站点详细信息需向交通局/交警获取。</div>
+          <div class="item-meta">
+            <span class="meta-tag">主要道路已知</span>
+            <span class="meta-tag">交通量待获取</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">给水排水管网</div>
+            <span class="item-status status-pending">❌ 待获取</span>
+          </div>
+          <div class="item-desc">片区内给水管网、雨水管网、污水管网的走向、管径、泵站位置、雨污分流情况。需向自来水公司/排水管理部门获取GIS数据或CAD图纸。实施方案中有86个改造项目可参考。</div>
+          <div class="item-meta">
+            <span class="meta-tag">GIS/CAD数据</span>
+            <span class="meta-tag">待市政部门获取</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">燃气电力管网</div>
+            <span class="item-status status-pending">❌ 待获取</span>
+          </div>
+          <div class="item-desc">燃气管网走向、调压站位置；电力管网走向、变电站位置、配电设施。需向燃气公司/电力部门获取。</div>
+          <div class="item-meta">
+            <span class="meta-tag">燃气+电力</span>
+            <span class="meta-tag">待相关企业获取</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">停车设施数据</div>
+            <span class="item-status status-partial">⚠️ 部分获取</span>
+          </div>
+          <div class="item-desc">POI数据中包含片区内公共停车场位置和泊位数量。路内停车、小区停车矛盾需现场踏勘核实。智慧停车平台数据待向城管/交警获取。</div>
+          <div class="item-meta">
+            <span class="meta-tag">POI已含</span>
+            <span class="meta-tag">路内停车待核实</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">环卫设施数据</div>
+            <span class="item-status status-partial">⚠️ 部分获取</span>
+          </div>
+          <div class="item-desc">POI数据中包含部分公厕、垃圾转运站位置。垃圾分类设施、保洁人员配置等需向城管局获取或现场核实。</div>
+          <div class="item-meta">
+            <span class="meta-tag">POI已含部分</span>
+            <span class="meta-tag">待城管局补充</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 公共服务设施 -->
+  <div class="category">
+    <div class="cat-header" onclick="toggleCat(this)">
+      <span class="cat-icon">🏥</span>
+      <span class="cat-name">公共服务设施</span>
+      <span class="cat-count">6项</span>
+      <span class="cat-arrow">▶</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-inner">
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">教育设施</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">POI数据含19个教育设施：幼儿园14所、小学2所、中学3所。已按片区范围筛选和去重。详细的学位数、招生范围、办学质量需向教育局补充。</div>
+          <div class="item-meta">
+            <span class="meta-tag">19个设施</span>
+            <span class="meta-tag">幼儿园14/小学2/中学3</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">医疗卫生设施</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">POI数据含42个医疗卫生设施：医院、社区卫生服务中心、诊所、药店等。已按片区范围筛选。详细的床位数、服务人口、科室设置需向卫健局补充。</div>
+          <div class="item-meta">
+            <span class="meta-tag">42个设施</span>
+            <span class="meta-tag">含医院/诊所/药店</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">文化体育设施</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">POI数据含16个文化体育设施：文化活动中心、体育场馆、健身场地、图书室等。已按片区范围筛选。详细的面积、开放时间、使用频率需现场核实。</div>
+          <div class="item-meta">
+            <span class="meta-tag">16个设施</span>
+            <span class="meta-tag">文化+体育</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">养老服务设施</div>
+            <span class="item-status status-partial">⚠️ 部分获取</span>
+          </div>
+          <div class="item-desc">POI数据含1个社会福利设施。片区内养老院、日间照料中心、养老服务站的详细名单、位置、床位数、运营情况需向民政局补充。</div>
+          <div class="item-meta">
+            <span class="meta-tag">POI仅1个</span>
+            <span class="meta-tag">待民政局补充</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">商业服务设施</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">POI数据含47个商业服务设施：菜市场、超市、便利店、餐饮、银行、快递等。已按片区范围筛选和去重。经营状况、服务范围需现场核实。</div>
+          <div class="item-meta">
+            <span class="meta-tag">47个设施</span>
+            <span class="meta-tag">含菜市场/超市/餐饮</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-top">
+            <div class="item-name">交通设施</div>
+            <span class="item-status status-complete">✅ 已获取</span>
+          </div>
+          <div class="item-desc">POI数据含33个交通设施：公交站点、公共停车场、火车站等。已按片区范围筛选。详细的公交线路、发车频率、泊位数量需向交通局补充。</div>
+          <div class="item-meta">
+            <span class="meta-tag">33个设施</span>
+            <span class="meta-tag">公交+停车+铁路</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    永州市冷水滩区老火车站片区城市更新项目 · 已有资料清单<br>
+    数据更新至 2026年9月6日
+  </div>
+
+</div>
+
+<script>
+function toggleCat(header) {
+  const cat = header.parentElement;
+  cat.classList.toggle('open');
+}
+</script>
+</body>
+</html>
