@@ -114,41 +114,43 @@
     margin-top: 4px;
   }
 
-  /* 工具卡片 */
-  .tools-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    margin-bottom: 60px;
+  /* 工具横向条 */
+  .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 50px;
   }
-  .tool-card {
-    display: block;
-    background: rgba(32,33,36,0.8);
+  .tool-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(32,33,36,0.7);
     border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 32px 28px;
+    border-radius: 14px;
+    padding: 22px 24px;
     text-decoration: none;
     color: inherit;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
     position: relative;
     overflow: hidden;
   }
-  .tool-card::before {
+  .tool-item::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
     background: var(--accent, #1a73e8);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
   }
-  .tool-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255,255,255,0.15);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  .tool-item:hover {
+    background: rgba(40,42,46,0.9);
+    border-color: rgba(255,255,255,0.14);
+    transform: translateX(4px);
   }
-  .tool-card:hover::before {
-    transform: scaleX(1);
+  .tool-item:hover::before {
+    transform: scaleY(1);
   }
   .tool-icon {
     width: 52px;
@@ -158,42 +160,44 @@
     align-items: center;
     justify-content: center;
     font-size: 26px;
-    margin-bottom: 20px;
+    flex-shrink: 0;
     background: var(--icon-bg, rgba(26,115,232,0.15));
   }
+  .tool-body {
+    flex: 1;
+    min-width: 0;
+  }
   .tool-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    margin-bottom: 10px;
     color: #fff;
+    margin-bottom: 4px;
   }
   .tool-desc {
-    font-size: 14px;
+    font-size: 13px;
     color: #9aa0a6;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    line-height: 1.6;
+    margin-bottom: 8px;
   }
   .tool-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
   .tool-tag {
-    padding: 4px 10px;
+    padding: 3px 8px;
     background: rgba(255,255,255,0.05);
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 11px;
     color: #9aa0a6;
   }
   .tool-arrow {
-    position: absolute;
-    bottom: 28px;
-    right: 28px;
-    font-size: 18px;
+    font-size: 20px;
     color: #5f6368;
-    transition: all 0.3s ease;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
   }
-  .tool-card:hover .tool-arrow {
+  .tool-item:hover .tool-arrow {
     color: var(--accent, #1a73e8);
     transform: translateX(4px);
   }
@@ -298,56 +302,64 @@
     </div>
   </div>
 
-  <!-- 工具卡片 -->
-  <div class="tools-grid">
-    <a href="gis.html" class="tool-card" style="--accent:#1a73e8; --icon-bg:rgba(26,115,232,0.15);">
+  <!-- 工具横向条 -->
+  <div class="tools-list">
+    <a href="gis.html" class="tool-item" style="--accent:#1a73e8; --icon-bg:rgba(26,115,232,0.15);">
       <div class="tool-icon">🗺️</div>
-      <div class="tool-name">GIS 分析平台</div>
-      <div class="tool-desc">集成现状建筑、用地、控规、POI、地名等多源数据，一键生成13类GIS分析图，支持人工标注与图片导出。</div>
-      <div class="tool-tags">
-        <span class="tool-tag">建筑分析</span>
-        <span class="tool-tag">用地分析</span>
-        <span class="tool-tag">公服覆盖</span>
-        <span class="tool-tag">控规对比</span>
+      <div class="tool-body">
+        <div class="tool-name">GIS 分析平台</div>
+        <div class="tool-desc">集成现状建筑、用地、控规、POI、地名等多源数据，一键生成13类GIS分析图，支持人工标注与图片导出。</div>
+        <div class="tool-tags">
+          <span class="tool-tag">建筑分析</span>
+          <span class="tool-tag">用地分析</span>
+          <span class="tool-tag">公服覆盖</span>
+          <span class="tool-tag">控规对比</span>
+        </div>
       </div>
       <div class="tool-arrow">→</div>
     </a>
 
-    <a href="survey.html" class="tool-card" style="--accent:#34a853; --icon-bg:rgba(52,168,83,0.15);">
+    <a href="survey.html" class="tool-item" style="--accent:#34a853; --icon-bg:rgba(52,168,83,0.15);">
       <div class="tool-icon">📋</div>
-      <div class="tool-name">现场调研工具</div>
-      <div class="tool-desc">部门/街道/社区资料调取 + 项目现场核实，支持语音输入、拍照、备注、GPS定位，一键导出完整调研报告。</div>
-      <div class="tool-tags">
-        <span class="tool-tag">资料调取</span>
-        <span class="tool-tag">现场核实</span>
-        <span class="tool-tag">语音输入</span>
-        <span class="tool-tag">导出报告</span>
+      <div class="tool-body">
+        <div class="tool-name">现场调研工具</div>
+        <div class="tool-desc">部门/街道/社区资料调取 + 项目现场核实，支持语音输入、拍照、备注、GPS定位，一键导出完整调研报告。</div>
+        <div class="tool-tags">
+          <span class="tool-tag">资料调取</span>
+          <span class="tool-tag">现场核实</span>
+          <span class="tool-tag">语音输入</span>
+          <span class="tool-tag">导出报告</span>
+        </div>
       </div>
       <div class="tool-arrow">→</div>
     </a>
 
-    <a href="checklist.html" class="tool-card" style="--accent:#fbbc04; --icon-bg:rgba(251,188,4,0.15);">
+    <a href="checklist.html" class="tool-item" style="--accent:#fbbc04; --icon-bg:rgba(251,188,4,0.15);">
       <div class="tool-icon">📑</div>
-      <div class="tool-name">资料需求清单</div>
-      <div class="tool-desc">61项资料需求交互清单，按部门、重要程度、获取状态分类筛选，明确每项资料的已有信息、待核实点和获取途径。</div>
-      <div class="tool-tags">
-        <span class="tool-tag">部门函调</span>
-        <span class="tool-tag">基础数据</span>
-        <span class="tool-tag">八大方向</span>
-        <span class="tool-tag">现场调研</span>
+      <div class="tool-body">
+        <div class="tool-name">资料需求清单</div>
+        <div class="tool-desc">61项资料需求交互清单，按部门、重要程度、获取状态分类筛选，明确每项资料的已有信息、待核实点和获取途径。</div>
+        <div class="tool-tags">
+          <span class="tool-tag">部门函调</span>
+          <span class="tool-tag">基础数据</span>
+          <span class="tool-tag">八大方向</span>
+          <span class="tool-tag">现场调研</span>
+        </div>
       </div>
       <div class="tool-arrow">→</div>
     </a>
 
-    <a href="guide.html" class="tool-card" style="--accent:#ea4335; --icon-bg:rgba(234,67,53,0.15);">
+    <a href="guide.html" class="tool-item" style="--accent:#ea4335; --icon-bg:rgba(234,67,53,0.15);">
       <div class="tool-icon">📖</div>
-      <div class="tool-name">调研指导手册</div>
-      <div class="tool-desc">部门资料调取清单、街道社区座谈提纲、现场踏勘详表、调研全流程与注意事项，手机端适配，随时查阅。</div>
-      <div class="tool-tags">
-        <span class="tool-tag">部门函调</span>
-        <span class="tool-tag">座谈提纲</span>
-        <span class="tool-tag">踏勘清单</span>
-        <span class="tool-tag">流程注意</span>
+      <div class="tool-body">
+        <div class="tool-name">调研指导手册</div>
+        <div class="tool-desc">部门资料调取清单、街道社区座谈提纲、现场踏勘详表、调研全流程与注意事项，手机端适配，随时查阅。</div>
+        <div class="tool-tags">
+          <span class="tool-tag">部门函调</span>
+          <span class="tool-tag">座谈提纲</span>
+          <span class="tool-tag">踏勘清单</span>
+          <span class="tool-tag">流程注意</span>
+        </div>
       </div>
       <div class="tool-arrow">→</div>
     </a>
