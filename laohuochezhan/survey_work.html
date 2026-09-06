@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>现场调研与踏勘 - 永州市冷水滩区老火车站片区城市更新项目</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+/* 头部 */
+.header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-bottom: 2px solid #e94560;
+    padding: 40px 20px;
+    margin-bottom: 30px;
+}
+.header h1 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+.header .subtitle {
+    font-size: 14px;
+    color: #888;
+}
+.header .meta {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #666;
+}
+.header .meta span { margin-right: 20px; }
+
+/* 导航 */
+.nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.nav a {
+    padding: 8px 16px;
+    background: #1a1a2e;
+    color: #aaa;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+    border: 1px solid #333;
+    transition: all 0.3s;
+}
+.nav a:hover {
+    background: #e94560;
+    color: #fff;
+    border-color: #e94560;
+}
+
+/* 板块标题 */
+.section-title {
+    font-size: 20px;
+    color: #fff;
+    margin: 30px 0 15px;
+    padding-left: 12px;
+    border-left: 4px solid #e94560;
+    font-weight: 600;
+}
+
+/* 介绍卡片 */
+.intro-card {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #2a2a3e;
+}
+.intro-card h3 {
+    color: #e94560;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+.intro-card p {
+    color: #bbb;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+/* 工作计划表格 */
+.plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    font-size: 13px;
+}
+.plan-table th {
+    background: #16213e;
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #2a2a3e;
+    font-weight: 600;
+}
+.plan-table td {
+    padding: 10px 12px;
+    border: 1px solid #2a2a3e;
+    color: #ccc;
+    vertical-align: top;
+}
+.plan-table tr:nth-child(even) { background: #15151f; }
+.plan-table .time { color: #e94560; font-weight: 600; white-space: nowrap; }
+
+/* 文件卡片 */
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.file-card {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #2a2a3e;
+    transition: all 0.3s;
+}
+.file-card:hover {
+    border-color: #e94560;
+    transform: translateY(-2px);
+}
+.file-card .file-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.file-card h4 {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+.file-card .file-desc {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+.file-card .file-meta {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 10px;
+}
+.file-card .download-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    background: #e94560;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+.file-card .download-btn:hover {
+    background: #c73650;
+}
+
+/* 注意事项 */
+.notice-list {
+    background: #1a1a2e;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #2a2a3e;
+}
+.notice-list h4 {
+    color: #e94560;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.notice-list ul {
+    list-style: none;
+    padding: 0;
+}
+.notice-list li {
+    color: #bbb;
+    font-size: 13px;
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    border-bottom: 1px solid #222;
+}
+.notice-list li:last-child { border-bottom: none; }
+.notice-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #e94560;
+}
+
+/* 调查类型网格 */
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: 25px;
+}
+.type-card {
+    background: #15151f;
+    border-radius: 6px;
+    padding: 15px;
+    border: 1px solid #2a2a3e;
+}
+.type-card .type-num {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #e94560;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.type-card h5 {
+    display: inline;
+    color: #fff;
+    font-size: 14px;
+}
+.type-card p {
+    color: #888;
+    font-size: 12px;
+    margin-top: 8px;
+    line-height: 1.5;
+}
+
+/* 工具链接 */
+.tool-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+.tool-link {
+    flex: 1;
+    min-width: 250px;
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #2a2a3e;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.tool-link:hover {
+    border-color: #e94560;
+    transform: translateY(-2px);
+}
+.tool-link h4 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+.tool-link p {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.tool-link .tool-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 3px 8px;
+    background: #e94560;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+/* 页脚 */
+.footer {
+    text-align: center;
+    padding: 30px;
+    color: #555;
+    font-size: 12px;
+    border-top: 1px solid #222;
+    margin-top: 40px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .header h1 { font-size: 22px; }
+    .file-grid { grid-template-columns: 1fr; }
+    .type-grid { grid-template-columns: 1fr; }
+    .plan-table { font-size: 12px; }
+    .plan-table th, .plan-table td { padding: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="container">
+        <h1>现场调研与踏勘</h1>
+        <div class="subtitle">永州市冷水滩区老火车站片区城市更新项目 · 基础调研工作板块</div>
+        <div class="meta">
+            <span>版本：V1.0</span>
+            <span>编制日期：2026年9月6日</span>
+            <span>调研周期：1周（10人）</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- 导航 -->
+<div class="nav">
+    <a href="index.html">← 返回首页</a>
+    <a href="#plan">工作计划</a>
+    <a href="#files">文件下载</a>
+    <a href="#types">调查类型</a>
+    <a href="#notice">注意事项</a>
+    <a href="#tools">在线工具</a>
+</div>
+
+<!-- 板块介绍 -->
+<div class="intro-card">
+    <h3>板块说明</h3>
+    <p>本板块集中管理现场调研与踏勘工作的所有文件、表格、工具和规范。现场调研与踏勘是城市更新项目的基础性工作，目的是全面掌握片区现状，识别问题和资源，为城市体检、片区策划、实施方案编制提供真实、准确、完整的基础数据。</p>
+    <p>本次调研按"分组分类、逐栋核实、图文并茂、数据可追溯"的原则开展，分为12类调查类型，每类调查有明确的调查内容、表格模板、照片要求和注意事项。所有调查数据使用统一的小区、建筑、单位完整名称，确保后续GIS整合、项目关联、数据对比时不出现名称不一致的问题。</p>
+</div>
+
+<!-- 工作计划 -->
+<h2 class="section-title" id="plan">一周工作计划（10人）</h2>
+<table class="plan-table">
+    <thead>
+        <tr>
+            <th style="width:12%">时间</th>
+            <th style="width:25%">工作内容</th>
+            <th style="width:30%">人员安排</th>
+            <th style="width:33%">产出</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="time">第1天（周一）</td>
+            <td>各部门调取资料</td>
+            <td>4人分2组，每组2人。上午：自然资源局、住建局；下午：城管局、教育局、卫健委、民政局等</td>
+            <td>各部门资料收集汇总</td>
+        </tr>
+        <tr>
+            <td class="time">第2天（周二）</td>
+            <td>街道社区座谈</td>
+            <td>6人分3组，每组2人。分别对接梧桐、肖家园、菱角山街道，每个街道半天</td>
+            <td>座谈记录、社区资料、小区名单确认、完整名称清单</td>
+        </tr>
+        <tr>
+            <td class="time">第3天上午</td>
+            <td>基础资料整理与踏勘准备</td>
+            <td>全员10人。整理部门+社区资料，更新小区/建筑/设施清单，确认完整名称，划分踏勘小组，准备表格/工具/影像图</td>
+            <td>更新后的基础资料台账、踏勘分组表、打印表格和影像图</td>
+        </tr>
+        <tr>
+            <td class="time">第3天下午-第5天</td>
+            <td>分组分类现场踏勘</td>
+            <td>分2大组：片区策划组（4人，分2小组）、老旧小区组（6人，分3小组）</td>
+            <td>各类现场调查表、照片（按规范命名）、GPS点位</td>
+        </tr>
+        <tr>
+            <td class="time">第6天（周六）</td>
+            <td>资料整理与补勘</td>
+            <td>全员10人。整理踏勘资料，发现遗漏的安排补勘</td>
+            <td>完整的现场调查资料包</td>
+        </tr>
+        <tr>
+            <td class="time">第7天（周日）</td>
+            <td>数据汇总与分析</td>
+            <td>全员10人。数据录入GIS平台，生成现状分析图，问题清单</td>
+            <td>现状分析成果、问题清单、下一步工作建议</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- 分组分工 -->
+<div class="intro-card">
+    <h3>分组分工</h3>
+    <p><strong style="color:#e94560">片区策划组（4人，分2小组）：</strong>宏观层面的现状要素调查，为片区定位、功能策划、空间结构、项目策划提供依据。重点调查：闲置建筑/低效用地、历史文化资源、公共服务设施、道路交通、绿化景观、商业商务、工业用地。</p>
+    <p><strong style="color:#e94560">老旧小区组（6人，分3小组，每小组2人）：</strong>逐小区、逐栋的精细化调查，为老旧小区改造、完整社区建设、实施方案编制提供依据。第1小组负责白竹亭社区，第2小组负责又一村社区+活龙井社区西侧，第3小组负责文昌阁社区+活龙井社区东侧。</p>
+</div>
+
+<!-- 文件下载 -->
+<h2 class="section-title" id="files">文件下载（V1.0）</h2>
+<div class="file-grid">
+
+    <div class="file-card">
+        <div class="file-icon">📋</div>
+        <h4>工作计划与分工</h4>
+        <div class="file-desc">一周工作计划、分组分工、前期准备工作、注意事项、配套文件清单。是本次调研的总纲文件。</div>
+        <div class="file-meta">版本：V1.0 · 2026-09-06</div>
+        <a href="attachments/老火车站片区_现场调研与踏勘_工作计划与分工_V1.0.docx" class="download-btn" download>下载 Word</a>
+    </div>
+
+    <div class="file-card">
+        <div class="file-icon">🏢</div>
+        <h4>部门资料收集清单</h4>
+        <div class="file-desc">10个主要部门+8个建议咨询部门+2个公用事业企业的资料调取清单。每项资料含内容与格式要求。</div>
+        <div class="file-meta">版本：V1.0 · 2026-09-06</div>
+        <a href="attachments/老火车站片区_现场调研与踏勘_部门资料收集清单_V1.0.docx" class="download-btn" download>下载 Word</a>
+    </div>
+
+    <div class="file-card">
+        <div class="file-icon">📮</div>
+        <h4>街道社区资料调取与座谈函件</h4>
+        <div class="file-desc">致梧桐、肖家园、菱角山三个街道的正式函件。含资料调取清单（6大类30项）、座谈提纲（4大类20个问题）、现场踏勘配合要求。</div>
+        <div class="file-meta">版本：V1.0 · 2026-09-06</div>
+        <a href="attachments/老火车站片区_现场调研与踏勘_街道社区资料调取与座谈函件_V1.0.docx" class="download-btn" download>下载 Word</a>
+    </div>
+
+    <div class="file-card">
+        <div class="file-icon">📊</div>
+        <h4>街道社区调研表格模板</h4>
+        <div class="file-desc">4张标准化调研表格：小区楼栋问题统计表、小区配套设施问题统计表、社区配套设施统计表、街道配套设施问题统计表。含通知正文和填报说明。</div>
+        <div class="file-meta">版本：V1.0 · 2026-09-06</div>
+        <a href="attachments/老火车站片区_现场调研与踏勘_街道社区调研表格模板_V1.0.docx" class="download-btn" download>下载 Word</a>
+    </div>
+
+    <div class="file-card">
+        <div class="file-icon">🔍</div>
+        <h4>现场踏勘工作手册</h4>
+        <div class="file-desc">12类调查的详细内容：调查目的、基本信息来源、调查内容、表格设计、照片要求、注意事项。含与现场调研小工具的结合、数据整理与汇总要求。</div>
+        <div class="file-meta">版本：V1.0 · 2026-09-06</div>
+        <a href="attachments/老火车站片区_现场调研与踏勘_现场踏勘工作手册_V1.0.docx" class="download-btn" download>下载 Word</a>
+    </div>
+
+</div>
+
+<!-- 调查类型 -->
+<h2 class="section-title" id="types">12类调查类型</h2>
+<div class="type-grid">
+    <div class="type-card"><span class="type-num">1</span><h5>老旧小区调查</h5><p>逐栋调查，重点。含小区基本信息、楼栋情况、基础设施、公共服务、安全隐患、改造需求。</p></div>
+    <div class="type-card"><span class="type-num">2</span><h5>闲置建筑调查</h5><p>逐栋调查。含基本信息、现状情况、资源条件、计划与建议。重点关注可利用方向。</p></div>
+    <div class="type-card"><span class="type-num">3</span><h5>历史建筑调查</h5><p>逐处调查。含基本信息、现状情况、价值特色、保护与利用建议。关注未认定但有价值的建筑。</p></div>
+    <div class="type-card"><span class="type-num">4</span><h5>公共服务设施调查</h5><p>逐处调查。教育、医疗、养老、文化、体育、社区服务六类设施。评估服务覆盖率和缺口。</p></div>
+    <div class="type-card"><span class="type-num">5</span><h5>市政基础设施调查</h5><p>逐路段/小区。供水、排水、燃气、电力、通信、道路、照明、环卫。识别老化破损缺口。</p></div>
+    <div class="type-card"><span class="type-num">6</span><h5>道路交通调查</h5><p>逐道路/停车场。道路、停车场、公交站点、交通问题、慢行系统。高峰时段观察拥堵。</p></div>
+    <div class="type-card"><span class="type-num">7</span><h5>绿化景观调查</h5><p>逐处。公园绿地、广场、滨水空间、古树名木、道路绿化、小区绿化。识别绿化缺口。</p></div>
+    <div class="type-card"><span class="type-num">8</span><h5>商业商务调查</h5><p>逐街区/市场。商业街、市场、写字楼、酒店、沿街商业。识别商业活力和问题。</p></div>
+    <div class="type-card"><span class="type-num">9</span><h5>工业用地调查</h5><p>逐厂区。基本信息、现状情况、资源条件、搬迁可能性。关注工业遗产和改造可行性。</p></div>
+    <div class="type-card"><span class="type-num">10</span><h5>违章建筑调查</h5><p>逐处。位置、面积、类型、建设时间、当事人、处理情况。区分历史遗留和新增违建。</p></div>
+    <div class="type-card"><span class="type-num">11</span><h5>安全隐患调查</h5><p>逐处。危房、消防隐患、内涝点、其他安全隐患。优先调查和记录。</p></div>
+    <div class="type-card"><span class="type-num">12</span><h5>人口与社会调查</h5><p>逐社区/抽样。人口结构、特殊群体、居民诉求、社会网络、搬迁意愿。注意隐私保护。</p></div>
+</div>
+
+<!-- 注意事项 -->
+<h2 class="section-title" id="notice">注意事项</h2>
+<div class="notice-list">
+    <h4>名称规范（最重要）</h4>
+    <ul>
+        <li>所有调查表中的小区、建筑、单位名称必须填写完整全称，不得使用简称、俗称、缩写</li>
+        <li>同一对象在不同表格中名称必须完全一致</li>
+        <li>如遇名称有歧义，应向社区工作人员确认并备注官方名称</li>
+        <li>小区范围和四至边界要现场确认，避免"有名无实"或"有实无名"</li>
+    </ul>
+</div>
+
+<div class="notice-list">
+    <h4>安全注意</h4>
+    <ul>
+        <li>进入老旧建筑内部时注意结构安全，避免进入危险区域</li>
+        <li>进入厂区、铁路等特殊区域需征得管理方同意</li>
+        <li>高空拍摄、攀爬等危险动作禁止</li>
+        <li>注意交通安全，特别是在老旧小区狭窄道路调查时</li>
+        <li>每天出发前确认手机电量和通讯畅通</li>
+    </ul>
+</div>
+
+<div class="notice-list">
+    <h4>调查质量</h4>
+    <ul>
+        <li>逐栋调查，不能只看小区整体</li>
+        <li>对照老旧小区改造内容清单逐项核实</li>
+        <li>安全隐患类优先记录，附现场照片</li>
+        <li>居民访谈要抽样，覆盖不同人群（老人、年轻人、租户、业主）</li>
+        <li>每天调查结束后及时整理资料，发现遗漏第二天补勘</li>
+        <li>照片命名规范：小区完整名称_日期_序号.jpg</li>
+    </ul>
+</div>
+
+<div class="notice-list">
+    <h4>数据保密</h4>
+    <ul>
+        <li>居民个人信息（姓名、电话、身份证号等）不得记录在调查表中</li>
+        <li>特殊群体信息（低保、残疾等）只做脱敏统计</li>
+        <li>所有调查资料仅限项目内部使用，不得外传</li>
+        <li>照片中如包含居民肖像，需征得同意或做模糊处理</li>
+    </ul>
+</div>
+
+<!-- 在线工具 -->
+<h2 class="section-title" id="tools">在线工具</h2>
+<div class="tool-links">
+    <a href="survey.html" class="tool-link">
+        <h4>📱 现场调研工具 V2.0</h4>
+        <p>手机端现场调查工具。支持部门/街道/社区资料调取清单、项目现场核实、语音/拍照/备注/GPS定位、导出报告。现场调查时用手机打开使用。</p>
+        <span class="tool-tag">手机端 · 现场使用</span>
+    </a>
+    <a href="gis.html" class="tool-link">
+        <h4>🗺️ GIS分析平台 V2.1</h4>
+        <p>GIS平台。支持地图浏览（高德/天地图，卫星/街道）、边界显示（片区/社区）、POI查询、地名标注、人工标注、分析图生成。现场定位和查询周边信息使用。</p>
+        <span class="tool-tag">电脑端 · 定位查询</span>
+    </a>
+</div>
+
+<!-- 页脚 -->
+<div class="footer">
+    <p>永州市冷水滩区老火车站片区城市更新项目 · 现场调研与踏勘板块</p>
+    <p>版本 V1.0 · 2026年9月6日 · 项目组编制</p>
+</div>
+
+</div>
+
+</body>
+</html>

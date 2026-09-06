@@ -1,0 +1,546 @@
+# -*- coding: utf-8 -*-
+# 生成甲方提供基础资料清单网页版
+
+html_content = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>甲方提供基础资料清单 - 永州市冷水滩区老火车站片区城市更新项目</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f8f9fa;
+    color: #202124;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+  /* 封面 */
+  .cover {
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+  .cover-project {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .cover-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+  .cover-date {
+    font-size: 14px;
+    opacity: 0.75;
+  }
+  .cover-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 32px;
+  }
+  .cover-stat {
+    text-align: center;
+  }
+  .cover-stat-num {
+    font-size: 36px;
+    font-weight: 700;
+  }
+  .cover-stat-label {
+    font-size: 13px;
+    opacity: 0.8;
+  }
+  /* 章节 */
+  .section {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a73e8;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e8f0fe;
+  }
+  .section-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #202124;
+    margin: 24px 0 12px;
+    padding-left: 12px;
+    border-left: 4px solid #1a73e8;
+  }
+  .body-text {
+    font-size: 14px;
+    color: #3c4043;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    text-indent: 2em;
+  }
+  /* 表格 */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+  .data-table th {
+    background: #1a73e8;
+    color: white;
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e8eaed;
+    vertical-align: top;
+  }
+  .data-table tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+  .data-table tr:hover {
+    background: #e8f0fe;
+  }
+  .col-center { text-align: center; }
+  .file-name {
+    font-weight: 600;
+    color: #202124;
+  }
+  .file-desc {
+    color: #5f6368;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .format-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #e8f0fe;
+    color: #1a73e8;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .size-tag {
+    color: #5f6368;
+    font-size: 12px;
+  }
+  /* 汇总卡片 */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .summary-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #e8eaed;
+  }
+  .summary-card-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a73e8;
+  }
+  .summary-card-label {
+    font-size: 13px;
+    color: #5f6368;
+    margin-top: 4px;
+  }
+  /* 下载区 */
+  .download-section {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 32px;
+    text-align: center;
+  }
+  .download-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 12px;
+  }
+  .download-desc {
+    font-size: 14px;
+    color: #388e3c;
+    margin-bottom: 20px;
+  }
+  .download-btn {
+    display: inline-block;
+    background: #2e7d32;
+    color: white;
+    padding: 14px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+  }
+  .download-btn:hover {
+    background: #1b5e20;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+  }
+  .download-meta {
+    font-size: 12px;
+    color: #66bb6a;
+    margin-top: 12px;
+  }
+  /* 页脚 */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: #9aa0a6;
+    font-size: 12px;
+  }
+  /* 响应式 */
+  @media (max-width: 640px) {
+    .cover { padding: 40px 20px; }
+    .cover-title { font-size: 24px; }
+    .cover-stats { gap: 20px; }
+    .cover-stat-num { font-size: 28px; }
+    .section { padding: 20px 16px; }
+    .data-table { font-size: 12px; }
+    .data-table th, .data-table td { padding: 8px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 封面 -->
+  <div class="cover">
+    <div class="cover-project">永州市冷水滩区老火车站片区城市更新项目</div>
+    <div class="cover-title">甲方提供基础资料清单</div>
+    <div class="cover-subtitle">项目启动阶段 · 基础资料汇总</div>
+    <div class="cover-date">2026年9月</div>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="cover-stat-num">7</div>
+        <div class="cover-stat-label">资料类别</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">16</div>
+        <div class="cover-stat-label">资料份数</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">14</div>
+        <div class="cover-stat-label">待补充项</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 编制说明 -->
+  <div class="section">
+    <div class="section-title">一、编制说明</div>
+    <p class="body-text">本清单为永州市冷水滩区老火车站片区城市更新项目启动阶段，由甲方（项目业主单位）提供的基础资料文件汇总。清单仅包含甲方原始提供的文件，不含项目组在工作过程中自行生成的中间成果、分析图件、数据整理文件等。</p>
+    <p class="body-text">每份资料标注完整文件名称、文件格式、文件大小及内容概述，便于项目组查阅、调用和后续资料补充对照。</p>
+    <p class="body-text">截至2026年9月6日，甲方共提供基础资料7大类16份（套）。</p>
+  </div>
+
+  <!-- 资料清单 -->
+  <div class="section">
+    <div class="section-title">二、甲方提供基础资料清单</div>
+'''
+
+# 资料数据
+materials = [
+    {
+        'category': '（一）规划成果类',
+        'items': [
+            {
+                'name': '永州市冷水滩区老火车站片区体检正式成果',
+                'format': 'PDF',
+                'size': '106.3MB',
+                'desc': '老火车站片区城市体检正式成果报告，包含片区现状基础数据、各项体检指标评估、现状问题诊断、问题成因分析及对策建议等内容，是片区现状分析的核心基础资料。'
+            },
+            {
+                'name': '永州市冷水滩区城市基础设施更新改造重点领域实施方案（20260119）',
+                'format': 'PDF',
+                'size': '11.2MB',
+                'desc': '冷水滩区城市基础设施更新改造重点领域实施方案，涵盖2026—2027年期间全区基础设施更新改造的重点领域、项目清单、建设内容、投资估算及实施安排，是片区基础设施类项目策划的上位依据。'
+            },
+            {
+                'name': '冷水滩区火车站片控制性详细规划（2019版）',
+                'format': 'PDF+JPG（整套）',
+                'size': '约723MB',
+                'desc': '火车站片区控制性详细规划成果整套，包含：①规划批复文件；②控规说明书；③10张规划图（土地利用规划图、道路交通规划图、给水/雨水/污水/电力/电信/燃气工程规划图、控制指标规划图）；④44张分地块图则。是片区用地性质、开发强度、道路系统、市政设施等规划管控的法定依据。'
+            },
+            {
+                'name': '（2025-2027）城市更新方案批复',
+                'format': 'PDF',
+                'size': '350KB',
+                'desc': '永州市（或冷水滩区）2025—2027年城市更新方案的批复文件，明确城市更新工作的总体安排、重点片区及政策支持，是项目立项和政策依据的重要文件。'
+            },
+        ]
+    },
+    {
+        'category': '（二）GIS空间数据类',
+        'items': [
+            {
+                'name': '老火车站片区.gdb（ArcGIS文件地理数据库）',
+                'format': 'GDB',
+                'size': '308KB',
+                'desc': '老火车站片区ArcGIS文件地理数据库，包含片区范围内的现状建筑、现状用地、控规用地等矢量空间数据，是GIS空间分析、现状评估、规划对比的核心数据底座。'
+            },
+        ]
+    },
+    {
+        'category': '（三）图件资料类',
+        'items': [
+            {
+                'name': '老火车站1(全).dwg',
+                'format': 'DWG',
+                'size': '7.7MB',
+                'desc': '老火车站片区现状地形图（CAD格式），包含片区范围内的地形地貌、道路、建筑、用地边界等基础地理信息，是现场踏勘对照、方案设计底图的基础图件。'
+            },
+            {
+                'name': '影像图20260305',
+                'format': 'PDF',
+                'size': '32.7MB',
+                'desc': '老火车站片区高清卫星影像图，影像拍摄时间为2026年3月5日，分辨率较高，可清晰辨识片区内建筑屋顶、道路、绿化、空地等地物，是现状判读、建筑识别、变化监测的重要底图。'
+            },
+        ]
+    },
+    {
+        'category': '（四）现状统计数据类',
+        'items': [
+            {
+                'name': '2022年冷水滩区资产图',
+                'format': 'PDF',
+                'size': '4.5MB',
+                'desc': '2022年冷水滩区资产分布图，标注全区范围内各类国有资产、集体资产的空间分布及基本信息，是片区内存量资产识别、权属梳理的参考资料。'
+            },
+            {
+                'name': '永州市老火车站片区城市更新项目城市片区内一期统计表',
+                'format': 'PDF',
+                'size': '1.4MB',
+                'desc': '老火车站片区城市更新项目范围内一期区域的现状统计表，包含一期范围内的用地、建筑、人口、设施等现状基础数据统计。'
+            },
+            {
+                'name': '永州市老火车站片区城市更新项目城市片区内二期统计表',
+                'format': 'PDF',
+                'size': '750KB',
+                'desc': '老火车站片区城市更新项目范围内二期区域的现状统计表，包含二期范围内的用地、建筑、人口、设施等现状基础数据统计。'
+            },
+            {
+                'name': '永州市老火车站片区城市更新项目城市片区内一期二期实测及统计图',
+                'format': 'PDF',
+                'size': '1.1MB',
+                'desc': '老火车站片区一期、二期范围的现场实测数据及统计分析图件，包含实测范围、建筑实测数据、用地实测数据等，是现状数据核实的重要依据。'
+            },
+        ]
+    },
+    {
+        'category': '（五）资源资产类',
+        'items': [
+            {
+                'name': '铁路资产清单',
+                'format': 'PDF',
+                'size': '2.0MB',
+                'desc': '铁路部门在老火车站片区范围内的资产清单，包含铁路用地、站场建筑、仓储设施、铁路专用线等资产的名称、位置、面积、权属等基本信息，是片区内铁路资产梳理和更新利用的基础资料。'
+            },
+            {
+                'name': '房地产评估（站场）',
+                'format': 'XLSX',
+                'size': '38KB',
+                'desc': '老火车站站场区域房地产评估数据表，包含站场范围内各类房地产的建筑面积、用途、评估价值等数据，是站场更新改造经济测算的参考依据。'
+            },
+            {
+                'name': '永州市城市建设投资发展有限责任公司资产价值预评估价值汇总表',
+                'format': 'PDF',
+                'size': '283KB',
+                'desc': '永州市城市建设投资发展有限责任公司（城投公司）资产价值预评估汇总表，包含城投公司持有的各类资产的预评估价值汇总，是片区内存量国资梳理和更新资金平衡分析的参考资料。'
+            },
+        ]
+    },
+    {
+        'category': '（六）调研资料类',
+        'items': [
+            {
+                'name': '冷水滩区老火车站片区调查清单',
+                'format': 'DOCX',
+                'size': '40KB',
+                'desc': '冷水滩区老火车站片区现状调查清单，包含片区现状调查的内容框架、调查指标、调查表格等，是前期现状调查工作的指导性文件。'
+            },
+        ]
+    },
+    {
+        'category': '（七）对标案例类',
+        'items': [
+            {
+                'name': '【260820汇总】-永州体育中心片区体检与策划',
+                'format': 'PDF',
+                'size': '77.1MB',
+                'desc': '永州体育中心片区城市体检与策划成果汇总（2026年8月20日版），是永州市内同类片区城市更新项目的对标案例，包含体检分析、问题诊断、策划定位、项目策划等完整成果，可作为本片区策划的参考范本。'
+            },
+        ]
+    },
+]
+
+# 生成资料表格
+for cat in materials:
+    html_content += f'''
+    <div class="section-subtitle">{cat['category']}</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:8%">序号</th>
+          <th style="width:32%">文件名称</th>
+          <th style="width:10%">格式</th>
+          <th style="width:10%">大小</th>
+          <th style="width:40%">内容概述</th>
+        </tr>
+      </thead>
+      <tbody>
+'''
+    for idx, item in enumerate(cat['items'], 1):
+        html_content += f'''        <tr>
+          <td class="col-center">{idx}</td>
+          <td><span class="file-name">{item['name']}</span></td>
+          <td class="col-center"><span class="format-tag">{item['format']}</span></td>
+          <td class="col-center"><span class="size-tag">{item['size']}</span></td>
+          <td><span class="file-desc">{item['desc']}</span></td>
+        </tr>
+'''
+    html_content += '      </tbody>\n    </table>\n'
+
+# 汇总统计
+html_content += '''
+  </div>
+
+  <!-- 汇总统计 -->
+  <div class="section">
+    <div class="section-title">三、资料汇总统计</div>
+    <p class="body-text">截至2026年9月6日，甲方共提供基础资料16份（套），按类别统计如下：</p>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-card-num">4</div>
+        <div class="summary-card-label">规划成果类</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-num">1</div>
+        <div class="summary-card-label">GIS空间数据类</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-num">2</div>
+        <div class="summary-card-label">图件资料类</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-num">4</div>
+        <div class="summary-card-label">现状统计数据类</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-num">3</div>
+        <div class="summary-card-label">资源资产类</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-num">1</div>
+        <div class="summary-card-label">调研资料类</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-num">1</div>
+        <div class="summary-card-label">对标案例类</div>
+      </div>
+    </div>
+    <p class="body-text" style="font-size:12px;color:#9aa0a6;text-indent:0;">注：控规成果按1套计，包含批复、说明书、10张规划图、44张图则等全部文件。</p>
+  </div>
+'''
+
+# 待补充资料
+pending = [
+    ('国土空间总体规划', '永州市及冷水滩区国土空间总体规划（最新版），用于上位规划衔接。'),
+    ('城市更新专项规划', '永州市或冷水滩区城市更新专项规划，用于更新策略和项目布局衔接。'),
+    ('住房发展规划', '冷水滩区住房发展规划，用于住房供需分析和老旧小区改造衔接。'),
+    ('第三次全国国土调查数据', '片区范围内第三次全国国土调查数据及年度变更数据，用于现状用地核实。'),
+    ('历史文化保护规划', '永州市历史文化名城保护规划及历史建筑、文保单位清单，用于历史文化资源识别。'),
+    ('综合交通规划', '永州市及冷水滩区综合交通规划，用于道路交通系统分析。'),
+    ('各类公共服务设施专项规划', '教育、医疗卫生、文化体育、养老、社会福利等专项规划，用于公服设施评估。'),
+    ('市政公用设施专项规划', '给水、排水、燃气、电力、电信、环卫等专项规划，用于基础设施评估。'),
+    ('防洪排涝专项规划', '片区防洪排涝专项规划，用于安全韧性评估。'),
+    ('闲置资产台账', '片区范围内闲置公共建筑、闲置土地、低效用地台账，用于存量资源识别。'),
+    ('老旧小区改造计划', '片区范围内已纳入及拟纳入老旧小区改造计划的小区清单及改造内容。'),
+    ('危房鉴定数据', '片区范围内危房鉴定报告及C/D级危房清单。'),
+    ('人口统计数据', '片区范围内街道、社区级人口统计数据（七普及最新年度）。'),
+]
+
+html_content += '''
+  <!-- 待补充资料 -->
+  <div class="section">
+    <div class="section-title">四、待补充资料说明</div>
+    <p class="body-text">根据片区城市更新项目策划工作需要，以下资料甲方尚未提供，需在后续工作中向相关部门调取或补充收集：</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width:8%">序号</th>
+          <th style="width:32%">待补充资料名称</th>
+          <th style="width:60%">用途说明</th>
+        </tr>
+      </thead>
+      <tbody>
+'''
+
+for idx, (name, use) in enumerate(pending, 1):
+    html_content += f'''        <tr>
+          <td class="col-center">{idx}</td>
+          <td><span class="file-name">{name}</span></td>
+          <td><span class="file-desc">{use}</span></td>
+        </tr>
+'''
+
+html_content += '''
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Word文档下载 -->
+  <div class="download-section">
+    <div class="download-title">📄 下载Word版文档</div>
+    <div class="download-desc">本清单同步提供Word格式文档，可直接编辑、打印或归档</div>
+    <a href="attachments/老火车站片区_甲方提供基础资料清单.docx" class="download-btn" download>
+      ⬇ 下载 Word 文档
+    </a>
+    <div class="download-meta">文件格式：DOCX · 文件大小：约50KB · 更新时间：2026年9月6日</div>
+  </div>
+
+  <div class="footer">
+    永州市冷水滩区老火车站片区城市更新项目 · 甲方提供基础资料清单<br>
+    数据更新至 2026年9月6日
+  </div>
+
+</div>
+</body>
+</html>
+'''
+
+# 保存文件
+output_path = r'D:\myweb\laohuochezhan\materials.html'
+with open(output_path, 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print(f'网页文件已生成: {output_path}')
+print(f'文件大小: {len(html_content)} 字符')
