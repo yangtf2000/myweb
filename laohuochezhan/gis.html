@@ -531,6 +531,7 @@ const map=L.map('map',{zoomControl:true}).setView([26.454,111.601],14);
 // 创建带错误处理的瓦片层
 function safeTileLayer(url, opts){
   const layer=L.tileLayer(url, opts);
+  const isTdt = url.indexOf('tianditu') > -1;
   let errorCount=0;
   layer.on('tileerror', function(e){
     errorCount++;
@@ -538,7 +539,11 @@ function safeTileLayer(url, opts){
       console.warn('瓦片加载失败过多，当前底图可能不可用');
       if(!window._tileErrorShown){
         window._tileErrorShown=true;
-        showToast('⚠️ 当前底图加载受限，建议切换底图或下载本地打开');
+        if(isTdt){
+          showToast('⚠️ 天地图加载失败：请在天地图控制台白名单添加 yangtf2000.github.io，或切换高德底图');
+        } else {
+          showToast('⚠️ 当前底图加载受限，建议切换底图或下载本地打开');
+        }
       }
     }
   });
