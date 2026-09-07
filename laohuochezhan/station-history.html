@@ -7,138 +7,168 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a0f;
-  --bg2:#12121c;
-  --card:#16161f;
-  --card2:#1c1c28;
-  --border:#2a2a3e;
-  --text:#e8e8e8;
-  --text2:#aaa;
-  --text3:#777;
-  --red:#e94560;
-  --red2:#ff6b81;
-  --gold:#d4a574;
-  --gold2:#e8c49a;
+  --bg:#0a0a0f;--bg2:#12121c;--card:#16161f;--card2:#1c1c28;
+  --border:#2a2a3e;--text:#e8e8e8;--text2:#aaa;--text3:#777;
+  --red:#e94560;--red2:#ff6b81;--gold:#d4a574;--gold2:#e8c49a;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Serif SC",serif;background:var(--bg);color:var(--text);line-height:1.9;font-size:18px}
 ::selection{background:var(--red);color:#fff}
 
 /* ===== 封面 ===== */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a0a0e 0%,#0f1a2e 40%,#0a0a0f 100%)}
+.hero{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a0a0e 0%,#0f1a2e 40%,#0a0a0f 100%);max-width:680px;margin:0 auto}
 .hero::before{content:'';position:absolute;inset:0;background:url('https://aka.doubaocdn.com/s/lrAN6jrGUe') center/cover;opacity:0.25;filter:grayscale(30%)}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,0.2) 0%,rgba(10,10,15,0.6) 50%,rgba(10,10,15,0.98) 100%)}
-.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;padding:60px 30px}
-.hero-tag{display:inline-block;padding:8px 28px;border:1px solid rgba(233,69,96,0.6);border-radius:30px;color:var(--red2);font-size:14px;letter-spacing:6px;margin-bottom:36px;font-weight:300}
-.hero h1{font-size:56px;font-weight:800;color:#fff;margin-bottom:20px;line-height:1.3;letter-spacing:2px}
-.hero h1 .accent{color:var(--red);display:block;font-size:42px;margin-top:8px;font-weight:600}
-.hero-divider{width:80px;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));margin:30px auto}
-.hero p{font-size:18px;color:var(--text2);max-width:680px;margin:0 auto;line-height:2;font-weight:300}
-.hero-meta{margin-top:40px;font-size:13px;color:var(--text3);letter-spacing:1px;line-height:2}
-.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;color:var(--text3);font-size:12px;letter-spacing:3px;animation:bounce 2s infinite}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:640px;padding:40px 24px}
+.hero-tag{display:inline-block;padding:6px 24px;border:1px solid rgba(233,69,96,0.6);border-radius:30px;color:var(--red2);font-size:13px;letter-spacing:5px;margin-bottom:24px;font-weight:300}
+.hero h1{font-size:48px;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.3;letter-spacing:2px}
+.hero h1 .accent{color:var(--red);display:block;font-size:36px;margin-top:6px;font-weight:600}
+.hero-divider{width:60px;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));margin:20px auto}
+.hero p{font-size:16px;color:var(--text2);max-width:580px;margin:0 auto;line-height:1.9;font-weight:300}
+.hero-meta{margin-top:24px;font-size:12px;color:var(--text3);letter-spacing:1px;line-height:1.8}
 
 /* ===== 容器 ===== */
-.container{max-width:1100px;margin:0 auto;padding:0 30px}
-.narrow{max-width:680px;margin:0 auto}
+.container{max-width:680px;margin:0 auto;padding:0 20px}
 
 /* ===== 关键数据条 ===== */
-.data-strip{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:50px 0;margin:0}
-.data-strip-inner{max-width:1100px;margin:0 auto;padding:0 30px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
-.data-item{text-align:center;padding:20px 10px;border-right:1px solid var(--border)}
+.data-strip{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:25px 0;margin:0;max-width:680px;margin:0 auto}
+.data-strip-inner{max-width:640px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.data-item{text-align:center;padding:12px 6px;border-right:1px solid var(--border)}
 .data-item:last-child{border-right:none}
-.data-item .num{font-size:42px;font-weight:800;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;line-height:1.2}
-.data-item .label{font-size:14px;color:var(--text2);line-height:1.6}
+.data-item .num{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;line-height:1.2}
+.data-item .label{font-size:12px;color:var(--text2);line-height:1.5}
 
 /* ===== 章节 ===== */
-.chapter{padding:80px 0;position:relative}
-.chapter-header{margin-bottom:50px}
-.chapter-num{font-size:80px;font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(233,69,96,0.3);line-height:1;margin-bottom:-10px;letter-spacing:-2px}
-.chapter-title{font-size:38px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.4;padding-left:20px;border-left:5px solid var(--red)}
-.chapter-subtitle{font-size:17px;color:var(--gold);padding-left:25px;font-weight:300;letter-spacing:1px}
+.chapter{padding:18px 0;position:relative}
+.chapter-header{margin-bottom:14px}
+.chapter-num{font-size:64px;font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(233,69,96,0.3);line-height:1;margin-bottom:-8px;letter-spacing:-2px}
+.chapter-title{font-size:30px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4;padding-left:16px;border-left:4px solid var(--red)}
+.chapter-subtitle{font-size:14px;color:var(--gold);padding-left:20px;font-weight:300;letter-spacing:1px}
 
 /* ===== 正文段落 ===== */
-.prose{max-width:680px;margin:0 auto}
-.prose p{font-size:18px;line-height:2;color:var(--text);margin-bottom:24px;text-align:justify}
+.prose{max-width:640px;margin:0 auto}
+.prose p{font-size:18px;line-height:1.9;color:var(--text);margin-bottom:14px;text-align:justify}
 .prose p strong{color:var(--gold2);font-weight:600}
-.prose h3{font-size:24px;color:#fff;margin:40px 0 20px;padding-bottom:12px;border-bottom:2px solid var(--border);font-weight:600}
-.prose h4{font-size:20px;color:var(--gold2);margin:30px 0 15px;font-weight:600}
+.prose h3{font-size:20px;color:#fff;margin:20px 0 12px;padding-bottom:10px;border-bottom:2px solid var(--border);font-weight:600}
 
 /* ===== 故事卡片 ===== */
-.story-card{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);border-radius:12px;padding:32px;margin:30px 0;border:1px solid var(--border);border-left:5px solid var(--red);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.story-card{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);border-radius:10px;padding:22px;margin:16px 0;border:1px solid var(--border);border-left:4px solid var(--red);box-shadow:0 6px 24px rgba(0,0,0,0.3)}
 .story-card.gold{border-left-color:var(--gold)}
-.story-card h4{font-size:20px;color:var(--red2);margin-bottom:18px;font-weight:600;display:flex;align-items:center;gap:10px}
+.story-card h4{font-size:17px;color:var(--red2);margin-bottom:12px;font-weight:600;display:flex;align-items:center;gap:8px}
 .story-card.gold h4{color:var(--gold2)}
-.story-card h4 .icon{font-size:24px}
-.story-card p{font-size:17px;line-height:1.95;color:var(--text);margin-bottom:14px}
+.story-card h4 .icon{font-size:20px}
+.story-card p{font-size:15px;line-height:1.9;color:var(--text);margin-bottom:10px}
 .story-card p:last-child{margin-bottom:0}
-.story-card .source{display:block;font-size:13px;color:var(--text3);margin-top:16px;padding-top:12px;border-top:1px solid var(--border);font-style:italic}
+.story-card .source{display:block;font-size:12px;color:var(--text3);margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-style:italic}
 
 /* ===== 引用块 ===== */
-.quote-block{position:relative;padding:40px 50px;margin:40px 0;background:var(--card);border-radius:12px;border:1px solid var(--border)}
-.quote-block::before{content:'"';position:absolute;top:10px;left:20px;font-size:100px;color:var(--red);opacity:0.2;font-family:Georgia,serif;line-height:1}
-.quote-block p{font-size:20px;line-height:2;color:var(--text2);font-style:italic;font-weight:300;position:relative;z-index:1}
-.quote-block .author{display:block;text-align:right;font-size:15px;color:var(--gold);margin-top:20px;font-style:normal;font-weight:400}
+.quote-block{position:relative;padding:22px 28px;margin:18px 0;background:var(--card);border-radius:10px;border:1px solid var(--border)}
+.quote-block::before{content:'"';position:absolute;top:6px;left:16px;font-size:70px;color:var(--red);opacity:0.2;font-family:Georgia,serif;line-height:1}
+.quote-block p{font-size:17px;line-height:1.9;color:var(--text2);font-style:italic;font-weight:300;position:relative;z-index:1}
+.quote-block .author{display:block;text-align:right;font-size:13px;color:var(--gold);margin-top:14px;font-style:normal;font-weight:400}
 
 /* ===== 时间轴 ===== */
-.timeline{position:relative;margin:40px 0;padding-left:40px}
-.timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),transparent)}
-.tl-item{position:relative;margin-bottom:32px;padding:24px 28px;background:var(--card);border-radius:10px;border:1px solid var(--border);transition:transform 0.3s,box-shadow 0.3s}
-.tl-item:hover{transform:translateX(5px);box-shadow:0 8px 30px rgba(233,69,96,0.15)}
-.tl-item::before{content:'';position:absolute;left:-34px;top:30px;width:14px;height:14px;background:var(--red);border-radius:50%;border:3px solid var(--bg);box-shadow:0 0 0 2px var(--red)}
-.tl-year{font-size:16px;font-weight:700;color:var(--red2);margin-bottom:8px;letter-spacing:1px}
-.tl-title{font-size:19px;color:#fff;margin-bottom:10px;font-weight:600}
-.tl-desc{font-size:16px;line-height:1.9;color:var(--text2)}
+.timeline{position:relative;margin:18px 0;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),transparent)}
+.tl-item{position:relative;margin-bottom:20px;padding:14px 16px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
+.tl-item::before{content:'';position:absolute;left:-28px;top:24px;width:12px;height:12px;background:var(--red);border-radius:50%;border:3px solid var(--bg);box-shadow:0 0 0 2px var(--red)}
+.tl-year{font-size:14px;font-weight:700;color:var(--red2);margin-bottom:6px;letter-spacing:1px}
+.tl-title{font-size:17px;color:#fff;margin-bottom:8px;font-weight:600}
+.tl-desc{font-size:14px;line-height:1.85;color:var(--text2)}
 .tl-desc strong{color:var(--gold2)}
-.tl-source{display:block;font-size:12px;color:var(--text3);margin-top:10px;font-style:italic}
+.tl-source{display:block;font-size:11px;color:var(--text3);margin-top:8px;font-style:italic}
+
+/* ===== 杂志化多样化布局 ===== */
+.mag-hero{position:relative;border-radius:10px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)}
+.mag-hero img{width:100%;height:200px;object-fit:cover;display:block;object-position:center 30%}
+.mag-hero .mag-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,0.9) 0%,rgba(10,10,15,0.3) 60%,transparent 100%);display:flex;align-items:flex-end;padding:20px}
+.mag-hero .mag-hero-text h3{font-size:24px;color:#fff;margin-bottom:6px;font-weight:700}
+.mag-hero .mag-hero-text p{font-size:13px;color:var(--text2);max-width:460px;line-height:1.7}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.info-card{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s}
+.info-card:hover{transform:translateY(-2px)}
+.info-card .info-card-img{height:130px;overflow:hidden}
+.info-card .info-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+.info-card:hover .info-card-img img{transform:scale(1.05)}
+.info-card .info-card-body{padding:14px}
+.info-card .info-card-body h5{font-size:15px;color:var(--gold);margin-bottom:6px;font-weight:600}
+.info-card .info-card-body p{font-size:12px;color:var(--text2);line-height:1.7}
+
+/* 左文右图 - 文字更窄图片更大 */
+.layout-lr{display:grid;grid-template-columns:0.75fr 1.25fr;gap:18px;margin-bottom:18px;align-items:center}
+.layout-lr.reverse{grid-template-columns:1.25fr 0.75fr}
+.layout-lr .layout-text h4{font-size:17px;color:var(--red);margin-bottom:10px;font-weight:600}
+.layout-lr .layout-text p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:8px}
+.layout-lr .layout-img{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.layout-lr .layout-img img{width:100%;height:260px;object-fit:cover;display:block}
+
+/* 三列竖向排版 - 价值卡片 */
+.value-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
+.value-card{background:var(--card);border-radius:8px;padding:16px;border:1px solid var(--border);transition:transform 0.3s}
+.value-card:hover{transform:translateY(-2px)}
+.value-card .v-num{font-size:28px;font-weight:800;color:var(--red);margin-bottom:8px;line-height:1}
+.value-card .v-title{font-size:14px;color:var(--gold);margin-bottom:8px;font-weight:600}
+.value-card .v-text{font-size:12px;color:var(--text2);line-height:1.75;margin-bottom:10px}
+.value-card .v-img{height:90px;border-radius:5px;overflow:hidden;border:1px solid var(--border)}
+.value-card .v-img img{width:100%;height:100%;object-fit:cover}
+
+/* 竖排编号列表 */
+.num-vertical{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
+.num-v-card{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s}
+.num-v-card:hover{transform:translateY(-2px)}
+.num-v-card .nv-body{padding:14px}
+.num-v-card .nv-num{font-size:26px;font-weight:800;color:var(--red);margin-bottom:6px;line-height:1}
+.num-v-card .nv-title{font-size:14px;color:#fff;margin-bottom:8px;font-weight:600}
+.num-v-card .nv-text{font-size:12px;color:var(--text2);line-height:1.75}
+.num-v-card .nv-img{height:110px;overflow:hidden}
+.num-v-card .nv-img img{width:100%;height:100%;object-fit:cover}
 
 /* ===== 图片 ===== */
-.img-full{margin:40px 0;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
-.img-full img{width:100%;display:block;max-height:500px;object-fit:cover}
-.img-full .caption{padding:16px 24px;background:var(--card);font-size:15px;color:var(--text2);line-height:1.7;border-top:1px solid var(--border)}
+.img-full{max-width:640px;margin:18px auto;border-radius:10px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 32px rgba(0,0,0,0.4)}
+.img-full img{width:100%;display:block;max-height:360px;object-fit:cover}
+.img-full .caption{padding:12px 18px;background:var(--card);font-size:13px;color:var(--text2);line-height:1.6;border-top:1px solid var(--border)}
 .img-full .caption strong{color:var(--gold)}
 
-.img-side{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:40px 0;align-items:start}
-.img-side .img-box{border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
-.img-side .img-box img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
-.img-side .img-box .cap{padding:14px 18px;background:var(--card);font-size:14px;color:var(--text2);border-top:1px solid var(--border)}
-
 /* ===== 高亮信息框 ===== */
-.highlight-box{background:linear-gradient(135deg,rgba(233,69,96,0.1) 0%,rgba(212,165,116,0.08) 100%);border:1px solid rgba(233,69,96,0.3);border-radius:12px;padding:30px 36px;margin:35px 0}
-.highlight-box h4{font-size:20px;color:var(--red2);margin-bottom:16px;font-weight:600}
-.highlight-box p{font-size:17px;line-height:1.95;color:var(--text);margin-bottom:12px}
+.highlight-box{background:linear-gradient(135deg,rgba(233,69,96,0.1) 0%,rgba(212,165,116,0.08) 100%);border:1px solid rgba(233,69,96,0.3);border-radius:10px;padding:20px 24px;margin:18px 0}
+.highlight-box h4{font-size:17px;color:var(--red2);margin-bottom:12px;font-weight:600}
+.highlight-box p{font-size:14px;line-height:1.9;color:var(--text);margin-bottom:10px}
 .highlight-box p:last-child{margin-bottom:0}
 .highlight-box ul{list-style:none;padding:0}
-.highlight-box li{font-size:17px;line-height:2;color:var(--text);padding-left:28px;position:relative;margin-bottom:8px}
+.highlight-box li{font-size:14px;line-height:1.9;color:var(--text);padding-left:22px;position:relative;margin-bottom:6px}
 .highlight-box li::before{content:'▸';position:absolute;left:0;color:var(--red);font-weight:bold}
 
 /* ===== 编号列表 ===== */
-.numbered-list{margin:30px 0;counter-reset:item}
-.numbered-list .n-item{display:flex;gap:24px;margin-bottom:28px;padding:24px;background:var(--card);border-radius:10px;border:1px solid var(--border)}
-.numbered-list .n-num{flex-shrink:0;width:56px;height:56px;background:linear-gradient(135deg,var(--red),#c73e54);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff}
-.numbered-list .n-content h5{font-size:19px;color:#fff;margin-bottom:10px;font-weight:600}
-.numbered-list .n-content p{font-size:16px;line-height:1.9;color:var(--text2);margin:0}
+.numbered-list{margin:18px 0;counter-reset:item}
+.numbered-list .n-item{display:flex;gap:18px;margin-bottom:18px;padding:18px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
+.numbered-list .n-num{flex-shrink:0;width:48px;height:48px;background:linear-gradient(135deg,var(--red),#c73e54);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff}
+.numbered-list .n-content h5{font-size:16px;color:#fff;margin-bottom:8px;font-weight:600}
+.numbered-list .n-content p{font-size:14px;line-height:1.85;color:var(--text2);margin:0}
 
 /* ===== 分隔符 ===== */
-.divider{text-align:center;padding:50px 0;color:var(--border);font-size:30px;letter-spacing:20px}
+.divider{text-align:center;padding:16px 0;color:var(--border);font-size:24px;letter-spacing:16px}
 
 /* ===== 页脚 ===== */
-.footer{background:var(--bg2);padding:50px 30px;text-align:center;border-top:1px solid var(--border);margin-top:60px}
-.footer p{color:var(--text3);font-size:14px;line-height:2.2}
-.footer .title{color:var(--text2);font-size:16px;margin-bottom:10px;font-weight:600}
+.footer{background:var(--bg2);padding:30px 20px;text-align:center;border-top:1px solid var(--border);margin-top:30px;max-width:680px;margin:30px auto 0}
+.footer p{color:var(--text3);font-size:12px;line-height:2}
+.footer .title{color:var(--text2);font-size:14px;margin-bottom:8px;font-weight:600}
 
 /* ===== 响应式 ===== */
 @media(max-width:768px){
-  .hero h1{font-size:36px}
-  .hero h1 .accent{font-size:28px}
-  .data-strip-inner{grid-template-columns:repeat(2,1fr);gap:20px}
-  .data-item{border-right:none;border-bottom:1px solid var(--border);padding-bottom:20px}
+  .hero h1{font-size:32px}
+  .hero h1 .accent{font-size:24px}
+  .data-strip-inner{grid-template-columns:repeat(2,1fr);gap:12px}
+  .data-item{border-right:none;border-bottom:1px solid var(--border);padding-bottom:12px}
   .data-item:nth-child(3),.data-item:nth-child(4){border-bottom:none}
-  .chapter-num{font-size:56px}
-  .chapter-title{font-size:28px}
-  .img-side{grid-template-columns:1fr}
-  .prose p{font-size:17px}
-  .quote-block{padding:30px 30px}
-  .quote-block p{font-size:18px}
+  .chapter-num{font-size:48px}
+  .chapter-title{font-size:24px}
+  .prose p{font-size:15px}
+  .quote-block{padding:20px 20px}
+  .quote-block p{font-size:16px}
+  .layout-lr,.layout-lr.reverse{grid-template-columns:1fr}
+  .layout-lr .layout-img img{height:200px}
+  .value-grid,.num-vertical{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -153,7 +183,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p>从1938年湘桂铁路抗战抢建，到2025年10.85亿保护性焕新——87年风雨历程，一座老站的前世今生，半部永州成长史</p>
 <div class="hero-meta">史料来源：湖南省文物局 · 永州市人民政府 · 中国国家铁路集团 · 湖南日报 · 潇湘晨报 · 抗日战争纪念网</div>
 </div>
-<div class="hero-scroll">↓ 向下滚动 ↓</div>
 </div>
 
 <!-- ==================== 关键数据 ==================== -->
@@ -176,21 +205,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p class="chapter-subtitle">湘桂铁路修建史 —— 一天一公里的奇迹，30万民工的血汗</p>
 </div>
 
-<div class="prose">
-<p>1936年，国民政府考虑中日战争不可避免，西南地区又亟待开发，为有利于战时交通运输的需要，打通西南国际通道，决定铺设<strong>湘桂铁路</strong>（衡阳至桂林）。这是抗战爆发后国民政府首次修建的铁路干线，被誉为"抗战铁路"。</p>
-<p>1937年4月，在衡阳成立湘桂铁路工程处，筹备修建衡阳至桂林铁路。同年7月，该处改为湘桂铁路衡桂段工程处。由著名铁路工程师<strong>杜镇远</strong>主持修建。</p>
+<!-- 杂志开篇大图 -->
+<div class="mag-hero">
+<img src="https://aka.doubaocdn.com/s/avzxSReX7W" alt="修筑湘桂铁路逢山开路">
+<div class="mag-hero-overlay">
+<div class="mag-hero-text">
+<h3>30万民工的血汗</h3>
+<p>逢山开路、遇水架桥，在战火已及的情况下，以"一天一公里"的速度抢建这条抗战生命线</p>
+</div>
+</div>
 </div>
 
-<div class="img-full">
-<img src="https://aka.doubaocdn.com/s/JTGvByjWXU" alt="修筑湘桂铁路">
-<div class="caption"><strong>修筑湘桂铁路</strong> — 30万民工在战火中逢山开路、遇水架桥，以"一天一公里"的速度抢建这条抗战生命线</div>
+<!-- 左文右图 -->
+<div class="layout-lr">
+<div class="layout-text">
+<h4>🚂 抗战铁路的诞生</h4>
+<p>1936年，国民政府考虑中日战争不可避免，西南地区又亟待开发，为有利于战时交通运输的需要，打通西南国际通道，决定铺设<strong>湘桂铁路</strong>（衡阳至桂林）。</p>
+<p>这是抗战爆发后国民政府首次修建的铁路干线，被誉为"抗战铁路"。1937年4月，在衡阳成立湘桂铁路工程处，由著名铁路工程师<strong>杜镇远</strong>主持修建。</p>
+</div>
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/oR9448MVOj" alt="湘桂铁路南镇段民工开工">
+</div>
 </div>
 
 <div class="timeline">
 <div class="tl-item">
 <div class="tl-year">1937.09.10</div>
 <div class="tl-title">衡桂段正式开工</div>
-<div class="tl-desc">湖南段与广西段同时动工。湖南省政府在湘段沿线30里以内的居民中，共征用16～45岁民工共<strong>4万人</strong>，每人工作30天；广西段征调全县、兴安、临桂等11县民工，一说30余万人，一说15.63万人。<span class="tl-source">来源：抗日战争纪念网 / 广西地方志</span></div>
+<div class="tl-desc">湖南段与广西段同时动工。湖南省政府在湘段沿线30里以内的居民中，共征用16～45岁民工共<strong>4万人</strong>，每人工作30天；广西段征调全县、兴安、临桂等11县民工，一说30余万人。<span class="tl-source">来源：抗日战争纪念网 / 广西地方志</span></div>
 </div>
 <div class="tl-item">
 <div class="tl-year">1938.04</div>
@@ -200,7 +242,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="tl-item">
 <div class="tl-year">1938.09.27</div>
 <div class="tl-title">衡桂段全线贯通</div>
-<div class="tl-desc">全长<strong>361公里</strong>，从开工到通车仅用一年时间，"以一天一公里之速度"抢建，<strong>突破我国铁道史之纪录</strong>。"实为我国家民族在抗战军兴后建设之最大成绩"。<span class="tl-source">来源：中华民国史档案资料 / 广州铁路</span></div>
+<div class="tl-desc">全长<strong>361公里</strong>，从开工到通车仅用一年时间，"以一天一公里之速度"抢建，<strong>突破我国铁道史之纪录</strong>。<span class="tl-source">来源：中华民国史档案资料 / 广州铁路</span></div>
 </div>
 <div class="tl-item">
 <div class="tl-year">1938.09.28</div>
@@ -235,20 +277,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p class="chapter-subtitle">从湘江边的小镇到永州城市中心 —— 一座火车站改变一座城</p>
 </div>
 
-<div class="img-side">
-<div class="img-box">
-<img src="https://aka.doubaocdn.com/s/QxQFOBcRO6" alt="冷水滩火车站历史照片">
-<div class="cap">冷水滩火车站历史照片（建站初期，站前有雕像，"冷水滩站"四个大字清晰可见）</div>
-</div>
-<div class="img-box">
-<img src="https://aka.doubaocdn.com/s/FrRslUGDTn" alt="冷水滩老码头">
-<div class="cap">冷水滩河西老码头（百多年历史，滩市镇因河滩集市贸易发达而兴）</div>
-</div>
+<!-- 一张大图（原三图并排改成一张大图） -->
+<div class="img-full">
+<img src="https://aka.doubaocdn.com/s/FrRslUGDTn" alt="冷水滩河西老码头">
+<div class="caption"><strong>冷水滩河西老码头</strong> — 百多年历史，滩市镇因河滩集市贸易发达而兴，湘江在此形成天然良港</div>
 </div>
 
-<div class="prose">
-<p>冷水滩以前是<strong>滩市镇</strong>，所谓滩市，即河滩集市贸易发达，后来修建码头供人来人往，客商小贩越来越多，往陆地发展成街市。客商小贩，农民运夫，老人小孩，有人就得要吃喝，于是服务业兴起，剃头理发，烧水泡茶，当铺客栈等等，这就是街市。</p>
+<!-- 左文右图 -->
+<div class="layout-lr">
+<div class="layout-text">
+<h4>🏙️ 滩市镇的前世今生</h4>
+<p>冷水滩以前是<strong>滩市镇</strong>，所谓滩市，即河滩集市贸易发达，后来修建码头供人来人往，客商小贩越来越多，往陆地发展成街市。</p>
+<p>客商小贩，农民运夫，老人小孩，有人就得要吃喝，于是服务业兴起，剃头理发，烧水泡茶，当铺客栈等等，这就是街市。</p>
 <p>1938年湘桂铁路通车，冷水滩站建成。彼时冷水滩还是零陵县的一个镇，因为优越的地理位置（湘江水陆中转），项目指挥部决定在这里建设火车站。它让永州进入火车时代。</p>
+</div>
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/pTn92enZUG" alt="老站台绿皮火车">
+</div>
 </div>
 
 <div class="timeline">
@@ -286,46 +331,58 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p class="chapter-subtitle">运输生命线、日军占领、铁道游击队、撤退悲歌、抗日标语 —— 血与火的记忆</p>
 </div>
 
-<div class="img-full">
-<img src="https://aka.doubaocdn.com/s/kyD0UkbBaV" alt="抗日战争中的湘桂铁路">
-<div class="caption"><strong>抗日战争中的湘桂铁路</strong> — 逃难百姓挤满列车车顶，在喀斯特山峰间艰难西行，这是抗战大撤退的真实写照</div>
+<!-- 杂志开篇大图 -->
+<div class="mag-hero">
+<img src="https://aka.doubaocdn.com/s/UDqPpPpPA3" alt="1937年难民火车逃难">
+<div class="mag-hero-overlay">
+<div class="mag-hero-text">
+<h3>抗战大撤退的真实写照</h3>
+<p>逃难百姓挤满列车车顶，在喀斯特山峰间艰难西行，这是一个民族在战火中迁徙的集体记忆</p>
+</div>
+</div>
 </div>
 
-<div class="story-card">
-<h4><span class="icon">🚂</span> 运输生命线：维系大后方运转的关键要道</h4>
-<p>抗战期间，上海各工厂内迁的机器，沿海各省向大后方撤退的人员和机械材料等，多经浙赣铁路再转湘桂铁路运到桂林、贵阳、重庆、昆明各地。冷水滩站作为湘桂铁路上的一等站，是这条运输生命线上的关键节点。</p>
-<p>前苏联援华物资从北方通道中断后，援华物资只能从南方走，香港、广州是抗战初期唯一的稳定远洋进口港口，物资经粤汉线到武汉，再经湘桂线分发到西南大后方。</p>
+<!-- 信息卡片网格 2x2 -->
+<div class="info-grid">
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/HcqOVwUSTx" alt="运输生命线"></div>
+<div class="info-card-body">
+<h5>🚂 运输生命线</h5>
+<p>上海各工厂内迁的机器，沿海各省向大后方撤退的人员和机械材料等，多经浙赣铁路再转湘桂铁路运到桂林、贵阳、重庆、昆明各地。</p>
+</div>
+</div>
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/yVu0e5zJHJ" alt="日军围攻"></div>
+<div class="info-card-body">
+<h5>⚔️ 日军四路围攻</h5>
+<p>1944年9月5日，日军第11军司令横山下达向冷水滩全线进攻的命令，四个师团围攻：第3师团、第13师团、第40师团、第58师团。</p>
+</div>
+</div>
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/XbUDs5vRpy" alt="毁路阻敌"></div>
+<div class="info-card-body">
+<h5>💥 毁路阻敌</h5>
+<p>1944年战事吃紧，为阻止日军西进，湘桂铁路轨道被拆，桥梁被炸。沿线轨道、桥梁被迫拆毁阻滞日军，直至抗战胜利才分段修复。</p>
+</div>
+</div>
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/67bYyliyUF" alt="撤退悲歌"></div>
+<div class="info-card-body">
+<h5>😢 撤退悲歌</h5>
+<p>铁路员工赵福兴回忆：1944年冬从冷水滩站撤退，经广西柳州转至黔桂铁路，途中遭遇严寒、高山阻隔、食物匮乏、疾病和日军轰炸，"夫妻不团圆，父子不相顾"。</p>
+</div>
+</div>
 </div>
 
-<div class="highlight-box">
-<h4>⚔️ 1944年：日军四路围攻冷水滩</h4>
-<p>1944年，日本帝国主义在太平洋战场上节节失利，为了救援入侵南洋的本国军队，发动了打通从东北到广州、南宁的"大陆交通线"战役，即<strong>"豫湘桂"战役</strong>。</p>
-<p>当年春夏，日军横扫河南，占领长沙。在衡阳，国民党部队与日军展开殊死搏斗交战40多天，最终被打败，8月8日衡阳失守。国民党军队向永州方向撤退，日军直逼永州。</p>
-<p><strong>1944年9月5日18时15分</strong>，日军第11军司令横山下达了向冷水滩发起全线进攻的命令。主攻冷水滩的日军是由中将横山指挥的四个师团，包括山本的第3师团、赤鹿的第13师团、官川青山的第40师团以及毛利的第58师团。</p>
-<span style="display:block;font-size:13px;color:var(--text3);margin-top:12px;font-style:italic">—— 来源：今日头条《日寇侵入永州暴行实录》 / 永州军民抗战纪实</span>
+<!-- 左图右文 -->
+<div class="layout-lr reverse">
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/vVvDzFu9XD" alt="抗日武装破坏敌人铁路线">
 </div>
-
-<div class="numbered-list">
-<div class="n-item">
-<div class="n-num">1</div>
-<div class="n-content">
-<h5>💥 毁路阻敌：拆轨道、炸桥梁</h5>
-<p>1944年战事吃紧，为阻止日军西进，湘桂铁路轨道被拆，桥梁被炸。沿线轨道、桥梁被迫拆毁阻滞日军，直至抗战胜利才分段修复。老站也在炮火与重建中站稳了脚跟。</p>
-</div>
-</div>
-<div class="n-item">
-<div class="n-num">2</div>
-<div class="n-content">
-<h5>😢 撤退悲歌："夫妻不团圆，父子不相顾"</h5>
-<p>铁路员工赵福兴生前回忆：1944年冬，他和同事们从冷水滩站搭乘列车撤退，经广西柳州转至黔桂铁路，撤退至金城江时前方铁路遭破坏，只得徒步向贵阳方向撤退。途中遭遇严寒、高山阻隔、食物匮乏、疾病和日军飞机轰炸，铁路员工和家属"夫妻不团圆，父子不相顾"，死伤十分惨重。</p>
-</div>
-</div>
-<div class="n-item">
-<div class="n-num">3</div>
-<div class="n-content">
-<h5>🎖️ 铁道游击队：湘南民抗纵队六中队</h5>
-<p>从1941年到1945年日军投降，一支由中国共产党领导的抗日游击队在冷水滩区湘桂铁路沿线从无到有，不断骚扰日军运输线。1945年农历三月二十三日晚，刘国安、谭云龙、严正带领湘南民抗纵队六中队180余人，在冷水滩车站与蓝家村车站之间的廖家村路段成功炸毁日军装甲列车。</p>
-</div>
+<div class="layout-text">
+<h4>🎖️ 铁道游击队：湘南民抗纵队六中队</h4>
+<p>从1941年到1945年日军投降，一支由中国共产党领导的抗日游击队在冷水滩区湘桂铁路沿线从无到有，不断骚扰日军运输线。</p>
+<p><strong>1945年农历三月二十三日晚</strong>，刘国安、谭云龙、严正带领湘南民抗纵队六中队180余人，在冷水滩车站与蓝家村车站之间的廖家村路段成功炸毁日军装甲列车。</p>
 </div>
 </div>
 
@@ -349,14 +406,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p class="chapter-subtitle">多次扩建、昼夜不停 —— 从货运枢纽到客运门户，66年的繁华</p>
 </div>
 
-<div class="img-side">
-<div class="img-box">
-<img src="https://aka.doubaocdn.com/s/7e2h2HJmUv" alt="永州老火车站机车">
-<div class="cap">永州老火车站留存的内燃机车（DF7c 5023，货运调车机车，见证了老站货运时代的辉煌）</div>
+<!-- 左文右图 -->
+<div class="layout-lr">
+<div class="layout-text">
+<h4>🚉 一等站的繁华</h4>
+<p>新中国成立后，湘桂铁路逐步修复延伸，冷水滩站成为广州铁路局下属一等站，湘桂铁路和洛湛铁路的中间站。</p>
+<p>车站多次扩建，配设多股到发线、货场、机务段，南北货运、长途客运昼夜不停，是湘南地区最重要的铁路枢纽之一。</p>
 </div>
-<div class="img-box">
-<img src="https://aka.doubaocdn.com/s/ILdDfKTaBg" alt="老站货运雨棚">
-<div class="cap">老站货运雨棚（双坡屋顶、混凝土立柱，是典型的 mid-century 铁路工业建筑风格）</div>
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/TFaAzqsBV4" alt="冷水滩老站房高清">
 </div>
 </div>
 
@@ -364,7 +422,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="tl-item">
 <div class="tl-year">1949年后</div>
 <div class="tl-title">新中国建设时期</div>
-<div class="tl-desc">湘桂铁路逐步修复延伸，冷水滩站成为广州铁路局下属一等站，湘桂铁路和洛湛铁路的中间站。车站多次扩建，配设多股到发线、货场、机务段，南北货运、长途客运昼夜不停。<span class="tl-source">来源：抖音 / 今日头条</span></div>
+<div class="tl-desc">湘桂铁路逐步修复延伸，冷水滩站成为广州铁路局下属一等站。车站多次扩建，配设多股到发线、货场、机务段，南北货运、长途客运昼夜不停。<span class="tl-source">来源：抖音 / 今日头条</span></div>
 </div>
 <div class="tl-item">
 <div class="tl-year">1951 — 1955</div>
@@ -392,13 +450,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <li><strong>机务段</strong> — 负责机车检修、整备、换挂</li>
 <li><strong>客运站房</strong> — 售票、候车、检票等完整客运功能</li>
 </ul>
-<p style="margin-top:12px">南北货运、长途客运昼夜不停，是湘南地区最重要的铁路枢纽之一。</p>
 </div>
 
-<div class="story-card gold">
-<h4><span class="icon">👨‍👩‍👧‍👦</span> 铁路大院：几代人的集体记忆</h4>
-<p>活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常、朝夕岁月温情，全都深深镌刻在这片铁轨之上。蹲铁轨、等绿皮是几代永州人抹不去的童年印记。</p>
-<p>铁路职工家属区、铁路中学、铁路医院、铁路俱乐部……围绕火车站形成了一个完整的"铁路小社会"，是冷水滩城市记忆的重要组成部分。</p>
+<!-- 三列竖向排版 - 铁路大院几代人的集体记忆 -->
+<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--gold)">铁路大院：几代人的集体记忆</h3>
+<div class="value-grid">
+<div class="value-card">
+<div class="v-num">👨‍👩‍👧‍👦</div>
+<div class="v-title">铁路小社会</div>
+<div class="v-text">铁路职工家属区、铁路中学、铁路医院、铁路俱乐部……围绕火车站形成了一个完整的"铁路小社会"。</div>
+<div class="v-img"><img src="https://aka.doubaocdn.com/s/jRjdoPcxVL" alt="铁路职工家属住宅区"></div>
+</div>
+<div class="value-card">
+<div class="v-num">🚂</div>
+<div class="v-title">蹲铁轨等绿皮</div>
+<div class="v-text">活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常、朝夕岁月温情，全都深深镌刻在这片铁轨之上。</div>
+<div class="v-img"><img src="https://aka.doubaocdn.com/s/40N2221GLS" alt="绿皮车厢"></div>
+</div>
+<div class="value-card">
+<div class="v-num">🏘️</div>
+<div class="v-title">城市记忆</div>
+<div class="v-text">蹲铁轨、等绿皮是几代永州人抹不去的童年印记，是冷水滩城市记忆的重要组成部分。</div>
+<div class="v-img"><img src="https://aka.doubaocdn.com/s/Z5Gxd7NkLc" alt="绿皮火车站台"></div>
+</div>
 </div>
 </div>
 
@@ -412,9 +486,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p class="chapter-subtitle">2004年新站启用 → 老站转货运 → 逐渐废弃 —— 被遗忘的城市伤疤</p>
 </div>
 
-<div class="img-full">
-<img src="https://aka.doubaocdn.com/s/MTXqx7uQwH" alt="废弃铁轨透视">
-<div class="caption"><strong>废弃铁轨与双站台</strong> — 透视视角下，荒草漫过铁轨，曾经昼夜不停的运输枢纽如今寂静无声</div>
+<!-- 杂志开篇大图 -->
+<div class="mag-hero">
+<img src="https://aka.doubaocdn.com/s/DVo4tgW7be" alt="废弃站台荒草">
+<div class="mag-hero-overlay">
+<div class="mag-hero-text">
+<h3>荒草漫过铁轨</h3>
+<p>透视视角下，曾经昼夜不停的运输枢纽如今寂静无声，荒草漫过铁轨，烟火落幕</p>
+</div>
+</div>
 </div>
 
 <div class="timeline">
@@ -440,26 +520,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 </div>
 </div>
 
-<div class="img-side">
-<div class="img-box">
-<img src="https://aka.doubaocdn.com/s/H2bQO33aA5" alt="永州东站站牌">
-<div class="cap">永州东站站牌（2004年更名后，背景为老旧居民楼，站牌已显斑驳）</div>
+<!-- 左文右图 -->
+<div class="layout-lr">
+<div class="layout-text">
+<h4>😔 众人担忧：老站会被拆掉吗？</h4>
+<p>这座走过87载岁月的老火车站，如同刻印在冷水滩人心底的时光相册。众人一直担忧它会被推倒消失。</p>
+<p>"一直担心老站被拆！"——这是许多永州人的共同心声。好在，重磅利好最终落地。</p>
 </div>
-<div class="img-box">
-<img src="https://aka.doubaocdn.com/s/IRMXoolwyQ" alt="废弃站台">
-<div class="cap">废弃站台（混凝土立柱投下长长的阴影，站台地面裂缝中长出杂草）</div>
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/IRMXoolwyQ" alt="废弃站台高清">
 </div>
 </div>
 
 <div class="quote-block">
 <p>"始建于1938年的永州老火车站停运多年，曾是城市风貌的'伤疤'。"</p>
 <span class="author">—— 湖南省自然资源厅，2026年7月</span>
-</div>
-
-<div class="story-card">
-<h4><span class="icon">😔</span> 众人担忧：老站会被拆掉吗？</h4>
-<p>这座走过87载岁月的老火车站，如同刻印在冷水滩人心底的时光相册。众人一直担忧它会被推倒消失。"一直担心老站被拆！"——这是许多永州人的共同心声。</p>
-<p>好在，重磅利好最终落地。</p>
 </div>
 </div>
 
@@ -471,6 +546,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="chapter-num">06</div>
 <h2 class="chapter-title">2025-2026：10.85亿保护性焕新</h2>
 <p class="chapter-subtitle">"永州'轨记'·潇湘客厅" —— 组合供应模式创新，4.5公里铁轨+30栋历史建筑完整保留</p>
+</div>
+
+<!-- 杂志开篇大图 -->
+<div class="mag-hero">
+<img src="https://aka.doubaocdn.com/s/P6RjNyHYcd" alt="老火车站改造效果图">
+<div class="mag-hero-overlay">
+<div class="mag-hero-text">
+<h3>10.85亿保护性焕新</h3>
+<p>坚持保护性开发、拒绝大拆大建！4.5公里百年老铁轨、经典复古老站房、特色铁路建筑群全部原样留存</p>
+</div>
+</div>
 </div>
 
 <div class="timeline">
@@ -496,8 +582,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 </div>
 </div>
 
-<div class="data-strip" style="margin:40px -30px;border-radius:12px;overflow:hidden">
-<div class="data-strip-inner" style="padding:40px 30px">
+<!-- 数据条 -->
+<div class="data-strip" style="margin:18px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
+<div class="data-strip-inner" style="padding:20px">
 <div class="data-item"><div class="num">10.85亿</div><div class="label">项目出让金额<br>刷新湖南纪录</div></div>
 <div class="data-item"><div class="num">4.5km</div><div class="label">保留铁轨长度<br>百年老铁轨</div></div>
 <div class="data-item"><div class="num">30栋</div><div class="label">保留历史建筑<br>站房+仓库+附属</div></div>
@@ -508,31 +595,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="story-card gold">
 <h4><span class="icon">🏷️</span> 项目名称："永州'轨记'·潇湘客厅"</h4>
 <p>本项目以"文旅融合"为核心导向，立足永州铁路工业遗存与湘江滨水生态资源，打造<strong>"永州'轨记'·潇湘客厅"</strong>新地标。</p>
-<p>通过组合供应有效盘活存量资源，保留并活化利用了4.5公里铁轨、30栋历史建筑，融合历史记忆、现代艺术与多元商业，构建集<strong>文化展示、创意体验、市民休闲、品质生活</strong>于一体的文旅融合示范区，塑造永州城市文化和潇湘流域特色城市客厅。</p>
+<p>通过组合供应有效盘活存量资源，保留并活化利用了4.5公里铁轨、30栋历史建筑，融合历史记忆、现代艺术与多元商业，构建集<strong>文化展示、创意体验、市民休闲、品质生活</strong>于一体的文旅融合示范区。</p>
 <span class="source">—— 来源：湖南省自然资源厅 / 三湘都市报</span>
 </div>
 
-<div class="numbered-list">
-<div class="n-item">
-<div class="n-num">1</div>
-<div class="n-content">
-<h5>铁路文化展示区</h5>
-<p>老站房改造铁路历史展厅，陈列抗战铁路史料、老式机车配件、老车票、职工老物件。</p>
+<!-- 竖排编号列表 - 三大核心板块 -->
+<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--red)">三大核心板块</h3>
+<div class="num-vertical">
+<div class="num-v-card">
+<div class="nv-body">
+<div class="nv-num">1</div>
+<div class="nv-title">铁路文化展示区</div>
+<div class="nv-text">老站房改造铁路历史展厅，陈列抗战铁路史料、老式机车配件、老车票、职工老物件。</div>
 </div>
+<div class="nv-img"><img src="https://aka.doubaocdn.com/s/YQ4MUsBnzB" alt="永州铁路主题文化公园设计图"></div>
 </div>
-<div class="n-item">
-<div class="n-num">2</div>
-<div class="n-content">
-<h5>文创休闲街区</h5>
-<p>沿4.5公里铁轨打造慢行步道、火车主题市集、文创艺术街区。</p>
+<div class="num-v-card">
+<div class="nv-body">
+<div class="nv-num">2</div>
+<div class="nv-title">文创休闲街区</div>
+<div class="nv-text">沿4.5公里铁轨打造慢行步道、火车主题市集、文创艺术街区。</div>
 </div>
+<div class="nv-img"><img src="https://aka.doubaocdn.com/s/dNJoGV7u7V" alt="铁路文化公园景观设计"></div>
 </div>
-<div class="n-item">
-<div class="n-num">3</div>
-<div class="n-content">
-<h5>配套服务业态</h5>
-<p>融入铁路博物馆、主题酒店、观光小火车、特色餐饮等业态。</p>
+<div class="num-v-card">
+<div class="nv-body">
+<div class="nv-num">3</div>
+<div class="nv-title">配套服务业态</div>
+<div class="nv-text">融入铁路博物馆、主题酒店、观光小火车、特色餐饮等业态。</div>
 </div>
+<div class="nv-img"><img src="https://aka.doubaocdn.com/s/SDOTPxIxit" alt="铁路文创新天地设计"></div>
 </div>
 </div>
 
@@ -540,7 +632,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <h4>💡 创新模式："国有建设用地使用权＋文化旅游观光经营权"组合供应</h4>
 <p>永州创新采用"国有建设用地使用权＋文化旅游观光经营权"组合供应模式，将铁路遗址、老旧铁轨与沿江生态资源整体打包，规划建设"永州·轨记"体验区，实现出让收入10.85亿元。</p>
 <p>这一组合供应模式，不仅盘活了存量资源，更为全省自然资源资产组合供应与城市更新深度融合提供了实践范例。</p>
-<span style="display:block;font-size:13px;color:var(--text3);margin-top:12px;font-style:italic">—— 来源：湖南省自然资源厅《永州:探索自然资源资产组合供应的创新实践》</span>
+<span style="display:block;font-size:12px;color:var(--text3);margin-top:10px;font-style:italic">—— 来源：湖南省自然资源厅《永州:探索自然资源资产组合供应的创新实践》</span>
 </div>
 </div>
 
@@ -553,6 +645,92 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <h2 class="chapter-title">历史价值与文化意义</h2>
 <p class="chapter-subtitle">一座老站，半部永州成长史 —— 为什么必须保护、为什么能够活化</p>
 </div>
+
+<!-- 杂志化开篇大图 -->
+<div class="mag-hero">
+<img src="https://aka.doubaocdn.com/s/ArEiOLd1jU" alt="潇湘二水交汇处萍岛">
+<div class="mag-hero-overlay">
+<div class="mag-hero-text">
+<h3>老站不是孤立的存在</h3>
+<p>它与永州、冷水滩的历史血脉相连。铁路的选择，是对这片土地千年地理与历史积淀的最终确认。</p>
+</div>
+</div>
+</div>
+
+<!-- 永州：潇湘之源 - 四信息卡片 -->
+<h3 style="font-size:20px;color:#fff;margin:16px 0 12px;padding-left:12px;border-left:3px solid var(--gold)">永州：潇湘之源，千年文脉</h3>
+
+<div class="info-grid">
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/oQoOI348JC" alt="萍岛潇湘汇合"></div>
+<div class="info-card-body">
+<h5>🌊 潇湘之源</h5>
+<p>永州地处"潇湘之源"，潇水和湘水在零陵区萍岛相汇成湘江。这里有<strong>一万年开发史、四千年文明史、两千年建制史</strong>，是湖湘文化的重要源头。</p>
+</div>
+</div>
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/eLAIvguGTB" alt="柳子庙"></div>
+<div class="info-card-body">
+<h5>📜 柳宗元文传千年</h5>
+<p>被贬永州十年，《柳宗元全集》670余篇诗文中约500篇作于永州。《捕蛇者说》《永州八记》《江雪》等千古名篇写于这片土地，<strong>开创中国山水散文先河</strong>。</p>
+</div>
+</div>
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/FyK7FVrSqR" alt="柳子街青石板路"></div>
+<div class="info-card-body">
+<h5>🏛️ 理学开宗·真理求索</h5>
+<p><strong>周敦颐</strong>理学开宗，《爱莲说》传颂千古；<strong>李达</strong>求索真理，中国共产党创始人之一，而李达正是冷水滩人。思想薪火，在这片土地上生生不息。</p>
+</div>
+</div>
+<div class="info-card">
+<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/guIUXyxZuo" alt="萍岛航拍"></div>
+<div class="info-card-body">
+<h5>✍️ 不到潇湘岂有诗</h5>
+<p>宋代诗人陆游吟咏出<strong>"挥毫当得江山助，不到潇湘岂有诗"</strong>的名句。永州的山水，本身就是诗意的源泉。摩崖石刻、舜帝祭典、女书习俗等文化遗存蜚声海内外。</p>
+</div>
+</div>
+</div>
+
+<!-- 冷水滩：湘江码头 - 左文右图 -->
+<div class="layout-lr">
+<div class="layout-text">
+<h4>🌊 冷水滩：湘江码头，滩市兴起</h4>
+<p>冷水滩，因湘江而兴。早在铁路到来之前，这里就是湘桂走廊上的重要水陆码头。</p>
+<p><strong>"滩市镇"</strong>——所谓滩市，即河滩集市贸易发达。湘江在此形成天然良港，客商小贩、农民运夫云集，往陆地发展成街市。</p>
+<p>冷水滩河西老码头有百多年历史，<strong>文昌阁</strong>历史更久，建于清康熙年间，滨临市区河西，凌崖耸立。</p>
+</div>
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/dyQGYs26pq" alt="冷水滩文昌阁航拍">
+</div>
+</div>
+
+<!-- 一张大图（原三图并排改成一张大图） -->
+<div class="img-full">
+<img src="https://aka.doubaocdn.com/s/q0AtUm7DAc" alt="文昌阁临江">
+<div class="caption"><strong>文昌阁·凌崖耸立五百年</strong> — 建于清康熙年间，滨临市区河西，凌崖耸立，高50余米，是冷水滩的历史文化地标</div>
+</div>
+
+<!-- 因站而兴 - 左图右文 -->
+<div class="layout-lr reverse">
+<div class="layout-img">
+<img src="https://aka.doubaocdn.com/s/hgO4rVGPbi" alt="夕阳下的永州东站">
+</div>
+<div class="layout-text">
+<h4>🚉 因站而兴：铁路与城市的共生</h4>
+<p>1938年，湘桂铁路的修建者们选择了冷水滩，正是因为这里<strong>"铁路+水运"的水陆中转枢纽</strong>区位。</p>
+<p>铁路的到来，彻底改变了这座小镇的命运。<strong>"一座火车站改变一座城"</strong>——冷水滩由一个小镇，渐渐发展成为永州市委市政府所在地、永州的城市中心。</p>
+<p style="color:var(--gold);font-weight:600;margin-top:8px">没有湘江码头的千年积淀，就没有湘桂铁路的选择；没有湘桂铁路的选择，就没有冷水滩的今天。</p>
+</div>
+</div>
+
+<!-- 全宽大图 -->
+<div class="img-full" style="margin-bottom:18px">
+<img src="https://aka.doubaocdn.com/s/a1GvVTRwLU" alt="2000年代冷水滩火车站广场">
+<div class="caption"><strong>2000年代的冷水滩火车站广场</strong> —— 站前广场人来人往，出租车、摊贩、旅客交织，这是老站最繁华的时代</div>
+</div>
+
+<!-- 五大历史价值 -->
+<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--red)">五大历史价值</h3>
 
 <div class="numbered-list">
 <div class="n-item">
@@ -592,14 +770,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 </div>
 </div>
 
-<div class="story-card gold">
-<h4><span class="icon">🎯</span> 为什么保护性活化是唯一正确选择</h4>
-<p><strong>大拆大建的损失</strong>：如果推倒老站重建，损失的不仅是一栋建筑，而是87年的历史记忆、完整的铁路工业遗产体系、几代人的集体情感。</p>
-<p style="margin-top:14px"><strong>保护性活化的价值</strong>：</p>
-<p>• <strong>历史肌理是资产不是负担</strong> — 斑驳的红砖墙、生锈的铁轨、老站房，都是不可复制的价值，别人花钱清旧，它们靠旧赚钱</p>
-<p>• <strong>文化IP自带流量</strong> — "87年老站""抗战铁路""4.5公里老铁轨"本身就是强大的文化IP，自带传播属性</p>
-<p>• <strong>差异化竞争优势</strong> — 在千城一面的商业综合体中，铁路文化主题的文创街区具有不可复制的差异化优势</p>
-<p>• <strong>政策支持机遇</strong> — 国家历史文化保护、城市更新、文旅融合等政策叠加，为保护性活化提供了良好的政策环境</p>
+<!-- 三列竖向排版 - 保护性活化的价值 -->
+<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--gold)">为什么保护性活化是唯一正确选择</h3>
+<div class="value-grid">
+<div class="value-card">
+<div class="v-num">🏚️</div>
+<div class="v-title">历史肌理是资产不是负担</div>
+<div class="v-text">斑驳的红砖墙、生锈的铁轨、老站房，都是不可复制的价值，别人花钱清旧，它们靠旧赚钱。</div>
+<div class="v-img"><img src="https://aka.doubaocdn.com/s/ixbAba9t1n" alt="破旧老铁路货运站台"></div>
+</div>
+<div class="value-card">
+<div class="v-num">🎯</div>
+<div class="v-title">文化IP自带流量</div>
+<div class="v-text">"87年老站""抗战铁路""4.5公里老铁轨"本身就是强大的文化IP，自带传播属性和话题热度。</div>
+<div class="v-img"><img src="https://aka.doubaocdn.com/s/RK9zDKigQJ" alt="蒸汽机车站台"></div>
+</div>
+<div class="value-card">
+<div class="v-num">💎</div>
+<div class="v-title">差异化竞争优势</div>
+<div class="v-text">在千城一面的商业综合体中，铁路文化主题的文创街区具有不可复制的差异化优势。</div>
+<div class="v-img"><img src="https://aka.doubaocdn.com/s/ufUriiJfZj" alt="废弃乡村火车站"></div>
+</div>
 </div>
 
 <div class="quote-block">
@@ -614,7 +805,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="footer">
 <p class="title">永州市冷水滩区老火车站片区城市更新项目 · 专题研究报告</p>
 <p>老火车站完整历史与现状研究</p>
-<p style="margin-top:15px;color:#555">报告编制时间：2026年9月 | 版本：V2.0 杂志化重排版</p>
+<p style="margin-top:12px;color:#555">报告编制时间：2026年9月 | 版本：V3.1 零重复图片版</p>
 <p style="color:#444">史料来源：湖南省文物局 · 永州市人民政府 · 中国国家铁路集团 · 湖南日报 · 潇湘晨报 · 抗日战争纪念网 · 三湘都市报 · 人民网</p>
 </div>
 
