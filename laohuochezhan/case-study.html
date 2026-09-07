@@ -15,6 +15,22 @@
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Serif SC",serif;background:var(--bg);color:var(--text);line-height:1.9;font-size:18px}
 ::selection{background:var(--red);color:#fff}
 
+/* ===== 顶部导航 ===== */
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 20px;max-width:680px;margin:0 auto}
+.top-nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.top-nav a{color:var(--text2);text-decoration:none;font-size:14px;transition:color 0.3s}
+.top-nav a:hover{color:var(--red)}
+.top-nav .nav-title{color:var(--gold);font-size:13px;letter-spacing:1px}
+
+/* ===== 底部导航 ===== */
+.bottom-nav{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);padding:30px 20px;margin-top:40px;max-width:680px;margin:0 auto}
+.bottom-nav-inner{max-width:640px;margin:0 auto;text-align:center}
+.bottom-nav a{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,var(--red),#c73e54);color:#fff;text-decoration:none;border-radius:30px;font-size:15px;font-weight:600;transition:transform 0.3s,box-shadow 0.3s}
+.bottom-nav a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,69,96,0.4)}
+.bottom-nav .nav-links{margin-top:16px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.bottom-nav .nav-links a{background:none;color:var(--text2);padding:0;font-size:13px;font-weight:400}
+.bottom-nav .nav-links a:hover{color:var(--red);transform:none;box-shadow:none}
+
 /* ===== 封面 ===== */
 .hero{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a0a0e 0%,#0f1a2e 40%,#0a0a0f 100%);max-width:680px;margin:0 auto}
 .hero::before{content:'';position:absolute;inset:0;background:url('https://aka.doubaocdn.com/s/8z75GoYm15') center/cover;opacity:0.3;filter:grayscale(20%)}
@@ -167,6 +183,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 </style>
 </head>
 <body>
+
+<!-- 顶部导航 -->
+<div class="top-nav">
+<div class="top-nav-inner">
+<a href="index.html">← 返回首页</a>
+<span class="nav-title">案例对标研究报告</span>
+</div>
+</div>
 
 <!-- ==================== 封面 ==================== -->
 <div class="hero">
@@ -1233,6 +1257,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p>老火车站历史文化保护与活化利用 · 国内外经典案例对标研究</p>
 <p style="margin-top:12px;color:#555">报告编制时间：2026年9月 | 版本：V1.0</p>
 <p style="color:#444">对标案例：纽约高线公园 · 厦门铁路文化公园 · 哈尔滨中东铁路公园 · 巴黎奥赛博物馆 · 杭州白塔公园 · 上海1876老站创意园 · 伦敦国王十字车站 · 高雄驳二艺术特区</p>
+</div>
+
+<!-- 底部导航 -->
+<div class="bottom-nav">
+<div class="bottom-nav-inner">
+<a href="index.html">← 返回项目首页</a>
+<div class="nav-links">
+<a href="station-history.html">📖 历史与现状研究报告</a>
+<a href="topic-research.html">📚 专题研究总览</a>
+</div>
+</div>
 </div>
 
 </body>
