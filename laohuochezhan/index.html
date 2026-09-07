@@ -51,6 +51,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .data-item .label{font-size:12px;color:#888;margin-bottom:5px}
 .data-item .value{font-size:16px;color:#fff;font-weight:600}
 .data-item .note{font-size:11px;color:#666;margin-top:5px}
+.overview-wrapper{background:#15151f;border-radius:8px;padding:25px;margin-bottom:30px;border:1px solid #2a2a3e}
+.overview-wrapper .stats-grid{margin-bottom:20px}
+.overview-wrapper .data-section{background:#1a1a2e;border:none;padding:0;margin-bottom:0}
+.overview-wrapper .data-section h3{border-bottom-color:#2a2a3e}
 .footer{background:#0d0d14;padding:40px 20px;text-align:center;border-top:1px solid #2a2a3e}
 .footer p{color:#666;font-size:12px;line-height:2}
 @media(max-width:768px){.hero h1{font-size:32px}.hero p{font-size:15px}.stats-grid{grid-template-columns:repeat(2,1fr)}}
@@ -72,18 +76,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 
 <div class="container" id="overview">
 
-<div class="changelog">
-<h3>📋 修改日志</h3>
-<div class="changelog-item"><span class="date">2026-09-07</span>网站全面维护：修复4个坏链接、所有附件更新至V2.0版本、统一4个页面风格为深色杂志风、网站文件迁移至项目目录</div>
-<div class="changelog-item"><span class="date">2026-09-06</span>网站全面重构：新增片区资料解读板块（5个页面）、现状调研与踏勘板块（5个页面）、项目工具集、资料下载页</div>
-<div class="changelog-item"><span class="date">2026-09-05</span>GIS平台V2.1迭代完成：高德/天地图双底图切换、边界编辑、POI分类图层、GIS分析功能</div>
-<div class="changelog-item"><span class="date">2026-09-05</span>现场调研工具V2.0完成：点位标注、照片上传、调查表填写、数据导出</div>
-<div class="changelog-item"><span class="date">2026-09-04</span>部门资料收集清单V1.0完成：10个主要部门+8个建议咨询部门+2个公用事业企业</div>
-</div>
-
 <h2 class="section-title">项目概况</h2>
 <p class="section-subtitle">数据来源：片区体检报告 + 城市基础设施更新改造实施方案 · 部分数据待现场核实</p>
 
+<div class="overview-wrapper">
 <div class="stats-grid">
 <div class="stat-card"><div class="stat-number">234.4</div><div class="stat-label">片区总面积（公顷）</div><div class="stat-source">来源：控规边界</div></div>
 <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">涉及社区数</div><div class="stat-source">白竹亭/又一村/活龙井/文昌阁</div></div>
@@ -100,6 +96,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="data-item"><div class="label">功能定位</div><div class="value">交通枢纽转型 · 历史文化传承 · 宜居生活社区</div></div>
 <div class="data-item"><div class="label">核心资源</div><div class="value">老火车站历史建筑 · 湘江西岸风光带 · 废弃铁路空间</div></div>
 <div class="data-item"><div class="label">主要问题</div><div class="value">老旧小区集中 · 基础设施老化 · 产业衰退 · 交通拥堵</div></div>
+</div>
 </div>
 </div>
 
@@ -134,12 +131,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 </a>
 </div>
 
+<div class="changelog">
+<h3>📋 修改日志</h3>
+<div class="changelog-item"><span class="date">2026-09-07 15:40</span>首页布局调整：修改日志移至底部、项目概况两部分包裹统一、修改日志精确到时分</div>
+<div class="changelog-item"><span class="date">2026-09-07 14:30</span>网站全面维护：修复4个坏链接、所有附件更新至V2.0版本、统一4个页面风格为深色杂志风、网站文件迁移至项目目录</div>
+<div class="changelog-item"><span class="date">2026-09-06 16:00</span>网站全面重构：新增片区资料解读板块（5个页面）、现状调研与踏勘板块（5个页面）、项目工具集、资料下载页</div>
+<div class="changelog-item"><span class="date">2026-09-05 18:20</span>GIS平台V2.1迭代完成：高德/天地图双底图切换、边界编辑、POI分类图层、GIS分析功能</div>
+<div class="changelog-item"><span class="date">2026-09-05 11:30</span>现场调研工具V2.0完成：点位标注、照片上传、调查表填写、数据导出</div>
+<div class="changelog-item"><span class="date">2026-09-04 17:00</span>部门资料收集清单V1.0完成：10个主要部门+8个建议咨询部门+2个公用事业企业</div>
+</div>
+
 </div>
 
 <div class="footer">
 <p>永州市冷水滩区老火车站片区城市更新项目 · 项目管理平台</p>
 <p>涵盖城市体检 · 片区策划 · 实施方案全流程</p>
-<p style="margin-top:10px;color:#444">最后更新：2026年9月6日</p>
+<p style="margin-top:10px;color:#444">最后更新：2026年9月7日 15:40</p>
 </div>
 
 </body>
