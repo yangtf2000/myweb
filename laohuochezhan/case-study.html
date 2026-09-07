@@ -16,15 +16,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 ::selection{background:var(--red);color:#fff}
 
 /* ===== 顶部导航 ===== */
-.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 20px;max-width:680px;margin:0 auto}
-.top-nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 20px;max-width:1100px;margin:0 auto}
+.top-nav-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
 .top-nav a{color:var(--text2);text-decoration:none;font-size:14px;transition:color 0.3s}
 .top-nav a:hover{color:var(--red)}
 .top-nav .nav-title{color:var(--gold);font-size:13px;letter-spacing:1px}
 
 /* ===== 底部导航 ===== */
-.bottom-nav{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);padding:30px 20px;margin-top:40px;max-width:680px;margin:0 auto}
-.bottom-nav-inner{max-width:640px;margin:0 auto;text-align:center}
+.bottom-nav{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);padding:30px 20px;margin-top:40px;max-width:1100px;margin:0 auto}
+.bottom-nav-inner{max-width:1040px;margin:0 auto;text-align:center}
 .bottom-nav a{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,var(--red),#c73e54);color:#fff;text-decoration:none;border-radius:30px;font-size:15px;font-weight:600;transition:transform 0.3s,box-shadow 0.3s}
 .bottom-nav a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,69,96,0.4)}
 .bottom-nav .nav-links{margin-top:16px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
@@ -32,7 +32,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .bottom-nav .nav-links a:hover{color:var(--red);transform:none;box-shadow:none}
 
 /* ===== 封面 ===== */
-.hero{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a0a0e 0%,#0f1a2e 40%,#0a0a0f 100%);max-width:680px;margin:0 auto}
+.hero{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a0a0e 0%,#0f1a2e 40%,#0a0a0f 100%);max-width:1100px;margin:0 auto}
 .hero::before{content:'';position:absolute;inset:0;background:url('https://aka.doubaocdn.com/s/8z75GoYm15') center/cover;opacity:0.3;filter:grayscale(20%)}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,0.2) 0%,rgba(10,10,15,0.6) 50%,rgba(10,10,15,0.98) 100%)}
 .hero-content{position:relative;z-index:2;text-align:center;max-width:640px;padding:40px 24px}
@@ -44,11 +44,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .hero-meta{margin-top:24px;font-size:12px;color:var(--text3);letter-spacing:1px;line-height:1.8}
 
 /* ===== 容器 ===== */
-.container{max-width:680px;margin:0 auto;padding:0 20px}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
 
 /* ===== 关键数据条 ===== */
-.data-strip{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:25px 0;margin:0;max-width:680px;margin:0 auto}
-.data-strip-inner{max-width:640px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.data-strip{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:25px 0;margin:0;max-width:1100px;margin:0 auto}
+.data-strip-inner{max-width:1040px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .data-item{text-align:center;padding:12px 6px;border-right:1px solid var(--border)}
 .data-item:last-child{border-right:none}
 .data-item .num{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;line-height:1.2}
@@ -62,7 +62,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .chapter-subtitle{font-size:14px;color:var(--gold);padding-left:20px;font-weight:300;letter-spacing:1px}
 
 /* ===== 正文段落 ===== */
-.prose{max-width:640px;margin:0 auto}
+.prose{max-width:720px;margin:0 auto}
 .prose p{font-size:18px;line-height:1.9;color:var(--text);margin-bottom:14px;text-align:justify}
 .prose p strong{color:var(--gold2);font-weight:600}
 .prose h3{font-size:20px;color:#fff;margin:20px 0 12px;padding-bottom:10px;border-bottom:2px solid var(--border);font-weight:600}
@@ -115,7 +115,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .layout-lr .layout-text h4{font-size:17px;color:var(--red);margin-bottom:10px;font-weight:600}
 .layout-lr .layout-text p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:8px}
 .layout-lr .layout-img{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.layout-lr .layout-img img{width:100%;height:260px;object-fit:cover;display:block}
+.layout-lr .layout-img img{width:100%;height:300px;object-fit:cover;display:block}
 
 /* ===== 对比表格 ===== */
 .compare-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13px}
@@ -134,8 +134,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .strategy-card .strategy-key{display:inline-block;margin-top:12px;padding:6px 16px;background:rgba(212,165,116,0.15);border-radius:20px;font-size:12px;color:var(--gold2);border:1px solid rgba(212,165,116,0.3)}
 
 /* ===== 图片 ===== */
-.img-full{max-width:640px;margin:18px auto;border-radius:10px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 32px rgba(0,0,0,0.4)}
-.img-full img{width:100%;display:block;max-height:360px;object-fit:cover}
+.img-full{max-width:900px;margin:18px auto;border-radius:10px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 32px rgba(0,0,0,0.4)}
+.img-full img{width:100%;display:block;max-height:420px;object-fit:cover}
 .img-full .caption{padding:12px 18px;background:var(--card);font-size:13px;color:var(--text2);line-height:1.6;border-top:1px solid var(--border)}
 .img-full .caption strong{color:var(--gold)}
 
