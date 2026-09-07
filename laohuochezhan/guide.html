@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -8,8 +8,8 @@
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #0f1115;
-    color: #e8eaed;
+    background: #0a0a0f;
+    color: #2a2a3e;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
@@ -51,7 +51,7 @@
     border: 1px solid rgba(138,180,248,0.3);
     border-radius: 20px;
     font-size: 12px;
-    color: #8ab4f8;
+    color: #e94560;
     letter-spacing: 3px;
     margin-bottom: 28px;
   }
@@ -59,7 +59,7 @@
     position: relative;
     z-index: 1;
     font-size: 16px;
-    color: #9aa0a6;
+    color: #666;
     margin-bottom: 12px;
     letter-spacing: 1px;
   }
@@ -70,7 +70,7 @@
     font-weight: 700;
     line-height: 1.3;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #fff 0%, #8ab4f8 100%);
+    background: linear-gradient(135deg, #fff 0%, #e94560 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -79,7 +79,7 @@
     position: relative;
     z-index: 1;
     font-size: 15px;
-    color: #9aa0a6;
+    color: #666;
     max-width: 400px;
     margin-bottom: 40px;
   }
@@ -88,7 +88,7 @@
     z-index: 1;
     width: 50px;
     height: 3px;
-    background: linear-gradient(90deg, #1a73e8, #ea4335);
+    background: linear-gradient(90deg, #e94560, #ea4335);
     border-radius: 2px;
     margin-bottom: 40px;
   }
@@ -106,11 +106,11 @@
   .cover-meta-num {
     font-size: 24px;
     font-weight: 700;
-    color: #8ab4f8;
+    color: #e94560;
   }
   .cover-meta-label {
     font-size: 12px;
-    color: #5f6368;
+    color: #888;
     margin-top: 2px;
   }
   .cover-scroll {
@@ -120,7 +120,7 @@
     transform: translateX(-50%);
     z-index: 1;
     font-size: 12px;
-    color: #5f6368;
+    color: #888;
     animation: bounce 2s infinite;
   }
   @keyframes bounce {
@@ -158,16 +158,16 @@
   }
   .toc-list li:last-child { border-bottom: none; }
   .toc-list a {
-    color: #9aa0a6;
+    color: #666;
     text-decoration: none;
     font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .toc-list a:hover { color: #8ab4f8; }
+  .toc-list a:hover { color: #e94560; }
   .toc-num {
-    color: #5f6368;
+    color: #888;
     font-size: 12px;
   }
 
@@ -180,7 +180,7 @@
     font-weight: 700;
     color: #fff;
     padding: 16px 0;
-    border-bottom: 2px solid #1a73e8;
+    border-bottom: 2px solid #e94560;
     margin-bottom: 24px;
     display: flex;
     align-items: center;
@@ -192,7 +192,7 @@
     justify-content: center;
     width: 32px;
     height: 32px;
-    background: #1a73e8;
+    background: #e94560;
     border-radius: 8px;
     font-size: 16px;
     color: #fff;
@@ -202,21 +202,21 @@
   .sub-title {
     font-size: 17px;
     font-weight: 600;
-    color: #8ab4f8;
+    color: #e94560;
     margin: 28px 0 14px;
     padding-left: 12px;
-    border-left: 3px solid #1a73e8;
+    border-left: 3px solid #e94560;
   }
   .sub-sub-title {
     font-size: 15px;
     font-weight: 600;
-    color: #e8eaed;
+    color: #2a2a3e;
     margin: 20px 0 10px;
   }
 
   .desc {
     font-size: 14px;
-    color: #9aa0a6;
+    color: #666;
     margin-bottom: 16px;
     padding: 12px 16px;
     background: rgba(138,180,248,0.05);
@@ -247,10 +247,10 @@
   .collapse-header .name {
     font-size: 15px;
     font-weight: 600;
-    color: #e8eaed;
+    color: #2a2a3e;
   }
   .collapse-header .arrow {
-    color: #5f6368;
+    color: #888;
     font-size: 12px;
     transition: transform 0.3s;
   }
@@ -284,7 +284,7 @@
     min-width: 400px;
   }
   th {
-    background: #1a73e8;
+    background: #e94560;
     color: #fff;
     padding: 10px 12px;
     text-align: left;
@@ -294,13 +294,13 @@
   td {
     padding: 10px 12px;
     border-bottom: 1px solid rgba(255,255,255,0.05);
-    color: #c5c8ce;
+    color: #444;
     vertical-align: top;
   }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: rgba(255,255,255,0.02); }
   .imp { font-size: 14px; text-align: center; white-space: nowrap; }
-  .doc-name { font-weight: 600; color: #e8eaed; white-space: nowrap; }
+  .doc-name { font-weight: 600; color: #2a2a3e; white-space: nowrap; }
 
   /* 列表 */
   .bullet-list {
@@ -311,14 +311,14 @@
     padding: 8px 0 8px 24px;
     position: relative;
     font-size: 14px;
-    color: #c5c8ce;
+    color: #444;
     border-bottom: 1px solid rgba(255,255,255,0.03);
   }
   .bullet-list li::before {
     content: '•';
     position: absolute;
     left: 8px;
-    color: #8ab4f8;
+    color: #e94560;
     font-weight: bold;
   }
   .bullet-list li:last-child { border-bottom: none; }
@@ -347,7 +347,7 @@
     justify-content: center;
     font-size: 13px;
     font-weight: 600;
-    color: #8ab4f8;
+    color: #e94560;
   }
   .flow-content {
     flex: 1;
@@ -355,12 +355,12 @@
   .flow-stage {
     font-size: 14px;
     font-weight: 600;
-    color: #e8eaed;
+    color: #2a2a3e;
     margin-bottom: 4px;
   }
   .flow-desc {
     font-size: 13px;
-    color: #9aa0a6;
+    color: #666;
   }
 
   /* 提示框 */
@@ -381,7 +381,7 @@
     right: 24px;
     width: 44px;
     height: 44px;
-    background: #1a73e8;
+    background: #e94560;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -403,7 +403,7 @@
     padding: 30px 20px;
     border-top: 1px solid rgba(255,255,255,0.06);
     font-size: 12px;
-    color: #5f6368;
+    color: #888;
   }
 
   /* 手机适配 */
@@ -479,12 +479,12 @@
         <thead><tr><th style="width:80px">版本</th><th style="width:120px">日期</th><th>修改内容摘要</th></tr></thead>
         <tbody>
           <tr>
-            <td style="text-align:center;font-weight:bold;color:#8ab4f8">V1.0</td>
+            <td style="text-align:center;font-weight:bold;color:#e94560">V1.0</td>
             <td style="text-align:center">2026-08</td>
             <td>初版生成，包含部门资料调取清单、街道社区调研、现场踏勘清单、调研流程四大部分。</td>
           </tr>
           <tr>
-            <td style="text-align:center;font-weight:bold;color:#8ab4f8">V2.0</td>
+            <td style="text-align:center;font-weight:bold;color:#e94560">V2.0</td>
             <td style="text-align:center">2026-09-06</td>
             <td>
               <strong>第一部分大改：</strong>10个部门全称，新增第三次全国国土调查、国资委、水利局；资料归属修正（城市更新专项规划/体检报告/住房发展规划/历史文化保护规划→住建局，违章建筑→街道社区，停车设施/老旧管网/老旧泵站→城管局，消防栓→水务公司）；去掉重要程度标记改用序号；每项标注文件格式要求。<br><br>
@@ -513,7 +513,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：国土空间规划、控规、用地、地籍、影像、地形、三调</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：国土空间规划、控规、用地、地籍、影像、地形、三调</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -543,7 +543,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：城市更新、住房发展、历史文化保护、危房、老旧小区、市政基础设施、房屋权属</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：城市更新、住房发展、历史文化保护、危房、老旧小区、市政基础设施、房屋权属</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -573,7 +573,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：环境卫生、停车设施、市政老旧管网、老旧泵站、环卫设施</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：环境卫生、停车设施、市政老旧管网、老旧泵站、环卫设施</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -598,7 +598,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：教育设施布局、统计数据、改造计划</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：教育设施布局、统计数据、改造计划</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -621,7 +621,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：医疗卫生设施布局、统计数据、改造计划</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：医疗卫生设施布局、统计数据、改造计划</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -644,7 +644,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：养老服务、社区服务、社会福利</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：养老服务、社区服务、社会福利</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -667,7 +667,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：消防设施布局、消防站数据</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：消防设施布局、消防站数据</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -689,7 +689,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：防洪排涝</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：防洪排涝</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -710,7 +710,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：闲置国有资产、市属企业闲置资产</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：闲置国有资产、市属企业闲置资产</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -732,7 +732,7 @@
       </div>
       <div class="collapse-body">
         <div class="collapse-inner">
-          <p style="font-size:13px;color:#9aa0a6;margin-bottom:10px;">对接方向：人口、户籍数据</p>
+          <p style="font-size:13px;color:#666;margin-bottom:10px;">对接方向：人口、户籍数据</p>
           <div class="table-wrap">
             <table>
               <thead><tr><th style="width:40px">序号</th><th style="width:160px">资料名称</th><th>需获取的具体内容与格式要求</th></tr></thead>
@@ -768,7 +768,7 @@
     <div class="desc">街道和社区是城市更新工作的第一线，所有改造项目申报、计划上报、居民协调都经过他们之手，对辖区情况最了解。建议组织街道和社区联合座谈，以<strong>收集资料、了解情况、了解诉求</strong>为主，同时为后续现场踏勘做准备。以下资料请街道社区尽量提供原件或已有台账，不需要专门整理，有相关或相近的资料都可以提供。</div>
 
     <div class="sub-title">一、需要收集的资料清单</div>
-    <p style="font-size:13px;color:#9aa0a6;margin-bottom:14px;">以下资料类型请街道社区确认是否有，如有请尽量提供原件或电子件，不需要重新整理。</p>
+    <p style="font-size:13px;color:#666;margin-bottom:14px;">以下资料类型请街道社区确认是否有，如有请尽量提供原件或电子件，不需要重新整理。</p>
 
     <!-- 1. 小区基础资料 -->
     <div class="collapse open">
@@ -913,7 +913,7 @@
     </div>
 
     <div class="sub-title">二、需要了解的情况和诉求</div>
-    <p style="font-size:13px;color:#9aa0a6;margin-bottom:14px;">通过座谈了解街道社区的工作重点、上级项目安排、居民诉求和推进难点，这些信息对策划方案至关重要。</p>
+    <p style="font-size:13px;color:#666;margin-bottom:14px;">通过座谈了解街道社区的工作重点、上级项目安排、居民诉求和推进难点，这些信息对策划方案至关重要。</p>
 
     <div class="sub-sub-title">1. 街道社区工作重点和计划</div>
     <ul class="bullet-list">
@@ -953,7 +953,7 @@
     </ul>
 
     <div class="sub-title">三、配合现场踏勘</div>
-    <p style="font-size:13px;color:#9aa0a6;margin-bottom:14px;">街道社区的配合是现场踏勘顺利进行的关键，首先要确认基础信息，然后协调带路和联系相关方。</p>
+    <p style="font-size:13px;color:#666;margin-bottom:14px;">街道社区的配合是现场踏勘顺利进行的关键，首先要确认基础信息，然后协调带路和联系相关方。</p>
 
     <div class="sub-sub-title">1. 基础信息确认</div>
     <ul class="bullet-list">
@@ -999,8 +999,8 @@
           <tr><td class="doc-name">控规图纸</td><td>土地利用规划图、道路交通规划图</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
           <tr><td class="doc-name">体检报告摘要</td><td>关键指标打印核心页</td><td style="text-align:center;color:#34a853">✅已有</td></tr>
           <tr><td class="doc-name">踏勘记录表</td><td>小区/建筑/设施各一套模板</td><td style="text-align:center;color:#fbbc04">需准备</td></tr>
-          <tr><td class="doc-name">拍照设备</td><td>手机/相机+充电宝</td><td style="text-align:center;color:#9aa0a6">自备</td></tr>
-          <tr><td class="doc-name">测量工具</td><td>卷尺（5m）、激光测距仪（可选）</td><td style="text-align:center;color:#9aa0a6">自备</td></tr>
+          <tr><td class="doc-name">拍照设备</td><td>手机/相机+充电宝</td><td style="text-align:center;color:#666">自备</td></tr>
+          <tr><td class="doc-name">测量工具</td><td>卷尺（5m）、激光测距仪（可选）</td><td style="text-align:center;color:#666">自备</td></tr>
         </tbody>
       </table>
     </div>
@@ -1286,13 +1286,13 @@
     <div style="background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 100%);border-radius:12px;padding:28px;margin-top:24px;text-align:center;">
       <div style="font-size:18px;font-weight:700;color:#2e7d32;margin-bottom:10px;">📄 下载调研表格模板</div>
       <div style="font-size:14px;color:#388e3c;margin-bottom:18px;">含通知正文 + 4张标准化调研表格，可直接编辑使用</div>
-      <a href="attachments/老火车站片区_街道社区调研表格模板.docx" class="download-btn" download style="display:inline-block;background:#2e7d32;color:white;padding:14px 36px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:600;transition:all 0.25s ease;">
+      <a href="attachments/老火车站片区_现场调研与踏勘_街道社区调研表格模板_V2.0.docx" class="download-btn" download style="display:inline-block;background:#2e7d32;color:white;padding:14px 36px;border-radius:8px;text-decoration:none;font-size:15px;font-weight:600;transition:all 0.25s ease;">
         ⬇ 下载 Word 文档
       </a>
       <div style="font-size:12px;color:#66bb6a;margin-top:12px;">文件格式：DOCX · 文件大小：约25KB · 更新时间：2026年9月6日</div>
     </div>
 
-    <div class="desc" style="margin-top:20px;font-size:12px;color:#9aa0a6;">
+    <div class="desc" style="margin-top:20px;font-size:12px;color:#666;">
       <strong>使用说明：</strong>本表格模板由项目组根据湘乡市城市体检调研表格模板改编，表头保留"体检内容/体检指标/指标填报"等原表述（本项目包含城市体检、片区策划、实施方案等多方面内容）。各街道社区填报时，请根据实际情况如实填写，不确定的数据标注"待核实"。
     </div>
   </div>
