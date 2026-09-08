@@ -2002,7 +2002,7 @@ function setAsProjectLocation(){
     getLocation();
     return;
   }
-  if(!confirm('确定把当前位置设为该项目的准确位置吗？')) return;
+  // 直接定位为准确位置（无需确认）
   currentItem.lat = parseFloat(currentLocation.lat);
   currentItem.lng = parseFloat(currentLocation.lng);
   currentItem.locStatus = 'calibrated';
