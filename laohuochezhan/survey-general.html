@@ -202,7 +202,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     
     <!-- 操作按钮 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-      <button onclick="createNewProjectDirect()" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">➕ 新建项目</button>
+      <button onclick="showNewProjectModal()" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">➕ 新建项目</button>
       <button onclick="exportByCommunity()" style="background:var(--card2);border:1px solid var(--line);color:var(--text);padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">📤 导出记录</button>
     </div>
     
@@ -280,15 +280,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       </div>
     </div>
     
-    <!-- 未填写名称提示 -->
-    <div id="nameRequiredTip" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:20px;text-align:center;margin-bottom:16px;">
-      <div style="font-size:36px;margin-bottom:10px;">⚠️</div>
-      <div style="color:#ef4444;font-size:14px;font-weight:600;margin-bottom:6px;">请先填写项目名称</div>
-      <div style="color:var(--text3);font-size:12px;">在上方标题处输入项目名称后，即可开始填写备注、照片等内容</div>
-    </div>
-    
     <!-- 位置信息（最顶部） -->
-    <div class="loc-top detail-content-area">
+    <div class="loc-top">
       <div class="loc-btns">
         <button class="btn-map" onclick="showMap()">🗺️ 查看地图与定位</button>
       </div>
@@ -322,7 +315,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     </div>
     
     <!-- 现场备注 -->
-    <div class="data-section detail-content-area">
+    <div class="data-section">
       <h3>✏️ 现场备注</h3>
       <textarea class="note-textarea" id="noteText" placeholder="现场看到的情况、问题、补充信息..." oninput="saveNote()"></textarea>
       <div class="note-tools">
@@ -332,7 +325,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       <div style="margin-top:8px;font-size:11px;color:var(--text3);text-align:center;">💡 提示：点击输入框，用手机输入法的麦克风按钮语音输入</div>
     </div>
     <!-- 现场照片 -->
-    <div class="data-section detail-content-area">
+    <div class="data-section">
       <h3>📷 现场照片 (<span id="photoCount">0</span>/20，最多20张)</h3>
       <div class="photo-grid" id="photoGrid">
         <div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
@@ -383,6 +376,37 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
   <div class="container" id="deptList"></div>
 </div>
 
+<!-- 新建项目模态框 -->
+<div id="newProjectModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="background:var(--card);border-radius:16px;padding:24px;width:90%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:36px;margin-bottom:8px;">📍</div>
+      <div style="font-size:18px;font-weight:600;color:var(--text);">新建踏勘项目</div>
+      <div style="font-size:12px;color:var(--text3);margin-top:4px;" id="modalCommunityDisplay">所属社区：—</div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:8px;">项目名称 <span style="color:#ef4444;">*</span></label>
+      <input type="text" id="modalProjectName" placeholder="例如：包装厂宿舍、玻璃厂厂区..." style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;" onkeypress="if(event.key==='Enter')confirmNewProject()">
+    </div>
+    <div style="margin-bottom:20px;">
+      <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:8px;">项目类型</label>
+      <select id="modalProjectType" style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;">
+        <option value="自定义">✏️ 自定义类型...</option>
+        <option value="老旧小区">老旧小区</option>
+        <option value="厂区仓库">厂区/仓库</option>
+        <option value="闲置用地">闲置用地</option>
+        <option value="公共服务设施">公共服务设施</option>
+        <option value="历史建筑">历史建筑</option>
+      </select>
+      <input type="text" id="modalCustomType" placeholder="请输入自定义类型名称..." style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;margin-top:8px;display:none;">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <button onclick="closeNewProjectModal()" style="background:var(--card2);border:1px solid var(--line);color:var(--text);padding:12px;border-radius:10px;font-size:15px;cursor:pointer;">取消</button>
+      <button onclick="confirmNewProject()" style="background:var(--green);border:none;color:#fff;padding:12px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">✓ 确认并开始</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -411,29 +435,87 @@ function selectCommunity(community) {
 
 // 新增项目保存
 // 快速新建项目：弹框输名称，直接进详情页
-// 新建项目：直接进入详情页（名称在详情页填写）
-function createNewProjectDirect() {
+// 显示新建项目模态框
+function showNewProjectModal() {
   if (!currentCommunity) {
     showToast('⚠️ 请先选择社区');
     return;
   }
+  document.getElementById('modalCommunityDisplay').textContent = '所属社区：' + currentCommunity;
+  document.getElementById('modalProjectName').value = '';
+  document.getElementById('modalProjectType').value = '自定义';
+  document.getElementById('modalCustomType').value = '';
+  document.getElementById('modalCustomType').style.display = 'none';
+  document.getElementById('newProjectModal').style.display = 'flex';
+  setTimeout(() => document.getElementById('modalProjectName').focus(), 100);
+}
+
+// 关闭新建项目模态框
+function closeNewProjectModal() {
+  document.getElementById('newProjectModal').style.display = 'none';
+}
+
+// 模态框类型选择变化
+document.addEventListener('DOMContentLoaded', function() {
+  const typeSelect = document.getElementById('modalProjectType');
+  if (typeSelect) {
+    typeSelect.addEventListener('change', function() {
+      const customInput = document.getElementById('modalCustomType');
+      if (this.value === '自定义') {
+        customInput.style.display = 'block';
+        customInput.focus();
+      } else {
+        customInput.style.display = 'none';
+      }
+    });
+  }
+});
+
+// 确认新建项目
+function confirmNewProject() {
+  const name = document.getElementById('modalProjectName').value.trim();
+  if (!name) {
+    showToast('⚠️ 请输入项目名称');
+    document.getElementById('modalProjectName').focus();
+    return;
+  }
+  
+  let type = document.getElementById('modalProjectType').value;
+  if (type === '自定义') {
+    const customType = document.getElementById('modalCustomType').value.trim();
+    if (!customType) {
+      showToast('⚠️ 请输入自定义类型名称');
+      document.getElementById('modalCustomType').focus();
+      return;
+    }
+    type = customType;
+    // 保存自定义类型
+    saveCustomType(type);
+  }
+  
   const newItem = {
     id: 'CUSTOM_' + Date.now(),
-    name: '',
+    name: name,
     sub: currentCommunity,
-    type: '自定义',
+    type: type,
     desc: '',
     community: currentCommunity,
     createdAt: new Date().toISOString(),
-    isNew: true,
     data: {
       '所属社区': currentCommunity,
+      '项目类型': type,
       '创建时间': new Date().toLocaleString('zh-CN')
     }
   };
+  
   customProjects.push(newItem);
   localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
   
+  closeNewProjectModal();
+  showToast('✅ 已创建：' + name);
+  updateStats();
+  
+  // 直接进入详情页
   const communityProjects = customProjects.filter(p => p.community === currentCommunity);
   currentItem = newItem;
   currentCategory = {id:'custom',name:'踏勘项目',items:communityProjects};
@@ -441,11 +523,6 @@ function createNewProjectDirect() {
   currentItemIndex = communityProjects.length - 1;
   renderDetail();
   showPage('pageDetail');
-  
-  setTimeout(() => {
-    const input = document.getElementById('detailTitleInput');
-    if(input) input.focus();
-  }, 100);
 }
 
 // 从标题输入框保存项目名称
@@ -543,34 +620,9 @@ function updateAllTypeSelects(){
   }
 }
 
-// 控制内容区域可用性（名称未填写时禁用）
+// 内容区域可用性（已简化，不做禁用）
 function updateContentAvailability() {
-  const hasName = currentItem && currentItem.name && currentItem.name.trim();
-  const contentAreas = document.querySelectorAll('.detail-content-area');
-  const tip = document.getElementById('nameRequiredTip');
-  const bottomNav = document.querySelector('#pageDetail .bottom-nav');
-  
-  if (hasName) {
-    contentAreas.forEach(el => {
-      el.style.opacity = '1';
-      el.style.pointerEvents = 'auto';
-    });
-    if(tip) tip.style.display = 'none';
-    if(bottomNav) {
-      bottomNav.style.opacity = '1';
-      bottomNav.style.pointerEvents = 'auto';
-    }
-  } else {
-    contentAreas.forEach(el => {
-      el.style.opacity = '0.4';
-      el.style.pointerEvents = 'none';
-    });
-    if(tip) tip.style.display = 'block';
-    if(bottomNav) {
-      bottomNav.style.opacity = '0.4';
-      bottomNav.style.pointerEvents = 'none';
-    }
-  }
+  // 不再禁用内容，所有内容都可编辑
 }
 
 // 前往新建项目页（先检查社区）
@@ -579,7 +631,7 @@ function goToAddProject() {
     showToast('⚠️ 请先选择社区！');
     return;
   }
-  createNewProjectDirect();
+  showNewProjectModal();
 }
 
 function quickAddProject() {
