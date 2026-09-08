@@ -1798,75 +1798,31 @@ function takePhoto(){ document.getElementById('cameraInput').click(); }
 function pickPhotos(){ document.getElementById('albumInput').click(); }
 
 function handlePhotos(files){
-  if(!currentItem){
-    showToast('⚠️ 请先创建或选择一个项目');
-    return;
-  }
-  if(!files || files.length === 0) return;
-  
-  // 确保itemPhotos有当前项目的数组
-  if(!itemPhotos[currentItem.id]) itemPhotos[currentItem.id] = [];
-  const photos = itemPhotos[currentItem.id];
-  const beforeCount = photos.length;
-  
-  // 处理每一张照片
-  let processed = 0;
-  const totalFiles = Math.min(files.length, 20 - photos.length);
-  
-  if(totalFiles <= 0){
-    showToast('⚠️ 已达到最大照片数量（20张）');
-    return;
-  }
-  
-  showToast('正在处理' + totalFiles + '张照片...');
-  
-  for(let i = 0; i < totalFiles; i++){
-    const file = files[i];
+  if(!currentItem) return;
+  const photos = itemPhotos[currentItem.id] || [];
+  Array.from(files).forEach(file=>{
+    if(photos.length >= 20) return;
     const reader = new FileReader();
-    reader.onload = function(e){
+    reader.onload = e=>{
       const img = new Image();
-      img.onload = function(){
-        // 压缩图片
+      img.onload = ()=>{
         const canvas = document.createElement('canvas');
         const maxSize = 1280;
         let w = img.width, h = img.height;
-        if(w > h && w > maxSize){ h = Math.round(h * maxSize / w); w = maxSize; }
-        else if(h > maxSize){ w = Math.round(w * maxSize / h); h = maxSize; }
+        if(w > h && w > maxSize){ h = h * maxSize / w; w = maxSize; }
+        else if(h > maxSize){ w = w * maxSize / h; h = maxSize; }
         canvas.width = w; canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        
-        // 保存照片
         photos.push(canvas.toDataURL('image/jpeg', 0.7));
         itemPhotos[currentItem.id] = photos;
-        
-        // 保存到localStorage（两个位置都保存）
-        localStorage.setItem('survey_photos_' + currentItem.id, JSON.stringify(photos));
         saveData();
-        
-        processed++;
-        if(processed === totalFiles){
-          renderPhotos();
-          showToast('✅ 已添加' + totalFiles + '张照片（共' + photos.length + '/20）');
-        }
-      };
-      img.onerror = function(){
-        processed++;
-        if(processed === totalFiles){
-          renderPhotos();
-          showToast('部分照片处理失败');
-        }
+        renderPhotos();
       };
       img.src = e.target.result;
     };
-    reader.onerror = function(){
-      processed++;
-      if(processed === totalFiles){
-        renderPhotos();
-        showToast('部分照片读取失败');
-      }
-    };
     reader.readAsDataURL(file);
-  }
+  });
+  showToast('照片已添加');
 }
 
 function deletePhoto(index){
