@@ -231,7 +231,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
   </div>
   <div class="container">
     <input class="search-box" placeholder="🔍 搜索项目名称..." oninput="filterItems(this.value)">
-    <button class="add-btn" onclick="showPage('pageAddProject')" style="margin-bottom:14px;">➕ 新增踏勘项目</button>
+    <button class="add-btn" onclick="quickAddProject()" style="margin-bottom:14px;">➕ 新建踏勘项目</button>
     <div id="categoryList"></div>
   </div>
 </div>
@@ -392,6 +392,46 @@ function selectCommunity(community) {
 }
 
 // 新增项目保存
+// 快速新建项目：弹框输名称，直接进详情页
+function quickAddProject() {
+  if (!currentCommunity) {
+    showToast('请先在首页选择社区！');
+    return;
+  }
+  const name = prompt('请输入踏勘项目名称：\n（例如：包装厂宿舍、玻璃厂厂区等）');
+  if (!name || !name.trim()) return;
+  
+  const newId = 'CUSTOM_' + Date.now();
+  const newItem = {
+    id: newId,
+    name: name.trim(),
+    sub: currentCommunity,
+    type: '未分类',
+    desc: '',
+    community: currentCommunity,
+    createdAt: new Date().toISOString(),
+    data: {
+      "所属社区": currentCommunity,
+      "创建时间": new Date().toLocaleString('zh-CN')
+    }
+  };
+  
+  customProjects.push(newItem);
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  
+  showToast('✅ 已创建：' + name.trim());
+  updateStats();
+  
+  // 直接进入详情页
+  const communityProjects = customProjects.filter(p => p.community === currentCommunity);
+  currentItem = newItem;
+  currentCategory = {id:'custom',name:'踏勘项目',items:communityProjects};
+  filteredItems = [...communityProjects];
+  currentItemIndex = communityProjects.length - 1;
+  renderDetail();
+  showPage('pageDetail');
+}
+
 function saveNewProject() {
   const name = document.getElementById('newProjectName').value.trim();
   const type = document.getElementById('newProjectType').value;
@@ -456,9 +496,7 @@ function addNewInDetail() {
     showPage('pageHome');
     return;
   }
-  document.getElementById('newProjectCommunity').value = currentCommunity;
-  document.getElementById('newProjectName').value = '';
-  showPage('pageAddProject');
+  quickAddProject();
 }
 
 // 按社区导出
@@ -1441,7 +1479,7 @@ function startWatch(){
         showToast(msg);
       }
     },
-    {enableHighAccuracy:true, timeout:10000, maximumAge:0}
+    {enableHighAccuracy:true, timeout:30000, maximumAge:5000}
   );
 }
 
@@ -1458,7 +1496,7 @@ function stopWatch(){
 
 function getLocation(){
   if(!navigator.geolocation){ alert('您的浏览器不支持GPS定位'); return; }
-  showToast('定位中...');
+  showToast('📍 正在定位，请稍候（最多30秒）...');
   navigator.geolocation.getCurrentPosition(
     async position=>{
       const {latitude, longitude, accuracy} = position.coords;
@@ -1485,7 +1523,7 @@ function getLocation(){
       else if(error.code === 3) msg = '定位超时';
       alert(msg);
     },
-    {enableHighAccuracy:true, timeout:10000, maximumAge:0}
+    {enableHighAccuracy:true, timeout:30000, maximumAge:5000}
   );
 }
 
