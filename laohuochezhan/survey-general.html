@@ -1560,9 +1560,23 @@ function renderDetail(){
   if(!currentItem) return;
   const titleInput = document.getElementById('detailTitleInput');
   if(titleInput) titleInput.value = currentItem.name || '';
-  // 更新社区下拉框
+  // 更新社区显示
+  const communityDisplay = document.getElementById('detailCommunityDisplay');
+  if(communityDisplay) {
+    const comm = currentItem.community || currentItem.sub || currentCommunity || '';
+    // 社区名称映射（简称 -> 全称）
+    const commMap = {
+      '白竹亭社区': '梧桐街道 · 白竹亭社区',
+      '又一村社区': '肖家园街道 · 又一村社区',
+      '活龙井社区': '菱角山街道 · 活龙井社区',
+      '文昌阁社区': '菱角山街道 · 文昌阁社区'
+    };
+    communityDisplay.textContent = commMap[comm] || comm || '未选择';
+  }
+  
+  // 更新社区下拉框（如果存在）
   const communitySelect = document.getElementById('detailCommunitySelect');
-  if(communitySelect) communitySelect.value = currentItem.community || currentCommunity || '梧桐街道白竹亭社区';
+  if(communitySelect) communitySelect.value = currentItem.community || currentCommunity || '白竹亭社区';
   
   // 更新项目类型下拉框
   const typeSelect = document.getElementById('detailTypeSelect');
