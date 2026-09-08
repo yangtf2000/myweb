@@ -202,7 +202,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     
     <!-- 操作按钮 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-      <button onclick="showPage('pageAddProject')" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">➕ 新建项目</button>
+      <button onclick="createNewProjectDirect()" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">➕ 新建项目</button>
       <button onclick="exportByCommunity()" style="background:var(--card2);border:1px solid var(--line);color:var(--text);padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">📤 导出记录</button>
     </div>
     
@@ -253,12 +253,42 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 <div class="page" id="pageDetail">
   <div class="topbar">
     <button class="back" onclick="showPage('pageHome')">← 返回</button>
-    <div class="title" id="detailTitle" style="flex:1;">项目详情</div>
+    <input type="text" id="detailTitleInput" style="flex:1;background:transparent;border:none;color:var(--text);font-size:17px;font-weight:600;text-align:center;outline:none;" placeholder="请输入项目名称" onblur="saveProjectNameFromTitle()" onkeypress="if(event.key==='Enter'){this.blur();}">
     <div class="progress" id="detailProgress"></div>
   </div>
   <div class="container">
+    <!-- 项目信息 -->
+    <div class="data-section" style="margin-bottom:16px;">
+      <h3 style="font-size:14px;color:var(--green);margin-bottom:10px;">📋 项目信息</h3>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;font-size:12px;color:var(--text3);margin-bottom:6px;">📍 所属社区</label>
+        <div id="detailCommunityDisplay" style="background:var(--card2);padding:10px;border-radius:8px;font-size:14px;color:var(--green);">—</div>
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;color:var(--text3);margin-bottom:6px;">🏷️ 项目类型</label>
+        <select id="detailTypeSelect" onchange="updateDetailType(this.value)" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text);font-size:14px;">
+          <option value="自定义">✏️ 自定义类型...</option>
+          <option value="老旧小区">老旧小区</option>
+          <option value="厂区仓库">厂区/仓库</option>
+          <option value="闲置用地">闲置用地</option>
+          <option value="公共服务设施">公共服务设施</option>
+          <option value="历史建筑">历史建筑</option>
+        </select>
+        <input type="text" id="detailCustomTypeInput" placeholder="请输入自定义类型名称..." 
+          style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text);font-size:14px;margin-top:8px;display:none;"
+          onblur="saveDetailCustomType()">
+      </div>
+    </div>
+    
+    <!-- 未填写名称提示 -->
+    <div id="nameRequiredTip" style="display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:20px;text-align:center;margin-bottom:16px;">
+      <div style="font-size:36px;margin-bottom:10px;">⚠️</div>
+      <div style="color:#ef4444;font-size:14px;font-weight:600;margin-bottom:6px;">请先填写项目名称</div>
+      <div style="color:var(--text3);font-size:12px;">在上方标题处输入项目名称后，即可开始填写备注、照片等内容</div>
+    </div>
+    
     <!-- 位置信息（最顶部） -->
-    <div class="loc-top">
+    <div class="loc-top detail-content-area">
       <div class="loc-btns">
         <button class="btn-map" onclick="showMap()">🗺️ 查看地图与定位</button>
       </div>
