@@ -417,11 +417,7 @@ function goToAddProject() {
     showToast('⚠️ 请先选择社区！');
     return;
   }
-  document.getElementById('newProjectCommunity').value = currentCommunity;
-  document.getElementById('addPageCommunity').textContent = currentCommunity;
-  document.getElementById('newProjectName').value = '';
-  showPage('pageAddProject');
-  setTimeout(()=>document.getElementById('newProjectName').focus(), 300);
+  createNewProjectDirect();
 }
 
 function quickAddProject() {
