@@ -297,7 +297,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       <h3>✏️ 现场备注</h3>
       <textarea class="note-textarea" id="noteText" placeholder="现场看到的情况、问题、补充信息..." oninput="saveNote()"></textarea>
       <div class="note-tools">
-        <button class="note-tool" id="voiceBtn" onclick="toggleVoice()">🎤 语音</button>
+        <button class="note-tool" id="voiceBtn" 
+  onmousedown="startVoice()" onmouseup="stopVoice()" onmouseleave="stopVoice()"
+  ontouchstart="startVoice(event)" ontouchend="stopVoice(event)"
+  style="user-select:none;-webkit-user-select:none;touch-action:manipulation;">🎤 按住说话</button>
         <button class="note-tool" onclick="insertLocationToNote()">📋 插入位置</button>
         <button class="note-tool" onclick="clearNote()">🔤 清空</button>
       </div>
