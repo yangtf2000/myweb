@@ -295,13 +295,12 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     <div class="data-section">
       <h3>🏷️ 项目类型</h3>
       <select id="projectTypeSelect" onchange="updateProjectType(this.value)" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--text);font-size:15px;">
-        <option value="未分类">未分类</option>
+        <option value="自定义">✏️ 自定义类型...</option>
         <option value="老旧小区">老旧小区</option>
         <option value="厂区仓库">厂区/仓库</option>
         <option value="闲置用地">闲置用地</option>
         <option value="公共服务设施">公共服务设施</option>
         <option value="历史建筑">历史建筑</option>
-        <option value="其他">其他</option>
       </select>
     </div>
     
@@ -737,12 +736,25 @@ function updateStats() {
 // 更新项目类型（下拉选择框）
 function updateProjectType(type) {
   if (!currentItem) return;
+  if(type === '自定义'){
+    const customType = prompt('请输入自定义类型名称：', '');
+    if(!customType || !customType.trim()){
+      // 恢复为原来的类型
+      const typeSelect = document.getElementById('projectTypeSelect');
+      if(typeSelect) typeSelect.value = currentItem.type || '自定义';
+      return;
+    }
+    type = customType.trim();
+    // 保存自定义类型到下拉菜单
+    saveCustomType(type);
+  }
   currentItem.type = type;
   // 更新customProjects中的数据
   const p = customProjects.find(x => x.id === currentItem.id);
   if (p) p.type = type;
   localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
   updateStats();
+  renderHomeProjectList();
   showToast('✅ 类型已设置为：' + type);
 }
 
@@ -1259,7 +1271,12 @@ function renderDetail(){
   document.getElementById('detailTitle').textContent = currentItem.name + ' ✏️';
   // 更新项目类型下拉框
   const typeSelect = document.getElementById('projectTypeSelect');
-  if(typeSelect) typeSelect.value = currentItem.type || '未分类';
+  if(typeSelect){
+    // 先确保自定义类型都加载了
+    updateAllTypeSelects();
+    // 设置当前类型，如果没有则设为"自定义"
+    typeSelect.value = currentItem.type || '自定义';
+  }
   document.getElementById('detailProgress').textContent = `${currentItemIndex+1}/${filteredItems.length}`;
   
   // 备注
