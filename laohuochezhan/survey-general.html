@@ -586,8 +586,8 @@ function exportByCommunity() {
   html += '<div class="meta">导出时间：' + new Date().toLocaleString('zh-CN') + '</div>';
   
   // 统计摘要
-  let totalProjects = customProjects.length;
-  let totalPhotos = 0, totalNotes = 0;
+  let totalProjects = projectsToExport.length;
+  let totalNotes = 0;
   Object.values(grouped).forEach(arr => arr.forEach(p => {
     totalPhotos += p.photoCount;
     if (p.note && p.note.trim()) totalNotes++;
