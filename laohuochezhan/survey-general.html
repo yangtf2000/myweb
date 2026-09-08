@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -189,7 +189,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     
     <!-- 社区选择 -->
     <div class="data-section" style="margin-bottom:16px;">
-      <h3 style="font-size:14px;color:var(--green);margin-bottom:10px;">🏘️ 选择踏勘社区（选择后锁定）</h3>
+      <h3 style="font-size:14px;color:var(--green);margin-bottom:10px;">🏘️ 选择踏勘社区</h3>
       <select id="communitySelect" onchange="selectCommunity(this.value)" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--text);font-size:15px;">
         <option value="">— 请选择社区 —</option>
         <option value="白竹亭社区">梧桐街道 · 白竹亭社区</option>
@@ -197,7 +197,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
         <option value="活龙井社区">菱角山街道 · 活龙井社区</option>
         <option value="文昌阁社区">菱角山街道 · 文昌阁社区</option>
       </select>
-      <div id="communityLocked" style="display:none;margin-top:8px;font-size:12px;color:var(--green);">✅ 已锁定：<span id="lockedCommunity"></span>（刷新页面可重新选择）</div>
+      <div id="communityHint" style="margin-top:8px;font-size:12px;color:var(--text3);">💡 选择社区后，新建项目将自动归属该社区</div>
     </div>
     
     <!-- 操作按钮 -->
@@ -303,7 +303,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     </div>
     <!-- 现场照片 -->
     <div class="data-section">
-      <h3>📷 现场照片 (<span id="photoCount">0</span>/9)</h3>
+      <h3>📷 现场照片 (<span id="photoCount">0</span>/20)</h3>
       <div class="photo-grid" id="photoGrid">
         <div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
         <div class="photo-add" onclick="pickPhotos()">🖼️<span>相册</span></div>
@@ -312,9 +312,10 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       <input type="file" id="albumInput" accept="image/*" multiple style="display:none" onchange="handlePhotos(this.files)">
     </div>
   </div>
-  <div class="bottom-nav">
+  <div class="bottom-nav" style="grid-template-columns:1fr 1fr 1fr 1fr;">
     <button onclick="prevItem()">← 上一个</button>
-    <span class="save-tip" id="saveTip">已自动保存</span>
+    <button onclick="saveCurrentItem()" style="background:var(--green-bg);color:var(--green);border-color:var(--green);">💾 保存</button>
+    <button onclick="addNewInDetail()" style="background:var(--green-bg);color:var(--green);border-color:var(--green);">➕ 新增</button>
     <button onclick="nextItem()">下一个 →</button>
   </div>
 </div>
@@ -349,10 +350,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
           <option value="其他">其他</option>
         </select>
       </div>
-      <div style="margin-bottom:14px;">
-        <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:6px;">备注说明（可选）</label>
-        <textarea id="newProjectDesc" placeholder="简要说明项目位置、现状等..." rows="3" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text);font-size:14px;resize:vertical;"></textarea>
-      </div>
       <button onclick="saveNewProject()" style="width:100%;background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;">💾 保存并开始踏勘</button>
     </div>
   </div>
@@ -379,9 +376,6 @@ let customProjects = JSON.parse(localStorage.getItem('survey_general_custom_proj
 window.addEventListener('DOMContentLoaded', function() {
   if (currentCommunity) {
     document.getElementById('communitySelect').value = currentCommunity;
-    document.getElementById('communitySelect').disabled = true;
-    document.getElementById('communityLocked').style.display = 'block';
-    document.getElementById('lockedCommunity').textContent = currentCommunity;
     document.getElementById('newProjectCommunity').value = currentCommunity;
   }
   setTimeout(function() { updateStats(); }, 300);
@@ -392,12 +386,8 @@ function selectCommunity(community) {
   if (!community) return;
   currentCommunity = community;
   localStorage.setItem('survey_general_community', community);
-  document.getElementById('communitySelect').value = community;
-  document.getElementById('communitySelect').disabled = true;
-  document.getElementById('communityLocked').style.display = 'block';
-  document.getElementById('lockedCommunity').textContent = community;
   document.getElementById('newProjectCommunity').value = community;
-  showToast('已选择：' + community + '，开始踏勘吧！');
+  showToast('已切换到：' + community);
   updateStats();
 }
 
@@ -405,7 +395,6 @@ function selectCommunity(community) {
 function saveNewProject() {
   const name = document.getElementById('newProjectName').value.trim();
   const type = document.getElementById('newProjectType').value;
-  const desc = document.getElementById('newProjectDesc').value.trim();
   
   if (!currentCommunity) {
     showToast('请先在首页选择社区！');
@@ -423,13 +412,12 @@ function saveNewProject() {
     name: name,
     sub: currentCommunity,
     type: type,
-    desc: desc,
+    desc: '',
     community: currentCommunity,
     createdAt: new Date().toISOString(),
     data: {
       "所属社区": currentCommunity,
       "项目类型": type,
-      "备注": desc || '无',
       "创建时间": new Date().toLocaleString('zh-CN')
     }
   };
@@ -438,7 +426,6 @@ function saveNewProject() {
   localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
   
   document.getElementById('newProjectName').value = '';
-  document.getElementById('newProjectDesc').value = '';
   
   showToast('项目已保存：' + name);
   updateStats();
@@ -451,6 +438,27 @@ function saveNewProject() {
   currentItemIndex = communityProjects.length - 1;
   renderDetail();
   showPage('pageDetail');
+}
+
+// 详情页保存当前项目
+function saveCurrentItem() {
+  if (!currentItem) return;
+  saveNote();
+  saveData();
+  showToast('✅ 已保存：' + currentItem.name);
+  updateStats();
+}
+
+// 详情页新增项目（当前社区）
+function addNewInDetail() {
+  if (!currentCommunity) {
+    showToast('请先在首页选择社区！');
+    showPage('pageHome');
+    return;
+  }
+  document.getElementById('newProjectCommunity').value = currentCommunity;
+  document.getElementById('newProjectName').value = '';
+  showPage('pageAddProject');
 }
 
 // 按社区导出
@@ -466,33 +474,97 @@ function exportByCommunity() {
   customProjects.forEach(p => {
     const comm = p.community || '未分类';
     if (!grouped[comm]) grouped[comm] = [];
+    const photos = JSON.parse(localStorage.getItem('survey_photos_' + p.id) || '[]');
+    const note = (itemData[p.id] && itemData[p.id].note) || '';
+    const loc = locs[p.id];
     grouped[comm].push({
-      名称: p.name,
-      类型: p.type || '未分类',
-      社区: p.community,
-      备注: p.desc || '',
-      创建时间: p.createdAt ? new Date(p.createdAt).toLocaleString('zh-CN') : '',
-      现场备注: (itemData[p.id] && itemData[p.id].note) || '',
-      照片数量: (JSON.parse(localStorage.getItem('survey_photos_' + p.id) || '[]')).length,
-      位置: locs[p.id] || null
+      name: p.name,
+      type: p.type || '未分类',
+      community: p.community,
+      createdAt: p.createdAt ? new Date(p.createdAt).toLocaleString('zh-CN') : '',
+      note: note,
+      photoCount: photos.length,
+      photos: photos,
+      location: loc ? loc.lat.toFixed(6) + ', ' + loc.lng.toFixed(6) : '未定位'
     });
   });
   
-  const exportData = {
-    导出时间: new Date().toLocaleString('zh-CN'),
-    项目名称: '老火车站片区现场踏勘记录',
-    社区列表: Object.keys(grouped),
-    踏勘记录: grouped
-  };
+  // 生成HTML
+  let html = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">';
+  html += '<title>老火车站片区现场踏勘记录</title>';
+  html += '<style>body{font-family:"Microsoft YaHei",sans-serif;background:#f5f5f5;margin:0;padding:20px;color:#333;}';
+  html += '.container{max-width:900px;margin:0 auto;background:#fff;padding:30px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}';
+  html += 'h1{text-align:center;color:#1a5632;border-bottom:3px solid #1a5632;padding-bottom:15px;margin-top:0;}';
+  html += '.meta{text-align:center;color:#666;margin-bottom:30px;font-size:14px;}';
+  html += '.community-section{margin-bottom:30px;}';
+  html += '.community-title{background:#1a5632;color:#fff;padding:10px 15px;border-radius:5px;font-size:18px;margin:0 0 15px 0;}';
+  html += '.project-card{border:1px solid #e0e0e0;border-radius:6px;padding:15px;margin-bottom:12px;background:#fafafa;}';
+  html += '.project-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}';
+  html += '.project-name{font-size:16px;font-weight:bold;color:#1a5632;}';
+  html += '.project-type{background:#e8f5e9;color:#2e7d32;padding:3px 10px;border-radius:12px;font-size:12px;}';
+  html += '.project-info{font-size:13px;color:#555;line-height:1.8;}';
+  html += '.project-info span{display:inline-block;margin-right:20px;}';
+  html += '.note-box{background:#fff3e0;border-left:4px solid #ff9800;padding:10px;margin-top:10px;border-radius:0 4px 4px 0;font-size:13px;white-space:pre-wrap;}';
+  html += '.photos{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}';
+  html += '.photos img{width:120px;height:90px;object-fit:cover;border-radius:4px;border:1px solid #ddd;}';
+  html += '.summary{background:#e8f5e9;padding:15px;border-radius:6px;margin-bottom:25px;}';
+  html += '.summary-item{display:inline-block;margin-right:30px;font-size:14px;}';
+  html += '.summary-item b{color:#1a5632;font-size:18px;}';
+  html += '</style></head><body><div class="container">';
+  html += '<h1>老火车站片区现场踏勘记录</h1>';
+  html += '<div class="meta">导出时间：' + new Date().toLocaleString('zh-CN') + '</div>';
   
-  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type: 'application/json'});
+  // 统计摘要
+  let totalProjects = customProjects.length;
+  let totalPhotos = 0, totalNotes = 0;
+  Object.values(grouped).forEach(arr => arr.forEach(p => {
+    totalPhotos += p.photoCount;
+    if (p.note && p.note.trim()) totalNotes++;
+  }));
+  html += '<div class="summary">';
+  html += '<span class="summary-item">踏勘项目：<b>' + totalProjects + '</b> 个</span>';
+  html += '<span class="summary-item">涉及社区：<b>' + Object.keys(grouped).length + '</b> 个</span>';
+  html += '<span class="summary-item">现场照片：<b>' + totalPhotos + '</b> 张</span>';
+  html += '<span class="summary-item">有备注：<b>' + totalNotes + '</b> 个</span>';
+  html += '</div>';
+  
+  // 按社区分组
+  for (const comm in grouped) {
+    html += '<div class="community-section">';
+    html += '<h2 class="community-title">🏘️ ' + comm + '（' + grouped[comm].length + '个项目）</h2>';
+    grouped[comm].forEach((p, idx) => {
+      html += '<div class="project-card">';
+      html += '<div class="project-header"><span class="project-name">' + (idx+1) + '. ' + p.name + '</span><span class="project-type">' + p.type + '</span></div>';
+      html += '<div class="project-info">';
+      html += '<span>🕐 创建时间：' + p.createdAt + '</span>';
+      html += '<span>📍 位置：' + p.location + '</span>';
+      html += '<span>📷 照片：' + p.photoCount + '张</span>';
+      html += '</div>';
+      if (p.note && p.note.trim()) {
+        html += '<div class="note-box"><b>📝 现场备注：</b><br>' + p.note + '</div>';
+      }
+      if (p.photos && p.photos.length > 0) {
+        html += '<div class="photos">';
+        p.photos.forEach(photo => {
+          html += '<img src="' + photo + '" alt="现场照片">';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+  
+  html += '</div></body></html>';
+  
+  const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = '现场踏勘记录_' + new Date().toISOString().slice(0,10) + '.json';
+  a.download = '现场踏勘记录_' + new Date().toISOString().slice(0,10) + '.html';
   a.click();
   URL.revokeObjectURL(url);
-  showToast('已导出 ' + customProjects.length + ' 条踏勘记录');
+  showToast('已导出 ' + customProjects.length + ' 条踏勘记录（HTML格式）');
 }
 
 // 渲染首页项目列表
@@ -520,6 +592,7 @@ function renderHomeProjectList() {
     const locs = localStorage.getItem('survey_project_locs') ? JSON.parse(localStorage.getItem('survey_project_locs')) : {};
     const hasLoc = locs[item.id];
     
+    const createTime = item.createdAt ? new Date(item.createdAt).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
     html += '<div class="cat-card" onclick="openHomeItem(' + idx + ')" style="margin-bottom:10px;">'
       + '<div class="cat-header">'
       + '<span><span class="cat-icon">📍</span><span class="cat-name">' + item.name + '</span></span>'
@@ -530,7 +603,7 @@ function renderHomeProjectList() {
       + '<span style="color:' + (hasNote ? 'var(--green)' : 'var(--text3)') + '">📝 ' + (hasNote ? '有备注' : '无备注') + '</span>'
       + '<span style="color:' + (hasLoc ? 'var(--blue)' : 'var(--text3)') + '">📍 ' + (hasLoc ? '已定位' : '未定位') + '</span>'
       + '</div>'
-      + (item.desc ? '<div style="font-size:12px;color:var(--text3);margin-top:6px;padding-left:28px;">' + item.desc + '</div>' : '')
+      + '<div style="font-size:11px;color:var(--text3);margin-top:4px;padding-left:28px;">🕐 ' + createTime + (item.desc ? ' · ' + item.desc : '') + '</div>'
       + '</div>';
   });
   
@@ -568,6 +641,27 @@ function updateStats() {
   document.getElementById('statLocs').textContent = totalLocs;
   
   renderHomeProjectList();
+}
+
+
+
+// 删除项目
+function deleteProject(id) {
+  if (!confirm('确定要删除这个踏勘项目吗？删除后不可恢复。')) return;
+  const idx = customProjects.findIndex(p => p.id === id);
+  if (idx > -1) {
+    const name = customProjects[idx].name;
+    customProjects.splice(idx, 1);
+    localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+    // 清除相关数据
+    localStorage.removeItem('survey_photos_' + id);
+    localStorage.removeItem('survey_note_' + id);
+    if (itemData[id]) delete itemData[id];
+    const locs = localStorage.getItem('survey_project_locs') ? JSON.parse(localStorage.getItem('survey_project_locs')) : {};
+    if (locs[id]) { delete locs[id]; localStorage.setItem('survey_project_locs', JSON.stringify(locs)); }
+    updateStats();
+    showToast('已删除：' + name);
+  }
 }
 
 // ===== 数据 =====
@@ -941,23 +1035,7 @@ function getAllItems(){
   return CATEGORIES.flatMap(c=>c.items.map(i=>({...i, categoryId:c.id, categoryName:c.name})));
 }
 
-function updateStats(){
-  const all = getAllItems();
-  let done=0, issue=0, pending=0;
-  all.forEach(item=>{
-    const d = itemData[item.id];
-    if(d && d.conclusion==='done') done++;
-    else if(d && d.conclusion==='issue') issue++;
-    else pending++;
-  });
-  document.getElementById('statTotal').textContent = all.length;
-  document.getElementById('statDone').textContent = done;
-  document.getElementById('statIssue').textContent = issue;
-  document.getElementById('statPending').textContent = pending;
-  document.getElementById('projectCount').textContent = all.length + '项';
-  const docCount = DEPTS.reduce((sum,d)=>sum+d.docs.length,0);
-  document.getElementById('deptCount').textContent = docCount + '项';
-}
+
 
 // ===== 页面切换 =====
 function showPage(pageId){
@@ -1207,7 +1285,7 @@ function renderPhotos(){
       <button class="del" onclick="deletePhoto(${i})">×</button>
     </div>`
   ).join('');
-  if(photos.length < 9){
+  if(photos.length < 20){
     html += `<div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
              <div class="photo-add" onclick="pickPhotos()">🖼️<span>相册</span></div>`;
   }
@@ -1261,15 +1339,25 @@ function toggleVoice(){
     if(recognition) recognition.stop();
     isRecording = false;
     btn.classList.remove('recording');
-    btn.textContent = '🎤 语音输入';
+    btn.textContent = '🎤 语音';
+    showToast('语音输入已结束');
     return;
   }
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SpeechRecognition){
-    alert('您的浏览器不支持语音识别，请用Chrome/Edge');
+    showToast('⚠️ 浏览器不支持语音识别，请用Chrome/Edge浏览器');
     return;
   }
-  recognition = new SpeechRecognition();
+  // 检查是否是HTTPS或localhost（语音识别需要安全上下文）
+  if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.protocol !== 'file:') {
+    showToast('⚠️ 语音识别需要HTTPS环境，本地文件可能不稳定');
+  }
+  try {
+    recognition = new SpeechRecognition();
+  } catch(e) {
+    showToast('⚠️ 语音识别初始化失败，请检查麦克风权限');
+    return;
+  }
   recognition.lang = 'zh-CN';
   recognition.continuous = true;
   recognition.interimResults = true;
@@ -1288,13 +1376,21 @@ function toggleVoice(){
   recognition.onerror = e=>{
     isRecording = false;
     btn.classList.remove('recording');
-    btn.textContent = '🎤 语音输入';
-    if(e.error !== 'no-speech') alert('语音识别错误：' + e.error);
+    btn.textContent = '🎤 语音';
+    if(e.error === 'not-allowed') {
+      showToast('⚠️ 麦克风权限被拒绝，请在浏览器设置中允许');
+    } else if(e.error === 'no-speech') {
+      showToast('未检测到语音，请靠近麦克风再试');
+    } else if(e.error === 'network') {
+      showToast('⚠️ 网络错误，语音识别需要联网');
+    } else {
+      showToast('语音识别错误：' + e.error);
+    }
   };
   recognition.onend = ()=>{
     isRecording = false;
     btn.classList.remove('recording');
-    btn.textContent = '🎤 语音输入';
+    btn.textContent = '🎤 语音';
   };
   recognition.start();
   isRecording = true;
