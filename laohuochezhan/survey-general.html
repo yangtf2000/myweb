@@ -391,18 +391,39 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     <div style="margin-bottom:20px;">
       <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:8px;">项目类型</label>
       <select id="modalProjectType" style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;">
-        <option value="自定义">✏️ 自定义类型...</option>
         <option value="老旧小区">老旧小区</option>
         <option value="厂区仓库">厂区/仓库</option>
         <option value="闲置用地">闲置用地</option>
         <option value="公共服务设施">公共服务设施</option>
         <option value="历史建筑">历史建筑</option>
+        <option value="自定义">✏️ 自定义类型...</option>
       </select>
       <input type="text" id="modalCustomType" placeholder="请输入自定义类型名称..." style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;margin-top:8px;display:none;">
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       <button onclick="closeNewProjectModal()" style="background:var(--card2);border:1px solid var(--line);color:var(--text);padding:12px;border-radius:10px;font-size:15px;cursor:pointer;">取消</button>
       <button onclick="confirmNewProject()" style="background:var(--green);border:none;color:#fff;padding:12px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">✓ 确认并开始</button>
+    </div>
+  </div>
+</div>
+
+<!-- 导出选择模态框 -->
+<div id="exportModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:var(--card);border-radius:16px;padding:24px;width:90%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+    <div style="text-align:center;margin-bottom:20px;">
+      <div style="font-size:36px;margin-bottom:8px;">📤</div>
+      <div style="font-size:18px;font-weight:600;color:var(--text);">选择导出范围</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <button onclick="doExport('current')" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">
+        📍 导出当前社区（<span id="exportCurrentCount">0</span>个项目）
+      </button>
+      <button onclick="doExport('all')" style="background:var(--card2);border:1px solid var(--line);color:var(--text);padding:14px;border-radius:10px;font-size:15px;cursor:pointer;">
+        🌐 导出全部社区（<span id="exportAllCount">0</span>个项目）
+      </button>
+      <button onclick="closeExportModal()" style="background:transparent;border:1px solid var(--line);color:var(--text3);padding:12px;border-radius:10px;font-size:14px;cursor:pointer;">
+        取消
+      </button>
     </div>
   </div>
 </div>
@@ -443,7 +464,7 @@ function showNewProjectModal() {
   }
   document.getElementById('modalCommunityDisplay').textContent = '所属社区：' + currentCommunity;
   document.getElementById('modalProjectName').value = '';
-  document.getElementById('modalProjectType').value = '自定义';
+  document.getElementById('modalProjectType').value = '老旧小区';
   document.getElementById('modalCustomType').value = '';
   document.getElementById('modalCustomType').style.display = 'none';
   document.getElementById('newProjectModal').style.display = 'flex';
@@ -760,7 +781,7 @@ function exportByCommunity() {
       return;
     }
     // 社区名去掉"街道"前缀，只保留社区名
-    let shortName = exportChoice ? currentCommunity : '全部社区';
+    let shortName = (scope === 'current') ? currentCommunity : '全部社区';
     if (shortName.includes('街道')) shortName = shortName.split('街道')[1] || shortName;
     exportName = shortName + '_现场踏勘记录_' + timeStr;
   } else {
