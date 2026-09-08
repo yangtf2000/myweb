@@ -1253,7 +1253,7 @@ function openItem(index){
 
 function renderDetail(){
   if(!currentItem) return;
-  document.getElementById('detailTitle').textContent = currentItem.name;
+  document.getElementById('detailTitle').textContent = currentItem.name + ' ✏️';
   // 更新项目类型下拉框
   const typeSelect = document.getElementById('projectTypeSelect');
   if(typeSelect) typeSelect.value = currentItem.type || '未分类';
