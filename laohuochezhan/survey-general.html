@@ -385,6 +385,17 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 
 </div>
 
+<!-- 导出选择模态框 -->
+<div id="exportModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;justify-content:center;align-items:center;">
+  <div style="background:var(--card);border-radius:16px;padding:24px;width:90%;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+    <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:8px;text-align:center;">选择导出范围</div>
+    <div style="font-size:13px;color:var(--text3);margin-bottom:20px;text-align:center;">请选择要导出的踏勘记录范围</div>
+    <button onclick="doExport('current')" style="width:100%;background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:10px;">📤 导出当前社区（<span id="exportCurrentCount">0</span>个项目）</button>
+    <button onclick="doExport('all')" style="width:100%;background:var(--card2);border:1px solid var(--line);color:var(--text);padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:10px;">📦 导出全部社区（<span id="exportAllCount">0</span>个项目）</button>
+    <button onclick="closeExportModal()" style="width:100%;background:transparent;border:none;color:var(--text3);padding:10px;border-radius:10px;font-size:14px;cursor:pointer;">取消</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -794,42 +805,47 @@ function exportByCommunity() {
     return;
   }
   
-  // 弹出导出选项
-  const exportChoice = confirm('选择导出范围：\n\n点击【确定】= 导出当前社区（' + (currentCommunity || '未选择') + '）\n点击【取消】= 导出全部社区（' + customProjects.length + '个项目）');
+  // 显示导出选择模态框
+  const currentCount = customProjects.filter(p => p.community === currentCommunity).length;
+  document.getElementById('exportCurrentCount').textContent = currentCount;
+  document.getElementById('exportAllCount').textContent = customProjects.length;
+  document.getElementById('exportModal').style.display = 'flex';
+}
+
+// 关闭导出模态框
+function closeExportModal() {
+  document.getElementById('exportModal').style.display = 'none';
+}
+
+// 执行导出
+function doExport(scope) {
+  closeExportModal();
   
   let projectsToExport = [];
   let exportName = '';
   const now = new Date();
   const timeStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + '_' + String(now.getHours()).padStart(2,'0') + String(now.getMinutes()).padStart(2,'0');
   
-  if (exportChoice) {
-    // 导出当前社区
-    if (!currentCommunity) {
-      showToast('⚠️ 请先选择社区！');
-      return;
-    }
+  if (scope === 'current') {
     projectsToExport = customProjects.filter(p => p.community === currentCommunity);
+    exportName = '踏勘记录_' + (currentCommunity || '未选择') + '_' + timeStr;
     if (projectsToExport.length === 0) {
       showToast('当前社区暂无踏勘记录');
       return;
     }
-    // 社区名去掉"街道"前缀，只保留社区名
-    let shortName = exportChoice ? currentCommunity : '全部社区';
-    if (shortName.includes('街道')) shortName = shortName.split('街道')[1] || shortName;
-    exportName = shortName + '_现场踏勘记录_' + timeStr;
   } else {
-    // 导出全部
-    projectsToExport = customProjects;
-    exportName = '全部社区_现场踏勘记录_' + timeStr;
+    projectsToExport = [...customProjects];
+    exportName = '踏勘记录_全部社区_' + timeStr;
   }
   
-  // 统计照片总数，大文件提示
+  // 大文件提示
   let totalPhotos = 0;
   projectsToExport.forEach(p => {
-    totalPhotos += (JSON.parse(localStorage.getItem('survey_photos_' + p.id) || '[]')).length;
+    const photos = JSON.parse(localStorage.getItem('survey_photos_' + p.id) || '[]');
+    totalPhotos += photos.length;
   });
-  if (totalPhotos >= 20) {
-    showToast('📷 共' + totalPhotos + '张照片，文件较大，导出可能需要几秒钟...');
+  if (totalPhotos > 50) {
+    showToast('照片较多（' + totalPhotos + '张），导出可能需要几秒钟...');
   }
   
   const grouped = {};
