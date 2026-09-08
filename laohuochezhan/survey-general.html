@@ -411,6 +411,168 @@ function selectCommunity(community) {
 
 // 新增项目保存
 // 快速新建项目：弹框输名称，直接进详情页
+// 新建项目：直接进入详情页（名称在详情页填写）
+function createNewProjectDirect() {
+  if (!currentCommunity) {
+    showToast('⚠️ 请先选择社区');
+    return;
+  }
+  const newItem = {
+    id: 'CUSTOM_' + Date.now(),
+    name: '',
+    sub: currentCommunity,
+    type: '自定义',
+    desc: '',
+    community: currentCommunity,
+    createdAt: new Date().toISOString(),
+    isNew: true,
+    data: {
+      '所属社区': currentCommunity,
+      '创建时间': new Date().toLocaleString('zh-CN')
+    }
+  };
+  customProjects.push(newItem);
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  
+  const communityProjects = customProjects.filter(p => p.community === currentCommunity);
+  currentItem = newItem;
+  currentCategory = {id:'custom',name:'踏勘项目',items:communityProjects};
+  filteredItems = [...communityProjects];
+  currentItemIndex = communityProjects.length - 1;
+  renderDetail();
+  showPage('pageDetail');
+  
+  setTimeout(() => {
+    const input = document.getElementById('detailTitleInput');
+    if(input) input.focus();
+  }, 100);
+}
+
+// 从标题输入框保存项目名称
+function saveProjectNameFromTitle() {
+  if (!currentItem) return;
+  const input = document.getElementById('detailTitleInput');
+  if (!input) return;
+  const name = input.value.trim();
+  if (!name) {
+    showToast('⚠️ 请输入项目名称');
+    input.focus();
+    return;
+  }
+  currentItem.name = name;
+  currentItem.isNew = false;
+  const p = customProjects.find(x => x.id === currentItem.id);
+  if (p) {
+    p.name = name;
+    p.isNew = false;
+  }
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  updateContentAvailability();
+  renderHomeProjectList();
+  showToast('✅ 项目名称已保存');
+}
+
+// 更新详情页类型选择
+function updateDetailType(value) {
+  const customInput = document.getElementById('detailCustomTypeInput');
+  if(value === '自定义'){
+    customInput.style.display = 'block';
+    customInput.focus();
+  } else {
+    customInput.style.display = 'none';
+    saveDetailType(value);
+  }
+}
+
+// 保存详情页自定义类型
+function saveDetailCustomType() {
+  const input = document.getElementById('detailCustomTypeInput');
+  if (!input) return;
+  const typeName = input.value.trim();
+  if (!typeName) return;
+  saveCustomType(typeName);
+  saveDetailType(typeName);
+  input.value = '';
+  input.style.display = 'none';
+}
+
+// 保存详情页类型
+function saveDetailType(type) {
+  if (!currentItem) return;
+  currentItem.type = type;
+  const p = customProjects.find(x => x.id === currentItem.id);
+  if (p) p.type = type;
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  updateStats();
+  renderHomeProjectList();
+  showToast('✅ 类型已设置为：' + type);
+}
+
+// 保存自定义类型到下拉菜单
+function saveCustomType(typeName) {
+  let customTypes = [];
+  try {
+    customTypes = JSON.parse(localStorage.getItem('survey_custom_types') || '[]');
+  } catch(e) {}
+  if(!customTypes.includes(typeName)){
+    customTypes.push(typeName);
+    localStorage.setItem('survey_custom_types', JSON.stringify(customTypes));
+  }
+  updateAllTypeSelects();
+}
+
+// 更新所有类型下拉菜单
+function updateAllTypeSelects(){
+  let customTypes = [];
+  try {
+    customTypes = JSON.parse(localStorage.getItem('survey_custom_types') || '[]');
+  } catch(e) {}
+  
+  const detailSelect = document.getElementById('detailTypeSelect');
+  if(detailSelect){
+    const oldCustom = detailSelect.querySelectorAll('.custom-type-option');
+    oldCustom.forEach(opt => opt.remove());
+    const firstOption = detailSelect.options[0];
+    customTypes.forEach(typeName => {
+      const opt = document.createElement('option');
+      opt.value = typeName;
+      opt.textContent = typeName;
+      opt.className = 'custom-type-option';
+      detailSelect.insertBefore(opt, firstOption.nextSibling);
+    });
+  }
+}
+
+// 控制内容区域可用性（名称未填写时禁用）
+function updateContentAvailability() {
+  const hasName = currentItem && currentItem.name && currentItem.name.trim();
+  const contentAreas = document.querySelectorAll('.detail-content-area');
+  const tip = document.getElementById('nameRequiredTip');
+  const bottomNav = document.querySelector('#pageDetail .bottom-nav');
+  
+  if (hasName) {
+    contentAreas.forEach(el => {
+      el.style.opacity = '1';
+      el.style.pointerEvents = 'auto';
+    });
+    if(tip) tip.style.display = 'none';
+    if(bottomNav) {
+      bottomNav.style.opacity = '1';
+      bottomNav.style.pointerEvents = 'auto';
+    }
+  } else {
+    contentAreas.forEach(el => {
+      el.style.opacity = '0.4';
+      el.style.pointerEvents = 'none';
+    });
+    if(tip) tip.style.display = 'block';
+    if(bottomNav) {
+      bottomNav.style.opacity = '0.4';
+      bottomNav.style.pointerEvents = 'none';
+    }
+  }
+}
+
 // 前往新建项目页（先检查社区）
 function goToAddProject() {
   if (!currentCommunity) {
@@ -546,7 +708,7 @@ function exportByCommunity() {
       return;
     }
     // 社区名去掉"街道"前缀，只保留社区名
-    let shortName = '全部社区';
+    let shortName = exportChoice ? currentCommunity : '全部社区';
     if (shortName.includes('街道')) shortName = shortName.split('街道')[1] || shortName;
     exportName = shortName + '_现场踏勘记录_' + timeStr;
   } else {
