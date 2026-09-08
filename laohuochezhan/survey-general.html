@@ -231,7 +231,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
   </div>
   <div class="container">
     <input class="search-box" placeholder="🔍 搜索项目名称..." oninput="filterItems(this.value)">
-    <button class="add-btn" onclick="quickAddProject()" style="margin-bottom:14px;">➕ 新建踏勘项目</button>
+    <button class="add-btn" onclick="goToAddProject()" style="margin-bottom:14px;">➕ 新建踏勘项目</button>
     <div id="categoryList"></div>
   </div>
 </div>
@@ -325,33 +325,22 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 <div class="page" id="pageAddProject">
   <div class="topbar">
     <button class="back" onclick="showPage('pageHome')">← 返回</button>
-    <div class="title">新增踏勘项目</div>
+    <div class="title">新建踏勘项目</div>
     <div class="progress"></div>
   </div>
-  <div class="container">
-    <div class="data-section">
-      <h3>📝 项目基本信息</h3>
-      <div style="margin-bottom:14px;">
-        <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:6px;">所属社区</label>
-        <input type="text" id="newProjectCommunity" readonly style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text3);font-size:14px;">
-      </div>
-      <div style="margin-bottom:14px;">
-        <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:6px;">项目名称 *</label>
-        <input type="text" id="newProjectName" placeholder="例如：包装厂宿舍、玻璃厂厂区..." style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text);font-size:15px;">
-      </div>
-      <div style="margin-bottom:14px;">
-        <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:6px;">项目类型</label>
-        <select id="newProjectType" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--text);font-size:14px;">
-          <option value="小区">老旧小区</option>
-          <option value="厂区">厂区/仓库</option>
-          <option value="闲置用地">闲置用地</option>
-          <option value="公服设施">公共服务设施</option>
-          <option value="历史建筑">历史建筑</option>
-          <option value="其他">其他</option>
-        </select>
-      </div>
-      <button onclick="saveNewProject()" style="width:100%;background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;">💾 保存并开始踏勘</button>
+  <div class="container" style="padding-top:40px;">
+    <div style="text-align:center;margin-bottom:30px;">
+      <div style="font-size:48px;margin-bottom:15px;">📍</div>
+      <div style="font-size:18px;color:var(--text);margin-bottom:8px;">所属社区</div>
+      <div style="font-size:16px;color:var(--green);font-weight:600;" id="addPageCommunity">—</div>
     </div>
+    <div style="margin-bottom:25px;">
+      <label style="display:block;font-size:14px;color:var(--text3);margin-bottom:10px;text-align:center;">请输入项目名称</label>
+      <input type="text" id="newProjectName" placeholder="例如：包装厂宿舍、玻璃厂厂区..." style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:12px;padding:16px;color:var(--text);font-size:17px;text-align:center;" onkeypress="if(event.key==='Enter')saveNewProject()">
+    </div>
+    <input type="hidden" id="newProjectCommunity">
+    <button onclick="saveNewProject()" style="width:100%;background:var(--green);border:none;color:#fff;padding:16px;border-radius:12px;font-size:17px;font-weight:600;cursor:pointer;">✓ 确认并开始踏勘</button>
+    <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--text3);">输入名称后按回车或点击按钮确认</div>
   </div>
 </div>
 
@@ -393,6 +382,19 @@ function selectCommunity(community) {
 
 // 新增项目保存
 // 快速新建项目：弹框输名称，直接进详情页
+// 前往新建项目页（先检查社区）
+function goToAddProject() {
+  if (!currentCommunity) {
+    showToast('⚠️ 请先选择社区！');
+    return;
+  }
+  document.getElementById('newProjectCommunity').value = currentCommunity;
+  document.getElementById('addPageCommunity').textContent = currentCommunity;
+  document.getElementById('newProjectName').value = '';
+  showPage('pageAddProject');
+  setTimeout(()=>document.getElementById('newProjectName').focus(), 300);
+}
+
 function quickAddProject() {
   if (!currentCommunity) {
     showToast('请先在首页选择社区！');
@@ -434,7 +436,6 @@ function quickAddProject() {
 
 function saveNewProject() {
   const name = document.getElementById('newProjectName').value.trim();
-  const type = document.getElementById('newProjectType').value;
   
   if (!currentCommunity) {
     showToast('请先在首页选择社区！');
@@ -451,13 +452,12 @@ function saveNewProject() {
     id: newId,
     name: name,
     sub: currentCommunity,
-    type: type,
+    type: '未分类',
     desc: '',
     community: currentCommunity,
     createdAt: new Date().toISOString(),
     data: {
       "所属社区": currentCommunity,
-      "项目类型": type,
       "创建时间": new Date().toLocaleString('zh-CN')
     }
   };
@@ -491,12 +491,7 @@ function saveCurrentItem() {
 
 // 详情页新增项目（当前社区）
 function addNewInDetail() {
-  if (!currentCommunity) {
-    showToast('请先在首页选择社区！');
-    showPage('pageHome');
-    return;
-  }
-  quickAddProject();
+  goToAddProject();
 }
 
 // 按社区导出
