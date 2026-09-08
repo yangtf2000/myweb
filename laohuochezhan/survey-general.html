@@ -1777,8 +1777,9 @@ function pickPhotos(){ document.getElementById('albumInput').click(); }
 function handlePhotos(files){
   if(!currentItem) return;
   const photos = itemPhotos[currentItem.id] || [];
+  let added = 0;
   Array.from(files).forEach(file=>{
-    if(photos.length >= 9) return;
+    if(photos.length >= 20) return;
     const reader = new FileReader();
     reader.onload = e=>{
       const img = new Image();
@@ -1792,14 +1793,18 @@ function handlePhotos(files){
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
         photos.push(canvas.toDataURL('image/jpeg', 0.7));
         itemPhotos[currentItem.id] = photos;
+        // 同时保存到每个项目单独的key（导出和统计用）
+        localStorage.setItem('survey_photos_' + currentItem.id, JSON.stringify(photos));
         saveData();
         renderPhotos();
+        added++;
+        if(added > 0) showToast('已添加' + added + '张照片（' + photos.length + '/20）');
       };
       img.src = e.target.result;
     };
     reader.readAsDataURL(file);
   });
-  showToast('照片已添加');
+  if(photos.length >= 20) showToast('⚠️ 已达到最大照片数量（20张）');
 }
 
 function deletePhoto(index){
@@ -1807,6 +1812,8 @@ function deletePhoto(index){
   const photos = itemPhotos[currentItem.id] || [];
   photos.splice(index, 1);
   itemPhotos[currentItem.id] = photos;
+  // 同时更新每个项目单独的key
+  localStorage.setItem('survey_photos_' + currentItem.id, JSON.stringify(photos));
   saveData();
   renderPhotos();
 }
