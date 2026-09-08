@@ -291,21 +291,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       </div>
     </div>
     
-    <!-- 项目类型 -->
-    <div class="data-section">
-      <h3>🏷️ 项目类型</h3>
-      <select id="projectTypeSelect" onchange="updateProjectType(this.value)" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--text);font-size:15px;">
-        <option value="自定义">✏️ 自定义类型...</option>
-        <option value="老旧小区">老旧小区</option>
-        <option value="厂区仓库">厂区/仓库</option>
-        <option value="闲置用地">闲置用地</option>
-        <option value="公共服务设施">公共服务设施</option>
-        <option value="历史建筑">历史建筑</option>
-      </select>
-    </div>
-    
     <!-- 现场备注 -->
-    <div class="data-section">
+    <div class="data-section detail-content-area">
       <h3>✏️ 现场备注</h3>
       <textarea class="note-textarea" id="noteText" placeholder="现场看到的情况、问题、补充信息..." oninput="saveNote()"></textarea>
       <div class="note-tools">
@@ -315,7 +302,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       <div style="margin-top:8px;font-size:11px;color:var(--text3);text-align:center;">💡 提示：点击输入框，用手机输入法的麦克风按钮语音输入</div>
     </div>
     <!-- 现场照片 -->
-    <div class="data-section">
+    <div class="data-section detail-content-area">
       <h3>📷 现场照片 (<span id="photoCount">0</span>/20，最多20张)</h3>
       <div class="photo-grid" id="photoGrid">
         <div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
@@ -1268,15 +1255,21 @@ function openItem(index){
 
 function renderDetail(){
   if(!currentItem) return;
-  document.getElementById('detailTitle').textContent = currentItem.name + ' ✏️';
+  const titleInput = document.getElementById('detailTitleInput');
+  if(titleInput) titleInput.value = currentItem.name || '';
+  // 更新社区下拉框
+  const communitySelect = document.getElementById('detailCommunitySelect');
+  if(communitySelect) communitySelect.value = currentItem.community || currentCommunity || '梧桐街道白竹亭社区';
+  
   // 更新项目类型下拉框
-  const typeSelect = document.getElementById('projectTypeSelect');
+  const typeSelect = document.getElementById('detailTypeSelect');
   if(typeSelect){
-    // 先确保自定义类型都加载了
     updateAllTypeSelects();
-    // 设置当前类型，如果没有则设为"自定义"
     typeSelect.value = currentItem.type || '自定义';
   }
+  
+  // 控制内容可用性
+  updateContentAvailability();
   document.getElementById('detailProgress').textContent = `${currentItemIndex+1}/${filteredItems.length}`;
   
   // 备注
