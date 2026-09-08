@@ -202,7 +202,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     
     <!-- 操作按钮 -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-      <button onclick="showNewProjectModal()" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">➕ 新建项目</button>
+      <button onclick="simpleNewProject()" style="background:var(--green);border:none;color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">➕ 新建项目</button>
       <button onclick="exportByCommunity()" style="background:var(--card2);border:1px solid var(--line);color:var(--text);padding:14px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;">📤 导出记录</button>
     </div>
     
@@ -456,7 +456,82 @@ function selectCommunity(community) {
 
 // 新增项目保存
 // 快速新建项目：弹框输名称，直接进详情页
-// 显示新建项目模态框
+// 简单新建项目：用系统弹窗（最可靠，任何设备都能用）
+function simpleNewProject() {
+  if (!currentCommunity) {
+    showToast('⚠️ 请先选择社区');
+    return;
+  }
+  
+  // 第一步：输入项目名称
+  const name = prompt('请输入踏勘项目名称：\n（例如：包装厂宿舍、玻璃厂厂区等）\n\n当前社区：' + currentCommunity, '');
+  if (!name || !name.trim()) {
+    showToast('已取消');
+    return;
+  }
+  
+  // 第二步：选择项目类型
+  const typeOptions = ['老旧小区', '厂区仓库', '闲置用地', '公共服务设施', '历史建筑', '自定义类型'];
+  let typeStr = '请选择项目类型（输入序号）：\n\n';
+  typeOptions.forEach((t, i) => {
+    typeStr += (i+1) + '. ' + t + '\n';
+  });
+  typeStr += '\n直接按回车 = 默认（老旧小区）';
+  
+  const typeInput = prompt(typeStr, '1');
+  let type = '老旧小区';
+  
+  if (typeInput) {
+    const idx = parseInt(typeInput.trim());
+    if (!isNaN(idx) && idx >= 1 && idx <= typeOptions.length) {
+      type = typeOptions[idx-1];
+    }
+  }
+  
+  // 如果选择了自定义类型
+  if (type === '自定义类型') {
+    const customType = prompt('请输入自定义类型名称：', '');
+    if (customType && customType.trim()) {
+      type = customType.trim();
+      saveCustomType(type);
+    } else {
+      type = '老旧小区';
+    }
+  }
+  
+  // 创建项目
+  const newItem = {
+    id: 'CUSTOM_' + Date.now(),
+    name: name.trim(),
+    sub: currentCommunity,
+    type: type,
+    desc: '',
+    community: currentCommunity,
+    createdAt: new Date().toISOString(),
+    data: {
+      '所属社区': currentCommunity,
+      '项目类型': type,
+      '创建时间': new Date().toLocaleString('zh-CN')
+    }
+  };
+  
+  customProjects.push(newItem);
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  
+  showToast('✅ 已创建：' + name.trim());
+  updateStats();
+  
+  // 直接进入详情页
+  const communityProjects = customProjects.filter(p => p.community === currentCommunity);
+  currentItem = newItem;
+  currentCategory = {id:'custom',name:'踏勘项目',items:communityProjects};
+  filteredItems = [...communityProjects];
+  currentItemIndex = communityProjects.length - 1;
+  renderDetail();
+  showPage('pageDetail');
+}
+
+// 显示新建项目模态框（保留备用）
 function showNewProjectModal() {
   if (!currentCommunity) {
     showToast('⚠️ 请先选择社区');
@@ -652,7 +727,7 @@ function goToAddProject() {
     showToast('⚠️ 请先选择社区！');
     return;
   }
-  showNewProjectModal();
+  simpleNewProject();
 }
 
 function quickAddProject() {
