@@ -312,9 +312,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       <input type="file" id="albumInput" accept="image/*" multiple style="display:none" onchange="handlePhotos(this.files)">
     </div>
   </div>
-  <div class="bottom-nav" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+  <div class="bottom-nav" style="grid-template-columns:1fr 1fr 1fr;">
     <button onclick="prevItem()">← 上一个</button>
-    <button onclick="saveCurrentItem()" style="background:var(--green-bg);color:var(--green);border-color:var(--green);">💾 保存</button>
     <button onclick="addNewInDetail()" style="background:var(--green-bg);color:var(--green);border-color:var(--green);">➕ 新增</button>
     <button onclick="nextItem()">下一个 →</button>
   </div>
@@ -677,6 +676,24 @@ function updateStats() {
 }
 
 
+
+
+// 修改项目名称
+function renameProject(id) {
+  const project = customProjects.find(p => p.id === id);
+  if (!project) return;
+  const newName = prompt('请输入新的项目名称：', project.name);
+  if (!newName || !newName.trim() || newName.trim() === project.name) return;
+  project.name = newName.trim();
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  // 如果当前正在查看这个项目，更新标题
+  if (currentItem && currentItem.id === id) {
+    currentItem.name = newName.trim();
+    document.getElementById('detailTitle').textContent = newName.trim();
+  }
+  updateStats();
+  showToast('✅ 已修改为：' + newName.trim());
+}
 
 // 删除项目
 function deleteProject(id) {
