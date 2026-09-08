@@ -253,13 +253,19 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 <div class="page" id="pageDetail">
   <div class="topbar">
     <button class="back" onclick="backToHomeFromDetail()">← 返回</button>
-    <input type="text" id="detailTitleInput" style="flex:1;background:transparent;border:none;color:var(--text);font-size:17px;font-weight:600;text-align:center;outline:none;" placeholder="请输入项目名称" onblur="saveProjectNameFromTitle()" onkeypress="if(event.key==='Enter'){this.blur();}">
+    <div class="title" id="detailTitleText" style="flex:1;">项目详情</div>
     <div class="progress" id="detailProgress"></div>
   </div>
   <div class="container">
     <!-- 项目信息 -->
     <div class="data-section" style="margin-bottom:16px;">
       <h3 style="font-size:14px;color:var(--green);margin-bottom:10px;">📋 项目信息</h3>
+      <div style="margin-bottom:12px;">
+        <label style="display:block;font-size:12px;color:#ef4444;margin-bottom:6px;font-weight:600;">📝 项目名称 <span style="color:#ef4444;">*</span></label>
+        <input type="text" id="detailNameInput" placeholder="请输入项目名称" 
+          style="width:100%;background:var(--card2);border:2px solid #ef4444;border-radius:8px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;outline:none;"
+          onblur="saveProjectName()" onkeypress="if(event.key==='Enter'){this.blur();}">
+      </div>
       <div style="margin-bottom:12px;">
         <label style="display:block;font-size:12px;color:var(--text3);margin-bottom:6px;">📍 所属社区</label>
         <div id="detailCommunityDisplay" style="background:var(--card2);padding:10px;border-radius:8px;font-size:14px;color:var(--green);">—</div>
@@ -461,7 +467,7 @@ function simpleNewProject() {
   
   // 聚焦到项目名称输入框
   setTimeout(() => {
-    const input = document.getElementById('detailTitleInput');
+    const input = document.getElementById('detailNameInput');
     if(input) input.focus();
   }, 100);
   
@@ -558,7 +564,34 @@ function confirmNewProject() {
   showPage('pageDetail');
 }
 
-// 从标题输入框保存项目名称
+// 保存项目名称
+function saveProjectName() {
+  if (!currentItem) return;
+  const input = document.getElementById('detailNameInput');
+  if (!input) return;
+  const name = input.value.trim();
+  if (!name) {
+    showToast('⚠️ 请输入项目名称');
+    input.focus();
+    return;
+  }
+  currentItem.name = name;
+  currentItem.isNew = false;
+  const p = customProjects.find(x => x.id === currentItem.id);
+  if (p) {
+    p.name = name;
+    p.isNew = false;
+  }
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  // 更新顶部标题
+  const titleText = document.getElementById('detailTitleText');
+  if(titleText) titleText.textContent = name;
+  renderHomeProjectList();
+  updateStats();
+  showToast('✅ 项目名称已保存');
+}
+
+// 从标题输入框保存项目名称（保留兼容）
 function saveProjectNameFromTitle() {
   if (!currentItem) return;
   const input = document.getElementById('detailTitleInput');
@@ -1531,8 +1564,12 @@ function openItem(index){
 
 function renderDetail(){
   if(!currentItem) return;
-  const titleInput = document.getElementById('detailTitleInput');
-  if(titleInput) titleInput.value = currentItem.name || '';
+  // 更新项目名称输入框
+  const nameInput = document.getElementById('detailNameInput');
+  if(nameInput) nameInput.value = currentItem.name || '';
+  // 更新顶部标题
+  const titleText = document.getElementById('detailTitleText');
+  if(titleText) titleText.textContent = currentItem.name || '项目详情';
   // 更新社区显示
   const communityDisplay = document.getElementById('detailCommunityDisplay');
   if(communityDisplay) {
