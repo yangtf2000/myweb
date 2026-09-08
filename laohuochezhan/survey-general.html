@@ -465,7 +465,7 @@ function simpleNewProject() {
     if(input) input.focus();
   }, 100);
   
-  showToast('💡 请在上方填写项目名称');
+  showToast('请填写项目名称');
 }
 
 // 显示新建项目模态框（保留备用）
@@ -669,10 +669,12 @@ function goToAddProject() {
 
 function quickAddProject() {
   if (!currentCommunity) {
-    showToast('请先在首页选择社区！');
+    showToast('请先选择社区');
     return;
   }
-  const name = prompt('请输入踏勘项目名称：\n（例如：包装厂宿舍、玻璃厂厂区等）');
+  simpleNewProject();
+  return;
+  const name = prompt('请输入项目名称');
   if (!name || !name.trim()) return;
   
   const newId = 'CUSTOM_' + Date.now();
@@ -997,7 +999,7 @@ function updateStats() {
 function updateProjectType(type) {
   if (!currentItem) return;
   if(type === '自定义'){
-    const customType = prompt('请输入自定义类型名称：', '');
+    const customType = prompt('自定义类型名称');
     if(!customType || !customType.trim()){
       // 恢复为原来的类型
       const typeSelect = document.getElementById('projectTypeSelect');
@@ -1022,7 +1024,7 @@ function updateProjectType(type) {
 function renameProject(id) {
   const project = customProjects.find(p => p.id === id);
   if (!project) return;
-  const newName = prompt('请输入新的项目名称：', project.name);
+  const newName = prompt('项目名称', project.name);
   if (!newName || !newName.trim() || newName.trim() === project.name) return;
   project.name = newName.trim();
   localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
@@ -1697,7 +1699,7 @@ function nextItem(){
 }
 
 function addNewItem(){
-  const name = prompt('请输入新项目名称：');
+  const name = prompt('项目名称');
   if(!name) return;
   const newId = (currentCategory?.id || 'NEW') + '_' + Date.now();
   const newItem = {id:newId, name:name, sub:'（现场新增）', data:{'备注':'现场新增项目，请补充详细信息'}};
