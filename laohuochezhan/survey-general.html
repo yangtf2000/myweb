@@ -254,7 +254,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
   <div class="topbar">
     <button class="back" onclick="showPage('pageHome')">← 返回</button>
     <div class="title" id="detailTitle" style="flex:1;">项目详情</div>
-    <div id="detailTypeBadge" onclick="changeProjectType()" style="cursor:pointer;background:rgba(59,130,246,0.15);color:#3b82f6;padding:4px 12px;border-radius:12px;font-size:12px;border:1px solid rgba(59,130,246,0.3);" title="点击修改类型">未分类 ✏️</div>
     <div class="progress" id="detailProgress"></div>
   </div>
   <div class="container">
@@ -292,18 +291,29 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
       </div>
     </div>
     
+    <!-- 项目类型 -->
+    <div class="data-section">
+      <h3>🏷️ 项目类型</h3>
+      <select id="projectTypeSelect" onchange="updateProjectType(this.value)" style="width:100%;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--text);font-size:15px;">
+        <option value="未分类">未分类</option>
+        <option value="老旧小区">老旧小区</option>
+        <option value="厂区仓库">厂区/仓库</option>
+        <option value="闲置用地">闲置用地</option>
+        <option value="公共服务设施">公共服务设施</option>
+        <option value="历史建筑">历史建筑</option>
+        <option value="其他">其他</option>
+      </select>
+    </div>
+    
     <!-- 现场备注 -->
     <div class="data-section">
       <h3>✏️ 现场备注</h3>
       <textarea class="note-textarea" id="noteText" placeholder="现场看到的情况、问题、补充信息..." oninput="saveNote()"></textarea>
       <div class="note-tools">
-        <button class="note-tool" id="voiceBtn" 
-  onmousedown="startVoice()" onmouseup="stopVoice()" onmouseleave="stopVoice()"
-  ontouchstart="startVoice(event)" ontouchend="stopVoice(event)"
-  style="user-select:none;-webkit-user-select:none;touch-action:manipulation;">🎤 按住说话</button>
         <button class="note-tool" onclick="insertLocationToNote()">📋 插入位置</button>
         <button class="note-tool" onclick="clearNote()">🔤 清空</button>
       </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--text3);text-align:center;">💡 提示：点击输入框，用手机输入法的麦克风按钮语音输入</div>
     </div>
     <!-- 现场照片 -->
     <div class="data-section">
@@ -721,28 +731,16 @@ function updateStats() {
 
 
 
-// 修改项目类型
-function changeProjectType() {
+// 更新项目类型（下拉选择框）
+function updateProjectType(type) {
   if (!currentItem) return;
-  const types = ['老旧小区', '厂区仓库', '闲置用地', '公共服务设施', '历史建筑', '其他', '未分类'];
-  const currentIdx = types.indexOf(currentItem.type || '未分类');
-  let msg = '请选择项目类型（输入序号）：\n';
-  types.forEach((t, i) => {
-    msg += (i+1) + '. ' + t + (i === currentIdx ? '（当前）' : '') + '\n';
-  });
-  const input = prompt(msg, String(currentIdx + 1));
-  if (!input) return;
-  const idx = parseInt(input) - 1;
-  if (idx >= 0 && idx < types.length) {
-    currentItem.type = types[idx];
-    // 更新customProjects中的数据
-    const p = customProjects.find(x => x.id === currentItem.id);
-    if (p) p.type = types[idx];
-    localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
-    document.getElementById('detailTypeBadge').textContent = types[idx] + ' ✏️';
-    updateStats();
-    showToast('✅ 类型已修改为：' + types[idx]);
-  }
+  currentItem.type = type;
+  // 更新customProjects中的数据
+  const p = customProjects.find(x => x.id === currentItem.id);
+  if (p) p.type = type;
+  localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+  updateStats();
+  showToast('✅ 类型已设置为：' + type);
 }
 
 // 修改项目名称
@@ -1256,7 +1254,9 @@ function openItem(index){
 function renderDetail(){
   if(!currentItem) return;
   document.getElementById('detailTitle').textContent = currentItem.name;
-  document.getElementById('detailTypeBadge').textContent = (currentItem.type || '未分类') + ' ✏️';
+  // 更新项目类型下拉框
+  const typeSelect = document.getElementById('projectTypeSelect');
+  if(typeSelect) typeSelect.value = currentItem.type || '未分类';
   document.getElementById('detailProgress').textContent = `${currentItemIndex+1}/${filteredItems.length}`;
   
   // 备注
