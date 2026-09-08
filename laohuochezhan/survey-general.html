@@ -677,7 +677,8 @@ function renderHomeProjectList() {
     const hasLoc = locs[item.id];
     
     const createTime = item.createdAt ? new Date(item.createdAt).toLocaleString('zh-CN', {month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}) : '';
-    html += '<div class="cat-card" onclick="openHomeItem(' + idx + ')" style="margin-bottom:10px;">'
+    html += '<div class="cat-card" style="margin-bottom:10px;position:relative;">'
+      + '<div onclick="openHomeItem(' + idx + ')" style="cursor:pointer;">'
       + '<div class="cat-header">'
       + '<span><span class="cat-icon">📍</span><span class="cat-name">' + item.name + '</span></span>'
       + '<span style="color:var(--text3);font-size:12px;">' + (item.type || '未分类') + '</span>'
@@ -688,6 +689,8 @@ function renderHomeProjectList() {
       + '<span style="color:' + (hasLoc ? 'var(--blue)' : 'var(--text3)') + '">📍 ' + (hasLoc ? '已定位' : '未定位') + '</span>'
       + '</div>'
       + '<div style="font-size:11px;color:var(--text3);margin-top:4px;padding-left:28px;">🕐 ' + createTime + (item.desc ? ' · ' + item.desc : '') + '</div>'
+      + '</div>'
+      + '<button onclick="event.stopPropagation();deleteProject(\'' + item.id + '\')" style="position:absolute;top:8px;right:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);color:#ef4444;width:24px;height:24px;border-radius:50%;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;" title="删除此项目">×</button>'
       + '</div>';
   });
   
