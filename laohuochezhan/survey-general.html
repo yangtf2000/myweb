@@ -467,6 +467,29 @@ function simpleNewProject() {
   showToast('请填写项目名称');
 }
 
+// 从详情页返回首页（不需要项目名称检查，可以随时返回）
+function backToHomeFromDetail() {
+  if (currentItem) {
+    try { saveNote(); } catch(e) {}
+  }
+  showPage('pageHome');
+  renderHomeProjectList();
+  updateStats();
+}
+
+// 检查当前项目是否已填写名称，未填写则提示
+function checkProjectName() {
+  if (!currentItem) return true;
+  if (!currentItem.name || !currentItem.name.trim()) {
+    showToast('⚠️ 请先填写项目名称');
+    const input = document.getElementById('detailNameInput');
+    if (input) input.focus();
+    return false;
+  }
+  return true;
+}
+
+
 // 显示新建项目模态框（保留备用）
 function showNewProjectModal() {
   if (!currentCommunity) {
