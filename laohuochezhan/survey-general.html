@@ -383,22 +383,6 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 </div>
 
 
-    <div style="margin-bottom:16px;">
-      <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:8px;">项目名称 <span style="color:#ef4444;">*</span></label>
-      <input type="text" id="modalProjectName" placeholder="例如：包装厂宿舍、玻璃厂厂区..." style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;" onkeypress="if(event.key==='Enter')confirmNewProject()">
-    </div>
-    <div style="margin-bottom:20px;">
-      <label style="display:block;font-size:13px;color:var(--text3);margin-bottom:8px;">项目类型</label>
-      <select id="modalProjectType" style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;">
-        <option value="老旧小区">老旧小区</option>
-        <option value="厂区仓库">厂区/仓库</option>
-        <option value="闲置用地">闲置用地</option>
-        <option value="公共服务设施">公共服务设施</option>
-        <option value="历史建筑">历史建筑</option>
-        <option value="自定义">✏️ 自定义类型...</option>
-      </select>
-      <input type="text" id="modalCustomType" placeholder="请输入自定义类型名称..." style="width:100%;background:var(--card2);border:2px solid var(--line);border-radius:10px;padding:12px;color:var(--text);font-size:15px;box-sizing:border-box;margin-top:8px;display:none;">
-    </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -799,7 +783,8 @@ function saveCurrentItem() {
 // 详情页新增项目（当前社区）
 function addNewInDetail() {
   if (!checkProjectName()) return;
-  goToAddProject();
+  // 直接新建项目，进入详情页
+  simpleNewProject();
 }
 
 // 按社区导出
