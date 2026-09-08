@@ -520,7 +520,7 @@ function exportByCommunity() {
       return;
     }
     // 社区名去掉"街道"前缀，只保留社区名
-    let shortName = currentCommunity;
+    let shortName = '全部社区';
     if (shortName.includes('街道')) shortName = shortName.split('街道')[1] || shortName;
     exportName = shortName + '_现场踏勘记录_' + timeStr;
   } else {
