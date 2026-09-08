@@ -1311,7 +1311,8 @@ function setConclusion(status){
   saveData();
   document.querySelectorAll('.conc-btn').forEach(b=>b.classList.remove('active'));
   document.querySelector(`.conc-btn.${status==='none'?'none':status}`).classList.add('active');
-  document.getElementById('issueOptions').classList.toggle('show', status==='issue');
+  const issueEl = document.getElementById('issueOptions');
+  if(issueEl) issueEl.classList.toggle('show', status==='issue');
   
   const textarea = document.getElementById('noteText');
   
@@ -1356,7 +1357,6 @@ function saveNote(){
   d.note = document.getElementById('noteText').value;
   itemData[currentItem.id] = d;
   saveData();
-  document.getElementById('saveTip').textContent = '已自动保存 ' + new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'});
 }
 
 function clearNote(){
@@ -1950,8 +1950,10 @@ function saveDeptRemarks(){
 
 function renderDepts(){
   currentDeptIndex = -1;
-  document.getElementById('deptPageTitle').textContent = '部门资料调取';
-  document.getElementById('deptBackBtn').onclick = function(){ showPage('pageHome'); };
+  const deptTitle = document.getElementById('deptPageTitle');
+  if(deptTitle) deptTitle.textContent = '部门资料调取';
+  const deptBack = document.getElementById('deptBackBtn');
+  if(deptBack) deptBack.onclick = function(){ showPage('pageHome'); };
   const container = document.getElementById('deptList');
   container.innerHTML = DEPTS.map((dept,di)=>{
     let got=0, part=0, no=0;
@@ -1972,8 +1974,10 @@ function renderDepts(){
 function openDeptDetail(di){
   currentDeptIndex = di;
   const dept = DEPTS[di];
-  document.getElementById('deptPageTitle').textContent = dept.name;
-  document.getElementById('deptBackBtn').onclick = function(){ renderDepts(); };
+  const deptTitle2 = document.getElementById('deptPageTitle');
+  if(deptTitle2) deptTitle2.textContent = dept.name;
+  const deptBack2 = document.getElementById('deptBackBtn');
+  if(deptBack2) deptBack2.onclick = function(){ renderDepts(); };
   const container = document.getElementById('deptList');
   container.innerHTML = dept.docs.map((doc,ci)=>{
     const remarkKey = `${di}_${ci}`;
