@@ -252,7 +252,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 <!-- 项目详情页 -->
 <div class="page" id="pageDetail">
   <div class="topbar">
-    <button class="back" onclick="showPage('pageHome')">← 返回</button>
+    <button class="back" onclick="backToHomeFromDetail()">← 返回</button>
     <input type="text" id="detailTitleInput" style="flex:1;background:transparent;border:none;color:var(--text);font-size:17px;font-weight:600;text-align:center;outline:none;" placeholder="请输入项目名称" onblur="saveProjectNameFromTitle()" onkeypress="if(event.key==='Enter'){this.blur();}">
     <div class="progress" id="detailProgress"></div>
   </div>
@@ -765,6 +765,7 @@ function saveCurrentItem() {
 
 // 详情页新增项目（当前社区）
 function addNewInDetail() {
+  if (!checkProjectName()) return;
   goToAddProject();
 }
 
@@ -1683,6 +1684,7 @@ function insertLocationToNote(){
 }
 
 function prevItem(){
+  if(!checkProjectName()) return;
   if(currentItemIndex > 0){
     openItem(currentItemIndex - 1);
   } else {
@@ -1691,6 +1693,7 @@ function prevItem(){
 }
 
 function nextItem(){
+  if(!checkProjectName()) return;
   if(currentItemIndex < filteredItems.length - 1){
     openItem(currentItemIndex + 1);
   } else {
