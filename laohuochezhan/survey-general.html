@@ -253,7 +253,8 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
 <div class="page" id="pageDetail">
   <div class="topbar">
     <button class="back" onclick="showPage('pageHome')">← 返回</button>
-    <div class="title" id="detailTitle">项目详情</div>
+    <div class="title" id="detailTitle" style="flex:1;">项目详情</div>
+    <div id="detailTypeBadge" onclick="changeProjectType()" style="cursor:pointer;background:rgba(59,130,246,0.15);color:#3b82f6;padding:4px 12px;border-radius:12px;font-size:12px;border:1px solid rgba(59,130,246,0.3);" title="点击修改类型">未分类 ✏️</div>
     <div class="progress" id="detailProgress"></div>
   </div>
   <div class="container">
@@ -303,7 +304,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Microsoft
     </div>
     <!-- 现场照片 -->
     <div class="data-section">
-      <h3>📷 现场照片 (<span id="photoCount">0</span>/20)</h3>
+      <h3>📷 现场照片 (<span id="photoCount">0</span>/20，最多20张)</h3>
       <div class="photo-grid" id="photoGrid">
         <div class="photo-add" onclick="takePhoto()">📷<span>拍照</span></div>
         <div class="photo-add" onclick="pickPhotos()">🖼️<span>相册</span></div>
@@ -500,10 +501,48 @@ function exportByCommunity() {
     return;
   }
   
+  // 弹出导出选项
+  const exportChoice = confirm('选择导出范围：\n\n点击【确定】= 导出当前社区（' + (currentCommunity || '未选择') + '）\n点击【取消】= 导出全部社区（' + customProjects.length + '个项目）');
+  
+  let projectsToExport = [];
+  let exportName = '';
+  const now = new Date();
+  const timeStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + '_' + String(now.getHours()).padStart(2,'0') + String(now.getMinutes()).padStart(2,'0');
+  
+  if (exportChoice) {
+    // 导出当前社区
+    if (!currentCommunity) {
+      showToast('⚠️ 请先选择社区！');
+      return;
+    }
+    projectsToExport = customProjects.filter(p => p.community === currentCommunity);
+    if (projectsToExport.length === 0) {
+      showToast('当前社区暂无踏勘记录');
+      return;
+    }
+    // 社区名去掉"街道"前缀，只保留社区名
+    let shortName = currentCommunity;
+    if (shortName.includes('街道')) shortName = shortName.split('街道')[1] || shortName;
+    exportName = shortName + '_现场踏勘记录_' + timeStr;
+  } else {
+    // 导出全部
+    projectsToExport = customProjects;
+    exportName = '全部社区_现场踏勘记录_' + timeStr;
+  }
+  
+  // 统计照片总数，大文件提示
+  let totalPhotos = 0;
+  projectsToExport.forEach(p => {
+    totalPhotos += (JSON.parse(localStorage.getItem('survey_photos_' + p.id) || '[]')).length;
+  });
+  if (totalPhotos >= 20) {
+    showToast('📷 共' + totalPhotos + '张照片，文件较大，导出可能需要几秒钟...');
+  }
+  
   const grouped = {};
   const locs = localStorage.getItem('survey_project_locs') ? JSON.parse(localStorage.getItem('survey_project_locs')) : {};
   
-  customProjects.forEach(p => {
+  projectsToExport.forEach(p => {
     const comm = p.community || '未分类';
     if (!grouped[comm]) grouped[comm] = [];
     const photos = JSON.parse(localStorage.getItem('survey_photos_' + p.id) || '[]');
@@ -593,10 +632,10 @@ function exportByCommunity() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = '现场踏勘记录_' + new Date().toISOString().slice(0,10) + '.html';
+  a.download = exportName + '.html';
   a.click();
   URL.revokeObjectURL(url);
-  showToast('已导出 ' + customProjects.length + ' 条踏勘记录（HTML格式）');
+  showToast('✅ 已导出 ' + projectsToExport.length + ' 条记录（' + totalPhotos + '张照片）');
 }
 
 // 渲染首页项目列表
@@ -678,6 +717,31 @@ function updateStats() {
 
 
 
+
+// 修改项目类型
+function changeProjectType() {
+  if (!currentItem) return;
+  const types = ['老旧小区', '厂区仓库', '闲置用地', '公共服务设施', '历史建筑', '其他', '未分类'];
+  const currentIdx = types.indexOf(currentItem.type || '未分类');
+  let msg = '请选择项目类型（输入序号）：\n';
+  types.forEach((t, i) => {
+    msg += (i+1) + '. ' + t + (i === currentIdx ? '（当前）' : '') + '\n';
+  });
+  const input = prompt(msg, String(currentIdx + 1));
+  if (!input) return;
+  const idx = parseInt(input) - 1;
+  if (idx >= 0 && idx < types.length) {
+    currentItem.type = types[idx];
+    // 更新customProjects中的数据
+    const p = customProjects.find(x => x.id === currentItem.id);
+    if (p) p.type = types[idx];
+    localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
+    document.getElementById('detailTypeBadge').textContent = types[idx] + ' ✏️';
+    updateStats();
+    showToast('✅ 类型已修改为：' + types[idx]);
+  }
+}
+
 // 修改项目名称
 function renameProject(id) {
   const project = customProjects.find(p => p.id === id);
@@ -701,6 +765,7 @@ function deleteProject(id) {
   const idx = customProjects.findIndex(p => p.id === id);
   if (idx > -1) {
     const name = customProjects[idx].name;
+    const wasCurrent = currentItem && currentItem.id === id;
     customProjects.splice(idx, 1);
     localStorage.setItem('survey_general_custom_projects', JSON.stringify(customProjects));
     // 清除相关数据
@@ -711,6 +776,22 @@ function deleteProject(id) {
     if (locs[id]) { delete locs[id]; localStorage.setItem('survey_project_locs', JSON.stringify(locs)); }
     updateStats();
     showToast('已删除：' + name);
+    // 如果删除的是当前查看的项目，自动跳转
+    if (wasCurrent) {
+      const communityProjects = currentCommunity ? customProjects.filter(p => p.community === currentCommunity) : customProjects;
+      if (communityProjects.length > 0) {
+        const newIdx = Math.min(idx, communityProjects.length - 1);
+        currentItem = communityProjects[newIdx];
+        filteredItems = [...communityProjects];
+        currentItemIndex = newIdx;
+        renderDetail();
+        showToast('已自动切换到：' + currentItem.name);
+      } else {
+        currentItem = null;
+        showPage('pageHome');
+        showToast('该社区暂无项目，请新建');
+      }
+    }
   }
 }
 
@@ -1172,6 +1253,7 @@ function openItem(index){
 function renderDetail(){
   if(!currentItem) return;
   document.getElementById('detailTitle').textContent = currentItem.name;
+  document.getElementById('detailTypeBadge').textContent = (currentItem.type || '未分类') + ' ✏️';
   document.getElementById('detailProgress').textContent = `${currentItemIndex+1}/${filteredItems.length}`;
   
   // 备注
