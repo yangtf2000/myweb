@@ -186,6 +186,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
   .value-grid,.num-vertical{grid-template-columns:1fr}
   .info-grid{grid-template-columns:1fr}
 }
+
+/* ===== 现场照片网格 ===== */
+.photo-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+.pg-item{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.pg-item img{width:100%;height:140px;object-fit:cover;display:block}
+.pg-caption{padding:10px 12px;font-size:12px;line-height:1.7;color:var(--text2)}
+@media(max-width:600px){.photo-grid-3{grid-template-columns:1fr}.pg-item img{height:180px}}
+
 </style>
 </head>
 <body>
@@ -512,11 +520,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 
 <!-- 杂志开篇大图 -->
 <div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/DVo4tgW7be" alt="废弃站台荒草">
+<img src="https://aka.doubaocdn.com/s/0fuFUrVi70" alt="荒草漫过铁轨现场实拍">
 <div class="mag-hero-overlay">
 <div class="mag-hero-text">
 <h3>荒草漫过铁轨</h3>
-<p>透视视角下，曾经昼夜不停的运输枢纽如今寂静无声，荒草漫过铁轨，烟火落幕</p>
+<p>现场实拍：曾经昼夜不停的运输枢纽如今寂静无声，4.5公里铁轨被荒草淹没，南瓜藤爬满道砟</p>
 </div>
 </div>
 </div>
@@ -544,6 +552,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 </div>
 </div>
 
+<!-- 现场实拍：荒寂的站场 -->
+<h3 style="font-size:20px;color:#fff;margin:22px 0 14px;padding-left:12px;border-left:3px solid var(--red)">📷 现场实拍：被遗忘的站场</h3>
+<div class="photo-grid-3">
+<div class="pg-item">
+<img src="https://aka.doubaocdn.com/s/X4CYIt45o5" alt="废弃站台雨棚">
+<div class="pg-caption">废弃站台雨棚 — 钢结构梁柱锈迹斑斑，黄黑警示柱仍在，站台空无一人</div>
+</div>
+<div class="pg-item">
+<img src="https://aka.doubaocdn.com/s/DG35dt98sY" alt="废弃仓库与站台">
+<div class="pg-caption">仓库与站台之间 — 左侧白色仓库门窗封死，右侧雨棚延伸向远方，中间道路荒草丛生</div>
+</div>
+<div class="pg-item">
+<img src="https://aka.doubaocdn.com/s/Xh0hMjYKSr" alt="铁轨特写">
+<div class="pg-caption">老铁轨特写 — 轨面刻有"054"编号，道砟间野花盛开，铁轨已20年未过列车</div>
+</div>
+</div>
+
+<div class="story-card" style="margin-top:18px">
+<h4><span class="icon">🏚️</span> 站场现状勘察记录（2026年9月）</h4>
+<p><strong>站房与雨棚：</strong>老站房主体结构尚存，站台雨棚钢结构梁柱锈蚀严重，黄黑警示柱标识清晰可见，站台地面破损开裂。</p>
+<p><strong>铁轨线路：</strong>4.5公里铁轨完整留存，多条股道并行，轨面有编号标记（如"054"），道砟完好但已被荒草和南瓜藤覆盖，部分路段杂草长过轨面。</p>
+<p><strong>仓库与附属建筑：</strong>沿线分布多栋白色平房仓库和职工宿舍，门窗均已被砖封死，墙面剥落，屋顶杂草丛生，建筑周围被大树和藤蔓包裹。</p>
+<p><strong>整体环境：</strong>整个站场区域已成为城市中的"荒野孤岛"，植被自然生长，野生动物出没，与周边城市社区形成鲜明对比。</p>
+</div>
+
 <!-- 左文右图 -->
 <div class="layout-lr">
 <div class="layout-text">
@@ -552,7 +585,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <p>"一直担心老站被拆！"——这是许多永州人的共同心声。好在，重磅利好最终落地。</p>
 </div>
 <div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/IRMXoolwyQ" alt="废弃站台高清">
+<img src="https://aka.doubaocdn.com/s/197d8iMJMA" alt="废弃铁路建筑现场实拍">
 </div>
 </div>
 
@@ -574,11 +607,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 
 <!-- 杂志开篇大图 -->
 <div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/P6RjNyHYcd" alt="老火车站改造效果图">
+<img src="https://aka.doubaocdn.com/s/LpIrc3t0Vb" alt="老火车站站场全景现场实拍">
 <div class="mag-hero-overlay">
 <div class="mag-hero-text">
 <h3>10.85亿保护性焕新</h3>
-<p>坚持保护性开发、拒绝大拆大建！4.5公里百年老铁轨、经典复古老站房、特色铁路建筑群全部原样留存</p>
+<p>现场实拍：这片荒寂20年的站场，即将迎来新生 — 4.5公里老铁轨、30栋历史建筑将全部原样保留</p>
 </div>
 </div>
 </div>
