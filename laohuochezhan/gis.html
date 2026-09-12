@@ -174,6 +174,11 @@
           <button class="btn" id="btn-tdt-sat" onclick="switchBasemap('tdt-sat')">🛰️ 卫星</button>
           <button class="btn" id="btn-tdt-street" onclick="switchBasemap('tdt-street')">🗺️ 街道</button>
         </div>
+        <div class="section-label" style="margin-top:8px;">其他</div>
+        <div class="btn-row-2">
+          <button class="btn" id="btn-no-basemap" onclick="toggleNoBasemap()">⬜ 关闭底图</button>
+          <button class="btn" id="btn-osm" onclick="switchBasemap('osm')">🌍 OSM</button>
+        </div>
         <div class="section-label" style="margin-top:8px;">卫星图标注</div>
         <div class="layer-item"><input type="checkbox" id="layerLabels" onchange="toggleMapLabels(this.checked)"><div class="color" style="background:#fff;border:1px solid #8ab4f8;"></div><span class="name">显示文字标注</span></div>
       </div>
@@ -201,7 +206,6 @@
         
         <div class="section-label">地名</div>
         <div class="layer-item"><input type="checkbox" id="layer-places" onchange="togglePlaces(this.checked)"><div class="color" style="background:#4caf50;"></div><span class="name">社区名录点位</span><span class="count">273</span></div>
-        <div class="layer-item" style="margin-top:4px;"><input type="checkbox" id="place-labels" onchange="togglePlaceLabels(this.checked)"><div class="color" style="background:#fff;border:1px solid #8ab4f8;"></div><span class="name" style="color:#8ab4f8;">显示地名</span></div>
         <div class="section-label">公共服务设施</div>
         <div class="poi-group">
           <div class="poi-group-header">
@@ -630,8 +634,8 @@ function switchBasemap(type){
   const newCoord=basemaps[type].coord;
   const changed=newCoord!==currentCoordSystem;
   if(changed){const c=map.getCenter();if(currentCoordSystem==='gcj02'&&newCoord==='wgs84'){const a=gcj02ToWgs84(c.lng,c.lat);map.setView([a[1],a[0]],map.getZoom(),{animate:false});}else if(currentCoordSystem==='wgs84'&&newCoord==='gcj02'){const t=wgs84ToGcj02(c.lng,c.lat);map.setView([t[1],t[0]],map.getZoom(),{animate:false});}}
-  map.removeLayer(basemaps[currentBasemapKey].layer);
-  basemaps[type].layer.addTo(map);
+  if(!noBasemapMode) map.removeLayer(basemaps[currentBasemapKey].layer);
+  if(!noBasemapMode) basemaps[type].layer.addTo(map);
   currentBasemapKey=type;
   if(type==='gaode-street'&&gaodeLabelLayer){map.removeLayer(gaodeLabelLayer);document.getElementById('layerLabels').checked=false;}
   document.querySelectorAll('.btn-row-2 .btn, .menu-body .btn').forEach(b=>{if(b.id&&b.id.startsWith('btn-'))b.classList.remove('primary');});
@@ -649,6 +653,22 @@ function switchBasemap(type){
   }
   document.getElementById('statusBar').textContent='底图：'+basemaps[type].name+' | 坐标：'+(newCoord==='gcj02'?'GCJ-02':'WGS84');
 }
+// 关闭/恢复底图
+let noBasemapMode=false;
+function toggleNoBasemap(){
+  noBasemapMode=!noBasemapMode;
+  const btn=document.getElementById('btn-no-basemap');
+  if(noBasemapMode){
+    map.removeLayer(basemaps[currentBasemapKey].layer);
+    if(btn) btn.classList.add('primary');
+    showToast('已关闭底图');
+  } else {
+    basemaps[currentBasemapKey].layer.addTo(map);
+    if(btn) btn.classList.remove('primary');
+    showToast('已恢复底图');
+  }
+}
+
 function getStateText(){return boundaryState==='editing'?'编辑中':'正常';}
 
 
