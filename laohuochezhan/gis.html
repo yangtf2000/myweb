@@ -179,8 +179,6 @@
           <button class="btn" id="btn-no-basemap" onclick="toggleNoBasemap()">⬜ 关闭底图</button>
           <button class="btn" id="btn-osm" onclick="switchBasemap('osm')">🌍 OSM</button>
         </div>
-        <div class="section-label" style="margin-top:8px;">卫星图标注</div>
-        <div class="layer-item"><input type="checkbox" id="layerLabels" onchange="toggleMapLabels(this.checked)"><div class="color" style="background:#fff;border:1px solid #8ab4f8;"></div><span class="name">显示文字标注</span></div>
       </div>
     </div>
     
@@ -206,6 +204,7 @@
         
         <div class="section-label">地名</div>
         <div class="layer-item"><input type="checkbox" id="layer-places" onchange="togglePlaces(this.checked)"><div class="color" style="background:#4caf50;"></div><span class="name">社区名录点位</span><span class="count">273</span></div>
+        <div class="layer-item" style="margin-top:4px;"><input type="checkbox" id="place-labels" onchange="togglePlaceLabels(this.checked)"><div class="color" style="background:#fff;border:1px solid #8ab4f8;"></div><span class="name" style="color:#8ab4f8;">显示地名</span></div>
         <div class="section-label">公共服务设施</div>
         <div class="poi-group">
           <div class="poi-group-header">
