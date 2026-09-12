@@ -193,6 +193,12 @@
         <div class="layer-item"><input type="checkbox" id="layerPlan" onchange="toggleLayer('plan')"><div class="color" style="background:#4285f4;"></div><span class="name">片区控规</span><span class="count">77块</span></div>
         
         
+        <div class="section-label">现场调研</div>
+        <div class="layer-item"><input type="checkbox" id="layerSurveyTrack" onchange="toggleLayer('surveyTrack')"><div class="color" style="background:#ff5722;"></div><span class="name">调研轨迹线</span><span class="count">4条/52.6km</span></div>
+        <div class="layer-item"><input type="checkbox" id="layerSurveyPhotos" onchange="toggleLayer('surveyPhotos')"><div class="color" style="background:#e91e63;"></div><span class="name">调研照片点</span><span class="count">326张</span></div>
+        <div class="layer-item"><input type="checkbox" id="layerSurveyTrackNew" onchange="toggleLayer('surveyTrackNew')"><div class="color" style="background:#9c27b0;"></div><span class="name">补充轨迹线</span><span class="count">6条/36km</span></div>
+        <div class="layer-item"><input type="checkbox" id="layerSurveyPhotosNew" onchange="toggleLayer('surveyPhotosNew')"><div class="color" style="background:#00bcd4;"></div><span class="name">补充照片点</span><span class="count">1202张</span></div>
+        
         <div class="section-label">地名</div>
         <div class="layer-item"><input type="checkbox" id="layer-places" onchange="togglePlaces(this.checked)"><div class="color" style="background:#4caf50;"></div><span class="name">小区/项目地名</span><span class="count">58</span></div>
         <div class="layer-item" style="margin-top:4px;"><input type="checkbox" id="place-labels" onchange="togglePlaceLabels(this.checked)"><div class="color" style="background:#fff;border:1px solid #8ab4f8;"></div><span class="name" style="color:#8ab4f8;">显示地名</span></div>
@@ -479,7 +485,7 @@ let activeBoundaryId='default';
 let boundaryCounter=1;
 let currentCoords=JSON.parse(JSON.stringify(BOUNDARY_COORDS));
 let boundaryMarkers=[],isAddingPoint=false,isDeletingPoint=false,undoStack=[];
-const layers={boundary:null,building:null,land:null,plan:null,community:null,analysisLand:null,textureBuilding:null};
+const layers={boundary:null,building:null,land:null,plan:null,community:null,analysisLand:null,textureBuilding:null,surveyTrack:null,surveyPhotos:null,surveyData:null,surveyTrackNew:null,surveyPhotosNew:null,surveyDataNew:null};
 let analysisLayer=null,analysisOpacity=0.7,currentColorScheme='standard';
 let gisData={building:null,land:null,plan:null};
 
@@ -526,6 +532,8 @@ function toggleSubSection(name){
 }
 
 const map=L.map('map',{zoomControl:true}).setView([26.454,111.601],14);
+loadSurveyTrack();
+  loadSurveyTrackNew();
 
 // ========== 底图 ==========
 // 创建带错误处理的瓦片层
@@ -1302,6 +1310,10 @@ function toggleLayer(name){
   else if(name==='building'){if(visible){if(!layers.building&&gisData.building)renderBuildingLayer();else if(layers.building)layers.building.addTo(map);}else if(layers.building)map.removeLayer(layers.building);}
   else if(name==='land'){if(visible){if(!layers.land&&gisData.land)renderLandLayer();else if(layers.land)layers.land.addTo(map);}else if(layers.land)map.removeLayer(layers.land);}
   else if(name==='plan'){if(visible){if(!layers.plan&&gisData.plan)renderPlanLayer();else if(layers.plan)layers.plan.addTo(map);}else if(layers.plan)map.removeLayer(layers.plan);}
+  else if(name==='surveyTrack'){if(visible){if(!layers.surveyTrack&&layers.surveyData)renderSurveyTrackLayer();else if(layers.surveyTrack)layers.surveyTrack.addTo(map);}else if(layers.surveyTrack)map.removeLayer(layers.surveyTrack);}
+  else if(name==='surveyPhotos'){if(visible){if(!layers.surveyPhotos&&layers.surveyData)renderSurveyPhotosLayer();else if(layers.surveyPhotos)layers.surveyPhotos.addTo(map);}else if(layers.surveyPhotos)map.removeLayer(layers.surveyPhotos);}
+  else if(name==='surveyTrackNew'){if(visible){if(!layers.surveyTrackNew&&layers.surveyDataNew)renderSurveyTrackNewLayer();else if(layers.surveyTrackNew)layers.surveyTrackNew.addTo(map);}else if(layers.surveyTrackNew)map.removeLayer(layers.surveyTrackNew);}
+  else if(name==='surveyPhotosNew'){if(visible){if(!layers.surveyPhotosNew&&layers.surveyDataNew)renderSurveyPhotosNewLayer();else if(layers.surveyPhotosNew)layers.surveyPhotosNew.addTo(map);}else if(layers.surveyPhotosNew)map.removeLayer(layers.surveyPhotosNew);}
 }
 
 // ========== GIS图层渲染 ==========
@@ -1319,6 +1331,137 @@ function renderLandLayer(){
   const colors=COLOR_SCHEMES[currentColorScheme].land;
   layers.land=L.geoJSON(data,{style:f=>{const c=colors[f.properties.用地类型]||'#5f6368';return{color:c,weight:1,fillColor:c,fillOpacity:0.6};},onEachFeature:(f,l)=>l.bindPopup(`<div class="popup-content"><h4>🌍 用地</h4><div class="row"><span class="label">类型</span><span class="value">${f.properties.用地类型||'?'}</span></div></div>`)}).addTo(map);
 }
+
+// ========== 调研轨迹图层渲染 ==========
+function renderSurveyTrackLayer(){
+  if(layers.surveyTrack)map.removeLayer(layers.surveyTrack);
+  if(!layers.surveyData)return;
+  const trackFeatures=layers.surveyData.features.filter(f=>f.properties.type==='track');
+  if(trackFeatures.length===0)return;
+  // 不同日期用不同颜色
+  const dateColors={'2026-09-09':'#ff5722','2026-09-10':'#2196f3','2026-09-11':'#4caf50'};
+  layers.surveyTrack=L.geoJSON({type:'FeatureCollection',features:trackFeatures},{
+    style:f=>{const c=dateColors[f.properties.date]||'#9c27b0';return{color:c,weight:4,opacity:0.85};},
+    onEachFeature:(f,l)=>{
+      const p=f.properties;
+      l.bindPopup(`<div class="popup-content"><h4>📍 调研轨迹</h4><div class="row"><span class="label">日期</span><span class="value">${p.date||'未知'}</span></div><div class="row"><span class="label">距离</span><span class="value">${(p.distance_m/1000).toFixed(2)} km</span></div><div class="row"><span class="label">采样点</span><span class="value">${p.point_count}个</span></div></div>`);
+    }
+  }).addTo(map);
+}
+function renderSurveyPhotosLayer(){
+  if(layers.surveyPhotos)map.removeLayer(layers.surveyPhotos);
+  if(!layers.surveyData)return;
+  const photoFeatures=layers.surveyData.features.filter(f=>f.properties.type==='photo');
+  if(photoFeatures.length===0)return;
+  const photoIcon=L.divIcon({
+    className:'survey-photo-icon',
+    html:'<div style="width:20px;height:20px;background:#e91e63;border:2px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 1px 4px rgba(0,0,0,0.4);">📷</div>',
+    iconSize:[20,20],
+    iconAnchor:[10,10]
+  });
+  layers.surveyPhotos=L.geoJSON({type:'FeatureCollection',features:photoFeatures},{
+    pointToLayer:(f,latlng)=>L.marker(latlng,{icon:photoIcon}),
+    onEachFeature:(f,l)=>{
+      const p=f.properties;
+      let photosHtml='';
+      if(p.photo_urls&&p.photo_urls.length>0){
+        photosHtml='<div style="margin-top:8px;">';
+        p.photo_urls.forEach((url,i)=>{
+          if(i<3){
+            photosHtml+=`<div style="margin-bottom:8px;">
+              <img src="${url}" referrerpolicy="no-referrer" style="width:100%;max-width:260px;border-radius:6px;display:block;cursor:pointer;" 
+                onclick="window.open('${url}','_blank')"
+                alt="点击查看大图">
+              <div style="text-align:center;margin-top:2px;">
+                <a href="${url}" target="_blank" style="font-size:11px;color:#2196f3;text-decoration:none;">🔗 新窗口打开照片${i+1}</a>
+              </div>
+            </div>`;
+          }
+        });
+        if(p.photo_urls.length>3){photosHtml+=`<div style="font-size:11px;color:#999;margin-top:4px;">共${p.photo_urls.length}张照片</div>`;}
+        photosHtml+='</div>';
+      }
+      l.bindPopup(`<div class="popup-content"><h4>📷 调研照片</h4><div class="row"><span class="label">日期</span><span class="value">${p.date||'未知'}</span></div><div class="row"><span class="label">名称</span><span class="value">${p.name||'未命名'}</span></div><div class="row"><span class="label">时间</span><span class="value">${p.timestamp||'未知'}</span></div>${photosHtml}</div>`);
+    }
+  }).addTo(map);
+}
+// 加载调研轨迹数据
+function loadSurveyTrack(){
+  fetch('survey_tracks_all.geojson')
+    .then(r=>r.json())
+    .then(data=>{
+      layers.surveyData=convertGeoJSONCoords(data);
+      console.log('调研轨迹加载成功:',layers.surveyData.features.length,'个要素（坐标已转换）');
+    })
+    .catch(err=>{
+      console.warn('调研轨迹加载失败:',err);
+    });
+}
+
+// ========== 补充调研轨迹图层 ==========
+function renderSurveyTrackNewLayer(){
+  if(layers.surveyTrackNew)map.removeLayer(layers.surveyTrackNew);
+  if(!layers.surveyDataNew)return;
+  const trackFeatures=layers.surveyDataNew.features.filter(f=>f.properties.type==='track');
+  if(trackFeatures.length===0)return;
+  const dateColors={'2026-09-08':'#9c27b0','2026-09-09':'#673ab7','2026-09-10':'#3f51b5','2026-09-11':'#2196f3'};
+  layers.surveyTrackNew=L.geoJSON({type:'FeatureCollection',features:trackFeatures},{
+    style:f=>{const c=dateColors[f.properties.date]||'#9c27b0';return{color:c,weight:4,opacity:0.85,dashArray:'8,4'};},
+    onEachFeature:(f,l)=>{
+      const p=f.properties;
+      l.bindPopup(`<div class="popup-content"><h4>📍 补充轨迹</h4><div class="row"><span class="label">日期</span><span class="value">${p.date||'未知'}</span></div><div class="row"><span class="label">距离</span><span class="value">${p.distance_km||0} km</span></div><div class="row"><span class="label">照片</span><span class="value">${p.photo_count||0}张</span></div></div>`);
+    }
+  }).addTo(map);
+}
+function renderSurveyPhotosNewLayer(){
+  if(layers.surveyPhotosNew)map.removeLayer(layers.surveyPhotosNew);
+  if(!layers.surveyDataNew)return;
+  const photoFeatures=layers.surveyDataNew.features.filter(f=>f.properties.type==='photo');
+  if(photoFeatures.length===0)return;
+  const photoIcon=L.divIcon({
+    className:'survey-photo-icon',
+    html:'<div style="width:18px;height:18px;background:#00bcd4;border:2px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;box-shadow:0 1px 4px rgba(0,0,0,0.4);">📷</div>',
+    iconSize:[18,18],
+    iconAnchor:[9,9]
+  });
+  layers.surveyPhotosNew=L.geoJSON({type:'FeatureCollection',features:photoFeatures},{
+    pointToLayer:(f,latlng)=>L.marker(latlng,{icon:photoIcon}),
+    onEachFeature:(f,l)=>{
+      const p=f.properties;
+      let photosHtml='';
+      if(p.photo_urls&&p.photo_urls.length>0){
+        photosHtml='<div style="margin-top:8px;">';
+        p.photo_urls.forEach((url,i)=>{
+          if(i<3){
+            photosHtml+=`<div style="margin-bottom:8px;">
+              <img src="${url}" style="width:100%;max-width:260px;border-radius:6px;display:block;cursor:pointer;" 
+                onclick="window.open('${url}','_blank')"
+                alt="点击查看大图">
+              <div style="text-align:center;margin-top:2px;">
+                <a href="${url}" target="_blank" style="font-size:11px;color:#2196f3;text-decoration:none;">🔗 新窗口打开照片${i+1}</a>
+              </div>
+            </div>`;
+          }
+        });
+        if(p.photo_urls.length>3){photosHtml+=`<div style="font-size:11px;color:#999;margin-top:4px;">共${p.photo_urls.length}张照片</div>`;}
+        photosHtml+='</div>';
+      }
+      l.bindPopup(`<div class="popup-content"><h4>📷 补充照片</h4><div class="row"><span class="label">日期</span><span class="value">${p.date||'未知'}</span></div><div class="row"><span class="label">名称</span><span class="value">${p.name||'未命名'}</span></div><div class="row"><span class="label">轨迹</span><span class="value">${p.track||'未知'}</span></div>${photosHtml}</div>`);
+    }
+  }).addTo(map);
+}
+function loadSurveyTrackNew(){
+  fetch('survey_tracks_new.geojson')
+    .then(r=>r.json())
+    .then(data=>{
+      layers.surveyDataNew=convertGeoJSONCoords(data);
+      console.log('补充轨迹加载成功:',layers.surveyDataNew.features.length,'个要素');
+    })
+    .catch(err=>{
+      console.warn('补充轨迹加载失败:',err);
+    });
+}
+
 function renderPlanLayer(){
   if(layers.plan)map.removeLayer(layers.plan);
   if(!gisData.plan)return;
