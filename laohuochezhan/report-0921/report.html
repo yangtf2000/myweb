@@ -323,9 +323,14 @@
       page-break-inside: auto !important;
       page-break-before: auto !important;
       page-break-after: auto !important;
-      /* 取消孤行控制，不会为了标题位置空一大块 */
+      /* 彻底取消孤行控制 */
       orphans: 1 !important;
       widows: 1 !important;
+    }
+    /* 所有元素都允许从中间断开，绝不推到下一页 */
+    *, *::before, *::after {
+      break-inside: auto !important;
+      page-break-inside: auto !important;
     }
     html, body {
       height: auto !important;
@@ -346,20 +351,11 @@
     }
     .chapter-num {
       margin: 5mm 0 2mm 0 !important;
-      break-before: auto !important;
-      page-break-before: auto !important;
-      /* 强制和后面的大标题不分开 */
-      break-after: avoid !important;
-      page-break-after: avoid !important;
     }
     .chapter-title {
       font-size: 24pt !important;
       margin-bottom: 5mm !important;
       padding-bottom: 3mm !important;
-      break-before: auto !important;
-      page-break-before: auto !important;
-      break-after: auto !important;
-      page-break-after: auto !important;
     }
     .divider {
       margin: 5mm 0 !important;
