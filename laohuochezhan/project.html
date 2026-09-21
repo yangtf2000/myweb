@@ -7,23 +7,25 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6}
-.container{max-width:1200px;margin:0 auto;padding:30px 20px}
+.container{max-width:900px;margin:0 auto;padding:30px 20px}
 .section-title{font-size:24px;color:#fff;margin-bottom:8px;text-align:center}
-.section-subtitle{font-size:13px;color:#888;text-align:center;margin-bottom:25px}
-.menu-grid{display:flex;flex-direction:column;gap:15px;margin-bottom:30px}
-.menu-card{background:#15151f;border-radius:8px;padding:25px;text-decoration:none;color:inherit;border:1px solid #2a2a3e;transition:all .3s;position:relative;overflow:hidden;display:flex;align-items:center;gap:25px}
-.menu-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#e94560;transform:scaleY(0);transition:transform .3s}
-.menu-card:hover::before{transform:scaleY(1)}
-.menu-card:hover{border-color:#e94560;transform:translateX(5px)}
-.menu-icon{font-size:36px;flex-shrink:0}
-.menu-card h3{color:#fff;font-size:18px;margin-bottom:8px}
-.menu-card p{color:#888;font-size:13px;line-height:1.6}
-.menu-content{flex:1}
-.footer{background:#0d0d14;padding:40px 20px;text-align:center;border-top:1px solid #2a2a3e}
+.section-subtitle{font-size:13px;color:#888;text-align:center;margin-bottom:35px}
+.menu-list{display:flex;flex-direction:column}
+.menu-item{padding:20px 15px;text-decoration:none;color:inherit;border-bottom:1px solid #222;transition:all .2s;display:flex;align-items:center;gap:18px}
+.menu-item:hover{background:#151515;padding-left:25px}
+.menu-item.latest{border-left:3px solid #e94560;background:rgba(233,69,96,0.08)}
+.menu-item.latest:hover{background:rgba(233,69,96,0.15)}
+.menu-icon{font-size:28px;flex-shrink:0}
+.menu-text{flex:1}
+.menu-text h3{color:#fff;font-size:17px;margin-bottom:4px}
+.menu-item.latest .menu-text h3{color:#e94560}
+.menu-text p{color:#888;font-size:13px;line-height:1.5}
+.date-badge{background:#e94560;color:#fff;padding:3px 10px;border-radius:10px;font-size:11px;letter-spacing:0.5px;flex-shrink:0}
+.footer{background:#0d0d14;padding:40px 20px;text-align:center;border-top:1px solid #2a2a3e;margin-top:30px}
 .footer p{color:#666;font-size:12px;line-height:2}
 .back-btn{display:inline-block;padding:10px 25px;border-radius:6px;font-size:14px;text-decoration:none;transition:all .3s;cursor:pointer;border:1px solid rgba(255,255,255,0.3);color:#fff;background:transparent;margin-bottom:25px}
 .back-btn:hover{border-color:#e94560;color:#e94560}
-@media(max-width:768px){.menu-card{flex-direction:column;text-align:center;gap:15px}}
+@media(max-width:768px){.menu-item{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -35,53 +37,53 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <h2 class="section-title">项目入口</h2>
 <p class="section-subtitle">功能板块，覆盖项目全流程</p>
 
-<div class="menu-grid">
-<a href="0921临时汇报/永州老火车站片区一期_临时汇报.html" class="menu-card" style="border:2px solid #e94560; background:linear-gradient(135deg, rgba(233,69,96,0.15) 0%, rgba(233,69,96,0.05) 100%);">
+<div class="menu-list">
+<a href="0921临时汇报/永州老火车站片区一期_临时汇报.html" class="menu-item latest">
 <div class="menu-icon">📝</div>
-<div class="menu-content">
-<div style="position:absolute;top:15px;right:15px;background:#e94560;color:#fff;padding:3px 10px;border-radius:10px;font-size:11px;letter-spacing:0.5px">2026.09.21</div>
+<div class="menu-text">
 <h3>片区体检与策划编制</h3>
-<p><strong style="color:#e94560">一期临时汇报版（最新）</strong><br>功能定位、项目清单与资金匹配、现场调查附录等完整内容</p>
+<p>一期临时汇报版：功能定位、项目清单与资金匹配、现场调查附录等完整内容</p>
 </div>
+<div class="date-badge">2026.09.21</div>
 </a>
-<a href="data_interpretation.html" class="menu-card">
+<a href="data_interpretation.html" class="menu-item">
 <div class="menu-icon">📊</div>
-<div class="menu-content">
+<div class="menu-text">
 <h3>片区资料解读</h3>
 <p>甲方提供基础资料清单、片区总体概况、城市体检报告摘要、实施方案摘要、现状照片展示</p>
 </div>
 </a>
-<a href="survey_work.html" class="menu-card">
+<a href="survey_work.html" class="menu-item">
 <div class="menu-icon">📋</div>
-<div class="menu-content">
+<div class="menu-text">
 <h3>现状调研与踏勘</h3>
 <p>总体工作计划、部门资料收集、街道社区调研、现场踏勘工作手册、资料需求清单</p>
 </div>
 </a>
-<a href="topic-research.html" class="menu-card">
+<a href="topic-research.html" class="menu-item">
 <div class="menu-icon">🔬</div>
-<div class="menu-content">
+<div class="menu-text">
 <h3>专题研究</h3>
 <p>老火车站历史文化保护与活化利用专题研究：完整历史与现状研究报告、八大案例对标研究报告、六大策略建议</p>
 </div>
 </a>
-<a href="tools.html" class="menu-card">
+<a href="tools.html" class="menu-item">
 <div class="menu-icon">🛠️</div>
-<div class="menu-content">
+<div class="menu-text">
 <h3>项目工具集</h3>
-<p>GIS分析平台V2.1（边界管理/图层管理/GIS分析/人工标注）、现场调研工具V2.0、现场踏勘通用工具（按社区分类/语音备注/GPS定位/照片上传/HTML导出）</p>
+<p>GIS分析平台V2.1、现场调研工具V2.0、现场踏勘通用工具</p>
 </div>
 </a>
-<a href="downloads.html" class="menu-card">
+<a href="downloads.html" class="menu-item">
 <div class="menu-icon">📥</div>
-<div class="menu-content">
+<div class="menu-text">
 <h3>资料下载</h3>
 <p>所有Word文档下载汇总：部门资料清单、街道社区函件、调研表格模板、工作计划、踏勘手册等</p>
 </div>
 </a>
-<a href="#" class="menu-card" onclick="alert('成果交付管理功能待后续开发')" style="opacity:0.5">
+<a href="#" class="menu-item" onclick="alert('成果交付管理功能待后续开发')" style="opacity:0.5">
 <div class="menu-icon">📦</div>
-<div class="menu-content">
+<div class="menu-text">
 <h3>成果交付管理</h3>
 <p>报告、PPT、图纸、数据等成果文件的版本管理、交付记录、审核流程（占位，待开发）</p>
 </div>
