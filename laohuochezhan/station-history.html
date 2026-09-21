@@ -50,10 +50,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .data-item .label{font-size:14px;color:var(--text2);line-height:1.6}
 
 /* ===== 章节 ===== */
-.chapter{padding:35px 0;position:relative}
-.chapter-header{margin-bottom:25px}
-.chapter-num{font-size:80px;font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(233,69,96,0.3);line-height:1;margin-bottom:-10px;letter-spacing:-2px}
-.chapter-title{font-size:38px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.4;padding-left:20px;border-left:5px solid var(--red)}
+.chapter{padding:8px 0;position:relative}
+.chapter-header{margin-bottom:8px;display:flex;align-items:baseline;gap:12px}
+.chapter-num{font-size:28px;font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(233,69,96,0.3);line-height:1;margin-bottom:-10px;letter-spacing:-2px}
+.chapter-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.4;padding-left:20px;border-left:5px solid var(--red)}
 .chapter-subtitle{font-size:17px;color:var(--gold);padding-left:25px;font-weight:300;letter-spacing:1px}
 
 /* ===== 正文段落 ===== */
@@ -119,7 +119,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .numbered-list .n-content p{font-size:16px;line-height:1.9;color:var(--text2);margin:0}
 
 /* ===== 分隔符 ===== */
-.divider{text-align:center;padding:10px 0;color:var(--border);font-size:18px;letter-spacing:10px}color:var(--border);font-size:30px;letter-spacing:20px}
+.divider{display:none;color:var(--border);font-size:18px;letter-spacing:10px}color:var(--border);font-size:30px;letter-spacing:20px}
 
 /* ===== 页脚 ===== */
 .footer{background:var(--bg2);padding:20px 30px;text-align:center;border-top:1px solid var(--border);margin-top:20px}text-align:center;border-top:1px solid var(--border);margin-top:60px}
@@ -141,30 +141,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
   .quote-block p{font-size:18px}
 }
 </style>
-<style>
-/* 强制紧缩 */
-.data-strip{padding:15px 0 !important}
-.data-strip-inner{grid-template-columns:repeat(4,1fr) !important;gap:15px !important}
-.chapter{padding:10px 0 !important}
-.chapter-header{margin-bottom:8px !important;display:flex;align-items:baseline;gap:15px}
-.chapter-num{font-size:28px !important;line-height:1 !important;-webkit-text-stroke:1px rgba(233,69,96,0.5) !important}
-.chapter-title{font-size:22px !important;margin:0 !important;padding:0 0 0 15px !important;border-left:4px solid var(--red) !important}
-.chapter-subtitle{font-size:13px !important;padding-left:19px !important;margin:3px 0 0 0 !important}
-.prose p{margin-bottom:6px !important;line-height:1.6 !important;font-size:16px !important}
-.prose h3{margin:8px 0 4px !important;padding-bottom:3px !important;font-size:19px !important}
-.prose h4{margin:6px 0 3px !important;font-size:16px !important}
-.timeline{margin:8px 0 !important;padding-left:18px !important}
-.tl-item{margin-bottom:6px !important;padding:6px 10px !important}
-.img-full{margin:6px 0 !important}
-.img-full .caption{padding:6px 10px !important;font-size:12px !important}
-.highlight-box{padding:8px 12px !important;margin:8px 0 !important}
-.quote-block{padding:8px 12px !important;margin:8px 0 !important}
-.story-card{padding:10px !important;margin:8px 0 !important}
-.divider{display:none !important}
-.numbered-list{margin:8px 0 !important}
-.n-item{margin-bottom:6px !important;padding:8px !important}
-div[style*="background:#222;border:1px dashed #444"]{padding:5px !important;margin:3px 0 !important;font-size:12px !important}
-</style>
+
 </head>
 <body>
 
