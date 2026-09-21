@@ -2604,8 +2604,32 @@
 
 <!-- ===== 附录入口链接 ===== -->
 </div>
+<script>
+// 打印前自动计算实际内容高度，消除多余空白
+window.addEventListener('beforeprint', function() {
+  // 先移除旧的动态样式
+  const oldStyle = document.getElementById('dynamic-print-size');
+  if (oldStyle) oldStyle.remove();
+  
+  // 计算实际内容高度
+  const contentHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight
+  );
+  
+  // 创建动态@page样式
+  const style = document.createElement('style');
+  style.id = 'dynamic-print-size';
+  style.textContent = @page {
+    size: 1200px px;
+    margin: 0;
+  };
+  document.head.appendChild(style);
+});
+</script>
 </body>
 </html>
+
 
 
 
