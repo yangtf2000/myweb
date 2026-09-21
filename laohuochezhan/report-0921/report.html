@@ -309,8 +309,8 @@
   }
   /* 长页PDF打印样式（不分页，一整页） */
   @page {
-    size: A4;
-    margin: 10mm;
+    size: 318mm 10000mm;
+    margin: 0;
   }
   @media print {
     * {
@@ -330,24 +330,19 @@
     html, body {
       height: auto !important;
       margin: 0 !important;
-      padding: 0 !important;
-      width: 210mm !important;
+      padding: 10mm !important;
+      width: 318mm !important;
     }
     body {
       background: #0d0d0d !important;
       color: #d0d0d0 !important;
     }
     .container {
-      max-width: 210mm !important;
-      padding: 0 !important;
+      max-width: 318mm !important;
+      padding: 10mm !important;
     }
     .cover {
       min-height: 100mm !important;
-    }
-    /* 每个大章节自动从新页开始，不会在内容中间切断 */
-    .chapter-title {
-      break-before: page !important;
-      page-break-before: always !important;
     }
     .divider {
       margin: 10mm 0 !important;
@@ -2630,6 +2625,7 @@
 
 </body>
 </html>
+
 
 
 
