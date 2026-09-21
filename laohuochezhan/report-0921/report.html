@@ -2618,15 +2618,13 @@ window.addEventListener('beforeprint', function() {
   // 创建动态@page样式，高度精确贴合内容
   const style = document.createElement('style');
   style.id = 'dynamic-print-size';
-  style.textContent = @page {
-    size: 1200px px;
-    margin: 0;
-  };
+  style.textContent = '@page { size: 1200px ' + contentHeight + 'px; margin: 0; }';
   document.head.appendChild(style);
 });
 </script>
 </body>
 </html>
+
 
 
 
