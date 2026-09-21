@@ -309,33 +309,48 @@
   }
   /* 长页PDF打印样式（不分页，一整页） */
   @page {
-    size: 1200px 20000px;
+    size: 318mm 5000mm;
     margin: 0;
   }
   @media print {
     * {
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
+      /* 强制所有元素自然流动，禁止任何分页行为 */
+      break-inside: auto !important;
+      break-before: auto !important;
+      break-after: auto !important;
+      page-break-inside: auto !important;
+      page-break-before: auto !important;
+      page-break-after: auto !important;
     }
     html, body {
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
+      width: 318mm !important;
     }
     body {
       background: #0d0d0d !important;
       color: #d0d0d0 !important;
-      width: 1200px !important;
     }
     .container {
-      max-width: 1200px !important;
-      padding: 20px !important;
+      max-width: 318mm !important;
+      padding: 15mm !important;
     }
     .cover {
-      min-height: 400px !important;
+      min-height: 100mm !important;
     }
     .divider {
-      margin: 20px 0 !important;
+      margin: 10mm 0 !important;
+    }
+    .two-col, .three-col {
+      margin: 5mm 0 !important;
+      gap: 5mm !important;
+    }
+    .card {
+      padding: 8mm !important;
+      margin-bottom: 5mm !important;
     }
     img {
       max-width: 100% !important;
@@ -2604,6 +2619,7 @@
 
 </body>
 </html>
+
 
 
 
