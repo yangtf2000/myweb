@@ -1,951 +1,468 @@
-锘�<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>濮樼�跨獮閼颁胶浼�鏉烇妇鐝� 璺� 鐎瑰本鏆ｉ崢鍡楀蕉娑撳海骞囬悩鍓佺埡缁岃埖濮ら崨?/title>
+<title>永州老火车站 · 完整历史与现状研究报告</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#0a0a0f;--bg2:#12121c;--card:#16161f;--card2:#1c1c28;
-  --border:#2a2a3e;--text:#e8e8e8;--text2:#aaa;--text3:#777;
-  --red:#e94560;--red2:#ff6b81;--gold:#d4a574;--gold2:#e8c49a;
-}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Noto Serif SC",serif;background:var(--bg);color:var(--text);line-height:1.9;font-size:18px}
-::selection{background:var(--red);color:#fff}
-
-/* ===== 妞ゅ爼鍎寸�佃壈鍩� ===== */
-.top-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 20px;max-width:680px;margin:0 auto}
-.top-nav-inner{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.top-nav a{color:var(--text2);text-decoration:none;font-size:14px;transition:color 0.3s}
-.top-nav a:hover{color:var(--red)}
-.top-nav .nav-title{color:var(--gold);font-size:13px;letter-spacing:1px}
-
-/* ===== 鎼存洟鍎寸�佃壈鍩� ===== */
-.bottom-nav{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);padding:30px 20px;margin-top:40px;max-width:680px;margin:0 auto}
-.bottom-nav-inner{max-width:640px;margin:0 auto;text-align:center}
-.bottom-nav a{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,var(--red),#c73e54);color:#fff;text-decoration:none;border-radius:30px;font-size:15px;font-weight:600;transition:transform 0.3s,box-shadow 0.3s}
-.bottom-nav a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(233,69,96,0.4)}
-.bottom-nav .nav-links{margin-top:16px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.bottom-nav .nav-links a{background:none;color:var(--text2);padding:0;font-size:13px;font-weight:400}
-.bottom-nav .nav-links a:hover{color:var(--red);transform:none;box-shadow:none}
-
-/* ===== 鐏忎線娼� ===== */
-.hero{position:relative;min-height:480px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(160deg,#1a0a0e 0%,#0f1a2e 40%,#0a0a0f 100%);max-width:680px;margin:0 auto}
-.hero::before{content:'';position:absolute;inset:0;background:url('https://aka.doubaocdn.com/s/lrAN6jrGUe') center/cover;opacity:0.25;filter:grayscale(30%)}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,0.2) 0%,rgba(10,10,15,0.6) 50%,rgba(10,10,15,0.98) 100%)}
-.hero-content{position:relative;z-index:2;text-align:center;max-width:640px;padding:40px 24px}
-.hero-tag{display:inline-block;padding:6px 24px;border:1px solid rgba(233,69,96,0.6);border-radius:30px;color:var(--red2);font-size:13px;letter-spacing:5px;margin-bottom:24px;font-weight:300}
-.hero h1{font-size:48px;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.3;letter-spacing:2px}
-.hero h1 .accent{color:var(--red);display:block;font-size:36px;margin-top:6px;font-weight:600}
-.hero-divider{width:60px;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));margin:20px auto}
-.hero p{font-size:16px;color:var(--text2);max-width:580px;margin:0 auto;line-height:1.9;font-weight:300}
-.hero-meta{margin-top:24px;font-size:12px;color:var(--text3);letter-spacing:1px;line-height:1.8}
-
-/* ===== 鐎圭懓娅� ===== */
-.container{max-width:680px;margin:0 auto;padding:0 20px}
-
-/* ===== 閸忔娊鏁�閺佺増宓侀弶?===== */
-.data-strip{background:linear-gradient(135deg,#1a0a12 0%,#16161f 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:25px 0;margin:0;max-width:680px;margin:0 auto}
-.data-strip-inner{max-width:640px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.data-item{text-align:center;padding:12px 6px;border-right:1px solid var(--border)}
-.data-item:last-child{border-right:none}
-.data-item .num{font-size:32px;font-weight:800;background:linear-gradient(135deg,var(--red),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;line-height:1.2}
-.data-item .label{font-size:12px;color:var(--text2);line-height:1.5}
-
-/* ===== 缁旂姾濡� ===== */
-.chapter{padding:18px 0;position:relative}
-.chapter-header{margin-bottom:14px}
-.chapter-num{font-size:64px;font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(233,69,96,0.3);line-height:1;margin-bottom:-8px;letter-spacing:-2px}
-.chapter-title{font-size:30px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4;padding-left:16px;border-left:4px solid var(--red)}
-.chapter-subtitle{font-size:14px;color:var(--gold);padding-left:20px;font-weight:300;letter-spacing:1px}
-
-/* ===== 濮濓絾鏋冨▓浣冩儰 ===== */
-.prose{max-width:640px;margin:0 auto}
-.prose p{font-size:18px;line-height:1.9;color:var(--text);margin-bottom:14px;text-align:justify}
-.prose p strong{color:var(--gold2);font-weight:600}
-.prose h3{font-size:20px;color:#fff;margin:20px 0 12px;padding-bottom:10px;border-bottom:2px solid var(--border);font-weight:600}
-
-/* ===== 閺佸懍绨ㄩ崡锛勫�� ===== */
-.story-card{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);border-radius:10px;padding:22px;margin:16px 0;border:1px solid var(--border);border-left:4px solid var(--red);box-shadow:0 6px 24px rgba(0,0,0,0.3)}
-.story-card.gold{border-left-color:var(--gold)}
-.story-card h4{font-size:17px;color:var(--red2);margin-bottom:12px;font-weight:600;display:flex;align-items:center;gap:8px}
-.story-card.gold h4{color:var(--gold2)}
-.story-card h4 .icon{font-size:20px}
-.story-card p{font-size:15px;line-height:1.9;color:var(--text);margin-bottom:10px}
-.story-card p:last-child{margin-bottom:0}
-.story-card .source{display:block;font-size:12px;color:var(--text3);margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-style:italic}
-
-/* ===== 瀵�鏇犳暏閸�?===== */
-.quote-block{position:relative;padding:22px 28px;margin:18px 0;background:var(--card);border-radius:10px;border:1px solid var(--border)}
-.quote-block::before{content:'"';position:absolute;top:6px;left:16px;font-size:70px;color:var(--red);opacity:0.2;font-family:Georgia,serif;line-height:1}
-.quote-block p{font-size:17px;line-height:1.9;color:var(--text2);font-style:italic;font-weight:300;position:relative;z-index:1}
-.quote-block .author{display:block;text-align:right;font-size:13px;color:var(--gold);margin-top:14px;font-style:normal;font-weight:400}
-
-/* ===== 閺冨爼妫挎潪?===== */
-.timeline{position:relative;margin:18px 0;padding-left:32px}
-.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--red),var(--gold),transparent)}
-.tl-item{position:relative;margin-bottom:20px;padding:14px 16px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
-.tl-item::before{content:'';position:absolute;left:-28px;top:24px;width:12px;height:12px;background:var(--red);border-radius:50%;border:3px solid var(--bg);box-shadow:0 0 0 2px var(--red)}
-.tl-year{font-size:14px;font-weight:700;color:var(--red2);margin-bottom:6px;letter-spacing:1px}
-.tl-title{font-size:17px;color:#fff;margin-bottom:8px;font-weight:600}
-.tl-desc{font-size:14px;line-height:1.85;color:var(--text2)}
-.tl-desc strong{color:var(--gold2)}
-.tl-source{display:block;font-size:11px;color:var(--text3);margin-top:8px;font-style:italic}
-
-/* ===== 閺夊倸绻旈崠鏍ь樋閺嶅嘲瀵茬敮鍐ㄧ湰 ===== */
-.mag-hero{position:relative;border-radius:10px;overflow:hidden;margin-bottom:18px;border:1px solid var(--border)}
-.mag-hero img{width:100%;height:200px;object-fit:cover;display:block;object-position:center 30%}
-.mag-hero .mag-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,0.9) 0%,rgba(10,10,15,0.3) 60%,transparent 100%);display:flex;align-items:flex-end;padding:20px}
-.mag-hero .mag-hero-text h3{font-size:24px;color:#fff;margin-bottom:6px;font-weight:700}
-.mag-hero .mag-hero-text p{font-size:13px;color:var(--text2);max-width:460px;line-height:1.7}
-
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
-.info-card{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s}
-.info-card:hover{transform:translateY(-2px)}
-.info-card .info-card-img{height:130px;overflow:hidden}
-.info-card .info-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
-.info-card:hover .info-card-img img{transform:scale(1.05)}
-.info-card .info-card-body{padding:14px}
-.info-card .info-card-body h5{font-size:15px;color:var(--gold);margin-bottom:6px;font-weight:600}
-.info-card .info-card-body p{font-size:12px;color:var(--text2);line-height:1.7}
-
-/* 瀹革附鏋冮崣鍐叉禈 - 閺傚洤鐡ч弴瀵哥崕閸ュ墽澧栭弴鏉戙亣 */
-.layout-lr{display:grid;grid-template-columns:0.75fr 1.25fr;gap:18px;margin-bottom:18px;align-items:center}
-.layout-lr.reverse{grid-template-columns:1.25fr 0.75fr}
-.layout-lr .layout-text h4{font-size:17px;color:var(--red);margin-bottom:10px;font-weight:600}
-.layout-lr .layout-text p{font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:8px}
-.layout-lr .layout-img{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.layout-lr .layout-img img{width:100%;height:260px;object-fit:cover;display:block}
-
-/* 娑撳�婂灙缁旀牕鎮滈幒鎺斿�� - 娴犲嘲鈧�鐓庡幢閻�?*/
-.value-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
-.value-card{background:var(--card);border-radius:8px;padding:16px;border:1px solid var(--border);transition:transform 0.3s}
-.value-card:hover{transform:translateY(-2px)}
-.value-card .v-num{font-size:28px;font-weight:800;color:var(--red);margin-bottom:8px;line-height:1}
-.value-card .v-title{font-size:14px;color:var(--gold);margin-bottom:8px;font-weight:600}
-.value-card .v-text{font-size:12px;color:var(--text2);line-height:1.75;margin-bottom:10px}
-.value-card .v-img{height:90px;border-radius:5px;overflow:hidden;border:1px solid var(--border)}
-.value-card .v-img img{width:100%;height:100%;object-fit:cover}
-
-/* 缁旀牗甯撶紓鏍у娇閸掓�勩�� */
-.num-vertical{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:18px 0}
-.num-v-card{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border);transition:transform 0.3s}
-.num-v-card:hover{transform:translateY(-2px)}
-.num-v-card .nv-body{padding:14px}
-.num-v-card .nv-num{font-size:26px;font-weight:800;color:var(--red);margin-bottom:6px;line-height:1}
-.num-v-card .nv-title{font-size:14px;color:#fff;margin-bottom:8px;font-weight:600}
-.num-v-card .nv-text{font-size:12px;color:var(--text2);line-height:1.75}
-.num-v-card .nv-img{height:110px;overflow:hidden}
-.num-v-card .nv-img img{width:100%;height:100%;object-fit:cover}
-
-/* ===== 閸ュ墽澧� ===== */
-.img-full{max-width:640px;margin:18px auto;border-radius:10px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 32px rgba(0,0,0,0.4)}
-.img-full img{width:100%;display:block;max-height:360px;object-fit:cover}
-.img-full .caption{padding:12px 18px;background:var(--card);font-size:13px;color:var(--text2);line-height:1.6;border-top:1px solid var(--border)}
-.img-full .caption strong{color:var(--gold)}
-
-/* ===== 妤傛ü瀵掓穱鈩冧紖濡�?===== */
-.highlight-box{background:linear-gradient(135deg,rgba(233,69,96,0.1) 0%,rgba(212,165,116,0.08) 100%);border:1px solid rgba(233,69,96,0.3);border-radius:10px;padding:20px 24px;margin:18px 0}
-.highlight-box h4{font-size:17px;color:var(--red2);margin-bottom:12px;font-weight:600}
-.highlight-box p{font-size:14px;line-height:1.9;color:var(--text);margin-bottom:10px}
-.highlight-box p:last-child{margin-bottom:0}
-.highlight-box ul{list-style:none;padding:0}
-.highlight-box li{font-size:14px;line-height:1.9;color:var(--text);padding-left:22px;position:relative;margin-bottom:6px}
-.highlight-box li::before{content:'閳�?;position:absolute;left:0;color:var(--red);font-weight:bold}
-
-/* ===== 缂傛牕褰块崚妤勩�� ===== */
-.numbered-list{margin:18px 0;counter-reset:item}
-.numbered-list .n-item{display:flex;gap:18px;margin-bottom:18px;padding:18px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
-.numbered-list .n-num{flex-shrink:0;width:48px;height:48px;background:linear-gradient(135deg,var(--red),#c73e54);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff}
-.numbered-list .n-content h5{font-size:16px;color:#fff;margin-bottom:8px;font-weight:600}
-.numbered-list .n-content p{font-size:14px;line-height:1.85;color:var(--text2);margin:0}
-
-/* ===== 閸掑棝娈х粭?===== */
-.divider{text-align:center;padding:16px 0;color:var(--border);font-size:24px;letter-spacing:16px}
-
-/* ===== 妞や絻鍓� ===== */
-.footer{background:var(--bg2);padding:30px 20px;text-align:center;border-top:1px solid var(--border);margin-top:30px;max-width:680px;margin:30px auto 0}
-.footer p{color:var(--text3);font-size:12px;line-height:2}
-.footer .title{color:var(--text2);font-size:14px;margin-bottom:8px;font-weight:600}
-
-/* ===== 閸濆秴绨插��?===== */
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.9}
+.hero{position:relative;height:520px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://aka.doubaocdn.com/s/lrAN6jrGUe') center/cover;opacity:0.3}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,0.3) 0%,rgba(10,10,15,0.95) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:1000px;padding:0 30px}
+.hero-tag{display:inline-block;padding:6px 24px;border:1px solid rgba(233,69,96,0.5);border-radius:20px;color:#e94560;font-size:13px;letter-spacing:3px;margin-bottom:24px}
+.hero h1{font-size:40px;font-weight:700;color:#fff;margin-bottom:16px;line-height:1.4}
+.hero h1 span{color:#e94560}
+.hero p{font-size:15px;color:#aaa;max-width:750px;margin:0 auto;line-height:1.8}
+.hero-meta{margin-top:20px;font-size:12px;color:#666;letter-spacing:1px}
+.container{max-width:1100px;margin:0 auto;padding:50px 30px}
+.chapter{margin-bottom:70px}
+.chapter-num{font-size:14px;color:#e94560;letter-spacing:4px;margin-bottom:8px;font-weight:600}
+.chapter-title{font-size:28px;color:#fff;margin-bottom:8px;padding-left:16px;border-left:4px solid #e94560}
+.chapter-subtitle{font-size:13px;color:#888;margin-bottom:30px;padding-left:20px}
+.history-timeline{background:#15151f;border-radius:10px;padding:30px;margin-bottom:25px;border:1px solid #2a2a3e}
+.timeline-item{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid #222}
+.timeline-item:last-child{border-bottom:none}
+.timeline-year{flex-shrink:0;width:110px;color:#e94560;font-weight:700;font-size:15px;padding-top:2px}
+.timeline-content{flex:1;color:#ccc;font-size:14px;line-height:1.9}
+.timeline-content strong{color:#fff}
+.timeline-content .source{display:block;font-size:11px;color:#555;margin-top:6px;font-style:italic}
+.story-box{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-radius:10px;padding:25px;margin:20px 0;border-left:4px solid #e94560}
+.story-box h4{font-size:16px;color:#e94560;margin-bottom:12px}
+.story-box p{font-size:14px;color:#ccc;line-height:1.9;margin-bottom:10px}
+.story-box p:last-child{margin-bottom:0}
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}
+.img-card{background:#15151f;border-radius:8px;overflow:hidden;border:1px solid #2a2a3e}
+.img-card img{width:100%;height:240px;object-fit:cover;display:block}
+.img-card .caption{padding:10px 15px;font-size:12px;color:#888;background:#111;line-height:1.6}
+.data-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:25px 0}
+.data-card{background:#15151f;border-radius:8px;padding:20px;text-align:center;border:1px solid #2a2a3e}
+.data-card .num{font-size:32px;font-weight:700;color:#e94560;margin-bottom:5px}
+.data-card .label{font-size:12px;color:#888;line-height:1.5}
+.quote-box{background:#111;border-radius:8px;padding:20px 25px;margin:20px 0;border-left:3px solid #e94560;font-style:italic}
+.quote-box p{font-size:14px;color:#aaa;line-height:1.9}
+.quote-box .author{display:block;text-align:right;font-size:12px;color:#666;margin-top:10px;font-style:normal}
+.section-divider{text-align:center;margin:50px 0;color:#333;font-size:24px;letter-spacing:10px}
+.footer{background:#0d0d14;padding:40px 30px;text-align:center;border-top:1px solid #2a2a3e;margin-top:60px}
+.footer p{color:#666;font-size:12px;line-height:2}
 @media(max-width:768px){
-  .hero h1{font-size:32px}
-  .hero h1 .accent{font-size:24px}
-  .data-strip-inner{grid-template-columns:repeat(2,1fr);gap:12px}
-  .data-item{border-right:none;border-bottom:1px solid var(--border);padding-bottom:12px}
-  .data-item:nth-child(3),.data-item:nth-child(4){border-bottom:none}
-  .chapter-num{font-size:48px}
-  .chapter-title{font-size:24px}
-  .prose p{font-size:15px}
-  .quote-block{padding:20px 20px}
-  .quote-block p{font-size:16px}
-  .layout-lr,.layout-lr.reverse{grid-template-columns:1fr}
-  .layout-lr .layout-img img{height:200px}
-  .value-grid,.num-vertical{grid-template-columns:1fr}
-  .info-grid{grid-template-columns:1fr}
+.hero h1{font-size:26px}
+.img-grid{grid-template-columns:1fr}
+.data-cards{grid-template-columns:repeat(2,1fr)}
+.timeline-item{flex-direction:column;gap:5px}
+.timeline-year{width:auto}
 }
-
-/* ===== 閻滄澘婧�閻撗呭�栫純鎴炵壐 ===== */
-.photo-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
-.pg-item{background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-.pg-item img{width:100%;height:140px;object-fit:cover;display:block}
-.pg-caption{padding:10px 12px;font-size:12px;line-height:1.7;color:var(--text2)}
-@media(max-width:600px){.photo-grid-3{grid-template-columns:1fr}.pg-item img{height:180px}}
-
 </style>
 </head>
 <body>
 
-<!-- 妞ゅ爼鍎寸�佃壈鍩� -->
-<div class="top-nav">
-<div class="top-nav-inner">
-<a href="index.html">閳�?鏉╂柨娲栨＃鏍�銆�</a>
-<span class="nav-title">閸樺棗褰舵稉搴ｅ箛閻樺墎鐖虹粚鑸靛Г閸�?/span>
-</div>
-</div>
-
-<!-- ==================== 鐏忎線娼� ==================== -->
 <div class="hero">
 <div class="hero-content">
-<div class="hero-tag">娑�?妫�?閻�?缁�?璺� 閸�?閸�?閹�?閹�?/div>
-<h1>濮樼�跨獮閼颁胶浼�鏉烇妇鐝�<span class="accent">鐎瑰本鏆ｉ崢鍡楀蕉娑撳海骞囬悩鍓佺埡缁岃埖濮ら崨?/span></h1>
-<div class="hero-divider"></div>
-<p>娴�?938楠炲瓨绠诲�楀倿鎼х捄顖涘�夐幋妯诲�犲�ょ尨绱濋崚?025楠�?0.85娴滃じ绻氶幎銈嗏偓褏鍓烽弬鎵斥偓鏂衡偓?7楠炴挳顥撻梿銊ュ坊缁嬪�剁礉娑撯偓鎼囱嗏偓浣虹彲閻ㄥ嫬澧犳稉鏍︾矕閻㈢噦绱濋崡濠囧劥濮樼�跨獮閹存劙鏆遍崣?/p>
-<div class="hero-meta">閸欏弶鏋￠弶銉︾爱閿涙碍绠归崡妤冩阜閺傚洨澧跨仦鈧� 璺� 濮樼�跨獮鐢�鍌欐眽濮樻垶鏂傛惔?璺� 娑擃厼娴楅崶钘夘啀闁句浇鐭鹃梿鍡楁礋 璺� 濠�鏍у础閺冦儲濮� 璺� 濞煎洦绠婚弲銊﹀Г 璺� 閹舵�佹）閹存ü绨ょ痪顏勫悍缂�?/div>
-</div>
-</div>
-
-<!-- ==================== 閸忔娊鏁�閺佺増宓� ==================== -->
-<div class="data-strip">
-<div class="data-strip-inner">
-<div class="data-item"><div class="num">1938</div><div class="label">瀵よ櫣鐝�楠炵繝鍞�<br>濠�妯活攪闁句浇鐭鹃柅姘虫簠</div></div>
-<div class="data-item"><div class="num">66楠�?/div><div class="label">鐎广垼绻嶆潻鎰�鎯�<br>1938 閳�?2004</div></div>
-<div class="data-item"><div class="num">4.5km</div><div class="label">閻ｆ瑥鐡ㄩ柧浣藉缓闂�鍨�瀹�<br>閻ф儳鍕鹃懓渚�鎼ф潪?/div></div>
-<div class="data-item"><div class="num">10.85娴�?/div><div class="label">2025楠炴潙鍤�鐠佲晠鍣炬０?br>娣囨繃濮㈤幀褏鍓烽弬?/div></div>
+<div class="hero-tag">专题研究 · 历史挖掘</div>
+<h1>永州老火车站<br><span>完整历史与现状研究报告</span></h1>
+<p>从1938年湘桂铁路抗战抢建，到2025年10.85亿保护性焕新——87年风雨历程，一座老站的前世今生</p>
+<div class="hero-meta">史料来源：湖南省文物局 / 永州市人民政府 / 中国国家铁路集团 / 湖南日报 / 潇湘晨报 / 抗日战争纪念网</div>
 </div>
 </div>
 
 <div class="container">
 
-<!-- ==================== 缁楊兛绔寸粩?==================== -->
-<div class="chapter" id="ch1">
-<div class="chapter-header">
-<div class="chapter-num">01</div>
-<h2 class="chapter-title">閹舵�佸灛閻戠晫浼�娑擃厽濮犲�よ櫣娈�"閹舵�佸灛闁句浇鐭�"</h2>
-<p class="chapter-subtitle">濠�妯活攪闁句浇鐭炬穱顔肩紦閸�?閳ユ柡鈧�?娑撯偓婢垛晙绔撮崗顒勫櫡閻ㄥ嫬顨屾潻鐧哥礉30娑撳洦鐨�瀹搞儳娈戠悰鈧�濮�?/p>
+<!-- 关键数据概览 -->
+<div class="data-cards">
+<div class="data-card">
+<div class="num">1938</div>
+<div class="label">建站年份<br>湘桂铁路通车</div>
 </div>
-
-<!-- 閺夊倸绻斿��鈧�缁″洤銇囬崶?-->
-<div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/avzxSReX7W" alt="娣囶喚鐡氬﹢妯活攪闁句浇鐭鹃柅銏犲寳瀵�鈧�鐠�?>
-<div class="mag-hero-overlay">
-<div class="mag-hero-text">
-<h3>30娑撳洦鐨�瀹搞儳娈戠悰鈧�濮�?/h3>
-<p>闁�銏犲寳瀵�鈧�鐠侯垬鈧�渚�浜ｅ�樺瓨鐏﹀�椼儻绱濋崷銊﹀灛閻忣偄鍑￠崣濠勬畱閹�鍛�鍠屾稉瀣剁礉娴�?娑撯偓婢垛晙绔撮崗顒勫櫡"閻ㄥ嫰鈧�鐔峰�抽幎銏犵紦鏉╂瑦娼�閹舵�佸灛閻㈢喎鎳＄痪?/p>
-</div>
-</div>
-</div>
-
-<!-- 瀹革附鏋冮崣鍐叉禈 -->
-<div class="layout-lr">
-<div class="layout-text">
-<h4>棣冩畯 閹舵�佸灛闁句浇鐭鹃惃鍕�鐧侀悽?/h4>
-<p>1936楠炶揪绱濋崶鑺ョ毌閺�鍨�绨婚懓鍐�妾绘稉顓熸）閹存ü绨ゆ稉宥呭讲闁�鍨�鍘ら敍宀冦偪閸楁��婀撮崠鍝勫嫉娴滅喎绶熷��鈧�閸欐埊绱濇稉鐑樻箒閸掆晙绨�閹存ɑ妞傛禍銈夆偓姘崇箥鏉堟挾娈戦棁鈧�鐟曚緤绱濋幍鎾烩偓姘炽偪閸楁��娴楅梽鍛粹偓姘朵壕閿涘苯鍠呯�规岸鎽电拋?strong>濠�妯活攪闁句浇鐭�</strong>閿涘牐銆�闂冨疇鍤﹀�楀倹鐏勯敍澶堚偓?/p>
-<p>鏉╂瑦妲搁幎妤佸灛閻栧棗褰傞崥搴℃禇濮樻垶鏂傛惔婊堫浕濞嗏�叉叏瀵よ櫣娈戦柧浣界熅楠炶尙鍤庨敍宀冾潶鐟惧�夎礋"閹舵�佸灛闁句浇鐭�"閵�?937楠�?閺堝牞绱濋崷銊ㄣ��闂冭櫕鍨氱粩瀣�绠诲�楀倿鎼х捄顖氫紣缁嬪��顦╅敍宀�鏁遍拋妤�鎮曢柧浣界熅瀹搞儳鈻肩敮?strong>閺夋粓鏅ｆ潻?/strong>娑撶粯瀵旀穱顔肩紦閵�?/p>
-</div>
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/oR9448MVOj" alt="濠�妯活攪闁句浇鐭鹃崡妤呮櫍濞堝灚鐨�瀹搞儱绱戝��?>
-</div>
-</div>
-
-<div class="timeline">
-<div class="tl-item">
-<div class="tl-year">1937.09.10</div>
-<div class="tl-title">鐞涒剝顢囧▓鍨�顒滃��蹇撶磻瀹�?/div>
-<div class="tl-desc">濠�鏍у础濞堝吀绗岄獮鑳�銈垮▓闈涙倱閺冭泛濮╁�搞儯鈧�鍌涚�归崡妤冩阜閺�鍨�绨婚崷銊︾�诲▓鍨�閮ㄧ痪?0闁插奔浜掗崘鍛�娈戠仦鍛�鐨�娑擃叏绱濋崗鍗炵窙閻�?6閿�?5瀹�浣圭毌瀹搞儱鍙�<strong>4娑撳洣姹�</strong>閿涘本鐦℃禍鍝勪紣娴�?0婢垛晪绱遍獮鑳�銈垮▓闈涚窙鐠嬪啫鍙忛崢瑁も偓浣稿彺鐎瑰�堚偓浣峰�嶅�楀倻鐡�11閸樻寧鐨�瀹搞儻绱濇稉鈧�鐠�?0娴ｆ瑤绔炬禍鎭掆偓?span class="tl-source">閺夈儲绨�閿涙碍濮夐弮銉﹀灛娴滃�岄偗韫囩數缍� / 楠炶儻銈块崷鐗堟煙韫�?/span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">1938.04</div>
-<div class="tl-title">閸╄櫣顢呭�搞儳鈻肩�瑰苯浼�</div>
-<div class="tl-desc">閸忋劍顔岄崷鐔虹叾閺傜懓鍙＄拋?strong>110娴ｆ瑤绔剧粩瀣�鏌熺猾?/strong>閵嗗倸婀�閹存�间紑瀹告彃寮烽惃鍕�鍎忛崘鍏哥瑓閿涘苯宕勬稉鍥ㄧ毌瀹搞儱婀�閺佸本婧�鏉炴壆鍋㈡稉瀣�鍒�瀹搞儯鈧�?span class="tl-source">閺夈儲绨�閿涙碍绶ㄥ﹢鍐╂煀闂�?/ 楠炶儻銈块崷鐗堟煙韫�?/span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">1938.09.27</div>
-<div class="tl-title">鐞涒剝顢囧▓闈涘弿缁捐儻鐤�闁�?/div>
-<div class="tl-desc">閸忋劑鏆�<strong>361閸忣剟鍣�</strong>閿涘奔绮犲��鈧�瀹搞儱鍩岄柅姘虫簠娴犲懐鏁ゆ稉鈧�楠炲瓨妞傞梻杈剧礉"娴犮儰绔存径鈺�绔撮崗顒勫櫡娑斿��鈧�鐔峰��"閹躲垹缂撻敍?strong>缁愪胶鐗�閹存垵娴楅柧渚�浜鹃崣韫�绠ｇ痪顏勭秿</strong>閵�?span class="tl-source">閺夈儲绨�閿涙矮鑵戦崡搴㈢毌閸ヨ棄褰跺�楋絾顢嶇挧鍕�鏋� / 楠炲灝绐為柧浣界熅</span></div>
+<div class="data-card">
+<div class="num">66年</div>
+<div class="label">客运运营<br>1938-2004</div>
 </div>
-<div class="tl-item">
-<div class="tl-year">1938.09.28</div>
-<div class="tl-title">閸愰攱鎸夊�娾晝鐝�瀵ょ儤鍨氶崥顖滄暏</div>
-<div class="tl-desc">濠�妯活攪闁句浇鐭惧�ら缚顔曢弶銉ュ煂濮樼�跨獮閿涘苯閮婇弮璺哄枎濮樺瓨鍝楁潻妯绘Ц闂嗗爼娅熼崢澶哥瑓鏉堟牜娈戞稉鈧�娑擃亝娅橀柅姘�鐨�闂�鍥风礉閸戭厼鈧�鐔哥�诲Ч鐔告寜闂勫棔鑵戞潪顒傛畱缂佹繀鍖犻崠杞扮秴閿涘矁顫︾�规矮璐熼弽绋跨妇閺嬨垻鑸�缁旀瑣鈧�?span class="tl-source">閺夈儲绨�閿涙碍妗堝�哥偛绔舵禍鐑樼毌閺�鍨�绨� / 娴犲﹥妫╂径瀛樻蒋</span></div>
+<div class="data-card">
+<div class="num">4.5km</div>
+<div class="label">留存铁轨长度<br>百年老铁轨</div>
 </div>
+<div class="data-card">
+<div class="num">10.85亿</div>
+<div class="label">2025年出让金额<br>保护性焕新</div>
 </div>
-
-<div class="quote-block">
-<p>"鐠囥儴鐭炬禒銉ょ�存径鈺�绔撮崗顒勫櫡娑斿��鈧�鐔峰�抽敍灞肩艾娴滃苯宕勬稉鍐ㄥ嬀娑旀繃婀�娴滃苯宕勬稉鍐╂）闁�姘虫簠閿涘苯鐤勬稉鐑樺灉閸ヨ棄顔嶅�樻垶妫岄崷銊﹀�夐幋妯哄晽閸忔潙鎮楀�ら缚顔曟稊瀣�娓舵径褎鍨氱紒鈺嬬礉閼板本鍨氶崝鐔剁�ｉ柅鐔跺�崇粣浣虹壃閹存垵娴楅柧渚�浜鹃崣韫�绠ｇ痪顏勭秿閵�?</p>
-<span class="author">閳ユ柡鈧�?娑擃厼宕曞�樻垵娴楅崣鍙夈�傚�楀牐绁�閺傛瑨顔囨潪?/span>
-</div>
-
-<div class="highlight-box">
-<h4>棣冩暏 娣囶喖缂撻幇蹇庣疅閿涙俺銈块崡妤�娴楅梽鍛粹偓姘朵壕閻ㄥ嫬鍙ч柨顔荤�撮悳?/h4>
-<p>濠�妯活攪闁句浇鐭鹃崠妤勬崳濠�鏍у础鐞涳繝妲肩敮鍌︾礉閸楁�勫殾楠炶儻銈块崣瀣�鐨ч崗绛圭礉閺勵垱濮夐幋妯绘�傞張鐔锋禇閸愬懍鎱ㄥ�よ櫣娈戠粭顑跨�撮弶锟犳惂鐠侯垰鍏辩痪瑁も偓鍌氬従閹存�兼殣閹板繋绠熼崷銊ょ艾閿�?/p>
-<ul>
-<li><strong>閹垫捇鈧�姘炽偪閸楁��娴楅梽鍛粹偓姘朵壕</strong> 閳�?鏉╃偞甯寸搾濠傚础濞寸兘妲诲〒顖ょ礉娴ｆ寧褰洪崡搴ｅ⒖鐠у嫬褰叉禒搴″础閺傝�勮厫閸欙絿绮￠柧浣界熅鏉╂劕鍙嗘径褍鎮楅弬?/li>
-<li><strong>閹存ɑ妞傛潻鎰�绶�閻㈢喎鎳＄痪?/strong> 閳�?濞屾寧鎹ｉ崘鍛扮讣瀹搞儱宸剁拋鎯ь槵閵嗕線鈧�鍐�姣﹂惂鎯ь潣閵嗕礁鍟楅悽銊у⒖鐠у嫮绮″�濄倛娴嗘潻鎰�绐涙�涙梹绮�</li>
-<li><strong>閹恒劌濮╃憲鍨�宕″��鈧�閸�?/strong> 閳�?娣囧啳绻樺﹢鏍у础閵嗕礁绠嶇憲鎸庨儴缁惧灝鐓勯梹鍥╂畱閸欐垵鐫嶉敍灞藉枎濮樺瓨鍝楅崶鐘电彲閼板苯鍙�</li>
-</ul>
 </div>
-</div>
 
-<div class="divider">璺� 璺� 璺�</div>
-
-<!-- ==================== 缁楊兛绨╃粩?==================== -->
-<div class="chapter" id="ch2">
-<div class="chapter-header">
-<div class="chapter-num">02</div>
-<h2 class="chapter-title">閸ョ姷鐝�閼板苯鍙撮敍姘�鍠庡�樺瓨鍝楃粩娆戞畱鐠囩偟鏁撴稉搴＄�囩挧?/h2>
-<p class="chapter-subtitle">娴犲孩绠诲Ч鐔荤珶閻ㄥ嫬鐨�闂�鍥у煂濮樼�跨獮閸╁骸绔舵稉顓炵妇 閳ユ柡鈧�?娑撯偓鎼囱呬紑鏉烇妇鐝�閺�鐟板綁娑撯偓鎼囱冪厔</p>
-</div>
+<!-- 第一章：湘桂铁路修建史 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 01</div>
+<h2 class="chapter-title">抗战烽火中抢建的"抗战铁路"</h2>
+<p class="chapter-subtitle">湘桂铁路修建史 —— 一天一公里的奇迹，30万民工的血汗</p>
 
-<!-- 娑撯偓瀵�鐘层亣閸ユ拝绱欓崢鐔剁瑏閸ユ儳鑻熼幒鎺撴暭閹存劒绔村��鐘层亣閸ユ拝绱� -->
-<div class="img-full">
-<img src="https://aka.doubaocdn.com/s/FrRslUGDTn" alt="閸愰攱鎸夊�娾晜娓ょ憲鑳�鈧�浣虹垳婢�?>
-<div class="caption"><strong>閸愰攱鎸夊�娾晜娓ょ憲鑳�鈧�浣虹垳婢�?/strong> 閳�?閻ф儳顦块獮鏉戝坊閸欒�х礉濠娾晛绔堕梹鍥ф礈濞岃櫕鍝楅梿鍡楃�剁拹鍛婃�楅崣鎴ｆ彧閼板苯鍙撮敍灞剧�诲Ч鐔锋躬濮濄倕鑸伴幋鎰�銇夐悞鎯板�囧〒?/div>
+<div class="story-box">
+<h4>📜 修建背景：为抗战而生的铁路</h4>
+<p>1936年，国民政府考虑中日战争不可避免，西南地区又亟待开发，为有利于战时交通运输的需要，打通西南国际通道，决定铺设湘桂铁路（衡阳至桂林）。这是抗战爆发后国民政府首次修建的铁路干线，被誉为"抗战铁路"。</p>
+<p>1937年4月，在衡阳成立湘桂铁路工程处，筹备修建衡阳至桂林铁路。同年7月，该处改为湘桂铁路衡桂段工程处。由著名铁路工程师<strong>杜镇远</strong>主持修建。</p>
 </div>
 
-<!-- 瀹革附鏋冮崣鍐叉禈 -->
-<div class="layout-lr">
-<div class="layout-text">
-<h4>棣冨綂閿�?濠娾晛绔堕梹鍥╂畱閸撳秳绗樻禒濠勬晸</h4>
-<p>閸愰攱鎸夊�娾晙浜掗崜宥嗘Ц<strong>濠娾晛绔堕梹?/strong>閿涘本澧嶇拫鎾村摋鐢�鍌︾礉閸楄櫕娓ゅ�娾晠娉︾敮鍌濋敜閺勬挸褰傛潏鎾呯礉閸氬孩娼垫穱顔肩紦閻�浣搞仈娓氭稐姹夐弶銉ゆ眽瀵扳偓閿涘苯顓归崯鍡楃毈鐠愨晞绉洪弶銉ㄧШ婢舵熬绱濆�扳偓闂勫棗婀撮崣鎴濈潔閹存劘顢滅敮鍌樷偓?/p>
-<p>鐎广垹鏅㈢亸蹇氱┛閿涘苯鍟樺�樻垼绻嶆径顐�绱濋懓浣锋眽鐏忓繐顒㈤敍灞炬箒娴滃搫姘ㄥ�版�勵洣閸氬啫鏋�閿涘奔绨�閺勵垱婀囬崝鈥茬瑹閸忕�嬫崳閿涘苯澧愭径瀵告倞閸欐埊绱濋悜褎鎸夊▔陇灏�閿涘苯缍嬮柧鍝勵吂閺嶅牏鐡戠粵澶涚礉鏉╂瑥姘ㄩ弰顖濐敎鐢�鍌樷偓?/p>
-<p>1938楠炲瓨绠诲�楀倿鎼х捄顖炩偓姘虫簠閿涘苯鍠庡�樺瓨鍝楃粩娆忕紦閹存劑鈧�鍌氶儕閺冭泛鍠庡�樺瓨鍝楁潻妯绘Ц闂嗗爼娅熼崢璺ㄦ畱娑撯偓娑擃亪鏅ｉ敍灞芥礈娑撹桨绱�鐡掑﹦娈戦崷鎵�鎮婃担宥囩枂閿涘牊绠诲Ч鐔告寜闂勫棔鑵戞潪顒婄礆閿涘矂銆嶉惄顔藉瘹閹搞儵鍎撮崘鍐茬暰閸︺劏绻栭柌灞界紦鐠佸墽浼�鏉烇妇鐝�閵嗗倸鐣犵拋鈺傛�堝�哥偠绻橀崗銉т紑鏉烇附妞傛禒锝冣偓?/p>
+<div class="history-timeline">
+<div class="timeline-item">
+<div class="timeline-year">1937.09.10</div>
+<div class="timeline-content"><strong>衡桂段正式开工</strong> — 湖南段与广西段同时动工。湖南省政府在湘段沿线30里以内的居民中，共征用16～45岁民工共4万人，每人工作30天；广西段征调全县、兴安、临桂等11县民工，一说30余万人，一说15.63万人。<span class="source">来源：抗日战争纪念网 / 广西地方志</span></div>
 </div>
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/pTn92enZUG" alt="閼颁胶鐝�閸欐壆璞㈤惃顔句紑鏉�?>
+<div class="timeline-item">
+<div class="timeline-year">1938.04</div>
+<div class="timeline-content"><strong>基础工程完工</strong> — 全段土石方共计110余万立方米。在战火已及的情况下，十万民工在敌机轰炸下赶工。<span class="source">来源：澎湃新闻 / 广西地方志</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">1938.09.27</div>
+<div class="timeline-content"><strong>衡桂段全线贯通</strong> — 全长361公里，从开工到通车仅用一年时间，"以一天一公里之速度"抢建，<strong>突破我国铁道史之纪录</strong>。"实为我国家民族在抗战军兴后建设之最大成绩"。<span class="source">来源：中华民国史档案资料 / 广州铁路</span></div>
 </div>
-
-<div class="timeline">
-<div class="tl-item">
-<div class="tl-year">瀵よ櫣鐝�閸掓繃婀�</div>
-<div class="tl-title">楠炲灝绐為柧浣界熅鐏炩偓娑撳��鐫樻稉鈧�缁涘�岀彲</div>
-<div class="tl-desc">閺勵垱绠诲�楀倿鎼х捄顖氭嫲濞叉稒绠鹃柧浣界熅閻ㄥ嫪鑵戦梻瀵哥彲閵嗗倸缍嬮弮鑸靛�嶉張澶屼紑鏉烇箑瀵橀幏顒傚�掕箛顐㈠灙鏉烇箓鍏樼憰浣告躬鏉╂瑩鍣烽崑婊堟浆閹广垼婧呮径杈剧礉閺勵垱绠归崡妤佹付閸楁�勭珶閻ㄥ嫬銇囩粩娆欑礉濮樼�跨獮閻ㄥ嫰妫�閹村嚖绱濋柅姘�鎮滈獮鑳�銈块惃鍕�绻�缂佸繋绠ｇ捄顖樷偓?span class="tl-source">閺夈儲绨�閿涙碍濮堥棅?/ 濮樼�跨獮閺堫剙婀撮崣鍙夋灐</span></div>
+<div class="timeline-item">
+<div class="timeline-year">1938.09.28</div>
+<div class="timeline-content"><strong>冷水滩站建成启用</strong> — 湘桂铁路建设来到永州，彼时冷水滩还是零陵县下辖的一个普通小镇，凭借湘江水陆中转的绝佳区位，被定为核心枢纽站。<span class="source">来源：永州市人民政府 / 今日头条</span></div>
 </div>
-<div class="tl-item">
-<div class="tl-year">1938 閳�?1944</div>
-<div class="tl-title">閹舵�佸灛鏉╂劘绶�閸忔娊鏁�閼哄倻鍋�</div>
-<div class="tl-desc">閹舵�佸灛閸忣厼鍕鹃梻杈剧礉濞屾寧鎹ｉ崘鍛扮讣瀹搞儱宸剁拋鎯ь槵閵嗕線鈧�鍐�姣﹂惂鎯ь潣閵嗕礁鍟楅悽銊у⒖鐠у嫮绮℃潻娆撳櫡鏉烆剝绻嶅�告繈绮╁�婂浄绱濋幋鎰�璐熺紒瀵搁兇婢堆冩倵閺傜�呯箥鏉烆剛娈戦崗鎶芥暛鐟曚線浜鹃妴?span class="tl-source">閺夈儲绨�閿涙矮绮栭弮銉ャ仈閺�?/ 濮樼�跨獮閼颁胶鐝�閻掓洘鏌婇幎銉╀壕</span></div>
 </div>
-</div>
 
-<div class="story-card gold">
-<h4><span class="icon">棣冨綂閿�?/span> 娑撯偓鎼囱呬紑鏉烇妇鐝�閺�鐟板綁娑撯偓鎼囱冪厔</h4>
-<p>"閸愰攱鎸夊�娾晝浼�鏉烇妇鐝�閺�鐟板綁娴滃棗缍嬮弮鑸垫殻娑擃亜鍠庡�樺瓨鍝楅惃鍕�鐗哥仦鈧�閿涘奔绡冨�濓絾妲搁崶鐘辫礋閺堝�夌啊鏉╂瑤閲滈悘顐ユ簠缁旀瑱绱濋崘閿嬫寜濠娾晝鏁辨稉鈧�娑擃亜鐨�闂�鍥风礉濞撴劖绗庨崣鎴濈潔閹存劒璐熷�樼�跨獮鐢�鍌氼潤鐢�鍌涙杺鎼存粍澧嶉崷銊ユ勾閵嗕焦妗堝�哥偟娈戦崺搴＄�舵稉顓炵妇閵�?</p>
-<span class="source">閳ユ柡鈧�?濮樼�跨獮鐢�鍌欐眽濮樻垶鏂傛惔婧库偓濠冩�堝�哥偟浼�鏉烇妇鐝�40楠炴潙宕曟稉鍊熸祮闊�顐犫偓?/span>
+<div class="quote-box">
+<p>"该路以一天一公里之速度，于二十七年九月二十七日通车，实为我国家民族在抗战军兴后建设之最大成绩，而成功之速亦突破我国铁道史之纪录。"</p>
+<span class="author">—— 中华民国史档案资料记载</span>
 </div>
 
-<div class="story-card">
-<h4><span class="icon">棣冩惙</span> 閸栬桨缍呮导妯哄◢閿涙碍绠诲Ч鐔告寜闂勫棔鑵戞潪顒佺亼缁�?/h4>
-<p>閸愰攱鎸夊�娾晙缍呮禍搴㈢�诲Ч鐔剁瑐濞撻潻绱濋弰顖涚�诲�楀倽铔嬪�ゅ﹦娈戦崠妤冾伂闂傘劍鍩涢妴鍌涚�诲�楀倿鎼х捄顖欑瑢濠�妯荤潤閸︺劍顒濇禍銈嗙湽閿涘苯鑸伴幋?闁句浇鐭�+濮樼�嬬箥"閻ㄥ嫭鎸夐梽鍡曡厬鏉烆剚鐏戠痪濮愨偓鍌欑矤閸愰攱鎸夊�娾晝鐝�閸戝搫褰傞敍灞芥倻閸栨��褰茬紒蹇氥��闂冨疇绻涢幒銉ц彔濮瑰�愭惂鐠侯垽绱欐禍顒�绠嶇痪鍨�澧犻煬顐�绱氶敍灞芥倻閸楁��褰茬紒蹇旑攪閺嬫ぜ鈧�浣圭叾瀹哥偟娲挎潏鎯у础鐎逛降鈧�浣稿殶缁併儻绱濋弰顖濈箾閹恒儱宕曟稉顓濈瑢鐟楀灝宕￠惃鍕�鎹婇崰澶庮洣闁�鎾扁偓?/p>
+<div class="story-box">
+<h4>🔨 修建意义：西南国际通道的关键一环</h4>
+<p>湘桂铁路北起湖南衡阳市，南至广西友谊关，是抗战时期国内修建的第一条铁路干线。其战略意义在于：</p>
+<p>① <strong>打通西南国际通道</strong> — 连接越南海防港，使援华物资可从南方港口经铁路运入大后方；</p>
+<p>② <strong>战时运输生命线</strong> — 沿海内迁工厂设备、逃难百姓、军用物资经此转运川黔滇；</p>
+<p>③ <strong>推动西南开发</strong> — 促进湖南、广西沿线城镇的发展，冷水滩因站而兴。</p>
 </div>
 </div>
 
-<div class="divider">璺� 璺� 璺�</div>
+<div class="section-divider">· · ·</div>
 
-<!-- ==================== 缁楊兛绗佺粩?==================== -->
-<div class="chapter" id="ch3">
-<div class="chapter-header">
-<div class="chapter-num">03</div>
-<h2 class="chapter-title">閹舵�佸灛閻戠晫浼�娑擃厾娈戦崘閿嬫寜濠娾晝鐝�</h2>
-<p class="chapter-subtitle">鏉╂劘绶�閻㈢喎鎳＄痪瑁も偓浣规）閸愭稑宕版０鍡愨偓渚�鎼ч柆鎾寸埗閸戝�氭Е閵嗕焦鎸欓柅鈧�閹�鍙夌摃閵嗕焦濮夐弮銉︾垼鐠�?閳ユ柡鈧�?鐞涒偓娑撳海浼�閻ㄥ嫯顔囪箛?/p>
-</div>
+<!-- 第二章：建站与早期发展 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 02</div>
+<h2 class="chapter-title">因站而兴：冷水滩站的诞生与崛起</h2>
+<p class="chapter-subtitle">从湘江边的小镇到永州城市中心 —— 一座火车站改变一座城</p>
 
-<!-- 閺夊倸绻斿��鈧�缁″洤銇囬崶?-->
-<div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/UDqPpPpPA3" alt="1937楠炴挳姣﹀�樻垹浼�鏉烇箓鈧�鍐�姣�">
-<div class="mag-hero-overlay">
-<div class="mag-hero-text">
-<h3>閹舵�佸灛婢堆勬寵闁�鈧�閻ㄥ嫮婀＄�圭偛鍟撻悡?/h3>
-<p>闁�鍐�姣﹂惂鎯ь潣閹搞倖寮ч崚妤勬簠鏉烇箓銆婇敍灞芥躬閸犫偓閺傤垳澹掔仦鍗炲槻闂傜�嬪�堥梾鎹愩偪鐞涘矉绱濇潻娆愭Ц娑撯偓娑擃亝鐨�閺冨繐婀�閹存�间紑娑擃叀绺煎�版瑧娈戦梿鍡曠秼鐠佹澘绻�</p>
+<div class="img-grid">
+<div class="img-card">
+<img src="https://aka.doubaocdn.com/s/xTjjpSxs22" alt="冷水滩火车站历史照片">
+<div class="caption">冷水滩火车站历史照片（建站初期，站前有雕像）</div>
 </div>
+<div class="img-card">
+<img src="https://aka.doubaocdn.com/s/QTmUV6NzDW" alt="永州东站站牌">
+<div class="caption">永州东站站牌（2004年更名后，背景为老旧居民楼）</div>
 </div>
 </div>
 
-<!-- 娣団剝浼呴崡锛勫�栫純鎴炵壐 2x2 -->
-<div class="info-grid">
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/HcqOVwUSTx" alt="鏉╂劘绶�閻㈢喎鎳＄痪?></div>
-<div class="info-card-body">
-<h5>棣冩畯 鏉╂劘绶�閻㈢喎鎳＄痪?/h5>
-<p>娑撳﹥鎹ｉ崥鍕�浼愰崢鍌氬敶鏉╀胶娈戦張鍝勬珤閿涘本閮ㄥù宄版倗閻�浣告倻婢堆冩倵閺傝�勬寵闁�鈧�閻ㄥ嫪姹夐崨妯烘嫲閺堢儤顫�閺夋劖鏋＄粵澶涚礉婢舵氨绮″ù娆掓媴闁句浇鐭鹃崘宥堟祮濠�妯活攪闁句浇鐭炬潻鎰�鍩屽�楀倹鐏勯妴浣藉惞闂冪偨鈧�渚�鍣告惔鍡愨偓浣规�呴弰搴℃倗閸﹁埇鈧�?/p>
-</div>
-</div>
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/yVu0e5zJHJ" alt="閺冦儱鍟楅崶瀛樻暰"></div>
-<div class="info-card-body">
-<h5>閳挎棑绗� 閺冦儱鍟楅崶娑滅熅閸ュ瓨鏁�</h5>
-<p>1944楠�?閺�?閺冦儻绱濋弮銉ュ晽缁�?1閸愭稑寰冩禒銈喢�鐏炲彉绗呮潏鎯ф倻閸愰攱鎸夊�娾晛鍙忕痪鑳�绻橀弨鑽ゆ畱閸涙垝鎶ら敍灞芥磽娑擃亜绗�閸ャ垹娲块弨浼欑窗缁�?鐢�鍫濇礋閵嗕胶顑�13鐢�鍫濇礋閵嗕胶顑�40鐢�鍫濇礋閵嗕胶顑�58鐢�鍫濇礋閵�?/p>
-</div>
+<div class="history-timeline">
+<div class="timeline-item">
+<div class="timeline-year">1938年</div>
+<div class="timeline-content"><strong>冷水滩站建成</strong> — 彼时冷水滩还是零陵县的一个镇，因为优越的地理位置（湘江水陆中转），项目指挥部决定在这里建设火车站。它让永州进入火车时代。<span class="source">来源：永州市人民政府</span></div>
 </div>
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/XbUDs5vRpy" alt="濮ｄ浇鐭鹃梼缁樻櫕"></div>
-<div class="info-card-body">
-<h5>棣冩寽 濮ｄ浇鐭鹃梼缁樻櫕</h5>
-<p>1944楠炲瓨鍨�娴滃��鎮嗙槐褝绱濇稉娲�妯嗗�濄垺妫╅崘娑溿偪鏉╂冻绱濆﹢妯活攪闁句浇鐭炬潪銊╀壕鐞氼偅濯堕敍灞舅夊�婁浇顫﹂悙鎼炩偓鍌涢儴缁捐儻寤洪柆鎾扁偓浣顾夊�婁浇顫︽潻顐ｅ�跺В渚�妯嗗�婄偞妫╅崘娑崇礉閻╃�嬪殾閹舵�佸灛閼虫粌鍩勯幍宥呭瀻濞堝吀鎱ㄦ径宥冣偓?/p>
+<div class="timeline-item">
+<div class="timeline-year">建站初期</div>
+<div class="timeline-content"><strong>广州铁路局下属一等站</strong> — 是湘桂铁路和洛湛铁路的中间站。当时所有火车包括特快列车都要在这里停靠换车头，是湖南最南边的大站，永州的门户，通向广西的必经之路。<span class="source">来源：抖音 / 永州本地史料</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">1938-1944</div>
+<div class="timeline-content"><strong>抗战运输关键节点</strong> — 抗战六年间，沿海内迁工厂设备、逃难百姓、军用物资经这里转运川黔滇，成为维系大后方运转的关键要道。<span class="source">来源：今日头条 / 永州老站焕新报道</span></div>
 </div>
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/67bYyliyUF" alt="閹俱倝鈧�鈧�閹�鍙夌摃"></div>
-<div class="info-card-body">
-<h5>棣冩З 閹俱倝鈧�鈧�閹�鍙夌摃</h5>
-<p>闁句浇鐭鹃崨妯轰紣鐠х數顩撮崗鏉戞礀韫囧棴绱�1944楠炴潙鍟叉禒搴″枎濮樺瓨鍝楃粩娆愭寵闁�鈧�閿涘瞼绮￠獮鑳�銈块弻鍐茬獮鏉烆剝鍤︽�涙梹顢囬柧浣界熅閿涘矂鈧�鏂捐厬闁�顓�浜ｆ稉銉ョ槰閵嗕線鐝�鐏為亶妯嗛梾鏂烩偓渚�顥ら悧鈺佸盀娑斿繈鈧�浣烘煣閻ュ懎鎷伴弮銉ュ晽鏉炴壆鍋㈤敍?婢额偄顬囨稉宥呮礋閸﹀棴绱濋悥璺虹摍娑撳秶娴夋い?閵�?/p>
 </div>
-</div>
-</div>
 
-<!-- 瀹革箑娴橀崣铏�鏋� -->
-<div class="layout-lr reverse">
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/vVvDzFu9XD" alt="閹舵�佹）濮濓箒顥婇惍鏉戞綎閺佸奔姹夐柧浣界熅缁�?>
-</div>
-<div class="layout-text">
-<h4>棣冨笭閿�?闁句線浜惧〒绋垮毊闂冪噦绱板﹢妯哄础濮樻垶濮夌痪鐢告Е閸忣厺鑵戦梼?/h4>
-<p>娴�?941楠炴潙鍩�1945楠炲瓨妫╅崘娑欏�囬梽宥忕礉娑撯偓閺�顖滄暠娑擃厼娴楅崗鍙橀獓閸忔岸顣�鐎佃偐娈戦幎妤佹）濞撶�垮毊闂冪喎婀�閸愰攱鎸夊�娾晛灏�濠�妯活攪闁句浇鐭惧▽璺ㄥ殠娴犲孩妫ら崚鐗堟箒閿涘奔绗夐弬顓㈢崹閹电増妫╅崘娑滅箥鏉堟挾鍤庨妴?/p>
-<p><strong>1945楠炴潙鍟橀崢鍡曠瑏閺堝牅绨╅崡浣风瑏閺冦儲娅�</strong>閿涘苯鍨�閸ヨ棄鐣ㄩ妴浣界�嶆禍鎴︾烦閵嗕椒寮楀�濓絽鐢�妫板棙绠婚崡妤佺毌閹舵�冩棻闂冪喎鍙氭稉顓㈡Е180娴ｆ瑤姹夐敍灞芥躬閸愰攱鎸夊�娾晞婧呯粩娆庣瑢閽冩繂顔嶉弶鎴ｆ簠缁旀瑤绠ｉ梻瀵告畱瀵ゆ牕顔嶉弶鎴ｇ熅濞堝灚鍨氶崝鐔哄仮濮ｄ焦妫╅崘娑滎棅閻㈡彃鍨�鏉烇负鈧�?/p>
+<div class="story-box">
+<h4>🏙️ 一座火车站改变一座城</h4>
+<p>"冷水滩火车站改变了当时整个冷水滩的格局，也正是因为有了这个火车站，冷水滩由一个小镇，渐渐发展成为永州市委市政府所在地、永州的城市中心。"</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 永州市人民政府《永州火车站40年华丽转身》</p>
 </div>
-</div>
 
-<div class="story-card gold">
-<h4><span class="icon">棣冩憪</span> 閻濆秷鍚归弬鍥╁⒖閿涙碍绠诲�楀倿鎼х捄顖涘�夐弮銉︾垼鐠囶參顣介崚?/h4>
-<p><strong>2025楠�?閺�?/strong>閿涘本绠归崡妤冩阜閺傚洨澧跨仦鈧�閸欐垵绔峰☉鍫熶紖閿涙艾婀�閸愰攱鎸夊�娾晛灏�閸ユ稑婢嬮悽鎵�銇為崠杞扮�峰┃顏勬浇閺夋垳绨╃紒鍕�褰傞悳鐗堢�诲�楀倿鎼х捄顖涙＋缁惧じ绗呭☉鍨�绀婇敍灞惧厹濞茬偛缂撻崷銊︾�诲�楀倿鎼х捄顖涙＋缁惧じ绗呴妴鍌涚垼鐠囶厼鍨庨崚顐㈠煝閸︺劍鍏滃ú鐐插�犻崥搴濊⒈缁旑垶銆婇柈顭掔礉濞戝灚绀婃い鍓佹暏閺佹潙娼￠棃鎺旂叾閺夊灝缂撻幋鎰剁礉鐎涙��姘ㄩ崚璇叉躬闂堟帞鐓堕弶澶哥瑐閿�?/p>
-<p>閳�?娑撯偓缁旑垯鑵戦梻瀛樏�閸愭瑥銇囩��?strong>"閺�璺侯槻娑撴粌瀵虫径鍗炴勾"</strong>閿涘苯銇囩�涙ぞ绔存笟褏鐝�閸�?娑擃厼宕曞�樻垵娴楁禍灞藉磩娑撳啫鍕炬禍鏃�婀�"閿涘奔绔存笟褏鐝�閸�?閻滃��鍣电�规﹢顣�"</p>
-<p>閳�?閸欙缚绔寸粩顖涚�婃い鏈佃厬闂傛潙銇囩�涙�佹Ц<strong>"鐎瑰本鍨氱憲鍨�宕℃禍銈夆偓?</strong>閿涘奔琚辨笟褍鐨�鐎涙ぞ绗岄崣锔跨�寸粩顖滄祲閸�?/p>
-<p>鏉╂瑦妲稿﹢妯活攪闁句浇鐭炬穱顔肩紦閺冭埖婀￠敍?938楠�?閺堝牞绱氶悾娆庣瑓閻ㄥ嫮寮界拹鍨�濮夐弮銉︽瀮閻椻晪绱濈憴浣界槈娴滃棜绻栭弶锟犳惂鐠侯垳娈戦幎妤佸灛娴ｅ灝鎳￠妴?/p>
-<span class="source">閳ユ柡鈧�?閺夈儲绨�閿涙碍绠归崡妤冩阜閺傚洨澧跨仦鈧�閵嗗﹤鍠庡�樺瓨鍝楅崠?濠�妯活攪闁句浇鐭鹃崣鎴犲箛閹舵�佹）閺嶅洩顕㈡０妯哄煝閵�?/span>
+<div class="story-box">
+<h4>📍 区位优势：湘江水陆中转枢纽</h4>
+<p>冷水滩位于湘江上游，是湘桂走廊的北端门户。湘桂铁路与湘江在此交汇，形成"铁路+水运"的水陆中转枢纽。从冷水滩站出发，向北可经衡阳连接粤汉铁路（京广线前身），向南可经桂林、柳州直达南宁、凭祥，是连接华中与西南的咽喉要道。</p>
 </div>
 </div>
 
-<div class="divider">璺� 璺� 璺�</div>
+<div class="section-divider">· · ·</div>
 
-<!-- ==================== 缁楊剙娲撶粩?==================== -->
-<div class="chapter" id="ch4">
-<div class="chapter-header">
-<div class="chapter-num">04</div>
-<h2 class="chapter-title">閺傞�佽厬閸ヨ姤鍨氱粩瀣�鎮楅惃鍕�绶ｉ悡灞界灳閺�?/h2>
-<p class="chapter-subtitle">婢舵碍顐奸幍鈺佺紦閵嗕焦妯囨径婊�绗夐崑?閳ユ柡鈧�?娴犲氦鎻ｆ潻鎰�鐏戠痪钘夊煂鐎广垼绻嶉梻銊﹀煕閿�?6楠炲�告畱缁讳礁宕�</p>
-</div>
+<!-- 第三章：抗战烽火 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 03</div>
+<h2 class="chapter-title">抗战烽火中的冷水滩站</h2>
+<p class="chapter-subtitle">运输生命线、日军占领、铁道游击队、撤退悲歌、抗日标语 —— 血与火的记忆</p>
 
-<!-- 瀹革附鏋冮崣鍐叉禈 -->
-<div class="layout-lr">
-<div class="layout-text">
-<h4>棣冩畽 娑撯偓缁涘�岀彲閻ㄥ嫮绠掗崡?/h4>
-<p>閺傞�佽厬閸ヨ姤鍨氱粩瀣�鎮楅敍灞剧�诲�楀倿鎼х捄顖炩偓鎰�顒炴穱顔碱槻瀵ゆ湹鍑犻敍灞藉枎濮樺瓨鍝楃粩娆愬灇娑撳搫绠嶅�哥偤鎼х捄顖氱湰娑撳��鐫樻稉鈧�缁涘�岀彲閿涘本绠诲�楀倿鎼х捄顖氭嫲濞叉稒绠鹃柧浣界熅閻ㄥ嫪鑵戦梻瀵哥彲閵�?/p>
-<p>鏉烇妇鐝�婢舵碍顐奸幍鈺佺紦閿涘矂鍘ょ拋鎯ь樋閼测�冲煂閸欐垹鍤庨妴浣芥彛閸︽亽鈧�浣规簚閸斺剝顔岄敍灞藉础閸栨�勬彛鏉╂劑鈧�渚�鏆遍柅鏂款吂鏉╂劖妯囨径婊�绗夐崑婊愮礉閺勵垱绠婚崡妤�婀撮崠鐑樻付闁插秷顩﹂惃鍕�鎼х捄顖涚亼缁炬垝绠ｆ稉鈧�閵�?/p>
-</div>
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/TFaAzqsBV4" alt="閸愰攱鎸夊�娾晞鈧�浣虹彲閹村潡鐝�濞�?>
+<div class="story-box">
+<h4>🚂 运输生命线：维系大后方运转的关键要道</h4>
+<p>抗战期间，上海各工厂内迁的机器，沿海各省向大后方撤退的人员和机械材料等，多经浙赣铁路再转湘桂铁路运到桂林、贵阳、重庆、昆明各地。冷水滩站作为湘桂铁路上的一等站，是这条运输生命线上的关键节点。</p>
+<p>前苏联援华物资从北方通道中断后，援华物资只能从南方走，香港、广州是抗战初期唯一的稳定远洋进口港口，物资经粤汉线到武汉，再经湘桂线分发到西南大后方。</p>
 </div>
-</div>
 
-<div class="timeline">
-<div class="tl-item">
-<div class="tl-year">1949楠炴潙鎮�</div>
-<div class="tl-title">閺傞�佽厬閸ヨ棄缂撶拋鐐�妞傞張?/div>
-<div class="tl-desc">濠�妯活攪闁句浇鐭鹃柅鎰�顒炴穱顔碱槻瀵ゆ湹鍑犻敍灞藉枎濮樺瓨鍝楃粩娆愬灇娑撳搫绠嶅�哥偤鎼х捄顖氱湰娑撳��鐫樻稉鈧�缁涘�岀彲閵嗗倽婧呯粩娆忣樋濞嗏剝澧垮�ょ尨绱濋柊宥堫啎婢舵俺鍋傞崚鏉垮絺缁捐￥鈧�浣芥彛閸︽亽鈧�浣规簚閸斺剝顔岄敍灞藉础閸栨�勬彛鏉╂劑鈧�渚�鏆遍柅鏂款吂鏉╂劖妯囨径婊�绗夐崑婧库偓?span class="tl-source">閺夈儲绨�閿涙碍濮堥棅?/ 娴犲﹥妫╂径瀛樻蒋</span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">1951 閳�?1955</div>
-<div class="tl-title">濠�妯活攪闁句浇鐭鹃崗銊у殠鐠愵垶鈧�?/div>
-<div class="tl-desc">1951楠炵繝鎱ㄩ懛鍐插础鐎逛緤绱�1952楠炵繝鎱ㄩ懛鍐插殶缁併儻绱�1954楠炴潙缂撻幋鎰�鍤熺粊銉ㄥ殾闂呮ê褰涢敍鍫濆几鐠嬪﹤鍙ч敍澶嬵唽閿�?955楠炴潙鎮撶搾濠傚础闁句浇鐭鹃幒銉ㄥ缓閼辨棁绻嶉妴鍌氬枎濮樺瓨鍝楃粩娆愬灇娑撻缚绻涢幒銉よ厬鐡掑﹦娈戦崶浠嬫��闁�姘朵壕娑撳﹦娈戦柌宥堫洣閼哄倻鍋ｉ妴?span class="tl-source">閺夈儲绨�閿涙艾鍙忛惌銉ㄧ槕 / 濠�妯活攪闁句浇鐭鹃崣鍙夋灐</span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">1995 閳�?1996</div>
-<div class="tl-title">閺囨潙鎮曞�樼�跨獮缁�?/div>
-<div class="tl-desc">閸愰攱鎸夊�娾晝浼�鏉烇妇鐝�閺囨潙鎮曟稉鐑樻�堝�哥偟鐝�閿涘苯鐓勭敮鍌欒厬韫囧啫浜ゆ惔鏇熷ⅰ閺嶇懓鍠庡�樺瓨鍝楅妴鍌濈箹閺嶅洤绻旈惈鈧�閸愰攱鎸夊�娾晙绮犳稉鈧�娑擃亪鏅ｅ�濓絽绱￠幋鎰�璐熷�樼�跨獮鐢�鍌滄畱閺�鎸庝笉閵嗕胶绮″ù搴涒偓浣规瀮閸栨牔鑵戣箛鍐︹偓?span class="tl-source">閺夈儲绨�閿涙碍妗堝�哥偛绔舵禍鐑樼毌閺�鍨�绨� / 閹舵牠鐓�</span></div>
+<div class="story-box">
+<h4>⚔️ 1944年：日军四路围攻冷水滩</h4>
+<p>1944年，日本帝国主义在太平洋战场上节节失利，为了救援入侵南洋的本国军队，发动了打通从东北到广州、南宁的"大陆交通线"战役，即"豫湘桂"战役。</p>
+<p>当年春夏，日军横扫河南，占领长沙。在衡阳，国民党部队与日军展开殊死搏斗交战40多天，最终被打败，8月8日衡阳失守。国民党军队向永州方向撤退，日军直逼永州。</p>
+<p><strong>1944年9月5日18时15分</strong>，日军第11军司令横山下达了向冷水滩发起全线进攻的命令。主攻冷水滩的日军是由中将横山指挥的四个师团，包括山本的第3师团、赤鹿的第13师团、官川青山的第40师团以及毛利的第58师团。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：今日头条《日寇侵入永州暴行实录》 / 永州军民抗战纪实</p>
 </div>
-<div class="tl-item">
-<div class="tl-year">2004.04.18</div>
-<div class="tl-title">閺傜増妗堝�哥偟鐝�瀵ょ儤鍨氶敍宀冣偓浣虹彲閸嬫粏绻嶇�广垼绻�</div>
-<div class="tl-desc">閺傜増妗堝�哥偟鐝�閸︺劍绲垮﹢妯恒亣闁�鎾规儰閹存劙鈧�姘虫簠閿涘矁鈧�浣虹彲閺囨潙鎮曟稉鐑樻�堝�哥偘绗㈢粩娆欑礉闁�鈧�閸戝搫顓规潻鎰�瀵岀痪鍖＄礉鏉烆兛璐熺拹褑绻嶇粩娆戝仯閵嗗倽绻嶉拃?6楠炲�告畱閼颁胶鐝�濮濓絽绱￠崑婊冨�欑�广垼绻嶆稉姘�濮熼妴?span class="tl-source">閺夈儲绨�閿涙碍妗堝�哥偛绔舵禍鐑樼毌閺�鍨�绨� / 閼规崘骞堢挧鍕�顔�</span></div>
-</div>
-</div>
 
-<div class="highlight-box">
-<h4>棣冩畽 娑撯偓缁涘�岀彲閻ㄥ嫮绠掗崡搴�绱伴弰鐓庮檨娑撳秴浠犻惃鍕�绻嶆潏鎾寸亼缁�?/h4>
-<p>娴ｆ粈璐熼獮鍨�绐為柧浣界熅鐏炩偓娑撳��鐫橀惃鍕�绔寸粵澶岀彲閿涘苯鍠庡�樺瓨鍝楃粩娆忔躬閺傞�佽厬閸ヨ姤鍨氱粩瀣�鎮楃紒蹇撳坊娴滃棗顦垮▎鈩冨⒖瀵ょ尨绱�</p>
-<ul>
-<li><strong>婢舵俺鍋傞崚鏉垮絺缁�?/strong> 閳�?閸欘垰鎮撻弮鑸靛复閸欐垵顦跨搾鐔峰灙鏉�?/li>
-<li><strong>婢堆冪�风拹褍婧�</strong> 閳�?閹垫寧濯村﹢妯哄础閸︽澘灏�鐠愌呭⒖闂嗗棙鏆庨崝鐔诲厴</li>
-<li><strong>閺堝搫濮熷▓?/strong> 閳�?鐠愮喕鐭楅張楦挎簠濡�鈧�娣囶喓鈧�浣规殻婢跺洢鈧�浣瑰床閹�?/li>
-<li><strong>鐎广垼绻嶇粩娆愬煣</strong> 閳�?閸烆喚銈ㄩ妴浣糕偓娆掓簠閵嗕焦顥呯粊銊х搼鐎瑰本鏆ｇ�广垼绻嶉崝鐔诲厴</li>
-</ul>
+<div class="story-box">
+<h4>💥 毁路阻敌：拆轨道、炸桥梁</h4>
+<p>1944年战事吃紧，为阻止日军西进，湘桂铁路轨道被拆，桥梁被炸。沿线轨道、桥梁被迫拆毁阻滞日军，直至抗战胜利才分段修复。老站也在炮火与重建中站稳了脚跟。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：艾莱资讯 / 今日头条</p>
 </div>
 
-<!-- 娑撳�婂灙缁旀牕鎮滈幒鎺斿�� - 闁句浇鐭炬径褔娅岄崙鐘卞敩娴滆櫣娈戦梿鍡曠秼鐠佹澘绻� -->
-<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--gold)">闁句浇鐭炬径褔娅岄敍姘�鍤戞禒锝勬眽閻ㄥ嫰娉︽担鎾诡唶韫�?/h3>
-<div class="value-grid">
-<div class="value-card">
-<div class="v-num">棣冩噯閳ュ稅鐓堚斁鈧�宥愮厛褉鈧�宥愮厛?/div>
-<div class="v-title">闁句浇鐭剧亸蹇曘仦娴�?/div>
-<div class="v-text">闁句浇鐭鹃懕灞戒紣鐎硅泛鐫橀崠鎭掆偓渚�鎼х捄顖欒厬鐎涳负鈧�渚�鎼х捄顖氬鞍闂勵潿鈧�渚�鎼х捄顖欏嫎娑旀劙鍎撮垾锔光偓锕�娲跨紒鏇犱紑鏉烇妇鐝�瑜般垺鍨氭禍鍡曠�存稉顏勭暚閺佸�告畱"闁句浇鐭剧亸蹇曘仦娴�?閵�?/div>
-<div class="v-img"><img src="https://aka.doubaocdn.com/s/jRjdoPcxVL" alt="闁句浇鐭鹃懕灞戒紣鐎硅泛鐫樻担蹇撶暍閸�?></div>
-</div>
-<div class="value-card">
-<div class="v-num">棣冩畯</div>
-<div class="v-title">闊�鏌ユ惂鏉炪劎鐡戠紒璺ㄦ瘖</div>
-<div class="v-text">濞插�氱烦娴滄洏鈧�渚�绮嶅▔銉ょ俺閵嗕線鎼х捄顖氥亣闂勩垻娈戦崙鐘卞敩鐞涙��娼戦敍灞藉磹閻㈢喓鍎�閻忣偅妫╃敮鎼炩偓浣规篂婢舵洖鐬鹃張鍫熶刊閹�鍜冪礉閸忋劑鍏樺ǎ杈ㄧ箒闂�灞藉煝閸︺劏绻栭悧鍥�鎼ф潪銊ょ�ｆ稉濞库偓?/div>
-<div class="v-img"><img src="https://aka.doubaocdn.com/s/40N2221GLS" alt="缂佽法姣婃潪锕�甯�"></div>
+<div class="story-box">
+<h4>😢 撤退悲歌："夫妻不团圆，父子不相顾"</h4>
+<p>铁路员工赵福兴生前曾向家人回忆：<strong>1944年冬</strong>，他和同事们从冷水滩站搭乘列车撤退，列车经广西柳州转至黔桂铁路，当撤退至金城江时，前方铁路遭到破坏，只得徒步向贵阳方向撤退。</p>
+<p>途中遭遇严寒侵袭、高山阻隔、食物匮乏、疾病袭扰和日军飞机狂轰滥炸，铁路员工和家属<strong>"夫妻不团圆，父子不相顾"</strong>，死伤十分惨重。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：中国国家铁路集团有限公司《铁路老物件会说话》</p>
 </div>
-<div class="value-card">
-<div class="v-num">棣冨綁閿�?/div>
-<div class="v-title">閸╁骸绔剁拋鏉跨箓</div>
-<div class="v-text">闊�鏌ユ惂鏉炪劊鈧�浣虹搼缂佽法姣婇弰顖氬殤娴狅絾妗堝�哥偘姹夐幎閫涚瑝閸樿崵娈戠粩銉ュ嬀閸楁媽顔囬敍灞炬Ц閸愰攱鎸夊�娾晛鐓勭敮鍌濐唶韫囧棛娈戦柌宥堫洣缂佸嫭鍨氶柈銊ュ瀻閵�?/div>
-<div class="v-img"><img src="https://aka.doubaocdn.com/s/Z5Gxd7NkLc" alt="缂佽法姣婇悘顐ユ簠缁旀瑥褰�"></div>
-</div>
-</div>
-</div>
 
-<div class="divider">璺� 璺� 璺�</div>
-
-<!-- ==================== 缁楊兛绨茬粩?==================== -->
-<div class="chapter" id="ch5">
-<div class="chapter-header">
-<div class="chapter-num">05</div>
-<h2 class="chapter-title">閸嬫粏绻嶆稉搴㈢焽鐎靛偊绱伴懡鎺曞磸濠曨偉寤洪惃?0楠�?/h2>
-<p class="chapter-subtitle">2004楠炲瓨鏌婄粩娆忔儙閻�?閳�?閼颁胶鐝�鏉烆剝鎻ｆ潻?閳�?闁�鎰�绗庢惔鐔风磾 閳ユ柡鈧�?鐞氼偊浠愯箛妯兼畱閸╁骸绔舵导銈囨灮</p>
+<div class="story-box">
+<h4>🎖️ 铁道游击队：湘南民抗纵队六中队</h4>
+<p>在冷水滩区湘桂铁路沿线，从1941年到1945年日军投降，一支由中国共产党领导的抗日游击队从无到有，不断骚扰日军运输线，打击日军扫荡小分队，留下了<strong>湖南民众联乡自卫纵队六中队</strong>的赫赫威名。</p>
+<p><strong>1945年3月</strong>，侵占冷水滩的日军准备把从零陵、冷水滩、祁阳一带抢来的大批粮食、布匹，以及军用物资运往西南前线。湘南民抗纵队六中队决定在冷水滩车站与蓝家村车站之间的廖家村路段炸毁日军军车。</p>
+<p>经过队员严开玉3次侦察，发现敌人的军车是装甲列车，每天晚上11时30分通过蓝家村车站，押车兵大约有一个排的兵力。<strong>1945年农历三月二十三日晚</strong>，刘国安、谭云龙、严正带领湘南民抗纵队六中队180余人，带上武器和爆炸器材，趁着夜色从铁芦冲出发，成功炸毁日军装甲列车。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：湖南日报《铁道线上，杀敌的好战场》 / 红网永州站</p>
 </div>
 
-<!-- 閺夊倸绻斿��鈧�缁″洤銇囬崶?-->
-<div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/0fuFUrVi70" alt="閼芥帟宕忓�曨偉绻冮柧浣藉缓閻滄澘婧�鐎圭偞濯�">
-<div class="mag-hero-overlay">
-<div class="mag-hero-text">
-<h3>閼芥帟宕忓�曨偉绻冮柧浣藉缓</h3>
-<p>閻滄澘婧�鐎圭偞濯块敍姘�娴樼紒蹇旀▏婢舵粈绗夐崑婊呮畱鏉╂劘绶�閺嬨垻鑸�婵″倷绮栫�靛倿娼ら弮鐘诧紣閿�?.5閸忣剟鍣烽柧浣藉缓鐞氼偉宕氶懡澶嬮キ濞屸槄绱濋崡妤冩憪閽樸倗鍩囧�婏繝浜鹃惍?/p>
+<div class="story-box">
+<h4>📜 珍贵文物：湘桂铁路抗日标语题刻</h4>
+<p><strong>2025年4月</strong>，湖南省文物局发布消息：在冷水滩区四坵田社区七溪坪村二组发现湘桂铁路旧线下涵洞，涵洞建在湘桂铁路旧线下。</p>
+<p>标语分别刻在涵洞前后两端顶部，涵洞顶用整块青石板建成，字就刻在青石板上：</p>
+<p>• 一端中间横写大字<strong>"收复东北失地"</strong>，大字一侧竖刻"中华民国二十七年五月"，一侧竖刻"王懋官题"</p>
+<p>• 另一端洞顶中间大字是<strong>"完成西南交通"</strong>，两侧小字与另一端相同</p>
+<p>这是湘桂铁路修建时期（1938年5月）留下的珍贵抗日文物，见证了这条铁路的抗战使命。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：湖南省文物局《冷水滩区:湘桂铁路发现抗日标语题刻》</p>
 </div>
 </div>
-</div>
 
-<div class="timeline">
-<div class="tl-item">
-<div class="tl-year">2004.04.18</div>
-<div class="tl-title">閼颁胶鐝�閸嬫粍顒涚�广垼绻�</div>
-<div class="tl-desc">閺傜増妗堝�哥偟鐝�閸︺劍绲垮﹢妯恒亣闁�鎾崇紦閹存劒濞囬悽顭掔礉闂嗗爼娅熸稉顓＄熅閻ㄥ嫯鈧�浣规�堝�哥偟浼�鏉烇妇鐝�閸嬫粍顒涙禍鍡曞▏閻㈩煉绱濋弴鏉戞倳娑撶儤妗堝�哥偘绗㈢粩娆欑礉鏉烆兛璐熺拹褑绻嶇粩娆嶁偓鍌濈箥閽�?6楠炲�告畱閼颁胶鐝�濮濓絽绱￠崑婊冨�欑�广垼绻嶆稉姘�濮熼妴?span class="tl-source">閺夈儲绨�閿涙碍濮堥棅?/ 濮樼�跨獮鐢�鍌欐眽濮樻垶鏂傛惔?/span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">2004楠炴潙鎮�</div>
-<div class="tl-title">閺傜増绠诲�楀倿鎼х捄顖涙暭闁�鎾荤彯濠ь亜绔�</div>
-<div class="tl-desc">閼颁胶鐝�閸︽椽鎼ф潪銊┾偓鎰�绗庨梻鑼�鐤嗛敍宀冨礆閼藉�嬫瀬鏉烆煉绱濋悜鐔轰紑閽�钘夌�烽妴鍌滅彲閹磋￥鈧�渚�娲﹀Λ姘モ偓渚�鎼ф潪銊ｂ偓浣风波鎼存挾鐡戠拋鐐�鏌﹂悾娆忕摠閿涘奔绲剧紓杞扮��缂佸瓨濮㈤敍宀勨偓鎰�绗庨幋鎰�璐熼崺搴＄�舵�嬪氦鐭婇惃?娴笺倗鏋�"閵�?span class="tl-source">閺夈儲绨�閿涙碍绠归崡妤冩阜閼奉亞鍔х挧鍕�绨�閸�?/ 娴犲﹥妫╂径瀛樻蒋</span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">2019楠�?/div>
-<div class="tl-title">濞插�氱烦娴滄洘鏋冮崚娑氥仦閸栭缚鎹ｅ��?/div>
-<div class="tl-desc">瑜版挸婀撮柌宥囧仯閹跺﹤銇夊�椼儱宕＄捄顖欑瑢闁句浇鐭惧▽璺ㄥ殠閻ㄥ嫯鍎楃悰妤�鐨�鐠侯垱鏆ｆ担鎾村ⅵ闁�鐘冲灇"闁句浇鐭鹃崡鎷岃杽"娑撳�氼暯娴兼垿妫介崗顒�娲�閿涘苯鍩勯悽銊с仦閸栭缚鈧�浣规＋閹村灝鐪挎晶娆庣秼閸掓稐缍�3D閼圭儤婀抽悽浼欑礉閺佹潙鎮庣紙缁樻煀閸樼喖鎼х捄顖濅捍瀹搞儲瀚戝�板懏澧嶉敍灞界紦閹存劖鏋冮崠鏍�鈹涚粩娆嶁偓?span class="tl-source">閺夈儲绨�閿涙碍绠归崡妤佹）閹�?/span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">2024楠�?/div>
-<div class="tl-title">閸ヨ棄婀＄粚娲�妫块幀璁崇秼鐟欏嫬鍨濋幓鎰�鍤�</div>
-<div class="tl-desc">閵嗗﹥妗堝�哥偛绔堕崶钘夋埂缁屾椽妫块幀璁崇秼鐟欏嫬鍨濋敍?021-2035楠炶揪绱氶妴瀣�褰侀崙鐚寸窗閹恒劏绻橀懓浣轰紑鏉烇妇鐝�閵嗕浇鈧�渚�鎼х捄顖涢儴缁炬寧娲块弬鐗堟暭闁�鐘�鈧�鍌濃偓浣轰紑鏉烇妇鐝�閻楀洤灏�閺囧瓨鏌婂�濓絽绱＄痪鍐插弳閸╁骸绔堕崣鎴濈潔閹存�兼殣閵�?span class="tl-source">閺夈儲绨�閿涙碍妗堝�哥偛绔堕懛顏嗗姧鐠у嫭绨�閸滃矁顫夐崚鎺戠湰</span></div>
-</div>
-</div>
+<div class="section-divider">· · ·</div>
 
-<!-- 閻滄澘婧�鐎圭偞濯块敍姘冲礆鐎靛倻娈戠粩娆忔簚 -->
-<h3 style="font-size:20px;color:#fff;margin:22px 0 14px;padding-left:12px;border-left:3px solid var(--red)">棣冩懖 閻滄澘婧�鐎圭偞濯块敍姘愁潶闁�妤�绻曢惃鍕�鐝�閸�?/h3>
-<div class="photo-grid-3">
-<div class="pg-item">
-<img src="https://aka.doubaocdn.com/s/x53Z9imyqg" alt="鎼寸喎绱旂粩娆忓酱闂嗐劍顥熼悳鏉挎簚鐎圭偞濯�">
-<div class="pg-caption">鎼寸喎绱旂粩娆忓酱闂嗐劍顥� 閳�?闁姐垻绮ㄩ弸鍕�顣﹂弻閬嶆敩鏉╄�勬瀿閺傛埊绱濇�涘嫰绮︾拃锔俱仛閺岃鲸鐖ｇ拠鍡樼�婚弲甯�绱濈粩娆忓酱缁岀儤妫ゆ稉鈧�娴滅尨绱濋柧浣藉缓閸氭垼绻欓弬鐟版�㈡导?/div>
-</div>
-<div class="pg-item">
-<img src="https://aka.doubaocdn.com/s/VbVx2ZYOAa" alt="闁句浇鐭惧▽璺ㄥ殠缁旀瑥褰撮悳鏉挎簚鐎圭偞濯�">
-<div class="pg-caption">闁句浇鐭惧▽璺ㄥ殠缁旀瑥褰� 閳�?閸撳秵娅欓懓渚�鎼ф潪銊�顫﹂懡鎺曞磸濞ｈ�勭梾閿涘奔鑵戦弲顖涜穿閸戞繂婀＄粩娆忓酱闂嗐劍顥熺紒闈涙�㈤敍宀冨剹閺咁垶鍣惧�樺瓨鍜曟径褔鍘�鎼存�冪厬缁斿�剁礉閼颁礁鐓勬稉搴㈡煀閸╁骸婀�濮濄倓姘﹀Ч?/div>
-</div>
-<div class="pg-item">
-<img src="https://aka.doubaocdn.com/s/0fuFUrVi70" alt="閼芥帟宕忓�曨偉寤洪崗銊︽珯閻滄澘婧�鐎圭偞濯�">
-<div class="pg-caption">閼芥帟宕忓�曨偉寤洪崗銊︽珯 閳�?婢舵碍娼�閼诧繝浜鹃獮鎯邦攽瀵ゆ湹鍑犻崥鎴ｇ箼閺傜櫢绱濋崡妤冩憪閽樸倗鍩囧�婏繝浜鹃惍鐕傜礉鏉╂粌顦╅懓浣规＋娴犳挸绨遍拑婵嬨�婃笟婵堚枅閸欘垵顫嗛敍?.5閸忣剟鍣烽柧浣藉缓瀹稿弶鍨氶崺搴＄�堕懡鎺楀櫣</div>
-</div>
-</div>
+<!-- 第四章：新中国辉煌 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 04</div>
+<h2 class="chapter-title">新中国成立后的辉煌岁月</h2>
+<p class="chapter-subtitle">多次扩建、昼夜不停 —— 从货运枢纽到客运门户，66年的繁华</p>
 
-<div class="story-card" style="margin-top:18px">
-<h4><span class="icon">棣冨綃閿�?/span> 缁旀瑥婧�閻滄壆濮搁崟妯虹檪鐠佹澘缍嶉敍?026楠�?閺堝牞绱�</h4>
-<p><strong>缁旀瑦鍩ф稉搴ㄦ处濡�姘剧窗</strong>閼颁胶鐝�閹村じ瀵屾担鎾剁波閺嬪嫬鐨荤�涙﹫绱濈粩娆忓酱闂嗐劍顥熼柦銏㈢波閺嬪嫭顣﹂弻閬嶆敩閾撯偓娑撱儵鍣搁敍宀勭矋姒涙垼顒熺粈鐑樼叴閺嶅洩鐦戝〒鍛�娅氶崣顖濐潌閿涘瞼鐝�閸欐澘婀撮棃銏㈢壃閹圭喎绱戠憗鍌樷偓?/p>
-<p><strong>闁句浇寤虹痪鑳�鐭鹃敍?/strong>4.5閸忣剟鍣烽柧浣藉缓鐎瑰本鏆ｉ悾娆忕摠閿涘苯顦块弶陇鍋傞柆鎾宠嫙鐞涘矉绱濇潪銊╂桨閺堝�岀椽閸欓攱鐖ｇ拋甯�绱欐俊?054"閿涘�涚礉闁�鎾剁墛鐎瑰苯銈芥担鍡楀嚒鐞氼偉宕氶懡澶婃嫲閸楁�冩憪閽樸倛顩�閻╂牭绱濋柈銊ュ瀻鐠侯垱顔岄弶鍌濆磸闂�鑳�绻冩潪銊╂桨閵�?/p>
-<p><strong>娴犳挸绨辨稉搴ㄦ��鐏炵偛缂撶粵鎴�绱�</strong>濞岃法鍤庨崚鍡楃�锋径姘�鐖ч惂鍊熷�婇獮铏�鍩ф禒鎾崇氨閸滃矁浜村�搞儱顔栭懜宥忕礉闂傘劎鐛ラ崸鍥у嚒鐞氼偆鐖剧亸浣诡劥閿涘苯顣鹃棃銏犲⒑閽�鏂ょ礉鐏炲��銆婇弶鍌濆磸娑撴稓鏁撻敍灞界紦缁涙垵鎳嗛崶纾嬵潶婢堆勭埐閸滃矁妫ㄩ拕鎾冲瘶鐟佸箍鈧�?/p>
-<p><strong>閺佺繝缍嬮悳顖氼暔閿�?/strong>閺佺繝閲滅粩娆忔簚閸栧搫鐓欏�稿弶鍨氭稉鍝勭厔鐢�鍌欒厬閻�?閼芥帡鍣圭�涖倕鐭�"閿涘本顦茬悮顐ュ殰閻掑墎鏁撻梹鍖＄礉闁插海鏁撻崝銊у⒖閸戠儤鐥呴敍灞肩瑢閸涖劏绔熼崺搴＄�剁粈鎯у隘瑜般垺鍨氭ご婊勬�戠�佃�勭槷閵�?/p>
+<div class="history-timeline">
+<div class="timeline-item">
+<div class="timeline-year">1949年后</div>
+<div class="timeline-content"><strong>新中国建设时期</strong> — 湘桂铁路逐步修复延伸，冷水滩站成为广州铁路局下属一等站，湘桂铁路和洛湛铁路的中间站。车站多次扩建，配设多股到发线、货场、机务段，南北货运、长途客运昼夜不停。<span class="source">来源：抖音 / 今日头条</span></div>
 </div>
-
-<!-- 闂傝尙鐤嗙挧鍕�楠囬弫鐗堝祦閿涘牏鏁抽弬瑙勫絹娓氭冻绱� -->
-<h3 style="font-size:20px;color:#fff;margin:24px 0 14px;padding-left:12px;border-left:3px solid var(--gold)">棣冩惓 閻楀洤灏�闂傝尙鐤嗙挧鍕�楠囧〒鍛�宕熼敍鍫㈡暢閺傝�勫絹娓氭稖绁�閺傛瑱绱�</h3>
-
-<!-- 閺佺増宓侀弶鈽呯窗闂傝尙鐤嗙挧鍕�楠囬幀鏄忣潔 -->
-<div class="data-strip" style="margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-<div class="data-strip-inner" style="padding:18px">
-<div class="data-item"><div class="num">7婢�?/div><div class="label">闂傝尙鐤嗛弮銏℃箒瀵よ櫣鐡�<br>閸氼偄宸堕幋?娴犳挸绨�/鐎硅儻鍨�</div></div>
-<div class="data-item"><div class="num">2.6娑撳洢甯�</div><div class="label">闂傝尙鐤嗗�よ櫣鐡氶棃銏⑿�<br>閸欘垱妞块崠鏍у焺閻�銊ョ摠闁�?/div></div>
-<div class="data-item"><div class="num">46.14ha</div><div class="label">闂傝尙鐤嗘担搴㈡櫏閻�銊ユ勾<br>缁�?10娴溾晪绱濆▽鍧楁惂鏉炪劌鐢�閻�?/div></div>
-<div class="data-item"><div class="num">0閺�?/div><div class="label">C/D缁狙冨祫閹�?br>閻楀洤灏�閸愬懏妫ら柎鏉戠暰閸楄鲸鍩�</div></div>
+<div class="timeline-item">
+<div class="timeline-year">1951-1955</div>
+<div class="timeline-content"><strong>湘桂铁路全线贯通</strong> — 1951年修至南宁，1952年修至凭祥，1954年建成凭祥至隘口（友谊关）段，1955年同越南铁路接轨联运。冷水滩站成为连接中越的国际通道上的重要节点。<span class="source">来源：全知识 / 湘桂铁路史料</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">1985年</div>
+<div class="timeline-content"><strong>柳州至黎塘段改造为复线</strong> — 湘桂铁路运能提升，冷水滩站货运量持续增长。<span class="source">来源：全知识</span></div>
 </div>
-
-<!-- 闂傝尙鐤嗗�よ櫣鐡氶弰搴ｇ矎鐞�?-->
-<div class="story-card gold" style="margin-top:16px">
-<h4><span class="icon">棣冨綃閿�?/span> 闂傝尙鐤嗛弮銏℃箒瀵よ櫣鐡氶弰搴ｇ矎閿�?婢跺嫸绱�</h4>
-<div style="overflow-x:auto;margin-top:10px">
-<table style="width:100%;border-collapse:collapse;font-size:13px">
-<thead>
-<tr style="background:rgba(212,165,116,0.15)">
-<th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--gold2)">鎼村繐褰�</th>
-<th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--gold2)">閸氬秶袨</th>
-<th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--gold2)">閹碘偓鐏炵偟銇為崠?/th>
-<th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--gold2)">闂堛垻袧</th>
-<th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--gold2)">閸忚渹缍嬫担宥囩枂</th>
-<th style="padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);color:var(--gold2)">閻滄壆濮哥拠瀛樻��</th>
-</tr>
-</thead>
-<tbody>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">1</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">濞煎洦绠绘稉鑺ユ珯閺冧焦鍩х仦?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">閺傚洦妲嶉梼浣恒仦閸�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">1844.97閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">濞煎洦绠绘稉鑺ユ珯閺�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤�</td></tr>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">2</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">閺勭喐妞囬崠濠氭珜</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">濞插�氱烦娴滄洜銇為崠?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">1256.14閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">鐟欏懏绠荤捄顖欎簰娑撴粣绱濋梿鍫曟珶娑擃叀鐭炬禒銉ュ础閿涘瞼姹夌紒鍥╃彲鐏忓繐灏�娴犮儴銈�</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤�</td></tr>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">3</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">鐠炲棜濮冲��鐔风吹閵嗕勾iao閼�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">濞插�氱烦娴滄洜銇為崠?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">123.92閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">閳�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤�</td></tr>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">4</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">閸樼喕宓傛稉姘舵肠閸�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">濞插�氱烦娴滄洜銇為崠?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">8599.68閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">閳�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤�</td></tr>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">5</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">娑撳��娓ょ划顔肩氨</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">濞插�氱烦娴滄洜銇為崠?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">缁�?000閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂嗗爼娅熼崠妤勭熅娑撳孩绔诲▔澶庣熅娴溿倕寮堕崣锝堛偪閸栨ぞ鏅剁痪?00缁�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤�</td></tr>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">6</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">濮樼�跨獮瀹搞儱濮熷▓浣冧捍瀹搞儱鐓跨拋顓炵唨閸�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">濞插�氱烦娴滄洜銇為崠?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">缁�?000閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">閺勩儲鐫欑捄顖欑瑢閺勩儲婀�鐠侯垯姘﹂崣澶庣熅閸欙絽绶氱憲鍨�瀵崇痪?50缁�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤嗛敍灞藉敶闁�銊╀壕鐠侯垶娓堕弨褰掆偓?/td></tr>
-<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">7</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text)">閼颁胶骞撻悹鍐ㄥ范鐎硅儻鍨�</td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">閻х晫顏舵禍顓犮仦閸�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--gold2)">缁�?500閵�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">閸戙倕鍤㈢捄顖欑瑢閻濆﹦鎲电捄顖欐唉閸欏�婂經鐟楀灝宕℃笟褏瀹�100缁�?/td><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--text2)">闂傝尙鐤�</td></tr>
-</tbody>
-</table>
+<div class="timeline-item">
+<div class="timeline-year">1995-1996</div>
+<div class="timeline-content"><strong>更名永州站</strong> — 冷水滩火车站更名为永州站，城市中心彻底扎根冷水滩。这标志着冷水滩从一个镇正式成为永州市的政治、经济、文化中心。<span class="source">来源：永州市人民政府 / 抖音</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">2004.04.18</div>
+<div class="timeline-content"><strong>新永州站建成，老站停运客运</strong> — 新永州站在潇湘大道落成通车，老站更名为永州东站，退出客运主线，转为货运站点。运营66年的老站正式停办客运业务。<span class="source">来源：永州市人民政府 / 艾莱资讯</span></div>
 </div>
-
-<!-- 闂傝尙鐤嗛悽銊ユ勾鐠囧瓨妲� -->
-<div class="story-card" style="margin-top:14px">
-<h4><span class="icon">棣冩�囬敂?/span> 闂傝尙鐤嗘担搴㈡櫏閻�銊ユ勾</h4>
-<p><strong>鐟欏嫭膩閿�?/strong>46.14閸忣剟銆嬮敍鍫㈠��210娴溾晪绱氶敍灞鹃儴闁句浇寤洪崨鍫濈敨閻樿泛鍨庣敮鍐︹偓?/p>
-<p><strong>缁�璇茬�烽敍?/strong>鎼寸喎绱旈妴浣衡敄缂冾喓鈧�浣瑰�掗懓灞炬弓娓氭稏鈧�浣风秵閺佸牆鍩勯悽銊ｂ偓?/p>
-<p><strong>閸掑棗绔烽敍?/strong>娑撴槒顩﹂梿鍡曡厬閸︺劏鈧�浣圭�诲�楀倿鎼х捄顖涢儴缁惧尅绱濇禒搴㈡た姒�娆庣俺缁�鎯у隘瀵ゆ湹鍑犻懛宕囨�х粩閫涙兜缁�鎯у隘閿涘本妲搁悧鍥у隘閸╁骸绔堕弴瀛樻煀閻ㄥ嫭鐗宠箛鍐ㄧ摠闁插繗绁�濠ф劑鈧�?/p>
-<p><strong>濞茶�插�查弬鐟版倻閿�?/strong>缂佹挸鎮庨懓浣轰紑鏉烇妇鐝�閺傚洦姊鹃弴瀛樻煀妞ゅ湱娲伴敍鍫熲偓缁樺�囩挧?.65娴滃灝鍘撻敍澶涚礉娴犮儵鎼х捄顖涢儴缁惧灝鐡ㄩ柌蹇氱カ娴溠冨挤瀵よ櫣鐡氬ú璇插�查崚鈺冩暏娑撴椽鍣搁悙鐧哥礉娣囶喚绫嶉弨褰掆偓鐘插徔閺堝�婂坊閸欏弶鍎忛幇鐔烘畱濮樻垶鍩ч妴浣哥紦缁涙垹澧跨粵澶堚偓?/p>
 </div>
 
-<!-- 閻ゆ垳鎶�閸楄鲸鍩х拠瀛樻�� -->
-<div class="story-card" style="margin-top:14px;border-left-color:#ff9800">
-<h4><span class="icon">閳跨媴绗�</span> 閻ゆ垳鎶�缂佹挻鐎�鐎瑰�婂弿闂呮劖鍋呮担蹇撶暍閿�?婢跺嫸绱�</h4>
-<p>閻楀洤灏�閸�?strong>閺冪娀澹岀�规矮璐烠閵嗕笍缁狙冨祫閹�?/strong>閻ㄥ嫭鍩х仦瀣剁礉娴ｅ棙婀�3婢跺嫮鏋掓导鑲╃波閺嬪嫬鐣ㄩ崗銊╂�ｉ幃锝勭秶鐎瑰拑绱�</p>
-<p>1. <strong>閸㈠�変繆鐟楀灝鐓勬＃娆忓寳A閸栫瘓1閺�?濡�?/strong>閿涘牊鏋冮弰宀勬�跨粈鎯у隘閿�?閺嶅�剁礆閳�?閻ゆ垳鎶�鐎涙ê婀�缂佹挻鐎�鐎瑰�婂弿闂呮劖鍋呴敍宀勬付閸掓繃顒為柎鏉戠暰</p>
-<p>2. <strong>閸樼喕鈧�鎰�浼�閸樺倸顔栭懜?/strong>閿涘牊鏋冮弰宀勬�跨粈鎯у隘閿�?閺嶅�剁礆閳�?閸忔湹鑵�1閺嶅��鐪冲�樻垵鍑￠悽杈┿仦閸栧搫濮栫粋浼欑礉閸忔湹缍戝�よ櫣鐡氶崸鍥ㄦ箒娴滃搫鐪虫担?/p>
-<p>3. <strong>闁�顔芥杺閸忣剙寰冪�硅儻鍨楅弮渚婄礄闁句浇鐭惧▽璺ㄥ殠閿�?/strong>閿涘牊妞挎Λ娆庣俺缁�鎯у隘閿�?閺嶅�剁礆閳�?閸у洣缍呮禍搴ㄦ惂鐠侯垱閮ㄧ痪鍖＄礉缁�鎯у隘瀹歌尙鐝�缁斿��鐖ｉ悧灞惧絹缁�?/p>
+<div class="img-grid">
+<div class="img-card">
+<img src="https://aka.doubaocdn.com/s/ZXil8La3tl" alt="站台与铁轨现状">
+<div class="caption">站台与铁轨现状（双站台视角，荒草漫轨）</div>
 </div>
-
-<div style="font-size:12px;color:var(--text3);margin-top:10px;font-style:italic">閺佺増宓侀弶銉︾爱閿涙碍妗堝�哥偛绔堕崘閿嬫寜濠娾晛灏�閼颁胶浼�鏉烇妇鐝�閻楀洤灏�閸╁骸绔舵担鎾搭梾鐠у嫭鏋￠敍?.21閻忣偉婧呯粩娆戝�栭崠鍝勫従娴犳牞藟閸忓懍淇婇幁?xlsx閿�?/div>
-
-
-
-<!-- 瀹革附鏋冮崣鍐叉禈 -->
-<div class="layout-lr">
-<div class="layout-text">
-<h4>棣冩�� 娴兼ぞ姹夐幏鍛�鍜栭敍姘斥偓浣虹彲娴兼俺顫﹂幏鍡樺竴閸氭�嬬吹</h4>
-<p>鏉╂瑥楠囩挧鎷岀箖87鏉炶棄鐬鹃張鍫㈡畱閼颁胶浼�鏉烇妇鐝�閿涘苯顩ч崥灞藉煝閸楁澘婀�閸愰攱鎸夊�娾晙姹夎箛鍐ㄧ俺閻ㄥ嫭妞傞崗澶屾祲閸愬被鈧�鍌欑船娴滆桨绔撮惄瀛樺�磋箛褍鐣犳导姘愁潶閹恒劌鈧�鎺撶Х婢朵究鈧�?/p>
-<p>"娑撯偓閻╁瓨濯磋箛鍐�鈧�浣虹彲鐞氼偅濯堕敍?閳ユ柡鈧�鏃囩箹閺勵垵顔忔径姘�妗堝�哥偘姹夐惃鍕�鍙￠崥灞界妇婢硅埇鈧�鍌氥偨閸︻煉绱濋柌宥囶棅閸掆晛銈介張鈧�缂佸牐鎯ら崷鑸�鈧�?/p>
+<div class="img-card">
+<img src="https://aka.doubaocdn.com/s/aU8y2hAHo1" alt="货运站台与雨棚">
+<div class="caption">货运站台与雨棚（转为货运站后的设施）</div>
 </div>
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/197d8iMJMA" alt="鎼寸喎绱旈柧浣界熅瀵よ櫣鐡氶悳鏉挎簚鐎圭偞濯�">
 </div>
+
+<div class="story-box">
+<h4>🚉 一等站的繁华：昼夜不停的运输枢纽</h4>
+<p>作为广州铁路局下属的一等站，冷水滩站在新中国成立后经历了多次扩建：</p>
+<p>• <strong>多股到发线</strong> — 可同时接发多趟列车</p>
+<p>• <strong>大型货场</strong> — 承担湘南地区货物集散功能</p>
+<p>• <strong>机务段</strong> — 负责机车检修、整备、换挂</p>
+<p>• <strong>客运站房</strong> — 售票、候车、检票等完整客运功能</p>
+<p>南北货运、长途客运昼夜不停，是湘南地区最重要的铁路枢纽之一。</p>
 </div>
 
-<div class="quote-block">
-<p>"婵�瀣�缂撴禍?938楠炲�告畱濮樼�跨獮閼颁胶浼�鏉烇妇鐝�閸嬫粏绻嶆径姘�鍕鹃敍灞炬禈閺勵垰鐓勭敮鍌烆棑鐠ㄥ瞼娈�'娴笺倗鏋�'閵�?</p>
-<span class="author">閳ユ柡鈧�?濠�鏍у础閻�浣藉殰閻掓儼绁�濠ф劕宸洪敍?026楠�?閺�?/span>
+<div class="story-box">
+<h4>👨‍👩‍👧‍👦 铁路大院：几代人的集体记忆</h4>
+<p>活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常、朝夕岁月温情，全都深深镌刻在这片铁轨之上。蹲铁轨、等绿皮是几代永州人抹不去的童年印记。</p>
+<p>铁路职工家属区、铁路中学、铁路医院、铁路俱乐部……围绕火车站形成了一个完整的"铁路小社会"，是冷水滩城市记忆的重要组成部分。</p>
 </div>
 </div>
 
-<div class="divider">璺� 璺� 璺�</div>
+<div class="section-divider">· · ·</div>
 
-<!-- ==================== 缁楊剙鍙氱粩?==================== -->
-<div class="chapter" id="ch6">
-<div class="chapter-header">
-<div class="chapter-num">06</div>
-<h2 class="chapter-title">2025-2026閿�?0.85娴滃じ绻氶幎銈嗏偓褏鍓烽弬?/h2>
-<p class="chapter-subtitle">"濮樼�跨獮'鏉炪劏顔�'璺�濞煎洦绠荤�广垹宸�" 閳ユ柡鈧�?缂佸嫬鎮庢笟娑樼安濡�鈥崇础閸掓稒鏌婇敍?.5閸忣剟鍣烽柧浣藉缓+30閺嶅��宸婚崣鎻掔紦缁涙垵鐣�閺佺繝绻氶悾?/p>
-</div>
+<!-- 第五章：停运与沉寂 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 05</div>
+<h2 class="chapter-title">停运与沉寂：荒草漫轨的20年</h2>
+<p class="chapter-subtitle">2004年新站启用 → 老站转货运 → 逐渐废弃 —— 被遗忘的城市伤疤</p>
 
-<!-- 閺夊倸绻斿��鈧�缁″洤銇囬崶?-->
-<div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/0fuFUrVi70" alt="閼颁胶浼�鏉烇妇鐝�缁旀瑥婧�閸忋劍娅欓悳鏉挎簚鐎圭偞濯�">
-<div class="mag-hero-overlay">
-<div class="mag-hero-text">
-<h3>10.85娴滃じ绻氶幎銈嗏偓褏鍓烽弬?/h3>
-<p>閻滄澘婧�鐎圭偞濯块敍姘崇箹閻楀洩宕氶懡澶嬫瀬鏉炪劊鈧�浣圭焽鐎�?0楠炲�告畱缁旀瑥婧�閿涘苯宓嗙亸鍡氱箣閺夈儲鏌婇悽?閳�?4.5閸忣剟鍣烽懓渚�鎼ф潪銊ｂ偓?0閺嶅��宸婚崣鎻掔紦缁涙垵鐨㈤崗銊╁劥閸樼喐鐗辨穱婵堟殌</p>
+<div class="history-timeline">
+<div class="timeline-item">
+<div class="timeline-year">2004.04.18</div>
+<div class="timeline-content"><strong>老站停止客运</strong> — 新永州站在潇湘大道建成使用，零陵中路的老永州火车站停止了使用，更名为永州东站，转为货运站。运营66年的老站正式停办客运业务。<span class="source">来源：抖音 / 永州市人民政府</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">2004年后</div>
+<div class="timeline-content"><strong>新湘桂铁路改道高溪市</strong> — 老站场铁轨逐渐闲置，荒草漫轨，烟火落幕。站房、雨棚、铁轨、仓库等设施留存，但缺乏维护，逐渐成为城市风貌的"伤疤"。<span class="source">来源：湖南省自然资源厅 / 今日头条</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">2010年代</div>
+<div class="timeline-content"><strong>周边老旧小区衰败</strong> — 火车站周边的活龙井、黄泥井等社区逐渐老化，基础设施落后，与新城区形成鲜明对比。老火车站片区成为城市更新的重点区域。<span class="source">来源：永州市自然资源和规划局</span></div>
 </div>
-
-<div class="timeline">
-<div class="tl-item">
-<div class="tl-year">2025.12.24</div>
-<div class="tl-title">妞ゅ湱娲伴幋鎰�濮涙禍銈嗘��</div>
-<div class="tl-desc">濮樼�跨獮鐢�鍌氬枎濮樺瓨鍝楅崠楦库偓浣轰紑鏉烇妇鐝�閻楀洤灏�閸╁骸绔堕弴瀛樻煀閸欏﹥鏋冮弮鍛扮�洪崥鍫ｅ殰閻掓儼绁�濠ф劘绁�娴溠呯矋閸氬牅绶垫惔鏃堛�嶉惄顔兼躬濮樼�跨獮鐢�鍌氬彆閸忚精绁�濠ф劒姘﹂弰鎾茶厬韫囧啯鍨氶崝鐔舵唉閺勬挶鈧�鍌涙�堝�哥偛绔堕柧浣界熅瀵ら缚顔曢幎鏇＄カ瀵�鈧�閸欐垶婀侀梽鎰�鐭楁禒璇插彆閸欓晲浜�<strong>10.85娴滃灝鍘�</strong>閹芥ê绶辩拠銉ㄧカ娴溠呯矋閸氬牊鐖ｉ惃鍕┾偓?span class="tl-source">閺夈儲绨�閿涙碍绠归崡妤冩阜閼奉亞鍔х挧鍕�绨�閸�?/ 閺傜増绠归崡?/span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">2025.12.24</div>
-<div class="tl-title">娑撳�愩�嶉弶鍐ㄥ焺缂佸嫬鎮庢笟娑樼安</div>
-<div class="tl-desc">閸欐牕绶遍崶鑺ユ箒瀵ら缚顔曢悽銊ユ勾閿涘牆鏅㈡稉姘辨暏閸﹀府绱氭担璺ㄦ暏閺夊啨鈧�浣告禇閺堝�婄紦鐠佸墽鏁ら崷甯�绱欓崗顒�娲�缂佸灝婀撮敍澶夊▏閻�銊︽綀閸欏﹪鎼х捄顖涢儴缁惧灝鎷板﹢妯荤潤鐟楀潡顥撻崗澶婄敨閺傚洤瀵查弮鍛�鐖剁憴鍌氬帨缂佸繗鎯�閺夊啰鐡�3妞よ�勬綀閸掆斂鈧�?strong>閸掗攱鏌婂﹢鏍у础缂佸嫬鎮庢笟娑樼安閸楁洖鐣绘い鍦�娲伴幋鎰�姘﹂柌鎴︻杺缁绢亜缍�</strong>閵�?span class="tl-source">閺夈儲绨�閿涙碍绠归崡妤冩阜閼奉亞鍔х挧鍕�绨�閸�?/span></div>
-</div>
-<div class="tl-item">
-<div class="tl-year">2026楠�?/div>
-<div class="tl-title">鐎规ɑ鏌熺�规ê顓洪敍姘�绗夐幏鍡�绱掔�瑰本鏆ｆ穱婵堟殌閿�?/div>
-<div class="tl-desc">濮樼�跨獮鐎规ɑ鏌熼柌宥囶棅鐎规ê顓洪敍姘�鏋肩挧?0.85娴滃灝鎯庨崝銊ㄢ偓浣轰紑鏉烇妇鐝�閻楀洤灏�娣囨繃濮㈤幀褏鍓烽弬鏉夸紣缁嬪�剁礉閸ф碍瀵旀穱婵囧Б閹�褍绱戦崣鎴欌偓浣瑰珕缂佹繂銇囬幏鍡椼亣瀵ょ尨绱�4.5閸忣剟鍣烽惂鎯у嬀閼颁線鎼ф潪銊ｂ偓浣虹病閸忕�款槻閸欍倛鈧�浣虹彲閹磋￥鈧�浣哄�掗懝鏌ユ惂鐠侯垰缂撶粵鎴犲參閸忋劑鍎撮崢鐔哥壉閻ｆ瑥鐡ㄩ妴?span class="tl-source">閺夈儲绨�閿涙艾浜曟径瀛樻蒋 / 娴犲﹥妫╂径瀛樻蒋</span></div>
+<div class="timeline-item">
+<div class="timeline-year">2019年</div>
+<div class="timeline-content"><strong>活龙井文创社区起步</strong> — 当地重点把天桥南路与铁路沿线的背街小路整体打造成"铁路印象"主题休闲公园，利用社区老旧房屋墙体创作3D艺术画，整合翻新原铁路职工招待所，建成文化驿站。<span class="source">来源：湖南日报</span></div>
 </div>
-<div class="tl-item">
-<div class="tl-year">2026.06</div>
-<div class="tl-title">鐎圭偞鏌︽潻娑樼潔閸ョ偛顦�</div>
-<div class="tl-desc">濮樼�跨獮鐢�鍌氱厔鐢�鍌氬絺鐏炴洟娉﹂崶銏犳礀婢跺稄绱伴惄顔煎�犳い鍦�娲板�濓絽婀�鏉╂稖顢戠粵鏍у灊閺傝�勵攳缂傛牕鍩楅敍灞界窡閺勫海鈥樼粵鏍у灊閺傝�勵攳閸氬骸鍟�閸掑棙婀￠崚鍡樺�掓潻娑滎攽瀵�鈧�閸欐垯鈧�鍌涚壌閹诡喖鍨靛�濄儱绱戦崣鎴炴煙濡楀牞绱濇＃鏍у帥鐎佃�勭�诲Ч鐔汇偪瀹�鍛婇儴缁惧灝婀撮崸妤勭箻鐞涘苯绱戦崣鎴�绱濋崥搴ㄦ�扮紒顓炵磻閸欐垹绮嶉崥鍫滅返鎼存棃銆嶉惄顔煎⒖娴ｆ瑥婀撮崸妞尖偓?span class="tl-source">閺夈儲绨�閿涙岸妫堕弨鎸庣�归崡?/span></div>
+<div class="timeline-item">
+<div class="timeline-year">2024年</div>
+<div class="timeline-content"><strong>国土空间总体规划提出</strong> — 《永州市国土空间总体规划（2021-2035年）》提出：推进老火车站、老铁路沿线更新改造。老火车站片区更新正式纳入城市发展战略。<span class="source">来源：永州市自然资源和规划局</span></div>
 </div>
 </div>
 
-<!-- 閺佺増宓侀弶?-->
-<div class="data-strip" style="margin:18px 0;border-radius:10px;overflow:hidden;border:1px solid var(--border)">
-<div class="data-strip-inner" style="padding:20px">
-<div class="data-item"><div class="num">10.85娴�?/div><div class="label">妞ゅ湱娲伴崙楦款唨闁叉垿顤�<br>閸掗攱鏌婂﹢鏍у础缁绢亜缍�</div></div>
-<div class="data-item"><div class="num">4.5km</div><div class="label">娣囨繄鏆�闁句浇寤洪梹鍨�瀹�<br>閻ф儳鍕鹃懓渚�鎼ф潪?/div></div>
-<div class="data-item"><div class="num">30閺�?/div><div class="label">娣囨繄鏆�閸樺棗褰跺�よ櫣鐡�<br>缁旀瑦鍩�+娴犳挸绨�+闂勫嫬鐫�</div></div>
-<div class="data-item"><div class="num">3妞�?/div><div class="label">缂佸嫬鎮庢笟娑樼安閺夊啫鍩�<br>閸熷棔绗�+缂佸灝婀�+缂佸繗鎯�閺�?/div></div>
+<div class="img-grid">
+<div class="img-card">
+<img src="https://aka.doubaocdn.com/s/MTXqx7uQwH" alt="废弃铁轨透视">
+<div class="caption">废弃铁轨与双站台（透视视角，荒草漫轨）</div>
 </div>
+<div class="img-card">
+<img src="https://aka.doubaocdn.com/s/lrAN6jrGUe" alt="老站房现状">
+<div class="caption">老站房与雨棚现状（缺乏维护，逐渐破败）</div>
 </div>
-
-<div class="story-card gold">
-<h4><span class="icon">棣冨娇閿�?/span> 妞ゅ湱娲伴崥宥囆為敍?濮樼�跨獮'鏉炪劏顔�'璺�濞煎洦绠荤�广垹宸�"</h4>
-<p>閺堫剟銆嶉惄顔讳簰"閺傚洦姊鹃摶宥呮値"娑撶儤鐗宠箛鍐�顕遍崥鎴�绱濈粩瀣�鍐诲�樼�跨獮闁句浇鐭惧�搞儰绗熼柆妤�鐡ㄦ稉搴㈢�诲Ч鐔歌姳濮樺�告晸閹�浣界カ濠ф劧绱濋幍鎾烩偓?strong>"濮樼�跨獮'鏉炪劏顔�'璺�濞煎洦绠荤�广垹宸�"</strong>閺傛澘婀撮弽鍥モ偓?/p>
-<p>闁�姘崇箖缂佸嫬鎮庢笟娑樼安閺堝�嬫櫏閻╂ɑ妞跨�涙﹢鍣虹挧鍕�绨�閿涘奔绻氶悾娆忚嫙濞茶�插�查崚鈺冩暏娴�?.5閸忣剟鍣烽柧浣藉缓閵�?0閺嶅��宸婚崣鎻掔紦缁涙埊绱濋摶宥呮値閸樺棗褰剁拋鏉跨箓閵嗕胶骞囨禒锝堝�撻張顖欑瑢婢舵艾鍘撻崯鍡曠瑹閿涘本鐎�瀵ゆ椽娉�<strong>閺傚洤瀵茬仦鏇犮仛閵嗕礁鍨遍幇蹇庣秼妤犲被鈧�浣哥�跺�樻垳绱ら梻灞傗偓浣告惂鐠愩劎鏁撳ú?/strong>娴滃簼绔存担鎾舵畱閺傚洦姊鹃摶宥呮値缁�楦垮瘱閸栨亽鈧�?/p>
-<span class="source">閳ユ柡鈧�?閺夈儲绨�閿涙碍绠归崡妤冩阜閼奉亞鍔х挧鍕�绨�閸�?/ 娑撳�嬬�婚柈钘夌�堕幎?/span>
 </div>
 
-<!-- 缁旀牗甯撶紓鏍у娇閸掓�勩�� - 娑撳�娿亣閺嶇�跨妇閺夊灝娼� -->
-<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--red)">娑撳�娿亣閺嶇�跨妇閺夊灝娼�</h3>
-<div class="num-vertical">
-<div class="num-v-card">
-<div class="nv-body">
-<div class="nv-num">1</div>
-<div class="nv-title">闁句浇鐭鹃弬鍥у�茬仦鏇犮仛閸�?/div>
-<div class="nv-text">閼颁胶鐝�閹存寧鏁奸柅鐘绘惂鐠侯垰宸婚崣鎻掔潔閸樺拑绱濋梽鍫濆灙閹舵�佸灛闁句浇鐭鹃崣鍙夋灐閵嗕浇鈧�浣哥础閺堥缚婧呴柊宥勬�㈤妴浣解偓浣芥簠缁併劊鈧�浣戒捍瀹搞儴鈧�浣哄⒖娴犺翰鈧�?/div>
-</div>
-<div class="nv-img"><img src="https://aka.doubaocdn.com/s/YQ4MUsBnzB" alt="濮樼�跨獮闁句浇鐭炬稉濠氼暯閺傚洤瀵查崗顒�娲�鐠佹崘顓搁崶?></div>
-</div>
-<div class="num-v-card">
-<div class="nv-body">
-<div class="nv-num">2</div>
-<div class="nv-title">閺傚洤鍨辨导鎴︽＝鐞涙��灏�</div>
-<div class="nv-text">濞�?.5閸忣剟鍣烽柧浣藉缓閹垫捇鈧�鐘冲弮鐞涘本顒為柆鎾扁偓浣轰紑鏉烇缚瀵屾０妯虹�堕梿鍡愨偓浣规瀮閸掓稖澹撻張顖濐敎閸栨亽鈧�?/div>
+<div class="quote-box">
+<p>"始建于1938年的永州老火车站停运多年，曾是城市风貌的'伤疤'。"</p>
+<span class="author">—— 湖南省自然资源厅，2026年7月</span>
 </div>
-<div class="nv-img"><img src="https://aka.doubaocdn.com/s/dNJoGV7u7V" alt="闁句浇鐭鹃弬鍥у�查崗顒�娲�閺咁垵顫囩拋鎹愵吀"></div>
-</div>
-<div class="num-v-card">
-<div class="nv-body">
-<div class="nv-num">3</div>
-<div class="nv-title">闁板秴顨滈張宥呭�熸稉姘�鈧�?/div>
-<div class="nv-text">閾诲秴鍙嗛柧浣界熅閸楁氨澧挎＃鍡愨偓浣峰瘜妫版﹢鍘�鎼存ぜ鈧�浣筋潎閸忓�婄毈閻忣偉婧呴妴浣哄�掗懝鏌ヮ樀妤楊喚鐡戞稉姘�鈧�浣碘偓?/div>
-</div>
-<div class="nv-img"><img src="https://aka.doubaocdn.com/s/SDOTPxIxit" alt="闁句浇鐭鹃弬鍥у灡閺傛澘銇夐崷鎷岊啎鐠�?></div>
-</div>
-</div>
 
-<div class="highlight-box">
-<h4>棣冩寱 閸掓稒鏌婂Ο鈥崇础閿�?閸ヨ姤婀佸�ら缚顔曢悽銊ユ勾娴ｈ法鏁ら弶鍐跨礈閺傚洤瀵查弮鍛�鐖剁憴鍌氬帨缂佸繗鎯�閺�?缂佸嫬鎮庢笟娑樼安</h4>
-<p>濮樼�跨獮閸掓稒鏌婇柌鍥╂暏"閸ヨ姤婀佸�ら缚顔曢悽銊ユ勾娴ｈ法鏁ら弶鍐跨礈閺傚洤瀵查弮鍛�鐖剁憴鍌氬帨缂佸繗鎯�閺�?缂佸嫬鎮庢笟娑樼安濡�鈥崇础閿涘苯鐨㈤柧浣界熅闁�妤�娼冮妴浣解偓浣规＋闁句浇寤烘稉搴㈤儴濮圭喓鏁撻幀浣界カ濠ф劖鏆ｆ担鎾村ⅵ閸栧拑绱濈憴鍕�鍨濆�ら缚顔�"濮樼�跨獮璺�鏉炪劏顔�"娴ｆ捇鐛欓崠鐚寸礉鐎圭偟骞囬崙楦款唨閺�璺哄弳10.85娴滃灝鍘撻妴?/p>
-<p>鏉╂瑤绔寸紒鍕�鎮庢笟娑樼安濡�鈥崇础閿涘奔绗夋禒鍛�娲忓ú璁崇啊鐎涙﹢鍣虹挧鍕�绨�閿涘本娲挎稉鍝勫弿閻�浣藉殰閻掓儼绁�濠ф劘绁�娴溠呯矋閸氬牅绶垫惔鏂剧瑢閸╁骸绔堕弴瀛樻煀濞ｅ崬瀹抽摶宥呮値閹绘劒绶垫禍鍡楃杽鐠轰絻瀵栨笟瀣ㄢ偓?/p>
-<span style="display:block;font-size:12px;color:var(--text3);margin-top:10px;font-style:italic">閳ユ柡鈧�?閺夈儲绨�閿涙碍绠归崡妤冩阜閼奉亞鍔х挧鍕�绨�閸樺懌鈧�濠冩�堝��?閹恒垻鍌ㄩ懛顏嗗姧鐠у嫭绨�鐠у嫪楠囩紒鍕�鎮庢笟娑樼安閻ㄥ嫬鍨遍弬鏉跨杽鐠虹偣鈧�?/span>
+<div class="story-box">
+<h4>😔 众人担忧：老站会被拆掉吗？</h4>
+<p>这座走过87载岁月的老火车站，如同刻印在冷水滩人心底的时光相册。众人一直担忧它会被推倒消失。"一直担心老站被拆！"——这是许多永州人的共同心声。</p>
+<p>好在，重磅利好最终落地。</p>
 </div>
 </div>
 
-<div class="divider">璺� 璺� 璺�</div>
+<div class="section-divider">· · ·</div>
 
-<!-- ==================== 缁楊兛绔风粩?==================== -->
-<div class="chapter" id="ch7">
-<div class="chapter-header">
-<div class="chapter-num">07</div>
-<h2 class="chapter-title">閸樺棗褰舵禒宄扳偓闂寸瑢閺傚洤瀵查幇蹇庣疅</h2>
-<p class="chapter-subtitle">娑撯偓鎼囱嗏偓浣虹彲閿涘苯宕愰柈銊︽�堝�哥偞鍨氶梹鍨�褰� 閳ユ柡鈧�?娑撹桨绮堟稊鍫濈箑妞よ�崇箽閹躲們鈧�浣疯礋娴犫偓娑斿牐鍏樻径鐔告た閸�?/p>
-</div>
+<!-- 第六章：保护性焕新 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 06</div>
+<h2 class="chapter-title">2025-2026：10.85亿保护性焕新</h2>
+<p class="chapter-subtitle">"永州'轨记'·潇湘客厅" —— 组合供应模式创新，4.5公里铁轨+30栋历史建筑完整保留</p>
 
-<!-- 閺夊倸绻旈崠鏍х磻缁″洤銇囬崶?-->
-<div class="mag-hero">
-<img src="https://aka.doubaocdn.com/s/ArEiOLd1jU" alt="濞煎洦绠绘禍灞炬寜娴溿倖鐪规径鍕�鎮曞畝?>
-<div class="mag-hero-overlay">
-<div class="mag-hero-text">
-<h3>閼颁胶鐝�娑撳秵妲哥�涖倗鐝涢惃鍕�鐡ㄩ崷?/h3>
-<p>鐎瑰啩绗屽�樼�跨獮閵嗕礁鍠庡�樺瓨鍝楅惃鍕�宸婚崣鑼额攨閼村�屾祲鏉╃偑鈧�鍌炴惂鐠侯垳娈戦柅澶嬪�ㄩ敍灞炬Ц鐎电�呯箹閻楀洤婀￠崷鏉垮磮楠炴潙婀撮悶鍡曠瑢閸樺棗褰剁粔顖涚┅閻ㄥ嫭娓剁紒鍫⑩�樼拋銈冣偓?/p>
-</div>
+<div class="history-timeline">
+<div class="timeline-item">
+<div class="timeline-year">2025.12.24</div>
+<div class="timeline-content"><strong>项目成功交易</strong> — 永州市冷水滩区老火车站片区城市更新及文旅融合自然资源资产组合供应项目在永州市公共资源交易中心成功交易。永州市铁路建设投资开发有限责任公司以<strong>10.85亿元</strong>摘得该资产组合标的。<span class="source">来源：湖南省自然资源厅 / 新湖南</span></div>
 </div>
+<div class="timeline-item">
+<div class="timeline-year">2025.12.24</div>
+<div class="timeline-content"><strong>三项权利组合供应</strong> — 取得国有建设用地（商业用地）使用权、国有建设用地（公园绿地）使用权及铁路沿线和湘江西风光带文化旅游观光经营权等3项权利。<strong>刷新湖南组合供应单宗项目成交金额纪录</strong>。<span class="source">来源：湖南省自然资源厅</span></div>
 </div>
-
-<!-- 濮樼�跨獮閿涙碍绲垮﹢妯圭�ｅ┃?- 閸ユ稐淇婇幁顖氬幢閻�?-->
-<h3 style="font-size:20px;color:#fff;margin:16px 0 12px;padding-left:12px;border-left:3px solid var(--gold)">濮樼�跨獮閿涙碍绲垮﹢妯圭�ｅ┃鎰剁礉閸楀啫鍕鹃弬鍥�鍓�</h3>
-
-<div class="info-grid">
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/oQoOI348JC" alt="閽�宥呯煗濞煎洦绠诲Ч鍥ф値"></div>
-<div class="info-card-body">
-<h5>棣冨癄 濞煎洦绠绘稊瀣�绨�</h5>
-<p>濮樼�跨獮閸︽澘顦�"濞煎洦绠绘稊瀣�绨�"閿涘本绲垮�樻潙鎷板﹢妯绘寜閸︺劑娴傞梽闈涘隘閽�宥呯煗閻╁憡鐪归幋鎰�绠诲Ч鐔粹偓鍌濈箹闁插本婀�<strong>娑撯偓娑撳洤鍕惧��鈧�閸欐垵褰堕妴浣告磽閸楀啫鍕鹃弬鍥ㄦ�戦崣灞傗偓浣疯⒈閸楀啫鍕惧�ゅ搫鍩楅崣?/strong>閿涘本妲稿﹢鏍ㄧ�婚弬鍥у�查惃鍕�鍣哥憰浣圭爱婢舵番鈧�?/p>
-</div>
+<div class="timeline-item">
+<div class="timeline-year">2026年</div>
+<div class="timeline-content"><strong>官方官宣：不拆！完整保留！</strong> — 永州官方重磅官宣：斥资10.85亿启动老火车站片区保护性焕新工程，坚持保护性开发、拒绝大拆大建！4.5公里百年老铁轨、经典复古老站房、特色铁路建筑群全部原样留存。<span class="source">来源：微头条 / 今日头条</span></div>
 </div>
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/eLAIvguGTB" alt="閺屽啿鐡欐惔?></div>
-<div class="info-card-body">
-<h5>棣冩憪 閺屽啿鐣婚崗鍐╂瀮娴肩姴宕堥獮?/h5>
-<p>鐞氼偉鑸瑰�樼�跨獮閸椾礁鍕鹃敍灞烩偓濠冪叾鐎规��鍘撻崗銊╂肠閵�?70娴ｆ瑧鐦掔拠妤佹瀮娑擃厾瀹�500缁″洣缍旀禍搴㈡�堝�哥偑鈧�鍌樷偓濠冨礋閾斿洩鈧�鍛邦嚛閵嗗�ㄢ偓濠冩�堝�哥偛鍙撶拋鑸�鈧�瀣ㄢ偓濠冪潤闂嗩亗鈧�瀣�鐡戦崡鍐ㄥ綔閸氬秶鐦掗崘娆庣艾鏉╂瑧澧栭崷鐔锋勾閿�?strong>瀵�鈧�閸掓稐鑵戦崶钘夊寳濮樺瓨鏆庨弬鍥у帥濞�?/strong>閵�?/p>
+<div class="timeline-item">
+<div class="timeline-year">2026.06</div>
+<div class="timeline-content"><strong>实施进展回复</strong> — 永州市城市发展集团回复：目前项目正在进行策划方案编制，待明确策划方案后再分期分批进行开发。根据初步开发方案，首先对湘江西岸沿线地块进行开发，后陆续开发组合供应项目剩余地块。<span class="source">来源：问政湖南</span></div>
 </div>
 </div>
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/FyK7FVrSqR" alt="閺屽啿鐡欑悰妤呮綒閻�铏�婢樼捄?></div>
-<div class="info-card-body">
-<h5>棣冨綄閿�?閻炲棗顒熷��鈧�鐎规�旈�庢埂閻炲棙鐪扮槐?/h5>
-<p><strong>閸涖劍鏆掓０?/strong>閻炲棗顒熷��鈧�鐎规�嬬礉閵嗗﹦鍩嶉懢鑼额嚛閵嗗�╃炊妫板倸宕堥崣銈忕幢<strong>閺夊氦鎻�</strong>濮瑰倻鍌ㄩ惇鐔烘倞閿涘奔鑵戦崶钘夊彙娴溠冨幏閸掓稑顫愭禍杞扮�ｆ稉鈧�閿涘矁鈧�灞炬綍鏉堢偓顒滈弰顖氬枎濮樺瓨鍝楁禍鎭掆偓鍌涒偓婵囧厒閽栴亞浼�閿涘苯婀�鏉╂瑧澧栭崷鐔锋勾娑撳﹦鏁撻悽鐔剁瑝閹�顖樷偓?/p>
+
+<div class="data-cards">
+<div class="data-card">
+<div class="num">10.85亿</div>
+<div class="label">项目出让金额<br>刷新湖南纪录</div>
 </div>
+<div class="data-card">
+<div class="num">4.5km</div>
+<div class="label">保留铁轨长度<br>百年老铁轨</div>
 </div>
-<div class="info-card">
-<div class="info-card-img"><img src="https://aka.doubaocdn.com/s/guIUXyxZuo" alt="閽�宥呯煗閼割亝濯�"></div>
-<div class="info-card-body">
-<h5>閴佸稄绗� 娑撳秴鍩屽�煎洦绠诲畝鍌涙箒鐠�?/h5>
-<p>鐎瑰�╁敩鐠囨ぞ姹夐梽鍡樼埗閸氱喎鎷搁崙?strong>"閹搞儲顕犺ぐ鎾崇繁濮圭喎鍖楅崝鈺嬬礉娑撳秴鍩屽�煎洦绠诲畝鍌涙箒鐠�?</strong>閻ㄥ嫬鎮曢崣銉ｂ偓鍌涙�堝�哥偟娈戠仦杈ㄦ寜閿涘本婀伴煬顐㈡皑閺勵垵鐦查幇蹇曟畱濠ф劖纭ラ妴鍌涙噰瀹曟牜鐓堕崚姹団偓浣藉灣鐢�婵堛偔閸忔悶鈧�浣搞偝娑旓缚绡勬穱妤冪搼閺傚洤瀵查柆妤�鐡ㄩ摎姘�锛愬ù宄板敶婢舵牓鈧�?/p>
+<div class="data-card">
+<div class="num">30栋</div>
+<div class="label">保留历史建筑<br>站房+仓库+附属</div>
 </div>
+<div class="data-card">
+<div class="num">3项</div>
+<div class="label">组合供应权利<br>商业+绿地+经营权</div>
 </div>
 </div>
 
-<!-- 閸愰攱鎸夊�娾晪绱板﹢妯荤潤閻�浣搞仈 - 瀹革附鏋冮崣鍐叉禈 -->
-<div class="layout-lr">
-<div class="layout-text">
-<h4>棣冨癄 閸愰攱鎸夊�娾晪绱板﹢妯荤潤閻�浣搞仈閿涘本鍝楃敮鍌氬彺鐠�?/h4>
-<p>閸愰攱鎸夊�娾晪绱濋崶鐘崇�诲Ч鐔烩偓灞藉彺閵嗗倹妫�閸︺劑鎼х捄顖氬煂閺夈儰绠ｉ崜宥忕礉鏉╂瑩鍣风亸杈ㄦЦ濠�妯活攪鐠ф澘绮栨稉濠勬畱闁插秷顩﹀�樻挳妾伴惍浣搞仈閵�?/p>
-<p><strong>"濠娾晛绔堕梹?</strong>閳ユ柡鈧�鏃�澧嶇拫鎾村摋鐢�鍌︾礉閸楄櫕娓ゅ�娾晠娉︾敮鍌濋敜閺勬挸褰傛潏淇扁偓鍌涚�诲Ч鐔锋躬濮濄倕鑸伴幋鎰�銇夐悞鎯板�囧〒顖ょ礉鐎广垹鏅㈢亸蹇氱┛閵嗕礁鍟樺�樻垼绻嶆径顐＄隘闂嗗棴绱濆�扳偓闂勫棗婀撮崣鎴濈潔閹存劘顢滅敮鍌樷偓?/p>
-<p>閸愰攱鎸夊�娾晜娓ょ憲鑳�鈧�浣虹垳婢跺瓨婀侀惂鎯ь樋楠炴潙宸婚崣璇х礉<strong>閺傚洦妲嶉梼?/strong>閸樺棗褰堕弴缈犵畽閿涘苯缂撴禍搴㈢�绘惔椋庡晸楠炴挳妫块敍灞捐姳娑撴潙绔堕崠鐑樻袱鐟楀尅绱濋崙灞界��閼板摜鐝涢妴?/p>
-</div>
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/dyQGYs26pq" alt="閸愰攱鎸夊�娾晜鏋冮弰宀勬�块懜顏呭��">
-</div>
+<div class="story-box">
+<h4>🏷️ 项目名称："永州'轨记'·潇湘客厅"</h4>
+<p>本项目以"文旅融合"为核心导向，立足永州铁路工业遗存与湘江滨水生态资源，打造<strong>"永州'轨记'·潇湘客厅"</strong>新地标。</p>
+<p>通过组合供应有效盘活存量资源，保留并活化利用了4.5公里铁轨、30栋历史建筑，融合历史记忆、现代艺术与多元商业，构建集<strong>文化展示、创意体验、市民休闲、品质生活</strong>于一体的文旅融合示范区，塑造永州城市文化和潇湘流域特色城市客厅。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：湖南省自然资源厅 / 三湘都市报</p>
 </div>
 
-<!-- 娑撯偓瀵�鐘层亣閸ユ拝绱欓崢鐔剁瑏閸ユ儳鑻熼幒鎺撴暭閹存劒绔村��鐘层亣閸ユ拝绱� -->
-<div class="img-full">
-<img src="https://aka.doubaocdn.com/s/q0AtUm7DAc" alt="閺傚洦妲嶉梼浣峰�嶅Ч?>
-<div class="caption"><strong>閺傚洦妲嶉梼浼�宄板櫡瀹曟牞鈧�鍝ョ彌娴滄梻娅ㄩ獮?/strong> 閳�?瀵よ桨绨�濞撳懎鎮嶉悢娆忓嬀闂傝揪绱濆�娿劋澶嶇敮鍌氬隘濞屽疇銈块敍灞藉櫡瀹曟牞鈧�鍝ョ彌閿涘矂鐝�50娴ｆ瑧鑳岄敍灞炬Ц閸愰攱鎸夊�娾晝娈戦崢鍡楀蕉閺傚洤瀵查崷鐗堢垼</div>
+<div class="story-box">
+<h4>🏗️ 规划三大核心板块</h4>
+<p><strong>① 铁路文化展示区</strong> — 老站房改造铁路历史展厅，陈列抗战铁路史料、老式机车配件、老车票、职工老物件。</p>
+<p><strong>② 文创休闲街区</strong> — 沿4.5公里铁轨打造慢行步道、火车主题市集、文创艺术街区。</p>
+<p><strong>③ 配套服务业态</strong> — 融入铁路博物馆、主题酒店、观光小火车、特色餐饮等业态。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：今日头条《一直担心老站被拆!冷水滩87年老站，斥资10.85亿留铁轨焕新》</p>
 </div>
 
-<!-- 閸ョ姷鐝�閼板苯鍙� - 瀹革箑娴橀崣铏�鏋� -->
-<div class="layout-lr reverse">
-<div class="layout-img">
-<img src="https://aka.doubaocdn.com/s/hgO4rVGPbi" alt="婢舵洟妲兼稉瀣�娈戝�樼�跨獮娑撴粎鐝�">
+<div class="story-box">
+<h4>💡 创新模式："国有建设用地使用权＋文化旅游观光经营权"组合供应</h4>
+<p>永州创新采用"国有建设用地使用权＋文化旅游观光经营权"组合供应模式，将铁路遗址、老旧铁轨与沿江生态资源整体打包，规划建设"永州·轨记"体验区，实现出让收入10.85亿元。</p>
+<p>这一组合供应模式，不仅盘活了存量资源，更为全省自然资源资产组合供应与城市更新深度融合提供了实践范例。</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：湖南省自然资源厅《永州:探索自然资源资产组合供应的创新实践》</p>
 </div>
-<div class="layout-text">
-<h4>棣冩畽 閸ョ姷鐝�閼板苯鍙撮敍姘舵惂鐠侯垯绗岄崺搴＄�堕惃鍕�鍙￠悽?/h4>
-<p>1938楠炶揪绱濆﹢妯活攪闁句浇鐭鹃惃鍕�鎱ㄥ�ら缚鈧�鍛�婊戦柅澶嬪�ㄦ禍鍡楀枎濮樺瓨鍝楅敍灞绢劀閺勵垰娲滄稉楦跨箹闁�?strong>"闁句浇鐭�+濮樼�嬬箥"閻ㄥ嫭鎸夐梽鍡曡厬鏉烆剚鐏戠痪?/strong>閸栬桨缍呴妴?/p>
-<p>闁句浇鐭鹃惃鍕�鍩岄弶銉�绱濊ぐ璇茬俺閺�鐟板綁娴滃棜绻栨惔褍鐨�闂�鍥╂畱閸涘�熺箥閵�?strong>"娑撯偓鎼囱呬紑鏉烇妇鐝�閺�鐟板綁娑撯偓鎼囱冪厔"</strong>閳ユ柡鈧�鏂垮枎濮樺瓨鍝楅悽鍙樼�存稉顏勭毈闂�鍥风礉濞撴劖绗庨崣鎴濈潔閹存劒璐熷�樼�跨獮鐢�鍌氼潤鐢�鍌涙杺鎼存粍澧嶉崷銊ユ勾閵嗕焦妗堝�哥偟娈戦崺搴＄�舵稉顓炵妇閵�?/p>
-<p style="color:var(--gold);font-weight:600;margin-top:8px">濞屸剝婀佸﹢妯荤潤閻�浣搞仈閻ㄥ嫬宕堥獮瀵感濆ǎ鈧�閿涘苯姘ㄥ▽鈩冩箒濠�妯活攪闁句浇鐭鹃惃鍕�鈧�澶嬪�ㄩ敍娑欑梾閺堝�嬬�诲�楀倿鎼х捄顖滄畱闁�澶嬪�ㄩ敍灞芥皑濞屸剝婀侀崘閿嬫寜濠娾晝娈戞禒濠傘亯閵�?/p>
+
+<div class="story-box">
+<h4>📈 预期效益</h4>
+<p>• <strong>就业带动</strong> — 预计创造上千个就业岗位</p>
+<p>• <strong>文化传承</strong> — 保留并活化4.5公里铁轨、30栋历史建筑，传承永州铁路记忆</p>
+<p>• <strong>城市更新</strong> — 带动周边老旧小区改造，提升片区整体品质</p>
+<p>• <strong>文旅融合</strong> — 打造永州城市文化和潇湘流域特色城市客厅</p>
+<p style="color:#888;font-size:13px;margin-top:10px">—— 来源：人民网湖南频道 / 湖南省自然资源厅</p>
 </div>
 </div>
 
-<!-- 閸忋劌顔旀径褍娴� -->
-<div class="img-full" style="margin-bottom:18px">
-<img src="https://aka.doubaocdn.com/s/a1GvVTRwLU" alt="2000楠炵繝鍞�閸愰攱鎸夊�娾晝浼�鏉烇妇鐝�楠炲灝婧�">
-<div class="caption"><strong>2000楠炵繝鍞�閻ㄥ嫬鍠庡�樺瓨鍝楅悘顐ユ簠缁旀瑥绠嶉崷?/strong> 閳ユ柡鈧�?缁旀瑥澧犻獮鍨�婧�娴滅儤娼垫禍鍝勭窔閿涘苯鍤�缁夌喕婧呴妴浣规啞鐠愨斂鈧�浣规⒕鐎诡澀姘︾紒鍥风礉鏉╂瑦妲搁懓浣虹彲閺堚偓缁讳礁宕曢惃鍕�妞傛禒?/div>
-</div>
+<div class="section-divider">· · ·</div>
 
-<!-- 娴滄柨銇囬崢鍡楀蕉娴犲嘲鈧�?-->
-<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--red)">娴滄柨銇囬崢鍡楀蕉娴犲嘲鈧�?/h3>
+<!-- 第七章：历史价值总结 -->
+<div class="chapter">
+<div class="chapter-num">CHAPTER 07</div>
+<h2 class="chapter-title">历史价值与文化意义</h2>
+<p class="chapter-subtitle">一座老站，半部永州成长史 —— 为什么必须保护、为什么能够活化</p>
 
-<div class="numbered-list">
-<div class="n-item">
-<div class="n-num">閳�?/div>
-<div class="n-content">
-<h5>閹舵�佸灛閸樺棗褰舵禒宄扳偓?/h5>
-<p>濠�妯活攪闁句浇鐭鹃弰顖涘�夐幋妯煎瀻閸欐垵鎮楅崶鑺ョ毌閺�鍨�绨绘穱顔肩紦閻ㄥ嫮顑囨稉鈧�閺夛繝鎼х捄顖氬叡缁惧尅绱濋崘閿嬫寜濠娾晝鐝�閺勵垵绻栭弶?閹舵�佸灛闁句浇鐭�"娑撳﹦娈戦崗鎶芥暛閼哄倻鍋ｉ敍宀冾潌鐠囦椒绨￠幎妤佸灛鏉╂劘绶�閵嗕焦妫╅崘娑樺窗妫板棎鈧�渚�鎼ч柆鎾寸埗閸戝�氭Е閵嗕線鎼х捄顖氭喅瀹搞儲鎸欓柅鈧�缁涘�愬櫢婢堆冨坊閸欒弓绨ㄦ禒韬测偓?025楠炴潙褰傞悳鎵�娈�"閺�璺侯槻娑撴粌瀵虫径鍗炴勾""鐎瑰本鍨氱憲鍨�宕℃禍銈夆偓?閹舵�佹）閺嶅洩顕㈡０妯哄煝閿涘本娲块弰顖滃冀鐠愮數娈戦幎妤佸灛閺傚洨澧块妴?/p>
-</div>
-</div>
-<div class="n-item">
-<div class="n-num">閳�?/div>
-<div class="n-content">
-<h5>闁句浇鐭惧�搞儰绗熼柆妞鹃獓娴犲嘲鈧�?/h5>
-<p>閼颁胶鐝�閹磋￥鈧�渚�娲﹀Λ姘モ偓浣虹彲閸欒埇鈧�?.5閸忣剟鍣烽柧浣藉缓閵嗕浇鎻ｆ潻鎰�绮ㄦ惔鎾扁偓浣规簚閸斺剝顔岀拋鐐�鏌︾粵澶涚礉閺嬪嫭鍨氭禍鍡楃暚閺佸�告畱闁句浇鐭惧�搞儰绗熼柆妞鹃獓娴ｆ挾閮撮敍灞炬Ц濠�妯哄础閸︽澘灏�娣囨繂鐡ㄩ張鈧�鐎瑰本鏆ｉ惃鍕�鈧�浣轰紑鏉烇妇鐝�娑斿�╃�撮妴?/p>
-</div>
-</div>
-<div class="n-item">
-<div class="n-num">閳�?/div>
-<div class="n-content">
-<h5>閸╁骸绔堕崣鎴濈潔鐠佹澘绻傛禒宄扳偓?/h5>
-<p>"娑撯偓鎼囱嗏偓浣芥簠缁旀瑱绱濋崡濠囧劥濮樼�跨獮閹存劙鏆遍崣?閵嗗倸鍠庡�樺瓨鍝楅崶鐘电彲閼板苯鍙撮敍灞肩矤娑撯偓娑擃亜鐨�闂�鍥у絺鐏炴洘鍨氭稉鐑樻�堝�哥偛绔舵慨鏂跨�堕弨鍨�绨婚幍鈧�閸︺劌婀撮敍宀冣偓浣轰紑鏉烇妇鐝�閺勵垱妗堝�哥偛鐓勭敮鍌氬�叉潻娑氣柤閻ㄥ嫰鍣哥憰浣筋潌鐠囦降鈧�?/p>
+<div class="story-box">
+<h4>🏛️ 五大历史价值</h4>
+<p><strong>① 抗战历史价值</strong> — 湘桂铁路是抗战爆发后国民政府修建的第一条铁路干线，冷水滩站是这条"抗战铁路"上的关键节点，见证了抗战运输、日军占领、铁道游击队、铁路员工撤退等重大历史事件。2025年发现的"收复东北失地""完成西南交通"抗日标语题刻，更是珍贵的抗战文物。</p>
+<p><strong>② 铁路工业遗产价值</strong> — 老站房、雨棚、站台、4.5公里铁轨、货运仓库、机务段设施等，构成了完整的铁路工业遗产体系，是湘南地区保存最完整的老火车站之一。</p>
+<p><strong>③ 城市发展记忆价值</strong> — "一座老车站，半部永州成长史"。冷水滩因站而兴，从一个小镇发展成为永州市委市政府所在地，老火车站是永州城市化进程的重要见证。</p>
+<p><strong>④ 集体记忆与情感价值</strong> — 活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常、朝夕岁月温情，全都深深镌刻在这片铁轨之上。蹲铁轨、等绿皮是几代永州人抹不去的童年印记。</p>
+<p><strong>⑤ 城市更新示范价值</strong> — 10.85亿组合供应模式，刷新湖南组合供应单宗项目成交金额纪录，为全省自然资源资产组合供应与城市更新深度融合提供了实践范例。</p>
 </div>
-</div>
-<div class="n-item">
-<div class="n-num">閳�?/div>
-<div class="n-content">
-<h5>闂嗗棔缍嬬拋鏉跨箓娑撳孩鍎忛幇鐔剁幆閸�?/h5>
-<p>濞插�氱烦娴滄洏鈧�渚�绮嶅▔銉ょ俺閵嗕線鎼х捄顖氥亣闂勩垻娈戦崙鐘卞敩鐞涙��娼戦敍灞藉磹閻㈢喓鍎�閻忣偅妫╃敮鎼炩偓浣规篂婢舵洖鐬鹃張鍫熶刊閹�鍜冪礉閸忋劑鍏樺ǎ杈ㄧ箒闂�灞藉煝閸︺劏绻栭悧鍥�鎼ф潪銊ょ�ｆ稉濞库偓鍌濆叡闁句浇寤洪妴浣虹搼缂佽法姣婇弰顖氬殤娴狅絾妗堝�哥偘姹夐幎閫涚瑝閸樿崵娈戠粩銉ュ嬀閸楁媽顔囬妴?/p>
-</div>
-</div>
-<div class="n-item">
-<div class="n-num">閳�?/div>
-<div class="n-content">
-<h5>閸╁骸绔堕弴瀛樻煀缁�楦垮瘱娴犲嘲鈧�?/h5>
-<p>10.85娴滆法绮嶉崥鍫滅返鎼存梹膩瀵�蹇ョ礉閸掗攱鏌婂﹢鏍у础缂佸嫬鎮庢笟娑樼安閸楁洖鐣绘い鍦�娲伴幋鎰�姘﹂柌鎴︻杺缁绢亜缍嶉敍灞艰礋閸忋劎娓烽懛顏嗗姧鐠у嫭绨�鐠у嫪楠囩紒鍕�鎮庢笟娑樼安娑撳骸鐓勭敮鍌涙纯閺傜増绻佹惔锕佺�洪崥鍫熷絹娓氭稐绨＄�圭偠杩旈懠鍐х伐閵�?/p>
-</div>
-</div>
-</div>
 
-<!-- 娑撳�婂灙缁旀牕鎮滈幒鎺斿�� - 娣囨繃濮㈤幀褎妞块崠鏍�娈戞禒宄扳偓?-->
-<h3 style="font-size:20px;color:#fff;margin:18px 0 12px;padding-left:12px;border-left:3px solid var(--gold)">娑撹桨绮堟稊鍫滅箽閹躲倖鈧�褎妞块崠鏍ㄦЦ閸烆垯绔村�濓絿鈥橀柅澶嬪��</h3>
-<div class="value-grid">
-<div class="value-card">
-<div class="v-num">棣冨綃閿�?/div>
-<div class="v-title">閸樺棗褰堕懖宀�鎮婇弰顖濈カ娴溠傜瑝閺勵垵绀嬮幏?/div>
-<div class="v-text">閺傛垿鈹忛惃鍕�瀛╅惍鏍ь暰閵嗕胶鏁撻柨鍫㈡畱闁句浇寤洪妴浣解偓浣虹彲閹村尅绱濋柈鑺ユЦ娑撳秴褰叉径宥呭煑閻ㄥ嫪鐜�閸婄》绱濋崚顐℃眽閼洪亶鎸跺〒鍛�妫�閿涘苯鐣犳禒顒勬浆閺冄嗙�嬮柦渚库偓?/div>
-<div class="v-img"><img src="https://aka.doubaocdn.com/s/hwTlA0tLFf" alt="缁剧晫瀹虫�傛�煎殠閸忣剙娲�闁句浇寤烘稉搴ｈ雹濡炲秷鐎洪崥?></div>
+<div class="story-box">
+<h4>🎯 为什么保护性活化是唯一正确选择</h4>
+<p><strong>大拆大建的损失</strong>：如果推倒老站重建，损失的不仅是一栋建筑，而是87年的历史记忆、完整的铁路工业遗产体系、几代人的集体情感。</p>
+<p><strong>保护性活化的价值</strong>：</p>
+<p>• <strong>历史肌理是资产不是负担</strong> — 斑驳的红砖墙、生锈的铁轨、老站房，都是不可复制的价值，别人花钱清旧，它们靠旧赚钱</p>
+<p>• <strong>文化IP自带流量</strong> — "87年老站""抗战铁路""4.5公里老铁轨"本身就是强大的文化IP，自带传播属性</p>
+<p>• <strong>差异化竞争优势</strong> — 在千城一面的商业综合体中，铁路文化主题的文创街区具有不可复制的差异化优势</p>
+<p>• <strong>政策支持机遇</strong> — 国家历史文化保护、城市更新、文旅融合等政策叠加，为保护性活化提供了良好的政策环境</p>
 </div>
-<div class="value-card">
-<div class="v-num">棣冨箚</div>
-<div class="v-title">閺傚洤瀵睮P閼奉亜鐢�濞翠線鍣�</div>
-<div class="v-text">"87楠炵�嬧偓浣虹彲""閹舵�佸灛闁句浇鐭�""4.5閸忣剟鍣烽懓渚�鎼ф潪?閺堫剝闊╃亸杈ㄦЦ瀵�鍝勩亣閻ㄥ嫭鏋冮崠鏈揚閿涘矁鍤滅敮锔跨炊閹绢厼鐫橀幀褍鎷扮拠婵嬵暯閻戭厼瀹抽妴?/div>
-<div class="v-img"><img src="https://aka.doubaocdn.com/s/hySslwItfO" alt="閺夘厼绐為惂钘夘敊閸忣剙娲�濡�杈�濮虫稉搴☆槻閸欍倛鎹�濮硅姤婧�鏉�?></div>
-</div>
-<div class="value-card">
-<div class="v-num">棣冩嫷</div>
-<div class="v-title">瀹割喖绱撻崠鏍�鐝垫禍澶夌喘閸�?/div>
-<div class="v-text">閸︺劌宕堥崺搴濈�撮棃銏㈡畱閸熷棔绗熺紒鐓庢値娴ｆ挷鑵戦敍宀勬惂鐠侯垱鏋冮崠鏍﹀瘜妫版�兼畱閺傚洤鍨辩悰妤�灏�閸忛攱婀佹稉宥呭讲婢跺秴鍩楅惃鍕�妯婂��鍌氬�叉导妯哄◢閵�?/div>
-<div class="v-img"><img src="https://aka.doubaocdn.com/s/dNJoGV7u7V" alt="閸橈箓妫�闁句浇鐭鹃弬鍥у�查崗顒�娲�濡�杈�濮冲�濄儵浜炬稉搴濈搐閹测晝鈹栭梻?></div>
-</div>
-</div>
 
-<div class="quote-block">
-<p>"娑撯偓鎼囱嗏偓浣芥簠缁旀瑱绱濋崡濠囧劥濮樼�跨獮閹存劙鏆遍崣灞傗偓鍌欑矤娣囨繃濮㈤崚鏉垮焺閻㈩煉绱濋崡鍐ㄥ嬀閺傚洩鍓︽稉宥勭矌鐞氼偆婀呯憴渚婄礉閺囩�嬪厴鐞氼偂缍嬫�犲被鈧�浣筋潶娴肩姵澹欓妴?</p>
-<span class="author">閳ユ柡鈧�?閹兼粎瀚勭純鎴欌偓濠佷簰閺傚洤瀵叉稊瀣�鎮曢崥鎴炴弓閺夈儴鈧�宀冾攽閳ユ柡鈧�鏃�妗堝�哥偠绐囬崙鐑樻瀮娴ｆ挻姊鹃崯鍡氱�洪崥?閸旂娀鈧�鐔峰��"閵�?/span>
+<div class="quote-box">
+<p>"一座老车站，半部永州成长史。从保护到利用，千年文脉不仅被看见，更能被体验、被传承。"</p>
+<span class="author">—— 搜狐网《以文化之名向未来而行——永州跑出文体旅商融合"加速度"》</span>
 </div>
 </div>
-
-</div>
-
 
-<!-- 閸ュ墽澧栭梿鍡楀弳閸�?-->
-<div class="story-card gold" style="margin:24px 0;text-align:center">
-<h4><span class="icon">棣冩懖</span> 閼颁胶浼�鏉烇妇鐝�閻滄壆濮搁悡褏澧栭崶楣冩肠</h4>
-<p style="margin:12px 0;color:var(--text2)">閺�璺虹秿缁旀瑥宸堕崠铏瑰箛閻樿翰鈧�浣告噯鏉堝湱骞囬悩韬测偓浣稿坊閸欐彃宓冪拋棰佺瑏婢堆呰��閿涘苯鍙�30娴ｆ瑥绱堕悳鏉挎簚鐎圭偞濯块悡褏澧栭敍灞剧槨瀵�鐘绘��鐠囷妇绮忕拠瀛樻�戦妴?/p>
-<a href="station-photos.html" style="display:inline-block;padding:10px 30px;background:var(--gold);color:#000;text-decoration:none;border-radius:6px;font-weight:bold;margin-top:8px">閺屻儳婀呯�瑰本鏆ｉ崶楣冩肠 閳�?/a>
 </div>
 
-<!-- ==================== 妞や絻鍓� ==================== -->
 <div class="footer">
-<p class="title">濮樼�跨獮鐢�鍌氬枎濮樺瓨鍝楅崠楦库偓浣轰紑鏉烇妇鐝�閻楀洤灏�閸╁骸绔堕弴瀛樻煀妞ゅ湱娲� 璺� 娑撴捇顣介惍鏃傗敀閹躲儱鎲�</p>
-<p>閼颁胶浼�鏉烇妇鐝�鐎瑰本鏆ｉ崢鍡楀蕉娑撳海骞囬悩鍓佺埡缁�?/p>
-<p style="margin-top:12px;color:#555">閹躲儱鎲＄紓鏍у煑閺冨爼妫块敍?026楠�?閺�?| 閻楀牊婀伴敍姝�3.1 闂嗗爼鍣告径宥呮禈閻楀洨澧�</p>
-<p style="color:#444">閸欏弶鏋￠弶銉︾爱閿涙碍绠归崡妤冩阜閺傚洨澧跨仦鈧� 璺� 濮樼�跨獮鐢�鍌欐眽濮樻垶鏂傛惔?璺� 娑擃厼娴楅崶钘夘啀闁句浇鐭鹃梿鍡楁礋 璺� 濠�鏍у础閺冦儲濮� 璺� 濞煎洦绠婚弲銊﹀Г 璺� 閹舵�佹）閹存ü绨ょ痪顏勫悍缂�?璺� 娑撳�嬬�婚柈钘夌�堕幎?璺� 娴滅儤鐨�缂�?/p>
-</div>
-
-<!-- 鎼存洟鍎寸�佃壈鍩� -->
-<div class="bottom-nav">
-<div class="bottom-nav-inner">
-<a href="index.html">閳�?鏉╂柨娲栨い鍦�娲版＃鏍�銆�</a>
-<div class="nav-links">
-<a href="case-study.html">棣冩惓 濡楀牅绶ョ�佃�勭垼閻�鏃傗敀閹躲儱鎲�</a>
-<a href="topic-research.html">棣冩憥 娑撴捇顣介惍鏃傗敀閹�鏄忣潔</a>
-</div>
-</div>
+<p>永州市冷水滩区老火车站片区城市更新项目 · 专题研究报告</p>
+<p>老火车站完整历史与现状研究</p>
+<p style="margin-top:10px;color:#444">报告编制时间：2026年9月 | 史料来源：湖南省文物局 / 永州市人民政府 / 中国国家铁路集团 / 湖南日报 / 潇湘晨报 / 抗日战争纪念网 / 三湘都市报 / 人民网</p>
 </div>
 
 </body>
