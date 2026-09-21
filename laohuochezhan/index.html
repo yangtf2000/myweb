@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6}
-.hero{position:relative;height:420px;min-height:380px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)}
+.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)}
 .hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=1920') center/cover;opacity:0.3}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,15,0.3) 0%,rgba(10,10,15,0.8) 100%)}
 .hero-content{position:relative;z-index:2;text-align:center;max-width:900px;padding:0 20px}
@@ -22,42 +22,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 .btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3)}
 .btn-outline:hover{border-color:#e94560;color:#e94560}
 .container{max-width:1200px;margin:0 auto;padding:30px 20px}
-.section-title{font-size:24px;color:#fff;margin-bottom:8px;text-align:center}
-.section-subtitle{font-size:13px;color:#888;text-align:center;margin-bottom:25px}
 .changelog{background:#15151f;border-radius:8px;padding:20px;margin-bottom:30px;border:1px solid #2a2a3e}
 .changelog h3{color:#fff;font-size:18px;margin-bottom:15px;display:flex;align-items:center;gap:10px}
 .changelog-item{padding:12px 0;border-bottom:1px solid #222;font-size:13px;color:#aaa}
 .changelog-item:last-child{border-bottom:none}
 .changelog-item .date{color:#e94560;font-weight:600;margin-right:15px}
-.changelog-item a{color:#4a9eff;text-decoration:none}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:30px}
-.stat-card{background:#15151f;border-radius:8px;padding:20px;text-align:center;border:1px solid #2a2a3e;transition:all .3s}
-.stat-card:hover{border-color:#e94560;transform:translateY(-2px)}
-.stat-number{font-size:30px;font-weight:700;color:#e94560;margin-bottom:5px}
-.stat-label{font-size:12px;color:#888}
-.stat-source{font-size:10px;color:#666;margin-top:6px}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;margin-bottom:30px}
-.menu-card{background:#15151f;border-radius:8px;padding:25px;text-decoration:none;color:inherit;border:1px solid #2a2a3e;transition:all .3s;position:relative;overflow:hidden}
-.menu-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#e94560;transform:scaleY(0);transition:transform .3s}
-.menu-card:hover::before{transform:scaleY(1)}
-.menu-card:hover{border-color:#e94560;transform:translateY(-3px)}
-.menu-icon{font-size:36px;margin-bottom:15px}
-.menu-card h3{color:#fff;font-size:18px;margin-bottom:10px}
-.menu-card p{color:#888;font-size:13px;line-height:1.6}
-.data-section{background:#15151f;border-radius:8px;padding:25px;margin-bottom:25px;border:1px solid #2a2a3e}
-.data-section h3{color:#fff;font-size:18px;margin-bottom:15px;padding-bottom:8px;border-bottom:1px solid #2a2a3e}
-.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
-.data-item{background:#1a1a2e;border-radius:6px;padding:15px}
-.data-item .label{font-size:12px;color:#888;margin-bottom:5px}
-.data-item .value{font-size:16px;color:#fff;font-weight:600}
-.data-item .note{font-size:11px;color:#666;margin-top:5px}
-.overview-wrapper{background:#15151f;border-radius:8px;padding:25px;margin-bottom:30px;border:1px solid #2a2a3e}
-.overview-wrapper .stats-grid{margin-bottom:20px}
-.overview-wrapper .data-section{background:#1a1a2e;border:none;padding:0;margin-bottom:0}
-.overview-wrapper .data-section h3{border-bottom-color:#2a2a3e}
 .footer{background:#0d0d14;padding:40px 20px;text-align:center;border-top:1px solid #2a2a3e}
 .footer p{color:#666;font-size:12px;line-height:2}
-@media(max-width:768px){.hero h1{font-size:32px}.hero p{font-size:15px}.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.hero h1{font-size:32px}.hero p{font-size:15px}}
 </style>
 </head>
 <body>
@@ -68,83 +40,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <h1>永州市冷水滩区<br><span>老火车站片区</span>城市更新项目</h1>
 <p>涵盖城市体检、片区策划、实施方案全流程 · 项目管理与资料协同平台</p>
 <div class="hero-buttons">
-<a href="#overview" class="btn btn-primary">进入项目</a>
+<a href="project.html" class="btn btn-primary">进入项目</a>
 <a href="tools.html" class="btn btn-outline">项目工具集</a>
 </div>
 </div>
 </div>
 
-<div class="container" id="overview">
-
-<h2 class="section-title">项目概况</h2>
-<p class="section-subtitle">数据来源：片区体检报告 + 城市基础设施更新改造实施方案 · 部分数据待现场核实</p>
-
-<div class="overview-wrapper">
-<div class="stats-grid">
-<div class="stat-card"><div class="stat-number">234.4</div><div class="stat-label">片区总面积（公顷）</div><div class="stat-source">来源：控规边界</div></div>
-<div class="stat-card"><div class="stat-number">4</div><div class="stat-label">涉及社区数</div><div class="stat-source">白竹亭/又一村/活龙井/文昌阁</div></div>
-<div class="stat-card"><div class="stat-number">3</div><div class="stat-label">涉及街道数</div><div class="stat-source">梧桐/肖家园/菱角山</div></div>
-<div class="stat-card"><div class="stat-number">60+</div><div class="stat-label">涉及老旧小区数</div><div class="stat-source">来源：实施方案 · 待核实</div></div>
-<div class="stat-card"><div class="stat-number">1938</div><div class="stat-label">老火车站始建年份</div><div class="stat-source">湘桂铁路 · 2004年停客运</div></div>
-<div class="stat-card"><div class="stat-number">12</div><div class="stat-label">现场调查类型</div><div class="stat-source">老旧小区/闲置建筑/历史建筑等</div></div>
-</div>
-
-<div class="data-section">
-<h3>📍 片区范围</h3>
-<div class="data-grid">
-<div class="data-item"><div class="label">四至范围</div><div class="value">北至珊瑚路、东至春江路、南至湘江西路、西至车站路</div></div>
-<div class="data-item"><div class="label">功能定位</div><div class="value">交通枢纽转型 · 历史文化传承 · 宜居生活社区</div></div>
-<div class="data-item"><div class="label">核心资源</div><div class="value">老火车站历史建筑 · 湘江西岸风光带 · 废弃铁路空间</div></div>
-<div class="data-item"><div class="label">主要问题</div><div class="value">老旧小区集中 · 基础设施老化 · 产业衰退 · 交通拥堵</div></div>
-</div>
-</div>
-</div>
-
-<h2 class="section-title">项目入口</h2>
-<p class="section-subtitle">六大功能板块，覆盖项目全流程</p>
-
-<div class="menu-grid">
-<a href="data_interpretation.html" class="menu-card" style="opacity:0.5">
-<div class="menu-icon">📊</div>
-<h3>片区资料解读</h3>
-<p>甲方提供基础资料清单、片区总体概况、城市体检报告摘要、实施方案摘要、现状照片展示</p>
-</a>
-<a href="survey_work.html" class="menu-card" style="opacity:0.5">
-<div class="menu-icon">📋</div>
-<h3>现状调研与踏勘</h3>
-<p>总体工作计划、部门资料收集、街道社区调研、现场踏勘工作手册、资料需求清单</p>
-</a>
-<a href="topic-research.html" class="menu-card" style="opacity:0.5">
-<div class="menu-icon">🔬</div>
-<h3>专题研究</h3>
-<p>老火车站历史文化保护与活化利用专题研究：完整历史与现状研究报告、八大案例对标研究报告、六大策略建议</p>
-</a>
-<a href="0921临时汇报/永州老火车站片区一期_临时汇报.html" class="menu-card" style="border:2px solid #e94560; background:linear-gradient(135deg, rgba(233,69,96,0.15) 0%, rgba(233,69,96,0.05) 100%);">
-<div class="menu-icon">📝</div>
-<div style="position:absolute;top:15px;right:15px;background:#e94560;color:#fff;padding:3px 10px;border-radius:10px;font-size:11px;letter-spacing:0.5px">2026.09.21</div>
-<h3>片区体检与策划编制</h3>
-<p><strong style="color:#e94560">一期临时汇报版（最新）</strong><br>功能定位、项目清单与资金匹配、现场调查附录等完整内容</p>
-</a>
-<a href="tools.html" class="menu-card" style="opacity:0.5">
-<div class="menu-icon">🛠️</div>
-<h3>项目工具集</h3>
-<p>GIS分析平台V2.1（边界管理/图层管理/GIS分析/人工标注）、现场调研工具V2.0、现场踏勘通用工具（按社区分类/语音备注/GPS定位/照片上传/HTML导出）</p>
-</a>
-<a href="downloads.html" class="menu-card" style="opacity:0.5">
-<div class="menu-icon">📥</div>
-<h3>资料下载</h3>
-<p>所有Word文档下载汇总：部门资料清单、街道社区函件、调研表格模板、工作计划、踏勘手册等</p>
-</a>
-<a href="#" class="menu-card" onclick="alert('成果交付管理功能待后续开发')" style="opacity:0.3">
-<div class="menu-icon">📦</div>
-<h3>成果交付管理</h3>
-<p>报告、PPT、图纸、数据等成果文件的版本管理、交付记录、审核流程（占位，待开发）</p>
-</a>
-</div>
-
+<div class="container">
 <div class="changelog">
 <h3>📋 修改日志</h3>
-<div class="changelog-item"><span class="date">2026-09-21</span>新增一期临时汇报版：功能定位、项目清单、资金匹配、现场调查附录完整内容；首页顶部新增最新汇报横幅；移除项目进度看板占位卡片</div>
+<div class="changelog-item"><span class="date">2026-09-21</span>新增一期临时汇报版：功能定位、项目清单与资金匹配、现场调查附录完整内容；首页拆分为入口页+项目页；移除项目进度看板占位卡片</div>
 <div class="changelog-item"><span class="date">2026-09-07 23:10</span>专题研究栏目结构调整：专题研究改为一级入口卡片（六大功能板块），新增专题研究二级页面（topic-research.html），顶部卡片式菜单展示两大研究报告</div>
 <div class="changelog-item"><span class="date">2026-09-07 22:50</span>新增专题研究栏目：老火车站完整历史与现状研究报告V3.1（零重复图片版）、历史文化保护与活化利用案例对标研究报告V1.0（八大案例深度对标+六大策略建议），首页新增专题研究卡片式菜单</div>
 <div class="changelog-item"><span class="date">2026-09-07 15:40</span>首页布局调整：修改日志移至底部、项目概况两部分包裹统一、修改日志精确到时分</div>
@@ -154,7 +59,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
 <div class="changelog-item"><span class="date">2026-09-05 11:30</span>现场调研工具V2.0完成：点位标注、照片上传、调查表填写、数据导出</div>
 <div class="changelog-item"><span class="date">2026-09-04 17:00</span>部门资料收集清单V1.0完成：10个主要部门+8个建议咨询部门+2个公用事业企业</div>
 </div>
-
+</div>
 </div>
 
 <div class="footer">
