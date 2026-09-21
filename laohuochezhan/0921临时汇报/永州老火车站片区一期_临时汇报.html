@@ -1,0 +1,2673 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>永州老火车站片区（一期）城市更新策划方案</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #0d0d0d;
+    color: #d0d0d0;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+  /* 封面 */
+  .cover {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    background: url('assets/birdseye-2.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.5) 50%, rgba(13,13,13,0.85) 100%);
+  }
+  .cover > * {
+    position: relative;
+    z-index: 1;
+  }
+  .cover h1 {
+    text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.8);
+  }
+  .cover .sub, .cover .info, .cover .label {
+    text-shadow: 0 0 10px rgba(255,255,255,0.2), 0 1px 4px rgba(0,0,0,0.7);
+  }
+  .cover .label {
+    font-size: 18px;
+    color: #c9a96e;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-size: 52px;
+    color: #c0392b;
+    font-weight: bold;
+    margin-bottom: 25px;
+    line-height: 1.3;
+  }
+  .cover .sub {
+    font-size: 22px;
+    color: #d0d0d0;
+    margin-bottom: 50px;
+  }
+  .cover .info {
+    font-size: 16px;
+    color: #888;
+    line-height: 2;
+  }
+  /* 章节大标题 */
+  .chapter-num {
+    font-size: 18px;
+    color: #c9a96e;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+  .chapter-title {
+    font-size: 42px;
+    color: #c0392b;
+    font-weight: bold;
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid #c9a96e;
+  }
+  /* 小节标题 */
+  .section-title {
+    font-size: 28px;
+    color: #c0392b;
+    font-weight: bold;
+    margin: 60px 0 25px;
+    padding-left: 18px;
+    border-left: 5px solid #c0392b;
+  }
+  /* 子标题 */
+  .sub-title {
+    font-size: 20px;
+    color: #c9a96e;
+    font-weight: bold;
+    margin: 35px 0 18px;
+  }
+  /* 正文段落 */
+  p {
+    font-size: 16px;
+    margin-bottom: 18px;
+    color: #d0d0d0;
+    text-align: justify;
+  }
+  /* 图片区 */
+  .img-block {
+    margin: 35px 0;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .img-block img {
+    width: 100%;
+    display: block;
+    filter: brightness(1.15) contrast(1.05);
+  }
+  /* 多图网格 */
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 30px 0;
+  }
+  .img-item {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .img-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(1.15) contrast(1.05);
+  }
+  .img-item .img-caption, .img-block .img-caption {
+    padding: 8px 10px;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+  }
+  .img-caption {
+    padding: 15px 25px;
+    font-size: 14px;
+    color: #888;
+    border-top: 1px solid #333;
+  }
+  /* 双栏布局 */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+    margin: 30px 0;
+  }
+  /* 卡片 */
+  .card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 30px;
+  }
+  .card h4 {
+    color: #c9a96e;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  .card p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  /* 数据卡片 */
+  .data-card {
+    background: #1a1a1a;
+    border-top: 4px solid #c0392b;
+    border-radius: 6px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  .data-card .num {
+    font-size: 40px;
+    color: #c0392b;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .data-card .unit {
+    font-size: 18px;
+    color: #c9a96e;
+  }
+  .data-card .label {
+    font-size: 15px;
+    color: #888;
+    margin-top: 10px;
+  }
+  /* 数据栏 */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+  }
+  /* 高亮 */
+  .highlight { color: #c0392b; font-weight: bold; }
+  .gold { color: #c9a96e; font-weight: bold; }
+  /* 列表 */
+  ul, ol {
+    margin: 18px 0 18px 30px;
+    font-size: 16px;
+  }
+  li { margin-bottom: 12px; color: #d0d0d0; }
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-size: 15px;
+  }
+  th {
+    background: #2c2c2c;
+    color: #c9a96e;
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #444;
+    font-weight: bold;
+  }
+  td {
+    padding: 15px;
+    border: 1px solid #333;
+    color: #d0d0d0;
+  }
+  tr:nth-child(even) { background: #1a1a1a; }
+  /* 分隔线 */
+  .divider {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 60px 0;
+  }
+  /* 目录页 */
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #2a2a2a;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+  }
+  .toc-item:hover {
+    background: #1a1a1a;
+    padding-left: 10px;
+  }
+  .toc-item:hover .toc-name {
+    color: #c0392b;
+  }
+  .toc-num {
+    font-size: 24px;
+    color: #c0392b;
+    font-weight: bold;
+    min-width: 50px;
+  }
+  .toc-name {
+    font-size: 20px;
+    color: #d0d0d0;
+  }
+  .toc-desc {
+    font-size: 14px;
+    color: #666;
+    margin-left: auto;
+  }
+  /* 卡片hover效果 */
+  .card:hover {
+    border-color: #c0392b;
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.15);
+  }
+  .data-card:hover {
+    border-top-color: #c9a96e;
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+  }
+  /* 滚动淡入动画 */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== 封面 ========== -->
+<div class="cover">
+  <div class="cover-text">
+    <div class="label">城市更新 · 片区策划</div>
+    <h1>永州老火车站片区（一期）<br>城市更新策划方案</h1>
+    <div class="sub">基于现有资料的阶段性汇报</div>
+    <div class="info">
+      编制单位：项目组<br>
+      编制时间：2026年9月<br>
+      版本：临时汇报版 V1.0
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 快捷链接 -->
+<div style="margin:20px 0; display:flex; gap:30px; flex-wrap:wrap; justify-content:center;">
+  <a href="https://yangtf2000.github.io/myweb/laohuochezhan/station-history.html" target="_blank" style="color:#c9a96e; text-decoration:none; font-size:14px;">🚂 老火车站历史</a>
+  <a href="https://yangtf2000.github.io/myweb/laohuochezhan/case-study.html" target="_blank" style="color:#c9a96e; text-decoration:none; font-size:14px;">🏛️ 八大案例对标</a>
+  <a href="../项目文件/片区内权属名录全.xls" style="color:#c9a96e; text-decoration:none; font-size:14px;">📊 权属名录全表</a>
+  <a href="附录_现场调查清单与工作流程.html" style="color:#c9a96e; text-decoration:none; font-size:14px;">📋 现场调查清单</a>
+</div>
+
+<div class="container">
+
+<!-- ========== 目录 ========== -->
+<div class="chapter-num">目录</div>
+<h2 class="chapter-title">汇报内容</h2>
+
+<a href="#chapter1" class="toc-item">
+  <div class="toc-num">01</div>
+  <div class="toc-name">项目概况</div>
+  <div class="toc-desc">编制背景 · 区位范围 · 社区构成 · 基础数据</div>
+</a>
+<a href="#chapter2" class="toc-item">
+  <div class="toc-num">02</div>
+  <div class="toc-name">片区体检与现状分析</div>
+  <div class="toc-desc">八大方向现状梳理 · 历史文化资源 · 体检结论</div>
+</a>
+<a href="#chapter3" class="toc-item">
+  <div class="toc-num">03</div>
+  <div class="toc-name">价值基因与案例对标</div>
+  <div class="toc-desc">核心价值提炼 · 八大案例对标 · 经验启示</div>
+</a>
+<a href="#chapter4" class="toc-item">
+  <div class="toc-num">04</div>
+  <div class="toc-name">项目清单与资金匹配</div>
+  <div class="toc-desc">7个项目包 · 建设内容 · 投资估算 · 资金来源</div>
+</a>
+<a href="#chapter5" class="toc-item">
+  <div class="toc-num">05</div>
+  <div class="toc-name">待研究问题与下一步</div>
+  <div class="toc-desc">四个关键问题 · 老火车站备选方向 · 工作计划</div>
+</a>
+
+<hr class="divider">
+
+<!-- ========== 第一章 项目概况 ========== -->
+<div id="chapter1" class="chapter-num">第一章</div>
+<h2 class="chapter-title">项目概况</h2>
+
+<!-- 1.1 编制背景 -->
+<h3 class="section-title">1.1 编制背景与政策依据</h3>
+
+<p>
+  近年来，我国城市发展进入城市更新的重要时期，由大规模增量建设转向存量提质改造和增量结构调整并重。城市更新作为国家重大战略部署，已从试点探索阶段进入全面推进阶段。国家层面明确提出城市更新八大方向：<span class="gold">加强既有建筑改造利用、推进城镇老旧小区整治改造、开展完整社区建设、推进老旧街区老旧厂区城中村等更新改造、完善城市功能、加强城市基础设施建设改造、修复城市生态系统、保护传承城市历史文化</span>。
+</p>
+<p>
+  湖南省层面，已编制实施城市更新三年行动计划，明确了全省城市更新的目标任务和实施路径。永州市作为国家级历史文化名城，老火车站片区承载着湘桂铁路87年的厚重历史，是永州市城市更新的重点片区。
+</p>
+<p>
+  在资金申报层面，根据湖南建设信息2026年第46期《城市更新项目资金申报工作手册》，当前可对接的资金渠道主要有四大类：<span class="highlight">中央预算内投资、超长期特别国债、地方政府专项债券、政策性银行贷款（国开行）</span>。不同资金渠道对应不同的支持方向和比例要求，需要精准匹配。
+</p>
+
+<div class="three-col">
+  <div class="card">
+    <h4>中央预算内投资</h4>
+    <p><strong>支持比例：</strong>一般不超过总投资的50%-70%</p>
+    <p><strong>支持方向：</strong></p>
+    <p>① 老旧小区改造（基础类+完善类）——水电气路信管线改造、屋面防水、外墙修缮、加装电梯等</p>
+    <p>② 完整社区建设——社区综合服务设施、嵌入式养老、普惠托育、社区食堂等</p>
+    <p>③ 老旧街区改造提升——建筑立面改造、业态升级、步行系统优化、公共空间提升</p>
+    <p>④ 历史文化保护传承利用——历史建筑修缮、历史街区保护、文化展示设施</p>
+    <p>⑤ 既有建筑改造利用——危旧房改造、直管公房改造、既有建筑节能改造</p>
+    <p>⑥ 城市公共服务设施——全民健身场地、文化设施、无障碍环境</p>
+  </div>
+  <div class="card">
+    <h4>超长期特别国债</h4>
+    <p><strong>支持比例：</strong>一般不超过总投资的70%</p>
+    <p><strong>支持方向：</strong></p>
+    <p>① 地下管网建设改造——供水、排水、燃气、供热等地下管线及综合管廊</p>
+    <p>② 城市基础设施建设——道路、桥梁、供水排水、污水处理、垃圾处理</p>
+    <p>③ 城市生态修复——山体修复、湿地保护、黑臭水体治理、海绵城市</p>
+    <p>④ 城市内涝治理——排水防涝设施建设、防洪排涝体系</p>
+    <p>⑤ 新型城市基础设施——CIM平台、城市生命线安全工程、智慧化改造</p>
+    <p style="color:#888; font-size:14px;">⚠️ 本项目主要用于小区级管网和基础设施，片区级市政道路管网需单独评估</p>
+  </div>
+  <div class="card">
+    <h4>专项债券 + 国开行贷款</h4>
+    <p><strong>专项债比例：</strong>最高不超过总投资的80%</p>
+    <p><strong>支持方向：</strong></p>
+    <p>① 公共停车设施——有收费收益的停车场、停车楼</p>
+    <p>② 配套商业设施——有经营收益的商业空间</p>
+    <p>③ 完整社区中的经营性设施——便民商业、养老托育等有收益部分</p>
+    <p>④ 老旧街区中的商业业态提升</p>
+    <p><strong>国开行贷款比例：</strong>约60%</p>
+    <p>⑤ 存量资产活化利用——闲置建筑改造、低效用地再开发</p>
+    <p>⑥ 历史文化街区保护性活化利用</p>
+  </div>
+</div>
+
+<p>
+  <strong>本项目资金匹配原则：</strong>老旧小区改造走中央预算内投资（60%）；完整社区建设走中央预算内+专项债组合；老旧街区走中央预算内+专项债组合；公共停车走专项债（80%）；老火车站项目走中央预算内+国开行贷款组合。形成<span class="gold">"中央资金为主体、专项债为补充、政策性贷款为辅助、地方财政兜底"</span>的多元资金拼盘体系。
+</p>
+
+<!-- 1.2 区位 -->
+<h3 class="section-title">1.2 片区区位</h3>
+
+<p>
+  老火车站片区位于永州市冷水滩区核心地段，是永州城市发展的历史发源地之一。片区北邻珊瑚路城市主干道，南接湘江路沿江景观带，东靠春江路，西至德源路—零陵中路—车站路。片区距冷水滩区政府约2公里，距永州火车站约3公里，交通可达性良好。
+</p>
+<p>
+  片区所在的冷水滩区是永州市的政治、经济、文化中心，湘桂铁路、洛湛铁路在此交汇，是湖南通往广西、海南的重要交通枢纽。老火车站作为湘桂铁路上的重要站点，自1938年建成以来，见证了永州从一个江边小镇发展成为湘南重镇的全过程。
+</p>
+
+<!-- 1.3 范围与社区构成 -->
+<h3 class="section-title">1.3 一期范围与社区构成</h3>
+
+<p>
+  老火车站片区一期更新范围四至为：<span class="highlight">北至珊瑚路、南至湘江路、东至春江路、西至德源路—零陵中路—车站路</span>围合区域。一期范围约<span class="gold">234.4公顷</span>，具体面积以最终确定的范围线为准。
+</p>
+<p>
+  本次一期范围涉及梧桐街道、菱角山街道、肖家园街道三个街道的三个社区：<span class="highlight">白竹亭社区（部分）、活龙井社区（全部）、又一村社区（部分）</span>。其中又一村社区仅涉及第1-6、14-16共9个网格，白竹亭社区为部分区域纳入，活龙井社区为全部纳入。文昌阁社区暂不纳入一期范围。
+</p>
+
+<div class="img-block" style="max-width:65%; margin:35px auto;">
+  <img src="assets/range-map-new.png" alt="老火车站片区一期范围图">
+  <div class="img-caption">图：老火车站片区一期范围示意图（来源：调研底图0920）</div>
+</div>
+
+<h4 class="sub-title">涉及社区明细</h4>
+
+<div class="two-col">
+  <div class="card">
+    <h4>梧桐街道 · 白竹亭社区（部分）</h4>
+    <p>建筑栋数：<span class="gold">79栋</span></p>
+    <p>户数：<span class="gold">872户</span></p>
+    <p>建筑面积：<span class="gold">11.96万㎡</span></p>
+    <p>纳入方式：部分区域纳入一期范围</p>
+  </div>
+  <div class="card">
+    <h4>菱角山街道 · 活龙井社区（全部）</h4>
+    <p>建筑栋数：<span class="gold">199栋</span></p>
+    <p>户数：<span class="gold">5261户</span></p>
+    <p>建筑面积：<span class="gold">62.47万㎡</span></p>
+    <p>纳入方式：社区全域纳入一期范围</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>肖家园街道 · 又一村社区（部分）</h4>
+    <p>建筑栋数：<span class="gold">26栋</span></p>
+    <p>户数：<span class="gold">725户</span></p>
+    <p>建筑面积：<span class="gold">6.12万㎡</span></p>
+    <p>纳入方式：涉及9个网格（第1-6、14-16网格）</p>
+  </div>
+  <div class="card">
+    <h4>数据说明</h4>
+    <p>以上数据来源于《永州火车站片区城市更新项目汇总清单0920》，为项目组初步统计数据。</p>
+    <p>建筑年代、权属性质、房屋质量等级等详细数据需后续现场踏勘及住建部门数据进一步核实。</p>
+  </div>
+</div>
+
+<!-- 1.4 基础数据总览 -->
+<h3 class="section-title">1.4 基础数据总览</h3>
+
+<p>
+  一期范围内共涉及<span class="highlight">304栋建筑、6858户居民、总建筑面积约24.33万平方米</span>。其中活龙井社区体量最大，占总栋数的65.5%、总户数的76.7%、总建筑面积的78.3%，是本次更新的重点区域。
+</p>
+
+<div class="stats-bar">
+  <div class="data-card">
+    <div class="num">3</div>
+    <div class="label">涉及社区</div>
+  </div>
+  <div class="data-card">
+    <div class="num">304</div>
+    <div class="label">建筑栋数</div>
+  </div>
+  <div class="data-card">
+    <div class="num">6,858</div>
+    <div class="label">居民户数</div>
+  </div>
+  <div class="data-card">
+    <div class="num">24.33<span class="unit">万㎡</span></div>
+    <div class="label">总建筑面积</div>
+  </div>
+</div>
+
+<table>
+  <tr>
+    <th>社区</th>
+    <th>街道</th>
+    <th>栋数</th>
+    <th>户数</th>
+    <th>建筑面积（万㎡）</th>
+    <th>纳入方式</th>
+  </tr>
+  <tr>
+    <td>白竹亭社区</td>
+    <td>梧桐街道</td>
+    <td>79</td>
+    <td>872</td>
+    <td>11.96</td>
+    <td>部分</td>
+  </tr>
+  <tr>
+    <td>活龙井社区</td>
+    <td>菱角山街道</td>
+    <td>199</td>
+    <td>5,261</td>
+    <td>62.47</td>
+    <td>全部</td>
+  </tr>
+  <tr>
+    <td>又一村社区</td>
+    <td>肖家园街道</td>
+    <td>26</td>
+    <td>725</td>
+    <td>6.12</td>
+    <td>部分（9网格）</td>
+  </tr>
+  <tr style="font-weight:bold; color:#c0392b;">
+    <td>合计</td>
+    <td>—</td>
+    <td>304</td>
+    <td>6,858</td>
+    <td>24.33</td>
+    <td>—</td>
+  </tr>
+</table>
+
+<hr class="divider">
+
+<!-- ========== 第二章 片区体检与现状分析 ========== -->
+<div id="chapter2" class="chapter-num">第二章</div>
+<h2 class="chapter-title">片区体检与现状分析</h2>
+
+<!-- 2.1 体检指标体系 -->
+<h3 class="section-title">2.1 体检指标体系</h3>
+
+<p>
+  片区体检按照国家城市体检指标体系框架，结合永州市城市体检工作要求，围绕城市更新八大方向开展现状调查与问题识别。体检内容覆盖以下维度：<span class="gold">既有建筑与房屋安全、老旧小区改造现状、完整社区与公共服务、老旧街区与基础设施、历史文化资源、闲置资产利用</span>。
+</p>
+<p>
+  本次体检资料来源于：永州市城市体检报告（市级）、冷水滩区城市体检报告（区级）、片区现场踏勘照片、各部门提供的基础资料、住建部门老旧小区改造规划等。资料时间节点为2025-2026年。
+</p>
+
+<!-- 2.2 既有建筑与房屋安全 -->
+<h3 class="section-title">2.2 既有建筑与房屋安全</h3>
+
+<p>
+  一期范围内共有建筑<span class="highlight">304栋</span>，总建筑面积约<span class="highlight">24.33万㎡</span>。从建筑年代看，片区内建筑主要建于<span class="gold">上世纪80-90年代</span>，部分铁路职工宿舍、老旧厂房年代更为久远。由于建设年代较早，普遍存在建筑老化、设施陈旧、安全隐患较多等问题。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; margin:25px 0;">
+  <div class="img-item">
+    <img src="assets/building-1.jpg" alt="既有建筑现状1">
+    <div class="img-caption">又一村社区老旧建筑现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/building-2.jpg" alt="既有建筑现状2">
+    <div class="img-caption">建筑外立面老化现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/building-3.jpg" alt="既有建筑现状3">
+    <div class="img-caption">小区建筑细部现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/building-4.jpg" alt="既有建筑现状4">
+    <div class="img-caption">建筑外观整体状况</div>
+  </div>
+</div>
+
+<p>
+  从房屋安全角度看，片区内存在一定数量的C级、D级危房，主要集中在老旧小区、铁路职工宿舍等区域。危房改造是城市更新的重点任务之一，需要通过加固、改建、拆除重建等多种方式分类处置。
+</p>
+<p>
+  此外，片区内还有一定数量的<span class="gold">直管公房</span>，主要分布在活龙井社区。直管公房作为国有资产，其改造利用是城市更新的重要组成部分，可结合基础设施改造、危房改造等方式统筹推进。
+</p>
+
+<div class="two-col">
+  <div class="card">
+    <h4>建筑年代分布</h4>
+    <p>• 2000年以前：占比约60%，主要为老旧小区、铁路宿舍、厂房</p>
+    <p>• 2000-2005年：占比约25%，部分单位集资房</p>
+    <p>• 2005年以后：占比约15%，少量新建商品房</p>
+    <p style="color:#888; font-size:13px;">（数据为初步估算，需逐栋核实）</p>
+  </div>
+  <div class="card">
+    <h4>房屋安全状况</h4>
+    <p>• D级危房：需拆除重建（具体数量待排查）</p>
+    <p>• C级危房：需加固改造（具体数量待排查）</p>
+    <p>• 一般老旧建筑：需修缮提升</p>
+    <p style="color:#888; font-size:13px;">（需住建部门提供正式危房鉴定数据）</p>
+  </div>
+</div>
+
+<!-- 2.3 老旧小区改造现状 -->
+<h3 class="section-title">2.3 老旧小区改造现状</h3>
+
+<p>
+  片区内老旧小区数量众多，是本次城市更新的核心内容之一。根据《永州市冷水滩区2020-2035年城镇老旧小区改造规划》，结合现场踏勘，片区内老旧小区主要分布在活龙井社区、又一村社区、白竹亭社区。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; margin:25px 0;">
+  <div class="img-item">
+    <img src="assets/old-community-1.jpg" alt="老旧小区现状1">
+    <div class="img-caption">老旧小区建筑外观</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/old-community-2.jpg" alt="老旧小区现状2">
+    <div class="img-caption">小区内部环境</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/old-community-3.jpg" alt="老旧小区现状3">
+    <div class="img-caption">街巷空间肌理</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/old-community-4.jpg" alt="老旧小区现状4">
+    <div class="img-caption">建筑细部现状</div>
+  </div>
+</div>
+
+<p>
+  老旧小区存在的主要问题包括：<span class="highlight">建筑外立面破损老化、管线老化混乱、公共服务设施不足、停车困难、环境脏乱差、缺乏无障碍设施</span>等。部分小区已完成过一轮基础类改造，但完善类、提升类改造尚未覆盖。
+</p>
+
+<table>
+  <tr>
+    <th>改造类型</th>
+    <th>主要内容</th>
+    <th>现状</th>
+  </tr>
+  <tr>
+    <td>基础类</td>
+    <td>水电气路信等管线改造、屋面防水、外墙修缮、路面修补等</td>
+    <td>部分小区已完成</td>
+  </tr>
+  <tr>
+    <td>完善类</td>
+    <td>加装电梯、停车设施、环境整治、无障碍改造等</td>
+    <td>大部分未覆盖</td>
+  </tr>
+  <tr>
+    <td>提升类</td>
+    <td>公共服务设施配套、智慧化改造、长效管理机制等</td>
+    <td>基本空白</td>
+  </tr>
+</table>
+
+<!-- 2.4 完整社区与公共服务 -->
+<h3 class="section-title">2.4 完整社区与公共服务</h3>
+
+<p>
+  完整社区建设是国家明确的城市更新重要方向。根据住建部完整社区建设标准，一个完整的社区应具备基本公共服务设施、便民商业服务设施、公共活动场地、市政配套基础设施等"一老一小"服务设施。
+</p>
+<p>
+  片区内公共服务设施现状：<span class="highlight">养老服务设施不足、普惠托育设施缺失、社区综合服务设施面积偏小、便民商业设施布局不完善</span>。活龙井社区作为本次完整社区建设的重点，已有一定基础（2600㎡文化驿站、文创企业20多家），但与完整社区标准仍有差距。
+</p>
+
+<div class="two-col">
+  <div class="card">
+    <h4>活龙井社区现有基础</h4>
+    <p>• 文化驿站：2600㎡</p>
+    <p>• 文创企业：20多家</p>
+    <p>• 铁路印象主题休闲公园</p>
+    <p>• 3D艺术画特色街巷</p>
+    <p>• 湖南省老旧小区改造示范社区</p>
+  </div>
+  <div class="card">
+    <h4>需补充短板</h4>
+    <p>• 普惠托育设施</p>
+    <p>• 嵌入式养老服务设施</p>
+    <p>• 社区食堂/助餐点</p>
+    <p>• 全民健身场地设施</p>
+    <p>• 便民菜市场/超市</p>
+  </div>
+</div>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; margin:25px 0;">
+  <div class="img-item">
+    <img src="assets/community-1.jpg" alt="活龙井社区现状1">
+    <div class="img-caption">活龙井社区公共空间现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/community-2.jpg" alt="活龙井社区现状2">
+    <div class="img-caption">社区街巷环境现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/community-3.jpg" alt="活龙井社区现状3">
+    <div class="img-caption">社区建筑风貌现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/community-4.jpg" alt="活龙井社区现状4">
+    <div class="img-caption">社区公共活动空间</div>
+  </div>
+</div>
+
+<!-- 2.5 老旧街区与基础设施 -->
+<h3 class="section-title">2.5 老旧街区与基础设施</h3>
+
+<p>
+  片区内老旧街区主要沿<span class="gold">零陵中路、车站路、天桥南路</span>等道路分布，具有浓厚的老城烟火气，但存在建筑老旧、业态低端、环境杂乱、交通不畅等问题。活龙井社区的特色街巷已进行初步改造，形成了一定的文创氛围，但整体仍有较大提升空间。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr; gap:15px; margin:25px 0;">
+  <div class="img-item">
+    <img src="assets/rooftop-1.jpg" alt="老旧街区鸟瞰1">
+    <div class="img-caption">老旧街区屋顶肌理（鸟瞰）</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/rooftop-2.jpg" alt="老旧街区鸟瞰2">
+    <div class="img-caption">街区建筑风貌（鸟瞰）</div>
+  </div>
+</div>
+
+<p>
+  基础设施方面，片区内<span class="highlight">供水、排水、燃气、电力、通信等管网普遍老化</span>，部分管线已超过设计使用年限，存在安全隐患。道路系统方面，背街小巷路面破损、停车混乱、慢行系统不连续等问题突出。
+</p>
+
+
+<!-- 2.6 历史文化与闲置资产 -->
+<h3 class="section-title">2.6 历史文化资源与闲置资产</h3>
+
+<p>
+  老火车站片区最核心的价值在于其<span class="highlight">铁路历史文化资源</span>。湘桂铁路冷水滩站始建于1938年，是抗战时期修建的第一条铁路干线的重要站点，见证了抗战运输、日军占领、铁道游击队等重大历史事件。2025年在片区内发现<span class="gold">抗日标语题刻</span>，进一步印证了其历史价值。
+</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin:25px 0; align-items:stretch;">
+  <div style="display:flex; flex-direction:column; gap:15px; height:100%;">
+    <div class="img-block" style="margin:0; flex:1; display:flex; flex-direction:column;">
+      <img src="assets/hist-building-1.png" alt="原冷水滩基建队办公楼" style="flex:1; object-fit:cover;">
+      <div class="img-caption">原冷水滩基建队办公楼（第五批历史建筑）</div>
+    </div>
+    <div class="img-block" style="margin:0; flex:1; display:flex; flex-direction:column;">
+      <img src="assets/hist-building-3.jpg" alt="基建队办公楼细部" style="flex:1; object-fit:cover;">
+      <div class="img-caption">基建队办公楼建筑细部</div>
+    </div>
+  </div>
+  <div class="img-block" style="margin:0; display:flex; flex-direction:column;">
+    <img src="assets/hist-building-2.png" alt="惜字塔" style="flex:1; object-fit:cover;">
+    <div class="img-caption">惜字塔（历史建筑）</div>
+  </div>
+</div>
+
+<p>
+  片区内历史文化资源主要包括：<span class="gold">老火车站废弃站台及铁路附属建筑、原冷水滩基建队办公楼（第五批历史建筑）、惜字塔、抗日标语题刻、特色街巷肌理</span>等。其中老火车站站台及相关建筑是最具标志性的资源，具有极高的保护与活化利用价值。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr; gap:12px; margin:25px 0;">
+  <div class="img-item">
+    <img src="assets/station-1.jpg" alt="老火车站现状1">
+    <div class="img-caption">老火车站站台现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/station-2.jpg" alt="老火车站现状2">
+    <div class="img-caption">站房建筑细部</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/station-3.jpg" alt="老火车站现状3">
+    <div class="img-caption">站台内部空间</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/station-4.jpg" alt="老火车站现状4">
+    <div class="img-caption">铁轨与站台现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/station-5.jpg" alt="老火车站现状5">
+    <div class="img-caption">站房外观现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/station-6.jpg" alt="老火车站现状6">
+    <div class="img-caption">站台遗存现状</div>
+  </div>
+</div>
+
+<p>
+  闲置资产方面，除老火车站站房及附属建筑外，片区内还有<span class="gold">城发集团名下的部分闲置低效用地和建筑</span>，以及部分老旧厂房、仓库等。这些闲置资产是城市更新的重要物质空间载体，可通过功能转换、混合利用等方式盘活。
+</p>
+
+<!-- 2.7 体检结论与问题总结 -->
+<h3 class="section-title">2.7 体检结论与问题总结</h3>
+
+<p>
+  根据《冷水滩区老火车站前更新片区体检报告》，构建<span class="highlight">"三脉资源基底、三势发展利好、三痛短板症结"</span>三维研判框架，系统厘清片区本底禀赋、发展优势与突出问题。
+</p>
+
+<!-- 三脉：核心资源禀赋 -->
+<h4 class="sub-title">三脉 —— 核心资源禀赋</h4>
+
+<div class="three-col">
+  <div class="card">
+    <h4 style="color:#c9a96e;">地脉：老城门户地脉</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;">地处湘江西岸核心地段，紧邻零陵中路传统商圈，商圈底蕴深厚，生活配套基底扎实，是冷水滩对外展示的重要门户窗口。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#c9a96e;">文脉：厚重铁路文脉</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;">1938年建成的老火车站及完整铁路工业遗存体系，承载近百年湘桂铁路工业记忆与城市乡愁文脉，活龙井文创街区已形成初步品牌效应。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#c9a96e;">绿脉：铁路线性绿脉</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;">4.5公里废弃铁路线曾是割裂城市的"伤疤"，如今可转化为串联各街区的线性绿脉。沿线可布局社区公园、慢行绿道、基础设施、快捷通行通道，将零散的老旧街区串联成有机整体，释放巨大的空间价值。</p>
+  </div>
+</div>
+
+<!-- 三势：发展利好条件 -->
+<h4 class="sub-title">三势 —— 发展利好条件</h4>
+
+<div class="three-col">
+  <div class="card">
+    <h4 style="color:#27ae60;">政策赋能之势</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;">2026年6月湖南省集中推出133个重点更新片区，老火车站片区为永州7个重点片区之一。省市两级重磅发力，老火车站片区闲置资源迎来新生；"打造活龙井铁路文创街区"写入政府工作报告，战略定位明确。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#27ae60;">存量释放之势</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;">现有闲置低效用地约210亩、闲置建筑约3.2万㎡，废弃铁路、站场、厂房等存量资源连片分布，更新盘活增值潜力可观。</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#27ae60;">共识凝聚之势</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;">超90%受访居民与商户明确支持更新，政府、企业与社区达成高度共识；"活龙井微改造"成功实践提供了宝贵经验。</p>
+  </div>
+</div>
+
+<!-- 三痛：突出短板痛点 -->
+<h4 class="sub-title">三痛 —— 突出短板痛点</h4>
+
+<div class="three-col">
+  <div class="card" style="border-left:4px solid #c0392b;">
+    <h4 style="color:#c0392b;">安全韧性之痛</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;"><strong>建筑隐患突出</strong>：部分住宅存在结构安全隐患，仍有居民居住；部分建筑钢筋裸露、楼梯坍塌，人员安全难以保障。</p>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;"><strong>内涝短板明显</strong>：大到暴雨应对能力不足，改造后内涝点仍临时积水；排水设施老旧，管径不满足现有需求。</p>
+  </div>
+  <div class="card" style="border-left:4px solid #c0392b;">
+    <h4 style="color:#c0392b;">民生供给之痛</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;"><strong>公服配套不足</strong>：养老、托育刚需供给不足，文体设施覆盖率低；优质教育、医疗资源覆盖不均。</p>
+    <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;"><strong>居住品质偏低</strong>：专业物业覆盖率不足40%，适老化与无障碍建设缓慢。</p>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;"><strong>空间配套短板</strong>：300米公园绿地覆盖率不足，停车泊位缺口大，路网微循环不畅。</p>
+  </div>
+  <div class="card" style="border-left:4px solid #c0392b;">
+    <h4 style="color:#c0392b;">产业活力之痛</h4>
+    <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;"><strong>业态能级偏低</strong>：以传统低端零售、基础餐饮为主，同质化竞争严重；特色文旅与沉浸式体验业态占比不足20%。</p>
+    <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;"><strong>资产利用低效</strong>：铁路遗存、闲置厂房长期低效利用，"沉睡资产"未释放经济价值。</p>
+    <p style="font-size:14px; line-height:1.9; color:#ddd;"><strong>门户风貌杂乱</strong>：沿街建筑风格不一，缺乏代表性城市地标与网红打卡场景。</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ========== 第三章 价值基因与案例对标 ========== -->
+<div id="chapter3" class="chapter-num">第三章</div>
+<h2 class="chapter-title">价值基因与案例对标</h2>
+
+<!-- 3.1 老火车站历史与现状研究 -->
+<h3 class="section-title">3.1 老火车站历史与现状研究</h3>
+
+<p>
+  老火车站片区最核心的价值在于其独特的<span class="highlight">铁路历史文化基因</span>。经过前期研究，我们提炼出片区五大核心特质：
+</p>
+
+<div class="three-col">
+  <div class="card">
+    <h4>特质一：87年铁路历史</h4>
+    <p>湘桂铁路冷水滩站始建于1938年，至今已有87年历史，见证了永州从江边小镇到湘南重镇的发展历程。</p>
+  </div>
+  <div class="card">
+    <h4>特质二：4.5公里城市铁路线</h4>
+    <p>片区内留存4.5公里长距离废弃铁轨，与厦门铁路文化公园长度完全一致，在城市中心极为罕见。</p>
+  </div>
+  <div class="card">
+    <h4>特质三：1938年抗战铁路</h4>
+    <p>湘桂铁路是抗战爆发后国民政府修建的第一条铁路干线，冷水滩站见证了抗战运输、日军占领、铁道游击队等重大历史事件。</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>特质四：完整历史建筑群落</h4>
+    <p>片区内留存站房、仓库、雨棚等历史建筑，建筑肌理完整，具有极高的保护与活化利用价值。</p>
+  </div>
+  <div class="card">
+    <h4>特质五：几代人集体记忆</h4>
+    <p>活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常镌刻在铁轨之上，是永州人的集体记忆载体。</p>
+  </div>
+</div>
+
+
+
+<!-- 关键数据卡片 -->
+<div class="data-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin:25px 0;">
+  <div class="card" style="text-align:center; padding:20px;">
+    <div class="gold" style="font-size:36px; font-weight:bold; margin-bottom:8px;">1938</div>
+    <div style="font-size:14px; color:#aaa;">建站年份<br>湘桂铁路通车</div>
+  </div>
+  <div class="card" style="text-align:center; padding:20px;">
+    <div class="gold" style="font-size:36px; font-weight:bold; margin-bottom:8px;">66年</div>
+    <div style="font-size:14px; color:#aaa;">客运运营<br>1938 — 2004</div>
+  </div>
+  <div class="card" style="text-align:center; padding:20px;">
+    <div class="gold" style="font-size:36px; font-weight:bold; margin-bottom:8px;">1.5km</div>
+    <div style="font-size:14px; color:#aaa;">片区范围内留存铁轨长度<br>（全线共4.5km）</div>
+  </div>
+  <div class="card" style="text-align:center; padding:20px;">
+    <div class="gold" style="font-size:36px; font-weight:bold; margin-bottom:8px;">10.85亿</div>
+    <div style="font-size:14px; color:#aaa;">2025年出让金额<br>保护性焕新</div>
+  </div>
+</div>
+
+<!-- 3.1.1 抗战烽火中抢建的抗战铁路 -->
+<h4 class="sub-title">3.1.1 抗战烽火中抢建的"抗战铁路"</h4>
+
+<p>
+  1936年，国民政府考虑中日战争不可避免，为打通西南国际通道，决定铺设湘桂铁路（衡阳至桂林）。这是抗战爆发后国民政府首次修建的铁路干线，被誉为"抗战铁路"。1937年4月，在衡阳成立湘桂铁路工程处，由著名铁路工程师杜镇远主持修建。
+</p>
+
+<div style="display:grid; grid-template-columns:1.2fr 1fr; gap:20px; margin:25px 0; align-items:start;">
+  <div class="timeline" style="position:relative; padding-left:30px;">
+    <div style="position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, #c0392b, #c9a96e, transparent);"></div>
+    
+    <div class="card" style="margin-bottom:15px; margin-left:20px;">
+      <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">1937.09.10</div>
+      <h5 style="color:#fff; margin-bottom:8px;">衡桂段正式开工</h5>
+      <p style="font-size:13px; color:#aaa; line-height:1.8;">抗战爆发后，为打通西南国际运输通道，国民政府紧急启动湘桂铁路建设。湖南段与广西段同时动工，规模空前。</p>
+      <p style="font-size:13px; color:#aaa; line-height:1.8; margin-top:6px;">湖南省政府在湘段沿线30里以内的居民中，共征用16～45岁民工共4万人，每人工作30天，自带口粮、工具；广西段征调全县、兴安、临桂等11县民工，一说30余万人，全部投入一线施工。</p>
+    </div>
+    
+    <div class="card" style="margin-bottom:15px; margin-left:20px;">
+      <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">1938.09.27</div>
+      <h5 style="color:#fff; margin-bottom:8px;">衡桂段全线贯通</h5>
+      <p style="font-size:13px; color:#aaa; line-height:1.8;">全长361公里的衡桂段，从开工到通车仅用短短一年时间，"以一天一公里之速度"抢建，突破我国铁道建设史之最快纪录。</p>
+      <p style="font-size:13px; color:#aaa; line-height:1.8; margin-top:6px;">建设者们在缺设备、缺材料、缺技术的极端困难条件下，靠肩挑手扛、人拉马拽，逢山开路、遇水架桥，硬是在抗战烽火中抢出了这条西南大动脉。</p>
+    </div>
+    
+    <div class="card" style="margin-bottom:15px; margin-left:20px;">
+      <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">1938.09.28</div>
+      <h5 style="color:#fff; margin-bottom:8px;">冷水滩站建成启用</h5>
+      <p style="font-size:13px; color:#aaa; line-height:1.8;">湘桂铁路建设来到永州，冷水滩站正式建成启用，成为这条西南国际通道上的核心枢纽站。</p>
+      <p style="font-size:13px; color:#aaa; line-height:1.8; margin-top:6px;">彼时冷水滩还是零陵县下辖的一个普通小镇，凭借湘江水陆中转的绝佳区位，从湘江边的小渔村一跃成为连接中南与西南的铁路重镇，开启了百年火车站的辉煌历史。</p>
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:12px;">
+    <div class="img-block" style="margin:0;">
+      <img src="assets/hist-1.jpg" alt="修筑湘桂铁路逢山开路">
+      <div class="img-caption">修筑湘桂铁路逢山开路</div>
+    </div>
+    <div class="img-block" style="margin:0;">
+      <img src="assets/hist-2.jpg" alt="湘桂铁路南镇段民工开工">
+      <div class="img-caption">湘桂铁路南镇段民工开工</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="background:linear-gradient(135deg, rgba(192,57,43,0.1) 0%, rgba(201,169,110,0.08) 100%); border:1px solid rgba(192,57,43,0.3); padding:20px; margin:20px 0;">
+  <h4 style="color:#c0392b; margin-bottom:12px;">修建意义：西南国际通道的关键一环</h4>
+  <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;">湘桂铁路北起湖南衡阳市，南至广西友谊关，是抗战时期国内修建的第一条铁路干线。其战略意义在于：</p>
+  <ul style="list-style:none; padding:0; margin:0;">
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">打通西南国际通道</strong> — 连接越南海防港，使援华物资可从南方港口经铁路运入大后方
+    </li>
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">战时运输生命线</strong> — 沿海内迁工厂设备、逃难百姓、军用物资经此转运川黔滇
+    </li>
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">推动西南开发</strong> — 促进湖南、广西沿线城镇的发展，冷水滩因站而兴
+    </li>
+  </ul>
+</div>
+
+<!-- 3.1.2 因站而兴：冷水滩站的诞生与崛起 -->
+<h4 class="sub-title">3.1.2 因站而兴：冷水滩站的诞生与崛起</h4>
+
+<p>
+  冷水滩以前是滩市镇，所谓滩市，即河滩集市贸易发达，后来修建码头供人来人往，客商小贩越来越多，往陆地发展成街市。1938年湘桂铁路通车，冷水滩站建成。彼时冷水滩还是零陵县的一个镇，因为优越的地理位置（湘江水陆中转），项目指挥部决定在这里建设火车站。它让永州进入火车时代。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
+  <div class="img-item">
+    <img src="assets/hist-3.jpg" alt="冷水滩河西老码头">
+    <div class="img-caption">冷水滩河西老码头</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-13.jpg" alt="老站台绿皮火车">
+    <div class="img-caption">老站台与绿皮火车</div>
+  </div>
+</div>
+
+<div class="card" style="border-left:4px solid #c9a96e; margin:20px 0;">
+  <h4 style="color:#c9a96e; margin-bottom:12px;">一座火车站改变一座城</h4>
+  <p style="font-size:14px; line-height:1.9; color:#ddd; font-style:italic;">
+    "冷水滩火车站改变了当时整个冷水滩的格局，也正是因为有了这个火车站，冷水滩由一个小镇，渐渐发展成为永州市委市政府所在地、永州的城市中心。"
+  </p>
+  <p style="font-size:12px; color:#888; margin-top:12px; padding-top:10px; border-top:1px solid #333; text-align:right;">
+    —— 永州市人民政府《永州火车站40年华丽转身》
+  </p>
+</div>
+
+<!-- 3.1.3 抗战烽火中的冷水滩站 -->
+<h4 class="sub-title">3.1.3 抗战烽火中的冷水滩站</h4>
+
+<p>
+  抗战六年间，沿海内迁工厂设备、逃难百姓、军用物资经这里转运川黔滇，成为维系大后方运转的关键要道。1944年9月，日军四个师团围攻冷水滩。为阻止日军西进，湘桂铁路轨道被拆，桥梁被炸。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; margin:20px 0;">
+  <div class="img-item">
+    <img src="assets/hist-5.jpg" alt="1937年难民火车逃难">
+    <div class="img-caption">1937年难民火车逃难</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-6.jpg" alt="运输生命线">
+    <div class="img-caption">战时运输生命线</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/war-1.jpg" alt="毁路阻敌">
+    <div class="img-caption">毁路阻敌</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/war-2.jpg" alt="抗日武装破坏敌人铁路线">
+    <div class="img-caption">抗日武装破坏敌铁路</div>
+  </div>
+</div>
+
+<div class="info-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;">
+  <div class="card" style="padding:18px;">
+    <h5 style="color:#c0392b; margin-bottom:10px;">🚂 运输生命线</h5>
+    <p style="font-size:13px; color:#aaa; line-height:1.8;">上海各工厂内迁的机器，沿海各省向大后方撤退的人员和机械材料等，多经浙赣铁路再转湘桂铁路运到桂林、贵阳、重庆、昆明各地。</p>
+  </div>
+  <div class="card" style="padding:18px;">
+    <h5 style="color:#c0392b; margin-bottom:10px;">⚔️ 日军四路围攻</h5>
+    <p style="font-size:13px; color:#aaa; line-height:1.8;">1944年9月5日，日军第11军司令横山下达向冷水滩全线进攻的命令，四个师团围攻：第3师团、第13师团、第40师团、第58师团。</p>
+  </div>
+  <div class="card" style="padding:18px;">
+    <h5 style="color:#c0392b; margin-bottom:10px;">💥 毁路阻敌</h5>
+    <p style="font-size:13px; color:#aaa; line-height:1.8;">1944年战事吃紧，为阻止日军西进，湘桂铁路轨道被拆，桥梁被炸。沿线轨道、桥梁被迫拆毁阻滞日军，直至抗战胜利才分段修复。</p>
+  </div>
+  <div class="card" style="padding:18px;">
+    <h5 style="color:#c0392b; margin-bottom:10px;">🎖️ 铁道游击队</h5>
+    <p style="font-size:13px; color:#aaa; line-height:1.8;">从1941年到1945年，湘南民抗纵队六中队180余人，在冷水滩车站与蓝家村车站之间的廖家村路段成功炸毁日军装甲列车。</p>
+  </div>
+</div>
+
+<div class="card" style="border-left:4px solid #c9a96e; margin:20px 0;">
+  <h4 style="color:#c9a96e; margin-bottom:12px;">📜 珍贵文物：湘桂铁路抗日标语题刻</h4>
+  <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;">
+    <strong style="color:#c9a96e;">2025年4月</strong>，湖南省文物局发布消息：在冷水滩区四坵田社区七溪坪村二组发现湘桂铁路旧线下涵洞，涵洞建在湘桂铁路旧线下。标语分别刻在涵洞前后两端顶部：
+  </p>
+  <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">
+    • 一端中间横写大字<strong style="color:#c9a96e;">"收复东北失地"</strong>，大字一侧竖刻"中华民国二十七年五月"，一侧竖刻"王懋官题"
+  </p>
+  <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">
+    • 另一端洞顶中间大字是<strong style="color:#c9a96e;">"完成西南交通"</strong>，两侧小字与另一端相同
+  </p>
+  <p style="font-size:12px; color:#888; margin-top:12px; padding-top:10px; border-top:1px solid #333; font-style:italic;">
+    —— 来源：湖南省文物局《冷水滩区:湘桂铁路发现抗日标语题刻》
+  </p>
+</div>
+
+<!-- 3.1.4 新中国成立后的辉煌岁月 -->
+<h4 class="sub-title">3.1.4 新中国成立后的辉煌岁月</h4>
+
+<p>
+  新中国成立后，湘桂铁路逐步修复延伸，冷水滩站成为广州铁路局下属一等站，湘桂铁路和洛湛铁路的中间站。车站多次扩建，配设多股到发线、货场、机务段，南北货运、长途客运昼夜不停，是湘南地区最重要的铁路枢纽之一。
+</p>
+
+<div class="timeline" style="position:relative; margin:20px 0; padding-left:30px;">
+  <div style="position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, #c0392b, #c9a96e, transparent);"></div>
+  
+  <div class="card" style="margin-bottom:15px; margin-left:20px;">
+    <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">1949年后</div>
+    <h5 style="color:#fff; margin-bottom:8px;">新中国建设时期</h5>
+    <p style="font-size:14px; color:#aaa; line-height:1.8;">湘桂铁路逐步修复延伸，冷水滩站成为广州铁路局下属一等站。车站多次扩建，配设多股到发线、货场、机务段，南北货运、长途客运昼夜不停。</p>
+  </div>
+  
+  <div class="card" style="margin-bottom:15px; margin-left:20px;">
+    <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">1955年</div>
+    <h5 style="color:#fff; margin-bottom:8px;">湘桂铁路全线贯通</h5>
+    <p style="font-size:14px; color:#aaa; line-height:1.8;">1951年修至南宁，1952年修至凭祥，1954年建成凭祥至隘口（友谊关）段，1955年同越南铁路接轨联运。冷水滩站成为连接中越的国际通道上的重要节点。</p>
+  </div>
+  
+  <div class="card" style="margin-bottom:15px; margin-left:20px;">
+    <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">1995 — 1996</div>
+    <h5 style="color:#fff; margin-bottom:8px;">更名永州站</h5>
+    <p style="font-size:14px; color:#aaa; line-height:1.8;">冷水滩火车站更名为永州站，城市中心彻底扎根冷水滩。这标志着冷水滩从一个镇正式成为永州市的政治、经济、文化中心。</p>
+  </div>
+  
+  <div class="card" style="margin-bottom:15px; margin-left:20px;">
+    <div style="color:#c0392b; font-weight:bold; margin-bottom:8px;">2004.04.18</div>
+    <h5 style="color:#fff; margin-bottom:8px;">新永州站建成，老站停运客运</h5>
+    <p style="font-size:14px; color:#aaa; line-height:1.8;">新永州站在潇湘大道落成通车，老站更名为永州东站，退出客运主线，转为货运站点。运营66年的老站正式停办客运业务。</p>
+  </div>
+</div>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;">
+  <div class="img-item">
+    <img src="assets/hist-9.jpg" alt="冷水滩老站房高清">
+    <div class="img-caption">冷水滩老站房（历史照片）</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-10.jpg" alt="2000年代冷水滩火车站广场">
+    <div class="img-caption">2000年代火车站广场</div>
+  </div>
+</div>
+
+<div class="card" style="background:linear-gradient(135deg, rgba(192,57,43,0.1) 0%, rgba(201,169,110,0.08) 100%); border:1px solid rgba(192,57,43,0.3); padding:20px; margin:20px 0;">
+  <h4 style="color:#c0392b; margin-bottom:12px;">🚉 一等站的繁华：昼夜不停的运输枢纽</h4>
+  <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:10px;">作为广州铁路局下属的一等站，冷水滩站在新中国成立后经历了多次扩建：</p>
+  <ul style="list-style:none; padding:0; margin:0;">
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">多股到发线</strong> — 可同时接发多趟列车
+    </li>
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">大型货场</strong> — 承担湘南地区货物集散功能
+    </li>
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">机务段</strong> — 负责机车检修、整备、换挂
+    </li>
+    <li style="font-size:14px; line-height:1.9; color:#ddd; padding-left:22px; position:relative; margin-bottom:6px;">
+      <span style="position:absolute; left:0; color:#c0392b; font-weight:bold;">▸</span>
+      <strong style="color:#c9a96e;">客运站房</strong> — 售票、候车、检票等完整客运功能
+    </li>
+  </ul>
+</div>
+
+<!-- 3.1.5 铁路大院：几代人的集体记忆 -->
+<h4 class="sub-title">3.1.5 铁路大院：几代人的集体记忆</h4>
+
+<p>
+  围绕火车站形成了一个完整的"铁路小社会"：铁路职工家属区、铁路中学、铁路医院、铁路俱乐部……活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常、朝夕岁月温情，全都深深镌刻在这片铁轨之上。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr; gap:10px; margin:20px 0;">
+  <div class="img-item">
+    <img src="assets/hist-11.jpg" alt="白竹亭社区老住宅">
+    <div class="img-caption">白竹亭社区老住宅</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-12.jpg" alt="白竹亭社区街巷">
+    <div class="img-caption">白竹亭社区街巷</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-13.jpg" alt="白竹亭社区现状">
+    <div class="img-caption">白竹亭社区现状</div>
+  </div>
+</div>
+
+<div class="value-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:20px 0;">
+  <div class="card" style="padding:16px; text-align:center;">
+    <div style="font-size:28px; margin-bottom:8px;">👨‍👩‍👧‍👦</div>
+    <h5 style="color:#c9a96e; margin-bottom:8px;">铁路小社会</h5>
+    <p style="font-size:12px; color:#aaa; line-height:1.75;">铁路职工家属区、铁路中学、铁路医院、铁路俱乐部……围绕火车站形成了一个完整的"铁路小社会"。</p>
+  </div>
+  <div class="card" style="padding:16px; text-align:center;">
+    <div style="font-size:28px; margin-bottom:8px;">🚂</div>
+    <h5 style="color:#c9a96e; margin-bottom:8px;">蹲铁轨等绿皮</h5>
+    <p style="font-size:12px; color:#aaa; line-height:1.75;">活龙井、黄泥井、铁路大院的几代街坊，半生烟火日常、朝夕岁月温情，全都深深镌刻在这片铁轨之上。</p>
+  </div>
+  <div class="card" style="padding:16px; text-align:center;">
+    <div style="font-size:28px; margin-bottom:8px;">🏭</div>
+    <h5 style="color:#c9a96e; margin-bottom:8px;">铁路工业遗产</h5>
+    <p style="font-size:12px; color:#aaa; line-height:1.75;">站房、水塔、仓库、机务段、铁轨……这些工业遗产见证了永州从农业小镇到工业城市的转型历程。</p>
+  </div>
+</div>
+
+<!-- 3.1.6 从繁华到沉寂：老站的衰落 -->
+<h4 class="sub-title">3.1.6 从繁华到沉寂：老站的衰落</h4>
+
+<p>
+  2004年新永州站建成后，老站退出客运主线，转为货运站点。随着城市发展，铁路货运逐渐外迁，老站逐渐沉寂。站房闲置、铁轨荒废、周边建筑老化……曾经最繁华的城市中心，逐渐变成了城市的"背面"。
+</p>
+
+<div class="img-grid" style="grid-template-columns:1fr 1fr 1fr; gap:10px; margin:20px 0;">
+  <div class="img-item">
+    <img src="assets/hist-14.jpg" alt="白竹亭社区现状">
+    <div class="img-caption">白竹亭社区现状</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-15.jpg" alt="白竹亭社区街巷">
+    <div class="img-caption">白竹亭社区街巷</div>
+  </div>
+  <div class="img-item">
+    <img src="assets/hist-16.jpg" alt="铁轨遗存现状">
+    <div class="img-caption">铁轨遗存现状</div>
+  </div>
+</div>
+
+
+
+<div class="card" style="margin:20px 0;">
+  <h4 style="color:#c0392b; margin-bottom:12px;">老站现状</h4>
+  <div class="two-col">
+    <div>
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">• <strong style="color:#c9a96e;">站房建筑</strong>：老站房闲置，部分结构老化，存在安全隐患</p>
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">• <strong style="color:#c9a96e;">铁轨线路</strong>：4.5公里铁轨留存，部分路段被杂草覆盖</p>
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">• <strong style="color:#c9a96e;">周边区域</strong>：铁路大院老旧，基础设施落后，环境脏乱差</p>
+    </div>
+    <div>
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">• <strong style="color:#c9a96e;">功能衰退</strong>：商业萧条，人口外流，活力不足</p>
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">• <strong style="color:#c9a96e;">记忆褪色</strong>：一代人的集体记忆逐渐被遗忘</p>
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:8px;">• <strong style="color:#c9a96e;">机遇出现</strong>：2025年10.85亿出让，保护性焕新正式启动</p>
+    </div>
+  </div>
+</div>
+
+<!-- 3.2 八大案例对标研究 -->
+<h3 class="section-title">3.2 八大案例对标研究</h3>
+
+<p>
+  为科学指导老火车站片区的保护与活化利用，我们选取了国内外八大经典铁路设施活化利用案例进行深度对标研究，涵盖城市公园、博物馆、文创园区、商业综合体等多种类型。
+</p>
+
+<!-- 案例1：纽约高线公园 -->
+<div class="card" style="margin:25px 0; overflow:hidden;">
+  <img src="assets/case-1.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+  <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:0;">
+    <div style="background:linear-gradient(135deg, rgba(44,62,80,0.85) 0%, rgba(52,73,94,0.85) 100%), url('assets/case-1.jpg') center/cover; padding:30px; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:14px; color:#c9a96e; margin-bottom:8px;">案例一 · 美国纽约</div>
+      <h4 style="color:#fff; font-size:24px; margin-bottom:12px; line-height:1.3;">高线公园 The High Line</h4>
+      <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:15px;">废弃高架铁路 → 世界级城市公园</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="padding:3px 10px; background:rgba(201,169,110,0.2); border:1px solid rgba(201,169,110,0.4); border-radius:15px; font-size:11px; color:#c9a96e;">线性公园</span>
+        <span style="padding:3px 10px; background:rgba(192,57,43,0.2); border:1px solid rgba(192,57,43,0.4); border-radius:15px; font-size:11px; color:#e74c3c;">野化设计</span>
+        <span style="padding:3px 10px; background:rgba(39,174,96,0.2); border:1px solid rgba(39,174,96,0.4); border-radius:15px; font-size:11px; color:#27ae60;">非营利运营</span>
+      </div>
+    </div>
+    <div style="padding:25px;">
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:12px;">
+        1934年建成的纽约曼哈顿西区高架货运铁路，1980年停运后面临拆除命运。经过社区长达十余年的保护运动，2009年一期开放，现已成为全球城市更新的标杆项目。
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:15px;">
+        <div style="text-align:center; padding:10px; background:#1a1a1a; border-radius:6px;">
+          <div style="font-size:20px; color:#c9a96e; font-weight:bold;">2.33km</div>
+          <div style="font-size:11px; color:#888;">线性公园长度</div>
+        </div>
+        <div style="text-align:center; padding:10px; background:#1a1a1a; border-radius:6px;">
+          <div style="font-size:20px; color:#c9a96e; font-weight:bold;">800万/年</div>
+          <div style="font-size:11px; color:#888;">年游客量</div>
+        </div>
+        <div style="text-align:center; padding:10px; background:#1a1a1a; border-radius:6px;">
+          <div style="font-size:20px; color:#c9a96e; font-weight:bold;">$20亿+</div>
+          <div style="font-size:11px; color:#888;">周边地产增值</div>
+        </div>
+      </div>
+      <p style="font-size:13px; line-height:1.8; color:#aaa;"><strong style="color:#c9a96e;">核心经验：</strong>保留铁轨与野生植被，用"轻介入"方式改造；非营利组织运营，门票免费；分期建设逐步完善，每一期都成为城市事件。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 案例2：厦门铁路文化公园 -->
+<div class="card" style="margin:25px 0; overflow:hidden;">
+  <img src="assets/case-2.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+  <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:0;">
+    <div style="padding:25px;">
+      <p style="font-size:14px; line-height:1.9; color:#ddd; margin-bottom:12px;">
+        厦门铁路文化公园利用原鹰厦铁路厦门段废弃线路改造而成，全长约4.5公里，是国内最早将废弃铁路改造为城市带状公园的成功案例。
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">
+        <div style="text-align:center; padding:10px; background:#1a1a1a; border-radius:6px;">
+          <div style="font-size:20px; color:#c9a96e; font-weight:bold;">4.5km</div>
+          <div style="font-size:11px; color:#888;">带状公园总长</div>
+        </div>
+        <div style="text-align:center; padding:10px; background:#1a1a1a; border-radius:6px;">
+          <div style="font-size:20px; color:#c9a96e; font-weight:bold;">2011年</div>
+          <div style="font-size:11px; color:#888;">改造完成开放</div>
+        </div>
+      </div>
+      <p style="font-size:13px; line-height:1.8; color:#aaa;"><strong style="color:#c9a96e;">核心经验：</strong>完整保留铁轨、枕木等铁路元素，按主题分段（铁路文化区、人文生活区、自然生态区），免费向市民开放，成为周边居民日常休闲的重要场所。</p>
+    </div>
+    <div style="background:linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%), url('assets/case-2.jpg') center/cover; padding:30px; display:flex; flex-direction:column; justify-content:center;">
+      <div style="font-size:14px; color:#c9a96e; margin-bottom:8px;">案例二 · 中国厦门</div>
+      <h4 style="color:#fff; font-size:24px; margin-bottom:12px; line-height:1.3;">铁路文化公园</h4>
+      <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:15px;">废弃铁路 → 市民带状公园</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="padding:3px 10px; background:rgba(201,169,110,0.2); border:1px solid rgba(201,169,110,0.4); border-radius:15px; font-size:11px; color:#c9a96e;">带状公园</span>
+        <span style="padding:3px 10px; background:rgba(192,57,43,0.2); border:1px solid rgba(192,57,43,0.4); border-radius:15px; font-size:11px; color:#e74c3c;">铁轨保留</span>
+        <span style="padding:3px 10px; background:linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.7) 100%), url('assets/case-8.jpg') center/cover; border:1px solid rgba(39,174,96,0.4); border-radius:15px; font-size:11px; color:#27ae60;">免费开放</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 案例3-6：两行两列 -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin:25px 0;">
+  <!-- 案例3：杭州白塔公园 -->
+  <div class="card" style="padding:20px; border-top:4px solid #c9a96e;">
+  <img src="assets/case-3.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+    <div style="font-size:12px; color:#c9a96e; margin-bottom:6px;">案例三 · 中国杭州</div>
+    <h4 style="color:#fff; font-size:18px; margin-bottom:10px;">白塔公园</h4>
+    <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:10px;">江墅铁路遗存改造，保留老站房、蒸汽机机车、铁轨，融入白塔历史文化，成为杭州最具人气的铁路主题公园。</p>
+    <p style="font-size:12px; color:#888;"><strong style="color:#c9a96e;">借鉴点：</strong>保留机车实物、亲子体验、历史文化融合</p>
+  </div>
+  <!-- 案例4：上海1876老站 -->
+  <div class="card" style="padding:20px; border-top:4px solid #c9a96e;">
+  <img src="assets/case-4.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+    <div style="font-size:12px; color:#c9a96e; margin-bottom:6px;">案例四 · 中国上海</div>
+    <h4 style="color:#fff; font-size:18px; margin-bottom:10px;">1876老站创意园</h4>
+    <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:10px;">中国第一条营运铁路——吴淞铁路的原址，老站房改造为创意园区，保留钟楼地标与红砖立面，植入创意办公与文化展示。</p>
+    <p style="font-size:12px; color:#888;"><strong style="color:#c9a96e;">借鉴点：</strong>站房活化、地标打造、文创办公</p>
+  </div>
+  <!-- 案例5：哈尔滨中东铁路公园 -->
+  <div class="card" style="padding:20px; border-top:4px solid #c9a96e;">
+  <img src="assets/case-5.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+    <div style="font-size:12px; color:#c9a96e; margin-bottom:6px;">案例五 · 中国哈尔滨</div>
+    <h4 style="color:#fff; font-size:18px; margin-bottom:10px;">中东铁路公园</h4>
+    <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:10px;">利用中东铁路遗存打造纪念公园，保留铁路桥、蒸汽机车、铁轨等历史要素，结合斯大林公园形成完整铁路历史展示带。</p>
+    <p style="font-size:12px; color:#888;"><strong style="color:#c9a96e;">借鉴点：</strong>历史展示、地标打造、文旅融合</p>
+  </div>
+  <!-- 案例6：高雄驳二艺术特区 -->
+  <div class="card" style="padding:20px; border-top:4px solid #c9a96e;">
+  <img src="assets/case-6.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+    <div style="font-size:12px; color:#c9a96e; margin-bottom:6px;">案例六 · 中国高雄</div>
+    <h4 style="color:#fff; font-size:18px; margin-bottom:10px;">驳二艺术特区</h4>
+    <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:10px;">港口旧仓库区最小改造，邀请艺术家入驻，从废弃仓库群发展为南台湾最具影响力的艺术创作与展览特区。</p>
+    <p style="font-size:12px; color:#888;"><strong style="color:#c9a96e;">借鉴点：</strong>最小干预、民间运营、艺术家入驻</p>
+  </div>
+</div>
+
+<!-- 案例7-8：两行两列 -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin:25px 0;">
+  <!-- 案例7：伦敦国王十字 -->
+  <div class="card" style="padding:20px; border-top:4px solid #c0392b;">
+  <img src="assets/case-7.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+    <div style="font-size:12px; color:#c0392b; margin-bottom:6px;">案例七 · 英国伦敦</div>
+    <h4 style="color:#fff; font-size:18px; margin-bottom:10px;">国王十字车站复兴</h4>
+    <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:10px;">欧洲最大的城市更新项目之一，从废弃铁路编组场转型为集办公、住宅、商业、文化于一体的综合复兴区，历时20年持续更新。</p>
+    <p style="font-size:12px; color:#888;"><strong style="color:#c0392b;">借鉴点：</strong>复合功能、分期实施、20年持续运营</p>
+  </div>
+  <!-- 案例8：巴黎奥赛博物馆 -->
+  <div class="card" style="padding:20px; border-top:4px solid #c0392b;">
+  <img src="assets/case-8.jpg" style="width:100%; height:250px; object-fit:cover; display:block;">
+    <div style="font-size:12px; color:#c0392b; margin-bottom:6px;">案例八 · 法国巴黎</div>
+    <h4 style="color:#fff; font-size:18px; margin-bottom:10px;">奥赛博物馆</h4>
+    <p style="font-size:13px; color:#bbb; line-height:1.8; margin-bottom:10px;">1900年建成的火车站，1986年改造为世界最著名的印象派艺术博物馆。完整保留站房建筑骨架，内部植入博物馆功能。</p>
+    <p style="font-size:12px; color:#888;"><strong style="color:#c0392b;">借鉴点：</strong>建筑保护+功能置换、站房博物馆化</p>
+  </div>
+</div>
+
+<!-- 3.3 对永州老火车站的启示 -->
+<h3 class="section-title">3.3 对永州老火车站的启示</h3>
+
+<p>
+  综合八大案例的成功经验，结合永州老火车站实际情况，我们得出以下核心启示：
+</p>
+
+<div class="two-col">
+  <div class="card">
+    <h4>启示一：废弃铁路不是负担，是资产</h4>
+    <p>纽约高线从面临拆除的废弃高架铁路，到年游客800万的全球城市更新标杆；厦门铁路公园从4.5公里废弃铁轨，到市民日常休闲的城市带状公园——都证明了保护性活化利用的巨大价值。</p>
+  </div>
+  <div class="card">
+    <h4>启示二：文化IP自带流量</h4>
+    <p>"87年老站""抗战铁路""4.5公里老铁轨"本身就是强大的文化IP，自带传播属性。在千城一面的商业综合体中，铁路文化主题的文创街区具有不可复制的差异化优势。</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>启示三：混合模式最适合永州</h4>
+    <p>永州老火车站不应采用单一模式，而应采用<span class="gold">"线性公园+站房文创+综合更新"</span>的混合模式——铁路沿线做线性公园，老站房作文创空间，周边片区做综合更新。</p>
+  </div>
+  <div class="card">
+    <h4>启示四：分期实施，持续运营</h4>
+    <p>伦敦国王十字用了20年完成更新，高线公园从废弃到开放用了29年。永州老火车站应制定<span class="gold">"三年成形、五年成势、十年成城"</span>的分期实施路径，避免一次性大拆大建。</p>
+  </div>
+</div>
+
+
+<!-- ========== 第四章 功能与定位 ========== -->
+<div id="chapter4" class="chapter-num">第四章</div>
+<h2 class="chapter-title">功能与定位</h2>
+
+<!-- 4.1 片区核心问题 -->
+<h3 class="section-title">4.1 片区核心问题</h3>
+
+<div style="margin:30px 0;">
+  <div>
+    <!-- 问题1 -->
+    <div style="background:#1a1a1a; border-left:4px solid #c0392b; padding:20px; margin-bottom:15px;">
+      <div style="font-size:16px; color:#c9a96e; margin-bottom:8px; font-weight:bold;">🚂 问题一：历史遗存闲置荒废，价值未能释放</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        老站房自2004年新永州站启用后逐渐退出使用，站房建筑长期闲置，内部空间破败、设施老化；站台雨棚破损、墙面风化；1.5公里留存铁轨长满荒草，沿线站台遗存散落各处。这些遗存是永州铁路历史的实物见证，承载了冷水滩从江边小镇发展为湘南重镇的集体记忆，但目前保护状况堪忧，更谈不上活化利用，是片区最珍贵却也最被遗忘的资源。
+      </p>
+    </div>
+
+    <!-- 问题2 -->
+    <div style="background:#1a1a1a; border-left:4px solid #c0392b; padding:20px; margin-bottom:15px;">
+      <div style="font-size:16px; color:#c9a96e; margin-bottom:8px; font-weight:bold;">🏚️ 问题二：老旧社区基础设施老化，居住品质低下</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        活龙井、白竹亭、又一村三个社区共304栋建筑、6858户，大多建于上世纪八九十年代甚至更早。供排水管网老化漏损严重，燃气管道不覆盖，电力线路私拉乱接，通信线路杂乱；背街小巷路面破损、坑洼不平，消防通道被占用；停车混乱，车辆占道停放；慢行系统不连续，铁路沿线成为步行断点。专业化物业覆盖率不足40%，适老化改造和无障碍设施建设缓慢，老年人出行不便。
+      </p>
+    </div>
+
+    <!-- 问题3 -->
+    <div style="background:#1a1a1a; border-left:4px solid #c0392b; padding:20px; margin-bottom:15px;">
+      <div style="font-size:16px; color:#c9a96e; margin-bottom:8px; font-weight:bold;">🏥 问题三：公服配套不足，民生短板突出</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        片区内养老设施严重不足，没有嵌入式养老机构，高龄老人就近照护困难；托育设施空白，双职工家庭婴幼儿照护难；基层文化活动站面积小、设施旧，不能满足居民文化需求；优质教育、医疗资源覆盖不足，居民要走远路才能看病上学。300米公园绿地覆盖率不足，超四成居民难以"开窗见绿、出门入园"；停车泊位缺口巨大，路侧停车混乱，路网微循环不畅。
+      </p>
+    </div>
+
+    <!-- 问题4 -->
+    <div style="background:#1a1a1a; border-left:4px solid #c0392b; padding:20px; margin-bottom:15px;">
+      <div style="font-size:16px; color:#c9a96e; margin-bottom:8px; font-weight:bold;">🏪 问题四：产业衰退商业萧条，片区活力不足</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        片区商业以传统低端零售、基础餐饮为主，店铺档次低、同质化竞争严重，缺乏特色和吸引力。大量具有历史价值的铁路遗存、闲置厂房被长期低效利用，有的租给小作坊、有的干脆闲置，"沉睡资产"未能释放经济价值。沿街建筑风格不一，店招店牌缺乏规范，立面杂乱；缺乏代表性城市地标和网红打卡场景，门户界面辨识度不足，年轻人不愿来、留不住。
+      </p>
+    </div>
+
+    <!-- 问题5 -->
+    <div style="background:#1a1a1a; border-left:4px solid #c0392b; padding:20px;">
+      <div style="font-size:16px; color:#c9a96e; margin-bottom:8px; font-weight:bold;">🚧 问题五：铁路阻隔城市，步行系统断裂</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        废弃铁路原本是交通动脉，现在变成了物理阻隔，把铁路两侧的城市空间割裂开来。三个社区被铁路分割成不同的片区，跨铁路步行连接点少，居民出行要绕远路。铁路沿线环境脏乱，杂草丛生，成为城市管理的死角。但换个角度看，这条1.5公里的线性空间如果利用好，恰恰可以成为串联城市各街区的绿脉，承载公园、健身步道、慢行系统等复合功能，把城市的"伤疤"变成城市的"项链"。
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- 4.2 片区特质与价值 -->
+<h3 class="section-title">4.2 片区特质与价值</h3>
+
+<p style="font-size:15px; color:#d0d0d0; line-height:1.9; margin:20px 0 30px;">
+面对以上问题，我们也要看到片区独特的资源特质，这正是我们破解难题的底气。老火车站片区不是一张白纸，而是带着百年历史记忆和丰富存量资源的"富矿"。
+</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:30px 0;">
+  <!-- 特质1 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/hist-1.jpg" style="width:100%; height:160px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:5px;">百年铁路遗存</div>
+      <div style="font-size:13px; color:#e74c3c; margin-bottom:10px;">独特文化IP</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        老火车站片区拥有永州最具标志性的历史文化资源——湘桂铁路冷水滩站。1938年衡桂段贯通，冷水滩站建成启用，至今已近90年。从抗战时期的抢建铁路、毁路阻敌，到建国后的铁路枢纽、冷水滩城市繁华中心，再到2004年新站启用后的沉寂，老站见证了永州城市发展的整个历程。
+      </p>
+    </div>
+  </div>
+
+  <!-- 特质2 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/IMG_9204.JPG" style="width:100%; height:160px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:5px;">线性铁路空间</div>
+      <div style="font-size:13px; color:#e74c3c; margin-bottom:10px;">巨大公共价值潜力</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        1.5公里留存铁轨是片区最独特的空间资源。参考纽约高线公园、厦门铁路文化公园的成功经验，废弃铁路改造为线性公园后，可以同时承担健身步道、口袋公园、慢行系统、休闲空间等多重功能。这条线性绿脉不仅能服务周边三个社区居民，更能把铁路两侧被割裂的城市空间重新连接起来。
+      </p>
+    </div>
+  </div>
+
+  <!-- 特质3 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/IMG_9325.JPG" style="width:100%; height:160px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:5px;">三个社区连片</div>
+      <div style="font-size:13px; color:#e74c3c; margin-bottom:10px;">规模效应显著</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        活龙井、白竹亭、又一村三个社区连片分布，共6858户、24.33万㎡，具备整体改造的规模效应。三个社区改造可以统一规划、同步实施，避免碎片化改造带来的衔接问题。同时，三个社区人口基数大、居民结构多元，改造完成后将成为老站运营的基本客群，为片区产业发展提供稳定的人流支撑。
+      </p>
+    </div>
+  </div>
+
+  <!-- 特质4 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/IMG_9192.JPG" style="width:100%; height:160px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:5px;">闲置存量资产</div>
+      <div style="font-size:13px; color:#e74c3c; margin-bottom:10px;">活化空间大</div>
+      <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+        片区内可盘活的闲置存量资产丰富：老站房候车大厅、站务用房、站台雨棚、铁路大院办公楼、原冷水滩基建队办公楼（第五批历史建筑）、惜字塔、抗日标语题刻等，总存量建筑约2-3万㎡。这些建筑大多结构完好，只是功能过时，以"留改拆"为主，改造成本低、活化空间大。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- 政策机遇条 -->
+<div style="background:#1a1a1a; border:1px solid #c9a96e; padding:20px; border-radius:8px; margin:30px 0; text-align:center;">
+  <p style="font-size:18px; color:#c9a96e; margin:0; font-weight:bold;">
+    2026年湖南省133个重点更新片区之一 · "打造活龙井铁路文创街区"写入政府工作报告
+  </p>
+</div>
+
+<!-- 4.3 问题与对策对应 -->
+<h3 class="section-title">4.3 问题与对策对应</h3>
+
+<p style="font-size:15px; color:#d0d0d0; line-height:1.9; margin:20px 0;">
+基于以上五大核心问题和片区特质，我们提出针对性的应对策略。本章重点讲清楚"为什么改、改什么方向"，具体的项目包和资金安排将在第五章详细展开。
+</p>
+
+<table style="width:100%; border-collapse:collapse; margin:30px 0; background:#1a1a1a;">
+  <thead>
+    <tr style="background:#2a2a2a;">
+      <th style="padding:15px; text-align:left; color:#c9a96e; border:1px solid #333;">序号</th>
+      <th style="padding:15px; text-align:left; color:#c9a96e; border:1px solid #333;">发现的问题</th>
+      <th style="padding:15px; text-align:left; color:#c9a96e; border:1px solid #333;">应对策略</th>
+      <th style="padding:15px; text-align:left; color:#c9a96e; border:1px solid #333;">策略要点</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#1a1a1a;">
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">1</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">老站房闲置、铁轨荒废</td>
+      <td style="padding:15px; border:1px solid #333; color:#c9a96e; font-weight:bold;">历史活化、产业植入</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">保护修缮历史遗存，注入文化展示、文创商业等功能，从静态保护转向活态利用</td>
+    </tr>
+    <tr style="background:#151515;">
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">2</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">三个社区基础设施老化</td>
+      <td style="padding:15px; border:1px solid #333; color:#c9a96e; font-weight:bold;">整体改造、品质提升</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">楼本体修缮+管网更新+环境整治，系统改善居住条件</td>
+    </tr>
+    <tr style="background:#1a1a1a;">
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">3</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">公服配套不足、文体缺失</td>
+      <td style="padding:15px; border:1px solid #333; color:#c9a96e; font-weight:bold;">完整社区、补短板</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">建设嵌入式养老、托育、文化活动等设施，补齐民生服务短板</td>
+    </tr>
+    <tr style="background:#151515;">
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">4</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">停车困难、交通混乱</td>
+      <td style="padding:15px; border:1px solid #333; color:#c9a96e; font-weight:bold;">系统治理、完善配套</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">增加停车设施，完善微循环道路，优化步行系统</td>
+    </tr>
+    <tr style="background:#1a1a1a;">
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">5</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">街区风貌杂乱、商业萧条</td>
+      <td style="padding:15px; border:1px solid #333; color:#c9a96e; font-weight:bold;">风貌整治、业态提升</td>
+      <td style="padding:15px; border:1px solid #333; color:#d0d0d0;">沿街立面整治，规范店招，引导业态升级，提升片区活力</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 4.4 总体定位与愿景 -->
+<h3 class="section-title">4.4 总体定位与愿景</h3>
+
+<!-- 大字体艺术化定位页 -->
+<div style="position:relative; margin:40px 0; border-radius:12px; overflow:hidden;">
+  <img src="assets/station-1.jpg" style="width:100%; height:400px; object-fit:cover; filter:brightness(0.3);">
+  <div style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:40px;">
+    <p style="font-size:16px; color:#c9a96e; letter-spacing:3px; margin-bottom:20px;">总体定位</p>
+    <h2 style="font-size:48px; color:#c9a96e; font-weight:bold; text-align:center; line-height:1.3; margin:0 0 30px 0;">站城一体城市更新示范区</h2>
+    <div style="display:flex; gap:40px; flex-wrap:wrap; justify-content:center;">
+      <p style="font-size:16px; color:#fff; margin:0;">· 永州城市历史文化新地标</p>
+      <p style="font-size:16px; color:#fff; margin:0;">· 老旧小区改造新样板</p>
+      <p style="font-size:16px; color:#fff; margin:0;">· 废弃铁路改造新示范</p>
+    </div>
+  </div>
+</div>
+
+<!-- 发展愿景 -->
+<div style="margin:40px 0; text-align:center;">
+  <p style="font-size:18px; color:#c9a96e; margin-bottom:25px; font-weight:bold;">发展愿景</p>
+  <div style="display:flex; gap:50px; flex-wrap:wrap; justify-content:center;">
+    <div style="text-align:center;">
+      <div style="font-size:36px; margin-bottom:10px;">🚂</div>
+      <div style="font-size:22px; color:#c9a96e; font-weight:bold;">百年站房新生</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:36px; margin-bottom:10px;">🌿</div>
+      <div style="font-size:22px; color:#c9a96e; font-weight:bold;">铁路绿脉连城</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:36px; margin-bottom:10px;">🏘️</div>
+      <div style="font-size:22px; color:#c9a96e; font-weight:bold;">老城品质提升</div>
+    </div>
+  </div>
+</div>
+
+<!-- 核心价值主张 -->
+<div style="margin:40px 0;">
+  <p style="font-size:18px; color:#c9a96e; margin-bottom:20px; font-weight:bold;">核心价值主张</p>
+  <div style="display:flex; gap:15px; flex-wrap:wrap;">
+    <span style="padding:10px 20px; border:1px solid #c9a96e; color:#c9a96e; border-radius:25px; font-size:14px;">保护优先</span>
+    <span style="padding:10px 20px; border:1px solid #c9a96e; color:#c9a96e; border-radius:25px; font-size:14px;">复合功能</span>
+    <span style="padding:10px 20px; border:1px solid #c9a96e; color:#c9a96e; border-radius:25px; font-size:14px;">站城一体</span>
+    <span style="padding:10px 20px; border:1px solid #c9a96e; color:#c9a96e; border-radius:25px; font-size:14px;">运营导向</span>
+    <span style="padding:10px 20px; border:1px solid #c9a96e; color:#c9a96e; border-radius:25px; font-size:14px;">多元资金</span>
+  </div>
+</div>
+
+<!-- 4.5 六大功能体系 -->
+<h3 class="section-title">4.5 六大功能体系</h3>
+
+<p style="font-size:15px; color:#d0d0d0; line-height:1.9; margin:20px 0 30px;">
+围绕总体定位，老火车站片区一期将构建六大功能体系，实现历史保护、公共服务、体育休闲、慢行连接、商业激活、居住改善的复合叠加。
+</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:30px 0;">
+  <!-- 功能1 -->
+  <div style="background:#1a1a1a; padding:25px; border:1px solid #333; border-left:4px solid #c9a96e;">
+    <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">🏛️ 历史文化保护功能</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0 0 12px 0;">
+      保护老站房、站台雨棚、铁轨遗存、铁路大院、基建队办公楼（历史建筑）、惜字塔、抗日标语题刻等各类历史文化资源，划定保护范围和建设控制地带，制定保护修缮导则。建设铁路博物馆、城市记忆展示空间，系统展示湘桂铁路建设历史和冷水滩站发展历程，传承百年铁路文化。
+    </p>
+  </div>
+
+  <!-- 功能2 -->
+  <div style="background:#1a1a1a; padding:25px; border:1px solid #333; border-left:4px solid #c9a96e;">
+    <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">🏥 公共服务提升功能</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0 0 12px 0;">
+      以活龙井社区为试点，建设完整社区。配套嵌入式养老服务中心，为高龄、失能老人提供日间照料、助餐助浴等服务；建设社区托育机构，解决双职工家庭婴幼儿照护难题；升级社区文化活动站，增加图书阅览室、多功能厅、社区学堂；完善社区卫生服务站，提升基层医疗服务能力。
+    </p>
+  </div>
+
+  <!-- 功能3 -->
+  <div style="background:#1a1a1a; padding:25px; border:1px solid #333; border-left:4px solid #c9a96e;">
+    <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">🏃 体育健身休闲功能</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0 0 12px 0;">
+      将1.5公里废弃铁轨改造为线性健身步道，满足周边居民跑步、快走、骑行等日常健身需求。沿线利用闲置空地建设口袋公园，配置篮球场、羽毛球场、儿童游乐场、老年健身器材等设施，让居民出门就能运动。结合铁路景观设置休闲座椅、观景平台，打造市民日常休闲的好去处。
+    </p>
+  </div>
+
+  <!-- 功能4 -->
+  <div style="background:#1a1a1a; padding:25px; border:1px solid #333; border-left:4px solid #c9a96e;">
+    <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">🚶 慢行系统连接功能</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0 0 12px 0;">
+      以铁路绿脉为骨架，打通跨铁路步行连接通道，缝合被铁路割裂的城市空间。完善三个社区内部步行路网，打通背街小巷断点，提升步行舒适度。串联老站核心区、三个社区、周边商业街区和城市干道，形成连续便捷的步行网络，让铁路从阻隔变成连接。
+    </p>
+  </div>
+
+  <!-- 功能5 -->
+  <div style="background:#1a1a1a; padding:25px; border:1px solid #333; border-left:4px solid #c9a96e;">
+    <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">🏪 商业产业激活功能</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0 0 12px 0;">
+      盘活老站房、铁路大院、基建队办公楼等闲置存量资产，注入文创工作室、特色商业、沉浸式体验、青年双创等业态。结合铁路IP打造主题商业街区，引入本地特色餐饮、文创零售、咖啡茶馆等业态。通过业态引导和政策扶持，逐步提升片区商业档次和活力，让老站产生持续运营收益。
+    </p>
+  </div>
+
+  <!-- 功能6 -->
+  <div style="background:#1a1a1a; padding:25px; border:1px solid #333; border-left:4px solid #c9a96e;">
+    <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">🏘️ 居住品质改善功能</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0 0 12px 0;">
+      同步推进活龙井、白竹亭、又一村三个老旧小区改造。实施楼本体修缮，解决屋面漏水、外墙脱落、楼梯破损等问题；更新供排水、燃气、电力、通信等管网；整治背街小巷，改善小区环境；完善无障碍设施和适老化改造；引入专业化物业管理，提升小区管理水平。
+    </p>
+  </div>
+</div>
+
+<!-- 4.6 产业体系与运营模式 -->
+<h3 class="section-title">4.6 产业体系与运营模式</h3>
+
+<p style="font-size:15px; color:#d0d0d0; line-height:1.9; margin:20px 0;">
+参考纽约高线公园、巴黎奥赛博物馆、伦敦国王十字等国际成功案例的共同经验——历史遗存活化不能只做静态展示，必须植入可运营的产业功能，才能实现可持续发展。我们聚焦老火车站核心区，以"铁路文化"为核心IP，打造"文化展示+休闲体验+创意办公+特色商业"四位一体的产业体系，强调运营造血，不做纯景观展示。
+</p>
+
+<!-- 三大产业板块 -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin:30px 0;">
+  <!-- 板块一 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/case-8.jpg" style="width:100%; height:150px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="display:inline-block; padding:3px 10px; background:#c0392b; color:#fff; border-radius:10px; font-size:11px; margin-bottom:10px;">基本盘 · 聚人气</div>
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">文化展示与公共服务</div>
+      <div style="font-size:14px; color:#d0d0d0; line-height:1.9;">
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 铁路博物馆/城市记忆馆</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 城市客厅/文旅服务中心</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 公共文化空间（剧场/展厅）</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 板块二 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/case-1.jpg" style="width:100%; height:150px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="display:inline-block; padding:3px 10px; background:#27ae60; color:#fff; border-radius:10px; font-size:11px; margin-bottom:10px;">流量入口 · 日常客群</div>
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">休闲体验与运动健身</div>
+      <div style="font-size:14px; color:#d0d0d0; line-height:1.9;">
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 铁轨遗址公园/线性步道</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 铁路主题沉浸式体验</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 运动场地/口袋公园</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 咖啡轻食茶吧配套</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 板块三 -->
+  <div style="background:#1a1a1a; border-radius:8px; overflow:hidden;">
+    <img src="assets/case-7.jpg" style="width:100%; height:150px; object-fit:cover;">
+    <div style="padding:20px;">
+      <div style="display:inline-block; padding:3px 10px; background:#c9a96e; color:#fff; border-radius:10px; font-size:11px; margin-bottom:10px;">收益核心 · 现金流</div>
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">文创创意与特色商业</div>
+      <div style="font-size:14px; color:#d0d0d0; line-height:1.9;">
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 文创工作室/青年双创</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 特色商业/夜市经济</p>
+        <p style="margin:0 0 8px 0;"><span style="color:#c9a96e;">●</span> 怀旧主题商业体验</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 案例对标 -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin:30px 0;">
+  <div style="background:#1a1a1a; padding:15px; border-radius:8px; text-align:center; border:1px solid #333;">
+    <div style="font-size:14px; color:#c9a96e; margin-bottom:5px;">纽约高线公园</div>
+    <div style="font-size:13px; color:#d0d0d0;">年游客800万 · 带动周边地产增值</div>
+  </div>
+  <div style="background:#1a1a1a; padding:15px; border-radius:8px; text-align:center; border:1px solid #333;">
+    <div style="font-size:14px; color:#c9a96e; margin-bottom:5px;">巴黎奥赛博物馆</div>
+    <div style="font-size:13px; color:#d0d0d0;">旧站房改美术馆 · 年接待300万人次</div>
+  </div>
+  <div style="background:#1a1a1a; padding:15px; border-radius:8px; text-align:center; border:1px solid #333;">
+    <div style="font-size:14px; color:#c9a96e; margin-bottom:5px;">伦敦国王十字</div>
+    <div style="font-size:13px; color:#d0d0d0;">20年更新 · 带动片区价值大幅提升</div>
+  </div>
+</div>
+
+<!-- 运营模式四原则 -->
+<div style="background:#1a1a1a; border-radius:8px; padding:25px; margin:30px 0;">
+  <p style="font-size:18px; color:#c9a96e; margin:0 0 20px 0; font-weight:bold;">运营模式四大原则</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:20px;">
+    <div>
+      <div style="font-size:24px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">01</div>
+      <div style="font-size:15px; color:#fff; font-weight:bold; margin-bottom:8px;">政府建硬件</div>
+      <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">政府投资完成保护修缮和基础设施改造，专业机构负责运营和招商</p>
+    </div>
+    <div>
+      <div style="font-size:24px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">02</div>
+      <div style="font-size:15px; color:#fff; font-weight:bold; margin-bottom:8px;">公益免费</div>
+      <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">公园步道免费开放聚人气，商业部分收益反哺维护成本</p>
+    </div>
+    <div>
+      <div style="font-size:24px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">03</div>
+      <div style="font-size:15px; color:#fff; font-weight:bold; margin-bottom:8px;">分期运营</div>
+      <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">一期先开放核心区聚人气，二期逐步引入商业，培育市场</p>
+    </div>
+    <div>
+      <div style="font-size:24px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">04</div>
+      <div style="font-size:15px; color:#fff; font-weight:bold; margin-bottom:8px;">在地优先</div>
+      <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">优先本地品牌，配套社区服务，让居民共享更新成果</p>
+    </div>
+  </div>
+</div>
+
+<!-- 4.7 改造模式：站城一体、双向赋能 -->
+<h3 class="section-title">4.7 改造模式：站城一体、双向赋能</h3>
+
+
+
+<p style="font-size:15px; color:#d0d0d0; line-height:1.9; margin:20px 0;">
+老火车站片区更新不是简单的单点改造，而是"站区一体"的系统性更新。老站改造与周边社区改造同步推进、相互赋能，形成双向促进的良性循环。
+</p>
+
+<!-- 中心辐射图（带背景图） -->
+<div style="position:relative; margin:30px 0; border-radius:12px; overflow:hidden;">
+  <img src="assets/IMG_9370.JPG" style="width:100%; min-height:500px; object-fit:cover; filter:brightness(0.3); position:absolute; top:0; left:0;">
+  <div style="position:relative; z-index:10; padding:50px 40px;">
+    <p style="font-size:28px; color:#c9a96e; font-weight:bold; text-align:center; text-shadow:2px 2px 4px rgba(0,0,0,0.8); margin:0 0 40px 0;">站城一体 · 双向赋能</p>
+
+    <!-- 中心节点 -->
+    <div style="width:200px; height:200px; border-radius:50%; border:3px solid #c9a96e; background:rgba(192,57,43,0.3); display:flex; flex-direction:column; justify-content:center; align-items:center; margin:0 auto 30px auto;">
+      <div style="font-size:18px; color:#c9a96e; font-weight:bold; text-align:center;">老火车站核心区</div>
+      <div style="font-size:13px; color:#d0d0d0; text-align:center; margin-top:8px;">百年站房 · 铁路遗存<br>文化地标</div>
+    </div>
+
+    <!-- 双向箭头 -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px;">
+      <div style="background:rgba(201,169,110,0.15); padding:25px; border-radius:8px; border:1px solid #c9a96e;">
+        <div style="font-size:18px; color:#c9a96e; margin-bottom:15px; font-weight:bold; text-align:center;">← 老站带动社区</div>
+        <div style="font-size:15px; color:#fff; line-height:1.8;">
+          <p style="margin:0 0 12px 0;"><strong style="color:#c9a96e;">人流活力：</strong>老站成为文化新地标，吸引游客市民带来持续人流</p>
+          <p style="margin:0 0 12px 0;"><strong style="color:#c9a96e;">品牌提升：</strong>百年站房品牌效应，提升周边房产价值与商业氛围</p>
+          <p style="margin:0;"><strong style="color:#c9a96e;">设施共享：</strong>同步完善基础设施和公服配套，居民直接受益</p>
+        </div>
+      </div>
+      <div style="background:rgba(201,169,110,0.15); padding:25px; border-radius:8px; border:1px solid #c9a96e;">
+        <div style="font-size:18px; color:#c9a96e; margin-bottom:15px; font-weight:bold; text-align:center;">社区支撑老站 →</div>
+        <div style="font-size:15px; color:#fff; line-height:1.8;">
+          <p style="margin:0 0 12px 0;"><strong style="color:#c9a96e;">基本客群：</strong>6858户居民是日常运营最稳定的消费基础</p>
+          <p style="margin:0 0 12px 0;"><strong style="color:#c9a96e;">日常活力：</strong>居民休闲、购物、健身为老站提供持续人流</p>
+          <p style="margin:0;"><strong style="color:#c9a96e;">人口红利：</strong>社区改造吸引年轻人口迁入，长期消费支撑</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 四大策略原则 -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:15px; margin:30px 0;">
+  <div style="background:#1a1a1a; padding:20px; border-radius:8px; text-align:center; border-top:3px solid #c9a96e;">
+    <div style="font-size:24px; margin-bottom:10px;">🎯</div>
+    <div style="font-size:16px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">以老站为核</div>
+    <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">保留修缮百年站房站台，打造城市文化地标，以点带面提升片区整体品牌价值与影响力</p>
+  </div>
+  <div style="background:#1a1a1a; padding:20px; border-radius:8px; text-align:center; border-top:3px solid #c9a96e;">
+    <div style="font-size:24px; margin-bottom:10px;">🌿</div>
+    <div style="font-size:16px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">以铁路为脉</div>
+    <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">将废弃铁轨改造为线性绿道公园，缝合被铁路阻断的城市空间，串联周边社区与老站核心区</p>
+  </div>
+  <div style="background:#1a1a1a; padding:20px; border-radius:8px; text-align:center; border-top:3px solid #c9a96e;">
+    <div style="font-size:24px; margin-bottom:10px;">🏘️</div>
+    <div style="font-size:16px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">以社区为基</div>
+    <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">三个老旧小区同步改造，完善基础设施和公服配套，改善居民居住品质，夯实民生基础</p>
+  </div>
+  <div style="background:#1a1a1a; padding:20px; border-radius:8px; text-align:center; border-top:3px solid #c9a96e;">
+    <div style="font-size:24px; margin-bottom:10px;">🔗</div>
+    <div style="font-size:16px; color:#c9a96e; font-weight:bold; margin-bottom:8px;">站城联动</div>
+    <p style="font-size:13px; color:#d0d0d0; line-height:1.7; margin:0;">老站与周边社区一体化规划、同步实施，老站带动社区发展，社区支撑老站运营，双向赋能</p>
+  </div>
+</div>
+
+<!-- 空间分区色块图 -->
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; margin:30px 0;">
+  <div style="background:#c0392b; padding:20px; border-radius:8px; text-align:center;">
+    <div style="font-size:16px; color:#fff; font-weight:bold; margin-bottom:8px;">老站核心区</div>
+    <p style="font-size:12px; color:#ddd; line-height:1.7; margin:0;">站房修缮、站台遗存保护、铁轨遗址公园、铁路博物馆</p>
+  </div>
+  <div style="background:#27ae60; padding:20px; border-radius:8px; text-align:center;">
+    <div style="font-size:16px; color:#fff; font-weight:bold; margin-bottom:8px;">铁路绿脉带</div>
+    <p style="font-size:12px; color:#ddd; line-height:1.7; margin:0;">线性健身步道、口袋公园、儿童活动场、慢行系统串联</p>
+  </div>
+  <div style="background:#2980b9; padding:20px; border-radius:8px; text-align:center;">
+    <div style="font-size:16px; color:#fff; font-weight:bold; margin-bottom:8px;">社区提升区</div>
+    <p style="font-size:12px; color:#ddd; line-height:1.7; margin:0;">活龙井、白竹亭、又一村三个老旧小区改造，完善配套</p>
+  </div>
+  <div style="background:#c9a96e; padding:20px; border-radius:8px; text-align:center;">
+    <div style="font-size:16px; color:#fff; font-weight:bold; margin-bottom:8px;">商业配套区</div>
+    <p style="font-size:12px; color:#ddd; line-height:1.7; margin:0;">站房周边文创商业、特色餐饮、休闲娱乐，激活片区经济</p>
+  </div>
+</div>
+
+<!-- 4.8 四大核心策略总结 -->
+<h3 class="section-title">4.8 四大核心策略总结</h3>
+
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:20px; margin:30px 0;">
+  <div style="background:#1a1a1a; padding:30px; border-radius:8px; border-top:4px solid #c9a96e; text-align:center;">
+    <div style="font-size:48px; margin-bottom:15px;">🔀</div>
+    <div style="font-size:20px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">功能复合化</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+      五大功能叠加在同一空间，提高空间利用效率，也通过多元收入提升资金平衡能力。
+    </p>
+  </div>
+
+  <div style="background:#1a1a1a; padding:30px; border-radius:8px; border-top:4px solid #c9a96e; text-align:center;">
+    <div style="font-size:48px; margin-bottom:15px;">💰</div>
+    <div style="font-size:20px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">产业运营化</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+      植入可运营的产业功能，政府建硬件、专业机构管运营，实现可持续造血。
+    </p>
+  </div>
+
+  <div style="background:#1a1a1a; padding:30px; border-radius:8px; border-top:4px solid #c9a96e; text-align:center;">
+    <div style="font-size:48px; margin-bottom:15px;">🔗</div>
+    <div style="font-size:20px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">站城联动化</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+      不只改老站，同步改三个社区，站区一体、相互赋能、双向促进。
+    </p>
+  </div>
+
+  <div style="background:#1a1a1a; padding:30px; border-radius:8px; border-top:4px solid #c9a96e; text-align:center;">
+    <div style="font-size:48px; margin-bottom:15px;">🧩</div>
+    <div style="font-size:20px; color:#c9a96e; font-weight:bold; margin-bottom:12px;">资金拼盘化</div>
+    <p style="font-size:14px; color:#d0d0d0; line-height:1.8; margin:0;">
+      按板块拆分项目，对接多条资金渠道，多元组合降低财政压力。
+    </p>
+  </div>
+</div>
+
+<hr style="border:none; border-top:1px solid #c9a96e; margin:60px 0;">
+
+<!-- ========== 第五章 项目清单与资金匹配 ========== -->
+<div id="chapter5" class="chapter-num">第五章</div>
+<h2 class="chapter-title">项目清单与资金匹配</h2>
+
+<p>
+  近两周，项目组对老火车站片区进行了现场踏勘，同步梳理了现有基础资料，初步整理形成了片区一期项目清单。片区一期范围涉及梧桐街道白竹亭社区、菱角山街道活龙井社区、肖家园街道又一村社区三个社区，共 <span class="highlight">304 栋建筑、6858 户、总建筑面积约 24.33 万㎡</span>。
+</p>
+
+<p>
+  本次梳理的核心目的，是明确各项目包的建设内容、范围及初步资金来源方向，研究各项目与国家、省资金申报政策的匹配度，为后续细化方案编制和资金申报提供依据。具体工程量和投资数据需根据各部门提供的基础资料进一步核实细化。其中，部分项目的包装模式和资金渠道，需与住建、城投及相关部门共同研究确定。
+</p>
+
+<!-- 4.1 项目总览 -->
+<h3 class="section-title">5.1 项目总览</h3>
+
+<p>根据现有资料梳理，一期共包装7个更新项目，涵盖老旧小区改造、完整社区建设、老旧街区提升、公共停车设施、历史文化保护传承等方向，总投资约6.71亿元。</p>
+
+<table style="table-layout: fixed; width: 100%;">
+  <colgroup>
+    <col style="width: 4%;">
+    <col style="width: 10%;">
+    <col style="width: 16%;">
+    <col style="width: 10%;">
+    <col style="width: 26%;">
+    <col style="width: 7%;">
+    <col style="width: 8%;">
+    <col style="width: 7%;">
+    <col style="width: 7%;">
+    <col style="width: 5%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>八大类分类</th>
+      <th>项目名称</th>
+      <th>建设地点</th>
+      <th>主要建设内容</th>
+      <th>总投资<br>（万元）</th>
+      <th>中央预算内<br>（万元）</th>
+      <th>专项债<br>（万元）</th>
+      <th>地方财政<br>（万元）</th>
+      <th>其他资金<br>（万元）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td style="text-align:left;">城镇老旧小区整治改造</td>
+      <td style="text-align:left;">又一村社区城镇老旧小区改造配套基础设施项目</td>
+      <td style="text-align:left;">肖家园街道又一村社区</td>
+      <td style="text-align:left; font-size:13px;">改造2000年底前建设的电力公司宿舍、工商所宿舍、海事局宿舍等老旧小区及配套基础设施。涉及26栋、725户、6.12万㎡。主要内容：道路改造、雨污管网、照明、强弱电入地、充电桩、消防、安防、环卫、健身器材、车棚、停车位等；少量屋面防水、楼道修缮（占比<10%）。</td>
+      <td>1,650</td>
+      <td>990</td>
+      <td>—</td>
+      <td>660</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td style="text-align:left;">城镇老旧小区整治改造</td>
+      <td style="text-align:left;">活龙井社区城镇老旧小区改造配套基础设施项目</td>
+      <td style="text-align:left;">菱角山街道活龙井社区</td>
+      <td style="text-align:left; font-size:13px;">改造2000年底前建设的纺织站小区、百货站宿舍、鸿泰佳园等老旧小区及配套基础设施。涉及199栋、5261户、62.47万㎡。主要内容：道路改造、雨污管网、供水供气、照明、强弱电入地、充电桩、消防、安防、环卫、健身器材、车棚、停车位、社区服务设施等；少量屋面防水、楼道修缮（占比<10%）。</td>
+      <td>19,290</td>
+      <td>11,574</td>
+      <td>—</td>
+      <td>7,716</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td style="text-align:left;">城镇老旧小区整治改造</td>
+      <td style="text-align:left;">白竹亭社区城镇老旧小区改造配套基础设施项目</td>
+      <td style="text-align:left;">梧桐街道白竹亭社区</td>
+      <td style="text-align:left; font-size:13px;">改造2000年底前建设的铁路向阳村一区、二区、珊雅小区等老旧小区及配套基础设施。涉及79栋、872户、11.96万㎡。主要内容：道路改造、雨污管网、照明、强弱电入地、充电桩、消防、安防、环卫、健身器材、车棚、停车位等；少量屋面防水、楼道修缮（占比<10%）。</td>
+      <td>3,197</td>
+      <td>1,918</td>
+      <td>—</td>
+      <td>1,279</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td style="text-align:left;">完整社区建设（嵌入式服务）</td>
+      <td style="text-align:left;">活龙井社区完整社区建设（社区嵌入式服务设施）项目</td>
+      <td style="text-align:left;">菱角山街道活龙井社区</td>
+      <td style="text-align:left; font-size:13px;">以活龙井社区为单元开展完整社区建设。主要内容：1.养老服务设施（社区嵌入式养老中心，日间照料、助餐助浴、康复护理、老年活动等）；2.托育服务设施（普惠托育中心，托位设置、婴幼儿照护等）；3.社区配套服务设施（便民商业、家政、健康、体育健身、文化休闲、儿童游憩、无障碍、适老化改造等）。</td>
+      <td>2,200</td>
+      <td>902</td>
+      <td>704</td>
+      <td>594</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td style="text-align:left;">老旧街区更新改造</td>
+      <td style="text-align:left;">零陵中路-觅湘路-德源路老旧街区改造提升项目</td>
+      <td style="text-align:left;">活龙井社区、又一村社区</td>
+      <td style="text-align:left; font-size:13px;">对零陵中路、觅湘路、德源路沿线老旧街区改造提升。主要内容：1.基础设施配套（道路提质、绿化、照明、供电、消防、安防、给排水等）；2.公共服务设施（社区综合服务、文化体育、公共停车、自行车棚等）；3.街区风貌提升（沿街立面整治、广告牌匾、公共空间改造、文旅业态培育、夜景亮化等）。</td>
+      <td>13,200</td>
+      <td>4,950</td>
+      <td>2,640</td>
+      <td>5,610</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td style="text-align:left;">完善城市功能（停车设施）</td>
+      <td style="text-align:left;">老火车站片区公共停车系统建设项目</td>
+      <td style="text-align:left;">老火车站片区（三个社区范围）</td>
+      <td style="text-align:left; font-size:13px;">完善片区停车设施体系。主要内容：1.利用闲置低效用地新建集中式公共停车场；2.规范路侧停车泊位，优化停车布局；3.增补新能源汽车充电桩，完善充电设施；4.建设智慧停车管理系统，提升停车管理效率。</td>
+      <td>7,590</td>
+      <td>—</td>
+      <td>6,072</td>
+      <td>1,518</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td style="text-align:left;">保护传承城市历史文化</td>
+      <td style="text-align:left;">老火车站片区历史文化保护传承利用项目</td>
+      <td style="text-align:left;">活龙井社区、白竹亭社区</td>
+      <td style="text-align:left; font-size:13px;">以老火车站及湘桂铁路沿线历史资源为重点，开展保护传承利用。主要内容：1.历史建筑修缮（老火车站站房、铁路附属建筑等保护性修缮）；2.基础设施配套（沿线道路、绿化、照明、消防等）；3.存量资产活化利用（文旅业态、文创空间、公共文化服务、铁路沿线公共空间整治、景观提升等）。</td>
+      <td>20,000</td>
+      <td>2,500</td>
+      <td>—</td>
+      <td>5,500</td>
+      <td>12,000</td>
+    </tr>
+    <tr style="background:#2a2a2a; font-weight:bold;">
+      <td colspan="5" style="text-align:right;">合计</td>
+      <td>67,127</td>
+      <td>22,834</td>
+      <td>9,416</td>
+      <td>22,877</td>
+      <td>12,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 4.2 又一村社区老旧小区改造项目 -->
+<h3 class="section-title">5.2 又一村社区城镇老旧小区改造配套基础设施项目</h3>
+
+<div style="margin:20px 0 25px 0; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+  <div class="img-block">
+    <img src="assets/y-house.png" alt="又一村楼本体现状" style="width:100%;">
+    <div class="img-caption">图：又一村社区楼本体现状（来源：调研底图0920）</div>
+  </div>
+  <div class="img-block">
+    <img src="assets/y-infra.png" alt="又一村基础设施现状" style="width:100%;">
+    <div class="img-caption">图：又一村社区基础设施现状（来源：调研底图0920）</div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>肖家园街道又一村社区</p>
+    <p><strong>改造范围：</strong>又一村社区范围内2000年底前建设的电力公司宿舍、工商所宿舍、海事局宿舍等老旧小区及周边配套基础设施</p>
+    <p><strong>涉及规模：</strong>26栋、725户、6.12万㎡</p>
+    <p><strong>总投资：</strong><span class="gold">1,650万元</span></p>
+    <p><strong>中央预算内：</strong>990万元（60%）</p>
+    <p><strong>地方财政：</strong>660万元（40%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>中央预算内支持部分（基础设施配套）：</strong></p>
+    <p>• 小区内道路改造、雨污管网改造</p>
+    <p>• 照明设施、强弱电入地、充电桩</p>
+    <p>• 消防设施、安防监控、环卫设施</p>
+    <p>• 健身器材、非机动车棚、停车位等</p>
+    <p>• 小区外与城市主干网衔接的道路改造</p>
+    <p><strong>零星配套完善：</strong>少量屋面防水修补、楼道公共区域修缮等，占比控制在10%以内</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>城镇老旧小区整治改造中央预算内资金</p>
+  <p><strong>支持比例：</strong>中部地区不超过总投资的70%，按60%申报</p>
+  <p><strong>政策依据：</strong>2005年底前建成城镇老旧小区改造，优先支持2000年底前建成小区</p>
+  <p><strong>申报要求：</strong>需纳入年度老旧小区改造计划台账</p>
+  <p><strong>注意事项：</strong>优先支持2000年底前建成小区，本项目符合条件；需纳入年度老旧小区改造计划台账后方可申报</p>
+  <p><strong>项目包装建议：</strong>本项目投资规模较小（1650万），建议与白竹亭社区改造项目合并为一个项目包申报，避免单个项目投资过小影响申报优先级</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料（住建局提供）</h4>
+  <p>• 片区范围内老旧小区完整清单，含小区名称、楼栋数、户数、建筑面积、建成年代、产权单位等</p>
+  <p>• 已完成改造的老旧小区清单，用于剔除已改造内容，避免重复申报</p>
+  <p>• "四网合一"改造情况台账</p>
+</div>
+
+
+
+<!-- 4.3 活龙井社区老旧小区改造项目 -->
+<h3 class="section-title">5.3 活龙井社区城镇老旧小区改造配套基础设施项目</h3>
+
+<div style="margin:20px 0 25px 0; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+  <div class="img-block">
+    <img src="assets/h-longjing-1.png" alt="活龙井社区现状图1" style="width:100%;">
+    <div class="img-caption">图：活龙井社区现状（来源：调研底图0920）</div>
+  </div>
+  <div class="img-block">
+    <img src="assets/h-longjing-2.png" alt="活龙井社区现状图2" style="width:100%;">
+    <div class="img-caption">图：活龙井社区基础设施现状（来源：调研底图0920）</div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>菱角山街道活龙井社区</p>
+    <p><strong>改造范围：</strong>活龙井社区范围内2000年底前建设的纺织站小区、百货站宿舍小区、鸿泰佳园等老旧小区及周边配套基础设施</p>
+    <p><strong>涉及规模：</strong>199栋、5261户、62.47万㎡</p>
+    <p><strong>总投资：</strong><span class="gold">19,290万元</span></p>
+    <p><strong>中央预算内：</strong>11,574万元（60%）</p>
+    <p><strong>地方财政：</strong>7,716万元（40%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>中央预算内支持部分（基础设施配套）：</strong></p>
+    <p>• 小区内道路改造、雨污管网改造</p>
+    <p>• 照明设施、强弱电入地、充电桩</p>
+    <p>• 消防设施、安防监控、环卫设施</p>
+    <p>• 健身器材、非机动车棚、停车位等</p>
+    <p>• 小区外与城市主干网衔接的道路改造</p>
+    <p><strong>零星配套完善：</strong>少量屋面防水修补、楼道公共区域修缮等，占比控制在10%以内</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>城镇老旧小区整治改造中央预算内资金</p>
+  <p><strong>支持比例：</strong>中部地区不超过总投资的70%，按60%申报</p>
+  <p><strong>政策依据：</strong>2005年底前建成城镇老旧小区改造，优先支持2000年底前建成小区</p>
+  <p><strong>申报要求：</strong>需纳入年度老旧小区改造计划台账</p>
+  <p><strong>有关说明：</strong>活龙井社区改造体量较大（199栋、5261户），单独作为一个项目包申报</p>
+  <p><strong>注意事项：</strong>本项目为片区内规模最大的老旧小区改造项目（199栋、5261户），需纳入年度老旧小区改造计划台账后方可申报</p>
+  <p><strong>项目包装建议：</strong>本项目投资规模较大（19290万），超过1亿元，建议按小区或片区拆分为两个项目包申报，避免单个项目投资过大被退回，同时提高申报成功率</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料（住建局提供）</h4>
+  <p>• 片区范围内老旧小区完整清单，含小区名称、楼栋数、户数、建筑面积、建成年代、产权单位等</p>
+  <p>• 已完成改造的老旧小区清单，用于剔除已改造内容，避免重复申报</p>
+  <p>• "四网合一"改造情况台账</p>
+</div>
+
+
+
+<!-- 4.4 白竹亭社区老旧小区改造项目 -->
+<h3 class="section-title">5.4 白竹亭社区城镇老旧小区改造配套基础设施项目</h3>
+
+<div style="margin:20px 0 25px 0; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+  <div class="img-block">
+    <img src="assets/b-house.png" alt="白竹亭楼本体现状" style="width:100%;">
+    <div class="img-caption">图：白竹亭社区楼本体现状（来源：调研底图0920）</div>
+  </div>
+  <div class="img-block">
+    <img src="assets/b-infra.png" alt="白竹亭基础设施现状" style="width:100%;">
+    <div class="img-caption">图：白竹亭社区基础设施现状（来源：调研底图0920）</div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>梧桐街道白竹亭社区</p>
+    <p><strong>改造范围：</strong>白竹亭社区范围内2000年底前建设的铁路向阳村一区、铁路向阳村二区、珊雅小区等老旧小区及周边配套基础设施</p>
+    <p><strong>涉及规模：</strong>79栋、872户、11.96万㎡</p>
+    <p><strong>总投资：</strong><span class="gold">3,197万元</span></p>
+    <p><strong>中央预算内：</strong>1,918万元（60%）</p>
+    <p><strong>地方财政：</strong>1,279万元（40%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>中央预算内支持部分（基础设施配套）：</strong></p>
+    <p>• 小区内道路改造、雨污管网改造</p>
+    <p>• 照明设施、强弱电入地、充电桩</p>
+    <p>• 消防设施、安防监控、环卫设施</p>
+    <p>• 健身器材、非机动车棚、停车位等</p>
+    <p>• 小区外与城市主干网衔接的道路改造</p>
+    <p><strong>零星配套完善：</strong>少量屋面防水修补、楼道公共区域修缮等，占比控制在10%以内</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>城镇老旧小区整治改造中央预算内资金</p>
+  <p><strong>支持比例：</strong>中部地区不超过总投资的70%，按60%申报</p>
+  <p><strong>政策依据：</strong>2005年底前建成城镇老旧小区改造，优先支持2000年底前建成小区</p>
+  <p><strong>申报要求：</strong>需纳入年度老旧小区改造计划台账</p>
+  <p><strong>有关说明：</strong>含铁路系统职工宿舍</p>
+  <p><strong>注意事项：</strong>本项目含铁路系统职工宿舍（向阳村一区、二区），需注意产权单位协调；需纳入年度老旧小区改造计划台账后方可申报</p>
+  <p><strong>项目包装建议：</strong>本项目投资规模较小（3197万），建议与又一村社区改造项目合并为一个项目包申报，避免单个项目投资过小影响申报优先级</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料（住建局提供）</h4>
+  <p>• 片区范围内老旧小区完整清单，含小区名称、楼栋数、户数、建筑面积、建成年代、产权单位等</p>
+  <p>• 已完成改造的老旧小区清单，用于剔除已改造内容，避免重复申报</p>
+  <p>• "四网合一"改造情况台账</p>
+</div>
+
+
+
+<!-- 4.5 活龙井完整社区建设项目 -->
+<h3 class="section-title">5.5 活龙井社区完整社区建设（社区嵌入式服务设施）项目</h3>
+
+<div class="img-block" style="max-width:70%; margin:25px auto;">
+  <img src="assets/full-community-map.png" alt="活龙井完整社区范围线">
+  <div class="img-caption">图：活龙井完整社区建设范围线（来源：调研底图0920）</div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>菱角山街道活龙井社区</p>
+    <p><strong>建设内容：</strong>以活龙井社区为单元开展完整社区建设，补齐公共服务设施短板</p>
+    <p><strong>总投资：</strong><span class="gold">2,200万元</span></p>
+    <p><strong>中央预算内：</strong>902万元（41%）</p>
+    <p><strong>专项债券：</strong>704万元（32%）</p>
+    <p><strong>地方财政：</strong>594万元（27%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>中央预算内支持部分：</strong></p>
+    <p>• <strong>养老服务设施：</strong>社区嵌入式养老服务中心，含日间照料、助餐助浴、康复护理、老年活动中心等，约770万元</p>
+    <p>• <strong>托育服务设施：</strong>普惠托育服务中心，含托位设置、婴幼儿照护服务、托育从业人员培训等，约550万元</p>
+    <p><strong>专项债券支持部分：</strong></p>
+    <p>• <strong>社区配套服务设施：</strong>便民商业、家政服务、健康服务、体育健身、文化休闲、儿童游憩、无障碍改造、适老化改造、公共活动场地提升等，约880万元</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>完整社区建设中央预算内资金（养老托育专项）+ 专项债券</p>
+  <p><strong>对应政策依据：</strong>完整社区建设（社区嵌入式服务设施建设）- 中央预算内资金 + 专项债券；养老：中央预算内不超过60%；托育：中央预算内不超过80%；配套：专项债券不超过80%</p>
+  <p><strong>支持比例：</strong>养老项目不超过60%，托育项目不超过80%，配套经营性设施不超过80%</p>
+  <p><strong>注意事项：</strong>养老床位≥30张护理型床位，床均30-40㎡；托育为普惠托位建设，设备购置不超总投资30%；配套部分有经营收益，可覆盖专项债本息</p>
+  <p><strong>有关说明：</strong></p>
+  <p>• 养老床位不少于30张护理型床位，床均面积控制在30-40㎡</p>
+  <p>• 托育为普惠托位建设，设备购置不超过总投资的30%</p>
+  <p>• 配套经营性部分有经营收益，可覆盖专项债券本息</p>
+  <p>• 项目落地需民政、卫健等主管部门及街道、社区共同配合，核实闲置资产情况和居民实际需求</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料</h4>
+  <p>• <strong>民政局：</strong>片区养老机构及日间照料中心数据、社区服务设施配置情况、养老服务专项规划</p>
+  <p>• <strong>卫健委：</strong>片区托育机构台账、医疗卫生设施现状、托育服务专项规划</p>
+  <p>• <strong>街道/社区：</strong>闲置资产摸排、居民实际需求调研</p>
+</div>
+
+<!-- 4.6 老旧街区改造提升项目 -->
+<h3 class="section-title">5.6 零陵中路-觅湘路-德源路老旧街区改造提升项目</h3>
+
+<div class="img-block" style="max-width:70%; margin:25px auto;">
+  <img src="assets/old-block-map.png" alt="老旧街区范围线">
+  <div class="img-caption">图：老旧街区改造范围线（来源：调研底图0920）</div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>活龙井社区、又一村社区</p>
+    <p><strong>建设内容：</strong>对零陵中路、觅湘路、德源路沿线老旧街区进行改造提升</p>
+    <p><strong>总投资：</strong><span class="gold">13,200万元</span></p>
+    <p><strong>中央预算内：</strong>4,950万元（37.5%）</p>
+    <p><strong>专项债券：</strong>2,640万元（20%）</p>
+    <p><strong>地方财政：</strong>5,610万元（42.5%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>中央预算内支持部分（公益性改造）：</strong></p>
+    <p>• <strong>基础设施配套：</strong>道路提质、绿化提升、照明改造、供电改造、消防完善、安防设施、给排水管网改造等</p>
+    <p>• <strong>公共服务设施：</strong>社区综合服务、文化体育、公共停车、自行车棚等</p>
+    <p><strong>专项债券支持部分（经营性提升）：</strong></p>
+    <p>• <strong>街区风貌提升：</strong>沿街建筑立面整治、广告牌匾规整、公共空间改造、文旅业态培育、夜景亮化等</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>老旧街区改造提升中央预算内资金 + 专项债券</p>
+  <p><strong>对应政策依据：</strong>推进老旧街区、老旧厂区、城中村等更新改造 - 中央预算内资金 + 专项债券；公益性内容：中央预算内不超过50%；经营性内容：专项债券不超过80%</p>
+  <p><strong>支持比例：</strong>公益性内容不超过50%，经营性内容不超过80%</p>
+  <p><strong>注意事项：</strong>永州为国家级历史文化名城，符合申报条件；需提供片区整体更新改造规划或方案；经营性部分有收益，可覆盖专项债本息</p>
+  <p><strong>有关说明：</strong></p>
+  <p>• 永州为国家级历史文化名城，符合申报条件</p>
+  <p>• 需提供片区整体更新改造规划或方案，并经政府或行业主管部门盖章认可</p>
+  <p>• 与老旧小区改造项目划清边界：围墙内归老旧小区改造，围墙外的道路、公共空间归本项目，避免重复申报</p>
+  <p>• 片区内有可利用的闲置资产，可结合街区改造一并盘活</p>
+  <p>• 经营性提升部分建议引入社会资本参与，减轻财政压力</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料（住建局提供）</h4>
+  <p>• 片区老旧生活街区、老旧商业街区清单，含位置、面积、建成年代等</p>
+</div>
+
+
+
+<!-- 4.7 公共停车系统建设项目 -->
+<h3 class="section-title">5.7 老火车站片区公共停车系统建设项目</h3>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>老火车站片区（三个社区范围）</p>
+    <p><strong>建设内容：</strong>完善片区停车设施体系</p>
+    <p><strong>总投资：</strong><span class="gold">7,590万元</span></p>
+    <p><strong>专项债券：</strong>6,072万元（80%）</p>
+    <p><strong>地方财政：</strong>1,518万元（20%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>专项债券支持部分：</strong></p>
+    <p>• 利用闲置低效用地新建集中式公共停车场</p>
+    <p>• 规范路侧停车泊位，优化停车布局</p>
+    <p>• 增补新能源汽车充电桩，完善充电设施</p>
+    <p>• 建设智慧停车管理系统，提升停车管理效率</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>城市停车设施专项债券</p>
+  <p><strong>对应政策依据：</strong>完善城市功能（城市停车设施建设）- 专项债券；支持比例：最高不超过总投资80%；项目收入需覆盖债券本息</p>
+  <p><strong>支持比例：</strong>最高不超过总投资的80%，项目收入需覆盖债券本息</p>
+  <p><strong>注意事项：</strong>需编制预期收益与融资平衡方案；公共停车位出租收入可作为偿债来源</p>
+  <p><strong>有关说明：</strong></p>
+  <p>• 需编制预期收益与融资平衡方案</p>
+  <p>• 公共停车位出租收入可作为偿债来源</p>
+  <p>• 需落实闲置资产产权情况，明确实施主体</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料（国资委 + 城投公司提供）</h4>
+  <p>• 片区内闲置国有资产清单，含位置、面积、产权单位、闲置原因、处置计划</p>
+  <p>• 市属企业在片区内的闲置资产清单</p>
+  <p>• 车位数量、收费标准、年运营收入测算</p>
+</div>
+
+<!-- 4.8 老火车站历史文化保护传承利用项目 -->
+<h3 class="section-title">5.8 老火车站片区历史文化保护传承利用项目</h3>
+
+<div style="margin:20px 0 25px 0;">
+  <div class="img-block">
+    <img src="assets/chengfa-idle.png" alt="城发闲置低效资产分布图" style="width:100%;">
+    <div class="img-caption">图：片区闲置低效资产分布图（来源：调研底图0920）</div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>项目基本情况</h4>
+    <p><strong>建设地点：</strong>活龙井社区、白竹亭社区</p>
+    <p><strong>建设内容：</strong>以老火车站及湘桂铁路沿线历史资源为重点，开展保护传承利用</p>
+    <p><strong>总投资：</strong><span class="gold">20,000万元</span></p>
+    <p><strong>中央预算内：</strong>2,500万元（12.5%）</p>
+    <p><strong>地方财政：</strong>5,500万元（27.5%）</p>
+    <p><strong>其他资金（国开行贷款）：</strong>12,000万元（60%）</p>
+  </div>
+  <div class="card">
+    <h4>主要建设内容</h4>
+    <p><strong>中央预算内支持部分（公益性修缮）：</strong></p>
+    <p>• <strong>历史建筑修缮：</strong>老火车站站房、铁路附属建筑等历史建筑保护性修缮</p>
+    <p>• <strong>基础设施配套：</strong>沿线道路、绿化、照明、消防等基础设施配套完善</p>
+    <p><strong>其他资金支持部分（活化利用）：</strong></p>
+    <p>• <strong>存量资产活化利用：</strong>发展文旅业态、文创空间、公共文化服务、铁路沿线公共空间整治、景观提升等</p>
+  </div>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>资金渠道与申报要求</h4>
+  <p><strong>资金渠道：</strong>历史文化街区保护提升中央预算内资金 + 其他资金</p>
+  <p><strong>对应政策依据：</strong>保护传承城市历史文化（历史文化街区保护提升）- 中央预算内资金 + 其他资金；公益性修缮：中央预算内不超过50%；活化利用：其他资金（政策性贷款）不超过60%</p>
+  <p><strong>支持比例：</strong>公益性修缮部分不超过50%，活化利用部分政策性贷款不超过60%</p>
+  <p><strong>注意事项：</strong>如按保护传承城市历史文化类申报，需属于历史街区及历史建筑；如不属于，可按完善城市功能类（全民健身/城市公共空间）方向包装；需明确历史建筑名录及保护级别；活化利用部分有经营收益，可覆盖贷款本息</p>
+  <p><strong>有关说明：</strong></p>
+  <p>• 选择历史文化保护传承方向申报，主要考虑该方向与老火车站的历史定位高度匹配，项目辨识度高、亮点突出</p>
+  <p>• 该方向的前提是老火车站站房、铁路附属建筑等需通过历史建筑认定，目前该认定工作尚未完成，存在一定不确定性</p>
+  <p>• 活化利用部分有经营收益，可覆盖贷款本息</p>
+</div>
+
+<div class="card" style="margin-top:25px;">
+  <h4>需补充资料（文旅局 + 住建局提供）</h4>
+  <p>• 老火车站站房、铁路附属建筑历史建筑认定情况，以及纳入历史建筑保护的可行性</p>
+  <p>• 片区内历史文化街区、历史地段、历史风貌区清单</p>
+  <p>• 历史建筑修缮相关政策要求、补贴标准、审批流程</p>
+</div>
+
+
+
+<!-- 4.9 需共同研究确定的问题 -->
+<hr class="divider">
+<div id="chapter6" class="chapter-num">第六章</div>
+<h2 class="chapter-title">待研究问题与下一步</h2>
+
+<!-- 5.1 四个待研究问题 -->
+<h3 class="section-title">6.1 四个待研究问题</h3>
+
+<p>
+  在项目梳理过程中，我们发现以下四个关键问题需要进一步研究和确认：
+</p>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>问题一：楼本体改造是否单独列项？</h4>
+  <p><strong>背景：</strong>目前老旧小区改造中央预算内资金中，楼本体改造随基础设施打包申报，一般不超过项目总投资的10%。但如果片区内楼本体改造量较大（如危房较多、外立面改造量大、屋面防水、管线入户等），随基础设施打包可能无法覆盖楼本体改造的全部投资。</p>
+  <p><strong>需研究的问题：</strong>片区内楼本体改造量具体有多大？是否需要单独列项，走住建系统中央财政补助渠道？楼本体改造的补助标准是多少？是按户数补助（如1.5万元/户）还是按面积补助？</p>
+  <p><strong>需对接部门：</strong>市住建局（住保股/城镇股）</p>
+  <p style="color:#888; font-size:14px;">→ 需与住建局核实楼本体改造规模、补助标准、申报流程</p>
+</div>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>问题二：既有建筑（危旧房/直管公房）改造是否纳入？</h4>
+  <p><strong>背景：</strong>片区内存在一定数量的直管公房和C/D级危房。危旧房改造有单独的中央预算内资金渠道，补助标准约4万元/户。如果单独列危旧房改造项目，可以争取额外的中央资金支持。</p>
+  <p><strong>需研究的问题：</strong>片区内有多少C/D级危房？有多少直管公房？是否需要单独列危旧房改造项目？直管公房的产权归谁？改造后如何处置？是否结合原拆原建实施？</p>
+  <p><strong>需对接部门：</strong>市住建局（住房保障股）、各街道社区</p>
+  <p style="color:#888; font-size:14px;">→ 需住建部门提供危房鉴定数据和直管公房清单（栋数、户数、面积、产权人）</p>
+</div>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>问题三：老火车站项目申报方向深化</h4>
+  <p><strong>背景：</strong>老火车站项目当前按历史文化保护传承利用方向包装（总投资2亿元，拟申请中央预算内2500万），但前提是需通过历史建筑认定，存在较大不确定性。如果该方向走不通，需要提前准备备选方案。</p>
+  <p><strong>需研究的问题：</strong>老火车站站房目前是否已纳入历史建筑名录？认定进展如何？需要多长时间？如果认定不通过，还有哪些备选申报方向？不同方向的支持比例和门槛要求分别是什么？如何做资金拼盘？详见下节专题分析。</p>
+  <p><strong>需对接部门：</strong>市文旅局、市住建局、市发改委</p>
+  <p style="color:#888; font-size:14px;">→ 需文旅局、住建局确认历史建筑认定进展和备选方向的可行性</p>
+</div>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>问题四：人口门槛影响</h4>
+  <p><strong>背景：</strong>多个中央预算内资金方向（如城市公共空间改造利用、老旧街区改造提升等）要求城区常住人口300万以上。永州城区常住人口约70万，远低于300万的门槛。但国家级历史文化名城可以例外申报老旧街区改造提升方向。</p>
+  <p><strong>需研究的问题：</strong>永州城区常住人口具体是多少？是否达到300万门槛？国家级历史文化名城的例外政策具体怎么操作？还有哪些其他的门槛可以例外？不同方向的门槛要求分别是什么？</p>
+  <p><strong>需对接部门：</strong>市统计局、市发改委</p>
+  <p style="color:#888; font-size:14px;">→ 需统计局提供城区常住人口数据，发改委确认例外政策的具体操作</p>
+</div>
+
+<!-- 5.2 老火车站备选方向专题 -->
+<h3 class="section-title">6.2 老火车站项目·备选方向专题</h3>
+
+<p>
+  <strong>背景：</strong>老火车站项目当前按历史文化保护方向包装（中央预算内2500万），但前提是需通过历史建筑认定。如该方向走不通，还有以下备选方向：
+</p>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>备选方向一：城市公共空间改造利用</h4>
+  <div class="two-col">
+    <div>
+      <p><strong>资金渠道：</strong>中央预算内投资（中部地区支持比例不超过70%）</p>
+      <p><strong>政策依据：</strong>国家发改委《城市更新专项实施方案》</p>
+      <p><strong>支持内容：</strong>老旧交通枢纽盘活利用、城市公共空间改造、口袋公园、广场、滨水空间改造</p>
+      <p><strong>适用范围：</strong>老火车站站房改造为城市公共空间、站前广场景观提升、周边绿地改造</p>
+    </div>
+    <div>
+      <p><strong>门槛要求：</strong></p>
+      <p>• 城区常住人口300万以上的大城市</p>
+      <p>• 项目纳入城市更新专项规划</p>
+      <p>• 公益性项目为主，不能以商业开发为主</p>
+      <p style="color:#c0392b;"><strong>可行性判断：</strong>永州城区常住人口约70万，远低于300万门槛，<strong>基本不满足申报条件</strong>。除非有特殊政策支持，否则不建议作为主选方向。</p>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>备选方向二：老旧街区改造提升</h4>
+  <div class="two-col">
+    <div>
+      <p><strong>资金渠道：</strong>中央预算内投资（中部地区支持比例不超过50%）</p>
+      <p><strong>政策依据：</strong>国家发改委《城镇老旧小区改造专项实施方案》</p>
+      <p><strong>支持内容：</strong>老旧街区内基础设施改造、公共服务设施完善、环境整治、功能转换、业态升级</p>
+      <p><strong>适用范围：</strong>老火车站周边老旧街区整体提升，包括站房周边街巷、基础设施、公共空间</p>
+    </div>
+    <div>
+      <p><strong>门槛要求：</strong></p>
+      <p>• 一般要求城区常住人口100万以上</p>
+      <p>• <strong style="color:#27ae60;">国家级历史文化名城可例外申报</strong>（永州是国家级历史文化名城）</p>
+      <p>• 改造内容符合老旧街区改造的政策导向</p>
+      <p style="color:#27ae60;"><strong>可行性判断：</strong>不依赖历史建筑认定，利用国家级历史文化名城例外通道，<strong>可以走通</strong>。建议作为主选备选方向，即使历史建筑认定不通过，也可以通过这个方向申报。</p>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:15px;">
+  <h4>备选方向三：全民健身场地设施（铁路沿线健身步道）</h4>
+  <div class="two-col">
+    <div>
+      <p><strong>资金渠道：</strong>中央预算内投资（中部地区支持比例不超过80%）</p>
+      <p><strong>政策依据：</strong>国家发改委《全民健身设施补短板工程实施方案》</p>
+      <p><strong>支持内容：</strong>健身步道、登山步道、骑行道、全民健身中心、体育公园</p>
+      <p><strong>适用范围：</strong>4.5公里铁路沿线线性空间改造为健身步道、休闲公园、景观带</p>
+    </div>
+    <div>
+      <p><strong>门槛要求：</strong></p>
+      <p>• <strong style="color:#27ae60;">无人口门槛限制</strong></p>
+      <p>• 步道长度原则上不低于5公里（我们4.5公里，接近要求，可争取）</p>
+      <p>• 用地落实，有明确的建设方案</p>
+      <p style="color:#27ae60;"><strong>可行性判断：</strong>无人口门槛，申报成功率最高，<strong>可作为中央预算内资金的保底来源</strong>。建议立即启动，优先申报。</p>
+    </div>
+  </div>
+</div>
+
+<h4 class="sub-title">配套渠道</h4>
+<div class="two-col">
+  <div class="card">
+    <h4>存量资产活化利用（国开行贷款）</h4>
+    <p>支持比例：约60%</p>
+    <p>适用范围：老火车站站房、仓库等闲置建筑的活化利用</p>
+    <p>与中央预算内资金可组合使用</p>
+  </div>
+  <div class="card">
+    <h4>专项债券</h4>
+    <p>支持比例：最高80%</p>
+    <p>适用范围：有收益的经营性设施（如停车场、商业空间）</p>
+    <p>需有稳定收益来源</p>
+  </div>
+</div>
+
+<h4 class="sub-title">空间拆分建议</h4>
+<p>
+  建议将老火车站项目拆分为四个板块，分别对接不同资金渠道：
+</p>
+<ul>
+  <li><strong>板块一：老站房及站前广场</strong>——按历史文化保护/老旧街区方向包装（三选一）</li>
+  <li><strong>板块二：铁路沿线步道</strong>——按全民健身场地设施方向包装（保底渠道）</li>
+  <li><strong>板块三：周边闲置建筑</strong>——按存量资产活化利用方向走国开行贷款</li>
+  <li><strong>板块四：历史建筑修缮</strong>——如认定通过，按历史文化保护方向包装</li>
+</ul>
+
+<!-- 5.3 下一步工作计划 -->
+<h3 class="section-title">6.3 下一步工作计划</h3>
+
+<p>
+  基于现有资料梳理和项目初步包装，下一步重点开展以下四方面工作：
+</p>
+
+<div class="two-col">
+  <div class="card">
+    <h4>一、社区深入调查</h4>
+    <p>• 现场踏勘：逐社区、逐小区现场踏勘</p>
+    <p>• 居民访谈：了解居民改造意愿和需求</p>
+    <p>• 逐栋核实：建筑现状、质量、权属等</p>
+    <p>• 拍照记录：现状照片、问题照片</p>
+  </div>
+  <div class="card">
+    <h4>二、落实具体数据</h4>
+    <p>• 建筑年代核实：304栋逐栋确认建成年代</p>
+    <p>• 危房排查：C/D级危房清单及面积</p>
+    <p>• 直管公房核实：范围、栋数、户数、面积、权属</p>
+    <p>• 建筑质量评估：外立面、结构、围护状况</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h4>三、部门资料收集</h4>
+    <p>• 住建局：老旧小区清单、危房数据、公房数据</p>
+    <p>• 民政局/卫健委：养老托育设施现状</p>
+    <p>• 文旅局：历史建筑认定情况、文保单位清单</p>
+    <p>• 城投/城发：闲置资产清单及权属</p>
+    <p>• 统计局：城区常住人口数据</p>
+    <p>• 体育局：健身步道建设要求</p>
+  </div>
+  <div class="card">
+    <h4>四、完成片区策划</h4>
+    <p>• 文本大纲编制：按片区策划大纲要求</p>
+    <p>• 现状调查报告：系统梳理现状问题</p>
+    <p>• 功能定位与项目策划：确定发展定位和项目体系</p>
+    <p>• 设计引导：提出空间设计和风貌引导要求</p>
+    <p>• 成果汇报：阶段性成果汇报和方案深化</p>
+  </div>
+</div>
+
+
+
+<!-- ===== 附录入口链接 ===== -->
+<hr class="divider">
+
+<!-- 回到顶部按钮 -->
+<div style="text-align:center; margin:40px 0;">
+  <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;" style="display:inline-block; padding:12px 30px; background:#c0392b; color:#fff; text-decoration:none; border-radius:4px; font-size:15px;">
+    ↑ 回到顶部
+  </a>
+</div>
+
+<div id="appendix" class="chapter-num">附录</div>
+<h2 class="chapter-title">附录资料</h2>
+
+<div class="two-col" style="margin:40px 0;">
+  <div class="card" style="text-align:center; padding:40px 20px; cursor:pointer; border:1px solid #c9a96e; transition:all 0.3s;">
+    <div style="font-size:48px; margin-bottom:20px;">📋</div>
+    <h3 style="color:#c0392b; margin-bottom:15px;">现场调查清单与工作流程</h3>
+    <p style="color:#aaa; font-size:14px; margin-bottom:25px; line-height:1.8;">
+      调研清单整体结构、任务分工及工作流程、填表主要注意事项<br>
+      （老旧小区调查组 + 策划组）
+    </p>
+    <a href="附录_现场调查清单与工作流程.html" style="display:inline-block; padding:12px 30px; background:#c0392b; color:#fff; text-decoration:none; border-radius:4px; font-size:15px;">
+      查看详细内容 →
+    </a>
+  </div>
+  
+  <div class="card" style="text-align:center; padding:40px 20px; cursor:pointer; border:1px solid #c9a96e; transition:all 0.3s;">
+    <div style="font-size:48px; margin-bottom:20px;">📊</div>
+    <h3 style="color:#c0392b; margin-bottom:15px;">片区内权属名录全表</h3>
+    <p style="color:#aaa; font-size:14px; margin-bottom:25px; line-height:1.8;">
+      片区内全部建筑权属名录详细数据<br>
+      （Excel格式，含产权单位、面积、栋数等）
+    </p>
+    <a href="../项目文件/片区内权属名录全.xls" style="display:inline-block; padding:12px 30px; background:#c0392b; color:#fff; text-decoration:none; border-radius:4px; font-size:15px;">
+      下载查看 →
+    </a>
+  </div>
+</div>
+
+<!-- 第三个卡片：调研清单附件包 -->
+<div class="card" style="text-align:center; padding:40px 20px; margin-top:20px; border:1px solid #c9a96e; transition:all 0.3s;">
+  <div style="font-size:48px; margin-bottom:20px;">📦</div>
+  <h3 style="color:#c0392b; margin-bottom:15px;">调研清单附件包（ZIP）</h3>
+  <p style="color:#aaa; font-size:14px; margin-bottom:25px; line-height:1.8;">
+    包含19个Word/Excel文件：5份部门函件 + 9份社区调查表 + 4份其他项目清单 + 1份工作说明<br>
+    （约376KB，不含图片）
+  </p>
+  <a href="调研清单附件包.zip" style="display:inline-block; padding:12px 30px; background:#c0392b; color:#fff; text-decoration:none; border-radius:4px; font-size:15px;">
+    ⬇️ 下载ZIP包 →
+  </a>
+</div>
+
+<!-- 封底 -->
+<hr class="divider">
+
+
+<div style="text-align:center; padding:60px 0;">
+  <div style="font-size:18px; color:#c9a96e; letter-spacing:6px; margin-bottom:20px;">感谢聆听</div>
+  <h2 style="font-size:36px; color:#c0392b; margin-bottom:30px;">永州老火车站片区（一期）城市更新策划</h2>
+  <p style="color:#888; font-size:15px; line-height:2;">
+    项目组 · 2026年9月<br>
+    临时汇报版 V1.0<br>
+    基于现有资料整理，后续将根据现场调查和部门资料进一步完善
+  </p>
+</div>
+
+</div>
+<script>
+// 滚动淡入动画
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .data-card, .img-block, table').forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

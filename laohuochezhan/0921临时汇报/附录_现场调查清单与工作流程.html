@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>永州老火车站片区（一期）城市更新策划方案</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #0d0d0d;
+    color: #d0d0d0;
+    line-height: 1.8;
+    font-size: 16px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+  /* 封面 */
+  .cover {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    background: url('assets/birdseye-2.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.2) 0%, rgba(13,13,13,0.5) 50%, rgba(13,13,13,0.85) 100%);
+  }
+  .cover > * {
+    position: relative;
+    z-index: 1;
+  }
+  .cover h1 {
+    text-shadow: 0 0 20px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.8);
+  }
+  .cover .sub, .cover .info, .cover .label {
+    text-shadow: 0 0 10px rgba(255,255,255,0.2), 0 1px 4px rgba(0,0,0,0.7);
+  }
+  .cover .label {
+    font-size: 18px;
+    color: #c9a96e;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+  }
+  .cover h1 {
+    font-size: 52px;
+    color: #c0392b;
+    font-weight: bold;
+    margin-bottom: 25px;
+    line-height: 1.3;
+  }
+  .cover .sub {
+    font-size: 22px;
+    color: #d0d0d0;
+    margin-bottom: 50px;
+  }
+  .cover .info {
+    font-size: 16px;
+    color: #888;
+    line-height: 2;
+  }
+  /* 章节大标题 */
+  .chapter-num {
+    font-size: 18px;
+    color: #c9a96e;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+  .chapter-title {
+    font-size: 42px;
+    color: #c0392b;
+    font-weight: bold;
+    margin-bottom: 50px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid #c9a96e;
+  }
+  /* 小节标题 */
+  .section-title {
+    font-size: 28px;
+    color: #c0392b;
+    font-weight: bold;
+    margin: 60px 0 25px;
+    padding-left: 18px;
+    border-left: 5px solid #c0392b;
+  }
+  /* 子标题 */
+  .sub-title {
+    font-size: 20px;
+    color: #c9a96e;
+    font-weight: bold;
+    margin: 35px 0 18px;
+  }
+  /* 正文段落 */
+  p {
+    font-size: 16px;
+    margin-bottom: 18px;
+    color: #d0d0d0;
+    text-align: justify;
+  }
+  /* 图片区 */
+  .img-block {
+    margin: 35px 0;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .img-block img {
+    width: 100%;
+    display: block;
+    filter: brightness(1.15) contrast(1.05);
+  }
+  /* 多图网格 */
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 30px 0;
+  }
+  .img-item {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .img-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(1.15) contrast(1.05);
+  }
+  .img-item .img-caption, .img-block .img-caption {
+    padding: 8px 10px;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+  }
+  .img-caption {
+    padding: 15px 25px;
+    font-size: 14px;
+    color: #888;
+    border-top: 1px solid #333;
+  }
+  /* 双栏布局 */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 30px 0;
+  }
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+    margin: 30px 0;
+  }
+  /* 卡片 */
+  .card {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 30px;
+  }
+  .card h4 {
+    color: #c9a96e;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  .card p {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  /* 数据卡片 */
+  .data-card {
+    background: #1a1a1a;
+    border-top: 4px solid #c0392b;
+    border-radius: 6px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  .data-card .num {
+    font-size: 40px;
+    color: #c0392b;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  .data-card .unit {
+    font-size: 18px;
+    color: #c9a96e;
+  }
+  .data-card .label {
+    font-size: 15px;
+    color: #888;
+    margin-top: 10px;
+  }
+  /* 数据栏 */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+  }
+  /* 高亮 */
+  .highlight { color: #c0392b; font-weight: bold; }
+  .gold { color: #c9a96e; font-weight: bold; }
+  /* 列表 */
+  ul, ol {
+    margin: 18px 0 18px 30px;
+    font-size: 16px;
+  }
+  li { margin-bottom: 12px; color: #d0d0d0; }
+  /* 表格 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    font-size: 15px;
+  }
+  th {
+    background: #2c2c2c;
+    color: #c9a96e;
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #444;
+    font-weight: bold;
+  }
+  td {
+    padding: 15px;
+    border: 1px solid #333;
+    color: #d0d0d0;
+  }
+  tr:nth-child(even) { background: #1a1a1a; }
+  /* 分隔线 */
+  .divider {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 60px 0;
+  }
+  /* 目录页 */
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+    padding: 18px 0;
+    border-bottom: 1px solid #2a2a2a;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+  }
+  .toc-item:hover {
+    background: #1a1a1a;
+    padding-left: 10px;
+  }
+  .toc-item:hover .toc-name {
+    color: #c0392b;
+  }
+  .toc-num {
+    font-size: 24px;
+    color: #c0392b;
+    font-weight: bold;
+    min-width: 50px;
+  }
+  .toc-name {
+    font-size: 20px;
+    color: #d0d0d0;
+  }
+  .toc-desc {
+    font-size: 14px;
+    color: #666;
+    margin-left: auto;
+  }
+  /* 卡片hover效果 */
+  .card:hover {
+    border-color: #c0392b;
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.15);
+  }
+  .data-card:hover {
+    border-top-color: #c9a96e;
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+  }
+  /* 滚动淡入动画 */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+<div class="container" style="width:1200px; margin:0 auto; padding:40px 20px;">
+
+  <!-- 返回按钮 -->
+  <div style="position:fixed; top:20px; left:20px; z-index:1000;">
+    <a href="永州老火车站片区一期_临时汇报.html" style="display:inline-block; padding:10px 20px; background:#c0392b; color:#fff; text-decoration:none; border-radius:4px; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">
+      ← 返回主报告
+    </a>
+  </div>
+
+<!-- ===== 附录：现场调查清单与工作流程 ===== -->
+<hr class="divider">
+<div id="appendix" class="chapter-num">附录</div>
+<h2 class="chapter-title">现场调查清单与工作流程</h2>
+
+<p style="margin:25px 0; color:#d0d0d0; font-size:15px; line-height:1.8;">
+为推进老火车站片区城市更新项目前期工作，科学编制片区体检策划方案，精准申报中央预算内资金、专项债券等政策资金，现启动一期片区现场调研工作。一期调研范围涉及梧桐街道白竹亭社区、菱角山街道活龙井社区、肖家园街道又一村社区三个社区，共304栋建筑、6858户、总建筑面积约24.33万㎡。
+</p>
+
+<p style="margin:25px 0; color:#d0d0d0; font-size:15px; line-height:1.8;">
+本次调研清单根据拟申报的7个城市更新项目内容确定，按工作分工整理为三个部分：<strong style="color:#c9a96e;">老旧小区项目清单、其他拟申报项目清单、部门清单</strong>。
+</p>
+
+<!-- 7.1 调研清单整体结构 -->
+<h3 class="section-title">附录一：调研清单整体结构</h3>
+
+<div class="three-col" style="margin:25px 0;">
+  <div class="card">
+    <h4 style="color:#c0392b;">第一部分<br>老旧小区项目清单</h4>
+    <p style="color:#888; font-size:13px; margin-bottom:15px;">（老旧小区调查组负责）</p>
+    <p style="margin-bottom:10px;">对应3个老旧小区改造项目（又一村、活龙井、白竹亭）</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">1. 老旧小区基础设施改造调查表</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:15px;">调查小区道路、给排水、供电、照明、消防、安防等基础设施现状及改造需求</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">2. 老旧小区楼本体改造调查表</strong></p>
+    <p style="color:#aaa; font-size:14px;">调查每栋建筑本体结构安全、楼道安全、围护安全、管线、适老化等现状及改造需求</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#c0392b;">第二部分<br>其他拟申报项目清单</h4>
+    <p style="color:#888; font-size:13px; margin-bottom:15px;">（策划组负责）</p>
+    <p style="margin-bottom:10px;">对应其余4个项目（完整社区、老旧街区、停车系统、历史文化保护）</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">1. 小区以外其他设施清单</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">调查社区范围内除老旧小区以外的公共建筑、闲置低效设施现状</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">2. 社区收资清单（统一模板）</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">调查社区基本情况、人口数据、公共服务设施配置、已改造老旧小区情况等</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">3. 老旧街区改造提升清单</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">调查零陵中路、觅湘路、德源路沿线基础设施现状及改造需求</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">4. 公共停车系统建设清单</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">调查片区停车设施现状、闲置用地、充电桩、智慧停车等情况</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">5. 历史文化保护传承利用清单</strong></p>
+    <p style="color:#aaa; font-size:14px;">调查历史文化资源、建筑修缮需求、活化利用条件等</p>
+  </div>
+  <div class="card">
+    <h4 style="color:#c0392b;">第三部分<br>部门清单</h4>
+    <p style="color:#888; font-size:13px; margin-bottom:15px;">（策划组负责）</p>
+    <p style="margin-bottom:10px;">对应各职能部门需提供的基础资料，共5个部门收资函</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">1. 住建局（核心资料）</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">老旧小区清单、危房鉴定、老旧街区、四网合一改造等</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">2. 文旅局（核心资料）</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">历史建筑名录、历史文化街区申报情况、文旅资源等</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">3. 卫健委</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">医疗卫生设施、托育服务设施台账等</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">4. 民政局</strong></p>
+    <p style="color:#aaa; font-size:14px; margin-bottom:12px;">养老服务设施、社区服务设施配置、社区边界等</p>
+    <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">5. 国资委</strong></p>
+    <p style="color:#aaa; font-size:14px;">闲置国有资产、市属企业闲置资产清单等</p>
+  </div>
+</div>
+
+<!-- 7.2 任务分工及工作流程 -->
+<h3 class="section-title">附录二：任务分工及工作流程</h3>
+
+<div class="two-col" style="margin:25px 0;">
+  <div class="card">
+    <h4>一、老旧小区调查组</h4>
+    <p style="margin-bottom:15px; color:#888;">负责第一部分全部老旧小区项目清单的调研工作</p>
+    <div style="background:#2a2a2a; padding:15px; border-radius:5px;">
+      <p style="margin-bottom:10px;"><strong style="color:#c9a96e;">步骤1：下发表格</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:15px;">老旧小区调查组将各社区老旧小区清单表格下发到各社区，并做好填写指导</p>
+      <p style="margin-bottom:10px;"><strong style="color:#c9a96e;">步骤2：配合填写</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:15px;">老旧小区调查组配合社区及网格员现场调查填写，逐栋核实建筑实际情况</p>
+      <p style="margin-bottom:10px;"><strong style="color:#c9a96e;">步骤3：现场复核</strong></p>
+      <p style="color:#aaa; font-size:14px;">现场复核每一栋建筑的实际情况，核对附录编号对应关系</p>
+    </div>
+  </div>
+  <div class="card">
+    <h4>二、策划组</h4>
+    <p style="margin-bottom:15px; color:#888;">负责第二部分其他拟申报项目清单和第三部分部门清单的资料收集工作</p>
+    <div style="background:#2a2a2a; padding:15px; border-radius:5px;">
+      <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">1. 小区以外其他设施清单：</strong>与社区一起配合填写，摸清公共建筑及闲置低效设施现状</p>
+      <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">2. 老旧街区改造提升清单：</strong>下发到又一村和活龙井两个社区，配合现场调查填写</p>
+      <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">3. 公共停车系统建设清单：</strong>根据社区基础数据，结合现场调研填写</p>
+      <p style="margin-bottom:8px;"><strong style="color:#c9a96e;">4. 历史文化保护传承利用清单：</strong>先去文旅局对接调资，无资料则现场调研收集</p>
+      <p style="margin-bottom:0;"><strong style="color:#c9a96e;">5. 部门收资：</strong>对接住建局、文旅局、卫健委、民政局、国资委等部门完成收资</p>
+    </div>
+  </div>
+</div>
+
+<!-- 7.3 填表主要注意事项 -->
+<h3 class="section-title">附录三：填表主要注意事项</h3>
+
+<div class="card" style="margin:25px 0;">
+  <div class="two-col">
+    <div>
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">1. 编号对应要求</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">附录清单已将片区按社区、分片、小区、建筑分别编号，附图与附表编号一一对应。调研清单中小区编号、小区名称、建筑编号需按照附录中的具体编号对应填写；如调研中需要调整编号的，需在备注栏详细说明调整原因及对应关系。</p>
+      
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">2. 老旧小区基础设施改造调查表</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">小区基础信息（如小区名称、户数、楼栋数、建成年代等）如与实际不符，可根据现场核实情况做相应修改，并在备注栏注明。</p>
+      
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">3. 老旧小区楼本体改造调查表</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">本表为通用统一模板表格，一个小区一份表。社区、小区、建筑编号等信息按附录编号手填；逐栋调查填写建筑本体相关内容，确保每栋建筑都覆盖。</p>
+      
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">4. 小区以外其他设施清单</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">按社区分别填写，主要填写现状住宅以外其他公共设施项目的现状情况，重点调查闲置低效设施及改造建设需求，包括社区用房、学校、医院、商业、厂房等。</p>
+    </div>
+    <div>
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">5. 社区收资清单</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">主要调查社区基本情况数据，包括人口、户数、公共服务设施配置等；社区公共设施情况对应完整社区建设项目需求；同时需调查已改造老旧小区情况，包括改造年份、改造内容等，用于剔除已改造部分。</p>
+      
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">6. 老旧街区改造提升清单</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">主要对零陵中路、觅湘路、德源路老旧街区范围内基础设施及改造需求进行调查，逐路段摸清现状问题，初步估算需要改造的设施内容及初步规模。</p>
+      
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">7. 公共停车系统建设清单</strong></p>
+      <p style="color:#aaa; font-size:14px; margin-bottom:20px;">主要摸清片区停车设施现状、可利用的闲置用地或空间，确定新增停车设施及规模，并了解停车及充电设施运营标准，用于收益测算和专项债申报。</p>
+      
+      <p style="margin-bottom:12px;"><strong style="color:#c9a96e;">8. 历史文化保护传承利用清单</strong></p>
+      <p style="color:#aaa; font-size:14px;">先对接文旅局收集历史建筑名录、保护级别等历史类资料；如部门无相关资料，由策划组现场调研现状收集。表中基础设施数据可根据现场情况估算一个规模量，用于初步测算投资。</p>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; margin:30px 0; padding:20px; background:#1a1a1a; border-radius:8px; border-left:4px solid #c0392b;">
+  <p style="color:#c9a96e; font-size:16px; margin:0;">以上调研工作说明，请各调研小组及被调研社区认真执行，确保数据收集全面、准确，为后续方案编制和资金申报提供坚实基础。</p>
+</div>
+
+<!-- 下载附件按钮 -->
+<div style="text-align:center; margin:40px 0; padding:30px; background:#1a1a1a; border-radius:8px; border:2px dashed #c9a96e;">
+  <h3 style="color:#c0392b; margin-bottom:15px;">📦 下载调研清单全部附件</h3>
+  <p style="color:#888; font-size:14px; margin-bottom:25px;">包含：5份部门函件 + 9份社区调查表 + 4份其他项目清单 + 1份工作说明（共19个Word/Excel文件）</p>
+  <a href="调研清单附件包.zip" style="display:inline-block; padding:15px 40px; background:#c0392b; color:#fff; text-decoration:none; border-radius:4px; font-size:16px; font-weight:bold; box-shadow:0 2px 8px rgba(192,57,43,0.3);">
+    ⬇️ 点击下载ZIP压缩包
+  </a>
+</div>
+
+
+
+
+</div>
+</body>
+</html>
