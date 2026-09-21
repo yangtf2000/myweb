@@ -309,7 +309,7 @@
   }
   /* 长页PDF打印样式（不分页，一整页） */
   @page {
-    size: 318mm 5000mm;
+    size: 318mm 1000mm;
     margin: 0;
   }
   @media print {
@@ -323,6 +323,9 @@
       page-break-inside: auto !important;
       page-break-before: auto !important;
       page-break-after: auto !important;
+      /* 取消孤行控制，不会为了标题位置空一大块 */
+      orphans: 1 !important;
+      widows: 1 !important;
     }
     html, body {
       height: auto !important;
@@ -2619,6 +2622,7 @@
 
 </body>
 </html>
+
 
 
 
