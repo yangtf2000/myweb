@@ -355,8 +355,11 @@
       padding: 8mm !important;
       margin-bottom: 5mm !important;
     }
-    img {
+    img, .img-block, .card, .three-col > div, .two-col > div {
       max-width: 100% !important;
+      /* 强制图片/卡片允许跨页，不推到下一页 */
+      break-inside: auto !important;
+      page-break-inside: auto !important;
     }
   }
 </style>
@@ -2622,6 +2625,7 @@
 
 </body>
 </html>
+
 
 
 
