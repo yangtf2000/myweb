@@ -307,6 +307,43 @@
     opacity: 1;
     transform: translateY(0);
   }
+  /* 长页PDF打印样式（不分页，一整页） */
+  @page {
+    size: 1200px 20000px;
+    margin: 0;
+  }
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      background: #0d0d0d !important;
+      color: #d0d0d0 !important;
+      width: 1200px !important;
+    }
+    .container {
+      max-width: 1200px !important;
+      padding: 40px !important;
+    }
+    .cover {
+      min-height: 400px !important;
+      page-break-after: avoid;
+    }
+    .divider {
+      page-break-before: avoid;
+      margin: 40px 0 !important;
+    }
+    .chapter-num, .chapter-title {
+      page-break-after: avoid;
+    }
+    .card, .toc-item, img {
+      page-break-inside: avoid;
+    }
+    img {
+      max-width: 100% !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -2569,4 +2606,6 @@
 </div>
 </body>
 </html>
+
+
 
