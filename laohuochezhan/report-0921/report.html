@@ -2611,13 +2611,11 @@ window.addEventListener('beforeprint', function() {
   const oldStyle = document.getElementById('dynamic-print-size');
   if (oldStyle) oldStyle.remove();
   
-  // 计算实际内容高度
-  const contentHeight = Math.max(
-    document.body.scrollHeight,
-    document.documentElement.scrollHeight
-  );
+  // 计算实际内容高度（取container的实际高度，更准确）
+  const container = document.querySelector('.container');
+  const contentHeight = container ? container.offsetHeight : document.body.scrollHeight;
   
-  // 创建动态@page样式
+  // 创建动态@page样式，高度精确贴合内容
   const style = document.createElement('style');
   style.id = 'dynamic-print-size';
   style.textContent = @page {
@@ -2629,6 +2627,7 @@ window.addEventListener('beforeprint', function() {
 </script>
 </body>
 </html>
+
 
 
 
