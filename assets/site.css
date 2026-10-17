@@ -90,6 +90,8 @@ a{color:var(--accent);text-decoration:none;}
 .sec-head{padding:30px 0 22px;border-bottom:1px solid rgba(255,255,255,.08);}
 .sec-head h1{font-family:var(--serif);font-size:30px;color:#fff;font-weight:500;margin:0 0 8px;}
 .sec-head p{color:var(--text-dim);font-size:13px;margin:0;}
+.sec-time{color:var(--text-dim);font-size:12px;margin:10px 0 0;letter-spacing:.4px;opacity:.9;}
+.sec-time b{color:var(--accent);font-weight:500;letter-spacing:.6px;}
 
 /* 文章列表：每行一个的富卡片 */
 .lane{padding:24px 2px;display:block;}

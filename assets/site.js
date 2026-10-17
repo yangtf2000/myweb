@@ -27,6 +27,13 @@
     'changxin':       S + '<path d="M10 34 L20 26 L28 30 L40 16"/><path d="M33 16 H40 V23"/><circle cx="20" cy="26" r="1.6" fill="currentColor"/><circle cx="28" cy="30" r="1.6" fill="currentColor"/>' + E,
     'yuanchai':       S + '<rect x="9" y="18" width="12" height="22" rx="1"/><path d="M9 18 L15 12 L21 18"/><rect x="27" y="20" width="12" height="20" rx="1" stroke-dasharray="2 3"/><path d="M27 20 L33 14 L39 20"/><path d="M24 8 A16 16 0 0 1 24 40" opacity=".5"/>' + E,
     'sanchang':       S + '<rect x="12" y="20" width="24" height="17" rx="2"/><path d="M12 28.5 H36"/><path d="M17 37 V42"/><path d="M31 37 V42"/><path d="M36 20 L40 15"/><path d="M8 43 C14 40 20 46 28 43 C34 41 38 44 42 42" opacity=".45"/>' + E,
+    'college':       S + '<path d="M6 20 L24 11 L42 20 L24 29 Z"/><path d="M14 24 V32 C14 36 34 36 34 32 V24"/><path d="M42 20 V31"/><circle cx="42" cy="33" r="1.6"/>' + E,
+    'logic':         S + '<path d="M24 8 V38"/><path d="M12 15 H36"/><path d="M12 15 L7 25 H17 Z"/><path d="M36 15 L31 25 H41 Z"/><path d="M16 38 H32"/><circle cx="24" cy="8" r="2"/>' + E,
+    'kaoyan':        S + '<path d="M9 12 L20 8 L28 12 L39 8 V36 L28 40 L20 36 L9 40 Z"/><path d="M20 8 V36"/><path d="M28 12 V40"/><path d="M24 18 A4 4 0 1 1 24 26 A4 4 0 1 1 24 18"/>' + E,
+    'cpp':           S + '<rect x="7" y="10" width="34" height="28" rx="3"/><path d="M17 19 L12 24 L17 29"/><path d="M25 19 L30 24 L25 29"/><path d="M32 19 V29"/><path d="M28 24 H36"/>' + E,
+    'ai-intro':      S + '<circle cx="11" cy="16" r="3"/><circle cx="11" cy="32" r="3"/><circle cx="24" cy="24" r="3.4"/><circle cx="37" cy="16" r="3"/><circle cx="37" cy="32" r="3"/><path d="M14 16.6 L21 22"/><path d="M14 31.4 L21 26"/><path d="M27 22 L34 16.6"/><path d="M27 26 L34 31.4"/>' + E,
+    'python':        S + '<rect x="9" y="11" width="30" height="26" rx="3"/><path d="M9 19 H39"/><circle cx="14" cy="15" r="1.2"/><circle cx="18" cy="15" r="1.2"/><path d="M16 25 L12 29 L16 33"/><path d="M26 25 L30 29 L26 33" opacity=".6"/><path d="M19 29 H23" opacity=".6"/>' + E,
+    'ai-four':       S + '<rect x="9" y="9" width="13" height="13" rx="2"/><rect x="26" y="9" width="13" height="13" rx="2"/><rect x="9" y="26" width="13" height="13" rx="2"/><rect x="26" y="26" width="13" height="13" rx="2"/><path d="M15.5 15.5 H15.6"/><path d="M32.5 15.5 H32.6"/><path d="M15.5 32.5 H15.6"/><path d="M32.5 32.5 H32.6"/>' + E,
     '_fallback':     S + '<circle cx="24" cy="24" r="6"/>' + E
   };
 
