@@ -184,7 +184,9 @@
       sec.articles.forEach(function (a, i) {
         var href = root + 'sections/' + section + '/' + a.slug + '/';
         var icon = ICONS[a.icon || a.slug] || ICONS._fallback;
-        var vis = a.chart ? barChart(a.chart, i) : motif();
+        var vis = a.cover
+          ? '<img class="art-cover" loading="lazy" alt="" src="' + root + 'sections/' + section + '/' + a.slug + '/' + a.cover + '">'
+          : (a.chart ? barChart(a.chart, i) : motif());
         var badge = a.issue ? '<span class="issue-badge">' + escHtml(a.issue) + '</span>' : '';
         var kw = a.tag ? '<span class="kw">' + escHtml(a.tag) + '</span>' : '';
         var detail = a.detail ? escHtml(a.detail) : escHtml(a.desc || '');
