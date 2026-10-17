@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>果蔬维C微型碘量滴定实验 · 竞赛项目</title>
+<style>
+/* ===== 深色版式基线 v1.0 ===== */
+:root{
+  --bg:#050a1a;--s1:#101d38;--s2:#16274a;--s3:#182c50;--s4:#0e1a35;
+  --line:rgba(150,188,245,.16);--line-2:rgba(150,188,245,.10);
+  --ink:#ffffff;--ink-2:#c3d1e3;--ink-3:#b0c0d4;
+  --sky:#38bdf8;--indigo:#818cf8;--emerald:#34d399;--amber:#fbbf24;--rose:#fb7185;--violet:#c084fc;
+  --key:#382c0c;--warn:#2b1416;--ok:#0e2820;--case:#182040;--blue:#0d2340;--drill:#2e240f;
+  --r-lg:18px;--r-md:14px;--r-sm:10px;
+  --shadow:inset 0 1px 0 rgba(160,195,250,.06),0 16px 34px -18px rgba(0,0,0,.75);
+  --shadow-sm:0 8px 20px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.8;font-size:18px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 620px at 8% 2%,rgba(56,189,248,.14),transparent 60%),
+    radial-gradient(760px 560px at 92% 16%,rgba(192,132,252,.11),transparent 62%),
+    radial-gradient(880px 640px at 40% 96%,rgba(52,211,153,.07),transparent 62%)}
+.wrap{position:relative;z-index:1;max-width:1050px;margin:0 auto;padding:0 30px 120px}
+
+h1{font-size:clamp(34px,4.6vw,52px);line-height:1.14;font-weight:800;letter-spacing:-1.6px;color:var(--ink)}
+h2{font-size:clamp(23px,3vw,29px);line-height:1.32;font-weight:760;letter-spacing:-.5px;color:var(--ink)}
+h3{font-size:21px;line-height:1.4;font-weight:740;color:var(--ink)}
+h4{font-size:18px;line-height:1.45;font-weight:700;color:var(--ink)}
+p{color:var(--ink)}
+a{color:#93c5fd;text-decoration:none;border-bottom:1px dotted rgba(147,197,253,.55)}
+a:hover{color:#bae6fd;border-bottom-style:solid}
+small,.caption{font-size:14px;color:var(--ink-3);line-height:1.7}
+
+.meta-row{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:8px}
+.meta-no{font-size:17px;letter-spacing:.1em;color:var(--sky);font-weight:800}
+.meta-t{font-size:16px;color:#aabdd2;letter-spacing:.04em}
+.meta-dot{width:4px;height:4px;border-radius:50%;background:#7b8ea6;display:inline-block}
+
+.card{background:var(--s1);border:1px solid var(--line);border-top:2px solid var(--accent,var(--sky));
+  border-radius:var(--r-lg);box-shadow:var(--shadow);padding:22px 24px 20px;margin:20px 0}
+.panel{background:var(--s2);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin:12px 0}
+.panel-tight{background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+
+.callout{position:relative;border-radius:var(--r-md);padding:16px 20px 15px 22px;margin:18px 0;background:var(--key);
+  border:1px solid rgba(251,191,36,.3);border-left:4px solid var(--accent,var(--amber))}
+.callout .ct{display:block;font-size:12.5px;letter-spacing:.18em;font-weight:800;margin-bottom:6px;color:var(--amber)}
+.callout.warn{background:var(--warn);border-color:rgba(239,68,68,.28);border-left-color:var(--rose)}
+.callout.warn .ct{color:var(--rose)}
+.callout.ok{background:var(--ok);border-color:rgba(52,211,153,.26);border-left-color:var(--emerald)}
+.callout.ok .ct{color:var(--emerald)}
+.callout.case{background:var(--case);border-color:rgba(129,140,248,.3);border-left-color:var(--indigo)}
+.callout.case .ct{color:var(--indigo)}
+.callout p{color:var(--ink);font-size:17.5px;line-height:1.85}
+.callout b{color:#fde68a}
+.callout.ok b{color:#8ef0c4}
+.callout.warn b{color:#fca5a5}
+
+.rule{background:var(--blue);border-left:3px solid var(--sky);border-radius:0 10px 10px 0;padding:10px 15px;margin:11px 0;
+  font-size:16.5px;color:var(--ink);line-height:1.75}
+.rule b{color:#7dd3fc;font-weight:600}
+.rule em{display:block;font-style:normal;color:var(--ink-2);font-size:14.5px;margin-top:5px}
+
+.drill{background:var(--drill);border:1px dashed rgba(251,191,36,.30);border-radius:9px;padding:9px 13px;margin:10px 0;
+  color:var(--ink);font-size:16.5px}
+.drill .dl{color:var(--amber);font-size:12.5px;letter-spacing:.12em;margin-right:7px;font-weight:700}
+
+table{width:100%;border-collapse:collapse;font-size:16px;margin:10px 0}
+th{background:var(--s3);color:var(--ink);font-weight:600;text-align:left;padding:9px 11px;
+  border-bottom:1px solid var(--line);font-size:15px}
+td{padding:9px 11px;border-bottom:1px solid var(--line-2);color:var(--ink);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tw{overflow-x:auto;border-radius:11px;border:1px solid var(--line);margin:12px 0}
+
+.fig{margin:14px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--s2)}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:13.5px;color:var(--ink-3);text-align:center;margin-top:6px}
+
+.btn{margin-top:9px;font-size:14px;color:var(--sky);background:rgba(56,189,248,.09);
+  border:1px solid rgba(56,189,248,.24);padding:4px 12px;border-radius:7px;cursor:pointer;font-family:inherit}
+.btn:hover{background:rgba(56,189,248,.18)}
+
+/* ===== 本页专用 ===== */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(5,10,26,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-2);margin:0 -30px}
+.topnav ul{flex-wrap:wrap;display:flex;gap:4px;list-style:none;overflow-x:auto;padding:9px 24px;scrollbar-width:none}
+.topnav ul::-webkit-scrollbar{display:none}
+.topnav a{font-size:15px;color:var(--ink-2);padding:5px 11px;border-radius:7px;border-bottom:none;white-space:nowrap;
+  letter-spacing:.02em;transition:.16s}
+.topnav a:hover{background:#16274a;color:var(--ink)}
+
+.hero{position:relative;overflow:hidden;margin:0 -30px 34px;padding:64px 30px 46px;
+  border-bottom:1px solid var(--line-2);background:linear-gradient(160deg,#081226 0%,#050a1a 62%)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(620px 420px at 88% 18%,rgba(52,211,153,.13),transparent 62%),
+             radial-gradient(520px 380px at 12% 84%,rgba(56,189,248,.10),transparent 66%)}
+.hero>*{position:relative;z-index:2}
+.hero .kick{font-size:13.5px;letter-spacing:.22em;color:var(--emerald);font-weight:700;display:block;margin-bottom:14px}
+.hero h1{max-width:20em;margin-bottom:18px}
+.hero .sub{font-size:18px;color:var(--ink-2);max-width:44em;line-height:1.9}
+.hero .hstats{display:flex;gap:26px;flex-wrap:wrap;margin-top:26px}
+.hero .hstat .n{font-size:28px;font-weight:800;color:var(--emerald);letter-spacing:-.5px;line-height:1.2}
+.hero .hstat .l{font-size:14px;color:var(--ink-3);letter-spacing:.06em}
+
+section{padding-top:46px}
+section>h2{margin-bottom:6px}
+.slead{font-size:17.5px;color:var(--ink-2);line-height:1.9;max-width:46em;margin:10px 0 4px}
+
+.step{display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line-2)}
+.step:last-child{border-bottom:none}
+.step .sn{flex:0 0 34px;height:34px;border-radius:9px;background:#0d2340;border:1px solid rgba(56,189,248,.24);
+  color:var(--sky);font-weight:800;font-size:16.5px;display:flex;align-items:center;justify-content:center}
+.step .sc{flex:1}
+.step .sc h4{margin-bottom:3px}
+.step .sc p{font-size:16.5px;color:var(--ink-2);line-height:1.8}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.grid2 .panel{margin:0}
+
+details.q{background:var(--s2);border:1px solid var(--line);border-radius:11px;padding:0;margin:9px 0;overflow:hidden}
+details.q summary{cursor:pointer;padding:12px 16px;font-size:16.5px;font-weight:600;color:var(--ink);list-style:none}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary::before{content:"Q";color:var(--sky);font-weight:800;margin-right:9px;font-size:14px}
+details.q[open] summary{border-bottom:1px solid var(--line-2)}
+details.q .a{padding:12px 16px 14px;font-size:16px;color:var(--ink-2);line-height:1.85}
+details.q .a b{color:#8ef0c4}
+
+.dlcard{background:var(--s1);border:1px solid var(--line);border-top:2px solid var(--accent,var(--sky));
+  border-radius:var(--r-md);padding:17px 19px;margin:12px 0;box-shadow:var(--shadow-sm)}
+.dlcard h4{margin-bottom:5px}
+.dlcard p{font-size:15.5px;color:var(--ink-2);line-height:1.75;margin-bottom:9px}
+.dlcard .fm{font-size:14.5px;color:var(--ink-3);margin-bottom:11px;letter-spacing:.03em}
+.dlcard a.get{display:inline-block;font-size:15px;color:var(--sky);background:rgba(56,189,248,.09);
+  border:1px solid rgba(56,189,248,.24);padding:5px 14px;border-radius:7px;border-bottom:none}
+.dlcard a.get:hover{background:rgba(56,189,248,.2)}
+.dlgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.zipbox{background:var(--s1);border:1px solid rgba(52,211,153,.3);border-top:3px solid var(--emerald);
+  border-radius:var(--r-lg);padding:24px 26px;margin:22px 0;box-shadow:var(--shadow)}
+.zipbox h3{margin-bottom:6px}
+.zipbox p{font-size:16.5px;color:var(--ink-2);line-height:1.85;margin-bottom:16px}
+.zipbtn{display:inline-block;font-size:17px;font-weight:700;color:#04121c;background:var(--emerald);
+  padding:11px 26px;border-radius:9px;border-bottom:none;letter-spacing:.02em}
+.zipbtn:hover{background:#5eead4;color:#04121c}
+.zipmeta{font-size:14.5px;color:var(--ink-3);margin-top:10px;letter-spacing:.04em}
+
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line-2);text-align:center}
+footer .f1{font-size:14.5px;color:var(--ink-3);line-height:1.9}
+footer .f2{font-size:14.5px;color:var(--ink-2);letter-spacing:.06em;margin-top:6px}
+
+@media(max-width:820px){
+  .wrap{padding:0 16px 90px}
+  .topnav{margin:0 -16px}
+  .hero{margin:0 -16px 24px;padding:42px 18px 34px}
+  .card{padding:18px 15px}
+  .callout{padding:14px 15px 13px 17px}
+  .grid2,.dlgrid{grid-template-columns:1fr}
+  .hero .hstats{gap:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav class="topnav">
+    <ul>
+      <li><a href="#overview">项目速览</a></li>
+      <li><a href="#pain">传统实验的问题</a></li>
+      <li><a href="#idea">改造思路</a></li>
+      <li><a href="#principle">原理与终点</a></li>
+      <li><a href="#samples">样品体系</a></li>
+      <li><a href="#sop">操作流程</a></li>
+      <li><a href="#data">数据与计算</a></li>
+      <li><a href="#qc">质控与安全</a></li>
+      <li><a href="#value">三重价值</a></li>
+      <li><a href="#defense">答辩要点</a></li>
+      <li><a href="#video">决赛视频</a></li>
+      <li><a href="#files">资料下载</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <span class="kick">第六届化学实验创新设计竞赛 · 已有实验创新设计赛道</span>
+    <h1>果蔬维C微型碘量滴定实验创新改造</h1>
+    <p class="sub">把大一无机及分析化学课上用锥形瓶与滴定管、历时两节课的经典实验，移至一块 96 孔滴板上完成。样品更换为日常可购的品类：新鲜猕猴桃、常温放置三天已发皱的猕猴桃、超市冷柜中的瓶装果汁、一板泡腾片。</p>
+    <div class="hstats">
+      <div class="hstat"><div class="n">1/10</div><div class="l">试剂用量</div></div>
+      <div class="hstat"><div class="n">90%</div><div class="l">废液减排</div></div>
+      <div class="hstat"><div class="n">≤5.5h</div><div class="l">全流程时长</div></div>
+      <div class="hstat"><div class="n">4+1</div><div class="l">样品组与空白</div></div>
+    </div>
+  </header>
+
+  <!-- ============ 速览 ============ -->
+  <section id="overview">
+    <h2>项目速览</h2>
+    <p class="slead">除实验本身，这个项目还需要在八分钟内讲清三件事：改动的原因、改动的方式、改动前后的差别。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:26%">项目</th><th>内容</th></tr>
+        <tr><td>项目名称</td><td>面向本科基础化学教学的果蔬维C微型碘量滴定实验创新改造</td></tr>
+        <tr><td>参赛赛道</td><td>已有实验创新设计赛道</td></tr>
+        <tr><td>所属课程</td><td>《大学基础化学》《普通化学实验》分析化学基础模块</td></tr>
+        <tr><td>核心创新</td><td>微型化减量 · 生活化样品 · 平行空白质控 · 验证转探究 · 微量物证检验思维</td></tr>
+        <tr><td>样品体系</td><td>A 新鲜猕猴桃 / B 常温放置三天 / C 市售纯果汁 / D 维C泡腾片 / BLK 蒸馏水空白</td></tr>
+        <tr><td>关键终点</td><td>孔内出现稳定浅蓝色，30 秒不褪色</td></tr>
+        <tr><td>团队分工</td><td>主讲（1–8 页）/ 成员A（9–10 页 + 实操）/ 成员B（11–12 页 + 问答）</td></tr>
+      </table>
+    </div>
+
+    <div class="callout ok">
+      <span class="ct">先说清楚定位</span>
+      <p>这是<b>相对定量</b>，不是绝对定量。它测的是几个样品之间谁高谁低、差多少，用在教学探究和科普对比上完全够用；要说"这杯果汁含维C多少毫克"，这套方法给不出可信答案。这一点主动讲，比被评委问出来强。</p>
+    </div>
+  </section>
+
+  <!-- ============ 痛点 ============ -->
+  <section id="pain">
+    <h2>传统实验的四个问题</h2>
+    <p class="slead">教材上的原版实验并无错误，其设计目的正是训练滴定手法。问题在于它只训练手法。</p>
+
+    <div class="card" style="--accent:var(--rose)">
+      <div class="panel">
+        <h4>一、耗材多，废液重</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.8">250mL 锥形瓶配 50mL 酸式滴定管，一个班几十组做下来，含碘废液是成桶的。碘有腐蚀性也会挥发，处理起来不轻松。</p>
+      </div>
+      <div class="panel">
+        <h4>二、样品单一，跟生活没关系</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.8">只测一种新鲜果蔬提取液。学生做完只知道"这个数是多少"，不知道放三天的水果还剩多少、果汁里的还剩多少。</p>
+      </div>
+      <div class="panel">
+        <h4>三、误差被人为放大</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.8">大一学生第一次握滴定管，半滴控制不住，终点颜色一闪而过。同一组样品几个人做出几个数，数据离散度大到没法讨论规律。</p>
+      </div>
+      <div class="panel">
+        <h4>四、教学形式固化</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.8">步骤写死了，照着做，做完填表。没有要判断的地方，也就没有要动脑的地方。验证性实验的通病。</p>
+      </div>
+    </div>
+
+    <div class="rule">
+      四条合并起来指向同一结果：<b>实验完成之后，学生掌握的只是滴定操作。</b>
+      <em>氧化还原、定量分析、误差分析、对照实验四个核心知识点，在课程设计上均有覆盖，实际教学中却未能真正建立。</em>
+    </div>
+  </section>
+
+  <!-- ============ 思路 ============ -->
+  <section id="idea">
+    <h2>改造思路</h2>
+    <p class="slead">五个方向并非凑数，而是从上述四条缺陷逐条倒推得出。</p>
+
+    <div class="grid2">
+      <div class="panel">
+        <div class="meta-row"><span class="meta-no">01</span><span class="meta-t">方法</span></div>
+        <h4>器材微型化</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">96 孔微量滴板 + 1mL 可调微量移液管，替代锥形瓶加常量滴定管。用量降到原来的十分之一。</p>
+      </div>
+      <div class="panel">
+        <div class="meta-row"><span class="meta-no">02</span><span class="meta-t">内容</span></div>
+        <h4>样品生活化</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">新鲜、存放、加工、药剂四种来源构成梯度，每组只差一个变量。</p>
+      </div>
+      <div class="panel">
+        <div class="meta-row"><span class="meta-no">03</span><span class="meta-t">精度</span></div>
+        <h4>平行加空白</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">每样两孔平行、全批一个空白孔，扣除本底后再算保留率，把主观判读的偏差压下来。</p>
+      </div>
+      <div class="panel">
+        <div class="meta-row"><span class="meta-no">04</span><span class="meta-t">教学</span></div>
+        <h4>验证转探究</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">从"测含量"变成"比差异、找原因、给建议"。学生自己画柱状图，自己解释为什么。</p>
+      </div>
+    </div>
+
+    <div class="panel" style="border-left:3px solid var(--violet)">
+      <div class="meta-row"><span class="meta-no" style="color:var(--violet)">05</span><span class="meta-t">特色</span></div>
+      <h4>微量物证检验思维</h4>
+      <p style="font-size:16px;color:var(--ink-2);line-height:1.8">物证检验经常拿到的样品只有一点点，必须在微量和痕量条件下做多组比对、做空白对照。这套实验的操作方式与之同构，可作为微量物证分析的基础实训模型。这一条在本类别中最具专业特色。</p>
+    </div>
+
+    <div class="callout case">
+      <span class="ct">最可能被追问的一处</span>
+      <p>"这不过是换了一块板子？"<b>改动不止于器材，而是四级连动。</b>器材更换之后，用量方能下降，废液处理才有意义；用量下降之后，样品才能一次做四组；四组样品具备之后，实验目标才能由验证转为探究；而微量多组比对，恰好对应物证检验的方法。器材是切入点，不是全部。</p>
+    </div>
+  </section>
+
+  <!-- ============ 原理 ============ -->
+  <section id="principle">
+    <h2>原理与终点判定</h2>
+    <p class="slead">抗坏血酸具有强还原性，在中性至弱酸性条件下可被碘定量氧化。淀粉是碘的专属指示剂，此处采用其经典显色反应。</p>
+
+    <div class="panel-tight" style="text-align:center;font-size:18px;letter-spacing:.02em;padding:18px">
+      C₆H₈O₆ + I₂ → C₆H₆O₆ + 2HI
+    </div>
+
+    <p style="font-size:17px;color:var(--ink-2);line-height:1.9;margin-top:14px">
+      维C 还没被消耗完的时候，滴进去的碘立刻被还原成碘离子，体系是无色的。等维C 全部反应掉，再多加一点点碘，它就无处可去，跟淀粉结合成蓝色络合物——这一滴就是终点。所以整个实验量的不是"蓝了多少"，是"变蓝之前到底吃进去多少碘"。
+    </p>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 190" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0,0 L9,4.5 L0,9 z" fill="#38bdf8"/>
+          </marker>
+        </defs>
+        <!-- 三格 -->
+        <g>
+          <rect x="18" y="44" width="180" height="96" rx="12" fill="#0e1a35" stroke="rgba(150,188,245,.22)"/>
+          <text x="108" y="34" text-anchor="middle" fill="#b0c0d4" font-size="12.5">加样</text>
+          <ellipse cx="108" cy="90" rx="46" ry="26" fill="#1d3557" stroke="#38bdf8" stroke-width="1.2"/>
+          <text x="108" y="95" text-anchor="middle" fill="#c3d1e3" font-size="12">无色透明</text>
+          <text x="108" y="126" text-anchor="middle" fill="#b0c0d4" font-size="11">500μL 样品 + 1 滴淀粉</text>
+        </g>
+
+        <path d="M206 92 L246 92" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#ar)"/>
+
+        <g>
+          <rect x="252" y="44" width="180" height="96" rx="12" fill="#0e1a35" stroke="rgba(150,188,245,.22)"/>
+          <text x="342" y="34" text-anchor="middle" fill="#b0c0d4" font-size="12.5">滴定中</text>
+          <ellipse cx="342" cy="90" rx="46" ry="26" fill="#2b2a17" stroke="#fbbf24" stroke-width="1.2"/>
+          <text x="342" y="95" text-anchor="middle" fill="#fde68a" font-size="12">淡黄，一闪即褪</text>
+          <text x="342" y="126" text-anchor="middle" fill="#b0c0d4" font-size="11">每滴 5μL，逐滴加</text>
+        </g>
+
+        <path d="M440 92 L480 92" stroke="#38bdf8" stroke-width="1.4" marker-end="url(#ar)"/>
+
+        <g>
+          <rect x="486" y="44" width="176" height="96" rx="12" fill="#0e1a35" stroke="rgba(52,211,153,.34)"/>
+          <text x="574" y="34" text-anchor="middle" fill="#b0c0d4" font-size="12.5">终点</text>
+          <ellipse cx="574" cy="90" rx="46" ry="26" fill="#123a5e" stroke="#34d399" stroke-width="1.4"/>
+          <text x="574" y="95" text-anchor="middle" fill="#8ef0c4" font-size="12">稳定浅蓝</text>
+          <text x="574" y="126" text-anchor="middle" fill="#b0c0d4" font-size="11">30 秒不褪色，读数</text>
+        </g>
+      </svg>
+      <div class="cap">滴定由无色转至浅蓝，中间黄色为碘加入后尚未反应完全的瞬间，不是终点</div>
+    </div>
+
+    <div class="callout warn">
+      <span class="ct">最容易判错的地方</span>
+      <p>碘液加入后的一两秒内，孔内会先泛黄甚至泛蓝，摇匀后又褪去。此时不应停止操作，也不应记录，须待颜色<b>稳定保持 30 秒</b>方可判读。初学者多在此处多记一滴。</p>
+    </div>
+  </section>
+
+  <!-- ============ 样品 ============ -->
+  <section id="samples">
+    <h2>样品体系</h2>
+    <p class="slead">四组样品对应四类常见的家庭情形：现买现吃、存放后食用、以瓶装果汁替代、直接服用补充剂。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:12%">编号</th><th style="width:34%">样品</th><th>组别定位与变量含义</th></tr>
+        <tr><td><b style="color:#34d399">A</b></td><td>新鲜猕猴桃（当日采购）</td><td>新鲜对照组，全部数据的 100% 基准</td></tr>
+        <tr><td><b style="color:#38bdf8">B</b></td><td>常温敞口放置 3 天的同款猕猴桃</td><td>储存氧化组，考察常温存放的损耗</td></tr>
+        <tr><td><b style="color:#b0c0d4">C</b></td><td>市售常温纯猕猴桃果汁</td><td>工业加工组，考察热加工与货架期的影响</td></tr>
+        <tr><td><b style="color:#818cf8">D</b></td><td>医用维生素C泡腾片溶液（0.2g/20mL）</td><td>药剂标准参比组，同时兼作阳性对照</td></tr>
+        <tr><td><b style="color:#7b8ea6">BLK</b></td><td>蒸馏水</td><td>空白对照，扣除溶剂与指示剂本底</td></tr>
+      </table>
+    </div>
+
+    <div class="rule">
+      四组样品共用一套前处理参数，这样组间差异才只能归因于<b>样品本身</b>。
+      <em>固体统一称 5.0g、加 20mL 常温蒸馏水、浸泡 10 分钟、双层纱布过滤、现配现用且 5 分钟内滴完。泡腾片单独按 0.2g 溶于 20mL 水。</em>
+    </div>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 176" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="24" fill="#c3d1e3" font-size="12.5">96 孔滴板分组示意（每组两平行孔 + 全批一个空白孔）</text>
+        <g>
+          <!-- 8x6 网格示意 -->
+          <!-- 行标签 -->
+          <text x="14" y="66" fill="#b0c0d4" font-size="11">A</text>
+          <text x="14" y="98" fill="#b0c0d4" font-size="11">B</text>
+          <text x="14" y="130" fill="#b0c0d4" font-size="11">C</text>
+          <text x="14" y="162" fill="#b0c0d4" font-size="11">D</text>
+          <!-- 孔 -->
+          <!-- A 行 -->
+          <circle cx="46" cy="62" r="11" fill="#0f3d2c" stroke="#34d399" stroke-width="1.6"/>
+          <circle cx="80" cy="62" r="11" fill="#0f3d2c" stroke="#34d399" stroke-width="1.6"/>
+          <text x="46" y="66" text-anchor="middle" fill="#8ef0c4" font-size="9.5">A1</text>
+          <text x="80" y="66" text-anchor="middle" fill="#8ef0c4" font-size="9.5">A2</text>
+          <circle cx="120" cy="62" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="154" cy="62" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="188" cy="62" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="222" cy="62" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="256" cy="62" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="290" cy="62" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <!-- B 行 -->
+          <circle cx="46" cy="94" r="11" fill="#12304d" stroke="#38bdf8" stroke-width="1.6"/>
+          <circle cx="80" cy="94" r="11" fill="#12304d" stroke="#38bdf8" stroke-width="1.6"/>
+          <text x="46" y="98" text-anchor="middle" fill="#7dd3fc" font-size="9.5">B1</text>
+          <text x="80" y="98" text-anchor="middle" fill="#7dd3fc" font-size="9.5">B2</text>
+          <circle cx="120" cy="94" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="154" cy="94" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="188" cy="94" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="222" cy="94" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="256" cy="94" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="290" cy="94" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <!-- C 行 -->
+          <circle cx="46" cy="126" r="11" fill="#22304a" stroke="#94a3b8" stroke-width="1.6"/>
+          <circle cx="80" cy="126" r="11" fill="#22304a" stroke="#94a3b8" stroke-width="1.6"/>
+          <text x="46" y="130" text-anchor="middle" fill="#cbd5e1" font-size="9.5">C1</text>
+          <text x="80" y="130" text-anchor="middle" fill="#cbd5e1" font-size="9.5">C2</text>
+          <circle cx="120" cy="126" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="154" cy="126" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="188" cy="126" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="222" cy="126" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="256" cy="126" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="290" cy="126" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <!-- D 行 -->
+          <circle cx="46" cy="158" r="11" fill="#1e1f45" stroke="#818cf8" stroke-width="1.6"/>
+          <circle cx="80" cy="158" r="11" fill="#1e1f45" stroke="#818cf8" stroke-width="1.6"/>
+          <text x="46" y="162" text-anchor="middle" fill="#a5b4fc" font-size="9.5">D1</text>
+          <text x="80" y="162" text-anchor="middle" fill="#a5b4fc" font-size="9.5">D2</text>
+          <circle cx="120" cy="158" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="154" cy="158" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="188" cy="158" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="222" cy="158" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="256" cy="158" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+          <circle cx="290" cy="158" r="11" fill="#0e1a35" stroke="rgba(150,188,245,.2)"/>
+        </g>
+        <!-- 空白孔标记 -->
+        <circle cx="356" cy="62" r="11" fill="#101d38" stroke="#7b8ea6" stroke-width="1.6" stroke-dasharray="3 2"/>
+        <text x="356" y="66" text-anchor="middle" fill="#b0c0d4" font-size="8.5">BLK</text>
+        <text x="382" y="66" fill="#b0c0d4" font-size="11">空白孔，只加蒸馏水与淀粉</text>
+
+        <text x="356" y="98" fill="#b0c0d4" font-size="11">其余孔位留空，避免孔间串扰</text>
+        <text x="356" y="126" fill="#b0c0d4" font-size="11">每组两孔平行，偏差 &gt;10% 重做</text>
+      </svg>
+      <div class="cap">滴板排布：左边两列是四个样品的平行孔，右侧单独一个空白孔</div>
+    </div>
+  </section>
+
+  <!-- ============ SOP ============ -->
+  <section id="sop">
+    <h2>操作流程</h2>
+    <p class="slead">七步，按顺序做。每一步的参数量都是定死的，改一个数就要重做对照组。</p>
+
+    <div class="card" style="--accent:var(--emerald);padding:8px 24px 14px">
+      <div class="step">
+        <div class="sn">1</div>
+        <div class="sc">
+          <h4>样品前处理</h4>
+          <p>称 5.0g 固体样品切碎入研钵，研磨至糊状；转入 50mL 烧杯加 20mL 常温蒸馏水，浸泡 10 分钟、中途搅拌两次；双层纱布过滤取澄清上清。泡腾片取 0.2g 溶于 20mL 水，完全溶解。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn">2</div>
+        <div class="sc">
+          <h4>滴板分区</h4>
+          <p>每样占两个平行孔，另设一个空白孔加蒸馏水。孔位须预先标注，不得凭记忆。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn">3</div>
+        <div class="sc">
+          <h4>加样</h4>
+          <p>每孔用微量移液管加 500μL 上清液，加 1 滴 0.5% 淀粉指示剂，轻摇滴板混匀。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn">4</div>
+        <div class="sc">
+          <h4>微量滴定</h4>
+          <p>以 5μL 为最小梯度逐滴加标准碘液，每加一次轻摇混匀。不得一次加入过量，微量体系过量后无法回退。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn">5</div>
+        <div class="sc">
+          <h4>终点判读</h4>
+          <p>孔内出现稳定浅蓝色、保持 30 秒不褪色即终点，记录累计耗碘体积（μL）。同一块板上几个人交叉复核。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn">6</div>
+        <div class="sc">
+          <h4>平行校验</h4>
+          <p>相对偏差 = |孔1 − 孔2| ÷ 平均值 × 100%。超过 10% 说明研磨不匀、上清浑浊或移液失误，重新做。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="sn">7</div>
+        <div class="sc">
+          <h4>废液处理</h4>
+          <p>所有孔内液体与洗涤液收集入废液烧杯，滴加 0.02mol/L 硫代硫酸钠，边加边摇，至棕黄色完全褪去、体系无色后才能排放。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="ct">这一步的化学</span>
+      <p>I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻。游离碘被还原成碘离子，颜色褪干净，腐蚀性和挥发性问题一起解决。被问及废液处理时，给出该反应式即可，不应仅答"倒掉"。</p>
+    </div>
+  </section>
+
+  <!-- ============ 数据 ============ -->
+  <section id="data">
+    <h2>数据与计算</h2>
+    <p class="slead">最终要看的是一个百分比：待测样品相对于新鲜样品的维C 保留率。绝对值不重要，相对高低才是要讲的结论。</p>
+
+    <div class="panel-tight" style="padding:18px 20px">
+      <div style="font-size:14px;letter-spacing:.14em;color:var(--sky);font-weight:800;margin-bottom:8px">计算公式</div>
+      <div style="font-size:16.5px;line-height:2;color:var(--ink)">
+        相对保留率 = <span style="color:#8ef0c4">（待测平均耗碘量 − 空白耗碘量）</span> ÷ <span style="color:#7dd3fc">（新鲜样品平均耗碘量 − 空白耗碘量）</span> × 100%
+      </div>
+      <p style="font-size:15px;color:var(--ink-3);margin-top:8px;line-height:1.75">两个括号里都先扣掉空白，是因为空白孔里也有溶剂和指示剂本底消耗，不扣掉会让低值样品的结果偏高。</p>
+    </div>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- 坐标 -->
+        <line x1="72" y1="40" x2="72" y2="236" stroke="rgba(150,188,245,.28)" stroke-width="1"/>
+        <line x1="72" y1="236" x2="640" y2="236" stroke="rgba(150,188,245,.28)" stroke-width="1"/>
+        <!-- 网格与刻度 -->
+        <g font-size="10.5" fill="#b0c0d4">
+          <line x1="72" y1="187" x2="640" y2="187" stroke="rgba(150,188,245,.10)"/>
+          <line x1="72" y1="138" x2="640" y2="138" stroke="rgba(150,188,245,.10)"/>
+          <line x1="72" y1="89" x2="640" y2="89" stroke="rgba(150,188,245,.10)"/>
+          <line x1="72" y1="40" x2="640" y2="40" stroke="rgba(150,188,245,.10)"/>
+          <text x="64" y="240" text-anchor="end">0</text>
+          <text x="64" y="191" text-anchor="end">25</text>
+          <text x="64" y="142" text-anchor="end">50</text>
+          <text x="64" y="93" text-anchor="end">75</text>
+          <text x="64" y="44" text-anchor="end">100</text>
+          <text x="640" y="26" text-anchor="end" fill="#c3d1e3" font-size="11.5">相对保留率 %（示意值）</text>
+        </g>
+
+        <!-- A 100% -> y=40 -->
+        <rect x="118" y="40" width="72" height="196" rx="5" fill="#34d399"/>
+        <text x="154" y="32" text-anchor="middle" fill="#8ef0c4" font-size="13" font-weight="700">100</text>
+        <text x="154" y="256" text-anchor="middle" fill="#ffffff" font-size="12.5">A 新鲜</text>
+        <text x="154" y="272" text-anchor="middle" fill="#b0c0d4" font-size="10.5">基准</text>
+
+        <!-- B 65% -> h=125, y=111 -->
+        <rect x="248" y="109" width="72" height="127" rx="5" fill="#38bdf8"/>
+        <text x="284" y="100" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="700">~65</text>
+        <text x="284" y="256" text-anchor="middle" fill="#ffffff" font-size="12.5">B 存放3天</text>
+        <text x="284" y="272" text-anchor="middle" fill="#b0c0d4" font-size="10.5">常温敞口</text>
+
+        <!-- C 18% -> h=34.5, y=201.5 -->
+        <rect x="378" y="201" width="72" height="35" rx="5" fill="#64748b"/>
+        <text x="414" y="192" text-anchor="middle" fill="#cbd5e1" font-size="13" font-weight="700">~18</text>
+        <text x="414" y="256" text-anchor="middle" fill="#ffffff" font-size="12.5">C 市售果汁</text>
+        <text x="414" y="272" text-anchor="middle" fill="#b0c0d4" font-size="10.5">工业加工</text>
+
+        <!-- D 95% -> h=182, y=54 -->
+        <rect x="508" y="50" width="72" height="186" rx="5" fill="#818cf8"/>
+        <text x="544" y="41" text-anchor="middle" fill="#a5b4fc" font-size="13" font-weight="700">~95</text>
+        <text x="544" y="256" text-anchor="middle" fill="#ffffff" font-size="12.5">D 泡腾片</text>
+        <text x="544" y="272" text-anchor="middle" fill="#b0c0d4" font-size="10.5">药剂参比</text>
+      </svg>
+      <div class="cap">示意值，用于说明预期规律，不代表实测数据。预实验完成后须用真实结果替换</div>
+    </div>
+
+    <div class="callout warn">
+      <span class="ct">图中数值的性质</span>
+      <p>图上四个数值为<b>预期规律</b>，不是实测结果。初赛 PPT 第 8 页所用亦为同一份示意数据。预实验完成之后，本图与 PPT 须同步替换为实测值；评委只需问一句数据来源，使用示意图即无法作答。</p>
+    </div>
+
+    <div class="grid2">
+      <div class="panel">
+        <h4>预期规律</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">新鲜最高；常温放置三天明显下降；工业加工果汁最低；泡腾片稳定。四条均与维C 的氧化敏感性相符。</p>
+      </div>
+      <div class="panel">
+        <h4>能讲出的结论</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">常温敞口存放加速氧化；果汁的高温灭菌与货架期让维C 大量损失，"喝果汁等于吃水果"难以成立。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 质控 ============ -->
+  <section id="qc">
+    <h2>质控、误差与安全</h2>
+    <p class="slead">微型化的代价是误差更容易被放大，质控部分须讲透，不能仅以"操作谨慎"作答。</p>
+
+    <div class="card" style="--accent:var(--indigo)">
+      <h4 style="margin-bottom:10px">四个误差来源，四条对应措施</h4>
+      <div class="tw">
+        <table>
+          <tr><th style="width:30%">误差来源</th><th>为什么会出现</th><th style="width:32%">怎么压下去</th></tr>
+          <tr><td>样品氧化</td><td>维C 遇氧、遇光、遇热都分解，提取完放着就在掉</td><td>现配现测、全程避光、5 分钟内滴完</td></tr>
+          <tr><td>人为操作</td><td>滴加速度、摇匀程度、终点判读全凭手感</td><td>微量移液管定量、双平行样、多人交叉复核</td></tr>
+          <tr><td>前处理</td><td>研磨不匀、纱布孔径不一、上清浑浊</td><td>统一 5.0g/20mL/10min 参数，静置取澄清液</td></tr>
+          <tr><td>环境</td><td>室温高、光照强，孔内挥发快</td><td>记录室温、避免阳光直射、缩短开板时间</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="panel" style="border-left:3px solid var(--emerald)">
+        <h4>绿色化学的三项指标</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">试剂与样品用量降到传统实验的 1/10；废液排放减少约 90%；含碘废液用硫代硫酸钠一步还原成碘离子。器材是聚苯乙烯滴板，可重复使用。</p>
+      </div>
+      <div class="panel" style="border-left:3px solid var(--rose)">
+        <h4>安全注意事项</h4>
+        <p style="font-size:16px;color:var(--ink-2);line-height:1.8">碘溶液有刺激性和轻微腐蚀性，全程戴一次性手套，避免接触皮肤眼睛；试剂严禁入口；废液统一收集处理后方可排放；实验后洗手。全程无高温、无明火、无高压。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 价值 ============ -->
+  <section id="value">
+    <h2>三重价值</h2>
+    <p class="slead">这是答辩中最应着力的部分。同一实验，从教学、民生、专业三个方向各论一次，论述方能成立。</p>
+
+    <div class="card" style="--accent:var(--sky)">
+      <div class="panel">
+        <div class="meta-row"><span class="meta-no">教学</span><span class="meta-t">课程大纲没丢</span></div>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.85">氧化还原滴定、定量分析、误差分析、对照实验四个核心知识点全部保留。变的是教学方式：学生从照着做，变成带着一个生活里的疑问去设计、测量、解释。</p>
+      </div>
+      <div class="panel">
+        <div class="meta-row"><span class="meta-no">科普</span><span class="meta-t">两个流传很广的误会</span></div>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.85">一是"水果放几天照样有营养"，二是"喝果汁就等于吃水果"。这两种说法在家庭中相当普遍，一组滴定数据即可说明，比抽象说理有效。</p>
+      </div>
+      <div class="panel" style="border-left:3px solid var(--violet)">
+        <div class="meta-row"><span class="meta-no" style="color:var(--violet)">专业</span><span class="meta-t">微量物证的同构训练</span></div>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.85">物证检验所面对的样品常为微量甚至痕量，取样量受严格限制，判断依据是多个样品之间的比对而不是单个样品的绝对值。这套实验的操作逻辑——微量取样、平行测定、空白对照、多组比对——跟它是同构的，可以作为微量物证分析的基础实训模型。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 答辩 ============ -->
+  <section id="defense">
+    <h2>答辩要点</h2>
+    <p class="slead">题库共 18 题：初赛基础 8 题、决赛深度 10 题。五道最易受阻的题目，展开可见答法。</p>
+
+    <details class="q">
+      <summary>这不过是把锥形瓶换成滴板，创新力度是否足够？</summary>
+      <div class="a">改动不止于器材。器材更换之后，用量才能降至十分之一，减量与绿色两项才成立；用量下降之后，一次实验才做得起四组样品；四组样品具备之后，实验目标才能由"测一个数"转为"比差异、找原因"；而微量多组比对，正好对应物证检验的方法。<b>器材是载体，背后是实验体系、教学目标和专业特色的整体升级。</b></div>
+    </details>
+
+    <details class="q">
+      <summary>微型滴板是相对定量，误差从哪来？为什么不能做高精度定量？</summary>
+      <div class="a">三个主要来源：微量体系溶剂挥发更快；孔内混合效果不如锥形瓶摇晃充分；终点靠肉眼判读，主观偏差难消除。所以这套方法适合教学探究和样品间相对对比，不适合报绝对含量。要高精度得上分光光度法或 HPLC，这一点在论文局限性里已经写明。</div>
+    </details>
+
+    <details class="q">
+      <summary>为什么浸泡时间定 10 分钟？长一点短一点会怎样？</summary>
+      <div class="a">10 分钟是为了统一提取条件，保证组间只差样品这一个变量。时间太短维C 溶出不完全，结果偏低；时间太长维C 在空气里持续氧化，数据同样失真。所以规定现配现测，配好 5 分钟内滴完。</div>
+    </details>
+
+    <details class="q">
+      <summary>预实验里遇到过什么失败？怎么解决的？</summary>
+      <div class="a">最常见两个。一是终点颜色很快褪掉——样品维C 氧化严重，或者体系里氧气在持续耗碘，解决方法是现配现用、避光、严格执行 30 秒稳定判据。二是平行数据差很大——研磨不匀、上清带渣、移液失误，解决方法是充分研磨、静置取澄清液、移液放慢。</div>
+    </details>
+
+    <details class="q">
+      <summary>现场演示时孔里一直不显色，怎么办？</summary>
+      <div class="a">通常有两个原因：样品中维C 已氧化殆尽，或淀粉指示剂失效。现场先换新配的淀粉指示剂；再用泡腾片样品做阳性对照，如果泡腾片能显色，说明是指示剂或样品的问题，不是方法的问题。因此决赛演示须将泡腾片安排在最后。</div>
+    </details>
+
+    <div class="callout warn" style="margin-top:22px">
+      <span class="ct">四条不能说错的话</span>
+      <p>不说"没有误差"；不编数据、不编文献；不夸大精度，反复讲清是相对定量；不回避局限——主动说出缺点，评委反而信你。</p>
+    </div>
+  </section>
+
+  <!-- ============ 视频 ============ -->
+  <section id="video">
+    <h2>决赛实操视频</h2>
+    <p class="slead">八个镜头，总长 5 到 8 分钟。拍摄顺序跟操作顺序一致，不用打乱重排。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:8%">镜号</th><th style="width:22%">内容</th><th style="width:10%">时长</th><th>画面与台词要点</th></tr>
+        <tr><td>1</td><td>开场介绍</td><td>30 秒</td><td>三人出镜，实验室背景。报项目名 + "现在演示完整流程"</td></tr>
+        <tr><td>2</td><td>器材展示</td><td>30 秒</td><td>镜头扫过 96 孔板、微量移液管、四组样品。点明"替代常量装置，用量减少 90%"</td></tr>
+        <tr><td>3</td><td>样品前处理</td><td>1 分 30 秒</td><td>称量 5.0g → 研磨 → 加 20mL 水 → 浸泡 → 纱布过滤。台词落在"变量唯一"</td></tr>
+        <tr><td>4</td><td>滴板加样</td><td>1 分钟</td><td>500μL 上清入孔、滴淀粉。强调每组两平行孔加一空白孔</td></tr>
+        <tr><td>5</td><td>微量滴定</td><td>2 分钟</td><td><b style="color:#8ef0c4">核心镜头</b>。特写逐滴加碘，颜色由无色→淡黄→浅蓝。此处留出停顿，由评委自行观察终点</td></tr>
+        <tr><td>6</td><td>数据记录</td><td>30 秒</td><td>填写原始记录表，口述偏差 &gt;10% 重做</td></tr>
+        <tr><td>7</td><td>废液处理</td><td>1 分钟</td><td>滴加硫代硫酸钠，棕黄褪去至无色。此镜为绿色化学的实证，不应剪除</td></tr>
+        <tr><td>8</td><td>总结收尾</td><td>30 秒</td><td>三人回镜头前，收在"微型绿色、贴近生活、融入物证思维"</td></tr>
+      </table>
+    </div>
+
+    <div class="rule">
+      拍摄前须彩排<b>两次以上</b>，泡腾片样品排在最后制作，用作阳性对照。
+      <em>若现场淀粉失效，以预先新配的一份替换。全程戴手套、穿实验服，此项在评审中所占分量高于数据本身。</em>
+    </div>
+  </section>
+
+  <!-- ============ 附件 ============ -->
+  <section id="files">
+    <h2>资料下载</h2>
+    <p class="slead">六份文档均为 Markdown 纯文本，可用记事本打开，需要排版时直接复制进 Word。整包可一次下载。</p>
+
+    <div class="zipbox">
+      <h3>完整资料包 · 一次下载</h3>
+      <p>六份文档与一份离线目录页，解压后双击 index.html 即可浏览。压缩包已内嵌于本页，将网页转发他人，对方亦可下载。</p>
+      <a class="zipbtn" href="data:application/zip;base64,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" download="维C实验项目资料包.zip">下载完整资料包（ZIP · 18 KB）</a>
+      <div class="zipmeta">含：竞赛论文正文 / PPT逐页文稿 / 答辩题库 / 实验SOP / 原始记录表 / 视频脚本 / 目录页</div>
+    </div>
+
+    <div class="dlgrid">
+      <div class="dlcard" style="--accent:var(--emerald)">
+        <h4>01 · 竞赛论文正文</h4>
+        <p>十章完整论文。项目概述、传统实验问题、改进思路、详细方案、质控误差、绿色安全、三重价值、可行性、局限展望、参考文献。</p>
+        <div class="fm">Markdown · 8.2 KB</div>
+        <a class="get" href="assets/01_竞赛论文正文.md" download>下载</a>
+      </div>
+
+      <div class="dlcard" style="--accent:var(--sky)">
+        <h4>02 · PPT逐页文稿</h4>
+        <p>12 页答辩 PPT 的逐页标题、讲稿、配图提示词。PPT 已有飞书在线版，这份用于改版或另起一版。</p>
+        <div class="fm">Markdown · 6.0 KB</div>
+        <a class="get" href="assets/02_PPT逐页文稿与配图提示词.md" download>下载</a>
+      </div>
+
+      <div class="dlcard" style="--accent:var(--violet)">
+        <h4>03 · 答辩题库与话术</h4>
+        <p>初赛基础题 8 道、决赛深度题 10 道，逐题给标准答案。另附四条注意事项与三人分工建议。</p>
+        <div class="fm">Markdown · 5.8 KB</div>
+        <a class="get" href="assets/03_答辩题库与话术.md" download>下载</a>
+      </div>
+
+      <div class="dlcard" style="--accent:var(--indigo)">
+        <h4>04 · 实验操作 SOP</h4>
+        <p>仪器清单、试剂清单、七步操作、数据记录表、计算公式、常见问题排查表。可直接打印带到实验室。</p>
+        <div class="fm">Markdown · 3.3 KB</div>
+        <a class="get" href="assets/04_实验操作SOP.md" download>下载</a>
+      </div>
+
+      <div class="dlcard" style="--accent:var(--amber)">
+        <h4>05 · 预实验原始记录表</h4>
+        <p>论文附录用的空白表格：试剂信息、样品信息、滴定原始数据、数据处理、异常记录、废液处理、签字栏。</p>
+        <div class="fm">Markdown · 2.0 KB</div>
+        <a class="get" href="assets/05_预实验原始记录表.md" download>下载</a>
+      </div>
+
+      <div class="dlcard" style="--accent:var(--rose)">
+        <h4>06 · 成果汇总与视频脚本</h4>
+        <p>七项成果清单、八个镜头的实操视频脚本、决赛现场要点、初赛到决赛的时间线建议。</p>
+        <div class="fm">Markdown · 3.3 KB</div>
+        <a class="get" href="assets/06_成果汇总与决赛视频脚本.md" download>下载</a>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <span class="ct">接下来要做的事</span>
+      <p>PPT 封面的参赛团队、指导教师、学院仍为占位符，须替换为真实信息。预实验完成后，将第 8 页柱状图与本页图形一并替换为实测值。论文附录补入原始记录表。晋级后按脚本拍摄视频。</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="f1">第六届化学实验创新设计竞赛 · 已有实验创新设计赛道<br>项目资料整理于 2026-10-13 · 页面重构于 2026-10-17</div>
+    <div class="f2">BY ytf2000@sina.com</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

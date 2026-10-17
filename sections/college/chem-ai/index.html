@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>把一份竞赛通知，变成一套能交的东西</title>
+<style>
+/* ===== 深色版式基线 v1.0 ===== */
+:root{
+  --bg:#050a1a;--s1:#101d38;--s2:#16274a;--s3:#182c50;--s4:#0e1a35;
+  --line:rgba(150,188,245,.16);--line-2:rgba(150,188,245,.10);
+  --ink:#ffffff;--ink-2:#c3d1e3;--ink-3:#b0c0d4;
+  --sky:#38bdf8;--indigo:#818cf8;--emerald:#34d399;--amber:#fbbf24;--rose:#fb7185;--violet:#c084fc;
+  --key:#382c0c;--warn:#2b1416;--ok:#0e2820;--case:#182040;--blue:#0d2340;--drill:#2e240f;
+  --r-lg:18px;--r-md:14px;--r-sm:10px;
+  --shadow:inset 0 1px 0 rgba(160,195,250,.06),0 16px 34px -18px rgba(0,0,0,.75);
+  --shadow-sm:0 8px 20px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  line-height:1.85;font-size:18px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 620px at 8% 2%,rgba(56,189,248,.14),transparent 60%),
+    radial-gradient(760px 560px at 92% 16%,rgba(192,132,252,.11),transparent 62%),
+    radial-gradient(880px 640px at 40% 96%,rgba(52,211,153,.07),transparent 62%)}
+.wrap{position:relative;z-index:1;max-width:1050px;margin:0 auto;padding:0 30px 120px}
+
+h1{font-size:clamp(34px,4.6vw,52px);line-height:1.16;font-weight:800;letter-spacing:-1.6px;color:var(--ink)}
+h2{font-size:clamp(23px,3vw,29px);line-height:1.32;font-weight:760;letter-spacing:-.5px;color:var(--ink)}
+h3{font-size:21px;line-height:1.4;font-weight:740;color:var(--ink)}
+h4{font-size:18px;line-height:1.45;font-weight:700;color:var(--ink)}
+p{color:var(--ink)}
+a{color:#93c5fd;text-decoration:none;border-bottom:1px dotted rgba(147,197,253,.55)}
+a:hover{color:#bae6fd;border-bottom-style:solid}
+small,.caption{font-size:14px;color:var(--ink-3);line-height:1.7}
+
+.meta-row{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-bottom:8px}
+.meta-no{font-size:17px;letter-spacing:.1em;color:var(--sky);font-weight:800}
+.meta-t{font-size:16px;color:#aabdd2;letter-spacing:.04em}
+
+.card{background:var(--s1);border:1px solid var(--line);border-top:2px solid var(--accent,var(--sky));
+  border-radius:var(--r-lg);box-shadow:var(--shadow);padding:22px 24px 20px;margin:20px 0}
+.panel{background:var(--s2);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin:12px 0}
+.panel-tight{background:var(--s2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+
+.callout{position:relative;border-radius:var(--r-md);padding:16px 20px 15px 22px;margin:18px 0;background:var(--key);
+  border:1px solid rgba(251,191,36,.3);border-left:4px solid var(--accent,var(--amber))}
+.callout .ct{display:block;font-size:12.5px;letter-spacing:.18em;font-weight:800;margin-bottom:6px;color:var(--amber)}
+.callout.warn{background:var(--warn);border-color:rgba(239,68,68,.28);border-left-color:var(--rose)}
+.callout.warn .ct{color:var(--rose)}
+.callout.ok{background:var(--ok);border-color:rgba(52,211,153,.26);border-left-color:var(--emerald)}
+.callout.ok .ct{color:var(--emerald)}
+.callout.case{background:var(--case);border-color:rgba(129,140,248,.3);border-left-color:var(--indigo)}
+.callout.case .ct{color:var(--indigo)}
+.callout p{color:var(--ink);font-size:17.5px;line-height:1.85}
+.callout b{color:#fde68a}
+.callout.ok b{color:#8ef0c4}
+.callout.warn b{color:#fca5a5}
+
+.rule{background:var(--blue);border-left:3px solid var(--sky);border-radius:0 10px 10px 0;padding:10px 15px;margin:11px 0;
+  font-size:16.5px;color:var(--ink);line-height:1.78}
+.rule b{color:#7dd3fc;font-weight:600}
+.rule em{display:block;font-style:normal;color:var(--ink-2);font-size:14.5px;margin-top:5px}
+
+table{width:100%;border-collapse:collapse;line-height:1.7;font-size:16.5px;margin:10px 0}
+th{background:var(--s3);color:var(--ink);font-weight:600;text-align:left;padding:9px 11px;
+  border-bottom:1px solid var(--line);font-size:15px}
+td{padding:9px 11px;border-bottom:1px solid var(--line-2);color:var(--ink);vertical-align:top;line-height:1.7}
+tr:last-child td{border-bottom:none}
+.tw{overflow-x:auto;border-radius:11px;border:1px solid var(--line);margin:12px 0}
+
+.fig{margin:16px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--s2)}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{font-size:13.5px;color:var(--ink-3);text-align:center;margin-top:8px;line-height:1.7}
+
+/* ===== 本页专用 ===== */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(5,10,26,.93);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line-2);margin:0 -30px}
+.topnav ul{flex-wrap:wrap;display:flex;gap:4px;list-style:none;overflow-x:auto;padding:9px 24px;scrollbar-width:none}
+.topnav ul::-webkit-scrollbar{display:none}
+.topnav a{font-size:14px;color:var(--ink-2);padding:5px 10px;border-radius:7px;border-bottom:none;white-space:nowrap;transition:.16s}
+.topnav a:hover{background:#16274a;color:var(--ink)}
+
+.hero{position:relative;overflow:hidden;margin:0 -30px 34px;padding:62px 30px 44px;
+  border-bottom:1px solid var(--line-2);background:linear-gradient(160deg,#081226 0%,#050a1a 62%)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(620px 420px at 88% 16%,rgba(52,211,153,.12),transparent 62%),
+             radial-gradient(520px 380px at 10% 86%,rgba(56,189,248,.10),transparent 66%)}
+.hero>*{position:relative;z-index:2}
+.hero .kick{font-size:13.5px;letter-spacing:.2em;color:var(--emerald);font-weight:700;display:block;margin-bottom:14px}
+.hero h1{max-width:17em;margin-bottom:18px}
+.hero .sub{font-size:18px;color:var(--ink-2);max-width:42em;line-height:1.95}
+.hero .hstats{display:flex;gap:30px;flex-wrap:wrap;margin-top:28px}
+.hero .hstat .n{font-size:25.5px;font-weight:800;color:var(--emerald);letter-spacing:-.4px;line-height:1.25}
+.hero .hstat .l{font-size:14px;color:var(--ink-3);letter-spacing:.05em;margin-top:2px}
+
+section{padding-top:48px}
+.slead{font-size:17.5px;color:var(--ink-2);line-height:1.95;max-width:45em;margin:10px 0 4px}
+
+.stage{background:var(--s1);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);
+  padding:0;margin:18px 0;overflow:hidden;border-left:3px solid var(--accent,var(--sky))}
+.stage .sh{display:flex;align-items:baseline;gap:13px;padding:16px 22px 12px;border-bottom:1px solid var(--line-2);background:#0e1a35}
+.stage .sh .no{font-size:15px;font-weight:800;color:var(--accent,var(--sky));letter-spacing:.1em}
+.stage .sh h3{font-size:20.5px}
+.stage .sb{padding:16px 22px 18px}
+.stage .line{display:flex;gap:12px;margin:9px 0;font-size:16.5px;line-height:1.82}
+.stage .line .tag{flex:0 0 74px;font-size:14.5px;font-weight:700;padding-top:2px;letter-spacing:.04em}
+.stage .line .txt{flex:1;color:var(--ink-2)}
+.tag.g{color:#8ef0c4}.tag.a{color:#fde68a}.tag.b{color:#a5b4fc}
+.stage .demo{margin-top:13px;background:var(--s4);border:1px solid var(--line-2);border-radius:10px;padding:12px 15px}
+.stage .demo .dt{font-size:12.5px;letter-spacing:.16em;color:var(--ink-3);font-weight:800;margin-bottom:6px}
+.stage .demo p{font-size:16px;color:var(--ink-2);line-height:1.82}
+.stage .demo p+p{margin-top:7px}
+
+.prompt{background:#0b1730;border:1px solid rgba(56,189,248,.24);border-radius:11px;padding:14px 16px;margin:12px 0}
+.prompt .pt{font-size:13px;letter-spacing:.15em;color:var(--sky);font-weight:800;margin-bottom:7px}
+.prompt q{display:block;font-size:16px;color:#dbeafe;line-height:1.9;quotes:none}
+.prompt .why{font-size:14.5px;color:var(--ink-3);margin-top:9px;line-height:1.75;padding-top:8px;border-top:1px dashed rgba(150,188,245,.16)}
+
+.bad{background:var(--warn);border-left:3px solid var(--rose);border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0}
+.bad .bt{font-size:13px;letter-spacing:.15em;color:var(--rose);font-weight:800;margin-bottom:5px}
+.bad p{font-size:16px;color:#fca5a5;line-height:1.8}
+
+.zipbtn{display:inline-block;font-size:17px;font-weight:700;color:#04121c;background:var(--emerald);
+  padding:11px 26px;border-radius:9px;border-bottom:none;letter-spacing:.02em}
+.zipbtn:hover{background:#5eead4;color:#04121c}
+
+
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--line-2);text-align:center}
+footer .f1{font-size:14.5px;color:var(--ink-3);line-height:1.95}
+footer .f2{font-size:14.5px;color:var(--ink-2);letter-spacing:.06em;margin-top:8px}
+
+@media(max-width:820px){
+  .wrap{padding:0 16px 90px}
+  .topnav{margin:0 -16px}
+  .hero{margin:0 -16px 24px;padding:42px 18px 34px}
+  .card{padding:18px 15px}
+  .callout{padding:14px 15px 13px 17px}
+  .hero .hstats{gap:20px}
+  .stage .sh{padding:14px 16px 10px}
+  .stage .sb{padding:14px 16px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav class="topnav">
+    <ul>
+      <li><a href="#notice">通知要求</a></li>
+      <li><a href="#track">赛道选择</a></li>
+      <li><a href="#seven">七个环节</a></li>
+      <li><a href="#limits">能力边界</a></li>
+      <li><a href="#ask">如何提问</a></li>
+      <li><a href="#case">过程记录</a></li>
+      <li><a href="#files">示例产物</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <span class="kick">2026 年 · 第六届化学实验创新设计竞赛</span>
+    <h1>把一份竞赛通知，拆成一套可交付的材料</h1>
+    <p class="sub">教务处这份通知篇幅一页半，读起来并不困难。困难的是把它转成手上一件件要交出去的东西：一个题目、一篇论文、一份汇报文稿、一场答辩，以及进入前 30% 之后的一间实验室和一台摄像机。果蔬维C 碘量滴定是一个已经走完的例子，换用其他实验，顺序不变。</p>
+    <div class="hstats">
+      <div class="hstat"><div class="n">3 人</div><div class="l">一队，含队长 1 名</div></div>
+      <div class="hstat"><div class="n">50 / 50</div><div class="l">初赛：论文 / 答辩</div></div>
+      <div class="hstat"><div class="n">30 / 30 / 40</div><div class="l">决赛：论文 / 视频 / 答辩</div></div>
+      <div class="hstat"><div class="n">20%</div><div class="l">获奖率，1:3:6</div></div>
+    </div>
+  </header>
+
+  <!-- ================= 一 ================= -->
+  <section id="notice">
+    <h2>通知要求什么</h2>
+    <p class="slead">先把纸面上的信息整理成一张表。整理之后可以看出，决定成绩的主要因素并不是实验本身做得好不好。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:20%">事项</th><th style="width:44%">通知原文要点</th><th>落到手上的动作</th></tr>
+        <tr><td>主办与承办</td><td>教务处主办，赛务由承办单位负责</td><td>咨询按通知所附联系人办理</td></tr>
+        <tr><td>时间</td><td>2026 年 11 月 7 日比赛；通知落款 10 月 10 日</td><td>从落款到比赛不足一个月</td></tr>
+        <tr><td>对象</td><td>全日制在校本科生，不限专业和年级</td><td>大一可以报名，且不分组别</td></tr>
+        <tr><td>组队</td><td>团体赛，3 人一队，队长 1 名</td><td>三人须各自分工，不能都做实验</td></tr>
+        <tr><td>初赛</td><td>理论设计形式，自拟题目，设计实验内容并写论文（附件 2 模板），制作 PPT 汇报答辩。<b>成绩＝论文 50% ＋ 现场答辩 50%</b></td><td>初赛不进实验室，全部为纸面设计与现场陈述</td></tr>
+        <tr><td>决赛</td><td>初赛前 30% 进实验室，验证、完善、重写论文、拍实验视频。<b>成绩＝论文 30% ＋ 视频 30% ＋ 现场答辩 40%</b></td><td>进决赛前须通过实验室安全培训与考核</td></tr>
+        <tr><td>报名</td><td>填附件 1 报名表发 Hxjsjcdx2020@126.com，文件名＝参赛学院＋队伍名称＋队长姓名＋竞赛类别</td><td>提交后加入通知所附工作群</td></tr>
+        <tr><td>奖项</td><td>一二三等奖，获奖率 20%，比例 1:3:6；获奖队排序推荐河北省赛、华北地区赛</td><td>三等奖亦进入省赛推荐序列</td></tr>
+        <tr><td>知识产权</td><td>归参赛者与学校共有，可用于非营利教学，须注明出处</td><td>不影响另行投稿</td></tr>
+      </table>
+    </div>
+
+    <div class="callout case">
+      <span class="ct">最应留意的一行</span>
+      <p>初赛<b>论文 50%、答辩 50%</b>，不含实验环节；决赛论文 30%、视频 30%、答辩 40%，答辩仍占最大比重。也就是说，全程<b>四成到五成的分数取决于陈述与答问</b>，而非动手操作。这正是 AI 能够发挥作用、也最容易出错的地方。</p>
+    </div>
+
+    <p style="font-size:17px;color:var(--ink-2);line-height:1.9;margin-top:18px">
+      通知另有一句容易被忽略：三类赛道中，"已有实验创新设计"的定义是<b style="color:#8ef0c4">改革现有教学实验的教学内容、教学方法或者教学手段</b>。它并未要求自制新仪器，也不要求取自科研前沿，只要在现成实验上改动一处并且理由充分，即符合条件。这是本科低年级学生唯一可行的一类。
+    </p>
+  </section>
+
+  <!-- ================= 二 ================= -->
+  <section id="track">
+    <h2>赛道的选择</h2>
+    <p class="slead">三个类别并非难度分级，而是三种性质不同的工作。选错类别，后续每一步都会受阻。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:15%">类别</th><th style="width:37%">通知表述</th><th style="width:24%">难点</th><th>是否适合以 AI 辅助</th></tr>
+        <tr>
+          <td><b style="color:#34d399">新创实验</b></td>
+          <td>把反映新知识、新理论、新技术、新方法的科研成果，设计成适合本科教学的基础实验、综合实验；须经反复验证</td>
+          <td>须先持有一项科研成果。AI 提供的"新"多停留在文献综述层面，缺少实验室支撑</td>
+          <td>不适合。层级最高，也最难自证</td>
+        </tr>
+        <tr>
+          <td><b style="color:#38bdf8">已有实验创新</b></td>
+          <td>改革现有教学实验的教学内容、教学方法或教学手段，对已有实验重新设计，使之更贴合现代化学学科发展</td>
+          <td>原型现成，但改动之处必须自行判断，否则只是更换器材</td>
+          <td>最合适。有原型可依，改造思路可以落地</td>
+        </tr>
+        <tr>
+          <td><b style="color:#c084fc">科普实验</b></td>
+          <td>贴近消防、检验鉴定及生活实际，体现化学在防火灭火、物证检验鉴定及生活中的应用，反映化学之美、化学之趣</td>
+          <td>创意容易产生，但贴近实际的部分依赖现场见闻，无法凭空编写</td>
+          <td>中等。创意阶段效率高，落地阶段依赖素材</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="rule">
+      本科生在<b>科普赛道</b>上有现成的素材来源——防火灭火、现场取样、快速检测这些题材，非本专业的人不易想到，在校期间却能经常接触。
+      <em>但科普赛道重在呈现，视频与现场展示占比高，三人中须有一人具备拍摄与剪辑能力。若不具备，选择"已有实验创新"更为稳妥。</em>
+    </div>
+  </section>
+
+  <!-- ================= 三 ================= -->
+  <section id="seven">
+    <h2>七个环节与 AI 的作用位置</h2>
+    <p class="slead">每个环节写清三件事：需要先提供什么、它能产出什么、哪一部分必须由人补足。维C 这条线即按此顺序推进。</p>
+
+    <div class="fig">
+      <svg viewBox="0 0 680 372" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="22" fill="#c3d1e3" font-size="12.5">七个环节中 AI 与人工的投入比例（浅蓝为 AI 承担部分，琥珀为须自行完成部分）</text>
+        <g font-size="11.5">
+        <text x="20" y="58" fill="#ffffff">① 定题</text>
+        <rect x="106" y="46" width="192" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="298" y="46" width="288" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="56" fill="#b0c0d4" font-size="10.5">40 / 60</text>
+        <text x="20" y="102" fill="#ffffff">② 打底</text>
+        <rect x="106" y="90" width="264" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="370" y="90" width="216" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="100" fill="#b0c0d4" font-size="10.5">55 / 45</text>
+        <text x="20" y="146" fill="#ffffff">③ 方案</text>
+        <rect x="106" y="134" width="240" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="346" y="134" width="240" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="144" fill="#b0c0d4" font-size="10.5">50 / 50</text>
+        <text x="20" y="190" fill="#ffffff">④ 论文</text>
+        <rect x="106" y="178" width="360" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="466" y="178" width="120" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="188" fill="#b0c0d4" font-size="10.5">75 / 25</text>
+        <text x="20" y="234" fill="#ffffff">⑤ PPT</text>
+        <rect x="106" y="222" width="384" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="490" y="222" width="96" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="232" fill="#b0c0d4" font-size="10.5">80 / 20</text>
+        <text x="20" y="278" fill="#ffffff">⑥ 答辩</text>
+        <rect x="106" y="266" width="312" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="418" y="266" width="168" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="276" fill="#b0c0d4" font-size="10.5">65 / 35</text>
+        <text x="20" y="322" fill="#ffffff">⑦ 决赛</text>
+        <rect x="106" y="310" width="120" height="11" rx="5" fill="#38bdf8"/>
+        <rect x="226" y="310" width="360" height="11" rx="5" fill="#fbbf24"/>
+        <text x="592" y="320" fill="#b0c0d4" font-size="10.5">25 / 75</text>
+        <line x1="106" y1="340" x2="586" y2="340" stroke="rgba(150,188,245,.16)"/>
+        <text x="106" y="360" fill="#b0c0d4" font-size="10.5">环节越靠前，AI 承担越多</text>
+        <text x="586" y="360" text-anchor="end" fill="#b0c0d4" font-size="10.5">进入实验室后，它仅能承担文档类工作</text>
+        </g>
+        </svg>
+      <div class="cap">比例为经验估计，用于提示投入分配</div>
+    </div>
+
+    <div class="stage" style="--accent:var(--sky)">
+      <div class="sh"><span class="no">①</span><h3>定题</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">年级、专业、队内人数、可借用的仪器、可用课时、拟选赛道。这五项须一次说全，逐项追问会降低产出质量。</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">五至八个候选题目，每个注明所改的原实验、改动之处、学生可获得的训练、最可能被质询的环节。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">可行性的最终判断。它列出的可借仪器多为理想配置，实验室实际有无相应设备，只能到现场确认。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>题目定为「面向本科基础化学教学的果蔬维C微型碘量滴定实验创新改造」，走"已有实验创新设计"赛道。选择理由有三条：碘量法是大一必修实验，原型扎实；微型化只改器材与用量，不触及原理，风险较低；改造后与微量物证检验的操作方式相互对应，可作为专业特色的落点。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" style="--accent:var(--sky)">
+      <div class="sh"><span class="no">②</span><h3>打底</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">题目确定之后，让它梳理该实验的源流：出自哪本教材、有无国家标准方法、已有哪些同类改造。</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">教材出处、经典方法、同类改造的思路谱系、可引用的标准编号。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">逐条核实。AI 会生成格式完整、卷期页码齐全但并不存在的文献；竞赛论文需存档，引用不存在的文献属学术不端。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>正文引用了武汉大学《分析化学（第六版）》、《普通化学实验（第三版）》、GB 5009.86-2016 食品中抗坏血酸的测定，以及周宁怀《微型化学实验》。前三条为确证出处，可以查证；后两条属方向性引用，提交前须核对原书。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" style="--accent:var(--sky)">
+      <div class="sh"><span class="no">③</span><h3>方案</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">原实验的完整流程，以及可接受的改动幅度。这一步须明确说明：不动原理，仅在器材、用量、样品、质控上修改。</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">按"问题—改造方向—参数—质控—价值"的结构填充内容，并把参数落为具体数值：称量质量、加样体积、浸泡时长、终点判据。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">凡固定下来的数值，都要能说明取值理由。它写浸泡 10 分钟，你须能解释时间过短则溶出不足、过长则氧化；解释不了，答辩时无法应答。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>五处改造：器材换成 96 孔板加 1mL 微量移液管；样品做成新鲜／存放三天／市售果汁／泡腾片四组加空白；每样两孔平行、全批一孔空白；教学模式从验证改探究；废液用硫代硫酸钠还原。参数全部固定：5.0g 样品、20mL 水、浸泡 10 分钟、每孔 500μL、每滴 5μL、30 秒不褪色为终点。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" style="--accent:var(--emerald)">
+      <div class="sh"><span class="no">④</span><h3>论文</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">附件 2 的论文模板（或直接要求按十章撰写），以及前面已经确定的方案。</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">章节结构、术语统一、逻辑衔接、参考文献格式。这一环节效率最高，八千字论文的骨架可在一小时内成型。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">全部数据，以及所有涉及"我们做了"的表述。初赛可以写预期规律，但须明确标注为预期，不得写成实测。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>十章、约八千字：项目概述、原实验与问题、改进思路、详细方案、质控与误差、绿色与安全、三重价值、可行性与成果、局限与展望、参考文献。局限一章由它主动补写——"本实验为相对定量，绝对精度略低"，这句话后来成为答辩时的依据。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" style="--accent:var(--emerald)">
+      <div class="sh"><span class="no">⑤</span><h3>PPT 与讲稿</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">陈述时长。该数值决定页数与字数，未提供时按十分钟默认安排。</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">逐页结构、每页一句结论、按中文每分钟约二百二十字配讲稿、配图提示词。八分钟的讲稿约一千八百字。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">照片与配图须为真实实验场景。PPT 上用生成式图像表现反应现象，评委一看即可判断未进过实验室。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>十二页：封面、目录、背景痛点、传统实验四项缺陷、五大创新、样品体系表、六步流程、数据规律、质控与绿色、三重价值、总结展望、致谢。每页配讲稿与生图提示词，其后制作成在线版，共十二页。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" style="--accent:var(--violet)">
+      <div class="sh"><span class="no">⑥</span><h3>答辩</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">完整方案，并明确一句："你现在是评委，不是助手。"</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">从评委视角出题，按初赛浅、决赛深分两档，逐题给出答法，另附"不宜说出口的话"清单。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">预实验中真实遇到的失败。"终点颜色一闪即褪"这类细节它写不出，而这正是评委判断真伪的依据。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>十八道题。最尖锐的一道是"这不过是换了器材"。准备好的答法不作辩解，而是把因果链展开：器材更换后用量方能下降，用量下降后一次实验才做得起四组样品，有四组样品才能从验证转向探究，微量多组比对又恰好对应物证检验的方法——器材是切入点，不是全部。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stage" style="--accent:var(--rose)">
+      <div class="sh"><span class="no">⑦</span><h3>决赛</h3></div>
+      <div class="sb">
+        <div class="line"><span class="tag g">你给什么</span><span class="txt">进入实验室后取得的真实数据与照片，越具体越好：平行样偏差多少、哪一组失败、重做了几次。</span></div>
+        <div class="line"><span class="tag a">它出什么</span><span class="txt">标准化 SOP、可直接打印的原始记录表、视频分镜脚本、现场故障排查表。</span></div>
+        <div class="line"><span class="tag b">你补什么</span><span class="txt">几乎全部。仪器是否齐备、试剂能否购得、五个半小时是否足够、拍摄画面是否可用，这些都无法替代。</span></div>
+        <div class="demo">
+          <div class="dt">维C 这一环的实际产出</div>
+          <p>七步 SOP、一张空白原始记录表、八个镜头的视频脚本（总长五至八分钟，核心镜头为第五镜的逐滴加碘特写），另附四条现场要点。其中一条是泡腾片样品放在最后制作，用作阳性对照——若淀粉失效，仍有孔位可以显色。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 四 ================= -->
+  <section id="limits">
+    <h2>它做不到的三件事</h2>
+    <p class="slead">七个环节看似顺畅，但有三处它必然失效。事先知道，比事后返工代价小。</p>
+
+    <div class="card" style="--accent:var(--rose)">
+      <div class="panel">
+        <h4>一、真实数据</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.88">AI 生成的数据容易辨认：有效数字过于整齐、平行样偏差过小、四组样品恰呈完美梯度。真实滴定数据必然带有波动——两个平行孔相差 7%、某一组重做两次、空白孔偶尔偏高。通知中"须经反复验证"一句，指的正是这一点。</p>
+      </div>
+      <div class="panel">
+        <h4>二、"能不能做成"</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.88">它会提供一份参数齐备、逻辑自洽的方案，而你在实验室里发现那块 96 孔板是圆底的、微量移液管最大量程只有 200μL、纱布孔径不符、当天买不到猕猴桃。方案在纸面上从不出现问题。</p>
+      </div>
+      <div class="panel">
+        <h4>三、现场那几分钟</h4>
+        <p style="font-size:16.5px;color:var(--ink-2);line-height:1.88">评委追问时的停顿、终点颜色一闪而过时该不该停手、加样器突然卡住，这些没有脚本。准备再充分，现场仍须自己应对。</p>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <span class="ct">一条容易被忽略的界限</span>
+      <p>初赛可以写预期规律，但必须<b>明说是预期</b>。维C 材料中，柱状图上的 65%、18% 至今仍是示意值，PPT 第 8 页亦然。初赛本为纸面设计，未进实验室，本就没有实测数据。<b>但进入决赛后，这些数值必须替换为实测结果。</b>评委只需问一句数据来源，使用示意图即无法作答。</p>
+    </div>
+  </section>
+
+  <!-- ================= 五 ================= -->
+  <section id="ask">
+    <h2>如何提问</h2>
+    <p class="slead">同一个模型，提问方式不同，产出质量差别很大。三条写法在实际使用中有效，参数可以直接替换。</p>
+
+    <div class="prompt">
+      <div class="pt">写法一 · 一次把约束给全</div>
+      <q>我在准备化学实验创新设计竞赛初赛，走"已有实验创新设计"赛道。我们三个都是大一，能借到的仪器只有常规玻璃仪器和一台酶标仪，只能挤出一次四小时的课时。请在这个约束下给五个改造方向，每个写清：改的是哪个原实验、动了哪一处、学生多学到什么、最可能被评委问倒的地方在哪。不要给我需要买新设备的方案。</q>
+      <div class="why">约束越具体，方案越可用。只写"帮我出个化学实验创意"，得到的多是依赖大型仪器的方案。</div>
+    </div>
+
+    <div class="prompt">
+      <div class="pt">写法二 · 先要结构，再要内容</div>
+      <q>先不要写正文。按十章把标题和每章要回答的问题列出来，我看过再动笔。第三章和第九章我想自己写。</q>
+      <div class="why">一次让它写完八千字，等于放弃对结构的控制，后续修改比重写更费力。分段提交，每段都可以中止。</div>
+    </div>
+
+    <div class="prompt">
+      <div class="pt">写法三 · 让它承担评委角色</div>
+      <q>你现在是评委，做过多年基础化学实验教学，见过大量仅更换器材的改造。下面是我们初赛方案的摘要。只做一件事：指出最站不住脚的三处，每处说明评委大概会怎么问、我该怎么答才不失分。不要夸我。</q>
+      <div class="why">这是整个流程中收益最高的一条。它指出的问题，往往就是现场实际被问到的。</div>
+    </div>
+
+    <div class="bad">
+      <div class="bt">反例</div>
+      <p>"帮我写一篇化学实验创新设计论文。"会得到一篇结构齐全、术语正确、分节合理，但没有一个数字可用的稿子。更值得注意的是，它的完成度会让人误以为工作已经结束。</p>
+    </div>
+  </section>
+
+  <!-- ================= 六 ================= -->
+  <section id="case">
+    <h2>维C 项目的过程记录</h2>
+    <p class="slead">从最初询问这个竞赛，到最后形成一整套可提交材料，大约经过七轮。下表是实际顺序，不是理想流程。</p>
+
+    <div class="tw">
+      <table>
+        <tr><th style="width:8%">轮次</th><th style="width:16%">工作内容</th><th style="width:34%">产出</th><th>当时的问题</th></tr>
+        <tr><td>1</td><td>定题</td><td>题目、赛道判断、三条选择理由</td><td>最初拟选"新创实验"，因"须先有科研成果"一条被排除</td></tr>
+        <tr><td>2</td><td>搭骨架</td><td>十章论文结构，每章需回答的问题</td><td>初次生成十二章，第七、八章内容重复，删去</td></tr>
+        <tr><td>3</td><td>填论文</td><td>约八千字正文，六条参考文献</td><td>文献须逐条核对，方向性引用须查原书</td></tr>
+        <tr><td>4</td><td>做 PPT</td><td>十二页逐页文稿、讲稿、配图提示词</td><td>按八分钟排页，讲稿超出三百字，删至一千七百</td></tr>
+        <tr><td>5</td><td>备答辩</td><td>十八道题、答法、四条注意事项</td><td>"这不过是换了器材"一题，初版答法为辩解，无效，重写为因果链陈述</td></tr>
+        <tr><td>6</td><td>备实操</td><td>七步 SOP、空白记录表、八镜视频脚本</td><td>SOP 写至第四步发现移液管量程不符，参数修改</td></tr>
+        <tr><td>7</td><td>收拢</td><td>一套可直接提交的材料</td><td>分散在七八个文件中，最后重新打包</td></tr>
+      </table>
+    </div>
+
+    <div class="callout ok">
+      <span class="ct">这条线未做的一件事</span>
+      <p>实验本身。整套材料至今没有一份真实样品进过孔。初赛本不进实验室，提交的是设计，因此这不构成缺陷。但须记住这条线止于何处：进入前 30% 之后，第七轮之后的工作全部是新的，AI 只能协助撰写 SOP。</p>
+    </div>
+
+    <p style="font-size:17px;color:var(--ink-2);line-height:1.9;margin-top:20px">
+      更换实验，七轮流程照旧。把猕猴桃换成食堂剩油、把碘量滴定换成酸价测定，流程一字不改，变化的只是各环节中的数值。
+    </p>
+  </section>
+
+  <!-- ================= 七 ================= -->
+  <section id="files">
+    <h2>示例产物</h2>
+    <p class="slead">七轮的全部产出单独收在一页，逐节展开，整套材料可一次下载。</p>
+    <a class="zipbtn" href="demo.html">打开示例产物页</a>
+  </section>
+
+  <footer>
+    <div class="f1">依据《关于举办 2026 年第六届化学实验创新设计竞赛的通知》（2026 年 10 月 10 日）整理<br>示例项目：果蔬维C微型碘量滴定实验创新改造 · 已有实验创新设计赛道</div>
+    <div class="f2">BY ytf2000@sina.com</div>
+  </footer>
+
+</div>
+
+
+</body>
+</html>
