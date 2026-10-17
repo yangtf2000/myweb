@@ -148,8 +148,23 @@
       document.querySelectorAll('.art-vis').forEach(function (el) { el.classList.add('in-view'); });
     }
     document.querySelectorAll('.art-row, .sec-row').forEach(function (el) {
-      el.addEventListener('click', function () {
+      if (el.getAttribute('data-fx') === '1') return;   /* setupVisuals 会跑两次，避免重复绑定 */
+      el.setAttribute('data-fx', '1');
+      el.addEventListener('click', function (e) {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;  /* 新窗口打开照常 */
         Sound.blip(parseInt(el.getAttribute('data-snd') || '480', 10));
+        var href = el.getAttribute('href');
+        if (!href) return;
+        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) return;
+        e.preventDefault();
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--fx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--fy', (e.clientY - r.top) + 'px');
+        el.classList.remove('lit');
+        void el.offsetWidth;
+        el.classList.add('lit');
+        setTimeout(function () { window.location.href = href; }, 400);
       });
     });
   }

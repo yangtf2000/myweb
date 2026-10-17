@@ -169,5 +169,41 @@ a{color:var(--accent);text-decoration:none;}
 }
 
 /* 大学板块：封面大图模式 */
-.sec-wrap.lg-vis .art-vis{flex:0 0 420px;width:420px;height:260px;}
-@media(max-width:960px){.sec-wrap.lg-vis .art-vis{flex:none;width:100%;height:220px;}}
+.sec-wrap.lg-vis .art-vis{flex:0 0 212px;width:212px;height:130px;}
+.sec-wrap.lg-vis .art-top{margin-bottom:10px;}
+.sec-wrap.lg-vis .art-top h4{font-size:20px;font-weight:600;letter-spacing:.2px;}
+.sec-wrap.lg-vis .art-ico,
+.sec-wrap.lg-vis .art-ico svg{width:26px;height:26px;}
+.sec-wrap.lg-vis .kw{font-size:11.5px;padding:3px 11px;}
+.sec-wrap.lg-vis .art-detail{font-size:14px;line-height:1.75;margin-bottom:12px;}
+.sec-wrap.lg-vis .meta{font-size:13.5px;}
+@media(max-width:960px){.sec-wrap.lg-vis .art-vis{flex:none;width:100%;height:150px;}}
+
+/* ===== 点击点亮：光从落点扩散 ===== */
+.art-row, .sec-row{--fx:50%;--fy:50%;}
+.art-vis img.art-cover{transition:transform .45s cubic-bezier(.2,.8,.2,1);}
+.art-row.lit, .sec-row.lit{
+  transform:translateY(-2px);
+  border-color:rgba(125,211,252,.72);
+  box-shadow:0 0 0 1px rgba(125,211,252,.5), 0 20px 48px -14px rgba(56,189,248,.42);
+}
+.art-row.lit::after, .sec-row.lit::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(circle at var(--fx) var(--fy),
+    rgba(224,247,255,.62), rgba(125,211,252,.26) 30%, rgba(56,189,248,.08) 55%, transparent 72%);
+  mix-blend-mode:screen;transform:scale(.35);opacity:0;
+  animation:fxGlow .42s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes fxGlow{
+  0%{transform:scale(.35);opacity:0;}
+  30%{opacity:1;}
+  100%{transform:scale(1);opacity:.16;}
+}
+.art-row.lit .art-vis{box-shadow:inset 0 0 46px rgba(125,211,252,.34), 0 0 26px rgba(125,211,252,.3);}
+.art-row.lit .art-cover{transform:scale(1.06);}
+.art-row.lit .art-top h4{color:#ffffff;text-shadow:0 0 20px rgba(125,211,252,.55);}
+.art-row.lit .art-detail{color:#d5e3f2;}
+@media(prefers-reduced-motion:reduce){
+  .art-row.lit::after, .sec-row.lit::after{animation:none;opacity:.28;transform:none;}
+  .art-row.lit .art-cover{transform:none;}
+}
