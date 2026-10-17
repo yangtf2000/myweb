@@ -147,6 +147,26 @@
     } else {
       document.querySelectorAll('.art-vis').forEach(function (el) { el.classList.add('in-view'); });
     }
+    /* 首页板块行：悬停跟随鼠标的 3D 翻转 */
+    if (!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      document.querySelectorAll('.sec-row').forEach(function (el) {
+        if (el.getAttribute('data-tilt') === '1') return;
+        el.setAttribute('data-tilt', '1');
+        var rect = null;
+        el.addEventListener('mouseenter', function () { rect = el.getBoundingClientRect(); el.classList.add('tilt-on'); });
+        el.addEventListener('mousemove', function (e) {
+          if (!rect) rect = el.getBoundingClientRect();
+          var px = (e.clientX - rect.left) / rect.width - 0.5;
+          var py = (e.clientY - rect.top) / rect.height - 0.5;
+          el.style.setProperty('--gx', ((px + 0.5) * 100).toFixed(1) + '%');
+          el.style.setProperty('--gy', ((py + 0.5) * 100).toFixed(1) + '%');
+          el.style.transform = 'translateZ(16px) rotateY(' + (px * 18).toFixed(2)
+            + 'deg) rotateX(' + (-py * 10).toFixed(2) + 'deg) scale(1.025)';
+        });
+        el.addEventListener('mouseleave', function () { rect = null; el.style.transform = ''; el.classList.remove('tilt-on'); });
+      });
+    }
+
     document.querySelectorAll('.art-row, .sec-row').forEach(function (el) {
       if (el.getAttribute('data-fx') === '1') return;   /* setupVisuals 会跑两次，避免重复绑定 */
       el.setAttribute('data-fx', '1');
