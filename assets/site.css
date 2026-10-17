@@ -167,3 +167,7 @@ a{color:var(--accent);text-decoration:none;}
   .art-vis{flex:none;width:100%;height:150px;}
   .sec-row{padding:14px;}
 }
+
+/* 大学板块：封面大图模式 */
+.sec-wrap.lg-vis .art-vis{flex:0 0 420px;width:420px;height:260px;}
+@media(max-width:960px){.sec-wrap.lg-vis .art-vis{flex:none;width:100%;height:220px;}}
