@@ -263,3 +263,5 @@ a{color:var(--accent);text-decoration:none;}
   mix-blend-mode:multiply;
   animation:fxGlow .42s cubic-bezier(.2,.8,.2,1) forwards;
 }
+/* 白底时去掉标题的青色发光（覆盖翻转规则里的 text-shadow） */
+.sec-row.tilt-on .sec-main h3{text-shadow:none;}
