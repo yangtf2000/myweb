@@ -27,3 +27,6 @@ Thumbs.db
 
 # ===== college 板块封面（sections.js cover 字段引用）=====
 !sections/college/**/cover.jpg
+
+# ===== college 板块正文配图（cet46 页面 img/ 引用）=====
+!sections/college/cet46/img/*.jpg
