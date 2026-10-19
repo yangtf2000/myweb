@@ -47,15 +47,19 @@ a{color:#93c5fd;text-decoration:none;border-bottom:1px dotted rgba(147,197,253,.
 .sec{margin-top:52px}
 .no{font-size:12.5px;letter-spacing:.18em;color:var(--sky);font-weight:800;margin-bottom:8px}
 
-.banner{position:relative;overflow:hidden;border-radius:14px;margin:18px 0 6px;min-height:190px;
-  display:flex;flex-direction:column;justify-content:flex-end;padding:18px 22px;
+.banner{position:relative;overflow:hidden;border-radius:14px;margin:18px 0 6px;min-height:214px;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:20px 24px;
   border:1px solid var(--line);box-shadow:var(--shadow)}
 .banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
 .banner::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg,rgba(5,10,26,.30) 0%,rgba(5,10,26,.55) 52%,rgba(5,10,26,.90) 100%)}
 .banner>*:not(img){position:relative;z-index:2}
-.banner .bt{font-size:16.5px;font-weight:700;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7)}
-.banner .bd{font-size:13px;color:#d3dfee;margin-top:5px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.banner .bt{font-size:20px;font-weight:800;color:#fff;line-height:1.42;padding-top:16px;position:relative;
+  letter-spacing:.01em;text-shadow:0 2px 16px rgba(0,0,0,.78)}
+.banner .bt::before{content:"";position:absolute;left:0;top:0;width:48px;height:3px;border-radius:2px;
+  background:var(--acc,#7dd3fc);box-shadow:0 0 14px var(--acc,#7dd3fc)}
+.banner .bd{font-size:14.6px;line-height:1.8;color:var(--acc-soft,#dbeafe);margin-top:8px;
+  text-shadow:0 1px 12px rgba(0,0,0,.8)}
 
 .callout{border-radius:10px;padding:15px 20px;margin:18px 0;background:var(--key);
   border:1px solid rgba(251,191,36,.26);border-left:3px solid var(--amber)}
@@ -142,7 +146,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
 
   <p><strong>学位方面，学校对达到毕业要求的学生颁发本科毕业证书，符合学位授予规定者授予学士学位。</strong>学位授予的外语条件是否包含四级，公开渠道查不到本校的实施细则原文，这一点必须以入学后下发的学生手册和学位授予文件为准，开学后向教务处或学员队干部确认，不宜听信学长口头说法。</p>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#38bdf8;--acc-soft:#c9e9ff">
     <img src="img/library.jpg" alt="图书馆书架（示意图）">
     <div class="bt">一句话的定位</div>
     <div class="bd">联考看行测申论和专业课，四级看的是四年之后的岗位选择面与深造资格。前者决定能不能穿上警服，后者决定穿上之后能往哪里走。</div>
@@ -298,7 +302,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
   <div class="no">五</div>
   <h2>备考资料</h2>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#34d399;--acc-soft:#c6f3e0">
     <img src="img/desk.jpg" alt="书桌上的笔记本与键盘（示意图）">
     <div class="bt">三样东西就够</div>
     <div class="bd">一套近十年真题、一个带复习安排的背词工具、一个能改作文的对话工具。资料不在多，在于用完。</div>
@@ -342,7 +346,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
 
   <p>背单词效率低，通常不是记性差，是两件事没做：一是背过的词没有经过"先想再核对"的过程，看着词表顺着读，眼睛认识就算过了；二是复习没有按遗忘规律排期，学过的东西在差不多该忘的时候没有再出现。认知心理学里对应这两个问题的结论分别是测试效应与间隔重复，教育心理学教材对二者均有实验支持，不是民间偏方。单词卡片恰好把这两件事合并：卡片正面逼你先回想，软件按间隔安排每张卡下次出现的时间。</p>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#fbbf24;--acc-soft:#fbe7b8">
     <img src="img/notes.jpg" alt="文具与便签卡片（示意图）">
     <div class="bt">卡片从哪来：从真题里取，不按字母表背</div>
     <div class="bd">四级大纲词汇约 4500 个。一套真题中真正构成理解障碍的词，对基础一般的学生约一百个；十套去重之后，值得做成卡片的在六百到九百之间。</div>
@@ -475,7 +479,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
   <div class="no">七</div>
   <h2>听力：一天一篇，五步走完</h2>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#a78bfa;--acc-soft:#e0d6ff">
     <img src="img/headphone.jpg" alt="头戴式耳机（示意图）">
     <div class="bt">精听是唯一被反复验证有效的方法</div>
     <div class="bd">听力 248.5 分，与阅读并列最高，也是短期提升最难的部分。对同一段材料反复处理，直至每个音节都能辨认。</div>
@@ -525,7 +529,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
   <div class="no">八</div>
   <h2>阅读：定位与比对，不是逐句理解</h2>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#fb7185;--acc-soft:#fbd2d9">
     <img src="img/reading.jpg" alt="书桌上翻开的书（示意图）">
     <div class="bt">正确答案多是原文某句的同义改写</div>
     <div class="bd">仔细阅读两篇、十题、142 分。题目顺序与文章段落顺序基本一致，先读题干定位，再回原文比对。</div>
@@ -630,7 +634,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
   <div class="no">九</div>
   <h2>写作：三套结构，手写十篇</h2>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#22d3ee;--acc-soft:#c6f3fa">
     <img src="img/writing.jpg" alt="手写笔记（示意图）">
     <div class="bt">背结构，不背整篇范文</div>
     <div class="bd">写作 106.5 分，考试三十分钟，四级 120 至 180 词，六级 150 至 200 词。历年题目大体归为三类，掌握三套结构即可应对多数情况。</div>
@@ -671,7 +675,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
   <div class="no">十</div>
   <h2>翻译：四道坎，逐字对应是误区</h2>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#fb923c;--acc-soft:#fcdcbe">
     <img src="img/pen.jpg" alt="钢笔与笔记本（示意图）">
     <div class="bt">中国文化题材占大头，相关词汇集中准备</div>
     <div class="bd">翻译 106.5 分，段落汉译英，四级约 140 至 160 字，六级 180 至 200 字。评分看两点：信息是否完整，译文是否符合英语习惯。</div>
@@ -826,7 +830,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
   <div class="no">十三</div>
   <h2>怎么坚持八个月</h2>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#a3e635;--acc-soft:#e3f7c2">
     <img src="img/running.jpg" alt="跑步上台阶（示意图）">
     <div class="bt">能不能坚持，取决于启动成本，不取决于决心</div>
     <div class="bd">一个人能否长期做一件事，通常不取决于意志强弱，而取决于这件事的启动成本是否足够低。以下五项安排，都在降低这个成本。</div>
@@ -851,7 +855,7 @@ footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
 
   <p>四、六级实行分阶段收卷：写作与听力在答题卡一上作答，听力录音结束后立即回收；阅读与翻译在答题卡二上作答。这一规则决定了作答顺序与涂卡时机。</p>
 
-  <div class="banner">
+  <div class="banner" style="--acc:#818cf8;--acc-soft:#d6d9fe">
     <img src="img/classroom.jpg" alt="教室课桌椅（示意图）">
     <div class="bt">分阶段收卷，是当天一切安排的依据</div>
     <div class="bd">听力一结束，答题卡一立即回收，没有涂卡时间。听一题涂一题，这一条要在模考里练成习惯。</div>
