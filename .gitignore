@@ -30,3 +30,6 @@ Thumbs.db
 
 # ===== college 板块正文配图（cet46 页面 img/ 引用）=====
 !sections/college/cet46/img/*.jpg
+
+# 本地备份不入库
+*.bak-*
