@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四六级：2026 级新生备考指南</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --line:rgba(150,188,245,.16); --line-2:rgba(150,188,245,.10);
+  --ink:#ffffff; --ink-2:#c3d1e3; --ink-3:#b0c0d4;
+  --sky:#38bdf8; --emerald:#34d399; --amber:#fbbf24; --rose:#fb7185;
+  --key:#382c0c; --warn:#2b1416; --ok:#0e2820; --blue:#0d2340;
+  --shadow:inset 0 1px 0 rgba(160,195,250,.06), 0 16px 34px -18px rgba(0,0,0,.75);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.95; font-size:16px; -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 600px at 8% 0%, rgba(56,189,248,.12), transparent 60%),
+    radial-gradient(760px 520px at 94% 20%, rgba(192,132,252,.08), transparent 62%);
+}
+.wrap{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:0 28px 100px}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.22;font-weight:800;letter-spacing:-1px}
+h2{font-size:23px;line-height:1.4;font-weight:750;margin-bottom:10px}
+h3{font-size:17px;font-weight:700;margin:26px 0 8px;color:#ffffff}
+p{color:var(--ink-2);font-size:16px;margin-top:14px;text-align:justify}
+p strong{color:#ffffff;font-weight:600}
+a{color:#93c5fd;text-decoration:none;border-bottom:1px dotted rgba(147,197,253,.5)}
+
+.hero{position:relative;overflow:hidden;margin:40px -28px 20px;padding:150px 32px 36px;
+  display:flex;flex-direction:column;justify-content:flex-end;border-bottom:1px solid var(--line-2)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,10,26,.55) 0%,rgba(5,10,26,.45) 30%,rgba(5,10,26,.88) 68%,rgba(5,10,26,.96) 100%)}
+.hero>*:not(img){position:relative;z-index:2}
+.hero .k{font-size:11px;letter-spacing:.2em;color:#8fd4f5;font-weight:700;margin-bottom:12px}
+.hero .sub{margin-top:14px;font-size:16px;color:#d7e3f2;line-height:2}
+.hero .m{margin-top:20px;font-size:12.5px;color:#9db2ca;letter-spacing:.03em}
+.hero h1{text-shadow:0 2px 18px rgba(0,0,0,.65)}
+
+.sec{margin-top:52px}
+.no{font-size:12.5px;letter-spacing:.18em;color:var(--sky);font-weight:800;margin-bottom:8px}
+
+.banner{position:relative;overflow:hidden;border-radius:14px;margin:18px 0 6px;min-height:190px;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px 22px;
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.banner::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,10,26,.30) 0%,rgba(5,10,26,.55) 52%,rgba(5,10,26,.90) 100%)}
+.banner>*:not(img){position:relative;z-index:2}
+.banner .bt{font-size:16.5px;font-weight:700;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.banner .bd{font-size:13px;color:#d3dfee;margin-top:5px;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+
+.callout{border-radius:10px;padding:15px 20px;margin:18px 0;background:var(--key);
+  border:1px solid rgba(251,191,36,.26);border-left:3px solid var(--amber)}
+.callout.warn{background:var(--warn);border-color:rgba(239,68,68,.24);border-left-color:var(--rose)}
+.callout.ok{background:var(--ok);border-color:rgba(52,211,153,.22);border-left-color:var(--emerald)}
+.callout .ct{display:block;font-size:10.5px;letter-spacing:.16em;font-weight:800;margin-bottom:6px;color:var(--amber)}
+.callout.warn .ct{color:var(--rose)}
+.callout.ok .ct{color:var(--emerald)}
+.callout p{margin:0;font-size:14.8px;line-height:1.9;color:#ffffff}
+.callout b{color:#fde68a}
+.callout.warn b{color:#fca5a5}
+.callout.ok b{color:#8ef0c4}
+
+.rule{background:var(--blue);border-left:3px solid var(--sky);border-radius:0 8px 8px 0;
+  padding:12px 16px;margin:16px 0;font-size:14.4px;color:#ffffff;line-height:1.9}
+.rule b{color:#7dd3fc}
+
+ul,ol{margin:12px 0 0 22px}
+li{color:var(--ink-2);font-size:15.6px;line-height:1.95;margin-bottom:8px}
+li b{color:#ffffff;font-weight:600}
+
+table{width:100%;border-collapse:collapse;font-size:14px;margin:14px 0}
+th{background:var(--s3);color:#fff;font-weight:600;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px}
+td{padding:10px 12px;border-bottom:1px solid var(--line-2);color:var(--ink-2);vertical-align:top;line-height:1.8}
+td b{color:#fff;font-weight:600}
+tr:last-child td{border-bottom:none}
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--line);margin:14px 0}
+
+.fig{margin:18px 0}
+.fig svg{width:100%;height:auto;display:block}
+.cap{font-size:12.2px;color:#8fa6be;margin-top:8px;text-align:center}
+
+.task{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:13.4px;line-height:1.7;color:var(--ink-2)}
+.task input{appearance:none;-webkit-appearance:none;width:15px;height:15px;border:1.5px solid rgba(150,188,245,.5);
+  border-radius:4px;margin-top:4px;flex:0 0 auto;position:relative;cursor:pointer;background:transparent}
+.task input:checked{background:#38bdf8;border-color:#38bdf8}
+.task input:checked::after{content:"";position:absolute;left:4px;top:0;width:4px;height:9px;
+  border:solid #050a1a;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.task input:checked+span{color:#8fa6be;text-decoration:line-through}
+.taskline{margin:2px 0}
+.today{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  background:var(--blue);border-left:3px solid var(--sky);border-radius:0 8px 8px 0;
+  padding:10px 14px;margin:14px 0;font-size:13.4px;color:#cfe4f7}
+.today b{color:#7dd3fc;font-weight:700}
+
+footer{margin-top:60px;padding-top:22px;border-top:1px solid var(--line-2)}
+footer p{font-size:12.5px;color:#7f96ae;margin-top:4px;text-align:left}
+
+@media(max-width:700px){
+  .wrap{padding:0 16px 80px}
+  .hero{margin:0 -16px 16px;padding:110px 20px 26px}
+  h2{font-size:20px}
+  p,li{font-size:15.4px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="大学校园建筑（示意图，非本校实景）">
+  <div class="k">公安院校 · 2026 级新生</div>
+  <h1>四六级，从大一上学期开始安排</h1>
+  <p class="sub">写给 2026 年 8 月入学的公安专业本科生。按自己的起点选一档，每天做什么、做到什么程度算完，都写在任务单上；单词卡、真题取词、听说读写各项练法、考场流程，一并在这儿。</p>
+  <p class="m">2026 年 10 月 · 封面为校园示意图，非本校实景</p>
+</header>
+
+<p>这份指南有三个前提，先交代清楚。</p>
+<p>第一，考生是 2026 年 8 月入学的新生，学籍注册通常在入学后两三个月内完成，也就是十一月前后。2026 年 12 月 12 日这一场四级，报名在九月中下旬，那时既没有学籍，多数学校也不放行大一上学期考生，因此这一场与新生无关，不必为此焦虑。第一次可以参加的考试是 2027 年 6 月中旬那场，报名在三、四月，从现在算起准备时间约八个月。</p>
+<p>第二，学校实行警务化管理，作息由学员大队和中队统一安排，个人可支配的时间集中在早操之后、午间、固定晚自习与周末。备考计划必须长在这个时间结构里，照搬普通高校的自由安排行不通。</p>
+<p>第三，公安联考不考英语。四级与入警的关系，第一节专门说清。搞清它的位置，才知道该投入多少。</p>
+
+<!-- 01 -->
+<div class="sec">
+  <div class="no">一</div>
+  <h2>四级在公安院校里的位置</h2>
+
+  <p>四级不是入警的门票，但它决定四年后有几条路可以走。判断的依据如下。</p>
+
+  <p><strong>公安联考的笔试科目为行政职业能力测验、申论和公安专业科目，不含英语。</strong>报考条件也没有四级分数的要求。四级未通过，不影响参加联考，也不影响入警的主路径。这一点有多家招考机构口径一致，可视为可靠。</p>
+
+  <p><strong>但它影响的是联考之后的选择。</strong>联考岗位中，外语类、涉外类岗位对英语有明确资质要求，达到相应四六级分数是报名的前提条件之一；本校设有移民管理、出入境管理等涉外色彩浓厚的专业方向，这类岗位与专业背景的匹配度最高，若因英语关掉了这一扇门，选择的范围会明显收窄。此外，报考公安院校研究生须考英语，国际维和、涉外执法交流等机会同样以英语为基本条件。</p>
+
+  <p><strong>学位方面，学校对达到毕业要求的学生颁发本科毕业证书，符合学位授予规定者授予学士学位。</strong>学位授予的外语条件是否包含四级，公开渠道查不到本校的实施细则原文，这一点必须以入学后下发的学生手册和学位授予文件为准，开学后向教务处或学员队干部确认，不宜听信学长口头说法。</p>
+
+  <div class="banner">
+    <img src="img/library.jpg" alt="图书馆书架（示意图）">
+    <div class="bt">一句话的定位</div>
+    <div class="bd">联考看行测申论和专业课，四级看的是四年之后的岗位选择面与深造资格。前者决定能不能穿上警服，后者决定穿上之后能往哪里走。</div>
+  </div>
+
+  <p>由此可以确定投入原则：大一、大二阶段，四六级的目标是尽早达到 425 分，不必冲高分；大三大四若确定报考涉外岗位或考研，再按需要把六级提上去。四年只考一两场、每场都认真准备，比反复报名反复裸考经济得多。</p>
+</div>
+
+<!-- 02 -->
+<div class="sec">
+  <div class="no">二</div>
+  <h2>报名</h2>
+
+  <p>四、六级是校内考试，在本校考点报名并参加考试，不得跨校，社会考生没有报考资格。报名统一在教育部考试中心的报名网站（cet-bm.neea.edu.cn）完成。</p>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:24%">项目</th><th>规定</th></tr>
+    <tr><td>资格</td><td>全日制在校生。修完大学英语四级课程者可报四级；四级 425 分以上且修完六级课程者可报六级</td></tr>
+    <tr><td>时间</td><td>每年两次：上半年考试六月举行，报名三、四月；下半年考试十二月举行，报名九月中下旬。各校截止时间不同，逾期不补</td></tr>
+    <tr><td>费用</td><td>各省自定，一般 30 至 50 元</td></tr>
+    <tr><td>口试</td><td>选考，须先报同级别笔试。涉外方向的学生建议关注，口试等级会印在成绩单上</td></tr>
+  </table>
+  </div>
+
+  <h3>新生的时间线</h3>
+  <p>2026 级新生需要记住的是三个节点。2026 年 12 月 12 日这场，报名九月中旬前后，学籍尚未注册，通常无资格报考，也不必报考。2027 年三月，教务处发布上半年报名通知，这是第一场可以参加的考试，务必在开学第一周就把教务处通知页面设为关注。2027 年六月考试，八月出分，若达到 425 分，2027 年十二月即可报考六级。</p>
+
+  <h3>报名流程</h3>
+  <ol>
+    <li><b>注册并登录。</b>以身份证号注册，一个证件号只能注册一次。</li>
+    <li><b>资格验证。</b>填写姓名与身份证号，由系统与学籍库比对。查不到学籍时联系教务处，自行反复尝试没有意义。</li>
+    <li><b>核对照片与院系信息。</b>照片错误须立即申请更正，确认后锁定，无法修改。</li>
+    <li><b>选择科目。</b>四级与六级不能同场兼报；口试单独勾选，且以对应笔试报名为前提。</li>
+    <li><b>缴费。</b>报考信息确认后须在二十四小时内缴费，逾期系统自动删除记录，视为未报名。</li>
+    <li><b>打印准考证。</b>笔试准考证一般于考前十天左右开放下载，多打印一份备用。</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="ct">本校特有的两点</span>
+    <p><b>修完课程才可报考。</b>大学英语为必修课，学校对首次报考的学期可能有自己的安排，例如要求完成第一学年课程。以教务处当年通知为准，不要按地方高校的经验推断。<br>
+    <b>报名不靠个人自觉，靠队里组织。</b>报名窗口往往只有几天，且与警务化作息重叠，建议记入个人计划本，并提前与区队干部确认是否统一组织报名。</p>
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="sec">
+  <div class="no">三</div>
+  <h2>试卷构成</h2>
+
+  <p>四级与六级总分均为 710 分，四个部分占比完全相同，差别在材料长度、语速与题材深度。听力与阅读合计 497 分，占七成；写作与翻译合计 213 分，占三成。这一比例决定了复习时间的基本分配。</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 680 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="710 分构成">
+      <rect x="20" y="46" width="96" height="52" rx="3" fill="#8a6512"/>
+      <rect x="116" y="46" width="224" height="52" rx="3" fill="#0e6b8c"/>
+      <rect x="340" y="46" width="224" height="52" rx="3" fill="#43389a"/>
+      <rect x="564" y="46" width="96" height="52" rx="3" fill="#16694a"/>
+
+      <text x="68" y="68" fill="#ffffff" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">写作</text>
+      <text x="68" y="87" fill="#f5e6bf" font-size="14" font-weight="700" text-anchor="middle" font-family="sans-serif">106.5</text>
+      <text x="228" y="68" fill="#ffffff" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">听力</text>
+      <text x="228" y="87" fill="#c9eefb" font-size="14" font-weight="700" text-anchor="middle" font-family="sans-serif">248.5</text>
+      <text x="452" y="68" fill="#ffffff" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">阅读</text>
+      <text x="452" y="87" fill="#dcd8fb" font-size="14" font-weight="700" text-anchor="middle" font-family="sans-serif">248.5</text>
+      <text x="612" y="68" fill="#ffffff" font-size="12.5" font-weight="700" text-anchor="middle" font-family="sans-serif">翻译</text>
+      <text x="612" y="87" fill="#c7f0dd" font-size="14" font-weight="700" text-anchor="middle" font-family="sans-serif">106.5</text>
+
+      <line x1="116" y1="120" x2="564" y2="120" stroke="#38bdf8" stroke-width="1.4"/>
+      <line x1="116" y1="115" x2="116" y2="125" stroke="#38bdf8" stroke-width="1.4"/>
+      <line x1="564" y1="115" x2="564" y2="125" stroke="#38bdf8" stroke-width="1.4"/>
+      <text x="340" y="146" fill="#7dd3fc" font-size="13" text-anchor="middle" font-weight="700" font-family="sans-serif">听力与阅读合计 497 分，占百分之七十</text>
+      <text x="340" y="170" fill="#b0c0d4" font-size="11.5" text-anchor="middle" font-family="sans-serif">写作与翻译合计 213 分，占百分之三十</text>
+    </svg>
+    <div class="cap">四个部分的占比在四级与六级中完全一致</div>
+  </div>
+
+  <h3>各题型分值</h3>
+  <div class="tw">
+  <table>
+    <tr><th style="width:34%">题型</th><th style="width:16%">题数</th><th style="width:20%">每题分值</th><th>小计</th></tr>
+    <tr><td>听力篇章（六级为讲座与讲话）</td><td>10</td><td><b>14.2</b></td><td>142</td></tr>
+    <tr><td>仔细阅读</td><td>10</td><td><b>14.2</b></td><td>142</td></tr>
+    <tr><td>长篇阅读（段落匹配）</td><td>10</td><td>7.1</td><td>71</td></tr>
+    <tr><td>短篇新闻、长对话、听力篇章（其余部分）</td><td>15</td><td>7.1</td><td>106.5</td></tr>
+    <tr><td>选词填空</td><td>10</td><td>3.55</td><td>35.5</td></tr>
+    <tr><td>写作、翻译</td><td>各 1</td><td>—</td><td>各 106.5</td></tr>
+  </table>
+  </div>
+
+  <p>同为选择题，听力篇章与仔细阅读每题 14.2 分，选词填空每题 3.55 分，相差四倍。考场时间应按分值分配，而不是按题目顺序。</p>
+
+  <h3>425 分的性质</h3>
+  <p>CET 采用常模参照计分，不设及格线。卷面原始分经等值处理后，参照常模群体转换为 710 分制报道分。四级常模取自全国十六所高校约三万名非英语专业考生。因此同样的错题数在不同场次会得到不同的分数，误差可达数十分。425 分是历年形成的通用门槛，多数高校以之为学位条件之一，六级报名亦以此为资格线；它的约束力来自普遍采用，而非行政规定。</p>
+
+  <div class="rule">
+    <b>由此得出应试原则</b><br>
+    复习时间优先投入听力与阅读；写作与翻译以固定结构和常用句式保证基本得分；选词填空放到最后处理。这一顺序的依据是分值比例，不是题目难易。
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="sec">
+  <div class="no">四</div>
+  <h2>大学英语和高中英语，不是一回事</h2>
+
+  <p>高中那套办法，进大学之后有一半会失效。失效的原因不在努力程度：考法变了，教材和考试脱了钩，推着你走的人也没有了。把差别摆在一起看，才知道哪些功夫该带走，哪些该放下。</p>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:14%"> </th><th style="width:38%">高中</th><th>大学 · 四级</th></tr>
+    <tr><td><b>推进方式</b></td><td>按教材单元走，周考月考推着，一单元一测</td><td>没有单元考，一学期一次期末，四级没人催</td></tr>
+    <tr><td><b>词汇</b></td><td>约 3500 词，要求会拼、会写、会造句</td><td>约 4500 词，七成只要求认得，约 200 个写作词要会拼</td></tr>
+    <tr><td><b>语法</b></td><td>单独设题考：语法填空、改错、虚拟语气</td><td>不设语法题，语法只作读懂长句的工具</td></tr>
+    <tr><td><b>听力</b></td><td>短对话，语速慢，给时间预读选项</td><td>新闻、长对话、篇章，只播一遍，有连读与口音</td></tr>
+    <tr><td><b>写作</b></td><td>应用文与读后续写，套句能拿分</td><td>议论文 120 至 180 词，看结构是否清楚、语言是否准确</td></tr>
+    <tr><td><b>翻译</b></td><td>句子翻译，一句一句改</td><td>段落汉译英，140 至 160 字，要成段成篇</td></tr>
+    <tr><td><b>谁负责</b></td><td>老师布置、家长过问、考试追着</td><td>全部自己，连报名都要自己盯</td></tr>
+  </table>
+  </div>
+
+  <h3>教材和考试是两件事</h3>
+
+  <p>多数高校的大学英语是两学年必修，每周四课时上下，按综合教程的单元推进：一个单元一篇课文、一组词汇、一次听说练习。四级考的是通用语料，题型是新闻、长对话、篇章、选词填空、段落匹配、汉译段落。教材的单元进度和四级题型之间没有对应关系，任课教师也不会专门抽课时讲四级题型。具体课时与教材以本校现行培养方案为准。</p>
+
+  <p>于是有一种情况很常见：课上得认真，期末也过了，第一次拿起四级真题却连题型都不熟。这不是课没上好，是两套东西各有各的进度。备考必须在课堂之外另起一条线，自己走。</p>
+
+  <p>更关键的一点在分数构成上。高中英语的分数主要由语法和拼写撑起来，这两块在四级里占的分不多。四级有一半的分在听力和阅读，考的是速度与耐受度：一篇四百词的文章，十二分钟读完并答完五道题。这个能力高中没练过——高中阅读给的时间宽，文章短，题目直白。它必须单独练，靠刷高中题型的经验补不上。</p>
+
+  <h3>三条要改掉的高中习惯</h3>
+
+  <ul>
+    <li><b>从词汇书第一页开始背。</b>高中词表小，背得完；四级四千五百词按字母序背，A 开头那二十页被翻烂，S 之后永远是新的一页。改成从真题里取词，怎么取见第六节。</li>
+    <li><b>抱着语法书从头系统学。</b>高中语法单独设题，值得系统过一遍；四级不考语法题，语法只是拆句子的工具。遇到读不通的句子当场拆，拆一百句比看十章语法书管用。</li>
+    <li><b>等老师布置任务。</b>高中有人推着走，四级没人催。第十一节那套三档方案，就是替代"老师"的东西——什么时候做什么、做到什么程度算完，都写在上面。</li>
+  </ul>
+
+  <h3>两条要留住的高中习惯</h3>
+
+  <ul>
+    <li><b>错题本。</b>这是高中最值钱的遗产。四级同样管用，只是记的内容要变：从抄题目，改成写错因——定位错了、同义替换没看出、干扰项误选，三类分开记。抄题不产生任何作用，写错因才有。</li>
+    <li><b>早读出声。</b>高中早读背课文，大学没人管了。四级的听力要靠口腔熟悉连读与弱读的位置，跟读那一步必须出声，默读无效。这一点在第七节的精听五步里是第三步之后的必做项。</li>
+  </ul>
+
+  <div class="callout">
+    <span class="ct">一句话的分界</span>
+    <p>高中把语言拆成知识点，一个个考你；四级把语言当工具，考能不能用它读完、听完、写完。同一个单词，高中要求会写，四级大多只要求认得——但要在三秒内认出来，慢一步，整段就接不上了。</p>
+  </div>
+</div>
+
+<!-- 05 -->
+<div class="sec">
+  <div class="no">五</div>
+  <h2>备考资料</h2>
+
+  <div class="banner">
+    <img src="img/desk.jpg" alt="书桌上的笔记本与键盘（示意图）">
+    <div class="bt">三样东西就够</div>
+    <div class="bd">一套近十年真题、一个带复习安排的背词工具、一个能改作文的对话工具。资料不在多，在于用完。</div>
+  </div>
+
+  <p>历年真题的命题思路具有连续性，模拟题在这一点上难以替代，不必另购模拟卷。真题书市面上常见四个版本，差别主要在解析方式，按自己的基础选一本即可，买当年新版。</p>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:30%">真题书</th><th>解析特点</th><th style="width:26%">适合</th></tr>
+    <tr><td><b>巨微《四级真题逐句精解》</b></td><td>文章逐句拆语法、标词汇，长难句有图解，解析最厚</td><td>基础薄弱，长难句读不通</td></tr>
+    <tr><td><b>华研外语</b></td><td>真题与答案分册装订，附专项训练与词汇手册</td><td>想要专项练习、翻阅方便</td></tr>
+    <tr><td><b>黄皮书</b></td><td>逐题解析详细，含全文翻译与考点标注</td><td>想要详细解析、系统刷题</td></tr>
+    <tr><td><b>星火英语</b></td><td>题量大，配套 App 听力与词汇书</td><td>基础尚可，想多刷题保持手感</td></tr>
+  </table>
+  </div>
+  <p style="font-size:13.5px;color:#8fa6be">以上为市面常见版本的通行评价，属经验判断；各版本逐年改版，购买前翻看当年实书为准。</p>
+
+  <h3>免费在线资源</h3>
+  <div class="tw">
+  <table>
+    <tr><th style="width:34%">资源</th><th style="width:40%">用途</th><th>获取方式</th></tr>
+    <tr><td>中国教育考试网 CET 专区</td><td>官方大纲、题型说明、报名入口</td><td>neea.edu.cn</td></tr>
+    <tr><td><b>小鹿 DeerTools · 单词记忆卡</b></td><td>自制单词卡片、按遗忘规律排复习、打印纸质卡</td><td>deertools.cn/tools/flashcards</td></tr>
+    <tr><td>Anki</td><td>功能最强的自建卡片软件，自动排复习</td><td>apps.ankiweb.net</td></tr>
+    <tr><td>墨墨背单词 / 不背单词 / 百词斩</td><td>现成四六级词库，不想自己做卡时用</td><td>手机应用商店</td></tr>
+    <tr><td>欧路词典</td><td>查词带例句与发音，查过的词自动进生词本</td><td>手机应用商店</td></tr>
+    <tr><td>剑桥词典 Cambridge Dictionary</td><td>英式美式发音、英文释义、搭配例句</td><td>dictionary.cambridge.org</td></tr>
+    <tr><td>每日英语听力 / 可可英语</td><td>真题听力音频、泛听材料</td><td>App 或网页</td></tr>
+    <tr><td>China Daily 中国日报</td><td>泛读材料，题材与翻译题接近</td><td>chinadaily.com.cn</td></tr>
+  </table>
+  </div>
+
+  <p>改作文用任何一个能对话的 AI 工具都可以，提示词怎么写在第九节。工具之间没有神奇差异，用完一套真题、背完一本生词本，比比较十款软件有用得多。</p>
+</div>
+
+<!-- 05 -->
+<div class="sec">
+  <div class="no">六</div>
+  <h2>单词卡片：用什么做，怎么用</h2>
+
+  <p>背单词效率低，通常不是记性差，是两件事没做：一是背过的词没有经过"先想再核对"的过程，看着词表顺着读，眼睛认识就算过了；二是复习没有按遗忘规律排期，学过的东西在差不多该忘的时候没有再出现。认知心理学里对应这两个问题的结论分别是测试效应与间隔重复，教育心理学教材对二者均有实验支持，不是民间偏方。单词卡片恰好把这两件事合并：卡片正面逼你先回想，软件按间隔安排每张卡下次出现的时间。</p>
+
+  <div class="banner">
+    <img src="img/notes.jpg" alt="文具与便签卡片（示意图）">
+    <div class="bt">卡片从哪来：从真题里取，不按字母表背</div>
+    <div class="bd">四级大纲词汇约 4500 个。一套真题中真正构成理解障碍的词，对基础一般的学生约一百个；十套去重之后，值得做成卡片的在六百到九百之间。</div>
+  </div>
+
+  <h3>从一套真题里取哪些词</h3>
+
+  <p>真题是取词最好的语料，词汇范围、句子难度、语速全是考试本身的口径，比任何词表都准。按字母顺序编排的词汇书则相反，A 开头那二十页被反复翻阅，后部始终是新的，原因不在人懒，在编排方式与出现频率不匹配。</p>
+
+  <p>但"把所有词都搞会"这句话不能照字面执行。一套题里总有专有名词、学科术语、只在这一套里露过一次的冷僻词。把它们也做成卡片，会有两个后果：每天翻的卡里大半是考不到的词，复习队列被稀释；一套题的精析从三小时拖到六小时，做到第五套就停了。这两件事都会让一个好方法半途而废。</p>
+
+  <p>取词分三档，判定方法只有一句：<b>把这个词盖住，这道题还能不能做对。</b>能做对，就不进卡片。</p>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:18%">档次</th><th style="width:42%">判定</th><th>处理</th></tr>
+    <tr><td><b>A 档<br>必做卡</b></td><td>出现在题干、选项或答案所在句里，而你不认识</td><td>做成卡片，带原句。这类词直接影响得分，一个都不能漏</td></tr>
+    <tr><td><b>B 档<br>看频率</b></td><td>原文里的生词，不影响做题，但在近三套里出现过两次以上</td><td>做成卡片。重复出现说明它在真题语料里是高频，值得投入</td></tr>
+    <tr><td><b>C 档<br>不进卡</b></td><td>专有名词、学科术语、只在这一套出现过一次的词</td><td>只在原文上标注中文，读通句子即可，不占复习队列</td></tr>
+  </table>
+  </div>
+
+  <p>按这个分档，一套题进卡片的通常在三四十到六十个之间，A 档占多数。十套做下来，去重后的卡片在六百到九百张，八个月背得完，也复习得过来。</p>
+
+  <p>至于"每个细节都搞清楚"，该搞清的细节不在词上，在题上：每道错题卡在哪一步、正确选项对应原文哪一句、干扰项错在哪个字、听力哪个音没听出来。这四件事搞清楚，同一类题下次就能做对；多背五十个只出现一次的词，下次大概率还是碰不到。</p>
+
+  <h3>一套真题做三遍</h3>
+
+  <ol>
+    <li><b>第一遍，按考试时间做。</b>不查词、不暂停，作文翻译照常写完。这一遍产出的是分数和错题清单，不是知识。</li>
+    <li><b>第二遍，当天或次日精析。</b>逐题回原文定位，把正确选项怎么改写、干扰项错在哪里写下来；听力对照原文，把听不清的位置归类；生词按三档取，A、B 档当场做成卡片。</li>
+    <li><b>第三遍，四周之后回炉。</b>只做这一套的错题，只过这一套的卡片。不看解析，先自己做，做完再对。</li>
+  </ol>
+
+  <p>第三遍是多数人会跳过的一遍，也是记忆真正发生的一遍。第一遍做题时靠上下文猜出来的词，隔一个月再看往往已经不认得；隔一个月还认得的，才是真的进了长期记忆。二十套各做一遍，不如十套各做三遍。</p>
+
+  <p>做多少套也有个边际。前八套新词掉得最快，第九到第十五套重复率明显上升，第十六套以后基本是保持手感、验证稳定性。八到十二套精做，胜过二十套泛做。这个数字来自对真题重复率的观察，属经验判断，不是统计结果。</p>
+
+  <h3>一张卡怎么写</h3>
+  <p>卡片质量的差距全在正反面写什么。三条经验：一张卡只考一件事；背面不超过三行；必带一句原句——语境是回忆的抓手，孤零零的"单词—释义"配对最难被想起来。常用三种卡型：</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三种卡型示例">
+      <rect x="20" y="20" width="200" height="120" rx="10" fill="#16274a" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="34" y="46" fill="#7dd3fc" font-size="11" font-weight="700" font-family="sans-serif">卡型一 · 认词卡（正面）</text>
+      <text x="120" y="86" fill="#ffffff" font-size="21" font-weight="700" text-anchor="middle" font-family="sans-serif">suspend</text>
+      <text x="120" y="112" fill="#b0c0d4" font-size="12" text-anchor="middle" font-family="sans-serif">/səˈspend/  v.</text>
+
+      <rect x="240" y="20" width="200" height="120" rx="10" fill="#101d38" stroke="rgba(150,188,245,.3)" stroke-width="1"/>
+      <text x="254" y="46" fill="#b0c0d4" font-size="11" font-weight="700" font-family="sans-serif">（背面）</text>
+      <text x="340" y="72" fill="#ffffff" font-size="13.5" font-weight="700" text-anchor="middle" font-family="sans-serif">暂停； suspending flights</text>
+      <text x="340" y="94" fill="#c3d1e3" font-size="11.5" text-anchor="middle" font-family="sans-serif">Flights were suspended.</text>
+      <text x="340" y="114" fill="#8fa6be" font-size="10.5" text-anchor="middle" font-family="sans-serif">原句 + 搭配，不超过三行</text>
+
+      <rect x="460" y="20" width="200" height="120" rx="10" fill="#0d2340" stroke="#34d399" stroke-width="1.2"/>
+      <text x="474" y="46" fill="#6ee7b7" font-size="11" font-weight="700" font-family="sans-serif">卡型二 · 填空卡（正面）</text>
+      <text x="560" y="78" fill="#ffffff" font-size="12.5" text-anchor="middle" font-family="sans-serif">The airline ______ all</text>
+      <text x="560" y="100" fill="#ffffff" font-size="12.5" text-anchor="middle" font-family="sans-serif">flights before the storm.</text>
+      <text x="560" y="124" fill="#8fa6be" font-size="10.5" text-anchor="middle" font-family="sans-serif">（答案：suspended）</text>
+
+      <rect x="20" y="160" width="200" height="120" rx="10" fill="#0d2340" stroke="#fbbf24" stroke-width="1.2"/>
+      <text x="34" y="186" fill="#fde68a" font-size="11" font-weight="700" font-family="sans-serif">卡型三 · 反向卡（正面）</text>
+      <text x="120" y="228" fill="#ffffff" font-size="15" font-weight="700" text-anchor="middle" font-family="sans-serif">暂停；中止</text>
+      <text x="120" y="252" fill="#8fa6be" font-size="10.5" text-anchor="middle" font-family="sans-serif">（背面默写英文拼写）</text>
+
+      <rect x="240" y="160" width="420" height="120" rx="10" fill="#101d38" stroke="rgba(150,188,245,.2)" stroke-width="1"/>
+      <text x="254" y="188" fill="#7dd3fc" font-size="12.5" font-weight="700" font-family="sans-serif">三种卡型的分工</text>
+      <text x="254" y="214" fill="#c3d1e3" font-size="12" font-family="sans-serif">认词卡占大头：见到能认即可，考试主要考这个。</text>
+      <text x="254" y="236" fill="#c3d1e3" font-size="12" font-family="sans-serif">填空卡难一档：逼你在句子里回忆，适合熟词生义。</text>
+      <text x="254" y="258" fill="#c3d1e3" font-size="12" font-family="sans-serif">反向卡只给写作词：约 200 个必须会拼写的词才做。</text>
+    </svg>
+    <div class="cap">卡片正反面示例：一张卡只考一件事，背面必带原句</div>
+  </div>
+
+  <p>判断"认识"的标准要事先定死：看到正面，三秒之内说出意思，算认识；想不起来、想错、超过三秒，一律按"忘了"处理，让卡片回到复习队列。标准一松，软件的排期就失去了意义。</p>
+
+  <h3>工具怎么选</h3>
+  <div class="tw">
+  <table>
+    <tr><th style="width:24%">工具</th><th style="width:14%">形态</th><th style="width:22%">费用</th><th style="width:20%">复习安排</th><th>适合</th></tr>
+    <tr>
+      <td><b>小鹿 DeerTools<br>单词记忆卡</b></td><td>网页</td><td>免费，不注册不安装，点开即用</td><td>莱特纳五盒法，间隔 0/1/2/4/7 天，规则公开可核对</td>
+      <td>自己建卡；想打印纸质卡；不想折腾软件</td>
+    </tr>
+    <tr>
+      <td><b>Anki</b></td><td>电脑 + 手机</td><td>电脑与安卓免费；iOS 版一次性付费（约 25 美元）</td><td>SM-2 / FSRS 算法按每张卡的表现自动排期</td>
+      <td>词汇量大、长期使用、愿意花时间配置</td>
+    </tr>
+    <tr>
+      <td><b>Quizlet</b></td><td>网页 + App</td><td>免费版有广告与功能限制</td><td>有复习模式，排期算法较弱</td>
+      <td>直接搜别人做好的卡组来背</td>
+    </tr>
+    <tr>
+      <td><b>墨墨背单词</b></td><td>App</td><td>免费额度有限，扩容需任务或付费</td><td>按遗忘曲线排期，算法较精细</td>
+      <td>不想自己做卡，直接背四六级现成词库</td>
+    </tr>
+    <tr>
+      <td><b>不背单词</b></td><td>App</td><td>基础功能免费</td><td>自带学习计划</td>
+      <td>想要影视原声例句，背词同时磨耳朵</td>
+    </tr>
+    <tr>
+      <td><b>纸质索引卡</b></td><td>手写卡片</td><td>几乎为零</td><td>自己分盒管理，模仿莱特纳五盒</td>
+      <td>手机使用受限的环境，白天随身、晚上集中过</td>
+    </tr>
+  </table>
+  </div>
+
+  <p>对新生，本文把小鹿 DeerTools 与纸质卡排在前面的理由是具体的：警务化管理下手机不是随时能开的，白天碎片时间往往只有纸和笔；而 DeerTools 不用注册、不用安装，在队里公用电脑或自己的电脑上打开就能建卡，还能直接打印成 A4 裁剪卡。两者配合，白天用纸卡，晚自习用电脑核对进度。</p>
+
+  <h3>用小鹿 DeerTools 做卡的完整步骤</h3>
+  <ol>
+    <li><b>攒词表。</b>每做完一套真题，挑出构成障碍的三五十个词，在 Excel 或记事本里整理成两列：第一列单词（可带音标），第二列"中文释义 + 一句真题原句"。</li>
+    <li><b>粘贴建卡组。</b>打开 deertools.cn/tools/flashcards，把两列词表整段粘进输入框。工具自动识别分隔符（Tab、逗号、短横线都认），显示"识别 N 条"，数字对得上就点"建卡组"。从 Excel 直接复制出来的就是 Tab 分隔，不用改格式；Anki、Quizlet 导出的纯文本也能直接粘。</li>
+    <li><b>每天练"今天该复习的"。</b>学习区范围保持默认，点开始翻卡：心里回想意思，点卡片翻面核对，认识点"认识"，忘了点"忘了"。答对的卡进下一盒，隔 1、2、4、7 天再出现；答错直接回第一盒，当天还会再遇到。规则全部写在页面上，每张卡在第几盒、何时到期都能查到。</li>
+    <li><b>换练法查漏。</b>第一天用翻卡混脸熟，之后用选择题筛一遍认不认得出，临考前用拼写模式把写不出的词挑出来。每轮结束有正确率和错题清单，点"只练错题"直接重来。</li>
+    <li><b>打印成随身纸卡。</b>点"打印"，选"卡片版"：A4 纸 2 列 5 行，每张 90×50 毫米，带裁剪线。双面打印先打正面页，纸沿长边翻面放回再打背面页——背面列序已自动镜像，裁开后正反面才对得上。第一次先打一页试裁。</li>
+    <li><b>备份。</b>卡组和进度只存在这台设备的浏览器里，清浏览器数据或换设备都会丢。定期点"导出 JSON（含进度）"存一份，换设备导入即接续。这一步不能省。</li>
+  </ol>
+
+  <div class="callout">
+    <span class="ct">三条来自实际使用的提醒</span>
+    <p><b>卡片是攒出来的，不是造出来的。</b>一次坐下来做五百张卡的热情维持不了两周，卡应该跟着做题走，每天十张地进。<br>
+    <b>不要一张卡写五个释义。</b>只写这套真题里出现的那个意思。四级考的常是熟词生义，多义等遇到了再补一张卡。<br>
+    <b>量定在宁少不断。</b>每天新词的数量按档定（A 档 8 至 12 个，B 档 12 至 15 个，C 档 15 至 20 个，见第十一节），总时长不超过 20 分钟。这个量比一周突击一次、每次两小时有效得多——后者的复习间隔太长，等到再翻卡时，该复习的时点已经过去了。</p>
+  </div>
+</div>
+
+<!-- 06 -->
+<div class="sec">
+  <div class="no">七</div>
+  <h2>听力：一天一篇，五步走完</h2>
+
+  <div class="banner">
+    <img src="img/headphone.jpg" alt="头戴式耳机（示意图）">
+    <div class="bt">精听是唯一被反复验证有效的方法</div>
+    <div class="bd">听力 248.5 分，与阅读并列最高，也是短期提升最难的部分。对同一段材料反复处理，直至每个音节都能辨认。</div>
+  </div>
+
+  <ol>
+    <li><b>盲听做题，约五分钟。</b>不暂停，不回放，按考试状态完成。</li>
+    <li><b>核对答案，约两分钟。</b>先不看原文，只记录错题。</li>
+    <li><b>逐句听写，约十分钟。</b>听一句写一句，听不清的留空。</li>
+    <li><b>分析原因，约五分钟。</b>对照原文，把听不清的位置归类：生词、连读、弱读、语速。生词进生词本做成卡片；连读弱读靠跟读解决，归类错了练法就错。</li>
+    <li><b>跟读模仿，约三分钟。</b>跟随音频朗读，让口腔熟悉连读与弱读的位置。</li>
+  </ol>
+  <p>只做到核对答案为止，做三十篇听力也不会有明显变化。第三至第五步占时不到一半，却是能力形成的主要环节。学校的固定晚自习放一篇精听恰好完整。</p>
+
+  <p>三条经验。其一，精听材料只用近三年真题，语速、口音与难度才与考试对路；泛听另找材料，精听不换。其二，每天二十五分钟一篇，好过周末一次五篇——辨音能力靠每天的重复建立，间隔太长等于每次从零开始。其三，考前两周起，把整套听力按考试时段做，让耳朵适应考试那个钟点的状态。</p>
+
+  <div class="callout">
+    <span class="ct">关于六级</span>
+    <p>六级听力包含三篇讲座与讲话，共十题、142 分，为四级所无。该题型考查篇章结构而非逐句理解：first、second、however、for example、in conclusion 等标记词之后往往对应题目答案，听的过程中在草稿纸上记录标记词及其后的关键词，比完整记录内容有效。</p>
+  </div>
+</div>
+
+<!-- 07 -->
+<div class="sec">
+  <div class="no">八</div>
+  <h2>阅读：定位与比对，不是逐句理解</h2>
+
+  <div class="banner">
+    <img src="img/reading.jpg" alt="书桌上翻开的书（示意图）">
+    <div class="bt">正确答案多是原文某句的同义改写</div>
+    <div class="bd">仔细阅读两篇、十题、142 分。题目顺序与文章段落顺序基本一致，先读题干定位，再回原文比对。</div>
+  </div>
+
+  <p>每篇十二分钟，按四步完成：先读题干，圈出专有名词、数字、大写词等定位词；带着定位词扫读原文，找到对应句并读透上下文；将选项与原文逐词比对，识别同义替换；最后排除四类干扰项——绝对化表述、主体偷换、因果倒置与原文未提及的内容。</p>
+  <p>同义替换值得集中记：a growing number of 对应 an increasing proportion of，be responsible for 对应 account for，carry out 对应 implement，in the long run 对应 over time，play a key role in 对应 be central to。掌握这些对应关系，对提分的帮助大于同等时间的词汇背诵。</p>
+
+  <p>三条经验。其一，错题按三类归因：同义替换没看出来、定位找错段落、干扰项误选，三类对应三种练法，归类比刷量重要。其二，精读一篇好过泛读十篇——做完题把原文中造成障碍的句子划出来，逐句翻译一遍，长难句的功夫在这里补。其三，长难句抓主干：先找谓语动词，确定"谁做了什么"，再回头挂修饰成分；从句再长的句子，主干通常一行写得下。</p>
+  <p>长篇阅读的顺序相反：先用四分钟读完十个题干，标出每句中最独特的词，再扫读各段首尾句匹配。该部分考查检索速度，逐段翻译会使十二分钟的工作延长至二十分钟以上。</p>
+</div>
+
+<!-- 08 -->
+<div class="sec">
+  <div class="no">九</div>
+  <h2>写作：三套结构，手写十篇</h2>
+
+  <div class="banner">
+    <img src="img/writing.jpg" alt="手写笔记（示意图）">
+    <div class="bt">背结构，不背整篇范文</div>
+    <div class="bd">写作 106.5 分，考试三十分钟，四级 120 至 180 词，六级 150 至 200 词。历年题目大体归为三类，掌握三套结构即可应对多数情况。</div>
+  </div>
+
+  <ul>
+    <li><b>观点论证型</b>（agree or disagree）：首段陈述现象、引出争议、表明立场；主体段给出两个理由，各配一句解释和一个具体例证；末段重申立场并提出建议。</li>
+    <li><b>现象分析型</b>：首段说明现象的具体表现；主体段分析两个成因；末段讨论正反两面影响并表明态度。</li>
+    <li><b>问题解决型</b>：首段界定问题及其影响；主体段提出两条对策，明确实施主体；末段总结，不作空泛号召。</li>
+  </ul>
+  <p>句式方面准备二十组常用替换，例如 important 换作 crucial，many 换作 a considerable number of，think 换作 hold the view that，because 换作 owing to，help 换作 contribute to，should 换作 it is advisable that。替换词只有写进自己的作文才算学会——背十组不如用熟三组。</p>
+
+  <p>考前应用手写方式完成十篇，计时二十五分钟，三套结构各写三至四篇，题目取自历年真题。写至第七篇左右，结构会自然成形。手写而非打字，是因为考试为笔答，键盘练习无法建立对篇幅和书写速度的判断。</p>
+
+  <p>修改交给对话式 AI 工具，提示词照抄即可："我是四六级考生。下面这篇作文请按 CET 写作评分标准以十五分制打分，指出最影响得分的三处错误并给出改写，再用同样的结构写一版对照稿。不要笼统评价。"拿到的分数只看趋势，绝对值不作数——不同工具的口径并不一致。</p>
+</div>
+
+<!-- 09 -->
+<div class="sec">
+  <div class="no">十</div>
+  <h2>翻译：四道坎，逐字对应是误区</h2>
+
+  <div class="banner">
+    <img src="img/pen.jpg" alt="钢笔与笔记本（示意图）">
+    <div class="bt">中国文化题材占大头，相关词汇集中准备</div>
+    <div class="bd">翻译 106.5 分，段落汉译英，四级约 140 至 160 字，六级 180 至 200 字。评分看两点：信息是否完整，译文是否符合英语习惯。</div>
+  </div>
+
+  <p>中英文之间的主要差异有四处。其一，中文句子可省略主语，英文通常需要，翻译时补出 people、we、it 等成分。其二，中文多用动词，英文多用名词与介词，如"加大投入"处理为 increase investment in。其三，中文长句常以逗号连接多个分句，英文须用从句或非谓语结构断开。其四，文化专有名词宜作解释性翻译，如"四合院"译为 a traditional Chinese courtyard house。遇到不会表达的词，依次尝试上位概念、拆分解释与整句转换；评分不以用词难度为标准。</p>
+
+  <p>历年翻译题集中在中国文化、社会发展与科技成就三类题材，相关表达可以集中准备一页纸：传统节日的名称与习俗、名胜古迹、四大发明、高铁与移动支付一类当代成就的通行译法。真题参考译文是这一页纸的主要来源，把每篇译文的亮点表达抄下来，比背翻译词汇手册贴近考试。</p>
+
+  <p><strong>选词填空限时五分钟。</strong>十题每题 3.55 分，合计 35.5 分，难度却是阅读各部分中最高，同时涉及词性、搭配与上下文逻辑。第一分钟为十五个选项标注词性；三分钟逐空判断，冠词后为名词，be 动词后为形容词或分词，主语后缺谓语则为动词；最后一分钟对剩余空格按词性排除法作答，不回读全文。同样的十五分钟用于仔细阅读，多答对一题即 14.2 分。</p>
+</div>
+
+<!-- 10 -->
+<div class="sec">
+  <div class="no">十一</div>
+  <h2>三档方案：先定档，再照做</h2>
+
+  <p>三套方案的差别不在努力程度，在起点和目标。选错档的代价很具体：基础薄弱的按标准档走，第一天做精析就看不懂，三周后放弃；基础较好的按打底档走，八个月里有五个月在复习已经会的东西，时间白花。</p>
+
+  <h3>定档：只数一套真题的选择题</h3>
+
+  <p>取一套近三年真题，按考试时间做，不查词、不暂停，作文与翻译照常写完但不计分。只数听力和阅读的选择题：听力 25 题，阅读 30 题（选词填空 10、长篇匹配 10、仔细阅读 10），共 55 题。</p>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:12%">档位</th><th style="width:18%">答对题数</th><th>通常的样子</th><th style="width:14%">目标分</th></tr>
+    <tr><td><b>A 档</b></td><td><b>26 题以下</b><br><span style="font-size:12.5px;color:#8fa6be">正确率不足五成</span></td><td>句子读得断断续续，听力只抓得住个别词，单词量在 2500 上下，作文靠拼凑句子</td><td>425</td></tr>
+    <tr><td><b>B 档</b></td><td><b>27 – 38 题</b><br><span style="font-size:12.5px;color:#8fa6be">五成到七成</span></td><td>能读懂大意但慢，听力细节抓不住，写作能凑够字数但错误多</td><td>425 – 500</td></tr>
+    <tr><td><b>C 档</b></td><td><b>39 题以上</b><br><span style="font-size:12.5px;color:#8fa6be">七成以上</span></td><td>速度够用，失分集中在写作翻译，以及阅读里少量的推断题和主旨题</td><td>500 以上</td></tr>
+  </table>
+  </div>
+
+  <p style="font-size:13.5px;color:#8fa6be">分档线按正确率五成与七成划定，属经验划分，不是官方标准。定这一次就够，不必反复测。</p>
+
+  <h3>每天做什么</h3>
+
+  <p>任务单按学校作息排。钟点跟着队里的安排走，这里固定的是先后次序：早操后练耳，午间过卡，晚自习做读写译。方框可以勾，勾过的记录存在本机浏览器，第二天打开自动清空。</p>
+
+  <div class="tw">
+  <table>
+    <tr>
+      <th style="width:15%">时段</th>
+      <th style="width:28%">A 档 · 约 75 分钟</th>
+      <th style="width:28%">B 档 · 约 90 分钟</th>
+      <th>C 档 · 约 105 分钟</th>
+    </tr>
+    <tr>
+      <td><b>早操后</b></td>
+      <td><label class="task"><input type="checkbox" data-k="a1"><span>精听<strong>半篇</strong>对话（20 分钟），五步走完，只做一段</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="b1"><span>精听<strong>整篇</strong>（25 分钟），五步走完</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="c1"><span>整篇 1.2 倍速（25 分钟），听写只记关键词</span></label></td>
+    </tr>
+    <tr>
+      <td><b>午间</b></td>
+      <td><label class="task"><input type="checkbox" data-k="a2"><span>卡片 20 张（10 分钟），只看不写</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="b2"><span>卡片 40 张（15 分钟）</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="c2"><span>卡片 60 张（15 分钟），只过到期卡</span></label></td>
+    </tr>
+    <tr>
+      <td><b>晚自习<br>前段</b></td>
+      <td><label class="task"><input type="checkbox" data-k="a3"><span>精读<strong>一篇</strong>，逐句译成中文，写在页边（40 分钟）</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="b3"><span>阅读<strong>两篇</strong>限时 + 精析，错题写三行归因（50 分钟）</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="c3"><span>整套阅读限时（35 分钟），四篇连做不中断</span></label></td>
+    </tr>
+    <tr>
+      <td><b>晚自习<br>后段</b></td>
+      <td><span style="color:#5f7288">—</span></td>
+      <td><span style="color:#5f7288">—</span></td>
+      <td><label class="task"><input type="checkbox" data-k="c4"><span>写作或翻译（30 分钟），单日写作、双日翻译</span></label></td>
+    </tr>
+    <tr>
+      <td><b>熄灯前</b></td>
+      <td><label class="task"><input type="checkbox" data-k="a4"><span>今天最难的那一句读三遍（5 分钟）</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="b4"><span>默念今天的三个生词原句（5 分钟）</span></label></td>
+      <td><label class="task"><input type="checkbox" data-k="c5"><span>默写五个写作句式（5 分钟）</span></label></td>
+    </tr>
+  </table>
+  </div>
+
+  <h3>当天的活干到什么程度算完</h3>
+
+  <ul>
+    <li><b>A 档：</b>今天那篇文章，每一句都能译成通顺的中文，译不出的词不超过五个。译不出就说明这句话没读懂，跟做题对错无关。</li>
+    <li><b>B 档：</b>今天两篇阅读的正确选项，都能在原文里指出对应句；每道错题旁边写下一句错因（定位错了、同义替换没看出、干扰项误选）。</li>
+    <li><b>C 档：</b>整套阅读在 35 分钟内做完，错题不超过三个；写作或翻译写完，并对照参考译文标出至少五处差异。</li>
+  </ul>
+
+  <h3>八个月里各档的差别</h3>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:20%">时段</th><th>A 档</th><th>B 档</th><th>C 档</th></tr>
+    <tr><td><b>10 – 12 月</b><br><span style="font-size:12.5px;color:#8fa6be">学期内</span></td><td>每周 2 篇精读 + 2 段精听，不做整套（摸底那套除外）</td><td>每周 3 篇精听 + 2 篇精读 + 1 篇长篇匹配</td><td>每周 1 套限时 + 1 篇写作，其余时间补最弱的一项</td></tr>
+    <tr><td><b>寒假</b><br><span style="font-size:12.5px;color:#8fa6be">约 20 个可用日</span></td><td>6 套，每套三遍，每天 3 小时</td><td>8 套，每套三遍，每天 2.5 小时</td><td>10 套，每套三遍，每天 2.5 小时</td></tr>
+    <tr><td><b>3 – 4 月</b></td><td>3 套 + 写作 4 篇（先背十个功能句再写）</td><td>3 套 + 写作 6 篇 + 翻译 20 段</td><td>4 套 + 写作 6 篇，每篇改三稿</td></tr>
+    <tr><td><b>5 月</b></td><td>1 套 + 翻译 15 段 + 写作 4 篇</td><td>1 套 + 写作 4 篇 + 翻译 20 段</td><td>1 套 + 前四个月错题全套复盘</td></tr>
+    <tr><td><b>6 月</b></td><td>模考 2 套，考前一周只过错题</td><td>模考 2 套，考前一周只过错题</td><td>模考 2 套，考前一周只过错题</td></tr>
+    <tr><td><b>全年真题</b></td><td><b>13 套</b>，每套至少两遍</td><td><b>15 套</b>，前十套三遍</td><td><b>18 套</b>，前十二套三遍</td></tr>
+  </table>
+  </div>
+
+  <h3>什么时候该换档</h3>
+
+  <ul>
+    <li><b>降档：</b>连续三周，一周七天的任务做不到四天。这时候加时间没有用，说明这一档的强度本身就撑着走，降到下一档，把完成率拉回五天才谈加量。</li>
+    <li><b>升档：</b>连续两次模考超出目标分 30 分以上，升一档，把多出来的时间放到写作翻译上。</li>
+    <li><b>重测：</b>寒假结束用另一套真题重定一次档。一个寒假之后，档位变化很常见，按新档走剩下的四个月。</li>
+  </ul>
+</div>
+
+<!-- 11 -->
+<div class="sec">
+  <div class="no">十二</div>
+  <h2>每周与每月的节奏</h2>
+
+  <p>三档方案定的是每天做什么，周和月要另有一套节拍：周内保持，周末验证，月末回看。学校的作息规律，这套节拍容易维持。</p>
+
+  <h3>每周固定安排</h3>
+  <ul>
+    <li><b>周一至周五：</b>按本档任务单执行。有勤务或加练的日子压到最低档，优先削减阅读，听力不削减——耳朵停下来退得最快。</li>
+    <li><b>周六：</b>一整套听力加逐题复盘。复盘不是重听一遍，是把每个错题的原因写下来，三行以内。</li>
+    <li><b>周日：</b>写作一篇、翻译一段，随后修改三十分钟。两项合在一起练，因为它们依赖同一套语言能力。</li>
+    <li><b>每两周：</b>一套完整真题按考试时间计时，从第三周开始，用于观察分数走势。进步不是每周都出现的，两周一测才看得出趋势。</li>
+  </ul>
+
+  <h3>每周日晚上十分钟</h3>
+  <p>把这一周翻一遍，只回答三个问题：哪几天没完成、卡在哪一段；错题里哪一类最多；下周要不要降标准。答案写在计划本上，一句话就够。这三句话是后面调整方案的依据，比日记有用。</p>
+
+  <h3>每月末半小时</h3>
+  <p>做三件事：把当月错题按类型数一遍，看哪一类在减少、哪一类没动；把卡片里连着三次都答错的挑出来，抄成一张纸贴在桌上；用一套真题的阅读部分测一次速度，看有没有从超时变成够用。三件事都有具体产出，不做感受性的总结。</p>
+
+  <div class="callout ok">
+    <span class="ct">定档在先</span>
+    <p>先做第十一节那套定档题，再回来排计划。凭感觉定档，容易把前几周排得过满：计划第三天就完不成，后面很难接上。定档用的那一套，之后当作摸底记录留着，不重复做。</p>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="sec">
+  <div class="no">十三</div>
+  <h2>怎么坚持八个月</h2>
+
+  <div class="banner">
+    <img src="img/running.jpg" alt="跑步上台阶（示意图）">
+    <div class="bt">能不能坚持，取决于启动成本，不取决于决心</div>
+    <div class="bd">一个人能否长期做一件事，通常不取决于意志强弱，而取决于这件事的启动成本是否足够低。以下五项安排，都在降低这个成本。</div>
+  </div>
+
+  <div class="callout">
+    <span class="ct">五项安排</span>
+    <p><b>一、挂在已有习惯之后。</b>与其规定晚上七点学英语，不如规定晚自习坐下后先做一篇精听。前者要求在特定时刻想起一件事，后者依附于每天必然发生的动作。<br><br>
+    <b>二、最低标准定得足够低。</b>计划分两档：标准九十分钟，底线二十分钟。勤务、体能加练的日子完成二十分钟即可。<br><br>
+    <b>三、允许中断一天，不连续中断两天。</b>中断一天属正常，次日补做十分钟即接续。连续中断两天后，重新开始所需的心力远高于补做的十分钟。<br><br>
+    <b>四、用纸笔记录。</b>在储物柜或桌面贴一张月历，完成一天划去一格。打卡软件提供的连续天数与排名，容易使维护记录本身成为目的。<br><br>
+    <b>五、让已付出的成本发挥作用。</b>真题集买回来放在桌面上，比任何提醒都显眼。手机在手边、书在柜中，被选择的多半不是书。警务化管理对物品摆放有统一要求，把真题集和计划本纳入内务的固定位置，反而是可利用的机制。</p>
+  </div>
+
+  <p>判断执行情况的标准，不是每天学了多少，而是某个月是否出现连续七天以上完全没有接触。若出现，说明安排需要调整，而不是人出了问题。警务化作息的特点是规律，规律的环境本利于习惯的维持，多数中断并非来自懒惰，而是来自把标准定得过高之后的一次放弃。</p>
+</div>
+
+<!-- 12 -->
+<div class="sec">
+  <div class="no">十四</div>
+  <h2>考试当日</h2>
+
+  <p>四、六级实行分阶段收卷：写作与听力在答题卡一上作答，听力录音结束后立即回收；阅读与翻译在答题卡二上作答。这一规则决定了作答顺序与涂卡时机。</p>
+
+  <div class="banner">
+    <img src="img/classroom.jpg" alt="教室课桌椅（示意图）">
+    <div class="bt">分阶段收卷，是当天一切安排的依据</div>
+    <div class="bd">听力一结束，答题卡一立即回收，没有涂卡时间。听一题涂一题，这一条要在模考里练成习惯。</div>
+  </div>
+
+  <div class="tw">
+  <table>
+    <tr><th style="width:22%">四级</th><th style="width:22%">六级</th><th>事项</th></tr>
+    <tr><td>8:30–9:00</td><td>14:30–15:00</td><td>入场，调试耳机频率。迟到考生不得入场</td></tr>
+    <tr><td>9:00–9:10</td><td>15:00–15:10</td><td>发放试题册与答题卡，填写信息、粘贴条形码。不得翻阅试题册</td></tr>
+    <tr><td>9:10–9:40</td><td>15:10–15:40</td><td>写作，答题卡一。作文题目印于试题册背面</td></tr>
+    <tr><td>9:40–10:05</td><td>15:40–16:10</td><td>听力。边听边涂卡，录音结束立即停笔</td></tr>
+    <tr><td>10:05–10:10</td><td>16:10–16:15</td><td>回收答题卡一，不得答题，可看题干不可书写</td></tr>
+    <tr><td>10:10–11:20</td><td>16:15–17:25</td><td>阅读与翻译，共七十分钟，自行分配</td></tr>
+  </table>
+  </div>
+
+  <h3>七十分钟的分配</h3>
+  <p>按分值安排：仔细阅读三十分钟，两篇各十五分钟；长篇匹配十二分钟；翻译二十分钟；选词填空八分钟。不按试卷顺序作答，选词填空置于最后，时间不足时集中猜答。翻译应保证二十分钟，写至中途收卷是最常见的失分情形。</p>
+
+  <h3>携带物品</h3>
+  <p>必带：纸质准考证、身份证原件、学生证、2B 铅笔两支、黑色签字笔两支、橡皮、调频耳机及两节备用电池。不得携带：手机、智能手表、手环、蓝牙耳机。多数考点设置安检，设备即使关机亦按违规处理，成绩无效。</p>
+
+  <div class="callout warn">
+    <span class="ct">两处细节</span>
+    <p>条形码须粘贴在答题卡一的指定框内，粘贴错误、遗漏或损坏均按违规处理，拿到答题卡后首先完成此事。<br>
+    开考前翻阅试题册按违纪处理。为多看几秒作文题承担整场考试的风险，不值得。</p>
+  </div>
+</div>
+
+<!-- 13 -->
+<div class="sec">
+  <div class="no">十五</div>
+  <h2>结语</h2>
+
+  <p>对公安院校公安专业的学生而言，四六级不决定入警，但决定入警之后的选择面。八个月的准备换来一个一次通过的成绩，比四年里反复报名、反复裸考合算得多。若四年后确定报考涉外岗位或攻读研究生，六级与专业外语按同样方式推进；若不涉及，一个扎实的四级成绩已经够用。</p>
+
+  <p>入学后需要当面确认的三件事：本校学位授予的外语条件、首次允许报考的学期、英语必修课的教材与进度。三件事问教务处或学员队干部即可，一天之内可以办完，办完之后再按本文排计划。</p>
+
+  <div class="callout">
+    <span class="ct">资料来源</span>
+    <p>报考资格、报名流程、缴费时限，依据教育部考试中心 CET 报名系统与各省教育考试院公告；分值比例与常模机制，依据中国教育考试网「分数解释」页面；公安联考科目不含英语、外语类岗位设四六级资质要求，依据多家招考机构公布的联考报考条件，口径一致；学校的培养模式、警务化管理与外语课程设置，依据公开的招生问答，个别内容发布时间较早，以现行培养方案为准；学位授予的外语条件未见公开细则，以本校文件为准。测试效应与间隔重复为教育心理学的既有研究结论；各背词工具的功能与收费以官网与当年版本为准，其中小鹿 DeerTools 单词记忆卡的功能描述依据其页面说明（免费、免注册、莱特纳五盒法、支持打印与本地导出）。真题书的版本评价属市场通行说法，属经验判断。时间分配与练习强度亦为经验判断，非官方数据。具体安排一律以本校考点当年公告为准。</p>
+  </div>
+</div>
+
+<footer>
+  <p><a href="../" style="color:#38bdf8;text-decoration:none">← 返回「大学」</a></p>
+  <p>BY ytf2000@sina.com</p>
+  <p>2026 年 10 月 · 配图为 Unsplash 示意图，非本校实景</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  var d = new Date();
+  var key = 'cet-task-' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) { saved = {}; }
+  var boxes = document.querySelectorAll('.task input[data-k]');
+  for (var i = 0; i < boxes.length; i++) {
+    var el = boxes[i];
+    el.checked = !!saved[el.getAttribute('data-k')];
+    el.addEventListener('change', function(){
+      saved[this.getAttribute('data-k')] = this.checked;
+      try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) {}
+    });
+  }
+  try {
+    var stale = [];
+    for (var k in localStorage) {
+      if (k.indexOf('cet-task-') === 0 && k !== key) stale.push(k);
+    }
+    for (var j = 0; j < stale.length; j++) localStorage.removeItem(stale[j]);
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

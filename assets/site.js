@@ -34,6 +34,7 @@
     'ai-intro':      S + '<circle cx="11" cy="16" r="3"/><circle cx="11" cy="32" r="3"/><circle cx="24" cy="24" r="3.4"/><circle cx="37" cy="16" r="3"/><circle cx="37" cy="32" r="3"/><path d="M14 16.6 L21 22"/><path d="M14 31.4 L21 26"/><path d="M27 22 L34 16.6"/><path d="M27 26 L34 31.4"/>' + E,
     'python':        S + '<rect x="9" y="11" width="30" height="26" rx="3"/><path d="M9 19 H39"/><circle cx="14" cy="15" r="1.2"/><circle cx="18" cy="15" r="1.2"/><path d="M16 25 L12 29 L16 33"/><path d="M26 25 L30 29 L26 33" opacity=".6"/><path d="M19 29 H23" opacity=".6"/>' + E,
     'ai-four':       S + '<rect x="9" y="9" width="13" height="13" rx="2"/><rect x="26" y="9" width="13" height="13" rx="2"/><rect x="9" y="26" width="13" height="13" rx="2"/><rect x="26" y="26" width="13" height="13" rx="2"/><path d="M15.5 15.5 H15.6"/><path d="M32.5 15.5 H32.6"/><path d="M15.5 32.5 H15.6"/><path d="M32.5 32.5 H32.6"/>' + E,
+    'cet':           S + '<path d="M9 13 C13.5 11 20 11 24 13.5 C28 11 34.5 11 39 13 V34 C34.5 32 28 32 24 34.5 C20 32 13.5 32 9 34 Z"/><path d="M24 13.5 V34.5"/><path d="M14 19 H20"/><path d="M14 24 H20"/><path d="M28 19 H34"/><path d="M28 24 H34"/>' + E,
     'chem':         S + '<path d="M20 8 H28"/><path d="M22 8 V18 L13 33 A4 4 0 0 0 16.5 39 H31.5 A4 4 0 0 0 35 33 L26 18 V8"/><path d="M17.5 27 H30.5" opacity=".6"/><circle cx="23" cy="33.5" r="1.1"/><circle cx="28" cy="35.5" r=".9" opacity=".7"/>' + E,
     '_fallback':     S + '<circle cx="24" cy="24" r="6"/>' + E
   };
@@ -224,12 +225,13 @@
           ? '<img class="art-cover" loading="lazy" alt="" src="' + root + 'sections/' + section + '/' + a.slug + '/' + a.cover + '">'
           : (a.chart ? barChart(a.chart, i) : motif());
         var badge = a.issue ? '<span class="issue-badge">' + escHtml(a.issue) + '</span>' : '';
+        var newTag = a.isNew ? '<span class="new-badge">NEW</span>' : '';
         var kw = a.tag ? '<span class="kw">' + escHtml(a.tag) + '</span>' : '';
         var detail = a.detail ? escHtml(a.detail) : escHtml(a.desc || '');
-        html += '<a class="art-row" href="' + href + '" data-snd="' + (300 + i * 60) + '">'
+        html += '<a class="art-row' + (a.isNew ? ' just-new' : '') + '" href="' + href + '" data-snd="' + (300 + i * 60) + '">'
           + '<div class="art-vis">' + vis + '</div>'
           + '<div class="art-body">'
-          + '<div class="art-top">' + badge + '<span class="art-ico">' + icon + '</span><h4>' + escHtml(a.title) + '</h4></div>'
+          + '<div class="art-top">' + newTag + badge + '<span class="art-ico">' + icon + '</span><h4>' + escHtml(a.title) + '</h4></div>'
           + '<div class="kw-row">' + kw + '</div>'
           + '<div class="art-detail">' + detail + '</div>'
           + '<div class="meta"><span class="m-label">提交</span> ' + escHtml(a.date || '') + '</div>'
