@@ -120,7 +120,7 @@
     if (section) {
       var secObj = (window.SECTIONS || []).filter(function (s) { return s.id === section; })[0];
       var name = secObj ? secObj.title : section;
-      crumb += '<span class="crumb"><a href="' + root + 'index.html">首页</a> &nbsp;/&nbsp; ' + escHtml(name) + '</span>';
+      crumb += '<span class="crumb">首页 &nbsp;/&nbsp; ' + escHtml(name) + '</span>';
     }
     top.innerHTML = crumb + '<span class="spacer"></span>'
       + '<button class="sound-btn" id="soundBtn" type="button" aria-label="音效开关">🔊 音效</button>';
