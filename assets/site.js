@@ -112,30 +112,6 @@
       + '</svg>';
   }
 
-  /* ===== 顶部细导航 + 音效开关 ===== */
-  if (!document.querySelector('.site-top')) {
-    var top = document.createElement('header');
-    top.className = 'site-top';
-    var crumb = '<span class="brand">YTF</span>';
-    if (section) {
-      var secObj = (window.SECTIONS || []).filter(function (s) { return s.id === section; })[0];
-      var name = secObj ? secObj.title : section;
-      crumb += '<span class="crumb">首页 &nbsp;/&nbsp; ' + escHtml(name) + '</span>';
-    }
-    top.innerHTML = crumb + '<span class="spacer"></span>'
-      + '<button class="sound-btn" id="soundBtn" type="button" aria-label="音效开关">🔊 音效</button>';
-    document.body.insertBefore(top, document.body.firstChild);
-  }
-  var sb = document.getElementById('soundBtn');
-  if (sb) {
-    sb.addEventListener('click', function (e) {
-      e.preventDefault();
-      var v = !Sound.get(); Sound.set(v);
-      sb.textContent = v ? '🔊 音效' : '🔇 静音';
-      if (v) Sound.blip(600);
-    });
-  }
-
   /* ===== 视觉初始化：入场动画 + 点击音效 ===== */
   function setupVisuals() {
     if ('IntersectionObserver' in window) {
