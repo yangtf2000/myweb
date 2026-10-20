@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第十章 次第 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s11" class="cur">10.1 四段主线</a><span class="sp">/</span>
+  <a href="#s12">10.2 一年主练两样</a><span class="sp">/</span>
+  <a href="#s13">10.3 二十四格</a><span class="sp">/</span>
+  <a href="#send">写在最后</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第十章</p>
+  <h1>次<span class="em">第</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">课表排定了四年里的大部分时间，没被排定的那一块怎么安排，是这一篇的事。次序排对了，第一年省力，第四年踏实；次序倒了，年年都在补救上一年。</p>
+  <div class="chipline">
+    <span class="chip">四段主线</span><span class="chip">一年两样</span><span class="chip t">二十四格</span><span class="chip t">衔接前九篇</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/10.jpg" alt="长长的石阶通向暖光，深蓝雾气弥漫在石阶两侧">
+  <figcaption>石阶一级一级向上，光在顶端。四年也是这样走的：看着别人跳级的时候，想不到跳过去的那几级往后还要一级一级补回来。</figcaption>
+</figure>
+
+<h2 id="s11"><span class="n">10.1</span>四段主线</h2>
+<p class="sec-lead">同样四年，有人越走越宽，有人越走越窄，差别多半不在用不用功，在次序。</p>
+
+<p>时间账与八格年表在<a href="01_课内与课外.html">《课内与课外》</a>一篇里算过：每周可支配十五小时上下，四年约两千四百小时。那一篇算的是时间有多少，这一篇讲这些时间按什么次序花；两篇对着看，一张年表才排得满。</p>
+
+<figure>
+<svg viewBox="0 0 480 250" role="img" aria-label="四年四段依次递进：试探、收敛、深入、收尾">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四段依次：一年一段，前一段是后一段的底子</text>
+    <g stroke="#2a4066" stroke-width="1.2">
+      <rect x="4" y="28" width="108" height="92" rx="10" fill="#101d38"/>
+      <rect x="124" y="28" width="108" height="92" rx="10" fill="#132242"/>
+      <rect x="244" y="28" width="108" height="92" rx="10" fill="#16274a"/>
+    </g>
+    <rect x="364" y="28" width="108" height="92" rx="10" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <g font-size="12" fill="#FFD166">
+      <text x="14" y="50">第一年</text>
+      <text x="134" y="50">第二年</text>
+      <text x="254" y="50">第三年</text>
+      <text x="374" y="50">第四年</text>
+    </g>
+    <g font-size="13.5" font-weight="700" fill="#ffffff">
+      <text x="14" y="74">试探</text>
+      <text x="134" y="74">收敛</text>
+      <text x="254" y="74">深入</text>
+      <text x="374" y="74">收尾</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="14" y="98">五类活动</text>
+      <text x="14" y="114">各接触一次</text>
+      <text x="134" y="98">试过的事里</text>
+      <text x="134" y="114">只留一两项</text>
+      <text x="254" y="98">留下的一两样</text>
+      <text x="254" y="114">做到出成品</text>
+      <text x="374" y="98">整理作品</text>
+      <text x="374" y="114">完成转场</text>
+    </g>
+    <g stroke="#FF8A3D" stroke-width="1.6" fill="none">
+      <path d="M114 74 L119 74"/><path d="M116 70 L121 74 L116 78"/>
+      <path d="M234 74 L239 74"/><path d="M236 70 L241 74 L236 78"/>
+      <path d="M354 74 L359 74"/><path d="M356 70 L361 74 L356 78"/>
+    </g>
+    <line x1="0" y1="232" x2="480" y2="232" stroke="#2a4066"/>
+    <g>
+      <rect x="44" y="208" width="28" height="24" fill="#1f3355"/>
+      <rect x="164" y="186" width="28" height="46" fill="#1e3358"/>
+      <rect x="284" y="160" width="28" height="72" fill="#1c5a4a"/>
+      <rect x="404" y="132" width="28" height="100" fill="#FFD166"/>
+    </g>
+    <text x="0" y="246" fill="#b0c0d4" font-size="12">柱高是同一件事上花进去的工夫，越到后面下得越实</text>
+  </g>
+</svg>
+<figcaption>四张卡是一年一段，柱子是同一件事上花进去的工夫：面越收越窄，工夫下得越实，跳级的地方在这张图上看得最清楚。</figcaption>
+</figure>
+
+<p>四年的次序大体是试探、收敛、深入、收尾，一段接一段，前一段是后一段的底子。这个排法有来处。《学记》把七年分成四段看，一年看立志，三年看敬业乐群，五年看博习亲师，七年看论学取友，次序不能颠倒；颠倒过来的人不是没有，补起来都要花上加倍的工夫。各校的培养方案也守着这个次序排课：基础课在前，专业课居中，实习殿后，毕业设计收尾；学校排课尚且如此，课表之外的事更没有理由倒着来。</p>
+
+<blockquote>
+  <p>欲速则不达，见小利则大事不成。</p>
+  <p class="src">《论语·子路》· 一句论先后，也论大小</p>
+</blockquote>
+
+<div class="statrow">
+  <div class="stat"><b>5</b><span>五类活动，一类一次</span></div>
+  <div class="stat"><b>1~2</b><span>第二年留下的事</span></div>
+  <div class="stat"><b>1</b><span>第三年的成品</span></div>
+  <div class="stat"><b>3</b><span>第四年的转场事</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <p class="tt">第一年 · 试探</p>
+    <p>社团、竞赛、讲座、志愿、兼职，五类各接触一次。这一年的任务不是做出成绩，是知道自己对什么有反应：哪一类事做完还想做，哪一类事要勉强才做完，哪一群人面前自在，哪一个场合发怵。接触面太窄，第二年无从收敛；五类都碰过的人，手里才有东西可挑。</p>
+  </div>
+  <div class="card">
+    <p class="tt">第二年 · 收敛</p>
+    <p>从试过的事里选一到两项，其余放掉。标准只有一条落在自己身上：没有回报也愿意继续做的那一件；有没有前途，这件事要排在那一件后面。第一年铺得越宽，这一年越好选；铺得窄的，只能就着手边剩下的将就。</p>
+  </div>
+  <div class="card">
+    <p class="tt">第三年 · 深入</p>
+    <p>选定的一两项做出成品：一个项目做满一年，一门手艺到能演示，一场比赛打到最后一轮。这一年最吃力，长进也最快。前两年是铺开，这一年是收拢，范围收多窄，这时候才见分晓；半途换事的人，每一年都在重新开头。</p>
+  </div>
+  <div class="card">
+    <p class="tt">第四年 · 收尾</p>
+    <p>整理作品、完成转场、承担责任。作品归拢成一个能给人看的东西；转场指联考、论文、选岗，时点与入口在<a href="01_课内与课外.html">《课内与课外》</a>里列过；责任指在集体里接下别人的事，而不只是完成自己的事。</p>
+  </div>
+</div>
+
+<p>以本专业为例，做出成品可以很具体：一份现场勘查笔录能直接被采用，一套快检设备的用法能教给别人，一份案情通报能让外行看懂。这三样都能当场演示，手艺才算练成了。</p>
+
+<h3>五类活动，一类一次<span class="tag">第一年</span></h3>
+<p>第一年的任务是接触，五类各来一次。<span class="u">接触一次</span>指完整走完一个流程：报名或申请、到场或提交、结项或退出，领一张传单、听半场讲座都不算。五类的用处各不相同，试过一圈才知道自己在哪里有反应。</p>
+<ul class="dash">
+  <li>社团：跟不熟悉的人共处，半年就看得出处得来处不来</li>
+  <li>竞赛：赶一次截止日期，知道自己的产出节奏</li>
+  <li>讲座：听一批本专业以外的人讲话，量出自己的理解力</li>
+  <li>志愿：做一件没有学分的事，看出自己肯不肯白出力</li>
+  <li>兼职：拿一次报酬，明白时间与收入的兑换关系</li>
+</ul>
+<p>五类不必都挑热门的，也不必都挑有用的。冷门的那几类往往最见反应：没人催促、没有学分、不发证明的时候，人才露出本来想做的那个事。</p>
+
+<p>试探放在第一年，还因为这一年的试错成本最低。课业还没有铺开，试错的时间从周末与两段空档里出；身份还是新生，问拙劣的问题、做笨拙的事，都有人担待。同样的举动放到第三年，成本要高出许多：那一年每一段时间都有去处，错一步，后面的安排跟着挪。</p>
+
+<h3>放掉清单<span class="tag">第二年</span></h3>
+<p>收敛的难点不在选，在放。每件事背后都有一个说得通的理由，留着的成本看不见，放掉的代价看得见，于是越留越多。可行的做法是给每件试过的事写一句：没有回报、没有证明、没有加分的时候，还想不想做。写得出来还想做的，留下；只写得出应该有好处的，放掉，理由写进清单。这张清单第二年看一次，第三年再看一次。</p>
+
+<div class="card">
+  <p class="tt">四段怎么走</p>
+  <ol class="steps">
+    <li><b>开学列一张接触清单。</b>五类活动各找一件，写进学期日历，一月一件，排在周末与两段空档里。
+    <span class="why">排进日历才算数，停在念头里的事一件都不会发生。</span></li>
+    <li><b>每样接触完，记一句反应。</b>做完那一刻写下：想不想再做一次，为什么。
+    <span class="why">反应会褪，隔一个月再想，只剩一个笼统的印象。</span></li>
+    <li><b>第一年末做一次收敛。</b>五类里还想做的排个队，只留一到两项，其余写进放掉清单，每件跟一条理由。
+    <span class="why">不写理由，第二年又会一件件重新做起。</span></li>
+    <li><b>给留下的一两样各定一个成品标准。</b>项目做满一年，手艺到能演示，比赛打到最后一轮，标准写在纸上。
+    <span class="why">没有成品的年份看着也忙，年底清点却拿不出成果。</span></li>
+    <li><b>第四年把成品归拢成一个档案袋。</b>联考、论文、选岗三件事的时点，对照第一篇的年表排。
+    <span class="why">转场三件事时间固定，作品不早归拢，最后两周补不回来。</span></li>
+  </ol>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>段落</th><th>这一年只做一件事</th><th>最容易出的错</th><th>完成的标志</th></tr>
+  <tr><td>第一年 · 试探</td><td>五类活动各接触一次</td><td>每样只稍微试过，还当自己见识广</td><td>说得出自己对哪一类有反应</td></tr>
+  <tr><td>第二年 · 收敛</td><td>从试过的事里选一到两项</td><td>件件都有用，一件都放不掉</td><td>有一张写清理由的放掉清单</td></tr>
+  <tr><td>第三年 · 深入</td><td>选定的一两样做到出成品</td><td>年年换事，年年从零开始</td><td>做得出一个能给人看的成品</td></tr>
+  <tr><td>第四年 · 收尾</td><td>整理作品，完成转场</td><td>作品散在硬盘里，没人见过全貌</td><td>档案袋齐全，转场三事有着落</td></tr>
+</table>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>第一年结束，五类活动各至少接触过一次，并且说得出自己对哪一类有反应；第二年结束，手里有一张放掉清单，留下的一到两项各有一条不图回报也愿意继续的理由；第三年结束，做得出一个能给人看的成品。三条放在每年年末对一次，对不上，就是次序乱了。</p>
+</div>
+
+<p class="pull">第一年求宽，第二年求窄，第三年求深，第四年求完。<span class="q">跳过去的那一段，往后要花加倍的工夫补回来</span>。</p>
+
+<ul class="check">
+  <li class="hd">10.1 · 四段主线</li>
+  <li>列一张五类活动接触清单，排进学期日历</li>
+  <li>五类各接触过一次，每样记一句反应</li>
+  <li>写一张放掉清单，每件跟一条理由</li>
+  <li>留下的一到两项，各定一个成品标准</li>
+  <li>项目做满一年，手艺到能演示，比赛打到最后一轮</li>
+  <li>作品归拢成一个档案袋，转场三事各有着落</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s12"><span class="n">10.2</span>一年主练两样</h2>
+<p class="sec-lead">六样能力不必同时用力，一年集中两样更有效。这是给时间排次序，不是给内容做减法。</p>
+
+<p>六样指思辨、自控、协作、执行、沟通、担当，来处与每样的练法见<a href="02_课本教不会的六样.html">《课本教不会的六样》</a>一篇。这一篇只排次序：六样不必同时用力，一年集中两样，四年刚好一轮；它要回答的只有一个问题，同一年里功夫先往哪两样上使。</p>
+
+<figure>
+<svg viewBox="0 0 480 336" role="img" aria-label="六样能力在四年里的分配，每格标注主练、保持或打底">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一年两样主练，其余几样交给日常</text>
+    <g>
+      <rect x="62" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+      <rect x="164" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+      <rect x="266" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+      <rect x="368" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+    </g>
+    <g font-size="12.5" fill="#FFD166" text-anchor="middle">
+      <text x="112" y="39">大一</text>
+      <text x="214" y="39">大二</text>
+      <text x="316" y="39">大三</text>
+      <text x="418" y="39">大四</text>
+    </g>
+    <g>
+      <rect x="0" y="52" width="56" height="40" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="52" width="3" height="40" fill="#7FB3E8"/>
+      <text x="10" y="77" fill="#ffffff" font-size="13">思辨</text>
+      <rect x="62" y="52" width="100" height="40" fill="#FF8A3D"/>
+      <text x="112" y="77" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+      <rect x="164" y="52" width="100" height="40" fill="#FF8A3D"/>
+      <text x="214" y="77" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+      <rect x="266" y="52" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="316" y="77" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+      <rect x="368" y="52" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="418" y="77" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+    </g>
+    <g>
+      <rect x="0" y="95" width="56" height="40" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="95" width="3" height="40" fill="#FFD166"/>
+      <text x="10" y="120" fill="#ffffff" font-size="13">自控</text>
+      <rect x="62" y="95" width="100" height="40" fill="#FF8A3D"/>
+      <text x="112" y="120" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+      <rect x="164" y="95" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="214" y="120" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+      <rect x="266" y="95" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="316" y="120" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+      <rect x="368" y="95" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="418" y="120" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+    </g>
+    <g>
+      <rect x="0" y="138" width="56" height="40" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="138" width="3" height="40" fill="#3FBFA0"/>
+      <text x="10" y="163" fill="#ffffff" font-size="13">协作</text>
+      <rect x="62" y="138" width="100" height="40" fill="#101d38" stroke="#22385c"/>
+      <text x="112" y="163" fill="#b0c0d4" font-size="12.5" text-anchor="middle">打底</text>
+      <rect x="164" y="138" width="100" height="40" fill="#FF8A3D"/>
+      <text x="214" y="163" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+      <rect x="266" y="138" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="316" y="163" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+      <rect x="368" y="138" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="418" y="163" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+    </g>
+    <g>
+      <rect x="0" y="181" width="56" height="40" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="181" width="3" height="40" fill="#F5A623"/>
+      <text x="10" y="206" fill="#ffffff" font-size="13">执行</text>
+      <rect x="62" y="181" width="100" height="40" fill="#101d38" stroke="#22385c"/>
+      <text x="112" y="206" fill="#b0c0d4" font-size="12.5" text-anchor="middle">打底</text>
+      <rect x="164" y="181" width="100" height="40" fill="#101d38" stroke="#22385c"/>
+      <text x="214" y="206" fill="#b0c0d4" font-size="12.5" text-anchor="middle">打底</text>
+      <rect x="266" y="181" width="100" height="40" fill="#FF8A3D"/>
+      <text x="316" y="206" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+      <rect x="368" y="181" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="418" y="206" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+    </g>
+    <g>
+      <rect x="0" y="224" width="56" height="40" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="224" width="3" height="40" fill="#F27E7E"/>
+      <text x="10" y="249" fill="#ffffff" font-size="13">沟通</text>
+      <rect x="62" y="224" width="100" height="40" fill="#101d38" stroke="#22385c"/>
+      <text x="112" y="249" fill="#b0c0d4" font-size="12.5" text-anchor="middle">打底</text>
+      <rect x="164" y="224" width="100" height="40" fill="#101d38" stroke="#22385c"/>
+      <text x="214" y="249" fill="#b0c0d4" font-size="12.5" text-anchor="middle">打底</text>
+      <rect x="266" y="224" width="100" height="40" fill="#FF8A3D"/>
+      <text x="316" y="249" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+      <rect x="368" y="224" width="100" height="40" fill="#182c50" stroke="#2a4066"/>
+      <text x="418" y="249" fill="#c3d1e3" font-size="12.5" text-anchor="middle">保持</text>
+    </g>
+    <g>
+      <rect x="0" y="267" width="56" height="40" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="267" width="3" height="40" fill="#FF6B4A"/>
+      <text x="10" y="292" fill="#ffffff" font-size="13">担当</text>
+      <rect x="62" y="267" width="100" height="40" fill="#0d1c36" stroke="#1f3355"/>
+      <text x="112" y="292" fill="#b0c0d4" font-size="12.5" text-anchor="middle">—</text>
+      <rect x="164" y="267" width="100" height="40" fill="#0d1c36" stroke="#1f3355"/>
+      <text x="214" y="292" fill="#b0c0d4" font-size="12.5" text-anchor="middle">—</text>
+      <rect x="266" y="267" width="100" height="40" fill="#101d38" stroke="#22385c"/>
+      <text x="316" y="292" fill="#b0c0d4" font-size="12.5" text-anchor="middle">打底</text>
+      <rect x="368" y="267" width="100" height="40" fill="#FF8A3D"/>
+      <text x="418" y="292" fill="#081226" font-size="12.5" text-anchor="middle" font-weight="600">主练</text>
+    </g>
+    <g>
+      <rect x="0" y="312" width="12" height="12" fill="#FF8A3D"/>
+      <text x="18" y="322" fill="#c3d1e3" font-size="12">主练：这一年集中练</text>
+      <rect x="150" y="312" width="12" height="12" fill="#182c50" stroke="#2a4066"/>
+      <text x="168" y="322" fill="#c3d1e3" font-size="12">保持：靠日常维持</text>
+      <rect x="290" y="312" width="12" height="12" fill="#101d38" stroke="#22385c"/>
+      <text x="308" y="322" fill="#c3d1e3" font-size="12">打底：前一年留下的底</text>
+    </g>
+  </g>
+</svg>
+<figcaption>橙色是主练的格子。思辨连着练两年，是六样里唯一重复的一项；担当放在最后，前面几年的格子都是它的底子。</figcaption>
+</figure>
+
+<div class="statrow">
+  <div class="stat"><b>6</b><span>六样能力</span></div>
+  <div class="stat"><b>2</b><span>一年主练两样</span></div>
+  <div class="stat"><b>4</b><span>四年一轮</span></div>
+  <div class="stat"><b>1</b><span>思辨连练两年</span></div>
+</div>
+
+<p>思辨是六样里唯一连练两年的。另外几样靠事情带动：组队催协作，交付催执行，选岗催担当；思辨只靠读的书带动，而大一大二读的书一年比一年难，中间断上一年，很难接得上。</p>
+
+<div class="grid2">
+  <div class="card t">
+    <p class="tt">大一 · 自控与思辨</p>
+    <p>作息初立，习惯未定，这一年最省力的做法是先守日常。睡眠、手机、收支、情绪四件，各立一条规矩，写在看得见的地方；同时把读书与查证的习惯养成，每月一本书、每个数字查一次出处；一年怎么排这十二本、怎么挑书，另有一篇<a href="大学四年_读书.html">《读书：怎么读，读什么》</a>。自控管住日子，思辨管住读到的东西：哪些是事实，哪些是转述，哪些是立场，分得清才算读过。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">大二 · 协作与思辨</p>
+    <p>课程最重的一年，也是组队做事最多的一年，协作的问题集中暴露：分工怎么排，进度怎么催，队友中途退出怎么补，话怎么说完整。思辨接着练，因为读的东西开始变难，再靠印象已经应付不过去。两样都指向同一件事：把一个人做的事，变成几个人做得成的事。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">大三 · 执行与沟通</p>
+    <p>这一年要交付：项目、比赛、实习报告，三样都带截止日期。交付练出执行力，到点交不出，前面所有功夫都不算数；交付也要向人说明，说明白别人才认，说明练出沟通力。前两年学的是本事，这一年练的是把本事交得出去。</p>
+  </div>
+  <div class="card">
+    <p class="tt">大四 · 担当</p>
+    <p>选岗、承担责任、在一件与自己无关的事上表态。思辨、自控、协作、执行、沟通，前三年都打过底；这一年练的是敢不敢：敢不敢把名字签在一个结果上，敢不敢在没人举手的时候说一句属实的话。</p>
+  </div>
+</div>
+
+<p>六样在四年里的分布如下，橙色是主练的格子，深色是打底与保持：</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>能力</th><th>大一</th><th>大二</th><th>大三</th><th>大四</th></tr>
+  <tr><td>思辨</td><td><span class="kw">主练</span></td><td><span class="kw">主练</span></td><td><span class="num">保持</span></td><td><span class="num">保持</span></td></tr>
+  <tr><td>自控</td><td><span class="kw">主练</span></td><td><span class="num">保持</span></td><td><span class="num">保持</span></td><td><span class="num">保持</span></td></tr>
+  <tr><td>协作</td><td>打底</td><td><span class="kw">主练</span></td><td><span class="num">保持</span></td><td><span class="num">保持</span></td></tr>
+  <tr><td>执行</td><td>打底</td><td>打底</td><td><span class="kw">主练</span></td><td><span class="num">保持</span></td></tr>
+  <tr><td>沟通</td><td>打底</td><td>打底</td><td><span class="kw">主练</span></td><td><span class="num">保持</span></td></tr>
+  <tr><td>担当</td><td>—</td><td>—</td><td>打底</td><td><span class="kw">主练</span></td></tr>
+</table>
+</div>
+
+<p>主练的两样要落在具体的事情上，一年一样都不能空着：</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>学年</th><th>主练两样</th><th>守住的一件事</th><th>拿得出的证据</th></tr>
+  <tr><td>大一</td><td>自控、思辨</td><td>睡眠与手机的记录</td><td>一张两周时间流水，一月一本书的笔记</td></tr>
+  <tr><td>大二</td><td>协作、思辨</td><td>组队不临时搭伙</td><td>一次组队交付的复盘，一份读书笔记</td></tr>
+  <tr><td>大三</td><td>执行、沟通</td><td>每个交付提前三天交初稿</td><td>项目、比赛、实习报告各一件成品</td></tr>
+  <tr><td>大四</td><td>担当</td><td>会议与值日本人必到</td><td>一件负责到底的事，一次公开表态</td></tr>
+</table>
+</div>
+
+<div class="panel">
+  <p class="tt">六样怎么排</p>
+  <ol class="steps">
+    <li><b>开学把六样写在年表的空白处，一年只给两样画星。</b>年表的样子见<a href="01_课内与课外.html">《课内与课外》</a>。
+    <span class="why">六样一起抓，结果是六样都没有进展；画了星，取舍才有一个说得出口的依据。</span></li>
+    <li><b>给两样主练各定一个可数的动作。</b>自控对应睡眠与手机的记录，思辨对应每月一本书加一次查证。
+    <span class="why">能力看不见，动作数得清；数不清的练法，到年底说不清练过什么。</span></li>
+    <li><b>每月末自查一次，只查主练的两样。</b>问这个月各有一个具体动作没有。
+    <span class="why">一个月一问来得及纠偏，一年一问只剩年终的感慨。</span></li>
+    <li><b>学年末换星。</b>旧两样转入保持，新两样画星，写进下一学年的年表。
+    <span class="why">不换星，练来练去还是入学时的两样；换了星，四年刚好一轮。</span></li>
+    <li><b>已打底的几样靠日常维持，不占主练的名额。</b>
+    <span class="why">日常本身就在练这些，再列成任务，反而挤掉主练的时间。</span></li>
+  </ol>
+</div>
+
+<div class="panel">
+  <p class="tt">几处数字的口径</p>
+  <ul class="dash">
+    <li>睡眠时长：美国疾病控制与预防中心与美洲睡眠医学会二零一五年的共识为十八至六十岁每夜七小时以上；面向国内在校生的统一标准查不到，本校作息表是最接近的口径。</li>
+    <li>上网时长：全国人均每周上网时长见中国互联网络信息中心历次《中国互联网络发展状况统计报告》，以最新一期为准；按年级拆分的在校生口径查不到，各校没有公开统计。</li>
+    <li>课程密度与组队频率：无公开统计，以本校课表与亲历为准；多数专业大二最密，这一条只作参考，不作最后的依据。</li>
+  </ul>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>每个月末问一句：这一年主练的两样，这个月各有一个具体动作吗？两问都答得上，次序就没有乱；有一问答不上，下个月把那一项先补上，一次只补一样，两样才都补得回来。</p>
+</div>
+
+<p class="pull">同时用力，六样都只练到半途。<span class="q">一年两样，是让每一样都有轮到主练的那一年</span>。</p>
+
+<p>两样是一个能互相促进的组合，不是随手定的。一样太少，来不及在事情上验证；三样以上，每一样都练不深。自控与思辨，一个管作息一个管读物；协作与执行，一个对人一个对事；执行与沟通，一个把事情做完一个把事情说清。同一年的两样安排在一起，练一样的时候顺带练了另一样。</p>
+
+<ul class="check">
+  <li class="hd">10.2 · 一年两样</li>
+  <li>六样能力写在年表上，一年只标两样主练</li>
+  <li>睡眠、手机、收支、情绪四件各立一条规矩，贴在看得见的地方</li>
+  <li>读书与查证落到实处：每月一本书，每个数字查一次出处</li>
+  <li>每月末自查一次，只查主练的两样</li>
+  <li>学年末换星，旧两样转入保持</li>
+  <li>大四之前在集体里接下过别人的一件活，负责到底</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s13"><span class="n">10.3</span>二十四格</h2>
+<p class="sec-lead">六行四列，一列一年。四年填四次，填的是动作，不是愿望。</p>
+
+<p>六行各有分工：<a href="03_见天地.html">见天地</a>，看世界有多大；<a href="04_见自己.html">见自己</a>，看自己站在哪里；<a href="05_见众生.html">见众生</a>，看别人要什么；<a href="06_成事.html">成事</a>，看东西做不做得出来；<a href="07_立言.html">立言</a>，看话说不说得清楚；<a href="08_入世.html">入世</a>，看自己能不能融进去。六行对应中间六篇，每篇讲一行怎么走；这一篇给六行排一个四年的次序。四列是大一到大四，一年一列，一列六格，四年二十四格，每一格都数得出来。</p>
+
+<blockquote>
+  <p>合抱之木，生于毫末；九层之台，起于累土；千里之行，始于足下。</p>
+  <p class="src">《道德经》第六十四章 · 一章讲始终，也讲次序</p>
+</blockquote>
+
+<figure>
+<svg viewBox="0 0 480 416" role="img" aria-label="二十四格全表：六行四列，每格一项具体动作">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">六行四列，一列一年；每格一件事，做完打勾</text>
+    <g>
+      <rect x="62" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+      <rect x="164" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+      <rect x="266" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+      <rect x="368" y="24" width="100" height="22" fill="#182c50" stroke="#2a4066"/>
+    </g>
+    <g font-size="12.5" fill="#FFD166" text-anchor="middle">
+      <text x="112" y="39">大一</text>
+      <text x="214" y="39">大二</text>
+      <text x="316" y="39">大三</text>
+      <text x="418" y="39">大四</text>
+    </g>
+    <g>
+      <rect x="0" y="52" width="56" height="58" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="52" width="3" height="58" fill="#7FB3E8"/>
+      <text x="10" y="85" fill="#ffffff" font-size="13">见天地</text>
+      <rect x="62" y="52" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="72" y="76" fill="#c3d1e3" font-size="12">读完</text>
+      <text x="72" y="94" fill="#c3d1e3" font-size="12">十二本书</text>
+      <rect x="164" y="52" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="174" y="76" fill="#c3d1e3" font-size="12">走遍</text>
+      <text x="174" y="94" fill="#c3d1e3" font-size="12">十个辖区</text>
+      <rect x="266" y="52" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="276" y="76" fill="#c3d1e3" font-size="12">跟住一个案子</text>
+      <text x="276" y="94" fill="#c3d1e3" font-size="12">满一年</text>
+      <rect x="368" y="52" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="378" y="76" fill="#c3d1e3" font-size="12">整理</text>
+      <text x="378" y="94" fill="#c3d1e3" font-size="12">辖区笔记</text>
+    </g>
+    <g>
+      <rect x="0" y="113" width="56" height="58" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="113" width="3" height="58" fill="#3FBFA0"/>
+      <text x="10" y="146" fill="#ffffff" font-size="13">见自己</text>
+      <rect x="62" y="113" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="72" y="137" fill="#c3d1e3" font-size="12">记两周</text>
+      <text x="72" y="155" fill="#c3d1e3" font-size="12">时间流水</text>
+      <rect x="164" y="113" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="174" y="137" fill="#c3d1e3" font-size="12">测一次</text>
+      <text x="174" y="155" fill="#c3d1e3" font-size="12">一千米底数</text>
+      <rect x="266" y="113" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="276" y="137" fill="#c3d1e3" font-size="12">写下三件</text>
+      <text x="276" y="155" fill="#c3d1e3" font-size="12">不图回报的事</text>
+      <rect x="368" y="113" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="378" y="137" fill="#c3d1e3" font-size="12">写一封</text>
+      <text x="378" y="155" fill="#c3d1e3" font-size="12">四年的自述</text>
+    </g>
+    <g>
+      <rect x="0" y="174" width="56" height="58" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="174" width="3" height="58" fill="#F27E7E"/>
+      <text x="10" y="207" fill="#ffffff" font-size="13">见众生</text>
+      <rect x="62" y="174" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="72" y="198" fill="#c3d1e3" font-size="12">区图书馆</text>
+      <text x="72" y="216" fill="#c3d1e3" font-size="12">做满一学期</text>
+      <rect x="164" y="174" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="174" y="198" fill="#c3d1e3" font-size="12">访谈十位</text>
+      <text x="174" y="216" fill="#c3d1e3" font-size="12">报案人</text>
+      <rect x="266" y="174" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="276" y="198" fill="#c3d1e3" font-size="12">陪室友走过</text>
+      <text x="276" y="216" fill="#c3d1e3" font-size="12">一次挫折</text>
+      <rect x="368" y="174" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="378" y="198" fill="#c3d1e3" font-size="12">接下别人的</text>
+      <text x="378" y="216" fill="#c3d1e3" font-size="12">一件活</text>
+    </g>
+    <g>
+      <rect x="0" y="235" width="56" height="58" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="235" width="3" height="58" fill="#FFD166"/>
+      <text x="10" y="268" fill="#ffffff" font-size="13">成事</text>
+      <rect x="62" y="235" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="72" y="259" fill="#c3d1e3" font-size="12">组队做完</text>
+      <text x="72" y="277" fill="#c3d1e3" font-size="12">一次课程设计</text>
+      <rect x="164" y="235" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="174" y="259" fill="#c3d1e3" font-size="12">一个项目</text>
+      <text x="174" y="277" fill="#c3d1e3" font-size="12">做满一年</text>
+      <rect x="266" y="235" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="276" y="259" fill="#c3d1e3" font-size="12">比赛打到</text>
+      <text x="276" y="277" fill="#c3d1e3" font-size="12">最后一轮</text>
+      <rect x="368" y="235" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="378" y="259" fill="#c3d1e3" font-size="12">四年作品</text>
+      <text x="378" y="277" fill="#c3d1e3" font-size="12">装一个档案袋</text>
+    </g>
+    <g>
+      <rect x="0" y="296" width="56" height="58" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="296" width="3" height="58" fill="#F5A623"/>
+      <text x="10" y="329" fill="#ffffff" font-size="13">立言</text>
+      <rect x="62" y="296" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="72" y="320" fill="#c3d1e3" font-size="12">每月一篇</text>
+      <text x="72" y="338" fill="#c3d1e3" font-size="12">千字笔记</text>
+      <rect x="164" y="296" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="174" y="320" fill="#c3d1e3" font-size="12">每学期一篇</text>
+      <text x="174" y="338" fill="#c3d1e3" font-size="12">三千字报告</text>
+      <rect x="266" y="296" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="276" y="320" fill="#c3d1e3" font-size="12">做一次</text>
+      <text x="276" y="338" fill="#c3d1e3" font-size="12">十五分钟演示</text>
+      <rect x="368" y="296" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="378" y="320" fill="#c3d1e3" font-size="12">论文写完</text>
+      <text x="378" y="338" fill="#c3d1e3" font-size="12">通过答辩</text>
+    </g>
+    <g>
+      <rect x="0" y="357" width="56" height="58" fill="#0d1c36" stroke="#2a4066"/>
+      <rect x="0" y="357" width="3" height="58" fill="#FF8A3D"/>
+      <text x="10" y="390" fill="#ffffff" font-size="13">入世</text>
+      <rect x="62" y="357" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="72" y="381" fill="#c3d1e3" font-size="12">旁听一次</text>
+      <text x="72" y="399" fill="#c3d1e3" font-size="12">公开庭审</text>
+      <rect x="164" y="357" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="174" y="381" fill="#c3d1e3" font-size="12">完成一次</text>
+      <text x="174" y="399" fill="#c3d1e3" font-size="12">社区见习</text>
+      <rect x="266" y="357" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="276" y="381" fill="#c3d1e3" font-size="12">基层实习</text>
+      <text x="276" y="399" fill="#c3d1e3" font-size="12">做满三月</text>
+      <rect x="368" y="357" width="100" height="58" fill="#101d38" stroke="#22385c"/>
+      <text x="378" y="381" fill="#c3d1e3" font-size="12">联考四关</text>
+      <text x="378" y="399" fill="#c3d1e3" font-size="12">逐项准备</text>
+    </g>
+    <rect x="62" y="24" width="100" height="381" fill="none" stroke="#FFD166" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <text x="112" y="412" fill="#FFD166" font-size="12" text-anchor="middle">第三年回头看这一列</text>
+  </g>
+</svg>
+<figcaption>全表一张，每格一件事。虚线框住第一列：第三年填表的时候，回头看这一列。</figcaption>
+</figure>
+
+<p>规矩只有两条：每格填一项<span class="uw">具体动作</span>，不填形容词；未完成的格子写下一步，不写尚未开始。形容词年底无从检验，尚未开始是一句交差的话，<mark>下一步</mark>才是能接着做下去的事。</p>
+
+<div class="panel">
+  <p class="tt">二十四格怎么填</p>
+  <ol class="steps">
+    <li><b>开学第一周填当年那一列，六格一次填完。</b>赶在开学头七天，事前填。
+    <span class="why">事前填的是打算，事后填的是回忆，回忆会自动挑好看的写。</span></li>
+    <li><b>每格只填一项动作，带数字或时间范围。</b>
+    <span class="why">数字到年底自然见分晓，形容词到年底什么也证明不了。</span></li>
+    <li><b>填不下的格子写下一步，某月某日前做什么，写到日期。</b>
+    <span class="why">下一步是能接着做的事，尚未开始四个字什么也接不上。</span></li>
+    <li><b>学年末回看一次。</b>完成的打勾，没完成的改写下一步，再填下一列。
+    <span class="why">一列一列对照着看，才看得出哪一行年年都在补。</span></li>
+    <li><b>第三年把第一年的六格抄一份在旁边。</b>写下当时把什么当成了要紧的。
+    <span class="why">这份记录写在事前，改不了，比任何年终总结都诚实。</span></li>
+  </ol>
+</div>
+
+<h3>全表的样子<span class="tag">示例</span></h3>
+
+<div class="tblwrap">
+<table>
+  <tr><th></th><th>大一</th><th>大二</th><th>大三</th><th>大四</th></tr>
+  <tr><td>见天地</td><td>读完十二本书，其中四本与专业无关</td><td>走完本市十个派出所辖区，各画一张简图</td><td>跟住一个案子满一年，记下每个节点的日期</td><td>整理三年笔记，标出十处改变了看法的地方</td></tr>
+  <tr><td>见自己</td><td>连续记两周时间流水，算出五个数</td><td>测一次一千米，把底数写在年表背面</td><td>写下三件不拿回报也愿意做的事</td><td>给四年后的自己写一封三千字的信</td></tr>
+  <tr><td>见众生</td><td>在区图书馆做满一学期志愿者</td><td>访谈十位报案人，各记一页</td><td>陪室友度过一次挫折，只帮忙不评判</td><td>在集体里接下别人的一件活，负责到底</td></tr>
+  <tr><td>成事</td><td>组队完成一次课程设计，交付并讲评</td><td>把一个项目做满一年，不停不换</td><td>一场比赛打到最后一轮</td><td>四年作品归拢成一个档案袋，能给人看</td></tr>
+  <tr><td>立言</td><td>每月写一篇千字笔记，年末自选四篇</td><td>每学期交一篇三千字的报告</td><td>做一次十五分钟的演示，答满提问</td><td>写完毕业论文，通过答辩</td></tr>
+  <tr><td>入世</td><td>旁听一次公开庭审，记下流程</td><td>完成一次社区见习，认识三个网格员</td><td>完成基层公安机关实习，做满三个月</td><td><a href="大学四年_联考四关.html">联考四关</a>逐项准备，选岗后接下第一件事</td></tr>
+</table>
+</div>
+
+<h3>一格一动作<span class="tag">对照着改</span></h3>
+<p>填表最常见的差错，是把形容词当成了动作。常见的填法、差在哪、改成的样子，三栏对着看：</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>常见的填法</th><th>差在哪</th><th>改成的样子</th></tr>
+  <tr><td>多读书</td><td>形容词，年底无从检验</td><td>读完十二本书，其中四本与专业无关</td></tr>
+  <tr><td>参加志愿服务</td><td>没有次数，也没有时长</td><td>在区图书馆做满一学期志愿者</td></tr>
+  <tr><td>关注时事</td><td>不留任何东西下来</td><td>跟住一个案子满一年，记下每个节点的日期</td></tr>
+  <tr><td>提高表达能力</td><td>做没做，说不清</td><td>做一次十五分钟的演示，答满提问</td></tr>
+  <tr><td>尚未开始</td><td>一句交差的话</td><td>改成下一步：某月某日前约好第一次访谈</td></tr>
+</table>
+</div>
+
+<div class="panel">
+  <p class="tt">第三年那一回看</p>
+  <p>填到第三年，把第一年的六格抄一份放在旁边。多数人这时候会看见两样东西：一是当时当成要紧的事，如今看不出来了；二是当时随手写下的一格，居然一路做了下来。两样都是收获：前者说明判断变了，后者说明这件事已经坚持了下来。八格年表和时间流水记的是时间花在哪里，二十四格记的是心思曾放在哪里；两本账合起来，才看得清一个人是怎么变成现在这样的。</p>
+</div>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>最常见的两种填法：一种填形容词，提高自己、开阔眼界，年底无从检验；一种填尚未开始，一句交差的话把一格交掉。<span class="bad">两种都不是记录，是措辞</span>。改成带日期的下一步，格子才接得上上一格。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>每年填完，六格各说得清三样：这件事的检验标准是什么，做到哪一步算完，什么时候做。三样缺一样，这一格到年底多半还是空的。</p>
+</div>
+
+<p class="pull">二十四格不收成为更好的人这种空话，每一格都只记看得见的事。<span class="q">一件事接着一件事做下来，人就在这些事里一点点变了样子</span>。</p>
+
+<p>二十四格与八格年表不是一回事。年表按学期画，记的是学校与自己各自占用的时间；格子按年画，记的是这些时间里做成了什么。年表回答时间去了哪里，格子回答事情做没做成。一本挂在墙上，一本收在册子里，年底对着看，才凑得齐一本完整的账。</p>
+
+<ul class="check">
+  <li class="hd">10.3 · 二十四格</li>
+  <li>开学第一周填完当年六格，事前填，不补填</li>
+  <li>每格一项具体动作，带数字或时间范围</li>
+  <li>未完成的格子改写下一步，不写尚未开始</li>
+  <li>学年末回看一次，完成的打勾，没完成的写下改法</li>
+  <li>第三年把第一年的格子抄一份对照，写下当时把什么当成了要紧的</li>
+  <li>第四年填完最后一列，二十四格完整收进档案袋</li>
+</ul>
+
+<hr class="warm">
+
+<div class="card g" id="send">
+  <p class="tt">写在最后</p>
+  <p class="big">四年之后，课表早已不在。剩下多少时间，从第一周就看得见；那些时间用在了哪里，二十四格上写得出来。</p>
+</div>
+
+<div class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="09_上场.html"><span class="ar">‹</span>第九章 · 上场</a></p>
+  <p class="by">课表之外的大学 · 第十章　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

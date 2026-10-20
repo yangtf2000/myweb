@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第七章 立言 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s71" class="cur">7.1 一周八百字</a><span class="sp">/</span>
+  <a href="#s72">7.2 一次当众讲清</a><span class="sp">/</span>
+  <a href="#s73">7.3 一条自己剪的片</a><span class="sp">/</span>
+  <a href="#s74">7.4 每天二十分钟外语</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第七章</p>
+  <h1>立<span class="em">言</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">一件事懂了八成，讲出来对方懂三成，这个损耗与口才关系不大，与讲的人有没有顾及听的人关系很大。立言练的是把想法表达出来的四种方式：<b>写下来、讲出来、剪成片、用外语读原话</b>。四样都不靠天赋，靠的是按固定的结构反复做，每一样都给得出完成的证据。</p>
+  <div class="chipline">
+    <span class="chip">一周八百字</span><span class="chip t">三分钟稿</span><span class="chip">一条三分钟的片</span><span class="chip t">每天二十分钟</span><span class="chip">两百小时</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/07.jpg" alt="空礼堂里的一支麦克风，一束暖光从顶上照下来">
+  <figcaption>空礼堂里的麦克风。讲的人没上台之前，它与别处的支架没有分别；站上去的那三分钟，说的是此前写过多少遍。</figcaption>
+</figure>
+
+<h2 id="s71"><span class="n">7.1</span>一周八百字</h2>
+<p class="sec-lead"><a href="大学四年_写作与表达.html">写作</a>是唯一能把混乱的想法理清楚的办法。想的时候觉得懂了，一落笔就发现中间有几处接不上；那几处接不上的地方，就是还没想明白的地方。</p>
+
+<p>每周八百字，一年四十一万字。这个量不算大，贵在每篇都改过一遍。改过与没改过，隔三个月就看得出来：没改过的篇目，句子还是原来的次序；改过的，段落被合并过，结论后面补了依据，「我认为」一类的话删干净了。</p>
+
+<p>题目不用等。没有题目的时候，从下面二十个里挑一个，都写得完八百字。这些题目的共同点是只用自己的经历与查得到的材料，不需要田野调查，也不需要专家访谈。</p>
+
+<div class="grid2">
+  <ul class="dash">
+    <li>本周弄清的一个概念，它原来是什么意思，现在被人怎么用</li>
+    <li>一个原来相信、现在不信的说法，是什么让自己改的</li>
+    <li>一条规则为什么要这么定，换个定法会怎样</li>
+    <li>一个数据，它怎么统计出来的，口径是什么</li>
+    <li>一件小事里的三方立场，各自要什么</li>
+    <li>自己否定的一个观点，它最强的版本是什么</li>
+    <li>一次判断错了的经历，错在哪一步</li>
+    <li>一本书里最不同意的一段，为什么不同意</li>
+    <li>一个常见说法里的漏洞</li>
+    <li>一个案子如果换个处理方式，结果会怎样</li>
+  </ul>
+  <ul class="dash">
+    <li>自己的专业在社会上被误解的地方</li>
+    <li>一件工具的代价，它替掉了什么，又拿走了什么</li>
+    <li>一个词这五年的意思变化</li>
+    <li>所在的城市这三年变了吗，变在哪</li>
+    <li>一次合作失败的全过程</li>
+    <li>一个人做对了一件事，他可能自己都没意识到</li>
+    <li>一条新闻里被删掉的部分</li>
+    <li>如果只能保留三条校规，留哪三条</li>
+    <li>将来岗位的一天，可能是什么样</li>
+    <li>一年之后回看今天，会怎么看</li>
+  </ul>
+</div>
+
+<h3>四段结构，一段都不能少</h3>
+
+<figure>
+<svg viewBox="0 0 480 176" role="img" aria-label="八百字短文分四段，各段字数与任务">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四段，一共八百字</text>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="0" y="30" width="108" height="74" rx="10"/>
+      <rect x="124" y="30" width="108" height="74" rx="10"/>
+      <rect x="248" y="30" width="108" height="74" rx="10"/>
+      <rect x="372" y="30" width="108" height="74" rx="10"/>
+    </g>
+    <g font-size="12.5" text-anchor="middle" fill="#ffffff">
+      <text x="54" y="56">说一件事</text>
+      <text x="178" y="56">拆开它</text>
+      <text x="302" y="56">给证据</text>
+      <text x="426" y="56">收在判断上</text>
+    </g>
+    <g font-size="12" text-anchor="middle" fill="#FFD166">
+      <text x="54" y="78">150 字</text>
+      <text x="178" y="78">300 字</text>
+      <text x="302" y="78">200 字</text>
+      <text x="426" y="78">150 字</text>
+    </g>
+    <g font-size="11.5" text-anchor="middle" fill="#b0c0d4">
+      <text x="54" y="96">时间 · 地点 · 人 · 数字</text>
+      <text x="178" y="96">由哪几部分组成</text>
+      <text x="302" y="96">数据 · 原文 · 反例</text>
+      <text x="426" y="96">一句能站住的话</text>
+    </g>
+    <g stroke="#FF8A3D" stroke-width="1.3" fill="none">
+      <path d="M110 67 L120 67"/><path d="M115 62 L121 67 L115 72"/>
+      <path d="M234 67 L244 67"/><path d="M239 62 L245 67 L239 72"/>
+      <path d="M358 67 L368 67"/><path d="M363 62 L369 67 L363 72"/>
+    </g>
+    <text x="0" y="132" fill="#FF8A3D" font-size="12">先摆事实，再作分析；证据放在拆开之后；判断收在最后。</text>
+    <text x="0" y="154" fill="#b0c0d4" font-size="12">次序倒过来，证据会被挑着用。</text>
+  </g>
+</svg>
+<figcaption>四段各有任务。第一段不背景介绍，第四段不喊口号，中间两段承担全篇的分量。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>段</th><th>写什么</th><th>字数</th><th>写成什么样算合格</th></tr>
+  <tr><td>一 · 说一件事</td><td>具体的时间、地点、人、数字</td><td class="num">150</td><td>不写「近年来」「随着社会的发展」</td></tr>
+  <tr><td>二 · 拆开它</td><td>这件事由哪几部分组成，各部分的关系是什么</td><td class="num">300</td><td>能画成一张两到四格的图</td></tr>
+  <tr><td>三 · 给证据</td><td>一条数据、一段原文、一个反例</td><td class="num">200</td><td>每条证据注明出处，查得到的算</td></tr>
+  <tr><td>四 · 收在一个判断上</td><td>一句能站住的话</td><td class="num">150</td><td>不喊口号，不用「由此可见」</td></tr>
+</table>
+</div>
+
+<p>这个次序有理由。先摆事实，再作分析，是因为分析没有事实根据就空泛；证据放在拆开之后，是因为先有拆法才知道要证什么；判断收在最后，是因为结论先行的话，后面的证据会被挑着用，只留顺手的，把别扭的藏起来。</p>
+
+<div class="card">
+  <p class="tt">改稿清单 · 五条，逐条过</p>
+  <ol class="steps">
+    <li><b>删掉不承担信息的句子。</b>凡是删了不影响意思的，都删。
+    <span class="why">删过一遍才知道，原来的稿子里有多少话是凑行数的。</span></li>
+    <li><b>长句拆开。</b>一句话超过四十字，找逗号的位置断开。
+    <span class="why">读的人靠一口气走完全句；超过四十字，后半句就听不进去了。</span></li>
+    <li><b>每一处结论后面补依据。</b>补不上，就把结论改成疑问。
+    <span class="why">补依据不是规矩，是给自己一个发现错处的机会。</span></li>
+    <li><b>删掉所有的「我认为」「在我看来」。</b>观点不需要招牌。
+    <span class="why">写下这两个词的时候，多半是后面的证据不够充分，用表态来补。</span></li>
+    <li><b>读一遍出声。</b>读着别扭的地方，就是别人读着卡的地方。
+    <span class="why">眼睛会跳字，嘴不会；嘴停住的那一处，就是要改的地方。</span></li>
+  </ol>
+</div>
+
+<p class="pull">想的时候觉得懂了，一落笔就发现中间有几处接不上。<span class="q">那几处接不上的地方，就是这一篇真正的产出</span>。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年十二篇，每篇都改过一遍。十二篇之后自行编成一册，编的时候能看出前几篇与后几篇的差别，那个差别就是积累出来的东西。编不成一册，说明写得断断续续，写一阵停一阵的，等于没写。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">7.1 做完打勾</li>
+  <li>从二十个题目里挑定下一篇，写在日历上</li>
+  <li>按四段结构写完八百字，各段标出字数</li>
+  <li>按五条清单改一遍，删掉的句子数一数</li>
+  <li>给每处结论补上出处，补不上的改成疑问</li>
+  <li>建一个文件夹，按周编号存放，满十二篇编一册</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s72"><span class="n">7.2</span>一次当众讲清</h2>
+<p class="sec-lead">写可以改，讲不能改；写的读者可以停下来想，讲的听众一走神就接不回来。三分钟是把一件事讲清楚的合格长度，也是几乎所有场合都会给的长度。</p>
+
+<p>讲不清的原因多半不在口才，在结构上。一份三分钟稿，四段各有各的任务；写稿的时候逐字写，讲的时候才敢离开稿子。</p>
+
+<p>一段可用的开头照下面这样写：</p>
+
+<blockquote>
+  <p>去年这个时候，我们县查了一起案子。二十三个人吃了同一种卤味，当天晚上全部进了医院。检测报告出来，亚硝酸盐超标十一倍。</p>
+  <p class="src">一段可用的三分钟开头 · 第一句给一个具体的东西</p>
+</blockquote>
+
+<p>这个开头里没有自我介绍，没有「今天我讲三个方面」。第一句给一个数字、一个场景、一个问题，听众才知道重点在哪；重点清楚了，后面的内容才接得上。</p>
+
+<div class="card">
+  <p class="tt">三分钟稿 · 四段</p>
+  <ol class="steps">
+    <li><b>第一句给一个具体的东西。</b>一个数字、一个场景、一个问题。
+    <span class="why">抽象的句子要听众自己找重点，具体的东西，重点已经清楚了。</span></li>
+    <li><b>中间给三件事。</b>每件事一句话说完，再补一句证据；三件事之间用「还有一个」连接。
+    <span class="why">三件是听众一次能记住的上限。「首先其次」一出口，人就走神了。</span></li>
+    <li><b>给一个反例。</b>承认这件事在什么情况下不成立。
+    <span class="why">这一段最能让人信。全对的判断听起来不像实情，有一个边界的判断才显得实在。</span></li>
+    <li><b>最后一句回到第一句。</b>不总结，不感谢，说完就停。
+    <span class="why">总结是把刚才的话再说一遍；回到第一句，这三分钟才合得上。</span></li>
+  </ol>
+</div>
+
+<p class="pull">讲的人以为自己说过，听众那里并没有。<span class="q">这个差距只能靠第二个人发现</span>。</p>
+
+<h3>四级阶梯，一级一级上</h3>
+
+<figure>
+<svg viewBox="0 0 480 250" role="img" aria-label="当众发言的四级阶梯，从课堂提问到比赛答辩">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四级，一级一级上，不许跳</text>
+    <g fill="#16274a" stroke="#2a4066" stroke-width="1.2">
+      <rect x="16" y="176" width="104" height="46" rx="9"/>
+      <rect x="132" y="130" width="104" height="92" rx="9"/>
+      <rect x="248" y="84" width="104" height="138" rx="9"/>
+      <rect x="364" y="38" width="104" height="184" rx="9" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.3"/>
+    </g>
+    <g font-size="12.5" text-anchor="middle" fill="#ffffff">
+      <text x="68" y="160">一句话</text>
+      <text x="184" y="114">一分钟</text>
+      <text x="300" y="68">三分钟</text>
+      <text x="416" y="22" fill="#3FBFA0">五到十分钟</text>
+    </g>
+    <g font-size="11.5" text-anchor="middle" fill="#b0c0d4">
+      <text x="68" y="180">课堂提问</text>
+      <text x="184" y="134">小组讨论</text>
+      <text x="300" y="88">班会 · 社团例会</text>
+      <text x="416" y="42" fill="#b0c0d4">比赛答辩 · 公开场合</text>
+    </g>
+    <g font-size="11" text-anchor="middle" fill="#FFD166">
+      <text x="68" y="204">说清没懂哪里</text>
+      <text x="184" y="158">别人能接上话</text>
+      <text x="300" y="112">不用稿，能答提问</text>
+      <text x="416" y="66">追问三次不慌</text>
+    </g>
+    <g stroke="#FF8A3D" stroke-width="1.2" fill="none">
+      <path d="M122 199 L130 199"/><path d="M125 194 L131 199 L125 204"/>
+      <path d="M238 153 L246 153"/><path d="M241 148 L247 153 L241 158"/>
+      <path d="M354 107 L362 107"/><path d="M357 102 L363 107 L357 112"/>
+    </g>
+    <text x="0" y="240" fill="#b0c0d4" font-size="12">每一级都要有几次成功的记录，才往上一级。</text>
+  </g>
+</svg>
+<figcaption>四级阶梯。级别按场合排，不按难度排；每一级的通过标准都是可观察的。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>级</th><th>场合</th><th>时长</th><th>通过标准</th><th>一学期至少几次</th></tr>
+  <tr><td>一</td><td>课堂提问</td><td>一句话</td><td>说清自己没懂哪里</td><td class="num">八次</td></tr>
+  <tr><td>二</td><td>小组讨论</td><td>一分钟</td><td>别人能接上话</td><td class="num">四次</td></tr>
+  <tr><td>三</td><td>班会、社团例会</td><td>三分钟</td><td>不用稿，能答一个问题</td><td class="num">两次</td></tr>
+  <tr><td>四</td><td>比赛答辩、公开场合</td><td>五到十分钟</td><td>评委追问三次不慌</td><td class="num">一次</td></tr>
+</table>
+</div>
+
+<p>四级一级一级上，不许跳。直接上台讲十分钟的人，多数是去丢一次人，丢完就怕了，往后躲得更远；从一句话开始，每一级都积累了成功的记录，再上一级的时候心里有底。跳级的人不是没有，是极少，指望这个小概率不划算。</p>
+
+<div class="panel">
+  <p class="tt">复述检验 · 讲完请一个人复述</p>
+  <p>复述得出来，说明讲清了；受阻在某一处，那一处就是没讲清的地方。多数时候受阻的位置在前提上，结论反而清楚，讲的人以为自己说过，实际没有。这个检验自己做的不了，非得有第二个人在场。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年十二次当众发言，其中三次是三级以上场合。十二次里多数是一句话，那正是要的：一句话说清自己没懂哪里，比十分钟的泛泛而谈难得多。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">7.2 做完打勾</li>
+  <li>按四段结构逐字写一份三分钟稿</li>
+  <li>请一个人听完复述，记下受阻的位置</li>
+  <li>照受阻的位置改稿，再讲一次</li>
+  <li>本学年完成两次三级以上场合发言</li>
+  <li>把每次的场合、时长、卡点记在同一页纸上</li>
+</ul>
+
+<hr class="warm">
+
+<h2 id="s73"><span class="n">7.3</span>一条自己剪的片</h2>
+<p class="sec-lead">三分钟能讲清一件事，是一项被低估的能力。短视频时代三分钟算长，正式场合三分钟算短，两头都够用。</p>
+
+<p>设备只有四样，加起来不到三百元。四样东西的次序有讲究：声音优先于画面，固定优先于运动，顺光优先于逆光。三样都不是钱能一次性解决的，但每一样都有简单的做法。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>物件</th><th>价格</th><th>说明</th></tr>
+  <tr><td>手机</td><td class="num">现有</td><td>横拍，4K 或 1080p，开拍前锁定曝光</td></tr>
+  <tr><td>领夹麦</td><td class="num">100–200 元</td><td>声音比画质重要，室内尤其</td></tr>
+  <tr><td>三脚架</td><td class="num">30–60 元</td><td>固定机位，避免手持抖</td></tr>
+  <tr><td>补光</td><td class="num">台灯即可</td><td>脸朝着光，不背光</td></tr>
+</table>
+</div>
+
+<p class="pull">观众可以接受画面不讲究，却很难原谅声音听不清；<span class="q">预算有限时先保证收音清楚，再添置相机</span>。</p>
+
+<p><a href="大学四年_拍与剪.html">剪辑</a>用剪映就够，剪辑、字幕、配乐、降噪都在里面。第一版不必学专业软件，先把一条片子从头到尾做完。做完一条才知道自己缺的是哪一步，缺的那一步再去找教程，找的时候目标就明确了。</p>
+
+<h3>分镜表：六列，拍之前填</h3>
+
+<div class="tblwrap">
+<table>
+  <tr><th>镜头</th><th>画面</th><th>台词或字幕</th><th>时长</th><th>地点</th><th>备注</th></tr>
+  <tr><td>1</td><td>卤味摊近景，手在装袋</td><td>无</td><td class="num">5 秒</td><td>市场</td><td>早市光线</td></tr>
+  <tr><td>2</td><td>检测报告特写</td><td>超标十一倍</td><td class="num">4 秒</td><td>桌上</td><td>手不要入镜</td></tr>
+  <tr><td>3</td><td>（自己填）</td><td></td><td></td><td></td><td></td></tr>
+</table>
+</div>
+
+<p>六列一格都不能空。空着的那一格，到了现场就是来回跑的原因：忘了拍空镜，回去补一趟；忘了问一句当事人的话，案子已经结了找不上人。分镜表填得越细，现场越安静。</p>
+
+<figure>
+<svg viewBox="0 0 480 152" role="img" aria-label="一条三分钟片子的时间分配">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">三分钟，一百八十秒</text>
+    <rect x="0" y="34" width="80" height="46" rx="8" fill="#FF8A3D"/>
+    <rect x="80" y="34" width="320" height="46" rx="0" fill="#3FBFA0"/>
+    <rect x="400" y="34" width="80" height="46" rx="8" fill="#FFD166"/>
+    <g font-size="12" text-anchor="middle" font-weight="600" fill="#0b1730">
+      <text x="40" y="62">前 30 秒</text>
+      <text x="240" y="62">中间 120 秒</text>
+      <text x="440" y="62">最后 30 秒</text>
+    </g>
+    <g font-size="11.5" text-anchor="middle" fill="#b0c0d4">
+      <text x="40" y="102">给结论</text>
+      <text x="240" y="102">给事实与人</text>
+      <text x="440" y="102">收住，不总结</text>
+    </g>
+    <g font-size="11.5" fill="#ffffff" text-anchor="middle">
+      <text x="40" y="122">一句话说清讲什么</text>
+      <text x="240" y="122">两个当事人各一段 · 一组数据出一个图</text>
+      <text x="440" y="122">停在一个画面上</text>
+    </g>
+    <text x="0" y="146" fill="#FF8A3D" font-size="11.5">前三十秒做不到一句话讲清，后面再好也补不回来。</text>
+  </g>
+</svg>
+<figcaption>三段时间的分工。中间一段最长，因为事实与人最费时间；两头各三十秒，少一秒就松，多一秒就拖。</figcaption>
+</figure>
+
+<div class="card">
+  <p class="tt">三分钟结构 · 三段</p>
+  <ol class="steps">
+    <li><b>前三十秒：给结论。</b>一句话说清这条片子讲什么，配一个画面。
+    <span class="why">观众划走一条片子只花两秒；两秒里能留下的，只有一句话加一个画面。</span></li>
+    <li><b>中间两分钟：给事实与人。</b>两个当事人，各说一段；一组数据，出一个图。
+    <span class="why">人比结论有说服力，数据比人有普遍性；两样都要，缺一样就偏。</span></li>
+    <li><b>最后三十秒：收住，不总结。</b>停在一个画面上，让观众自己想。
+    <span class="why">一总结就疏远了观众；停在画面上，那三十秒是留给观众想的，不是自己替他说完的。</span></li>
+  </ol>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>能给陌生人看：不必解释背景，对方能看懂，能说出这条片子讲了什么。需要先解释三句才看得懂，回去重剪，不用重拍。剪的时候舍不得删，是因为每一条素材都记得当时的辛苦；辛苦是自己的事，观众不知道。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">7.3 做完打勾</li>
+  <li>按四样清单备齐设备，总价记下来</li>
+  <li>拍之前填一张六列分镜表，不留空格</li>
+  <li>一条片子从拍到剪做完，时长控制在三分钟上下</li>
+  <li>给两个陌生人看，只听他们的第一句话</li>
+  <li>按反馈重剪一版，两版都留着</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s74"><span class="n">7.4</span>每天二十分钟外语</h2>
+<p class="sec-lead">外语的用处有两个：拿到一手材料，扩大交往范围。这两样在专业上的分量，比考试分数重得多。</p>
+
+<p>食药环侦的专业材料，相当一部分只有外文。检测方法、限量标准、国际公约的原文，看译文与看原文是两回事：译文已经把一层判断做完了，而那一层判断常常是关键。同样是「不得检出」，不同文本里的对应词与适用条件并不一样，靠译文是看不出来的。</p>
+
+<p>一天也不中断，一年一百二十小时上下，四年四百八十小时以上，够走到第四阶段。这个账不复杂，难的是每天坚持。</p>
+
+<div class="statrow">
+  <div class="stat"><b>20</b><span>每天分钟数</span></div>
+  <div class="stat"><b>480</b><span>四年累计小时以上</span></div>
+  <div class="stat"><b>3</b><span>每天查的词数</span></div>
+  <div class="stat"><b>4</b><span>两百小时的阶段</span></div>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>时段</th><th>时长</th><th>做什么</th></tr>
+  <tr><td>早</td><td class="num">10 分钟</td><td>听。通勤或早操后，听一段新闻或播客，不求全懂</td></tr>
+  <tr><td>晚</td><td class="num">10 分钟</td><td>读。读半页专业材料，查三个词，抄两个句子</td></tr>
+</table>
+</div>
+
+<p>早晚各十分钟，比周末一次两小时管用：两小时的那个周末，总会被人占掉。关键是别中断，中断一个月，回来要补两周，补的时候最容易放弃。</p>
+
+<div class="grid3">
+  <div class="card t">
+    <p class="tt">法条与公约原文</p>
+    <p>条文句式固定，术语重复，读十页就能找出规律。适合打底。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">器械说明书</p>
+    <p>将来查设备参数用得上，句式比论文简单，一天能读一份。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">论文摘要</p>
+    <p>只读摘要与方法两段，一次一篇。读完说一句这篇做了什么。</p>
+  </div>
+</div>
+
+<p class="pull">把二十分钟拆到早晚，比周末攒一次两小时更稳；<span class="q">周末那整块时间看着宽裕，却总被别的事占掉，存着的计划常常落空</span>。</p>
+
+<h3>两百小时，四段路</h3>
+
+<figure>
+<svg viewBox="0 0 480 258" role="img" aria-label="两百小时外语路径的四段爬坡">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">累计小时越往上，能做的事越具体</text>
+    <g stroke="#1f3355" stroke-width="1">
+      <line x1="46" y1="40" x2="472" y2="40"/>
+      <line x1="46" y1="80" x2="472" y2="80"/>
+      <line x1="46" y1="120" x2="472" y2="120"/>
+      <line x1="46" y1="160" x2="472" y2="160"/>
+      <line x1="46" y1="200" x2="472" y2="200"/>
+    </g>
+    <g fill="#b0c0d4" font-size="11" text-anchor="end">
+      <text x="40" y="44">200</text>
+      <text x="40" y="84">150</text>
+      <text x="40" y="124">100</text>
+      <text x="40" y="164">50</text>
+      <text x="40" y="204">0</text>
+    </g>
+    <line x1="46" y1="204" x2="472" y2="204" stroke="#2a4066"/>
+    <polyline points="70,178 200,124 330,70 452,26" fill="none" stroke="#3FBFA0" stroke-width="2.2"/>
+    <g fill="#3FBFA0">
+      <circle cx="70" cy="178" r="4.5"/>
+      <circle cx="200" cy="124" r="4.5"/>
+      <circle cx="330" cy="70" r="4.5"/>
+      <circle cx="452" cy="26" r="4.5"/>
+    </g>
+    <g font-size="12" text-anchor="middle" fill="#FFD166">
+      <text x="70" y="222">50 小时</text>
+      <text x="200" y="222">100 小时</text>
+      <text x="330" y="222">150 小时</text>
+      <text x="452" y="222">200 小时</text>
+    </g>
+    <g font-size="11.5" fill="#ffffff">
+      <text x="70" y="196">看懂三成</text>
+      <text x="200" y="142">一页查五个词</text>
+      <text x="330" y="88">说出做了什么</text>
+      <text x="452" y="44">能开口问路</text>
+    </g>
+    <text x="0" y="248" fill="#b0c0d4" font-size="12">四段按次序走，不许跳；跳过开口那一关，前三段积累的成果都用不上。</text>
+  </g>
+</svg>
+<figcaption>两百小时的四个验收点。每个点都是一句能当场验证的话，不是「感觉有进步」。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>阶段</th><th>累计小时</th><th>做什么</th><th>验收</th></tr>
+  <tr><td>一</td><td class="num">50</td><td>看无字幕短片，先懂情节</td><td class="yes">看懂三成</td></tr>
+  <tr><td>二</td><td class="num">100</td><td>读说明书与法条，查词不查句</td><td class="yes">一页查五个词以内</td></tr>
+  <tr><td>三</td><td class="num">150</td><td>读论文摘要，一天一篇</td><td class="yes">说出这篇做了什么</td></tr>
+  <tr><td>四</td><td class="num">200</td><td>与人简单交谈</td><td class="yes">能自我介绍并问三个问题</td></tr>
+</table>
+</div>
+
+<p>四阶段按次序走，不许跳。跳过的结果很常见：词汇量够读论文，开口还是只能说出三个词。读与说是两种不同的能力，第二种能力只能靠开口练，看多少剧都代替不了。</p>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>一次两小时、每周一次。这个安排看上去总量相同，实际坚持不过两个月；某一周断了，后面会一连串断下去。<span class="bad">每天二十分钟比每周两小时管用</span>，管用的地方在中断的代价小。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>能读一页英文说明书，说出这台设备怎么用。开口这一关过不去，读得再多也用不上，所以第四阶段不能省。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">7.4 做完打勾</li>
+  <li>定下早晚两个十分钟的时点，写进作息表</li>
+  <li>选三类文本各一份，作为第一个月的材料</li>
+  <li>每天查三个词、抄两个句子，记在同一本上</li>
+  <li>满五十小时做第一次验收，只问看懂三成没有</li>
+  <li>满两百小时做完第四阶段，开口过一次</li>
+</ul>
+
+<hr class="deco">
+
+<div class="callout">
+  <p class="lab">一句话</p>
+  <p class="big">把想法交出去的方式有四种：写下来、讲出来、剪成片、用外语读原话。练到后来会发现它们是一件事，心里先有标准，手里再有一个具体的样。四年里能留下几篇改过的字、几段讲清的话、几条剪完的片、几页读过的原文；四样都在，立言就算没白练。</p>
+</div>
+
+<div class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="06_成事.html"><span class="ar">‹</span>第六章 · 成事</a><a href="08_入世.html">第八章 · 入世<span class="ar">›</span></a></p>
+  <p class="by">课表之外的大学 · 第七章　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章 见自己 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s41" class="cur">4.1 四件基础</a><span class="sp">/</span>
+  <a href="#s42">4.2 说得出口的目标</a><span class="sp">/</span>
+  <a href="#s43">4.3 十件怕的事</a><span class="sp">/</span>
+  <a href="#s44">4.4 让人舒服的样子</a><span class="sp">/</span>
+  <a href="#s45">4.5 看清自己哪类</a><span class="sp">/</span>
+  <a href="#slist">做完打勾</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第四章</p>
+  <h1>见<span class="em">自己</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">见天地之后，该把目光收回来，看见自己。四年里最先出问题的往往不是成绩，是睡不好、手机放不下、钱花得没有数、情绪没有出口。这四样归自控管；自控之上还有志向、自信、气度三项。每一项，都拆成一周之内能开始的动作、一条可以核对的判据。</p>
+  <div class="chipline">
+    <span class="chip">四件基础</span><span class="chip t">说得出口的目标</span><span class="chip">十件怕的事</span><span class="chip t">让人舒服的样子</span><span class="chip">自测看清类型</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/04.jpg" alt="深夜的台灯下，一个人伏在桌上往笔记本里写字，灯罩之外一片暗">
+  <figcaption>夜里十一点的书桌，台灯照亮的只有本子那么大一块。与自己相处的时刻，多数就是这么大一块，安静，但是看得清。</figcaption>
+</figure>
+
+<p>前三章讲的是往外看：时间怎么排，大学原本是干什么，这一行的现场长什么样。看到最后，问题都落回到看的人自己身上。作息乱着，材料读不进去；心里没方向，跑得越远越糊涂。这一篇往回走，讲四种靠自己维持的本事。</p>
+
+<p class="pull">课表能替人安排的部分，到报到那天为止。<span class="q">剩下的四样，安排的人、考核的人、兜底的人，一个都没有</span>。</p>
+
+<hr class="deco">
+
+<h2 id="s41"><span class="n">4.1</span>四件基础</h2>
+<p class="sec-lead">自控、志向、自信、气度。先守住自控这一项，再谈上面三项；上面三项，全以自控为基础。</p>
+
+<figure>
+<svg viewBox="0 0 480 262" role="img" aria-label="四件基础共同构成自控力，睡眠在最底层">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四件基础，共同构成自控力</text>
+    <rect x="52" y="26" width="376" height="38" rx="8" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="50" fill="#ffffff" font-size="13" text-anchor="middle">毕业时办得成事、也靠得住</text>
+    <g fill="#16274a" stroke="#2a4066" stroke-width="1.2">
+      <rect x="52" y="72" width="86" height="104" rx="6"/>
+      <rect x="146" y="72" width="86" height="104" rx="6"/>
+      <rect x="240" y="72" width="86" height="104" rx="6"/>
+      <rect x="334" y="72" width="86" height="104" rx="6"/>
+    </g>
+    <g font-size="13" text-anchor="middle" font-weight="600">
+      <text x="95" y="98" fill="#FF8A3D">自控</text>
+      <text x="189" y="98" fill="#FFD166">志向</text>
+      <text x="283" y="98" fill="#3FBFA0">自信</text>
+      <text x="377" y="98" fill="#7FB3E8">气度</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4" text-anchor="middle">
+      <text x="95" y="126">睡眠 · 手机 · 收支</text>
+      <text x="95" y="146">情绪 · 四件都靠设置</text>
+      <text x="189" y="126">单位 · 岗位</text>
+      <text x="189" y="146">三年三件事</text>
+      <text x="283" y="126">二十件怕的事</text>
+      <text x="283" y="146">挑十件做完</text>
+      <text x="377" y="126">衣服 · 体态</text>
+      <text x="377" y="146">谈吐 · 礼节</text>
+    </g>
+    <g font-size="12" text-anchor="middle">
+      <text x="95" y="166" fill="#FF8A3D">在此拆开</text>
+      <text x="189" y="166" fill="#FFD166">见 4.2</text>
+      <text x="283" y="166" fill="#3FBFA0">见 4.3</text>
+      <text x="377" y="166" fill="#7FB3E8">见 4.4</text>
+    </g>
+    <rect x="24" y="188" width="432" height="36" rx="8" fill="#0d2a24" stroke="#1c5a4a" stroke-width="1.4"/>
+    <text x="240" y="211" fill="#3FBFA0" font-size="13" text-anchor="middle" font-weight="600">设置与记录：决定做一次，执行交给<a href="大学四年_工具.html">闹钟</a>、限额与纸</text>
+    <text x="0" y="248" fill="#b0c0d4" font-size="12">出问题多半从自控这一项开始；上面三项，都以自控为基础。</text>
+  </g>
+</svg>
+<figcaption>自控在底，是因为夜里两点还在刷手机的人，白天谈不了志向，也攒不起自信。</figcaption>
+</figure>
+
+<p class="pull">志向、自信、气度，都以自控为基础；<span class="q">自控这一项没守住，上面三项都跟着出问题</span>。</p>
+
+<div class="grid2">
+  <div class="card">
+    <p class="tt">自控 · 先守这一项</p>
+    <p>睡眠、手机、收支、情绪，四样都靠设置维持，不靠品格。</p>
+  </div>
+  <div class="card t">
+    <p class="tt">志向 · 见 4.2</p>
+    <p>进哪一类单位、做什么工作、三年后做成哪三件事；写不到能核对，就只是愿望。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">自信 · 见 4.3</p>
+    <p>从二十件怕的事里挑十件，做完记三行；自信的依据是办成过什么。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">气度 · 见 4.4</p>
+    <p>衣服、体态、谈吐、礼节；定日子，定次数，月月如此，年年如此。</p>
+  </div>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>基础</th><th>一周之内的动作</th><th>最低量</th><th>判据</th></tr>
+  <tr><td>自控</td><td>买一个二十元的闹钟，手机挪出床头；下载近三年职位表前先查作息表</td><td>睡眠七小时三十分以上四天；娱乐类每日两小时以内</td><td>四周红圈不超过四个</td></tr>
+  <tr><td>志向</td><td>下载本省近三年职位表，逐列筛，抄成五列表</td><td>一次筛选，五个星标岗位</td><td>四行能念给第三个人听</td></tr>
+  <tr><td>自信</td><td>从二十件怕的事里挑十件，按怕的程度排序</td><td>每月两件，做完记三行</td><td>结果比预想好的不少于七件</td></tr>
+  <tr><td>气度</td><td>把理发、剪甲、锻炼、谈吐四条写进日历，定重复提醒</td><td>头发三周一次，指甲每周日，谈吐三条天天用</td><td>一个季度后拿旧照片对照</td></tr>
+</table>
+</div>
+
+<h3>睡眠：定死起床，倒推入睡<span class="tag">每天 1 分钟</span></h3>
+<p>时长有国家口径。国家卫健委《健康中国行动（2019—2030年）》把成人每日平均睡眠列进心理健康促进行动的倡导性指标：二零一九年六点五小时，二零三零年目标七到八小时；长期不足，文件里写明会加大心脑血管疾病、抑郁、糖尿病与肥胖的风险。</p>
+
+<ol class="steps">
+  <li><b>查作息表，抄下早操或首次集合时间，</b>假设是六点二十。
+  <span class="why">不知道几点必须出楼，倒推就没有起点。</span></li>
+  <li><b>按七小时三十分倒推：起床六点十分，上床二十二点四十。</b>两个闹钟写动作：二十二点一十分「洗漱」，二十二点四十「上床」。
+  <span class="why">闹钟响时人已经糊涂，「该睡了」是道理，「去洗漱」才是动作。</span></li>
+  <li><b>打开睡眠记录，每天早上只看时长；</b>墙上贴月历，三十一个格子，每天填一个数。
+  <span class="why">记在手机里的数，过一周没人点开；墙上的格子，抬头就看见。</span></li>
+  <li><b>连续记四周，低于七小时的格子红笔圈出，</b>回头看前一晚几点睡。
+  <span class="why">红圈要连着前一晚看，才知道该改哪个钟点。</span></li>
+</ol>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>四周里红圈不超过四个；超过四个，先把两个闹钟落实一周。周末补觉别超过一小时，补多了等于每周跨一次时区，周一必然起不来。</p>
+</div>
+
+<h3>手机：物理隔离，再做限额<span class="tag">当天 20 元</span></h3>
+<p>手机的问题不在用时长短，在它待的地方；同一个软件，放在床头和放在书桌，是两种东西。先改地方，再改限额。</p>
+
+<div class="panel">
+  <ol class="steps">
+    <li><b>买一个二十元的闹钟，手机从此不当闹铃。</b>
+    <span class="why">手机不在床边，比任何自律方法都管用。</span></li>
+    <li><b>充电线挪到书桌，床头不放手机，</b>睡前看的那几页书放床头。
+    <span class="why">充电的地方就是人待的地方；线在书桌，人就坐在书桌旁边。</span></li>
+    <li><b>屏幕使用时间给三类设限额：</b>短视频六十分钟，社交三十分钟，游戏零。
+    <span class="why">先限最费时间的那一类；三类一起限，必崩。</span></li>
+    <li><b>卸载最费时间的那一个，改用网页版；</b>每周日截图，文件名写周数。
+    <span class="why">网页版刷到第三屏就得手动点；单日数字说明不了什么，四周连起来才看得出升降。</span></li>
+  </ol>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>连续四周，娱乐类每日不超过两小时；达不到，先查床头还有没有手机。分类也诚实一点：看课算学习，看推荐算娱乐。</p>
+</div>
+
+<h3>收支：连记三个月，分四类<span class="tag">一天一笔</span></h3>
+<p>钱的问题，多半出在不知道漏在哪里，不在挣得少；记账是唯一能把「漏」变成数字的办法，且只对连续的数字有效。</p>
+
+<ol class="steps">
+  <li><b>从下个月第一天起，每花一笔当场记，</b>不留到晚上。
+  <span class="why">留到晚上的账，晚上就忘；一断就再也接不上。</span></li>
+  <li><b>分类只设四个：吃住、学习、社交、储蓄。</b>教材、报名费、比赛路费，都算学习。
+  <span class="why">分得越细，记得越短；四类够用，且能一直记下去。</span></li>
+  <li><b>三个月后做一张比例表，同五比一比二比一对照。</b>
+  <span class="why">比例有出处：伊丽莎白·沃伦二〇〇五年《All Your Worth》的「五三二零」；学生没有房租，把「想要」拆成学习与社交两份。</span></li>
+  <li><b>找出最大一笔非必要支出，砍一半，</b>转进一张不绑支付软件的卡；三个月后改周记。
+  <span class="why">全砍活不下去；不绑支付软件，那笔钱才真的动不了。</span></li>
+</ol>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>三个月里没有断天；断一天，前后两周的数就对不上，比例表就废了，从头再来。</p>
+</div>
+
+<h3>投资：开一个定投，自己选一只<span class="tag">每周一笔</span></h3>
+<p>存下的钱分两本账：一本是储蓄，活期或定期，没有风险，急用拿得出来；一本是投资，这里说基金定投，价格有涨有跌，可能亏。两本账不要混。定投是投资这本账里的练手功夫，每周自动扣一笔小钱，人不用每次下决心，先把投的动作做起来。</p>
+
+<ol class="steps">
+  <li><b>在支付宝里开通基金定投，设每周自动扣一笔小钱，</b>金额小到像少喝一杯奶茶。
+  <span class="why">自动扣，就不靠意志力；金额小，断了不心疼，接得上。</span></li>
+  <li><b>只买一只基金，页面里自己挑，不抄别人的代码。</b>
+  <span class="why">一只看得过来；抄来的不懂，跌了不敢拿，反而亏在恐慌里。</span></li>
+  <li><b>先弄懂两件最基本的：股票是公司所有权的一小份，基金是一篮子股票、由人代管；买基金等于请人替自己买一篮。</b>
+  <span class="why">不懂的东西拿不住；这两句够用，不用先学完金融再开始。</span></li>
+  <li><b>把波动当前提，不当意外：价格会涨会跌，跌的年份也照扣。</b>
+  <span class="why">定投的对手是波动，不是某一次涨跌；怕跌就先别开，开了就别停。</span></li>
+  <li><b>长期只看两件事：本金一笔笔累加进来，且时间够长，赶上经济持续向上。</b>
+  <span class="why">收益不靠某只基金的红利，也不靠短期投机；是本金日积月累的累加效益，加上经济长期向上的价值效益。中间会有亏损和波动，长期拿住才兑现这两样。</span></li>
+</ol>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>三个月后回头看，扣款日没断过；断过一次，人往往只记住那次跌，忘了存下的总量。</p>
+</div>
+
+<h3>情绪：三个出口，写名字<span class="tag">一张纸</span></h3>
+<p>情绪不能靠憋，也靠不了临时起意；管用的做法是把出口先写在纸上，写具体。情绪上来的时候，人想不起这些，纸能提醒人。</p>
+
+<ol class="steps">
+  <li><b>一个能说话的人：姓名、电话，</b>注明可以半夜打还是白天打。
+  <span class="why">标注时段，免得对方难做，也免得自己犹豫。</span></li>
+  <li><b>一项运动：写清项目与量，</b>例如跑步三公里，每周三次。
+  <span class="why">不写量的计划，一周后就变成「有空再说」。</span></li>
+  <li><b>一种写下来的办法：</b>备忘录建一个文件夹，或一本 A5 本，每次三行：发生了什么，我想到什么，明天做什么。
+  <span class="why">三行是上限；写成长篇，第三天就坚持不下去。</span></li>
+  <li><b>三个出口都启动不了的时候，打 12356。</b>
+  <span class="why">国家卫健委二〇二五年二月通知要求各地五月一日零时前统一为 12356；截至二零二五年底已接通七十余万通，危机干预近一万起（同年十二月二十六日发布会）。免费，全天候，不必先报姓名。</span></li>
+</ol>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>三个出口都能立刻启动，不用临时想；写不出三个名字的，先写两个，第三个下周补上。</p>
+</div>
+
+<div class="statrow">
+  <div class="stat"><b>7~8</b><span>成人日均睡眠倡导值（小时）</span></div>
+  <div class="stat"><b>2</b><span>娱乐类每日上限（小时）</span></div>
+  <div class="stat"><b>3</b><span>连续记账月数，不断天</span></div>
+  <div class="stat"><b>3</b><span>情绪出口，写名字</span></div>
+</div>
+
+<hr class="deco">
+
+<h2 id="s42"><span class="n">4.2</span>一个说得出口的目标</h2>
+<p class="sec-lead">目标要写到进哪一类单位、做什么工作、三年后做成哪三件事；写成「变得优秀」，无法核对也无法失败，四年过去，连失败的根据都没有。</p>
+
+<p class="pull">「变得优秀」不是目标，是愿望；<span class="q">愿望不能失败，所以也从来不算达成过</span>。</p>
+
+<p>说得出口的意思，是把这四行念给第三个人听，对方能当场指出哪一行不现实；念完只换来一句「挺好的」，多半是还没写完。</p>
+
+<figure>
+<svg viewBox="0 0 480 268" role="img" aria-label="从三年后倒推回本周的四层目标链">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">从终点倒推回本周，上面一格推出下一格</text>
+    <rect x="40" y="26" width="300" height="44" rx="8" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="52" y="46" fill="#3FBFA0" font-size="13" font-weight="600">三年后的三件事</text>
+    <text x="52" y="62" fill="#b0c0d4" font-size="12">每件能被第三个人核对</text>
+    <text x="352" y="52" fill="#b0c0d4" font-size="12">第四步</text>
+    <path d="M190 70 L190 80" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M185 75 L190 82 L195 75" fill="none" stroke="#2a4066" stroke-width="1.3"/>
+    <rect x="40" y="88" width="300" height="44" rx="8" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="52" y="108" fill="#ffffff" font-size="13">目标分 = 近三年录取平均分 + 5</text>
+    <text x="52" y="124" fill="#b0c0d4" font-size="12">加的五分，留给题目难易浮动</text>
+    <text x="352" y="114" fill="#b0c0d4" font-size="12">第二步</text>
+    <path d="M190 132 L190 142" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M185 137 L190 144 L195 137" fill="none" stroke="#2a4066" stroke-width="1.3"/>
+    <rect x="40" y="150" width="300" height="44" rx="8" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="52" y="170" fill="#ffffff" font-size="13">五个星标岗位</text>
+    <text x="52" y="186" fill="#b0c0d4" font-size="12">进面分与录取分都抄下</text>
+    <text x="352" y="176" fill="#b0c0d4" font-size="12">第二步</text>
+    <path d="M190 194 L190 204" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M185 199 L190 206 L195 199" fill="none" stroke="#2a4066" stroke-width="1.3"/>
+    <rect x="40" y="212" width="300" height="44" rx="8" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="52" y="232" fill="#ffffff" font-size="13">一张十五到三十行的职位表</text>
+    <text x="52" y="248" fill="#b0c0d4" font-size="12">专业列、备注列，逐列筛</text>
+    <text x="352" y="238" fill="#b0c0d4" font-size="12">第一步</text>
+  </g>
+</svg>
+<figcaption>倒推与顺排的分别：顺排从今天想到三年后，越排越虚；倒推从三年后回到本周，每一步都有<a href="大学四年_查证.html">出处</a>。</figcaption>
+</figure>
+
+<blockquote>
+  <p>知止而后有定。</p>
+</blockquote>
+
+<p>《礼记·大学》里有一个字把这件事说得很省：止。知道停在哪里，心才定得下来；不知道，就总是慌着赶下一个热闹处，四年赶了十几个地方，没有一个站稳。</p>
+
+<div class="card">
+  <p class="tt">五步，从一张表到一张 A5</p>
+  <ol class="steps">
+    <li><b>下载本省近三年职位表，逐列筛：</b>专业列含「公安技术类」或「食品药品环境犯罪侦查技术」，备注列看附加条件。抄成五列表。
+    <span class="why">只看一年，看不出哪些岗位常年招人；备注列字最小，最容易漏。</span></li>
+    <li><b>找「面试人员名单」或「拟录用人员公示」，</b>抄五个星标岗位的进面分与录取分。
+    <span class="why">录取分减进面分，是面试要追的分；减模拟分，是还要补的分。</span></li>
+    <li><b>模拟分自己测：</b>一套近年真题按考试时间做，申论请老师给一次分。目标分 = 近三年录取平均分 + 五分。
+    <span class="why">不测就没有分母；加的五分，留给题目难易浮动。</span></li>
+    <li><b>拿一张 A5 横画四栏：单位类型、岗位类型、三年后做到、为什么是它。</b>填完发给三位于业者，各核一遍。
+    <span class="why">三人说法起了冲突，说明那张表查得不够，回去补。</span></li>
+    <li><b>打印贴在书桌左上角，每年十二月改一次，</b>旧版留着，另写一页为什么改。
+    <span class="why">存在手机里的目标，多半再没打开过；一年改超三次，它是听来的，不是查来的。</span></li>
+  </ol>
+</div>
+
+<div class="panel">
+  <p class="tt">一份填好的样例</p>
+  <ul class="dash">
+    <li>单位：市公安局食药环侦支队；区市场监管局执法稽查大队；海关缉私分局</li>
+    <li>岗位：执法勤务，食药环侦方向</li>
+    <li>三年后：独立办结一类案件全流程；二十份合格笔录；通过法考客观题</li>
+    <li>为什么：年立案数在涨（市局年度工作报告）；专业对口；访谈里提到缺检测背景的人</li>
+  </ul>
+</div>
+
+<p>「业务能力强」要改成「独立完成一次食药环案件现场勘查，并制作一份合格笔录」；「得到认可」改成「市级业务比武前十名」。每一句都要能被第三个人核对。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>标准</th><th>问自己的一句</th><th>不合格的样子</th></tr>
+  <tr><td>说得出口</td><td>念给第三个人听，对方能不能当场指出哪一行不现实</td><td>念完只换来一句「挺好的」</td></tr>
+  <tr><td>有期限</td><td>哪一天算达成，写的是哪年哪月</td><td>「三年后」后面没有月份</td></tr>
+  <tr><td>数得清</td><td>这句话里有没有一个能数出来的东西</td><td>「业务能力强」「得到认可」</td></tr>
+  <tr><td>别人能作证</td><td>第三个人拿着材料，能不能核对这句话</td><td>只有自己知道算不算达成</td></tr>
+  <tr><td>拆得到这周</td><td>这一周的动作能不能直接排进日历</td><td>排不进日历的，改写到能排进去</td></tr>
+</table>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>四行填满，第三行那三件事能直接排进日历；排不进日历的，改写到能排进去为止。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s43"><span class="n">4.3</span>做成十件怕的事</h2>
+<p class="sec-lead">自信来自办成过的事，想法本身给不了。一个人相信自己能办事，依据是过去办成过几件他原本怕办的事，这个依据写在简历里，也写在同事眼里。</p>
+
+<p class="pull">怕的程度是个人的，没有统一量表；<span class="q">能做的只是把二十件事摆在面前，自己挑十件</span>，按怕的程度排下来。</p>
+
+<p>这二十件事，难度差不多，怕的内容不同：有人怕当众说话，有人怕给陌生人打电话，有人怕被拒绝。挑十件写在纸上，排序的过程本身就是第一次练习，多数人这时候才发现，原以为最怕的那件事，多半排不进前三。</p>
+
+<div class="grid2">
+  <ul class="dash">
+    <li>课堂上举手提问</li>
+    <li>站起来答一个没准备的问题</li>
+    <li>在三十人面前讲三分钟</li>
+    <li>给陌生人打电话，不发微信</li>
+    <li>到办公室当面找老师问问题</li>
+    <li>请人帮忙，并接受一次被拒绝</li>
+    <li>拒绝一个不合理的请求</li>
+    <li>当众认错</li>
+    <li>报名一次比赛并交出作品</li>
+    <li>投一次稿，被退也投</li>
+  </ul>
+  <ul class="dash">
+    <li>一个人去一座陌生的城市</li>
+    <li>组织一次五人以上的活动</li>
+    <li>向商家投诉并要求处理</li>
+    <li>参加一次面试或答辩</li>
+    <li>加一个陌生人的微信并请教</li>
+    <li>在群里公开指出一处错误</li>
+    <li>独自去医院挂号看病</li>
+    <li>当着全班唱一首歌或表演一段</li>
+    <li>主动申请一个职务</li>
+    <li>坐下来同长辈谈一次钱</li>
+  </ul>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>档位</th><th>是什么事</th><th>例子</th><th>排几件</th></tr>
+  <tr><td>一档</td><td>几分钟就结束的一次普通发言，当众做完就完了</td><td>课堂上举手提问；站起来答一个没准备的问题</td><td>每月两件</td></tr>
+  <tr><td>二档</td><td>要提前约人或要准备，一周之内兑现</td><td>到办公室当面问老师；请人帮忙并接受被拒绝</td><td>每月一件</td></tr>
+  <tr><td>三档</td><td>跨越多天，中途要能坚持下来，有始有终</td><td>报名比赛并交出作品；一个人去陌生的城市</td><td>一学期一件</td></tr>
+</table>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 210" role="img" aria-label="十件事的进度格与三次回看">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">十件事，一格一件；涂色是已完成</text>
+    <g fill="#b0c0d4" font-size="12" text-anchor="middle">
+      <text x="24" y="30">1</text><text x="72" y="30">2</text><text x="120" y="30">3</text><text x="168" y="30">4</text><text x="216" y="30">5</text><text x="264" y="30">6</text><text x="312" y="30">7</text><text x="360" y="30">8</text><text x="408" y="30">9</text><text x="456" y="30">10</text>
+    </g>
+    <g fill="#3FBFA0" opacity=".9">
+      <rect x="3" y="36" width="42" height="46" rx="6"/>
+      <rect x="51" y="36" width="42" height="46" rx="6"/>
+      <rect x="99" y="36" width="42" height="46" rx="6"/>
+      <rect x="147" y="36" width="42" height="46" rx="6"/>
+      <rect x="195" y="36" width="42" height="46" rx="6"/>
+      <rect x="243" y="36" width="42" height="46" rx="6"/>
+      <rect x="291" y="36" width="42" height="46" rx="6"/>
+    </g>
+    <g fill="#16274a" stroke="#2a4066" stroke-width="1.2">
+      <rect x="339" y="36" width="42" height="46" rx="6"/>
+      <rect x="387" y="36" width="42" height="46" rx="6"/>
+      <rect x="435" y="36" width="42" height="46" rx="6"/>
+    </g>
+    <g fill="#FFD166">
+      <path d="M114 90 L132 90 L123 100 Z"/>
+      <path d="M210 90 L228 90 L219 100 Z"/>
+      <path d="M444 90 L462 90 L453 100 Z"/>
+    </g>
+    <g fill="#FFD166" font-size="12" text-anchor="middle">
+      <text x="123" y="114">回看</text>
+      <text x="219" y="114">回看</text>
+      <text x="453" y="114">回看</text>
+    </g>
+    <line x1="24" y1="132" x2="312" y2="132" stroke="#FFD166" stroke-width="1.2"/>
+    <line x1="24" y1="127" x2="24" y2="137" stroke="#FFD166" stroke-width="1.2"/>
+    <line x1="312" y1="127" x2="312" y2="137" stroke="#FFD166" stroke-width="1.2"/>
+    <text x="168" y="152" fill="#FFD166" font-size="12" text-anchor="middle">十件做完，「比预想好」不少于七件</text>
+    <text x="0" y="184" fill="#b0c0d4" font-size="12">数的是结果与预想的差，不是完成了多少件。</text>
+  </g>
+</svg>
+<figcaption>第七件完成时的样子。回看三次之后，「比预想好」的件数攒起来，就是这个练习要的东西。</figcaption>
+</figure>
+
+<div class="card">
+  <p class="tt">做法三步</p>
+  <ol class="steps">
+    <li><b>把每件事拆到当天能做的一步。</b>怕上台，第一步不是上台，是小组讨论里讲足一分钟；怕打电话，第一步是打一个咨询电话问营业时间。
+    <span class="why">怕的是整个场面，不是那一步；把场面拆掉，剩下的就是一次普通动作。</span></li>
+    <li><b>做完当天记三行：日期，怕的是什么，结果如何。</b>再加一句身体反应，手抖、心跳、脸红，都记。
+    <span class="why">身体反应是这一条的关节，理由见后面一段。</span></li>
+    <li><b>每完成三件回看一次，</b>数一数实际结果比预想好的有几件。
+    <span class="why">这个数是十件事真正的产出；记不住它，十件就只是十次心跳。</span></li>
+  </ol>
+</div>
+
+<p>记身体反应，为的是三个月后能拿它看一件事。回看那三行字会发现：手抖过，心跳过，脸红过，却没有一次真的把事情办砸。<span class="uw">阻止人的从来不是手抖，是事先在脑子里放完的那场电影</span>：冷场、拒绝、当众出错，一幕一幕都是自己导的。这一条得自己看见，别人说没有用。</p>
+
+<blockquote>
+  <p>仁者先难而后获。</p>
+</blockquote>
+
+<p>《论语·雍也》里有一句：仁者先难而后获。先做难的，收获自己会跟上来。怕的事就是那个「难」；不先办它，它就一直是个障碍。</p>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>专挑有把握的。有人专挑末尾十件填，怕的程度排了序，做的全是会做的事；判据里「比预想好不少于七件」也就失去意义，这个练习本来就是为了量那件没把握的事。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>十件做完，结果比预想好的不少于七件；不到七件，不是事更难，是预想的时候把结果想得太坏。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s44"><span class="n">4.4</span>让人舒服的样子</h2>
+<p class="sec-lead">衣服、体态、谈吐、礼节。四样都不玄，每一样都能定日子、定次数，做完在日历上打勾，一个季度就能看出分别。</p>
+
+<p class="pull">让人舒服的样子，一样都不靠天赋：定日子，定次数，月月如此，<span class="q">四年之后见面，还是旧时候那个样子</span>。</p>
+
+<p>有个流传很广的说法：一个人留给别人的印象，四成在谈吐，三成在衣着与举止，其余在别处。这个比例查不到出处，这里不用它。能查到的是：梅拉宾一九六七年做了两个实验，一个听语气与用词互相矛盾的单个词，一个看表情照片配三种语气；两组结果一九七一年在《Silent Messages》里合成一个加权式，词、语气、表情分别占百分之七、三十八、五十五。他本人写明，这个式子只适用于表达好恶且三个通道互相矛盾的时候。能用的道理只剩一条：<span class="kw">说的话与露出来的神色不一致时，别人信神色。</span></p>
+
+<figure>
+<svg viewBox="0 0 480 224" role="img" aria-label="三组言与行的对照">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">左边是判断，右边是事实；判断没有下文，事实接得住</text>
+    <g fill="#16274a" stroke="#F27E7E" stroke-width="1.2">
+      <rect x="0" y="30" width="196" height="44" rx="8"/>
+      <rect x="0" y="92" width="196" height="44" rx="8"/>
+      <rect x="0" y="154" width="196" height="44" rx="8"/>
+    </g>
+    <g font-size="12">
+      <text x="12" y="50" fill="#e8eef7">这份材料做得不行</text>
+      <text x="12" y="66" fill="#b0c0d4">评价，听完只能受</text>
+      <text x="12" y="112" fill="#e8eef7">我觉得</text>
+      <text x="12" y="128" fill="#b0c0d4">只有自己，没有对方</text>
+      <text x="12" y="174" fill="#e8eef7">隔了很久的一句谢谢</text>
+      <text x="12" y="190" fill="#b0c0d4">隔了夜，就淡了</text>
+    </g>
+    <g stroke="#FFD166" stroke-width="1.4" fill="none">
+      <path d="M202 52 L246 52"/>
+      <path d="M240 46 L248 52 L240 58"/>
+      <path d="M202 114 L246 114"/>
+      <path d="M240 108 L248 114 L240 120"/>
+      <path d="M202 176 L246 176"/>
+      <path d="M240 170 L248 176 L240 182"/>
+    </g>
+    <g fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.2">
+      <rect x="260" y="30" width="220" height="44" rx="8"/>
+      <rect x="260" y="92" width="220" height="44" rx="8"/>
+      <rect x="260" y="154" width="220" height="44" rx="8"/>
+    </g>
+    <g font-size="12">
+      <text x="272" y="50" fill="#ffffff">第三页的数字和附件对不上</text>
+      <text x="272" y="66" fill="#b0c0d4">事实，能改，也能接住</text>
+      <text x="272" y="112" fill="#ffffff">刚才说到的检测标准</text>
+      <text x="272" y="128" fill="#b0c0d4">先应一句，再讲自己的</text>
+      <text x="272" y="174" fill="#ffffff">当天就说的一句谢谢</text>
+      <text x="272" y="190" fill="#b0c0d4">当天说，才算数</text>
+    </g>
+    <text x="0" y="214" fill="#b0c0d4" font-size="12">三条谈吐、四条礼节，都能换成右边这种说法。</text>
+  </g>
+</svg>
+<figcaption>三组对照。左边的话听着熟，只是说完没有下文；右边的话能核对，也接得住对方。</figcaption>
+</figure>
+
+<h3>衣服：三套够用<span class="tag">六百到九百元</span></h3>
+<p>警校大部分时间穿制服，便装机会不多；正因如此，几次便装出现的场合更容易被记住：寒假回家、外出办事、比赛答辩、面试。合身比牌子重要，深色比花色稳妥。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>物件</th><th>数量</th><th>标准</th></tr>
+  <tr><td>白衬衫</td><td>两件</td><td>领口能塞进一根手指，肩线落在肩骨外一厘米</td></tr>
+  <tr><td>深色长裤</td><td>一条</td><td>裤脚到鞋面，不堆褶</td></tr>
+  <tr><td>深色外套</td><td>一件</td><td>袖口到腕骨</td></tr>
+  <tr><td>黑皮鞋</td><td>一双</td><td>鞋面干净，鞋跟不歪</td></tr>
+</table>
+</div>
+
+<h3>打理：四件事，定日子<span class="tag">每周 20 分钟</span></h3>
+<ul class="plain">
+  <li>头发三周剪一次，日历上设重复提醒</li>
+  <li>指甲每周日剪，包括脚趾</li>
+  <li>衬衫领口与袖口，每次穿后单独搓一遍，这两处最容易显脏</li>
+  <li>鞋每周擦一次，湿布加一点牙膏</li>
+</ul>
+
+<h3>体态：三个动作，隔天做<span class="tag">三个月一张照</span></h3>
+<ul class="plain">
+  <li>靠墙站三分钟：后脑、肩胛、臀部、脚跟四点贴墙，下巴微收</li>
+  <li>俯卧撑三组，每组做到做不动</li>
+  <li>单杠悬垂三组，每组二十秒</li>
+</ul>
+<p>三个月拍一张侧面照，同第一张并排看。含胸驼背的原因，多半在背部力量不够，不在习惯；力量上去，人自己就直了。</p>
+
+<h3>谈吐：三条<span class="tag">当天就能改</span></h3>
+<ol class="steps">
+  <li><b>不抢话。</b>对方停下之后，默数一秒再接。
+  <span class="why">那一秒是给对方的，也是给自己想第一句话的时间。</span></li>
+  <li><b>接的时候先应一句对方说的内容，再讲自己的。</b>「刚才说到的检测标准」比「我觉得」好。
+  <span class="why">先应一句，对方才听得见后面那句；一上来就是「我觉得」，谈话就变成了两段独白。</span></li>
+  <li><b>说事实，不说评价。</b>「第三页的数字和附件对不上」比「材料做得不行」有用。
+  <span class="why">事实能改，评价只能受；把评价换成事实，一次谈话就办成了一件事。</span></li>
+</ol>
+
+<h3>礼节：四条<span class="tag">不花钱</span></h3>
+<ul class="plain">
+  <li>饭桌上不劝酒</li>
+  <li>电梯里替后面的人按一下</li>
+  <li>收到帮助当天道谢，不隔夜</li>
+  <li>不打听别人不愿说的事</li>
+</ul>
+
+<blockquote>
+  <p>质胜文则野，文胜质则史，文质彬彬，然后君子。</p>
+</blockquote>
+
+<p>《论语·雍也》把这一篇的事拆成两半。质是办成的事，文是待人接物的样子；只有质，人显得粗，只有文，人显得虚。衣服、体态、<a href="大学四年_说话.html">谈吐</a>归文，前三章的办案、<a href="大学四年_读书.html">读书</a>、现场归质；缺了哪一半，另一边都维持不了多久。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>见过一个不认识的人之后，问自己三句：有没有抢话，有没有把一件事说清，对方有没有为难；有一句过不去，下次先改那一句。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s45"><span class="n">4.5</span>看清自己属于哪一类</h2>
+<p class="sec-lead">市面上有几类成熟的自我测评，用来给「我大概是什么样的人」一个坐标。它们不是定命，是一面放大镜；做完拿去和真实经历对照，比盯着类型标签有用。</p>
+
+<p>测评的意义在对照，不在归类。一个人做完霍兰德，知道自己是研究型加常规型，这话本身说明不了什么；等他真去实验室待了两周、又去服务窗口坐了两天，回头看那份结果，才知道哪一句说中了自己。测评给的是假设，经历才是检验。</p>
+
+<figure>
+<svg viewBox="0 0 480 220" role="img" aria-label="几类测评汇成自我坐标，再经经历检验">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="12.5">几类测评各看一面，汇成一个待检验的自己</text>
+    <g fill="#16274a" stroke="#2a4066" stroke-width="1.2">
+      <rect x="6" y="30" width="72" height="34" rx="6"/><rect x="86" y="30" width="72" height="34" rx="6"/>
+      <rect x="166" y="30" width="72" height="34" rx="6"/><rect x="246" y="30" width="72" height="34" rx="6"/>
+      <rect x="326" y="30" width="72" height="34" rx="6"/><rect x="406" y="30" width="68" height="34" rx="6"/>
+    </g>
+    <g font-size="12" fill="#ffffff" text-anchor="middle">
+      <text x="42" y="51">霍兰德</text><text x="122" y="51">大五</text><text x="202" y="51">MBTI</text>
+      <text x="282" y="51">盖洛普</text><text x="362" y="51">DISC</text><text x="440" y="51">VIA</text>
+    </g>
+    <g stroke="#FF8A3D" stroke-width="1.2" fill="none">
+      <path d="M42 64 L240 92"/><path d="M122 64 L240 92"/><path d="M202 64 L240 92"/>
+      <path d="M282 64 L240 92"/><path d="M362 64 L240 92"/><path d="M440 64 L240 92"/>
+    </g>
+    <rect x="120" y="92" width="240" height="40" rx="9" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="240" y="112" fill="#3FBFA0" font-size="13" text-anchor="middle" font-weight="600">自我坐标：假设，待经历检验</text>
+    <path d="M240 132 L240 158" stroke="#FFD166" stroke-width="1.3" fill="none"/>
+    <path d="M235 152 L240 160 L245 152" stroke="#FFD166" stroke-width="1.3" fill="none"/>
+    <rect x="120" y="160" width="240" height="40" rx="9" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="180" fill="#b0c0d4" font-size="12.5" text-anchor="middle">真实经历：实习、社团、办案</text>
+    <text x="0" y="216" fill="#b0c0d4" font-size="12">测评给假设，经历做检验；两轮对不上，先去做一件事再回来。</text>
+  </g>
+</svg>
+<figcaption>几类测评各看一面；汇在一起，拼出一个粗糙但有用的自己，再拿经历去磨。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>测评</th><th>看什么</th><th>类型或维度</th><th>时长</th><th>免费入口</th><th>怎么用</th></tr>
+  <tr><td>霍兰德 RIASEC</td><td>职业兴趣</td><td>现实/研究/艺术/社会/企业/常规 六类</td><td>约30分</td><td>多个公开版（Truity、CareerOneStop 等）</td><td>缩窄专业与职业方向</td></tr>
+  <tr><td>大五 OCEAN</td><td>核心人格</td><td>开放性/尽责性/外向性/宜人性/情绪稳定性</td><td>约15分</td><td>Outofservice 等</td><td>比 MBTI 更经得起重复测量，看自己怎么学、怎么扛压</td></tr>
+  <tr><td>MBTI</td><td>认知偏好</td><td>16 型</td><td>约30分</td><td>16personalities 等</td><td>用作自我觉察可以，信效度有争议，不能当选拔依据</td></tr>
+  <tr><td>盖洛普优势</td><td>天赋主题</td><td>34 主题取前 5</td><td>约20分</td><td>付费（学生版有优惠）</td><td>找能发挥的长处，而不是补短</td></tr>
+  <tr><td>DISC</td><td>行为风格</td><td>支配/影响/稳健/尽责</td><td>约15分</td><td>多公开版</td><td>看团队里扮演什么角色</td></tr>
+  <tr><td>VIA 品格优势</td><td>品格优势</td><td>24 项</td><td>约15分</td><td>viacharacter 免费</td><td>找能长期啃下去的支点</td></tr>
+  <tr><td>职业锚</td><td>职业价值观</td><td>技术/管理/自主等八类</td><td>约20分</td><td>多公开版</td><td>多用于大三之后，定学术还是就业</td></tr>
+</table>
+</div>
+
+<p>这些工具都来自欧美心理学与管理学研究：霍兰德一九五九年提出职业兴趣理论，大五在八十年代成形，盖洛普优势基于三十余年访谈。它们对自我觉察有帮助，但没有一个是算命；企业招聘若用，也只是其中一项，且配合结构化面试。国内教育部学职平台也有正规测评，数据源更贴近本土，可以作为对照。</p>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>只做一个，还奉为结论。有人做完 MBTI 就把「我是某某型」挂在嘴边，四年不再动；测评说一个人适合研究，不等于他真坐得住实验室。单一测试给的是假设，至少做两个交叉，再拿一件事去验。</p>
+</div>
+
+<div class="card">
+  <p class="tt">做法三步</p>
+  <ol class="steps">
+    <li><b>大一上做霍兰德加一个大五，</b>记下代码与分数，别只看那一句结论。
+    <span class="why">两个看的面不同，交叉才看得出自己；只做一个，容易顺着结论给自己贴标签。</span></li>
+    <li><b>大三拿实习和社团经历回看，</b>看哪一条说中了自己、哪一条没说中。
+    <span class="why">这时候已经有事可对照，测评才从假设变成认识。</span></li>
+    <li><b>每一年到两年重测一次，</b>看分数挪了哪几格，挪的方向和这一年的经历对不对得上。
+    <span class="why">人格会随经历变；两次差得远，多半是这一年发生了什么，值得想。</span></li>
+  </ol>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>至少两个测试的结果能和一件真实经历对上；对不上的那条，先存疑，去做一件事再回来读，不要急着改自己。</p>
+</div>
+
+<p>这行当归谁管、按什么规矩管，是看清自己之外另一件该弄清的事。警察这个行业的沿革、体制与警大现状，见第八章 8.1「看清一个行业的代价」。</p>
+
+<hr class="warm">
+
+<h2 id="slist">做完打勾</h2>
+<p class="sec-lead">做完打勾，做不完的写上下一步的日期。清单只写动作，不写形容词。</p>
+
+<ul class="check">
+  <li class="hd">第四章 · 见自己</li>
+  <li>查作息表，倒推上床时间，设两个写动作的闹钟</li>
+  <li>连续四周记睡眠，低于七小时的格子红笔圈出</li>
+  <li>买二十元闹钟，充电线挪书桌，床头不放手机</li>
+  <li>屏幕使用时间三类设限额，每周日截图存档</li>
+  <li>下月第一天起记账，分吃住、学习、社交、储蓄</li>
+  <li>三个月后做比例表，砍掉最大一笔非必要支出的一半</li>
+  <li>写出情绪的三个出口：人名、项目与量、写三行的办法</li>
+  <li>把 12356 存进通讯录，注明免费、全天候</li>
+  <li>下载本省近三年职位表，筛出符合条件的岗位</li>
+  <li>抄五个星标岗位的进面分与录取分，测一次模拟分</li>
+  <li>算出目标分，填满四行，请三位从业者各核一遍</li>
+  <li>打印贴在书桌左上角，每年十二月改一次</li>
+  <li>从二十件里挑十件排序，每件拆到当天一步</li>
+  <li>做完记三行含身体反应，每三件回看一次</li>
+  <li>配齐三套便装，日历上设剪发、剪甲、擦鞋提醒</li>
+  <li>隔天做三个体态动作，三个月拍一张侧面照</li>
+  <li>谈吐三条抄在纸上，见人回来对着问三句</li>
+  <li>大一做霍兰德加一个大五，记下代码与分数</li>
+  <li>大三拿实习经历回看测评，对不上的先存疑</li>
+</ul>
+
+<div class="callout">
+  <p class="lab">一句话</p>
+  <p class="big">见自己这一篇没有一件需要天赋。定死的时间、贴在墙上的纸、当天记下的三行字，都是普通人做得来的事；做得来的事天天做，四年就见成效。</p>
+</div>
+
+<div class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="03_见天地.html"><span class="ar">‹</span>第三章 · 见天地</a><a href="05_见众生.html">第五章 · 见众生<span class="ar">›</span></a></p>
+  <p class="by">课表之外的大学 · 第四章　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

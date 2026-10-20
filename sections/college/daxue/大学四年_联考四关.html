@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>联考四关 · 大学四年课外</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B; --violet:#c084fc;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px 90px}
+.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 -28px;padding:11px 28px;display:flex;gap:13px;overflow-x:auto;white-space:nowrap;
+  font-size:13.5px;letter-spacing:.3px}
+.toc a{color:var(--t3);text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+.hero{padding:54px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px;letter-spacing:2px;color:var(--teal);margin:0 0 16px}
+h1{font-size:33px;line-height:1.38;font-weight:600;margin:0 0 16px;letter-spacing:.5px}
+.lead{font-size:17px;color:var(--t2);margin:0 0 22px}
+.metarow{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--t3)}
+.metarow b{color:var(--t2);font-weight:500}
+h2{font-size:23px;font-weight:600;margin:56px 0 10px;line-height:1.5}
+h2 .n{color:var(--teal);font-size:14.5px;letter-spacing:2px;display:block;margin-bottom:7px;font-weight:500}
+h3{font-size:17.5px;font-weight:600;margin:30px 0 8px;color:var(--t1)}
+.hook{color:var(--t2);font-size:15.5px;margin:0 0 6px;padding-left:13px;border-left:2px solid var(--line2)}
+p{margin:0 0 14px;color:var(--t2)}
+p b,li b{color:#fff;font-weight:500}
+.box{margin:26px 0;padding:19px 23px;background:var(--s3);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.box .lab{font-size:13.5px;letter-spacing:1.5px;color:var(--teal);margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff;font-weight:500}
+.box ol,.box ul{margin:0;padding-left:20px}
+.box li{margin-bottom:8px}
+.steps{counter-reset:st;margin:10px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:11px;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);color:var(--teal);
+  font-size:12px;line-height:21px;text-align:center}
+.card{margin:22px 0;padding:17px 20px;background:var(--s2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0}
+.card .tt{font-size:17px;color:var(--t1);font-weight:600;margin:0 0 8px}
+.card p{margin:0 0 9px;font-size:15px}
+.card p:last-child{margin:0}
+.callout{margin:22px 0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.callout.ok{background:#0d2a24;border-left:3px solid var(--teal)}
+.callout.warn{background:#2a1c12;border-left:3px solid var(--amber)}
+.callout .lab{font-size:13.5px;letter-spacing:1.5px;margin:0 0 7px;font-weight:600}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn .lab{color:var(--amber)}
+.callout p{margin:0}
+.tblwrap{margin:20px 0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;color:var(--t2)}
+th,td{border:1px solid var(--line2);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--s2);color:var(--t1);font-weight:600}
+td b{color:#fff}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.06em;padding:1px 8px;border-radius:20px;
+  color:var(--teal);border:1px solid var(--line2);margin-left:8px;vertical-align:2px}
+.pull{margin:30px 0;padding:22px 26px;background:var(--s3);border:1px solid var(--line2);border-radius:14px;
+  font-size:19px;line-height:1.7;color:var(--t1);position:relative}
+.pull::before{content:"❝";position:absolute;left:14px;top:6px;font-size:34px;color:var(--teal);opacity:.5}
+.pull p{margin:0;padding-left:30px;color:var(--t1)}
+.check{list-style:none;margin:14px 0;padding:0}
+.check li{position:relative;padding:7px 0 7px 28px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--teal)}
+.check li.hd{color:var(--teal);font-size:13.5px;letter-spacing:1px;padding-left:0;border-bottom:1px solid var(--line2)}
+.check li.hd::before{display:none}
+.pn{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.pn a{color:var(--t3);text-decoration:none}
+.pn a:hover{color:var(--teal)}
+.pn .ar{color:var(--teal);margin-right:4px}
+.foot{margin-top:40px;font-size:13.5px;color:var(--t3);line-height:2}
+.foot .ext{color:var(--teal);letter-spacing:1px;margin:0 0 8px}
+.foot a{color:var(--blue);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px;padding:11px 18px;gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px;margin-top:42px}
+  .tblwrap{font-size:13px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .toc{display:none}
+  .box,.card,.callout,.pull{background:#f4f6f9;border-color:#ccc}
+  .pn,.foot{border-color:#ccc}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="08_入世.html">‹ 返回 · 第八章 · 入世</a></nav>
+
+<header class="hero">
+  <p class="kicker">专篇 · 入警主渠道</p>
+  <h1>联考四关：报名、笔试、体测、选岗</h1>
+  <p class="lead">公安院校公安专业应届毕业生进入人民警察队伍的主渠道，是公安联考。四关递进：报名资格、笔试、体测、面试选岗。哪一关掉链子，前面四年的课都白上，所以这四关要当四年的坎，早练早稳。</p>
+  <div class="metarow">
+    <span><b>适用</b> 警大公安专业在校生</span>
+    <span><b>时点</b> 大四学年</span>
+    <span><b>来源</b> 当年省级联考公告、人社部发〔2011〕48号</span>
+  </div>
+</header>
+
+<h2 id="s1"><span class="n">总览</span>四关的次序</h2>
+<p>四关不是并列，是递进。前一关不过，后一关没有机会进场。报名资格把人拦在门外，笔试决定能不能进体测，体测是达标制、一项不过即淘汰，面试和选岗合在一起决定去哪。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>次序</th><th>关卡</th><th>性质</th><th>不过的后果</th></tr>
+  <tr><td>一</td><td>报名资格</td><td>条件审查</td><td>没有考试资格，直接出局</td></tr>
+  <tr><td>二</td><td>笔试</td><td>分数排名</td><td>分数不够，进不了体测与后续</td></tr>
+  <tr><td>三</td><td>体测</td><td>达标淘汰（四项全过）</td><td>任一项不达标即不合格</td></tr>
+  <tr><td>四</td><td>面试与选岗</td><td>素质考察 + 按分选岗</td><td>面试不过或分数低，岗位选择靠后</td></tr>
+</table>
+</div>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>只盯着笔试、把体测留到大四才练，是掉得最多的一类。体测是达标制，临考前两个月从零开始，四项里有一项天生偏弱，时间就不够。体测要当四年日常，不是考前突击。</p>
+</div>
+
+<h2 id="s2"><span class="n">关一</span>报名资格</h2>
+<p>公安联考面向的是<strong>公安院校公安专业应届毕业生</strong>。三个条件要同时成立：院校在当年公安院校名单内、所学专业属于公安类专业、身份是当年应届毕业生。往届、非公安专业、专升本等情况，按当年公告的具体表述为准，不能套用往年的经验。</p>
+
+<div class="box">
+  <p class="lab">动手前确认三件</p>
+  <ol>
+    <li>本校是否在当年具备联考资格的院校名单内（警大属公安部直属院校，长期在列，但每年仍看公告确认）。</li>
+    <li>本人所学专业是否在当年公安专业目录内（食药环侦属公安技术类，通常在内，以当年目录为准）。</li>
+    <li>是否为当年应届毕业生身份，有无因休学、延期导致的身份变化。</li>
+  </ol>
+</div>
+
+<p>身份信息、专业名称以学校就业部门和省级公务员主管部门发布的公告为准。报名前先去这两个出处核对，不要凭印象。</p>
+
+<h2 id="s3"><span class="n">关二</span>笔试</h2>
+<p>笔试一般设三科：<strong>行政职业能力测验</strong>、<strong>申论</strong>、<strong>公安专业科目</strong>。三科按一定比例合成笔试总分，具体权重以当年公告为准。公安专业科目考的是公安基础知识、法律知识、业务能力，和在校专业课直接挂钩，是警校生相对有底的一科。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>科目</th><th>考什么</th><th>和在校课程的关联</th></tr>
+  <tr><td>行政职业能力测验</td><td>言语、数量、判断、资料分析</td><td>靠刷题和速度，课程里不直接教</td></tr>
+  <tr><td>申论</td><td>阅读理解、归纳、议论文写作</td><td>和写作、立言那几章的练笔相通</td></tr>
+  <tr><td>公安专业科目</td><td>公安基础、法律、业务</td><td>和校内专业课本直接对应</td></tr>
+</table>
+</div>
+
+<p>笔试的难点不在某一科多难，在<strong>总分排名</strong>。选岗按合成总分从高到低，多一分可能就多一个好岗位的选择权。行测和申论靠日常积累，大三下就该开始刷套题，不要等公告出了再动手。</p>
+
+<h2 id="s4"><span class="n">关三</span>体测</h2>
+<p>体测依据《公安机关录用人民警察体能测评项目和标准（暂行）》（人社部发〔2011〕48号），为<strong>达标制</strong>，四项须全部达标，任一项不达标即为不合格。以下为2011版标准，具体以当年公告复核为准。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>项目</th><th>男</th><th>女</th></tr>
+  <tr><td>10米×4往返跑</td><td>≤ 13″1</td><td>≤ 14″1</td></tr>
+  <tr><td>1000米跑 / 800米跑</td><td>≤ 4′25″</td><td>≤ 4′20″</td></tr>
+  <tr><td>纵跳摸高</td><td>≥ 265 厘米</td><td>≥ 230 厘米</td></tr>
+  <tr><td>引体向上 / 仰卧起坐</td><td>≥ 10 次/分钟</td><td>≥ 25 次/分钟</td></tr>
+</table>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>四项全部达标才算过，不是看平均分。有一项天生吃力，就把那一项排进每周训练，越早补越稳。体测达标和笔试高分是两件事，都得占。</p>
+</div>
+
+<h2 id="s5"><span class="n">关四</span>面试与选岗</h2>
+<p>体测合格后进入面试，一般为<strong>结构化面试</strong>，考察综合分析、语言表达、应变等综合素质。面试与笔试合成总成绩后，按分数从高到低<strong>依次选岗</strong>，岗位按省（区、市）分配，具体岗位和名额每年随公告公布。</p>
+
+<div class="box">
+  <p class="lab">选岗的逻辑</p>
+  <p>选岗看总分排名，排名靠前的人先挑。这意味着笔试多拿的分，最后会兑现成选岗的主动权。岗位的去向、地点、警种，都随当年分配方案走，公开信息以公告和学校的选岗说明为准。</p>
+</div>
+
+<p>面试的表达底子，和「说话这件事」「表达与说话」两篇的练法连着；选岗时对地区和警种的判断，和「入世」章里看一个行业的方法连着。这几篇配合着看，四关才连得起来。</p>
+
+<h2 id="s6"><span class="n">节奏</span>一张时间表</h2>
+<p>下面是常见节奏，具体月份以当年公告为准。把节奏记在手机日历里，比记在脑子里牢。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>阶段</th><th>大致时点</th><th>动作</th></tr>
+  <tr><td>预备</td><td>大三下</td><td>确认资格、开始刷行测申论套题、体测进日常</td></tr>
+  <tr><td>公告与报名</td><td>大四上（年底至年初）</td><td>看公告、资格审核、报名</td></tr>
+  <tr><td>笔试</td><td>大四上末（约次年1月）</td><td>参加三科笔试</td></tr>
+  <tr><td>体测面试选岗</td><td>大四下初</td><td>体测达标、面试、按分选岗</td></tr>
+  <tr><td>录用</td><td>毕业前</td><td>审批、入警报到</td></tr>
+</table>
+</div>
+
+<div class="pull"><p>四关是一件事的四个截面：资格定能不能进，笔试定排第几，体测定过不过，选岗定去哪。四年里每天做的，都是在替这四关攒底子。</p></div>
+
+<div class="pn">
+  <a href="08_入世.html"><span class="ar">‹</span>返回 · 第八章 · 入世</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>

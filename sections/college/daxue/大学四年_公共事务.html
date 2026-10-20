@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>组织一次公共事务 · 大学四年课外</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B; --violet:#c084fc;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px 90px}
+.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 -28px;padding:11px 28px;display:flex;gap:13px;overflow-x:auto;white-space:nowrap;
+  font-size:13.5px;letter-spacing:.3px}
+.toc a{color:var(--t3);text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+.hero{padding:54px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px;letter-spacing:2px;color:var(--teal);margin:0 0 16px}
+h1{font-size:33px;line-height:1.38;font-weight:600;margin:0 0 16px;letter-spacing:.5px}
+.lead{font-size:17px;color:var(--t2);margin:0 0 22px}
+.metarow{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--t3)}
+.metarow b{color:var(--t2);font-weight:500}
+h2{font-size:23px;font-weight:600;margin:56px 0 10px;line-height:1.5}
+h2 .n{color:var(--teal);font-size:14.5px;letter-spacing:2px;display:block;margin-bottom:7px;font-weight:500}
+h3{font-size:17.5px;font-weight:600;margin:30px 0 8px;color:var(--t1)}
+.hook{color:var(--t2);font-size:15.5px;margin:0 0 6px;padding-left:13px;border-left:2px solid var(--line2)}
+p{margin:0 0 14px;color:var(--t2)}
+p b,li b{color:#fff;font-weight:500}
+.box{margin:26px 0;padding:19px 23px;background:var(--s3);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.box .lab{font-size:13.5px;letter-spacing:1.5px;color:var(--teal);margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff;font-weight:500}
+.box ol,.box ul{margin:0;padding-left:20px}
+.box li{margin-bottom:8px}
+.steps{counter-reset:st;margin:10px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:11px;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);color:var(--teal);
+  font-size:12px;line-height:21px;text-align:center}
+.card{margin:22px 0;padding:17px 20px;background:var(--s2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0}
+.card .tt{font-size:17px;color:var(--t1);font-weight:600;margin:0 0 8px}
+.card p{margin:0 0 9px;font-size:15px}
+.card p:last-child{margin:0}
+.callout{margin:22px 0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.callout.ok{background:#0d2a24;border-left:3px solid var(--teal)}
+.callout.warn{background:#2a1c12;border-left:3px solid var(--amber)}
+.callout .lab{font-size:13.5px;letter-spacing:1.5px;margin:0 0 7px;font-weight:600}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn .lab{color:var(--amber)}
+.callout p{margin:0}
+.tblwrap{margin:20px 0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;color:var(--t2)}
+th,td{border:1px solid var(--line2);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--s2);color:var(--t1);font-weight:600}
+td b{color:#fff}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.06em;padding:1px 8px;border-radius:20px;
+  color:var(--teal);border:1px solid var(--line2);margin-left:8px;vertical-align:2px}
+.pull{margin:30px 0;padding:22px 26px;background:var(--s3);border:1px solid var(--line2);border-radius:14px;
+  font-size:19px;line-height:1.7;color:var(--t1);position:relative}
+.pull::before{content:"❝";position:absolute;left:14px;top:6px;font-size:34px;color:var(--teal);opacity:.5}
+.pull p{margin:0;padding-left:30px;color:var(--t1)}
+.check{list-style:none;margin:14px 0;padding:0}
+.check li{position:relative;padding:7px 0 7px 28px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--teal)}
+.check li.hd{color:var(--teal);font-size:13.5px;letter-spacing:1px;padding-left:0;border-bottom:1px solid var(--line2)}
+.check li.hd::before{display:none}
+.pn{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.pn a{color:var(--t3);text-decoration:none}
+.pn a:hover{color:var(--teal)}
+.pn .ar{color:var(--teal);margin-right:4px}
+.foot{margin-top:40px;font-size:13.5px;color:var(--t3);line-height:2}
+.foot .ext{color:var(--teal);letter-spacing:1px;margin:0 0 8px}
+.foot a{color:var(--blue);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px;padding:11px 18px;gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px;margin-top:42px}
+  .tblwrap{font-size:13px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .toc{display:none}
+  .box,.card,.callout,.pull{background:#f4f6f9;border-color:#ccc}
+  .pn,.foot{border-color:#ccc}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="08_入世.html">‹ 返回 · 第八章 · 入世</a></nav>
+
+<header class="hero">
+  <p class="kicker">专篇 · 替不相干的人开一次口</p>
+  <h1>组织一次公共事务</h1>
+  <p class="lead">《入世》章说，毕业之后天天遇得上公共事务。这一篇给一套做法：定一件具体的事、列清单分好工、记清账目、收尾复盘。做一次，比听十遍牢。</p>
+  <div class="metarow">
+    <span><b>连着</b> 《访谈与数据》《组队这件事》</span>
+    <span><b>来源</b> 见《入世》8.4</span>
+  </div>
+</header>
+
+<h2 id="s1"><span class="n">起点</span>定一件具体的事</h2>
+<p>公共事务容易空谈。第一步是把「想改善点什么」定成一件具体、可操作、有边界的事：一栋楼的垃圾分类、一次社区活动的组织、一处设施的报修跟进。事越具体，越容易推进。</p>
+
+<div class="box">
+  <p class="lab">写清三样</p>
+  <ol>
+    <li><b>事：</b>要解决什么，一句话。</li>
+    <li><b>人：</b>涉及谁，谁是能拍板的。</li>
+    <li><b>时点：</b>什么时候前要有个结果。</li>
+  </ol>
+</div>
+
+<h2 id="s2"><span class="n">推进</span>清单与分工</h2>
+<p>定好事，列一张行动清单，谁负责哪格写清楚。公共事务的问题常出在「都觉得该有人管，结果没人管」，所以每件事必须有唯一负责人。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>动作</th><th>负责人</th><th>时限</th><th>交付</th></tr>
+  <tr><td>摸清现状</td><td>甲</td><td>第1周</td><td>现状说明一份</td></tr>
+  <tr><td>联系相关方</td><td>乙</td><td>第1–2周</td><td>联系人清单</td></tr>
+  <tr><td>拟方案</td><td>丙</td><td>第2–3周</td><td>方案稿</td></tr>
+  <tr><td>跟进落实</td><td>甲</td><td>第3–4周</td><td>进度记录</td></tr>
+</table>
+</div>
+
+<h2 id="s3"><span class="n">账目</span>一张透明表</h2>
+<p>只要涉及钱或物资，就建一张账目表，公开给相关的人看。透明是公共事务能不能推下去的关键。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>日期</th><th>项目</th><th>收入</th><th>支出</th><th>余额</th><th>经手</th></tr>
+  <tr><td>9.1</td><td>发起众筹</td><td>500</td><td>—</td><td>500</td><td>甲</td></tr>
+  <tr><td>9.3</td><td>购工具</td><td>—</td><td>180</td><td>320</td><td>乙</td></tr>
+  <tr><td>9.10</td><td>补耗材</td><td>—</td><td>95</td><td>225</td><td>乙</td></tr>
+  <tr><td colspan="6" style="color:var(--t3)">每笔当场记，余额随记随对；结束把表发群里，剩多少、去哪了，人人看得见。</td></tr>
+</table>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>账目经得起任何人当场翻看，这事务才信得过。有一笔说不清，信任就塌，后面再难推动。透明比省事重要。</p>
+</div>
+
+<h2 id="s4"><span class="n">收尾</span>复盘与交代</h2>
+<ol class="steps">
+  <li><b>说结果。</b>做成什么、没做成什么，给相关的人一个交代。</li>
+  <li><b>交账目。</b>余款、物资去向公开，不私留。</li>
+  <li><b>留文档。</b>过程记录存好，下一个人接手看得懂。</li>
+  <li><b>记教训。</b>哪一步卡了、下次怎么改，写一句。</li>
+</ol>
+
+<h2 id="s5"><span class="n">避错</span>几个常见的坑</h2>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>两件最毁信任：一是账目不公开，钱花哪了说不清；二是虎头蛇尾，起头热闹、中途没人跟、最后没交代。公共事务的口碑，全在收尾那一下。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">公共事务 · 四项</li>
+  <li>定一件具体事，写清事、人、时点</li>
+  <li>每动作有唯一负责人</li>
+  <li>涉及钱就建公开账目表</li>
+  <li>收尾给结果、交账目、留文档</li>
+</ul>
+
+<div class="pull"><p>公共事务练的是「替不相干的人把一件具体事办成」。办过一次，比听十遍明白；账清、话明、有交代，这事才办得成。</p></div>
+
+<div class="pn">
+  <a href="08_入世.html"><span class="ar">‹</span>返回 · 第八章 · 入世</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>

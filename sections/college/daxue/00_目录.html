@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>目录 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+
+/* ---------- 目录页 ---------- */
+.ch{display:block; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:22px 26px 18px; margin:0 0 16px; box-shadow:var(--sh); position:relative; overflow:hidden; text-decoration:none; transition:border-color .2s}
+.ch:hover{border-color:var(--orange)}
+.ch::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.ch .no{font-size:13px; letter-spacing:3px; color:var(--orange); margin:0 0 6px; font-weight:600}
+.ch .nm{font-size:23px; font-weight:700; color:#fff; margin:0 0 8px; letter-spacing:.6px}
+.ch:hover .nm{color:var(--gold)}
+.ch .ds{font-size:15px; color:var(--t2); margin:0; line-height:1.8}
+.ch .kw{margin:10px 0 0}
+.ch .kw span{display:inline-block; font-size:12px; letter-spacing:1px; color:var(--t3); border:1px solid var(--line2); border-radius:999px; padding:2px 10px; margin:0 7px 6px 0}
+.ch.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.ch.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.ch.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.ch.t .no{color:var(--teal)} .ch.b .no{color:var(--blue)} .ch.g .no{color:var(--gold)}
+.also{margin-top:14px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="#front" class="cur">卷首</a><span class="sp">/</span>
+  <a href="#part1">边界与六样</a><span class="sp">/</span>
+  <a href="#part2">五个方面</a><span class="sp">/</span>
+  <a href="#part3">检验与次第</a><span class="sp">/</span>
+  <a href="#also">附页</a>
+</nav>
+
+<header class="hero" id="front">
+  <p class="kicker">写给读公安院校的四年</p>
+  <h1>课表之外<span class="em">的大学</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">学校每学期开学之前都会排定课表。课表覆盖的那一部分，有人安排，有人考核；剩下的那一部分没有。这一册谈的就是剩下的那一部分：<b>一年有多少小时是自己的，这些小时用在哪里，四年之后会变成什么</b>。十章各自独立，也可以从任何一章读起；每一章都给到能照着做的动作、能填的表格、能核对的判据。</p>
+  <div class="chipline">
+    <span class="chip t">每章一个单页</span><span class="chip">手机可读</span><span class="chip t">可打印</span><span class="chip">按用处分栏</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/02.jpg" alt="长长的图书馆书架伸向远处，暖色的阅读灯亮在书架之间">
+  <figcaption>书架之间的灯。四年里能点亮的地方比想象的多，只是每一处都要自己走过去。</figcaption>
+</figure>
+
+<h2 id="part1"><span class="n">第一部分</span>边界与六样</h2>
+<p class="sec-lead">先算清时间，再认清校训里那个次序，最后看课内失守的代价具体落在哪一步。六样能力是这一册的纲，后面五章各练其中几样。</p>
+
+<a class="ch" href="01_课内与课外.html">
+  <p class="no">第一章</p>
+  <p class="nm">课内与课外</p>
+  <p class="ds">画一张八格年表，记两周时间流水，算出四年两千四百小时这笔账；联考四关的顺序与选岗的提前量化，都做在事前。</p>
+  <p class="kw"><span>八格年表</span><span>2400 小时</span><span>联考四关</span><span>八周训练表</span><span>岗位六步筛法</span></p>
+</a>
+
+<a class="ch" href="02_课本教不会的六样.html">
+  <p class="no">第二章</p>
+  <p class="nm">课本教不会的六样</p>
+  <p class="ds">思辨、自控、协作、执行、沟通、担当。每样给一个一周之内能开始的动作、一个量得出来的最低量、一条判据；末尾专讲 AI 工具替掉了哪一段训练。</p>
+  <p class="kw"><span>六样能力</span><span>一周动作</span><span>最低量</span><span>工具的边界</span></p>
+</a>
+
+<h2 id="part2"><span class="n">第二部分</span>五个方面</h2>
+<p class="sec-lead">见天地、见自己、见众生、成事、立言。五章分别对应书、人、事、言四类材料，也分别练六样里的不同几样。</p>
+
+<a class="ch t" href="03_见天地.html">
+  <p class="no">第三章</p>
+  <p class="nm">见天地</p>
+  <p class="ds">书单从哪儿来，十个问题十本书，一趟七天以上的自助行，一个亲历者讲他的过程，跟住三五件事，这十年三条链同时收紧，热词怎么拆开，研究在书之外怎么做。</p>
+  <p class="kw"><span>十个问题</span><span>七天自助行</span><span>三条链</span><span>热词拆解</span><span>公开数据</span></p>
+</a>
+
+<a class="ch" href="04_见自己.html">
+  <p class="no">第四章</p>
+  <p class="nm">见自己</p>
+  <p class="ds">自控、志向、自信、气度四项基础；一个说得出口的目标怎么写到第三个人能核对；从二十件怕的事里挑十件做完；让人舒服的样子一样一样定日子。</p>
+  <p class="kw"><span>四项基础</span><span>说得出口的目标</span><span>十件怕的事</span></p>
+</a>
+
+<a class="ch g" href="05_见众生.html">
+  <p class="no">第五章</p>
+  <p class="nm">见众生</p>
+  <p class="ds">一起交付过东西的关系才牢；让老师叫出名字靠的是几个简单的动作按次序做满一学期；开口求助是把关系建立起来；难听的话当面说完，问题才暴露出来。</p>
+  <p class="kw"><span>一起做完过事</span><span>邮件模板</span><span>开口求助</span><span>难听的话</span></p>
+</a>
+
+<a class="ch b" href="06_成事.html">
+  <p class="no">第六章</p>
+  <p class="nm">成事</p>
+  <p class="ds">一门能交付的手艺，一个做满一年的项目，一次有人付钱的活，一场必须做出东西的比赛。四样按长度排：小时、月份、期限、赛程。</p>
+  <p class="kw"><span>八门手艺</span><span>一年项目</span><span>有人付钱</span><span>七项赛事口径</span></p>
+</a>
+
+<a class="ch t" href="07_立言.html">
+  <p class="no">第七章</p>
+  <p class="nm">立言</p>
+  <p class="ds">一周八百字，二十个题目与四段结构；一次当众讲清，三分钟稿与四级阶梯；一条自己剪的片，四样设备不到三百元；每天二十分钟外语，两百小时四段路。</p>
+  <p class="kw"><span>一周八百字</span><span>三分钟稿</span><span>分镜表</span><span>两百小时</span></p>
+</a>
+
+<h2 id="part3"><span class="n">第三部分</span>检验与次第</h2>
+<p class="sec-lead">上场是检验，次第是次序。最后一章把六样能力与四个学年交叉成一张二十四格的表，每年填一次。</p>
+
+<a class="ch" href="08_入世.html">
+  <p class="no">第八章</p>
+  <p class="nm">入世</p>
+  <p class="ds">选一份工作之前先看清它的代价，访谈三个做过这一行的人；自己跑完一次办事流程；在一件与自己无关的事上表过一次态；组织一次公共事务，收尾留账目、名单、复盘三样。</p>
+  <p class="kw"><span>访谈三人</span><span>三组数据</span><span>跑一次流程</span><span>公共事务</span></p>
+</a>
+
+<a class="ch g" href="09_上场.html">
+  <p class="no">第九章</p>
+  <p class="nm">上场</p>
+  <p class="ds">检验在有对手、有评委、有截止日期的地方。八个方向一张表，与岗位关联最密切的是法与庭审、写与说、户外；条件不齐的时候，校内替代版本一样能练。</p>
+  <p class="kw"><span>八个方向</span><span>打到底</span><span>校内替代</span></p>
+</a>
+
+<a class="ch b" href="10_次第.html">
+  <p class="no">第十章</p>
+  <p class="nm">次第</p>
+  <p class="ds">第一年试探，第二年收敛，第三年深入，第四年收尾；一年集中练两样；一张二十四格的表，六行四列，每格填一个具体动作，每年填一次。</p>
+  <p class="kw"><span>四段主线</span><span>一年两样</span><span>二十四格</span></p>
+</a>
+
+<hr class="deco">
+
+<h2 id="also">附页</h2>
+<p class="sec-lead">另有两页配套：一页讲读书，一页收网站。</p>
+
+<div class="also">
+<a class="ch t" href="大学四年_读书.html">
+  <p class="no">附页一</p>
+  <p class="nm">读书：怎么读，读什么</p>
+  <p class="ds">上半页是方法：时间账、手机与书、找书、三十页、四种读法、喜欢、抢时间、十二本。下半页是书目：按门类分十类，另加影像与有声。</p>
+  <p class="kw"><span>方法</span><span>书目</span><span>影像与有声</span></p>
+</a>
+
+<a class="ch g" href="大学四年_资源网站.html">
+  <p class="no">附页二</p>
+  <p class="nm">好玩的网站</p>
+  <p class="ds">查数据、查公告、查文献、查岗位，做图、做表、做片子，学外语、学编程、学任何一样东西，各栏按用处分。</p>
+  <p class="kw"><span>查数据</span><span>做图表</span><span>学本事</span></p>
+</a>
+</div>
+
+<div class="callout">
+  <p class="lab">一句话</p>
+  <p class="big">课表决定这四年怎么过，课表之外决定这四年之后是谁。前一半有人替着安排，后一半没有人。</p>
+</div>
+
+<div class="foot">
+  <p class="xt">关于这一册</p>
+  <ul>
+    <li>十章各自独立，从任何一章读起都可以；第一章的时间账是其余各章的基数</li>
+    <li>每章末尾都有一份可勾选的清单，做完打勾，做不完的写上下一步的日期</li>
+    <li>各章「本篇延伸」里列出的篇目，是准备另立的页面，做好之后链接即通</li>
+  </ul>
+  <p class="by">课表之外的大学 · 目录　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第九章 上场 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s91" class="cur">9.1 一个场子打到底</a><span class="sp">/</span>
+  <a href="#s92">9.2 八个方向</a><span class="sp">/</span>
+  <a href="#s93">9.3 没有条件报名的时候</a><span class="sp">/</span>
+  <a href="#slist">上场清单</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第九章</p>
+  <h1>上<span class="em">场</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">课表之外值得做的事，终点都是交付。比赛这件事与别的事不同：有对手，有评委，有截止日期，做没做成一目了然。这一篇讲三件事：一场比赛怎么选、怎么打到底，条件不齐的时候怎么把同样的压力造出来。</p>
+  <div class="chipline">
+    <span class="chip">报名表四栏</span><span class="chip">最终轮才算</span><span class="chip t">八方向一张表</span><span class="chip t">校内替代版本</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/09.jpg" alt="清晨空无一人的操场跑道，暖色晨光照在塑胶跑面上">
+  <figcaption>清晨的操场，空无一人，只有暖光落在跑道上。上场之前的日子都是这样过的：没有观众，没有掌声，只有日复一日、无人看见的重复。</figcaption>
+</figure>
+
+<p>一份比赛的报名表上有四栏绕不过去：姓名、学校、队伍、指导教师。前两栏自己动笔就能填完，后两栏要找人、<a href="大学四年_组队.html">组队</a>、要有一位老师愿意签字。多数人的报名就停在这两栏上，表格存进文件夹，再没有打开过。</p>
+
+<p>比赛值得单独拿出来讲，理由在它的评判方式。课堂里的分数握在一位老师手里，比赛的分数写在章程里：交件时间一到，系统关闭，名次按规则排出来，找人通融的余地都没有。一个人把自己做的东西放到这种场子里过一遍，对自己真实水平的估计会准得多。</p>
+
+<figure>
+<svg viewBox="0 0 480 196" role="img" aria-label="一张比赛报名表的四栏，后两栏空着">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一张报名表的四栏，前两栏自己填，后两栏最难</text>
+    <rect x="8" y="26" width="260" height="152" rx="10" fill="#101d38" stroke="#2a4066" stroke-width="1.3"/>
+    <rect x="8" y="26" width="260" height="26" rx="10" fill="#16274a"/>
+    <text x="22" y="44" fill="#FFD166" font-size="12.5">赛事报名表</text>
+    <g font-size="12.5">
+      <text x="22" y="76" fill="#c3d1e3">姓名</text>
+      <text x="22" y="108" fill="#c3d1e3">学校</text>
+      <text x="22" y="140" fill="#c3d1e3">队伍</text>
+      <text x="22" y="172" fill="#c3d1e3">指导教师</text>
+    </g>
+    <g>
+      <rect x="96" y="60" width="156" height="20" rx="4" fill="#16274a" stroke="#22385c"/>
+      <rect x="96" y="92" width="156" height="20" rx="4" fill="#16274a" stroke="#22385c"/>
+      <rect x="96" y="124" width="156" height="20" rx="4" fill="none" stroke="#FF8A3D" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <rect x="96" y="156" width="156" height="20" rx="4" fill="none" stroke="#FF8A3D" stroke-width="1.3" stroke-dasharray="4 3"/>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="104" y="74">自己的信息</text>
+      <text x="104" y="106">录取通知书上有</text>
+    </g>
+    <g font-size="12" fill="#FF8A3D">
+      <text x="104" y="138">要找人组队</text>
+      <text x="104" y="170">要有人签字</text>
+    </g>
+    <g stroke="#FF8A3D" stroke-width="1.2" fill="none">
+      <path d="M264 134 L286 134"/>
+      <path d="M264 166 L286 166"/>
+      <path d="M286 134 L281 130 M286 134 L281 138"/>
+      <path d="M286 166 L281 162 M286 166 L281 170"/>
+    </g>
+    <rect x="292" y="122" width="180" height="56" rx="8" fill="#101d38" stroke="#F5A623" stroke-width="1.2"/>
+    <text x="304" y="144" fill="#F5A623" font-size="12.5" font-weight="600">难住多数人的两栏</text>
+    <text x="304" y="166" fill="#c3d1e3" font-size="12">凑人与签字，都比填姓名费时间</text>
+  </g>
+</svg>
+<figcaption>姓名与学校是十分钟的事，队伍与指导教师可能是两个月的事；报名表停在哪一栏，基本能看出一件事有没有开始。</figcaption>
+</figure>
+
+<p><a href="06_成事.html">《成事》</a>那一篇把比赛列为四样事之一，讲的是组队、八周备赛表与复盘；这一篇接在后面，讲另外两件事：<span class="uw">一场比赛怎么选、怎么打到底</span>，以及条件不齐的时候，怎么把同样的压力造出来。</p>
+
+<p class="pull">报名表上真正难填的从来不是姓名，<span class="q">是队伍和指导教师那两栏</span>。</p>
+
+<h2 id="s91"><span class="n">9.1</span>一个场子打到底</h2>
+<p class="sec-lead">检验不在教室里，在有对手、有评委、有截止日期的地方。</p>
+
+<p>一场比赛从报名到落幕分五步：报名、提交材料、初赛、复赛、最终轮。多数人的参赛经历停在第三步以前：报名表交了，材料交了，名次始终没有达到预期，事情就这样过去了，简历上多了一行「参加过」，抽屉里多了一份证书复印件。</p>
+
+<p>对食药环犯罪侦查技术专业的学生，这件事的紧要之处还在后面：将来的日常是抽样、送检、做笔录、整理案卷，样样有期限，样样要交付，没有「差不多」三个字的位置。比赛是离这种工作节奏最近的一种练习，交件时间一到，系统关闭，容不得含糊。</p>
+
+<figure>
+<svg viewBox="0 0 480 252" role="img" aria-label="从报名到最终轮的五层漏斗，前四层都不算走到最后">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">从报名到最终轮，五步里只有最后一步算打到底</text>
+    <path d="M96 26 L384 26 L368 58 L112 58 Z" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <path d="M112 62 L368 62 L352 94 L128 94 Z" fill="#132242" stroke="#2a4066" stroke-width="1.2"/>
+    <path d="M128 98 L352 98 L336 130 L144 130 Z" fill="#16274a" stroke="#2a4066" stroke-width="1.2"/>
+    <path d="M144 134 L336 134 L320 166 L160 166 Z" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <path d="M160 170 L320 170 L320 206 L160 206 Z" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <g font-size="13" fill="#ffffff" text-anchor="middle">
+      <text x="240" y="46">报名</text>
+      <text x="240" y="82">提交材料</text>
+      <text x="240" y="118">初赛</text>
+      <text x="240" y="154">复赛</text>
+      <text x="240" y="192" fill="#3FBFA0" font-weight="600">最终轮</text>
+    </g>
+    <g font-size="12" fill="#FF6B4A" text-anchor="start">
+      <text x="396" y="46">不算</text>
+      <text x="396" y="82">不算</text>
+      <text x="396" y="118">不算</text>
+      <text x="396" y="154">不算</text>
+    </g>
+    <text x="396" y="192" fill="#3FBFA0" font-size="12.5" font-weight="600">才算</text>
+    <path d="M96 112 L74 112" stroke="#FF6B4A" stroke-width="1.2" fill="none"/>
+    <text x="70" y="108" fill="#FF6B4A" font-size="12" text-anchor="end">多数人停在这里</text>
+    <text x="240" y="234" fill="#FFD166" font-size="12.5" text-anchor="middle">只有走到最后一轮，被迫做出的取舍才会发生</text>
+  </g>
+</svg>
+<figcaption>五步一层比一层窄。报名、交件、复赛都还早；真正让取舍发生的是最终轮，人是在取舍中一点一点积累起能力的。</figcaption>
+</figure>
+
+<p>参加到底的意思是进入最终轮次。报名不算，提交了材料不算，进了复赛也不算。只有走到最后一轮，那些被迫做出的取舍才会发生：删功能、删章节、删掉一半的图表，几天之内要决定保什么、舍什么，留下的部分重新讲成一个完整的故事。能力是在取舍中积累起来的，这一点在舒服的计划里永远学不到。</p>
+
+<div class="card">
+  <p class="tt">为什么只择定一个方向</p>
+  <p>一个人的时间只够打透一个方向。<a href="01_课内与课外.html">《课内与课外》</a>里算过这笔账：每周能自己支配的时间有限，一年六百小时上下，四年下来是两千四百小时。一场比赛从组队到最终轮，备赛要八周，加上选拔、训练与路上奔波，一个方向占掉一年并不夸张。</p>
+  <p>报五个名的结果可以提前写下来：五个都停在初赛。时间被分成五份，每份都不够走到最后一轮，而只有最后一轮才逼出取舍。八周备赛表怎么排、组队怎么分角色，见<a href="06_成事.html">《成事》</a>，这里不重复。</p>
+</div>
+
+<div class="statrow">
+  <div class="stat"><b>4</b><span>报名表绕不过去的栏数</span></div>
+  <div class="stat"><b>2</b><span>难住多数人的两栏</span></div>
+  <div class="stat"><b>1</b><span>值得打透的方向数</span></div>
+</div>
+
+<h3>把一场比赛打到底，五步<span class="tag">倒排日程</span></h3>
+
+<div class="panel">
+  <ol class="steps">
+    <li><b>按报名截止日倒排，先把赛程写进日历。</b>报名截止、交件、答辩三个日期先落定，再倒推进度，每周的产出对着日期排。
+    <span class="why">比赛的日期没有商量余地；倒排才能看出哪一周在冒险，提前补。</span></li>
+    <li><b>先解决队伍与指导教师两栏，再填别的。</b>找两个同学，一个能写、一个能做；指导教师带上题目和一页计划去谈一次。
+    <span class="why">这两栏难住的人最多，也最费时间；其余各栏都是自己的事，一个下午能填完。</span></li>
+    <li><b>选一场能走得远的，不选听起来最大的。</b>判断办法是看章程里的轮次设置，再看本校往年最好成绩到过哪一轮。
+    <span class="why">有的比赛全国有上千支队伍，初赛就要刷掉九成；选错了，八周备赛在第一轮就宣告结束。</span></li>
+    <li><b>按八周备赛表走。</b>读规则、定题分工、做第一版、请人提意见、按意见改、模拟答辩、交件留出三天缓冲。
+    <span class="why">八周表的关键在第五周有人提意见与第七周完整走场，这两步拦住了大多数准备不充分就交出的作品。</span></li>
+    <li><b>交件之后写一页复盘。</b>哪一周最险，哪个决定做错了，下一场换什么做法，一页写完存档。
+    <span class="why">不复盘，下一场还会在同一个地方摔倒；写长了不会看第二遍，一页就够。</span></li>
+  </ol>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>阶段</th><th>发生了什么</th><th>被迫做出的取舍</th><th>算不算打到底</th></tr>
+  <tr><td>报名</td><td>四栏填齐，资格确认</td><td>决定跟谁一队、谁签字</td><td class="no">不算</td></tr>
+  <tr><td>提交材料</td><td>作品、计划书或视频交进系统</td><td>砍掉来不及做的部分</td><td class="no">不算</td></tr>
+  <tr><td>初赛</td><td>与同赛区所有队伍同场</td><td>接受分数，没有解释的机会</td><td class="no">不算</td></tr>
+  <tr><td>复赛</td><td>与晋级队伍再比一轮</td><td>决定保哪条主线讲下去</td><td class="no">不算</td></tr>
+  <tr><td>最终轮</td><td>与最后的队伍同台，评委当面提问</td><td>几天之内决定保什么、舍什么</td><td class="yes">算</td></tr>
+</table>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>进入最终轮次。报名不算，提交材料不算，进了复赛也不算；三样都到过，仍然一场都没打到底。反过来，一场比赛进了最终轮，成绩如何是另一回事，这件事本身已经完成。</p>
+</div>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>同时报五场。报名的时候觉得都想去，截止日前两周发现五份材料一份都没做完，最后每场都停在初赛，等于五场都没参加。<span class="bad">选定一个方向，至多再配一场，就是上限</span>；再加，时间就不够走到最后一轮。</p>
+</div>
+
+<p class="pull">报五个名，五个都停在初赛；<span class="q">把一个方向打到底，取舍才会发生</span>。</p>
+
+<hr class="deco">
+
+<h2 id="s92"><span class="n">9.2</span>八个方向</h2>
+<p class="sec-lead">方向归成八类，一张表列全；一类里至多选报一场。</p>
+
+<p>能报的比赛按方向归，拢共八类。八类全报，时间一分，一场都走不到最后；一类里选一场打透，四年就能做出一件可以交付的成品。表里的时间与要求按各赛事近年的公开口径整理，报名之前以当年主办方公告为准。</p>
+
+<figure>
+<svg viewBox="0 0 480 284" role="img" aria-label="八个方向的分布，三项与岗位相关，五项按兴趣选">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">八个方向的分布：上排三项与将来岗位关联最密切，下排五项按兴趣选</text>
+    <text x="240" y="42" fill="#3FBFA0" font-size="12.5" text-anchor="middle">与将来岗位关联最密切</text>
+    <g stroke-width="1.3">
+      <rect x="3" y="52" width="150" height="62" rx="10" fill="#0d2a24" stroke="#1c5a4a"/>
+      <rect x="165" y="52" width="150" height="62" rx="10" fill="#0d2a24" stroke="#1c5a4a"/>
+      <rect x="327" y="52" width="150" height="62" rx="10" fill="#0d2a24" stroke="#1c5a4a"/>
+    </g>
+    <g font-size="13" fill="#3FBFA0" text-anchor="middle" font-weight="600">
+      <text x="78" y="78">法与庭审</text>
+      <text x="240" y="78">写与说</text>
+      <text x="402" y="78">户外</text>
+    </g>
+    <g font-size="12" fill="#c3d1e3" text-anchor="middle">
+      <text x="78" y="100">练文书</text>
+      <text x="240" y="100">练表达</text>
+      <text x="402" y="100">练体能</text>
+    </g>
+    <line x1="0" y1="136" x2="480" y2="136" stroke="#22385c" stroke-width="1"/>
+    <text x="240" y="160" fill="#7FB3E8" font-size="12.5" text-anchor="middle">按兴趣选，选哪一项都不算错</text>
+    <g stroke-width="1.2">
+      <rect x="4" y="172" width="88" height="56" rx="8" fill="#101d38" stroke="#2a4066"/>
+      <rect x="100" y="172" width="88" height="56" rx="8" fill="#101d38" stroke="#2a4066"/>
+      <rect x="196" y="172" width="88" height="56" rx="8" fill="#101d38" stroke="#2a4066"/>
+      <rect x="292" y="172" width="88" height="56" rx="8" fill="#101d38" stroke="#2a4066"/>
+      <rect x="388" y="172" width="88" height="56" rx="8" fill="#101d38" stroke="#2a4066"/>
+    </g>
+    <g font-size="12" fill="#ffffff" text-anchor="middle">
+      <text x="48" y="196">机器人</text>
+      <text x="144" y="196">数学与数据</text>
+      <text x="240" y="196">代码与开源</text>
+      <text x="336" y="196">创新创业</text>
+      <text x="432" y="196">影像与声音</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4" text-anchor="middle">
+      <text x="48" y="216">要组队要经费</text>
+      <text x="144" y="216">三人队九月赛</text>
+      <text x="240" y="216">一个人可报</text>
+      <text x="336" y="216">要商业计划书</text>
+      <text x="432" y="216">要求最低</text>
+    </g>
+    <text x="240" y="256" fill="#FFD166" font-size="12.5" text-anchor="middle">八类里择定一类，一类里选定一场</text>
+    <text x="240" y="276" fill="#b0c0d4" font-size="12" text-anchor="middle">择定之前先把三类与岗位相关的看一遍，再从五类按兴趣的里挑一类</text>
+  </g>
+</svg>
+<figcaption>上排三项的功夫直接搬得进将来的工作，下排五项全凭兴趣；两条都走得通，选错的标准只有一个：一类里报了两场以上。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>方向</th><th>可报项目</th><th>时间</th><th>要求</th></tr>
+  <tr><td>机器人</td><td>RoboMaster 机甲大师赛、中国机器人大赛</td><td>报名多在秋季，正赛次年春季</td><td>需组队，需指导教师，需经费</td></tr>
+  <tr><td>数学与数据</td><td>全国大学生数学建模竞赛、统计建模大赛</td><td>数学建模多在九月，连赛三天</td><td>三人组队，可跨专业</td></tr>
+  <tr><td>代码与开源</td><td>开源之夏及各类编程竞赛</td><td>开源之夏上半年申报，暑期开发</td><td>个人可报，需通过社区筛选</td></tr>
+  <tr><td>法与庭审</td><td>理律杯、Jessup、ICC 中文赛</td><td>秋冬启动，次年春收官</td><td>需校队选拔，Jessup 全程英文</td></tr>
+  <tr><td>创新创业</td><td>「互联网＋」、挑战杯</td><td>校赛春季，省赛夏季</td><td>需组队，需商业计划书</td></tr>
+  <tr><td>影像与声音</td><td>各类短片节、纪录片工作坊、播客赛事</td><td>全年分散</td><td>要求最低，个人可报</td></tr>
+  <tr><td>户外</td><td>定向越野、马拉松、登山</td><td>春秋两季集中</td><td>需体检，长距离需长期训练</td></tr>
+  <tr><td>写与说</td><td>征文、演讲、辩论</td><td>全年分散</td><td>个人可报</td></tr>
+</table>
+</div>
+
+<p>八个方向里与将来岗位关联最密切的是三项：<span class="u">法与庭审、写与说、户外</span>。法与庭审练文书，庭上用的诉状、答辩状与案卷里的文书是同一种功夫；写与说练表达，工作中大量的时间花在把事说清、把文写好；户外练体能，联考体测与日常工作都靠它。其余五项按兴趣选，选哪一项都不算错，兴趣是唯一能让人坚持过第三周的东西。各项比赛的届次、日期与报名入口，在<a href="06_成事.html">《成事》</a>的比赛日历里写得很细，这里不堆数字。</p>
+
+<div class="grid3">
+  <div class="card t">
+    <p class="tt">法与庭审 · 练文书</p>
+    <p>一份文书要在规则之内把事实、证据、法条拧成一条线，漏一环就站不住。案卷工作与这种训练同源，练的是同一种严谨。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">写与说 · 练表达</p>
+    <p><a href="大学四年_说话.html">辩论与演讲</a>都是限时输出，逼人把一团想法压缩成几句清楚的话。工作中大量的时间花在把事说清、把文写好，这里提前练。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">户外 · 练体能</p>
+    <p>定向与长距离项目把训练排进日程，雷打不动。联考体测要考的三项，靠的是这种长期安排，不是临考突击。</p>
+  </div>
+</div>
+
+<p>把三项放进日后的工作里看：整理案卷，文书功底直接决定卷宗的成色；向领导汇报案情，说的是限时表达；长时间的执勤与追逃，靠的是体能底子。比赛不过是把这些功课提前搬到有评委的场子里练，练完有分数，有评语，有下一场的切入点。</p>
+
+<h3>三个筛子，择定一个<span class="tag">对表用</span></h3>
+
+<ol class="steps">
+  <li><b>先看要求与自己对不对得上。</b>需校队选拔的，查本校有没有这个队、什么时候选拔；需经费的，看实验室或学院有没有预算；需指导教师的，先找到愿意签字的人。
+  <span class="why">要求对不上，方向再好也停在报名表上；先问清楚，再谈喜欢不喜欢。</span></li>
+  <li><b>再看时间与课表冲不冲。</b>数学建模在九月，与开学初的课程训练相撞；机器人正赛在次年春季，与期末相撞。撞得厉害的，往后放一年。
+  <span class="why">比赛日期不让步，能让步的只有自己的安排；硬撞的结果是两头落空。</span></li>
+  <li><b>最后看兴趣坐不坐得住。</b>挑定方向之前，找一份往届优秀作品读完，再决定；读不完的，换一个方向。
+  <span class="why">第三周兴趣消退是常态，消退之后仍愿意做的，才选它；往届作品能让人提前认清这一点，不必等第三周到了才发现。</span></li>
+</ol>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>八方向表填完，圈定一个方向，说出三条理由：一条要求对得上，一条时间排得进，一条读完往届作品还想做。三条缺一条，这个方向到第三周就会松，第八周备赛表走不完。</p>
+</div>
+
+<ul class="dash">
+  <li>把选定方向的报名截止日写进日历，提前一周设提醒，交件日再设一个</li>
+  <li>先填报名表的后两栏：队伍凑齐，指导教师谈妥，其余各栏留着最后填</li>
+  <li>第一周只做一件事：读完竞赛章程与三份往届优秀作品，写一页要点</li>
+</ul>
+
+<p class="pull">一个人的时间只够打透一个方向；<span class="q">八方向表的作用是帮人选定那一个，不是列一份愿望清单</span>。</p>
+
+<hr class="deco">
+
+<h2 id="s93"><span class="n">9.3</span>没有条件报名的时候</h2>
+<p class="sec-lead">多数赛事要出校、要组队、要有指导教师，有的还要经费；四样不齐，报名表就填不下去。</p>
+
+<p>四样条件的名目是这样的：出校，比赛不在本校，涉及请假、差旅与安全责任；组队，多数赛事不接受单人报名；指导教师，报名表上要签字，训练中要有人可问；经费，机器人一类的物料、「互联网＋」的商业计划与差旅，都要钱。四样缺一样，报名表就填不下去；四样都齐的，一学年遇不上几回。</p>
+
+<figure>
+<svg viewBox="0 0 480 300" role="img" aria-label="校外赛事四样条件不齐时改走校内替代路径">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四样条件不齐的时候，改走校内替代路径</text>
+    <rect x="8" y="34" width="128" height="194" rx="10" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="72" y="56" fill="#ffffff" font-size="12.5" text-anchor="middle" font-weight="600">校外赛事</text>
+    <g font-size="12" fill="#c3d1e3" text-anchor="middle">
+      <rect x="24" y="68" width="96" height="24" rx="5" fill="#16274a" stroke="#2a4066"/>
+      <text x="72" y="84">出校 · 差旅安全</text>
+      <rect x="24" y="98" width="96" height="24" rx="5" fill="#16274a" stroke="#2a4066"/>
+      <text x="72" y="114">组队 · 不接受单人</text>
+      <rect x="24" y="128" width="96" height="24" rx="5" fill="#16274a" stroke="#2a4066"/>
+      <text x="72" y="144">指导教师 · 要签字</text>
+      <rect x="24" y="158" width="96" height="24" rx="5" fill="#16274a" stroke="#2a4066"/>
+      <text x="72" y="174">经费 · 物料差旅</text>
+    </g>
+    <text x="72" y="198" fill="#FF6B4A" font-size="12" text-anchor="middle">四样不齐</text>
+    <text x="72" y="212" fill="#FF6B4A" font-size="12" text-anchor="middle">报名表填不下去</text>
+    <path d="M140 122 L184 122" stroke="#FF8A3D" stroke-width="1.4" fill="none"/>
+    <path d="M184 122 L177 117 M184 122 L177 127" stroke="#FF8A3D" stroke-width="1.4" fill="none"/>
+    <text x="162" y="108" fill="#FF8A3D" font-size="12" text-anchor="middle">换成</text>
+    <text x="162" y="146" fill="#FF8A3D" font-size="12" text-anchor="middle">校内版</text>
+    <g stroke-width="1.2">
+      <rect x="190" y="34" width="150" height="30" rx="8" fill="#132242" stroke="#2a4066"/>
+      <rect x="190" y="70" width="150" height="30" rx="8" fill="#132242" stroke="#2a4066"/>
+      <rect x="190" y="106" width="150" height="30" rx="8" fill="#132242" stroke="#2a4066"/>
+      <rect x="190" y="142" width="150" height="30" rx="8" fill="#132242" stroke="#2a4066"/>
+      <rect x="190" y="178" width="150" height="30" rx="8" fill="#132242" stroke="#2a4066"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff">
+      <text x="204" y="54">校内选拔赛</text>
+      <text x="204" y="90">课程设计</text>
+      <text x="204" y="126">自己凑的三人小组</text>
+      <text x="204" y="162">开源项目 · 一个人提交</text>
+      <text x="204" y="198">短片 · 一个人拍</text>
+    </g>
+    <rect x="356" y="70" width="116" height="102" rx="10" fill="#0d2a24" stroke="#1c5a4a" stroke-width="1.3"/>
+    <text x="414" y="94" fill="#3FBFA0" font-size="12.5" text-anchor="middle" font-weight="600">交付压力相同</text>
+    <g font-size="12" fill="#c3d1e3" text-anchor="middle">
+      <text x="414" y="118">都有截止时间</text>
+      <text x="414" y="140">都有人验收</text>
+      <text x="414" y="162">都要拿出东西</text>
+    </g>
+    <rect x="8" y="238" width="464" height="46" rx="10" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="258" fill="#FFD166" font-size="12.5" text-anchor="middle">分界不在条件，在有没有做完一件需要交付的事</text>
+    <text x="240" y="276" fill="#b0c0d4" font-size="12" text-anchor="middle">校内版本与校外版本，差的只是场子大小</text>
+  </g>
+</svg>
+<figcaption>左边四样缺一样，右边的路都通；共同点在底下那道框里：截止时间、验收的人、能交付的东西，一样都不少。</figcaption>
+</figure>
+
+<p>校内替代版本一样能练。校内选拔赛、课程设计、自己凑起来的三人小组，形式不同，交付的压力相同：都有截止时间，都有人验收，都要拿出东西。开源项目没有限制，一个人也能提交；短片可以一个人拍；数学建模可以找两个同学，按竞赛规则限时三天，做一遍往年题。四年里把缺少条件当成不做的理由，毕业时仍然拿不出成果。</p>
+
+<blockquote>
+  <p>君子藏器于身，待时而动。</p>
+  <p class="src">《周易·系辞下》· 器是积累下来的本事，动是上场的那一天</p>
+</blockquote>
+
+<p>这两句话隔了两千多年，说的还是同一件事：本事先积攒着，等机会到来的那一天再拿出来。校内替代版本积攒的就是这个本事：限时三天做出来的论文，一个人拍完的短片，合并进开源项目的代码，都是可以交付的成果。等到大二大三条件齐了，直接拿这些去报名，起点比从零开始高得多。</p>
+
+<p>顺序上也有讲究。大一先把个人能报的项目打上一两场，征文、短片、演讲都行，熟悉一遍交付的完整流程；大二大三再碰需要组队与经费的方向，那时专业课、实验与实习都开了，凑人、凑经费都比大一容易。一上来就挑战四样条件齐全的项目，多半连报名表都交不出去。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>校外赛事</th><th>校内替代版本</th><th>交付物</th><th>验收人</th></tr>
+  <tr><td>全国大学生数学建模竞赛</td><td>找两个同学，限时三天做往年题</td><td>一篇按格式写的论文</td><td>一位任课教师</td></tr>
+  <tr><td>机器人类大赛</td><td>课程设计、实验室项目、校内选拔</td><td>一台能动的装置</td><td>指导教师</td></tr>
+  <tr><td>模拟法庭类赛事</td><td>校内模拟法庭、案例研习课</td><td>一套文书加一次庭审</td><td>法学方向教师</td></tr>
+  <tr><td>「互联网＋」与挑战杯</td><td>课程项目、学院立项</td><td>一份计划书加一次答辩</td><td>评委或导师</td></tr>
+  <tr><td>短片节与纪录片工作坊</td><td>课程作业、社团宣传片</td><td>一条成片</td><td>教师与观众</td></tr>
+  <tr><td>开源之夏</td><td>一个人向社区提代码合并请求</td><td>被合并的提交记录</td><td>社区维护者</td></tr>
+</table>
+</div>
+
+<h3>校内版本怎么搭，五步<span class="tag">照原版定标准</span></h3>
+
+<div class="panel">
+  <ol class="steps">
+    <li><b>先定交付物。</b>想替代哪场比赛，就照它的交付物定：建模赛交论文，短片节交成片，法庭赛交文书。
+    <span class="why">交付物照原版定，压力才照原版来；自己降一档标准，练的就打了一个折扣。</span></li>
+    <li><b>自己定截止时间。</b>没有官方日期就自己设：三天、一周或一个月，写进日历，到日关闭，不许顺延。
+    <span class="why">没有截止时间的事，多数没有完成日；校内版缺的第一样东西就是这个。</span></li>
+    <li><b>约一个验收人。</b>一位任课教师、一位师兄、社团负责人都行，交件之前把时间约好，当面递过去。
+    <span class="why">验收人越具体，交付越当真；没有人看的东西，做到六十分就会停下来。</span></li>
+    <li><b>按角色找同伴。</b>三人小组自己凑，按能写、能做、能跑分工；一个人能做完的，就一个人做完。
+    <span class="why">分工提前说清，中途才不会为谁做多做少争执；单人项目则省掉这道风险。</span></li>
+    <li><b>做完归档。</b>论文、成片、代码、答辩记录存进一个文件夹，命名带上日期，四年不删。
+    <span class="why">归档的东西下一次报名直接能用；散在硬盘各处的，等于从来没有做过。</span></li>
+  </ol>
+</div>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>拿凑合的心态搭校内版。校内选拔的评委松一些，截止时间是软的，验收人可能只是同学；松多少，练的就差多少。<span class="bad">把日子当真的办法只有一个</span>：日期照原版定，验收人照原版找，交件之前不许顺延。</p>
+</div>
+
+<blockquote>
+  <p>知彼知己者，百战不殆。</p>
+  <p class="src">《孙子·谋攻篇》· 比赛之前，章程与往届作品就是「彼」</p>
+</blockquote>
+
+<p>上场之前能做的准备，大半花在读懂规则上：章程逐条读，往届优秀作品找三份，看评委常年嘉奖的是什么、逐年淘汰的又是什么。这些材料都是公开的，找一份的时间不超过一个下午。准备做得越细，取舍来得越早，第八周就越从容。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年之内做完一件有交付物、有截止时间、有验收人的事，三个条件齐一件。这一件可以是限时三天的一篇论文，可以是一条成片，也可以是一次被合并的代码提交；形式不论，到了交付那天能交付的才算数。</p>
+</div>
+
+<p class="pull">真正的分界不在条件，<span class="q">在有没有做完一件需要交付的事</span>；校内版本与校外版本，差的只是场子大小。</p>
+
+<hr class="warm">
+
+<h2 id="slist">上场清单</h2>
+<p class="sec-lead">做完打勾，做不完的写上下一步的日期；清单不写形容词，只写可以核对的动作。</p>
+
+<ul class="check">
+  <li class="hd">第九章 · 上场清单</li>
+  <li>找一份比赛章程，读出报名截止日、交件日与全部轮次</li>
+  <li>把报名表的后两栏解决：队伍凑齐，指导教师谈妥</li>
+  <li>从八个方向里圈定一个，写下三条择定理由</li>
+  <li>把选定方向的报名截止日写进日历，提前一周设提醒</li>
+  <li>读完竞赛章程与三份往届优秀作品，写一页要点</li>
+  <li>按八周备赛表走第一周，定题分工，建共享文件夹</li>
+  <li>交件之后写一页复盘，记下最险的一周与做错的决定</li>
+  <li>条件不齐的时候，定一份校内替代版本，日期与验收人照原版</li>
+  <li>一年之内做完一件有交付物、有截止时间、有验收人的事</li>
+</ul>
+
+<div class="callout">
+  <p class="lab">写在最后</p>
+  <p class="big">上场的路只有一条：择定一个方向，把报名表的后两栏填掉，一场一场打到底。条件不齐的时候就造一个校内版本，交付的压力一样不少。四年之后回头看，能证明时间去过哪里的是这样几样东西：一张进了最终轮的记录，一件做完的交付物，和一本写满日期的日历。</p>
+</div>
+
+<footer class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="08_入世.html"><span class="ar">‹</span>第八章 · 入世</a><a href="10_次第.html">第十章 · 次第<span class="ar">›</span></a></p>
+  <p class="by">课表之外的大学 · 第九章　<b>BY ytf2000@sina.com</b></p>
+</footer>
+
+</div>
+</body>
+</html>

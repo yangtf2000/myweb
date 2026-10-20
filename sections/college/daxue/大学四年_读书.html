@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>读书：怎么读，读什么</title>
+<style>
+:root{
+  --bg:#050a1a; --card:#101d38; --panel:#16274a; --hi:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px; line-height:1.85; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 90px}
+
+.toc{
+  position:sticky; top:0; z-index:20; background:var(--bg);
+  border-bottom:1px solid var(--line); margin:0 -28px;
+  padding:11px 28px; display:flex; gap:13px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+
+.hero{padding:54px 0 28px; border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px; letter-spacing:2px; color:var(--teal); margin:0 0 16px}
+h1{font-size:33px; line-height:1.4; font-weight:600; margin:0 0 16px; letter-spacing:.5px}
+.lead{font-size:17px; color:var(--t2); margin:0 0 22px}
+.metarow{display:flex; flex-wrap:wrap; gap:18px; font-size:13.5px; color:var(--t3)}
+.metarow b{color:var(--t2); font-weight:500}
+
+h2{font-size:23px; font-weight:600; margin:54px 0 10px; line-height:1.5}
+h2 .n{color:var(--teal); font-size:14.5px; letter-spacing:2px; display:block; margin-bottom:7px; font-weight:500}
+h3{font-size:17.5px; font-weight:600; margin:32px 0 8px; color:var(--t1)}
+.hook{color:var(--t2); font-size:15.5px; margin:0 0 8px; padding-left:13px; border-left:2px solid var(--line2)}
+p{margin:0 0 14px; color:var(--t2)}
+p b,li b{color:#fff; font-weight:500}
+
+.item{
+  display:grid; grid-template-columns:1fr auto; gap:2px 16px;
+  padding:14px 0; border-bottom:1px solid var(--line);
+}
+.item .t{font-size:17px; color:var(--t1); font-weight:500}
+.item .au{display:block; font-size:13.5px; color:var(--t3); font-weight:400; margin-top:3px; letter-spacing:.2px}
+.item .len{font-size:13.5px; color:var(--amber); white-space:nowrap; padding-top:3px}
+.item .why{grid-column:1 / -1; font-size:15px; color:var(--t2); margin-top:6px}
+
+.box{margin:26px 0; padding:19px 23px; background:var(--hi); border-left:3px solid var(--teal); border-radius:0 12px 12px 0; font-size:15px; color:var(--t2)}
+.box .lab{font-size:13.5px; letter-spacing:1.5px; color:var(--teal); margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff; font-weight:500}
+.box ol,.box ul{margin:0; padding-left:20px}
+.box li{margin-bottom:7px}
+.box.amber{border-left-color:var(--amber)}
+.box.amber .lab{color:var(--amber)}
+
+.tblwrap{overflow-x:auto; margin:20px 0 24px}
+table{width:100%; border-collapse:collapse; font-size:15px}
+th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{color:var(--teal); font-weight:500; font-size:13.5px; letter-spacing:.6px; background:var(--card)}
+td{color:var(--t2)}
+td.k{color:#fff; font-weight:500; white-space:nowrap}
+
+.num{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0 28px}
+.num div{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px}
+.num b{display:block; font-size:26px; color:#fff; font-weight:600; line-height:1.3}
+.num span{font-size:13.5px; color:var(--t3); line-height:1.6; display:block; margin-top:4px}
+
+ol.steps{margin:18px 0 22px; padding-left:0; list-style:none; counter-reset:s}
+ol.steps li{counter-increment:s; position:relative; padding-left:38px; margin-bottom:16px; color:var(--t2)}
+ol.steps li::before{
+  content:counter(s); position:absolute; left:0; top:3px;
+  width:24px; height:24px; border-radius:50%; background:var(--panel);
+  color:var(--teal); font-size:13px; text-align:center; line-height:24px; font-weight:600;
+}
+ol.steps li b{color:#fff; font-weight:500}
+
+a{color:var(--blue); text-decoration:none; border-bottom:1px solid var(--line2)}
+a:hover{color:var(--teal)}
+
+.src{font-size:13.5px; color:var(--t3); border-top:1px solid var(--line); padding-top:14px; margin-top:36px; line-height:1.9}
+.foot{margin-top:44px; padding-top:24px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2}
+.foot a{color:var(--teal); text-decoration:none; border-bottom:0}
+
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px; margin-top:42px}
+  table{font-size:14px}
+  th,td{padding:9px 8px}
+  .num{grid-template-columns:1fr 1fr}
+  .num div{padding:13px 14px}
+  .num b{font-size:21px}
+  .item{grid-template-columns:1fr}
+  .item .len{padding-top:2px}
+}
+
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .hero{padding:0 0 12pt}
+  h1,h2,h3,td.k,.num b,.item .t,.box b{color:#111}
+  .lead,.hook,p,td,.box,.foot,.src,.item .why{color:#333}
+  .box{background:#f2f2f2; border-left-color:#666}
+  .num div{background:#f7f7f7; border-color:#ccc}
+  .item{border-bottom:1px solid #ccc; padding:7pt 0; break-inside:avoid}
+  h2{break-after:avoid}
+  .wrap{max-width:none; padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="01_课内与课外.html">‹ 返回 · 第一章 · 课内与课外</a></nav>
+
+<header class="hero">
+  <p class="kicker">读 书 · 方法与书目 · 2026 年 10 月</p>
+  <h1>怎么读，读什么</h1>
+  <p class="lead">上半页讲怎么读：怎么找到自己读得下去的书，怎么读，怎么在一天里腾出那段被手机占着的时间。下半页是一份按他以后要碰的事分的书目，十类七十一种，影像和有声在末尾。</p>
+</header>
+
+<div class="box" style="margin:36px 0 10px; padding:22px 24px">
+  <p class="lab">写在前面</p>
+  <p style="font-size:17px; color:#fff; line-height:1.95; margin:0 0 10px">下面这些是我按自己的想法写的，都不算数。这是他的大学，他做主。</p>
+  <p style="font-size:16px; color:#c3d1e3; line-height:1.95; margin:0">不同意的地方，一段一段驳回来。驳出他自己的一套打算，我写这些就算没白写。</p>
+</div>
+
+<h2 id="k1"><span class="n">01</span>先算一笔时间账</h2>
+<p class="hook">说"没时间"，多半不如说时间已经在别处花掉了。把这笔账算完，这句话就不像说教了。</p>
+
+<p>中国新闻出版研究院每年做一次全国国民阅读调查，2026 年 4 月发布的那一次，数据是 2025 年的：成年国民人均纸质图书阅读量 4.81 本，电子书 3.58 本，两项合计 8.39 本；年读 10 本以上纸质书的人占 13.5%。同一份调查里，人均每天接触手机 109.54 分钟，每天读纸质书 24.41 分钟。</p>
+
+<div class="num">
+  <div><b>110</b><span>分钟 · 每天手机接触时长</span></div>
+  <div><b>24</b><span>分钟 · 每天纸质书阅读时长</span></div>
+  <div><b>4.8</b><span>本 · 人均一年纸质书</span></div>
+</div>
+
+<p>一天 110 分钟，一年是 670 小时。一本 250 页的书大约 7 小时读完，这些时间够读九十本。</p>
+<p>但没有人要求一年读九十本。一年读十二本，需要 12 × 7 = 84 小时，分摊到 365 天，每天 14 分钟。</p>
+
+<div class="box">
+  <p class="lab">这笔账的真正含义</p>
+  <p>不需要多出时间，只需要把 110 分钟里的 14 分钟搬个地方。从每天刷手机的时间里挪出百分之十三，就够一年十二本。</p>
+  <p>所以"没时间读书"这句话，准确的说法是"这十四分钟被别的东西先拿走了"。要处理的只是这十四分钟的归属，时间总量动不了。</p>
+</div>
+
+<h2 id="k2"><span class="n">02</span>手机和书，差在哪四件事</h2>
+<p class="hook">知道机制，才知道该在什么地方用力。</p>
+
+<h3>第一件：谁决定下一段</h3>
+<p>短视频的下一段由算法决定，依据是他在上一条停留了多久、有没有划走、有没有点赞。书的下一段由作者决定，他只能跟着他的顺序走，或者自己翻过去。</p>
+<p>这两件事练的是不同的东西。算法训练的是"被喂"，书训练的是"跟着一条线走完"。前者越来越省力，后者越来越费力，而工作里绝大多数难事都是后者：一份报告、一个案子、一段程序的逻辑，都得跟着一条线走完，没有人给他切成十五秒。</p>
+
+<h3>第二件：有没有"这一段结束了"</h3>
+<p>信息流没有终点。往下滑永远有下一条，没有页码和章节，也等不到读完的那一刻。书有。读完一本会有明确的完成感，这个感觉很稀缺，但它是人愿意再读一次的原因。</p>
+<p>这一点对刚起步的人特别重要。第一年读书的目标只有一个：把"读完一本书"这件事重新体验几遍。读什么不重要。</p>
+
+<h3>第三件：他能不能不同意</h3>
+<p>书的论证慢。一句话看不懂可以往回翻，一个观点不同意可以在页边写"不对"，可以停下来想十分钟再继续。十五秒的视频只给他两个动作：接受，或者划走。中间那一段，不同意、想清楚为什么不同意，被速度挤掉了。</p>
+<p>而那段被挤掉的东西，恰好就是判断力。</p>
+
+<h3>第四件：留下的东西</h3>
+<p>一本读过的书，他大概记得某句话在第三章、在左页下半。这种位置感是回忆的钩子，想起来的时候能顺回去。信息流没有位置，只有"我好像在哪刷到过"。</p>
+
+<div class="box amber">
+  <p class="lab">这里要说一句实话，免得把话说满</p>
+  <p>关于纸书和屏幕的差别，学界做过几轮汇总分析。德尔加多等人 2018 年汇总了 54 项研究、十七万余人，结论是纸面阅读的理解成绩略好于屏幕，效应量 0.21；克林顿 2019 年汇总 33 项，效应量 0.25。但这个优势<strong>只出现在知识性、说明性的长文上，小说没有明显差别</strong>（小说 −0.04，说明文 −0.32）。</p>
+  <p>所以准确的说法是：<strong>需要反复回看、需要建立结构的长论证，需要一个不被打断的界面。</strong>小说在手机上看，问题不大；理论书、法律书、报告，尽量用纸。</p>
+  <p>短视频那一边的数据更硬一些。阮等人 2025 年在《心理学公报》上汇总了 71 篇研究、九万八千余人，结论是短视频使用与注意力、自控力负相关，与压力、焦虑、孤独正相关；而且<strong>成瘾程度比使用时长更能预测问题</strong>，每天看一小时但能自己停下来，问题不大；一打开就停不下来，才是要处理的。另有汇总分析发现，每天超过两小时，持续注意力测试的成绩会下降。</p>
+</div>
+
+<p>把这四件事合起来看，读书的价值可以说得很朴素：它是少数几种<strong>由他决定顺序、有终点、允许他反驳</strong>的长时间输入。这三样同时在线的场合，一天里不多。</p>
+
+<h2 id="k3"><span class="n">03</span>怎么找到下一本</h2>
+<p class="hook">从书单里挑书，是效率最低的一种找书法。六条路，按离他近的顺序排。</p>
+
+<h3>一、从已经在看的东西倒推</h3>
+<p>看完《漫长的季节》会想读东北，看完《我的阿勒泰》会想读李娟，看完《三大队》会去读深蓝。剧和电影是最好的书托，它已经把人物和情境铺好了，书接上去不费力。</p>
+<p>做法很简单：看完一部喜欢的片子，搜一下"原著"或者"原型"，找到那本书。这条路的成功率最高，因为它保证了他对这个题材已经有兴趣。</p>
+
+<h3>二、图书馆的四个位置</h3>
+<p>图书馆不只是借书的地方，它有四个位置比书架本身有用：</p>
+<ul>
+  <li><b>新书区。</b>最近三个月进的书都摆在这里，塑封还没拆，比在书架深处翻十年前的版本强。</li>
+  <li><b>推荐架。</b>馆员写的推荐卡片通常只有一两句话，比网上的长评实在。</li>
+  <li><b>分类号。</b>中文图书按中图法排架。找到一本对的书，它左右三本大概率也对，这是图书馆比算法强的地方：算法按相似推给他，书架把相邻的摆在他手边。</li>
+  <li><b>馆员。</b>问一句"我想看某类的书，有什么推荐"，比自己在书架前站半小时有效。省图书馆、市图书馆办证都免费，一次能借几本。</li>
+</ul>
+
+<h3>三、书店里站着读三十页</h3>
+<p>书店的价值是让他翻，不是让他买。站着读三十页，读得下去再考虑买或者去图书馆借。网上买书看不到内页，这是它比不了的地方。手机上的对应物是 <a href="https://weread.qq.com" target="_blank" rel="noopener">微信读书</a>，大部分书前几十页免费试读，翻起来和站在书架前是一回事。</p>
+
+<h3>四、看别人在读什么</h3>
+<p>榜单的用法是看"哪些书反复出现"，不是看第一名。豆瓣的年度榜和分类榜、清华北大图书馆每年公布的借阅榜、书店的畅销榜，三个放在一起看，重复出现的那几本通常不会差。</p>
+<p>还有一处容易被忽略：身边真在读书的人。问他一句"他最近读什么"，比任何榜单都准，因为他知道他的口味。</p>
+
+<h3>五、顺着一个人往下读</h3>
+<p>一本书的参考文献、致谢、序言里提到的名字，往往属于同一路。找到一个合胃口的作者，就把他的书读完，比东一本西一本地跳要扎实。一个人写了好几本，说明他有稳定的关注点，他喜欢的多半是那个关注点。</p>
+
+<h3>六、从一个问题出发</h3>
+<p>不要问"我该读什么书"，问"我最近想不通什么"。带着问题找书，找到的才读得进去，因为他在书里找的是答案，不是任务。</p>
+<p>比如想不通"为什么基层办事这么难"，就去找写乡镇的书；想不通"为什么有人会认罪",就去看错案的记录。问题越具体，书越好找。</p>
+
+<h2 id="k4"><span class="n">04</span>三十页法则：怎么判断这本要不要读下去</h2>
+<p class="hook">会弃书的人，读得比谁都多。</p>
+
+<ol class="steps">
+  <li><b>三十页内没有事情发生，放下。</b>没有人出场、没有问题被提出、没有观点亮出来，说明这本书的节奏跟他现在不合。换一本，不用有心理负担。</li>
+  <li><b>一百页还读不动，也放下。</b>有个流传很广的算法叫"一百减年龄"：二十岁读不到八十页就该停，四十岁读到六十页。道理是一样的，好书很多，他的时间有限。</li>
+  <li><b>读三章找不到一句想划的话，放下。</b>这说明这本书没有提供他没想过的东西。</li>
+  <li><b>放下时记一笔。</b>书名、停在第几页、为什么停。过两年再试，很多人和书的相遇是有时间的，二十岁读不进去的书，二十五岁会读得很快。</li>
+</ol>
+
+<p>有一个反过来的提醒：<strong>不要因为一本书"很有名"就硬读。</strong>名著的"名"是几百万人读出来的平均值，跟他在不在那个平均值里没关系。读不进去就是读不进去，这跟他的水平无关，跟时机有关。</p>
+
+<h2 id="k5"><span class="n">05</span>怎么读：四种书，四种读法</h2>
+<p class="hook">读得慢，多半是读法用错了，跟速度关系不大。小说和教材不能用同一种方式读。</p>
+
+<div class="tblwrap">
+<table>
+<tr><th style="width:150px">书的类型</th><th>怎么读</th><th style="width:130px">不要做什么</th></tr>
+<tr><td class="k">小说、纪实、传记</td><td>一口气读完。找一个整块时间，两三个小时连着读，别做笔记，别查资料，别中途去看书评</td><td>边读边分析、边读边划线</td></tr>
+<tr><td class="k">知识书<br><span style="font-size:13.5px;color:var(--t3)">历史、社会、科普</span></td><td>先读目录和最后一章，弄清作者想证明什么；再挑三章细读，其余翻过去</td><td>从第一页开始硬啃</td></tr>
+<tr><td class="k">工具书<br><span style="font-size:13.5px;color:var(--t3)">方法、教材、手册</span></td><td>只查不读。遇到具体问题时翻对应章节，读完立刻用一次</td><td>通读一遍再想着用</td></tr>
+<tr><td class="k">难书<br><span style="font-size:13.5px;color:var(--t3)">哲学、经典、理论</span></td><td>先看一本解读或者听一遍讲解，再读原文；一次只读十页，读完停一停</td><td>一上来啃原文，读三页就放弃</td></tr>
+</table>
+</div>
+
+<h3>三行笔记</h3>
+<p>读完一本，在扉页写三行：<b>讲了什么事、哪一句记住了、跟我什么关系。</b>不超过五十个字，不写读后感，不做摘抄。</p>
+<p>摘抄的毛病是抄完就忘，因为他只是在搬运。写"跟我什么关系"这一句，才是把书里的东西接到自己身上。这一句写不出来，说明这本书对他还没起作用，不用勉强。</p>
+
+<h3>三条做法</h3>
+<ul>
+  <li><b>同时只开一本。</b>开三本的结果是三本都停在第 40 页。想换口味，换书，别叠加。</li>
+  <li><b>读两遍比读两本有用。</b>第二遍只读划过的句子，半小时能过完，记忆比读一本新书深。</li>
+  <li><b>听书不能代替读。</b>听适合小说和纪实，情节强，漏一句不影响；知识性的书要读，因为他要往回翻。</li>
+</ul>
+
+<h3>读不进去的三种情况</h3>
+<p><b>犯困。</b>多数时候跟书无关，跟时间有关。要动脑的书放在早上或者午睡之后读，床上留给小说。躺在床上读理论书，读三页就睡着，睡醒还会得出"这本书很枯燥"的错误结论。</p>
+<p><b>走神。</b>读了三行，脑子里已经在想别的事。三个办法：用手指着行读；读出声；读完一段停下来，用一句话复述刚才讲了什么。第三个最有效，因为它逼他把注意力收回来。</p>
+<p><b>看不懂。</b>多半是缺前置知识，不是理解力不行。先找一本通俗的入门或解读垫一下，或者从最后一章往前读（很多书写到最后才把话说明白），或者换一个译本，同一本外文书，译者的差别比作者还大。</p>
+
+<h2 id="k6"><span class="n">06</span>怎么才算喜欢上</h2>
+<p class="hook">"喜欢"常常在读顺了之后才出现，不在翻开第一本之前。很多人一直在等它先来。</p>
+
+<h3>喜欢不在第一次，在第六次</h3>
+<p>第一次弹吉他手疼，第一次编程全是报错，第一次拍照全是废片，那个阶段没有喜欢可言，只有笨拙。读书也一样，第一本读得慢、读得困，是正常的，不代表他不适合读书。</p>
+<p>给自己六次机会。六次之后还是不喜欢，可以放掉，这叫及时止损，不叫半途而废。</p>
+
+<h3>先求读完，不求收获</h3>
+<p>第一年只定一个目标：读完。读什么不重要，读完几本也不重要，重要的是重新体验"从第一页到最后一页"这件事。收获是第二三年才有的东西，第一年追收获，多半会停在第三十页。</p>
+
+<h3>读完讲给一个人听</h3>
+<p>讲得出，才算读过；讲不出，回去翻一遍。这是最省力的复习，也是检验有没有读进去的唯一办法。讲的对象不用懂行，室友、家里人、微信上的朋友都行，三分钟讲完一件事就够。</p>
+
+<h3>别定"一年五十本"</h3>
+<p>定数量会把读书变成 KPI。KPI 一旦完不成，人会放弃整件事，而不是调整数量。定场景更可靠：睡前二十分钟、通勤路上、饭后十分钟。场景能坚持，数量不能。</p>
+
+<h3>允许读没用的书</h3>
+<p>如果每一本都要"有用"，读书就变成了加班，加班是坚持不长的。单子里留三分之一给完全没用的东西：推理、武侠、漫画、画册、闲史。这些书负责让"读书"这件事不难受。</p>
+
+<h3>找一个同路的人</h3>
+<p>不用组读书会，一个人就够。互相说一句"我最近在读什么"，一个月一次。有人知道他在读，比自律管用。</p>
+
+<h3>纸书还是电子书</h3>
+<p>两个都用，按书的类型分。小说、纪实、传记用手机或电子书，随身、夜里能看、便宜，前面说过研究也显示小说在两种介质上理解没有明显差别。知识性的书尽量用纸：要往回翻、要在页边写字、要记住某句话大概在哪一页，这三件事纸比屏幕顺手。</p>
+<p>一个提醒：手机上的书要开免打扰。同一个界面里放着书和短视频，切换成本是零，人一定会往短视频那边滑。这一条跟自制力无关，问题出在界面设计上。</p>
+
+<h2 id="k7"><span class="n">07</span>怎么从手机里把时间拿回来</h2>
+<p class="hook">靠意志力对抗推荐算法，赢不了；能赢的是改环境。</p>
+
+<ol class="steps">
+  <li><b>手机放另一个房间。</b>这是唯一真正有效的动作。放包里、放抽屉、翻面扣在桌上，都不如放另一个房间。距离每增加一道门，拿起它的成本就高一分。</li>
+  <li><b>占用已有的空档，别新建时间。</b>"每天读书一小时"这种计划活不过一周。要占的是本来就在的空档：睡前、上厕所、坐公交、排队、饭后那十分钟。这些时间现在归手机，抢过来不用额外挤。</li>
+  <li><b>把启动成本降到最低。</b>书摊开放在枕头边，或者同一本随身带着，翻开就是上次那一页。书在书架上、在包里最底下，等于没有。</li>
+  <li><b>做替代，不做戒断。</b>要做的只是把某个场景换成书。想彻底戒掉手机的人，第三天就反弹，反弹得更狠。</li>
+  <li><b>关掉非必要推送。</b>每一次震动都是一次打断，重新进入状态要花好几分钟。一天被打断十次，等于一页书都没读进去。</li>
+  <li><b>熬过前两周。</b>注意力像肌肉，用进废退。头两周会明显坐不住，二十分钟像两小时；两周之后能读二十页不抬头。这一段没有捷径，只能熬。</li>
+  <li><b>记录书名，不打卡。</b>打卡会变成任务，完不成会内疚，内疚会让人放弃。记录只是记下读完的书名和日期，一年下来翻这张单子，比任何打卡软件都实在。</li>
+</ol>
+
+<div class="box">
+  <p class="lab">如果只能做一件事</p>
+  <p>做第一条：睡前把手机放到另一个房间，枕头边放一本书。这一条做到了，其余六条会自己发生。这一条做不到，其余六条都是纸上的。</p>
+</div>
+
+<h2 id="k8"><span class="n">08</span>一年十二本，大概是什么样</h2>
+<p class="hook">十二本听着多，拆开看只是一个可以核对的时间表。</p>
+
+<div class="tblwrap">
+<table>
+<tr><th style="width:110px">厚度</th><th style="width:110px">大约字数</th><th style="width:120px">读完需要</th><th>每天 20 分钟</th></tr>
+<tr><td class="k">200 页</td><td>15 万字</td><td>6–8 小时</td><td>约 20 天</td></tr>
+<tr><td class="k">300 页</td><td>22 万字</td><td>9–12 小时</td><td>约 30 天</td></tr>
+<tr><td class="k">450 页</td><td>33 万字</td><td>15–18 小时</td><td>约 50 天</td></tr>
+</table>
+</div>
+
+<p>按平均 300 页算，一本一个月，一年十二本，每天二十分钟。这个速度不快，但四年下来是四十八本，比人均的 4.8 本多十倍。</p>
+<p>如果学期里实在挤不出时间，还有一个算法：<b>寒假三本、暑假五本、学期里每月一本。</b>假期读厚的，学期读薄的，加起来也是十二本。</p>
+
+<div class="box">
+  <p class="lab">最后一句实话</p>
+  <p>十二本是个参考数，完不成也不算什么。第一年能读完三本，就已经超过八成以上的成年人，年读十本以上纸质书的人只占 13.5%。</p>
+  <p>真正要拿回来的是那种"能安静坐两小时、把一件事从头看到尾"的能力，数量是它的副产品。这个能力一旦丢了，工作里最吃亏的就是它。</p>
+</div>
+
+<h2 id="c0"><span class="n">09</span>下半页：读什么</h2>
+<p class="hook">不按学科分，按他以后要碰的事分。每一类前面写这一类在讲什么，每一条写书里有什么、多厚、从哪本起。</p>
+
+<div class="box">
+  <p class="lab">三个入口，按他现在的状态挑</p>
+  <ul>
+    <li><b>只想先听完一个故事：</b>《坏小孩》，喜马拉雅有声版九小时，通勤跑步能听完。剧版《隐秘的角落》。</li>
+    <li><b>想知道自己以后穿那身衣服干什么：</b>《深蓝的故事》，一篇一个接处警，一周一本。</li>
+    <li><b>想被顶一下，看看书能不能让人不舒服：</b>《动物农场》，两小时，一个下午读完。</li>
+  </ul>
+</div>
+
+<div class="box">
+  <p class="lab">选书的三条标准</p>
+  <p><b>一、三十页之内有事发生。</b>不是背景介绍、不是方法论、不是自序写三万字。翻到第三十页还没有人在做事，这本书现在不合适。</p>
+  <p><b>二、读完能变成判断。</b>合上书能多说出一件事、一个道理、一种别人怎么活的样本。只剩“挺感动”的，不进这份单子。</p>
+  <p><b>三、过十年还记得。</b>这一条筛掉爽文，也筛掉跟风的畅销书。</p>
+  <p>前两条决定现在读不读，第三条决定值不值得买。三条都占的才是主干，所以这份单子里既有紫金陈，也有《乡土中国》。</p>
+</div>
+
+<h2 id="c1"><span class="n">10</span>警察：这行九成时间在处理人和人之间的事</h2>
+<p class="hook">写这行的书分两种：一种写英雄，一种写日子。这一栏收的是后一种，因为以后九成的工作是日子。</p>
+
+<div class="item"><span class="t">深蓝的故事（三部曲）<span class="au">深蓝 · 新星出版社</span></span><span class="len">每本一周</span><span class="why">湖北一位基层民警写的五十七个案子。接处警、夫妻吵架、老人走失、邻里纠纷、抓捕，一篇一个，多数没有惊险场面。其中《请转告局长，三大队任务完成了》是电影《三大队》的原型。</span></div>
+
+<div class="item"><span class="t">深渊<span class="au">深蓝 · 豆瓣 2024 推理悬疑榜</span></span><span class="len">一周</span><span class="why">同一作者更长的一本，案子更重，写的是人命案后面那些家庭怎么过下去。文字比第一部稳。</span></div>
+
+<div class="item"><span class="t">余罪<span class="au">常书欣 · 有声剧评分 9.6</span></span><span class="len">长篇</span><span class="why">警校生被派去做卧底。蹲守、喝酒、挨打、写检查，立功和犯错常常是同一件事的两面。这行最脏最累的部分，书里没遮。</span></div>
+
+<div class="item"><span class="t">三叉戟<span class="au">吕铮 · 中信 2023 修订版</span></span><span class="len">三天</span><span class="why">三个快退休的老警察被拉回来办一桩洗钱案：一个在警保处打杂，一个在派出所巡街，一个在预审处混日子。作者是北京警察，干了十六年经侦，书里的程序、行话、上下级关系都是真的。剧版豆瓣 8.3。</span></div>
+
+<div class="item"><span class="t">鬼笑石<span class="au">呼延云 · 白夜剧场有声剧</span></span><span class="len">长篇</span><span class="why">三代警察跨几十年的案子，人物写得厚，不是解谜游戏。喜马拉雅有多人分角色的版本，适合走路听。</span></div>
+
+<div class="item"><span class="t">13·67<span class="au">陈浩基</span></span><span class="len">一周</span><span class="why">六个短篇，从二〇一三年倒着写到一九五七年，串起来是一个警察的一生，也是香港六十年。主角关振铎不是神探，会在规矩里绕，也会被规矩限制。</span></div>
+
+<h2 id="c2"><span class="n">11</span>法制：一个案子是怎么判下来的</h2>
+<p class="hook">教材讲“应当怎样”，这几本讲“实际怎样”：证据怎么被采信，口供怎么来的，一个人怎么被认定有罪，又怎么被认定错了。</p>
+
+<div class="item"><span class="t">洞穴公案：中华法系的思想实验<span class="au">秦涛 · 文津图书奖 2025</span></span><span class="len">一周</span><span class="why">借《聊斋》里“管秋阳食人案”编了一场朝堂辩论：绝境中杀人该不该抵命。十几个人各说一套，每一套都讲得通。看的是同一个案子里怎么能同时听见几种道理。</span></div>
+
+<div class="item"><span class="t">法律的悖论<span class="au">罗翔 · 豆瓣 2024 历史文化榜第三</span></span><span class="len">一周</span><span class="why">讲法律里绕不开的两难：惩罚是为了报应还是为了预防，平等要不要区别对待，死刑该不该留。罗翔的书选这一本，比《圆圈正义》更硬。</span></div>
+
+<div class="item"><span class="t">论犯罪与刑罚<span class="au">贝卡里亚 · 1764</span></span><span class="len">一个周末</span><span class="why">作者二十六岁，中译本一百多页。刑讯为什么问不出真话（扛不住的人乱说，扛得住的人不说）、罪刑为什么要法定、刑罚的目的应该是什么。现代刑法是从这本小册子开始的。</span></div>
+
+<div class="item"><span class="t">权力的边界<span class="au">赵宏 · 2023</span></span><span class="len">零散读</span><span class="why">行政法随笔，一篇一个近年的例子：面包店该不该罚、抢生二胎罚不罚、网暴平台有没有责任。作者反复讲一句：对个人，法无禁止即可为；对公权，法无授权即禁止。</span></div>
+
+<div class="item"><span class="t">错案<span class="au">勒内·弗洛里奥 · 法律出版社 2013</span></span><span class="len">一周</span><span class="why">法国法官按成因分章：无罪的人怎么被判刑、证据确凿但推理错了、被证人骗、被文件骗、鉴定出错、被告为什么自己认罪。二百二十七页，每章都是真案子。</span></div>
+
+<div class="item"><span class="t">桶川跟踪狂杀人事件<span class="au">清水洁 · 2021</span></span><span class="len">一天</span><span class="why">一个女孩遇害之前报过很多次警，警方没有立案；案发之后又篡改笔录、向媒体放话抹黑死者。最后把案子查清的是一个记者。书里不评论，只把每一步摆出来。</span></div>
+
+<div class="item"><span class="t">杀死一只知更鸟<span class="au">哈珀·李</span></span><span class="len">一天</span><span class="why">小说。一个律师明知会输，还是替一个黑人辩护。法庭戏不长，但把“一个人凭什么被当成一个人”问到了底。</span></div>
+
+<h2 id="c3"><span class="n">12</span>专业：检验、鉴定、同一认定</h2>
+<p class="hook">食药环这一行，案子常常败在鉴定上，也常常赢在鉴定上。这几本讲的就是物证怎么说话，说错了会怎么样。</p>
+
+<div class="item"><span class="t">法医秦明系列（从《尸语者》起）<span class="au">秦明 · 在职法医</span></span><span class="len">两三天</span><span class="why">写尸检、写损伤、写死亡时间怎么定。文字一般，但“物证怎么变成结论”这个过程写得清楚。二十一册不必全看，从第一本起，看完会对“检验”这两个字有感觉。</span></div>
+
+<div class="item"><span class="t">宋慈洗冤笔记<span class="au">南宋背景 · 有声评分 9.5</span></span><span class="len">长篇</span><span class="why">没有仪器的时候怎么判断：蒸骨、银针、蝇蛆定时。看点在方法本身，跟今天的理化检验是一件事的两头。</span></div>
+
+<div class="item"><span class="t">扫鼠岭<span class="au">呼延云 · 新星 2020 · 493 页</span></span><span class="len">暑假</span><span class="why">十年前一桩四死案，认定的凶手刑满出狱，同类手法又出现。书里有个警官大学的学生林香茗，全专案组咬定一个人时他坚持说：不能把疑似当成事实，做不出同一认定。后来定案靠物证袋编号、轮胎印痕、监控轨迹一笔一笔对账。</span></div>
+
+<div class="item"><span class="t">足利女童连续失踪事件<span class="au">清水洁 · 2022</span></span><span class="len">两天</span><span class="why">DNA 型鉴定出错，一个人被关了十七年。记者重新核对鉴定结果，把案子顶翻。鉴定标准怎么写、谁来复核、出错之后谁负责，这三件事在这本书里比任何教材都具体。</span></div>
+
+<h2 id="c4"><span class="n">13</span>周边：食品、药材、环境，各自的来历</h2>
+<p class="hook">这几本跟专业有关，但不是专业书。检测方法课堂上会教，这里补的是另一头：这些东西怎么被生产、怎么被造假、怎么流通到人手里。</p>
+
+<div class="item"><span class="t">美味欺诈<span class="au">比·威尔逊 · 三联 2010 · 280 页</span></span><span class="len">一周</span><span class="why">食品造假的历史。古罗马用铅给酒增甜，十九世纪的英国用铜给泡菜上色、往面粉里掺石灰，到现在还有假冒产地。作者是剑桥的思想史研究员，材料扎实。看下来能得一个印象：造假总跟着检测方法往前跑。</span></div>
+
+<div class="item"><span class="t">快餐国家<span class="au">施洛瑟 · 社科文献</span></span><span class="len">一周</span><span class="why">写美国快餐业怎么把种植、加工、屠宰、销售串成一条线。最硬的一章在肉品加工厂：流水线的速度、工人的伤、大肠杆菌怎么进了肉馅。二十年前的书，食品工业化那套逻辑没有变。</span></div>
+
+<div class="item"><span class="t">甜与权力<span class="au">西敏司 · 商务印书馆 · 237 页</span></span><span class="len">一周多</span><span class="why">人类学家写糖。糖怎么从贵族桌上的奢侈品，变成工人一天热量里最便宜的那一部分。甘蔗园、奴隶贸易、英国的关税，都在里面。看完会知道一样食物的价格里，有多少是政治。</span></div>
+
+<div class="item"><span class="t">致命元素<span class="au">埃姆斯利 · 三联 2024 新版</span></span><span class="len">两周</span><span class="why">汞、砷、锑、铅、铊，五种元素各带一串真事：水俣病、牛顿的头发、拿破仑的死因、用铊下的毒。作者是化学家，中毒机理讲得清楚，案子也讲得好看。跟理化检验是一件事的两头。</span></div>
+
+<div class="item"><span class="t">上瘾五百年<span class="au">考特莱特 · 中信 2014 · 288 页</span></span><span class="len">两周</span><span class="why">烟、酒、糖、咖啡、鸦片、大麻、古柯，讲它们怎么变成全球商品，也讲合法与违法的界线是谁划的、划在哪儿、后来为什么改。看完对“毒品”这两个字会多想一层。</span></div>
+
+<div class="item"><span class="t">人参帝国<span class="au">蒋竹山 · 浙江大学 2015 · 285 页</span></span><span class="len">两三周</span><span class="why">清代人参的专卖制度。里面有一件跟今天几乎一样的事：秧参案。人工种出来的参冒充野山参，朝廷要验，商人就做假，最后闹成官场大案。三百年前的造假与鉴定，路数和现在没差多少。</span></div>
+
+<div class="item"><span class="t">是药非药：原来本草这么有趣<span class="au">徐晓杭 · 中国中医药出版社 2025</span></span><span class="len">随手翻</span><span class="why">几十味本草的来历和民间故事，一篇千把字，作者是报人，写法轻。不当药材学看，当闲书看。看完对中药的命名、炮制、产地这些事会有一点感觉。</span></div>
+
+<div class="item"><span class="t">寂静的春天<span class="au">卡逊 · 上海译文 · 吕瑞兰、李长生译</span></span><span class="len">两周</span><span class="why">一九六二年写 DDT。今天读它的价值不在结论，在于看一个人怎么用一本书让一个国家改了政策。对面是整个化工行业，她靠的是每一句都落到数据上。</span></div>
+
+<div class="item"><span class="t">废物星球<span class="au">亚当·明特 · 重庆出版社 2015 · 265 页</span></span><span class="len">一周</span><span class="why">写全球废品贸易。作者在广东的拆解镇住过，写洋垃圾怎么进来、怎么分、怎么烧、谁在挣这个钱。固废走私这条线的背景，这本给得最具体。</span></div>
+
+<div class="box">
+  <p class="lab">这一类怎么读</p>
+  <p>不必按顺序，挑一样先看，食品、药、环境哪样离他近就从哪样起。看的时候留意三件事：这个东西的价格怎么来的、中间谁在挣钱、出了事谁负责。这三样在食药环的案子里会反复出现，但在教材上通常不写。</p>
+  <p>也不要当专业书读。它们是背景，正课在课堂和实验室里。</p>
+</div>
+
+<h2 id="c5"><span class="n">14</span>基层：县、乡、派出所这一级怎么运转</h2>
+<p class="hook">以后大概率要下去。这几本写的是政策落到人身上时，变成了什么事。</p>
+
+<div class="item"><span class="t">乡土中国<span class="au">费孝通</span></span><span class="len">半天</span><span class="why">一百一十页，一个下午看完。人情、面子、差序格局，讲的是中国社会的基础。清华借阅榜第七，说明它没死。</span></div>
+
+<div class="item"><span class="t">小镇喧嚣<span class="au">吴毅 · 生活书店 2018</span></span><span class="len">两周</span><span class="why">一个中部乡镇的日常：迎检、征地、收税、和农民周旋。作者在那儿住了很久，谁说了什么、谁让了步、谁背后骂人，都记下来了。</span></div>
+
+<div class="item"><span class="t">岂不怀归：三和青年调查<span class="au">田丰、林凯玄 · 2020</span></span><span class="len">一周多</span><span class="why">深圳三和，一群干一天玩三天、靠身份证换钱的年轻人。白描，不评判，看人怎么一步步滑下去。</span></div>
+
+<div class="item"><span class="t">我的二本学生<span class="au">黄灯</span></span><span class="len">一周</span><span class="why">一个二本院校的老师写自己的学生：从哪儿来、家里什么情况、毕业去了哪里。中国大学生的大多数是这个样子。</span></div>
+
+<div class="item"><span class="t">置身事内<span class="au">兰小欢 · 2021</span></span><span class="len">两三周</span><span class="why">地方政府怎么运转：土地财政、招商引资、债务从哪来。每章后面附了数据和出处，可以顺着他给的线索往下查。</span></div>
+
+<div class="item"><span class="t">我在北京送快递<span class="au">胡安焉 · 2023</span></span><span class="len">一周</span><span class="why">打过十九份工的人写的打工记录，快递只是其中一段。写干活时候的具体感受，不喊口号。</span></div>
+
+<h2 id="c6"><span class="n">15</span>世界：别人怎么判断这个世道</h2>
+<p class="hook">这几本不给答案，给的是别人看这件事的角度。看完仍旧不知道明天会不会打，但能听懂两边在争什么。</p>
+
+<div class="item"><span class="t">李光耀观天下<span class="au">李光耀</span></span><span class="len">一周</span><span class="why">对话体，一问一答。中美会不会打、美国的问题在哪、欧洲为什么往下走、印度为什么难、人口难题怎么解，他都直接给判断，不同意就直说。没有术语。</span></div>
+
+<div class="item"><span class="t">注定一战？<span class="au">格雷厄姆·艾利森</span></span><span class="len">一周</span><span class="why">“修昔底德陷阱”的出处：五百年里十六组新兴大国与守成大国，十二组打了起来。看完自己判断一句：这个框架解释了多少，又促成了多少。</span></div>
+
+<div class="item"><span class="t">风起云飞扬：钱乘旦讲大国崛起<span class="au">钱乘旦 · 文津图书奖 2025</span></span><span class="len">两周</span><span class="why">北大那门课的讲稿：葡萄牙、西班牙、荷兰、英国、法国、德国、日本、苏联、美国，九个国家怎么起来的。讲稿改的，读起来像上课，不像论文。</span></div>
+
+<div class="item"><span class="t">可能性的艺术：比较政治学 30 讲<span class="au">刘瑜 · 广西师大 2022 · 豆瓣 9.1</span></span><span class="len">两周</span><span class="why">从瑞典、印度、伊拉克、南非、埃及这些国家讲起：同一件事，不同的制度下办成了什么样，又付出了什么。作者在清华讲这门课，书是讲课稿，没有术语堆。</span></div>
+
+<div class="item"><span class="t">血与蜜之地<span class="au">刘子超 · 豆瓣 2024 年度</span></span><span class="len">两周</span><span class="why">一个人走巴尔干。一块地方被历史反复切开，人还在废墟上过日子。旅行文学里少见的沉。</span></div>
+
+<div class="item"><span class="t">看不见的中东<span class="au">姚璐 · 豆瓣 2025 年度第六</span></span><span class="len">一周</span><span class="why">一个女生用四年走了中东九国，住进三十一个当地人家里。写的是新闻画面之外的日常：怎么吃饭、怎么结婚、怎么看待外面的人。</span></div>
+
+<h2 id="c7"><span class="n">16</span>思考：读完那天晚上睡不着的</h2>
+<p class="hook">这一类不给知识，只在他脑子里留一块不舒服的地方。判断标准土一点：那天晚上睡不睡得着，脑子里转的是“原来可以这样”，还是“写得真好”。后一种是好文章，前一种才是冲击。</p>
+
+<div class="item"><span class="t">动物农场<span class="au">奥威尔</span></span><span class="len">两小时</span><span class="why">动物赶走主人，建立平等的新秩序，几年之后新上台的长出了两条腿。两小时读完，不恨任何人，只是把一件事推到底给他看。第一本从它起。</span></div>
+
+<div class="item"><span class="t">潜规则：中国历史中的真实游戏<span class="au">吴思</span></span><span class="len">三天</span><span class="why">明清官场里那套不上台面的规矩：合法伤害权、为什么清官总被淘汰、为什么制度越严下面的对策越多。讲的是脚下这块地。</span></div>
+
+<div class="item"><span class="t">人类简史<span class="au">尤瓦尔·赫拉利</span></span><span class="len">三周</span><span class="why">一个大胆的框架：人靠共同相信的故事组织起来，钱、国家、公司都是故事。框架有争议，但好用，两校的通识书单上都有。</span></div>
+
+<div class="item"><span class="t">人类新史<span class="au">格雷伯、温格罗 · 文津图书奖 2025</span></span><span class="len">三周</span><span class="why">专门反驳《人类简史》那一类线性叙事：农业、城市、国家未必是必经之路，人有过很多种活法。两本一起读，正好看两个学者怎么打架。</span></div>
+
+<div class="item"><span class="t">智人之上<span class="au">赫拉利 · 2024</span></span><span class="len">三周</span><span class="why">信息网络怎么塑造人类：从泥板、印刷到算法。后半本对 AI 的判断偏悲观，可以不同意，但要先看完再不同意。</span></div>
+
+<div class="item"><span class="t">活出生命的意义<span class="au">弗兰克尔</span></span><span class="len">一天</span><span class="why">集中营里活下来的心理学家写的。人在那种地方还能剩下什么，他给了答案，一句都不煽情。这本别留到最后读。</span></div>
+
+<div class="item"><span class="t">上学记<span class="au">何兆武</span></span><span class="len">两天</span><span class="why">西南联大，飞机在头顶，学生在底下读书。不激昂，讲一个人在乱世里怎么把书念完，以及那些先生上课是什么样子。</span></div>
+
+<h2 id="c8"><span class="n">17</span>小说：一口气能读完的</h2>
+<p class="hook">这一类的用处是让“读书”这件事不再难受。全是情节引人往下读的，一晚上能读掉几十页。挑的都是肯写笨功夫的，不是靠灵光一闪破案。</p>
+
+<div class="item"><span class="t">坏小孩<span class="au">紫金陈 · 有声：章鱼讲故事</span></span><span class="len">约 9 小时</span><span class="why">三个孩子在景区拍到一次谋杀，之后拿这段视频去要钱。全书没有侦探，看的是三个普通孩子怎么一步步变成另一种人。剧版《隐秘的角落》。</span></div>
+
+<div class="item"><span class="t">长夜难明<span class="au">紫金陈 · 有声评分 9.8</span></span><span class="len">约 10 小时</span><span class="why">一个检察官用十年翻一桩旧案，赔上工作、家庭和身体。程序走得通，人却走不出来。剧版《沉默的真相》。</span></div>
+
+<div class="item"><span class="t">无证之罪<span class="au">紫金陈</span></span><span class="len">约 8 小时</span><span class="why">雪人连环案。警察和凶手从头到尾都知道对方是谁，剩下的是怎么把证据做出来。看的是“知道”和“证明”之间那道坎。</span></div>
+
+<div class="item"><span class="t">高智商犯罪<span class="au">紫金陈 · 白夜剧场评分 9.6</span></span><span class="len">约 12 小时</span><span class="why">四起设计得很细的案子，每一本拆一个“完美犯罪”的漏洞。听完可以自己复盘：哪一步开始出错。</span></div>
+
+<div class="item"><span class="t">恶意<span class="au">东野圭吾 · 白夜剧场有全系列</span></span><span class="len">一天</span><span class="why">凶手第一章就被抓住，后面两百页在问“为什么”。动机比手法更冷。</span></div>
+
+<div class="item"><span class="t">白夜行<span class="au">东野圭吾</span></span><span class="len">一周</span><span class="why">两个孩子，十九年，十几桩案子。全书不写他们怎么想，只写别人看见什么。读完会重新想“一个人是怎么长成那样的”。</span></div>
+
+<div class="item"><span class="t">东方快车谋杀案<span class="au">阿加莎·克里斯蒂</span></span><span class="len">一天</span><span class="why">雪夜里一节车厢，十二个人，一具尸体。经典在最后两章：真相不止一个，怎么处置才是问题。</span></div>
+
+<div class="item"><span class="t">死亡通知单<span class="au">周浩晖</span></span><span class="len">两天</span><span class="why">刑警罗飞追一个提前发出死亡通知的杀手。节奏最快的一本，手机上就能看完。</span></div>
+
+<div class="item"><span class="t">平原上的摩西<span class="au">双雪涛 · 2016</span></span><span class="len">三天</span><span class="why">东北，一桩多年前的案子，和几个人的少年时代。有悬疑，篇幅不长，写法不啰嗦。</span></div>
+
+<h2 id="c9"><span class="n">18</span>杂书：近三年出的，什么都有</h2>
+<p class="hook">这一档不承担教育功能，也不按“有用”挑。标准只有一条：翻开头十页有事发生。</p>
+
+<div class="item"><span class="t">太白金星有点烦<span class="au">马伯庸 · 2023 · 豆瓣 9.0</span></span><span class="len">两小时</span><span class="why">把西天取经当成一个大项目写，太白金星干的是中间那一层：写汇报、平事、揣摩上面的意思。好笑，笑完有点凉。很久没读完一整本书的人，从它开始。</span></div>
+
+<div class="item"><span class="t">食南之徒<span class="au">马伯庸 · 豆瓣 2024 中国文学第一</span></span><span class="len">两天</span><span class="why">一个只想吃的县丞被卷进汉朝和南越的政治角力。历史是真的，人是编的。</span></div>
+
+<div class="item"><span class="t">世上为什么要有图书馆<span class="au">杨素秋 · 2024 · 豆瓣年度第一</span></span><span class="len">三天</span><span class="why">一个大学老师到区里挂职，任务是给一栋空房子配书。怎么写报告、怎么开会、怎么被人劝“别太认真”，写得好气又好笑。</span></div>
+
+<div class="item"><span class="t">我的母亲做保洁<span class="au">张小满 · 2023</span></span><span class="len">三天</span><span class="why">女儿写母亲在深圳的写字楼里做保洁，也写自己怎么重新认识母亲这份工作。看完会重新看那些穿工服的人。</span></div>
+
+<div class="item"><span class="t">要有光<span class="au">梁鸿 · 豆瓣 2025 年度第三</span></span><span class="len">两周</span><span class="why">三年走访超大城市、县城和农村，写那些因为情绪问题休学、退学、困在家里的少年。同龄人的事，读起来不轻松。</span></div>
+
+<div class="item"><span class="t">太阳的阴影<span class="au">卡普希钦斯基 · 豆瓣 2025 年度第二</span></span><span class="len">两周</span><span class="why">波兰记者在非洲跑了三十年，政变现场、丛林村落都去过。写新闻现场是什么样，也写记者的局限。想练“怎么把一件事写清楚”，这本是范本。</span></div>
+
+<div class="item"><span class="t">康熙的红票<span class="au">孙立天 · 豆瓣 2024 年度第七</span></span><span class="len">两周</span><span class="why">一张康熙发往欧洲的“红票”，牵出清朝和罗马教廷的交涉。写的是中国第一次跟另一种制度正面打交道，材料新，写法不学术。</span></div>
+
+<div class="item"><span class="t">明朝那些事儿<span class="au">当年明月</span></span><span class="len">挑着看</span><span class="why">清华借阅榜常年前三（2025 年 283 次）。它把官场、战争、党争写成了人跟人较劲。看前三册就够，后面挑感兴趣的朝代。</span></div>
+
+<div class="item"><span class="t">我看见的世界<span class="au">李飞飞 · 2024 · 豆瓣 9.2</span></span><span class="len">一周</span><span class="why">成都出生，家里开过洗衣店，后来做出 ImageNet。技术这一段和成长这一段是并着写的。</span></div>
+
+<div class="item"><span class="t">芯片战争<span class="au">克里斯·米勒 · 2023</span></span><span class="len">一周</span><span class="why">半导体七十年的争夺，按商战的路子写。看完能明白一颗芯片为什么能制约一个国家。国内有余盛的同名书，先看米勒这本。</span></div>
+
+<div class="item"><span class="t">深度学习革命<span class="au">凯德·梅茨 · 2023</span></span><span class="len">一周</span><span class="why">写辛顿、杨立昆、李飞飞这几个人。AI 有二十年拿不到钱，也没人看好，坚持下来的就是那一小批人。</span></div>
+
+<div class="item"><span class="t">翦商<span class="au">李硕 · 2022</span></span><span class="len">两周</span><span class="why">从考古现场讲商朝的人祭。材料血腥，但每一句有出处。学历史的人写得像侦探小说。</span></div>
+
+<div class="item"><span class="t">盗墓笔记<span class="au">南派三叔</span></span><span class="len">挑着看</span><span class="why">清华借阅榜前十（2025 年 149 次）。不用解释为什么好看。</span></div>
+
+<div class="item"><span class="t">天龙八部<span class="au">金庸</span></span><span class="len">一个月</span><span class="why">清华借阅榜前十。乔峰那条线讲的是一个人被身份逼到绝路上怎么选。</span></div>
+
+<h2 id="c10"><span class="n">19</span>短经典：一天读完</h2>
+<p class="hook">都短，也都不好读快。一年读一本就够。</p>
+
+<div class="item"><span class="t">活着<span class="au">余华</span></span><span class="len">一天</span><span class="why">一个人一辈子把亲人一个个送走，自己还活着。清华借阅榜前五十，几代学生都读它。</span></div>
+
+<div class="item"><span class="t">局外人<span class="au">加缪</span></span><span class="len">一天</span><span class="why">一个人在母亲葬礼上没有哭，后来这一点成了法庭上定他死罪的理由之一。篇幅很短。</span></div>
+
+<div class="item"><span class="t">审判<span class="au">卡夫卡</span></span><span class="len">一天</span><span class="why">一个人被起诉、被审了一年、最后被处死，从头到尾没人告诉他罪名。读的是程序空转的时候会发生什么。</span></div>
+
+<h2 id="c11"><span class="n">20</span>影像：两部纪录片，两部改编</h2>
+<p class="hook">书一时进不去，先看。《守护解放西》和《警察荣誉》拍的是日子，《三大队》和《中国市长》拍的是极端。日子那两部对他更有用。看完这四部还想顺着看，<a href="https://jishi.cctv.com/" target="_blank" rel="noopener">央视纪录频道</a>有成套的纪录片，免费。</p>
+
+<div class="item"><span class="t">守护解放西<span class="au">长沙坡子街派出所 · 纪录片</span></span><span class="len">随时看</span><span class="why">长沙坡子街派出所的接处警实录。他就在长沙，看到的是自己脚下这座城市的另一面。</span></div>
+
+<div class="item"><span class="t">警察荣誉<span class="au">2022 · 丁黑执导 · 豆瓣 8.5</span></span><span class="len">一集一停</span><span class="why">四个见习警员分到派出所，各跟一个师父，处理的都是遛狗、噪音、家庭纠纷这一类事。值得看的是曹建军那条线：老警察一心想立功，最后醉驾，脱了警服。剧里靠“和稀泥”把纠纷压下去，现实里那样做多半是警力不够，不是办法好。</span></div>
+
+<div class="item"><span class="t">三大队<span class="au">电影 · 深蓝原著改编</span></span><span class="len">两小时</span><span class="why">一个刑警队追一个凶手，追了十几年。</span></div>
+
+<div class="item"><span class="t">中国市长<span class="au">周浩 · 纪录片</span></span><span class="len">两小时</span><span class="why">一个市长在大同推拆迁、和各方周旋。基层治理最直接的一份影像。</span></div>
+
+<h2 id="c12"><span class="n">21</span>有声：眼睛空着的时候</h2>
+<p class="hook">走路、跑步、坐车、排队，这些时间原来被短视频填着，换成听的更划算。四个出处，各有各的货。</p>
+
+<div class="item"><span class="t">白夜剧场<span class="au">喜马拉雅</span></span><span class="len">成套</span><span class="why">紫金陈《高智商犯罪》、呼延云《鬼笑石》、东野圭吾恶意系列十一部、《宋慈洗冤笔记》都在这里。多人分角色，广播剧规格。</span></div>
+
+<div class="item"><span class="t">章鱼讲故事<span class="au">喜马拉雅主播</span></span><span class="len">紫金陈三部曲</span><span class="why">《坏小孩》《无证之罪》《长夜难明》三部的演播者，《长夜难明》评分 9.8。念得克制，不煽。</span></div>
+
+<div class="item"><span class="t">骆驼演播<span class="au">喜马拉雅主播</span></span><span class="len">法医秦明全 21 册</span><span class="why">二十多册，够听一学期。一集一个案子，不连着牵挂，适合睡前。</span></div>
+
+<div class="item"><span class="t">天才捕手 FM<span class="au">播客 · 小宇宙 / 喜马拉雅 / 苹果播客</span></span><span class="len">一期一小时</span><span class="why">刑警、法医、DNA 鉴定师、戒毒警、卧底，一个人讲一件亲历的事。跟《深蓝的故事》一个路子，用耳朵听。2019 年开播，现在还在更。</span></div>
+
+<div class="box">
+  <p class="lab">听的四条规矩</p>
+  <p><b>一、一集一停。</b>听完一个案子停十分钟，想一句“如果是我出这个警，第一步干什么”。想不出来就倒回去，听师父动手的头一步。</p>
+  <p><b>二、别在床上听。</b>床上一听就是三小时，第二天起不来。放到走路、跑步、坐车的时候。</p>
+  <p><b>三、速度 1.25 起。</b>播讲本来就慢，1.25 到 1.5 倍不影响理解。</p>
+  <p><b>四、听不能代替读。</b>听是把手上的时间用起来，练逻辑和记性还得看字。长篇听，短篇读。</p>
+</div>
+
+<h2 id="c13"><span class="n">22</span>这一版撤掉的，以及留下的老书</h2>
+<p class="hook">不必按顺序，也不必读完。一年八本，四年二十本，已经不算少。</p>
+
+<div class="box">
+  <p class="lab">读法在上半页</p>
+  <p>怎么找书（<a href="#k3">六条路</a>）、<a href="#k4">三十页法则</a>、<a href="#k5">四种书四种读法</a>、怎么从手机里把时间<a href="#k7">拿回来</a>，见上半页，比这里细。</p>
+  <p>这里留三条最短的：<b>读完在扉页写三行</b>，讲了什么事、哪句记住、跟我什么关系；<b>先去图书馆借</b>，借不到再买；<b>读不进去就换</b>，硬读完一本不合的书，代价是半年不想再碰书。</p>
+</div>
+
+<div class="box">
+  <p class="lab">这一版撤掉的，以及为什么</p>
+  <p><b>《万历十五年》：</b>讲制度怎么把人困住，题目很好，通篇是三十年前的学术语感。同样的道理，《康熙的红票》和《明朝那些事儿》讲得更近。</p>
+  <p><b>《我与地坛》《沉默的大多数》：</b>好文章，但语感和现在隔了一代。三十五岁读更合适。</p>
+  <p><b>《平凡的世界》《斯通纳》《渴望生活》：</b>都是“人生该怎么过”的回答。十九岁还没到问这个问题的时候，现在读多半读成励志故事。</p>
+  <p><b>《学会提问》《简单的逻辑学》《申辩篇》：</b>三本方法书没错，但都是“先学方法再做事”的路子。留一本《洞穴公案》代替。</p>
+  <p><b>《八月炮火》《战争的面目》：</b>军事史离他太远。这一栏先空着，等他真对某个战例起兴趣再回头找。</p>
+</div>
+
+<div class="box">
+  <p class="lab">留下的几本老书</p>
+  <p>《乡土中国》一百一十页，一个下午；《论犯罪与刑罚》一百多页，一个周末；《活着》《动物农场》《局外人》《审判》都在一天之内读完。这几本老，但都短。</p>
+  <p>判断一本书老不老，不看出版年，看两件事：翻开第一页有没有人在做事，读完有没有话可以跟人说。</p>
+</div>
+
+<p class="src">
+数据出处：中国新闻出版研究院《第二十三次全国国民阅读调查》（2026 年 4 月发布，2025 年数据）与《第二十二次全国国民阅读调查》（2025 年 4 月发布，2024 年数据）；QuestMobile《2025 中国移动互联网年度大报告》；Delgado, Vargas, Ackerman &amp; Salmerón (2018), <i>Educational Research Review</i>；Clinton (2019), <i>Journal of Research in Reading</i>；Nguyen et al. (2025), <i>Psychological Bulletin</i>, 151(9)；Chen et al. (2023) 短视频与持续注意力元分析。
+</p>
+
+<div class="pn">
+  <a href="01_课内与课外.html"><span class="ar">‹</span>返回 · 第一章 · 课内与课外</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>

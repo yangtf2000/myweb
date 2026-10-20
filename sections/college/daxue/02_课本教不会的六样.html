@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二章 课本教不会的六样 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s21" class="cur">2.1 思辨力</a><span class="sp">/</span>
+  <a href="#s22">2.2 自控力</a><span class="sp">/</span>
+  <a href="#s23">2.3 协作力</a><span class="sp">/</span>
+  <a href="#s24">2.4 执行力</a><span class="sp">/</span>
+  <a href="#s25">2.5 沟通力</a><span class="sp">/</span>
+  <a href="#s26">2.6 担当力</a><span class="sp">/</span>
+  <a href="#s27">2.7 工具的边界</a><span class="sp">/</span>
+  <a href="#slist">做完打勾</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第二章</p>
+  <h1>课本教不会的<span class="em">六样</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">刑法总论的卷子把条件写齐，答案唯一，判分的人在场；毕业以后经手的案子不是这样。真正区分人的地方不在卷面上，在卷子不考的那六样本事上。</p>
+  <div class="chipline">
+    <span class="chip">三源核一</span><span class="chip">连续四周</span><span class="chip">五列分工表</span><span class="chip">一版烂的</span><span class="chip">复述检验</span><span class="chip t">四列表</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/02.jpg" alt="图书馆长廊，两排高及屋顶的木书架夹着一条铺地毯的小路，暖黄的灯一串向深处排过去">
+  <figcaption>书架一排排向深处去。课本只是其中一排，其余各项在课表之外，要找、要核，都得自己来。</figcaption>
+</figure>
+
+<p>刑法总论的期末卷子上，一道案例题会把时间、地点、行为、结果写清楚，问构成什么罪；条件齐备，答案唯一，评分标准考前公布。毕业以后经手的案子不长这样：现场只留下部分痕迹，证人各说各话，法条与事实之间隔着一段要靠判断填上的距离，没有标准答案，也没有人在旁边判分。</p>
+
+<p>学校擅长的是前一种训练，即在条件齐备时求出唯一解，它覆盖的只是将来要用到的能力的一部分。哈佛前校长博克在《回归大学之道》里引用过一项校友调查：毕业生回顾四年，认为对自己影响最大的经历，多数发生在课堂之外。</p>
+
+<blockquote>
+  <p>博学之，审问之，慎思之，明辨之，笃行之。</p>
+  <p class="src">《礼记·中庸》第二十章 · 五个词排成一个次序，思与辨排在中间</p>
+</blockquote>
+
+<p>六样东西，一样一样说上来：交办的事能不能查到出处，一个项目交到手里能不能做完，放进一个组里能不能与人配合，说一段话对方能不能听懂，遇到麻烦敢不敢担，没人盯着的时候在做什么；前五样靠练，第六样靠守。</p>
+
+<p>每样给三样东西：一周之内能开始的动作，一年之内的最低量，一条能自己核的判据；没有最低量的目标不算目标，写在纸上，一年一核。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>能力</th><th>一年最低量</th><th>怎么数</th><th>展开在哪一章</th></tr>
+  <tr><td>思辨力</td><td><span class="num">12 篇</span>查证笔记</td><td>按篇</td><td>第三章</td></tr>
+  <tr><td>自控力</td><td><span class="num">连续 4 周</span>作息不断</td><td>按周</td><td>第四章</td></tr>
+  <tr><td>协作力</td><td><span class="num">2 件</span>有外人的交付物</td><td>按件</td><td>第五、六章</td></tr>
+  <tr><td>执行力</td><td><span class="num">3 件</span>能交付的成品</td><td>按件</td><td>第六章</td></tr>
+  <tr><td>沟通力</td><td><span class="num">12 次</span>发言，<span class="num">12 篇</span>八百字</td><td>按次、按篇</td><td>第七章</td></tr>
+  <tr><td>担当力</td><td><span class="num">3 次</span>为别人的事出面</td><td>按次</td><td>第八章</td></tr>
+</table>
+</div>
+
+<p>第一章算过一笔时间账：每周可支配约十五小时，一年六百，四年两千四百；把这笔钱粗分到六样上，一样四百小时，宁可粗，不要空。</p>
+
+<div class="statrow">
+  <div class="stat"><b>15</b><span>每周可支配小时</span></div>
+  <div class="stat"><b>600</b><span>一个学年</span></div>
+  <div class="stat"><b>2400</b><span>四年合计</span></div>
+  <div class="stat"><b>400</b><span>每样能力分到</span></div>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 268" role="img" aria-label="六样能力与一件事办成之间的关系">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">六样各管一段，缺一段，事情就做不完整</text>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="0" y="30" width="152" height="52" rx="8"/>
+      <rect x="0" y="110" width="152" height="52" rx="8"/>
+      <rect x="0" y="190" width="152" height="52" rx="8"/>
+      <rect x="328" y="30" width="152" height="52" rx="8"/>
+      <rect x="328" y="110" width="152" height="52" rx="8"/>
+      <rect x="328" y="190" width="152" height="52" rx="8"/>
+    </g>
+    <g stroke="#2a4066" stroke-width="1.2" fill="none">
+      <path d="M152 56 L176 122"/>
+      <path d="M152 136 L176 134"/>
+      <path d="M152 216 L176 146"/>
+      <path d="M304 122 L328 56"/>
+      <path d="M304 134 L328 136"/>
+      <path d="M304 146 L328 216"/>
+    </g>
+    <rect x="176" y="104" width="128" height="60" rx="10" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="240" y="128" fill="#3FBFA0" font-size="13" text-anchor="middle" font-weight="600">交办的事</text>
+    <text x="240" y="148" fill="#c3d1e3" font-size="12" text-anchor="middle">办成了没有</text>
+    <g font-size="13" fill="#ffffff">
+      <text x="12" y="52">思辨力</text>
+      <text x="12" y="132">协作力</text>
+      <text x="12" y="212">担当力</text>
+      <text x="340" y="52">执行力</text>
+      <text x="340" y="132">沟通力</text>
+      <text x="340" y="212">自控力</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="12" y="70">方向对不对</text>
+      <text x="12" y="150">人手够不够</text>
+      <text x="12" y="230">责任谁来负</text>
+      <text x="340" y="70">成品出没出</text>
+      <text x="340" y="150">意思到没到</text>
+      <text x="340" y="230">节奏断没断</text>
+    </g>
+  </g>
+</svg>
+<figcaption>进一件事之前，看思辨、协作、担当；事情进行到一半，看自控、执行、沟通。任何一段缺席，事情都做不完整。</figcaption>
+</figure>
+
+<figure>
+<svg viewBox="0 0 480 216" role="img" aria-label="四年两千四百小时粗分成六份，每份四百小时">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四年两千四百小时，粗分六份，每份四百</text>
+    <g stroke="#2a4066" stroke-width="1.2">
+      <rect x="8" y="30" width="148" height="66" fill="#16274a"/>
+      <rect x="168" y="30" width="148" height="66" fill="#182c50"/>
+      <rect x="328" y="30" width="148" height="66" fill="#16274a"/>
+      <rect x="8" y="106" width="148" height="66" fill="#182c50"/>
+      <rect x="168" y="106" width="148" height="66" fill="#16274a"/>
+      <rect x="328" y="106" width="148" height="66" fill="#182c50"/>
+    </g>
+    <g font-size="13" fill="#ffffff">
+      <text x="22" y="56">思辨力</text>
+      <text x="182" y="56">自控力</text>
+      <text x="342" y="56">协作力</text>
+      <text x="22" y="132">执行力</text>
+      <text x="182" y="132">沟通力</text>
+      <text x="342" y="132">担当力</text>
+    </g>
+    <g font-size="12" fill="#FFD166">
+      <text x="22" y="78">400 小时</text>
+      <text x="182" y="78">400 小时</text>
+      <text x="342" y="78">400 小时</text>
+      <text x="22" y="154">400 小时</text>
+      <text x="182" y="154">400 小时</text>
+      <text x="342" y="154">400 小时</text>
+    </g>
+    <text x="8" y="200" fill="#b0c0d4" font-size="12">分法是粗的：六样的练习常常几样一起来，先有数，再谈调整。</text>
+  </g>
+</svg>
+<figcaption>四百小时按每周两小时算，要连续投四年；按每周四小时算，两年就见底。数不大，也最经不起虚度，排不进表就会白白浪费。</figcaption>
+</figure>
+
+<p class="pull">课表之内有人安排，有人考核；课表之外的六样，既无人安排也无人考核，往后一样都少不了。</p>
+
+<hr class="deco">
+
+<h2 id="s21"><span class="n">2.1</span>思辨力</h2>
+<p class="sec-lead">思辨力由四项工作合成：找到来源，核实来源，横向比较，作出判断；缺一项，结论就悬而未决。</p>
+
+<p>练法叫<span class="kw">三源核一</span>：每周挑一条当周看到的说法，用九十分钟做完四道手续；找书、查库的门路不在本篇展开，见<a href="大学四年_读书.html">《读书：怎么读，读什么》</a>与<a href="大学四年_资源网站.html">《好玩的网站》</a>。</p>
+
+<figure>
+<svg viewBox="0 0 480 236" role="img" aria-label="三源核一的四道手续与一条回退路径">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一条说法进门，要过四道手续</text>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="6" y="34" width="106" height="58" rx="8"/>
+      <rect x="130" y="34" width="106" height="58" rx="8"/>
+      <rect x="254" y="34" width="106" height="58" rx="8"/>
+      <rect x="378" y="34" width="106" height="58" rx="8"/>
+    </g>
+    <g stroke="#3FBFA0" stroke-width="1.3" fill="none">
+      <path d="M112 63 L130 63"/>
+      <path d="M236 63 L254 63"/>
+      <path d="M360 63 L378 63"/>
+    </g>
+    <g fill="#3FBFA0">
+      <path d="M124 58 L132 63 L124 68 Z"/>
+      <path d="M248 58 L256 63 L248 68 Z"/>
+      <path d="M372 58 L380 63 L372 68 Z"/>
+    </g>
+    <g font-size="13" fill="#ffffff" text-anchor="middle">
+      <text x="59" y="58">抄原话</text>
+      <text x="183" y="58">追原始出处</text>
+      <text x="307" y="58">找反面证据</text>
+      <text x="431" y="58">写三百字</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4" text-anchor="middle">
+      <text x="59" y="78">谁在哪儿说</text>
+      <text x="183" y="78">追不到记下来</text>
+      <text x="307" y="78">反方怎么说</text>
+      <text x="431" y="78">何时不成立</text>
+    </g>
+    <path d="M431 92 L431 158 L183 158 L183 92" stroke="#FFD166" stroke-width="1.2" stroke-dasharray="5 4" fill="none"/>
+    <text x="307" y="148" fill="#FFD166" font-size="12" text-anchor="middle">追不到原始出处，写「未找到」也是一条结论</text>
+    <text x="0" y="210" fill="#b0c0d4" font-size="12">查证的部分省不掉，落笔的部分才能写满三百字。</text>
+  </g>
+</svg>
+<figcaption>四道手续走完，一条说法才变成一条笔记；缺后两道，写下来的只是把原话重复了一遍。</figcaption>
+</figure>
+
+<div class="panel">
+  <p class="tt">三源核一：四道手续</p>
+  <ol class="steps">
+    <li><b>抄原话。</b>谁说的，在哪儿看到的，哪一天，缺一项就不进入练习。
+    <span class="why">缺了日期，同一句话改过几版就说不清。</span></li>
+    <li><b>追原始出处。</b>新闻追到通报，通报追到文件，论文追到期刊原文，数据追到统计表；追不到就写「未找到」。
+    <span class="why">转述每经过一层就失真一层，核不到原始出处，手里就只是别人的摘要。</span></li>
+    <li><b>找一条反面证据。</b>反方怎么说，有没有相反的数据。
+    <span class="why">只找合自己意的证据，练的是确认，不是思辨。</span></li>
+    <li><b>写三百字。</b>只回答一个问题：在什么条件下成立，在什么条件下不成立。
+    <span class="why">三百字只够回答一个问题，写不长反而是约束。</span></li>
+  </ol>
+</div>
+
+<p>时间这样分：<a href="大学四年_查证.html">查证</a>占去一个多小时，落笔只留半个钟头，合计才凑得够九十分钟；一周一次，一年 <span class="k">12 篇</span>，一个月一篇，寒假补两篇。一月一篇的密度是有道理的：查证靠连续性，太密则练不透，太疏则手法生疏，假期时间整块，正好补量。第一条本周就能写：挑今天看到的一条说法，四道手续走完，五字段填全。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>字段</th><th>填什么</th><th>例</th></tr>
+  <tr><td>说法</td><td>一句话，不加修饰</td><td>某类食品添加剂「吃了就致癌」</td></tr>
+  <tr><td>出处</td><td>最初发布者与日期</td><td>某短视频账号，2026-03-02</td></tr>
+  <tr><td>原始文件</td><td>标准、论文、通报的文号</td><td>GB 2760 食品添加剂使用标准</td></tr>
+  <tr><td>反面证据</td><td>反方说法或相反数据</td><td>风险评估报告中的每日允许摄入量</td></tr>
+  <tr><td>判断</td><td>成立与不成立的条件</td><td>超量使用违法，合规剂量内无此结论</td></tr>
+</table>
+</div>
+
+<p class="pull">结论悬而未决，是因为四项里缺了一项；四项齐了，结论才靠得住。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>能说清这条说法在什么条件下不成立；说不出来，就是还没查透，回到第二步再查一遍。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s22"><span class="n">2.2</span>自控力</h2>
+<p class="sec-lead">自控力指四件事不失守，另有一个方向：睡眠、手机、收支、情绪是下限，这一年想往哪里去是上限；下限守不住，上限无从谈起。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>项目</th><th>目标值</th><th>怎么测</th><th>多久看一次</th></tr>
+  <tr><td>睡眠</td><td>每日 7 小时以上，起床时间固定</td><td>手环或手机自带的睡眠记录</td><td>每周日</td></tr>
+  <tr><td>手机</td><td>娱乐类应用每日 2 小时以内，睡前 1 小时不碰</td><td>屏幕使用时间截图</td><td>每周日</td></tr>
+  <tr><td>收支</td><td>连续记账 3 个月，支出分四类</td><td>记账应用，一天一记</td><td>每月底</td></tr>
+  <tr><td>情绪</td><td>三个出口，写具体名字</td><td>一张纸，贴在书桌</td><td>每学期</td></tr>
+</table>
+</div>
+
+<p>警校的早操时间由学校定，起床这一头本来就不由自己，要守的是别把睡眠压到六小时以下；固定起床时间比固定入睡时间有效，因为它把整天的节奏钉住，入睡时间会自己跟上。《健康中国行动（2019-2030 年）》对成年人睡眠时长有明确建议，每日七到八小时。</p>
+
+<h3>手机这条线，靠改设置，不靠咬牙</h3>
+<p>有效的原因很简单：把选择从每次都要决定，变成一次决定管很久。</p>
+
+<div class="panel">
+  <ol class="steps">
+    <li><b>把充电线挪到床以外的地方。</b>
+    <span class="why">睡前刷手机多数从线就在手边开始；线一挪，睡前一小时自然空出来。</span></li>
+    <li><b>给最费时间的两个应用设屏幕使用上限。</b>
+    <span class="why">上限一到，应用自己锁上，不必每晚重输一遍记性。</span></li>
+    <li><b>把这两个应用改成每次打开都要手动解锁。</b>
+    <span class="why">多出一步，顺手划开就变成想一下再划开。</span></li>
+  </ol>
+</div>
+
+<p>每周日截一张屏幕使用时间的图，四周连起来看，变化一目了然；判据定在四周，是因为一天两天说明不了问题。两小时这个数从每天三小时的可支配时间里来，娱乐占到两小时，才剩得下一小时做正事。</p>
+
+<h3>收支与情绪，各留一张纸</h3>
+<p>记账连续三个月，因为三个月足够覆盖一次缴费、一次换季、一次假期；支出分吃住、学习、社交、储蓄四块，比例大致五比一比二比一。学生手里钱不多，记账的目的在看清自己的钱由谁支配，省钱是附带的结果。</p>
+
+<p>情绪的出口有三样：一个可以说话的人，一项能让身体累起来的运动，一种把事写下来的办法，三样都要写具体的人名、项目名与做法，写「找朋友聊聊天」等于没写。写到纸上比存在手机里管用，因为写字慢，慢下来才想得清；到了自己处理不了的程度，可以打 12356 心理援助热线，这个号码是国家层面统一开通的。</p>
+
+<p>本周就能开始的三件事：把充电线挪出卧室，给两个应用设好上限，下载记账应用记下第一笔；情绪那张纸，今晚就贴到书桌上去。</p>
+
+<p class="pull">自控力的练习，是把环境改到不需要每次都靠意志去坚持。充电线挪到床外、给最费时间的应用设好上限，该做的事会自然推进，决心只在最初用上一次。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>连续四周，睡眠七小时以上、娱乐屏幕两小时以内、账目没有断天；断一天不算失败，断满一周，说明设置出了问题，推倒重来。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s23"><span class="n">2.3</span>协作力</h2>
+<p class="sec-lead">协作力是把一件事拆成几份交给几个人，并且合作结束以后对方愿意再合作一次；后半句比前半句难，后半句靠前几次合作积累起来的信任。</p>
+
+<div class="grid2">
+  <div class="card">
+    <p class="tt">前半句：把事拆开</p>
+    <p>一张分工表就能解决，事项、负责人、交付标准、截止、补位人，写完贴在群里，谁干什么一目了然。</p>
+  </div>
+  <div class="card t">
+    <p class="tt">后半句：让人愿意再来</p>
+    <p>信用是靠补位积累起来的：失误兜住过几回，补位补过几次，别人心里才有数，下一次有活，第一个想到的就是这类人。</p>
+  </div>
+</div>
+
+<p>写成「大家分头准备」等于没有分工，因为真出事的时候找不到人，「大家」两个字，到出事那天谁也对应不上。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>事项</th><th>负责人</th><th>交付标准</th><th>截止</th><th>补位人</th></tr>
+  <tr><td>案例检索</td><td>张某</td><td>十个同类判例，附裁判要旨</td><td>3 月 8 日</td><td>李某</td></tr>
+  <tr><td>书状第一部分</td><td>王某</td><td>三千字，每条主张附条文</td><td>3 月 15 日</td><td>张某</td></tr>
+</table>
+</div>
+
+<p>交付标准一栏不写形容词，写可验收的东西：几页、几条、什么格式、交给谁看。补位人一栏最容易被省略，也最不能省；没有补位人，一次失误就让整件事受阻，有补位人，失误只是换个人接手。</p>
+
+<div class="panel">
+  <p class="tt">推进与复盘</p>
+  <p>推进靠每天五分钟站会，只问三句：昨天做完了什么，今天做什么，受阻在哪里。受阻的事当场换人或加人，不留在会后；等到截止日前三天再发现，谁都来不及补。</p>
+  <p>复盘只问三件事：各人承担了什么，谁替谁补了什么，下一次哪一步要提前。有人失误时先补位，事后再论对错；顺序反了，事情办不成，人也留不住。<span class="u">先补位，后论对错</span>，这个次序极少有例外。</p>
+</div>
+
+<p>下一次小组作业就从这张表开始：五列填全，交付标准不写形容词，补位人那一栏先填上名字再贴出去。</p>
+
+<p class="pull">合作结束以后还有人主动再来找，这件事才算做成；分工表只是做成的第一步。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一学期两件有外人的交付物，且合作结束后至少有一人主动再来找；没有人再来找，说明过程里消耗了东西，回头查是哪一次补位没有补。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s24"><span class="n">2.4</span>执行力</h2>
+<p class="sec-lead">执行力是把「要做的」变成「已经交了」。做不完的事有几个共同的特征，认得出特征，就能避开一半。</p>
+
+<ul class="dash">
+  <li><b>停在第三个星期。</b>开头最热，第三周开始找理由，第四周默认放弃。</li>
+  <li><b>长期处在准备状态。</b>资料存了几十 G，一件成品也没有，随时可以开始，永远没有开始。</li>
+  <li><b>遇到第一个障碍就换方向。</b>不是想清楚了再换，是躲；换完的地方，同样的障碍还在。</li>
+</ul>
+
+<p>这几个特征有一个共同的原因：没有把事拆到当天就能动手的大小。事拆得够小，第一周就能见到第一版；拆不小，准备状态就看不到头。</p>
+
+<figure>
+<svg viewBox="0 0 480 300" role="img" aria-label="执行四个动作构成的一个环，环心是成品">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">这四个动作要循环着做，不是做完一次就结束</text>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="6" y="20" width="122" height="50" rx="8"/>
+      <rect x="180" y="14" width="130" height="54" rx="8"/>
+      <rect x="340" y="120" width="130" height="54" rx="8"/>
+      <rect x="180" y="232" width="130" height="54" rx="8"/>
+      <rect x="6" y="120" width="130" height="54" rx="8"/>
+    </g>
+    <g stroke="#FFD166" stroke-width="1.2" stroke-dasharray="5 4" fill="none">
+      <path d="M128 45 L180 45"/>
+    </g>
+    <path d="M169 39 L181 45 L169 51 Z" fill="#FFD166"/>
+    <g stroke="#3FBFA0" stroke-width="1.3" fill="none">
+      <path d="M310 41 C352 41 406 78 406 118"/>
+      <path d="M406 176 C406 216 352 259 312 259"/>
+      <path d="M180 259 C138 259 71 216 71 176"/>
+      <path d="M71 120 C71 82 138 41 178 41"/>
+    </g>
+    <g fill="#3FBFA0">
+      <path d="M400 110 L412 110 L406 120 Z"/>
+      <path d="M321 253 L321 265 L311 259 Z"/>
+      <path d="M65 185 L77 185 L71 175 Z"/>
+      <path d="M169 35 L169 47 L179 41 Z"/>
+    </g>
+    <rect x="193" y="120" width="94" height="60" rx="10" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="240" y="145" fill="#FFD166" font-size="13" text-anchor="middle" font-weight="600">成品</text>
+    <text x="240" y="165" fill="#c3d1e3" font-size="12" text-anchor="middle">在环里生成</text>
+    <g font-size="13" fill="#ffffff">
+      <text x="16" y="40">预演失败</text>
+      <text x="190" y="34">拆到两小时</text>
+      <text x="350" y="140">先交一版烂的</text>
+      <text x="190" y="252">定一个验收人</text>
+      <text x="16" y="140">改到能交出去</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="16" y="58">三个卡点一句应对</text>
+      <text x="190" y="52">拆不动就是没想清</text>
+      <text x="350" y="158">求存在，不求好</text>
+      <text x="190" y="270">具体到一个人</text>
+      <text x="16" y="158">能演示，能翻阅</text>
+    </g>
+  </g>
+</svg>
+<figcaption>做不到循环，就只有两种状态：长年的准备，和换方向前的兴奋；第一版越粗糙，反馈来得越快。</figcaption>
+</figure>
+
+<div class="card">
+  <p class="tt">四个动作，按次序做</p>
+  <ol class="steps">
+    <li><b>拆到两小时。</b>拆成能在两小时内做完的步骤；拆不动，说明这件事还没想清。
+    <span class="why">两小时大约是一天里能整块拿出来的最长一段，也是注意力不衰减的一段；切得更碎会散掉，凑得更大排不进去。</span></li>
+    <li><b>先交一版烂的。</b>第一版不求好，求存在。
+    <span class="why">有了第一版才有修改的对象，空想没有；烂的第一版交出去，反馈才会具体。</span></li>
+    <li><b>定一个验收人。</b>具体到一个人，不是「老师」或「大家」，且要提前知道截止日。
+    <span class="why">「大家」验收等于没有验收；截止日不提前说，意见来得再对也来不及。</span></li>
+    <li><b>预演失败。</b>动手之前写下三个最可能受阻的环节，每个配一句应对。
+    <span class="why">第一个障碍出现时就换方向，多半是因为手上没有预案；预案写三个就够。</span></li>
+  </ol>
+</div>
+
+<blockquote>
+  <p>不积跬步，无以至千里；不积小流，无以成江海。</p>
+  <p class="src">《荀子·劝学》 · 成品按件数积累，不按年头积累</p>
+</blockquote>
+
+<div class="tblwrap">
+<table>
+  <tr><th>列</th><th>填什么</th><th>例</th></tr>
+  <tr><td>成品</td><td>能拿在手上给人看的东西</td><td>十个判例的检索报告</td></tr>
+  <tr><td>形态</td><td>可演示、可播放、可翻阅，三选一</td><td>可翻阅：报告加目录</td></tr>
+  <tr><td>验收人</td><td>具体一个人，提前告知截止日</td><td>教刑法的张老师</td></tr>
+  <tr><td>第一版</td><td>烂的那一版交出去的日期</td><td>3 月 1 日</td></tr>
+  <tr><td>交付</td><td>改到能交出去的日期</td><td>3 月 22 日</td></tr>
+</table>
+</div>
+
+<p>一年三件，件件不同形态：一件可演示，一件可播放，一件可翻阅，都挑小事，不挑大事。本周就能开始的那件，就是手上正在拖、拖得最久的那一件事。</p>
+
+<p class="pull">成品指可以演示、可以播放、可以翻阅的东西；「做过」「参加过」都不算，因为交不出去。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年三件成品，能拿在手上给人看；三件摊到每学期一件半，密度再低，年底清点时一件都剩不下。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s25"><span class="n">2.5</span>沟通力</h2>
+<p class="sec-lead">讲不明白是常态。一个人对一件事懂了八成，讲出来对方懂了三成；这个损耗与口才关系不大，与讲的人有没有站在听的人位置上关系很大。</p>
+
+<figure>
+<svg viewBox="0 0 480 250" role="img" aria-label="从懂八成到复述出三成之间的损耗">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">懂了八成，讲出来，对方接到三成</text>
+    <rect x="6" y="86" width="118" height="66" rx="8" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="65" y="115" fill="#ffffff" font-size="13" text-anchor="middle">懂八成</text>
+    <text x="65" y="135" fill="#b0c0d4" font-size="12" text-anchor="middle">讲的人这侧</text>
+    <g stroke="#2a4066" stroke-width="1.2">
+      <rect x="152" y="34" width="200" height="46" fill="#16274a"/>
+      <rect x="152" y="96" width="160" height="46" fill="#182c50"/>
+      <rect x="152" y="158" width="120" height="46" fill="#1e3358"/>
+    </g>
+    <g font-size="13" fill="#ffffff">
+      <text x="164" y="62">说出口的</text>
+      <text x="164" y="124">对方听到的</text>
+      <text x="164" y="186">复述得出的</text>
+    </g>
+    <rect x="376" y="86" width="98" height="66" rx="8" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="425" y="115" fill="#3FBFA0" font-size="13" text-anchor="middle">懂三成</text>
+    <text x="425" y="135" fill="#c3d1e3" font-size="12" text-anchor="middle">复述才算数</text>
+    <g stroke="#FF8A3D" stroke-width="1.3" fill="none">
+      <path d="M124 110 L152 60"/>
+      <path d="M272 181 L376 112"/>
+    </g>
+    <path d="M368 108 L377 111 L369 118 Z" fill="#FF8A3D"/>
+    <text x="240" y="228" fill="#FFD166" font-size="12" text-anchor="middle">损耗不出在口才，出在没有站在听的人立场</text>
+  </g>
+</svg>
+<figcaption>损耗多在三个地方：词太抽象，推理跳了步，前提没有说出口；三处都能在八百字的修改里补上。</figcaption>
+</figure>
+
+<div class="grid3">
+  <div class="card">
+    <p class="tt">三十秒说清一件事</p>
+    <p>结论一句，依据三条，请求一句。场合是现成的：课堂提问、班会发言、组会汇报，一周至少用掉一次。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">复述检验</p>
+    <p>讲完请对方复述；复述得出来才算讲清，受阻在哪儿，补哪儿，改完再讲一遍。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">每周一篇八百字</p>
+    <p>写完放三天再改，只做三件事：删掉不承担信息的句子，把长句拆开，结论后面补依据。</p>
+  </div>
+</div>
+
+<p>三十秒这个长度是有道理的：结论、依据、请求三句话一口气说得完，听的人不用记，超过这个长度，对方就开始在脑子里挑毛病。八百字放三天再改，是因为隔三天，当初写作时的着急褪了，删得下手。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>列</th><th>填什么</th><th>例</th></tr>
+  <tr><td>日期场合</td><td>哪一天，在哪儿说的</td><td>3 月 12 日，班会</td></tr>
+  <tr><td>结论句</td><td>开口第一句，原话记下</td><td>这份检索报告可用，三条理由</td></tr>
+  <tr><td>复述结果</td><td>复述出几句，在不在点上</td><td>三句，两句在点上</td></tr>
+  <tr><td>受阻在哪</td><td>受阻的那一句，回去改哪里</td><td>第二条依据太抽象，换成数字</td></tr>
+</table>
+</div>
+
+<p>本周就能开始的一次：在下一节课堂上提一个问题，三十秒，结论一句，依据三条，请求一句，讲完请同桌复述。</p>
+
+<p class="pull">讲的人懂了不算数，听的人复述得出来才算数。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>对方能复述出三句以上，且三句都在点上；复述出来的是情绪而不是内容，说明讲的是感受，回去把结论句改短再讲。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s26"><span class="n">2.6</span>担当力</h2>
+<p class="sec-lead">担当力是在一件与自己无关的事上表过一次态，并且事后不追悔。</p>
+
+<ul class="dash">
+  <li><b>与己无关就不出声。</b>心里有数，嘴上不说，散会以后还庆幸自己避开一次。</li>
+  <li><b>出了事往后退。</b>表态在前，退缩在后，别人记住的是后一半。</li>
+  <li><b>事后给自己找一个说得过去的解释。</b>解释通了自己也就信了，下一次照旧。</li>
+</ul>
+
+<p>做法简单到近乎笨：建一张四列的表，每次表态记一行，日期、什么事、说了什么、结果，四列就够，不加感想栏。写在纸上，是因为事后给自己找的解释会悄悄改记忆，落在纸上，解释就瞒不过自己。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>日期</th><th>什么事</th><th>说了什么</th><th>结果</th></tr>
+  <tr><td>2026-11-05</td><td>小组作业有人整段抄网文</td><td>指出第三段来源，建议改写</td><td>重写，成绩未受影响</td></tr>
+</table>
+</div>
+
+<blockquote>
+  <p>自反而不缩，虽褐宽博，吾不惴焉；自反而缩，虽千万人，吾往矣。</p>
+  <p class="src">《孟子·公孙丑上》 · 自反是反躬自问，缩是理直；理直之后那一句，就是担当</p>
+</blockquote>
+
+<p>一学期三次，其中至少一次对方不是朋友；只在熟人圈里表态，练的是脾气，不是担当，不熟的人面前开口，才是担当本来的样子。三次是按一个月一次的密度排的：密到不至于挑事，疏到不至于忘了这件事。本周就能开始的一次，是小组里有人整段抄网文的时候，把来源指出来，建议改写，然后把这一行记进表里。</p>
+
+<p class="pull">担当力的练习，是在与自己无关的事上把话完整说出来。熟人面前开口容易，难的是对不熟的人也把该说的说出口，那一次才练得到位。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一学期三次，其中至少一次对方不是朋友；三次里没有一次对方是朋友，说明这一年都在躲，三次都是朋友，说明圈子太窄，往外扩一圈。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="s27"><span class="n">2.7</span>工具替掉了哪一段</h2>
+<p class="sec-lead">生成式工具把入门阶段压缩到几个小时：过去要跟着教程装环境、调参数、查报错，现在一句话就能出第一版，难点因此移到了后面。</p>
+
+<p>出第一版容易，把第一版做到能用、能交出去、别人用了不出问题，这一步没有被压缩。该问的不是工具好不好用，是它替掉了哪一段训练，被替掉的那一段里原本练的是什么。</p>
+
+<figure>
+<svg viewBox="0 0 480 312" role="img" aria-label="工具压缩的是入门一段，后半段没有被压缩">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">被省掉的是入门阶段，难点移到了后面</text>
+    <rect x="6" y="30" width="210" height="52" rx="8" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="111" y="51" fill="#3FBFA0" font-size="13" text-anchor="middle">装环境、调参数、查报错</text>
+    <text x="111" y="70" fill="#c3d1e3" font-size="12" text-anchor="middle">过去要几周，现在几小时</text>
+    <rect x="226" y="30" width="248" height="52" rx="8" fill="#101d38" stroke="#FF8A3D" stroke-width="1.4"/>
+    <text x="350" y="51" fill="#FF8A3D" font-size="13" text-anchor="middle">做到能用、能交出去</text>
+    <text x="350" y="70" fill="#b0c0d4" font-size="12" text-anchor="middle">别人用了不出问题</text>
+    <text x="216" y="104" fill="#FFD166" font-size="12" text-anchor="middle">分界</text>
+    <rect x="6" y="116" width="228" height="30" rx="6" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.3"/>
+    <text x="120" y="136" fill="#3FBFA0" font-size="13" text-anchor="middle">可以交给工具</text>
+    <rect x="246" y="116" width="228" height="30" rx="6" fill="#101d38" stroke="#FF6B4A" stroke-width="1.3"/>
+    <text x="360" y="136" fill="#FF6B4A" font-size="13" text-anchor="middle">不能交出去</text>
+    <g stroke="#2a4066" stroke-width="1.2">
+      <rect x="6" y="156" width="228" height="44" fill="#16274a"/>
+      <rect x="6" y="208" width="228" height="44" fill="#16274a"/>
+      <rect x="6" y="260" width="228" height="44" fill="#16274a"/>
+      <rect x="246" y="156" width="228" height="44" fill="#182c50"/>
+      <rect x="246" y="208" width="228" height="44" fill="#182c50"/>
+      <rect x="246" y="260" width="228" height="44" fill="#182c50"/>
+    </g>
+    <g font-size="13" fill="#ffffff">
+      <text x="18" y="174">解释概念</text>
+      <text x="18" y="226">改文字</text>
+      <text x="18" y="278">生成初稿</text>
+      <text x="258" y="174">事实</text>
+      <text x="258" y="226">引用</text>
+      <text x="258" y="278">判断</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="18" y="192">三句话，加一个反例</text>
+      <text x="18" y="244">删冗余、拆长句、标无依据</text>
+      <text x="18" y="296">表格、提纲、框架、模板</text>
+      <text x="258" y="192">数字、法条、判例、人名</text>
+      <text x="258" y="244">标题、作者、页码逐条核</text>
+      <text x="258" y="296">它给的是平均意见</text>
+    </g>
+  </g>
+</svg>
+<figcaption>交出去的三样各缺一样本事：事实缺的是回头核证的习惯，引用缺对出处的敬畏，判断缺自己下判断的那一次练习。</figcaption>
+</figure>
+
+<div class="grid2">
+  <div class="card t">
+    <p class="tt">三个用法，省时间</p>
+    <ul class="dash">
+      <li><b>解释概念。</b>不懂的术语，让它用三句话解释，再要一个反例，反例比正例更能验出懂没懂。</li>
+      <li><b>改文字。</b>把自己写的八百字贴进去，只让它删冗余、拆长句、指出没有依据的结论。</li>
+      <li><b>生成初稿。</b>表格、提纲、代码框架、邮件模板，先让它出一版，再自己改到自己认得出。</li>
+    </ul>
+  </div>
+  <div class="card b">
+    <p class="tt">三个禁用，省麻烦</p>
+    <ul class="dash">
+      <li><b>不让它给事实。</b>数字、法条、判例、人名，一律回原始出处核；它会编，而且编得很像。</li>
+      <li><b>不让它给引用。</b>论文的标题、作者、页码，凡进正式材料的，逐条查证，一条不漏。</li>
+      <li><b>不把它的判断当自己的判断。</b>它给的是平均意见，把平均意见当判断用，出事是迟早的。</li>
+    </ul>
+  </div>
+</div>
+
+<p>第二个禁用有判例可查：有律师因在材料中提交编造的案例被法院批评教育，判决见北京市通州区人民法院（2024）京 0112 民初 19067 号。编造的部分不在话术，在出处，出处核不到，话术再像也不算数。</p>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>把工具出的初稿原样交上去。初稿的错不在错别字，在出处；出处是编的，整份材料就作废了，交的人也要跟着担一次。</p>
+</div>
+
+<p>三样交出去，缺的是三样本事：事实交出去，缺的是回头核证的习惯；引用交出去，缺的是对出处的敬畏；判断交出去，缺的是自己下判断的那一次练习。入门阶段被省掉，省下的是装环境的时间，也省掉了跟报错搏斗时积累起来的耐心；这件事无法两全，只能靠后半段多下的功夫，来弥补前半段省掉的练习。</p>
+
+<p>本周就能开始的一次：把下周要交的作业草稿贴给它，只提删冗余、拆长句、指出没有依据的结论三个要求，改完自己再核一遍它标出的每一处。各门工具的选择与具体用法不在本篇展开，见<a href="大学四年_资源网站.html">《好玩的网站》</a>，那里按用处分栏收着。</p>
+
+<p class="pull">工具替掉的是入门阶段，替不掉后半段；省下的时间投到后半段，工具才算省了东西。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一学期一份零编造的材料：把写进正式材料的事实与引用，逐条核回原始出处，一份不漏；省下的时间投到了后半段，工具才算数。</p>
+</div>
+
+<hr class="warm">
+
+<p>同一届入学的两个人，四年之后差得最远的地方，常常不在分数上，在这六样里的某一样；分数在第一次选岗时用完，往后用的是这六样。</p>
+
+<div class="callout">
+  <p class="lab">一句话</p>
+  <p class="big">课表决定这四年怎么过，课表之外决定这四年之后是谁。前一半有人替着安排，后一半没有人。</p>
+</div>
+
+<hr class="deco">
+
+<h2 id="slist">做完打勾</h2>
+<p class="sec-lead">做完打勾，做不完的写上下一步的日期；清单上不写形容词，只写动作。</p>
+
+<ul class="check">
+  <li class="hd">第二章 · 六样的最低量</li>
+  <li>把六样的一年最低量抄在纸上，贴在书桌侧面，每学期核一次</li>
+  <li>写完第一篇查证笔记，五字段填全，判断写清成立与不成立的条件</li>
+  <li>把充电线挪到床以外的地方，给最费时间的两个应用设好上限</li>
+  <li>连续四周记录睡眠、屏幕时间与收支，每周日截一次图</li>
+  <li>写下三个情绪出口的具体人名、项目名与做法，贴在书桌</li>
+  <li>下一次小组作业建一张五列分工表，补位人一栏先填名字</li>
+  <li>挑一件正在拖的事拆成两小时的步骤，先把第一版交给一个具体的人</li>
+  <li>在课堂提问或班会上做一次三十秒发言，请对方复述</li>
+  <li>写一篇八百字，放三天再改，只删冗余、拆长句、补依据</li>
+  <li>在一件与自己无关的事上表一次态，记进四列表</li>
+  <li>把这一季用工具省下的时间记下来，写明投到了哪半段</li>
+</ul>
+
+<div class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="01_课内与课外.html"><span class="ar">‹</span>第一章 · 课内与课外</a><a href="03_见天地.html">第三章 · 见天地<span class="ar">›</span></a></p>
+  <p class="by">课表之外的大学 · 第二章　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>好玩的网站 · 大学四年课外</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B; --violet:#c084fc;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px 90px}
+
+.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 -28px;padding:11px 28px;display:flex;gap:13px;overflow-x:auto;white-space:nowrap;
+  font-size:13.5px;letter-spacing:.3px}
+.toc a{color:var(--t3);text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+
+.hero{padding:54px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px;letter-spacing:2px;color:var(--teal);margin:0 0 16px}
+h1{font-size:33px;line-height:1.38;font-weight:600;margin:0 0 16px;letter-spacing:.5px}
+.lead{font-size:17px;color:var(--t2);margin:0 0 22px}
+.metarow{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--t3)}
+.metarow b{color:var(--t2);font-weight:500}
+
+h2{font-size:23px;font-weight:600;margin:56px 0 10px;line-height:1.5}
+h2 .n{color:var(--teal);font-size:14.5px;letter-spacing:2px;display:block;margin-bottom:7px;font-weight:500}
+.hook{color:var(--t2);font-size:15.5px;margin:0 0 6px;padding-left:13px;border-left:2px solid var(--line2)}
+
+.site{padding:15px 0;border-bottom:1px solid var(--line)}
+.site .name{font-size:17px;color:var(--t1);font-weight:500}
+.site .name a{color:#93c5fd;text-decoration:none}
+.site .name a:hover{text-decoration:underline}
+.site .url{display:block;font-size:13px;color:var(--t3);margin-top:2px;letter-spacing:.2px;word-break:break-all}
+.site .tag{display:inline-block;font-size:11.5px;letter-spacing:.06em;padding:1px 8px;border-radius:20px;
+  color:var(--teal);border:1px solid var(--line2);margin-left:8px;vertical-align:2px}
+.site .tag.pay{color:var(--amber)}
+.site .why{font-size:15px;color:var(--t2);margin-top:7px}
+.site .start{font-size:14.5px;color:var(--t2);margin-top:6px;padding-left:11px;border-left:2px solid var(--line2)}
+.site .start b{color:var(--t1);font-weight:500}
+
+.box{margin:26px 0;padding:19px 23px;background:var(--s3);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.box .lab{font-size:13.5px;letter-spacing:1.5px;color:var(--teal);margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff;font-weight:500}
+.box ol{margin:0;padding-left:20px}
+.box li{margin-bottom:8px}
+
+.steps{counter-reset:st;margin:10px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:11px;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);color:var(--teal);
+  font-size:12px;line-height:21px;text-align:center}
+
+.foot{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--t3);line-height:2}
+
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px;padding:11px 18px;gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px;margin-top:42px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .toc{display:none}
+  h1,h2,.site .name,.box b{color:#111}
+  .site .name a{color:#111}
+  .lead,.hook,.site .why,.site .start,.box,.foot{color:#333}
+  .box{background:#f2f2f2;border-left-color:#666}
+  .site{border-bottom:1px solid #ccc;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="01_课内与课外.html">‹ 返回 · 第一章 · 课内与课外</a></nav>
+
+<header class="hero">
+  <p class="kicker">课 外 · 动 手 · 2026 年 10 月</p>
+  <h1>好玩的网站</h1>
+  <p class="lead">这里收的全是能做出东西的地方。每条写了网址、要不要花钱、第一步做什么。收藏一百个不如做完一个。</p>
+</header>
+
+<h2 id="r0"><span class="n">说明</span>怎么用这一页</h2>
+<p class="hook">先挑一条线，八周做完一件东西，再换下一条。同时开三条，三条都会停在第二天。</p>
+
+<div class="box">
+  <p class="lab">四条规矩</p>
+  <p><b>一、先用免费的。</b>这一页标了“免费”的，够玩到能判断自己喜不喜欢。设备等做完第一个东西再买。</p>
+  <p><b>二、从“做出来”倒推。</b>不要从“学完一门课”开始。先定一个能拿给人看的结果：一辆会绕开桌腿的小车、一条三分钟的片子、一个能打开的主页。</p>
+  <p><b>三、遇阻先问 AI。</b>这一页每一栏要做的东西，电路、代码、剪辑、条文，都能直接说给 AI 听：DeepSeek、Kimi、豆包、通义、文心，手机上都有，免费。让它给方案、写代码、讲原理，报错原文直接贴过去。要搜具体问题也一样：B 站搜“超声波模块 一直跳”，搜的是症状，不是学科。</p>
+  <p><b>四、账号注册不来，也问它。</b>把遇阻的那一页截图发给 AI，让它一步一步教；弄错了再问一遍，不花钱。</p>
+</div>
+
+<h2 id="r1"><span class="n">一</span>机器人和小车：从一块板子开始</h2>
+<p class="hook">入这一行比想象的容易。一块几十块的板子、几根线、一段现成代码，一个下午就能让轮子转起来。真正花时间的是调，调到不撞墙、不跑偏。电路怎么接、代码为什么报错，贴给 AI 问，它讲得比说明书清楚。</p>
+
+<div class="site">
+  <span class="name"><a href="https://www.arduino.cc" target="_blank">Arduino 官网</a><span class="tag">免费</span></span>
+  <span class="url">arduino.cc</span>
+  <div class="why">单片机的入门标准件。软件免费，板子几十到一百多块。官网的 Examples 里有几十段现成代码，插上就能跑。</div>
+  <div class="start"><b>第一步：</b>装 IDE，插上板子，让板载那颗小灯闪起来。这一步过了，后面的门就开了。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://oshwhub.com" target="_blank">立创开源硬件平台</a><span class="tag">中文</span></span>
+  <span class="url">oshwhub.com</span>
+  <div class="why">别人做好的项目全公开：电路图、代码、物料清单、打板文件。搜“智能小车”“空气质量检测”“土壤湿度”，能找到整套可以照着做的。</div>
+  <div class="start"><b>第一步：</b>找一个带完整物料清单的项目，照单买件。别自己从零设计电路。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.tinkercad.com" target="_blank">Tinkercad</a><span class="tag">免费 · 免安装</span></span>
+  <span class="url">tinkercad.com</span>
+  <div class="why">在浏览器里搭电路、拖积木写程序、直接跑仿真。元件不用买，烧了也不会坏。还能做简单的三维模型。</div>
+  <div class="start"><b>第一步：</b>照着它的 Circuits 教程，把“按钮控制灯”跑通，再决定要不要买实物。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.icourse163.org" target="_blank">中国大学 MOOC</a><span class="tag">免费旁听</span></span>
+  <span class="url">icourse163.org</span>
+  <div class="why">搜“单片机”“机器人”“传感器”，有整套本科课程，讲义、作业、实验都有。免费旁听，不用交钱。</div>
+  <div class="start"><b>第一步：</b>只挑一门，只看前四讲，够把板子玩起来就行。别从第一讲追到最后一讲。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.raspberrypi.com" target="_blank">树莓派</a><span class="tag">要买硬件</span></span>
+  <span class="url">raspberrypi.com</span>
+  <div class="why">比 Arduino 高一档：能跑 Linux、接摄像头、跑图像识别。想做“认出这个水果烂了没有”这类东西，得用它。</div>
+  <div class="start"><b>第一步：</b>等 Arduino 玩熟了再上。先买最便宜的板子加一个摄像头，别一次配齐。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.thingiverse.com" target="_blank">Thingiverse</a><span class="tag">免费模型</span></span>
+  <span class="url">thingiverse.com</span>
+  <div class="why">3D 打印模型库，几十万个现成模型，外壳、齿轮、支架都能找到。学校或打印店有机器就能打。</div>
+  <div class="start"><b>第一步：</b>先打一个小零件试机器，别一上来打十几个小时的大件。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.dji.com/cn/robomaster-tt" target="_blank">RoboMaster TT 教育无人机</a><span class="tag">要买硬件</span></span>
+  <span class="url">dji.com/cn/robomaster-tt</span>
+  <div class="why">巴掌大的开源无人机：Scratch、Python、Arduino 都能编，内置 ESP32 开源模块和测距避障，最多十六台编队。一架会飞的编程练习题，室内就能飞。再往深走是穿越机和开源飞控，每一层都有得研究。</div>
+  <div class="start"><b>第一步：</b>先用手机 App 手飞熟，再用 Python 让它自动起飞、画一个方形航线。</div>
+</div>
+
+<h2 id="r2"><span class="n">二</span>三维和建模：先把脑子里的东西转起来</h2>
+<p class="hook">建模这件事，学两周就能做出能看的东西。以后做实验装置、做展示、做小玩意，都用得上。</p>
+
+<div class="site">
+  <span class="name"><a href="https://www.blender.org" target="_blank">Blender</a><span class="tag">免费 · 全功能</span></span>
+  <span class="url">blender.org</span>
+  <div class="why">开源的三维软件，建模、材质、动画、渲染全包，商用也免费。装完界面会让人发懵，但跟着一个教程走一遍就顺了。</div>
+  <div class="start"><b>第一步：</b>B 站搜“Blender 甜甜圈”，跟着做一遍。一周后他有一个能转着看的成品。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.tinkercad.com" target="_blank">Tinkercad 建模</a><span class="tag">免费 · 最简单</span></span>
+  <span class="url">tinkercad.com</span>
+  <div class="why">拖方块、挖洞、拼起来，十分钟能做出一个能打印的零件。界面是网页，不用装。</div>
+  <div class="start"><b>第一步：</b>量一个实物（比如手机支架），照着做一个，尺寸对了就算成。</div>
+</div>
+
+<h2 id="r3"><span class="n">三</span>拍和剪：手机就够，先剪一条三分钟的</h2>
+<p class="hook">设备不是障碍。手机拍、电脑剪，一条三分钟的片子，第一个会困在“素材太多不知道留哪段”，第二个就会顺。</p>
+
+<div class="site">
+  <span class="name"><a href="https://www.capcut.cn" target="_blank">剪映专业版</a><span class="tag">免费</span></span>
+  <span class="url">capcut.cn</span>
+  <div class="why">电脑版免费，自动识别字幕、降噪、变速、转场都有。学生做片子最常用的就是它。</div>
+  <div class="start"><b>第一步：</b>拿手机拍二十个镜头（每个五秒），导进去，剪成三分钟。先不管好看，先剪完。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.blackmagicdesign.com/products/davinciresolve" target="_blank">DaVinci Resolve</a><span class="tag">免费版够用</span></span>
+  <span class="url">blackmagicdesign.com/products/davinciresolve</span>
+  <div class="why">专业剪辑软件，免费版功能已经很全，调色是它的强项。想要电影那种颜色，最后都得走到这儿。</div>
+  <div class="start"><b>第一步：</b>剪映用顺了再换。先用它调一条片子的颜色，别的功能不碰。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.xinpianchang.com" target="_blank">新片场</a><span class="tag">免费看</span></span>
+  <span class="url">xinpianchang.com</span>
+  <div class="why">广告、短片、学生作品的聚集地。看别人怎么用三个镜头讲完一件事，比看教程快。</div>
+  <div class="start"><b>第一步：</b>找“学生作品”分类，看十条，挑一条拆它的镜头顺序。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://tuchong.com" target="_blank">图虫</a><span class="tag">中文社区</span></span>
+  <span class="url">tuchong.com</span>
+  <div class="why">摄影社区，多数照片能看到拍摄参数。想知道“这种光是怎么拍的”，看参数最快。</div>
+  <div class="start"><b>第一步：</b>找一个他喜欢的摄影师，把他首页十张照片的参数抄下来。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.aigei.com" target="_blank">爱给网</a><span class="tag">免费素材</span></span>
+  <span class="url">aigei.com</span>
+  <div class="why">音效、配乐、视频素材。片子七成质感来自声音，这一块最容易被忽略。</div>
+  <div class="start"><b>第一步：</b>给剪好的片子加三层声音：环境音、动作音、背景音乐。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.pexels.com" target="_blank">Pexels</a> · <a href="https://unsplash.com" target="_blank">Unsplash</a><span class="tag">免费 · 注意授权</span></span>
+  <span class="url">pexels.com ／ unsplash.com</span>
+  <div class="why">免费可用的图片和视频素材。做封面、做背景、做课件都用得上。</div>
+  <div class="start"><b>第一步：</b>用之前看一眼授权说明，商用和个人用不是一回事。</div>
+</div>
+
+<h2 id="r4"><span class="n">四</span>做网站：说一句话，先出一版</h2>
+<p class="hook">最简单的一条路一分钟走完：把想要的样子说给 AI，它直接生成网页文件，双击就能看。注册 GitHub、上传、上线，每一步遇阻都有 AI 兜底。这条路不用怕，很简单。</p>
+
+<div class="box">
+  <p class="lab">最简单的一条路</p>
+  <ol class="steps">
+    <li>打开任意一个 AI（DeepSeek、豆包都行），说“帮我做一个介绍我自己的网页，深色底，全部放一个文件里”。一分钟左右拿到一段代码，存成 index.html，双击打开，就是一个能看的网页。</li>
+    <li>注册 GitHub。哪一步不会，把页面截图发给 AI，让它一步一步教。</li>
+    <li>建一个仓库，把 index.html 传上去，开 Pages，拿到网址。</li>
+    <li>把网址发给同学。能打开，这个网站就算上线了。</li>
+  </ol>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://developer.mozilla.org/zh-CN/" target="_blank">MDN Web 文档</a><span class="tag">中文 · 权威</span></span>
+  <span class="url">developer.mozilla.org/zh-CN</span>
+  <div class="why">HTML、CSS、JavaScript 的标准手册。写得比多数教程准，示例能直接改。遇到不懂的属性，查这里最快。</div>
+  <div class="start"><b>第一步：</b>看“学习 Web 开发”那一块，把 HTML 基础过一遍，两小时。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.freecodecamp.org/chinese/" target="_blank">freeCodeCamp 中文</a><span class="tag">免费 · 项目制</span></span>
+  <span class="url">freecodecamp.org/chinese</span>
+  <div class="why">在浏览器里一边写一边判对错，学完一节做一个项目。有中文界面，认证免费。</div>
+  <div class="start"><b>第一步：</b>做“响应式网页设计”那一段，做完会有一个自己的作品页。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://codepen.io" target="_blank">CodePen</a><span class="tag">免费 · 免安装</span></span>
+  <span class="url">codepen.io</span>
+  <div class="why">别人写好的网页效果，左边改代码右边立刻变。看到好看的效果，可以扒下来改成自己的。</div>
+  <div class="start"><b>第一步：</b>搜“card hover”，找十个效果，把其中一个改成自己的内容。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.runoob.com" target="_blank">菜鸟教程</a><span class="tag">中文</span></span>
+  <span class="url">runoob.com</span>
+  <div class="why">查语法的地方，不是学语法的地方。忘了标签怎么写、属性叫什么，搜一下就有例子。</div>
+  <div class="start"><b>第一步：</b>存成书签，别从头读。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://liaoxuefeng.com" target="_blank">廖雪峰的官方网站</a><span class="tag">中文教程</span></span>
+  <span class="url">liaoxuefeng.com</span>
+  <div class="why">JavaScript、Python 的成套中文教程，讲得直白，例子能跑。适合当第二本教材。</div>
+  <div class="start"><b>第一步：</b>只学 JavaScript 那一套的前八节，够给网页加交互。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://github.com" target="_blank">GitHub</a><span class="tag">免费</span></span>
+  <span class="url">github.com</span>
+  <div class="why">代码托管，也是全世界最大的开源项目库。GitHub Pages 可以免费把静态网页挂上线，不用买服务器。</div>
+  <div class="start"><b>第一步：</b>注册，建一个仓库，把 index.html 传上去，开 Pages，拿到一个能发给别人的网址。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://github.com/education" target="_blank">GitHub 学生包</a><span class="tag">学生免费</span></span>
+  <span class="url">github.com/education</span>
+  <div class="why">在校生用教育邮箱认证，免费领一圈工具和额度，编程相关的一整条线都在里头。每学年认证一次。</div>
+  <div class="start"><b>第一步：</b>注册 GitHub，进 Education 页提交学生认证，通过后把能领的都过一眼。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.cursor.com" target="_blank">Cursor</a><span class="tag">有免费额度</span></span>
+  <span class="url">cursor.com</span>
+  <div class="why">写代码的智能体，做网站的高配帮手。日常话描述想要什么，它写，他在旁边看着、改着；网页之外的程序它也能写。</div>
+  <div class="start"><b>第一步：</b>新建空文件夹，让它“做一个介绍我自己的单页，深色底”，生成后双击 index.html 打开看。</div>
+</div>
+
+<div class="box">
+  <p class="lab">想弄懂每行代码的，走这条</p>
+  <ol class="steps">
+    <li>把想要的样子描述给 AI（DeepSeek 或 Cursor），生成一版能双击打开的 index.html。先别直接用，逐行看它写了什么，看不懂的属性当场查 MDN。</li>
+    <li>打开 CodePen，随便找一个别人的页面，改一行字，看它会变。知道“代码就是改这个”。</li>
+    <li>照 MDN 的示例，自己在本地从空白建一个 index.html，写标题、一段话、一张图。双击能打开。</li>
+    <li>加 CSS：背景色、字号、行高、居中。做到手机上看着不难受。</li>
+    <li>把文件传到 GitHub，开 Pages，拿到网址。</li>
+    <li>发给三个人，看他们能不能打开、能不能看懂。打不开就问浏览器报什么错。</li>
+  </ol>
+</div>
+
+<h2 id="r5"><span class="n">五</span>看课：成套的课，挑一门就行</h2>
+<p class="hook">课听不懂的段落，先暂停，把那段原文贴给 AI 让它换个讲法；要成套补一门课，再来这一栏。一门课只看前四讲，是正常用法。</p>
+
+<div class="site">
+  <span class="name"><a href="https://chat.deepseek.com" target="_blank">DeepSeek</a><span class="tag">免费</span></span>
+  <span class="url">chat.deepseek.com</span>
+  <div class="why">随身家教。问它、让它出题、让它挑他写的毛病；拿不准的答案，换个 AI 再问一遍，两家说法不一样，就有了去核实的理由。</div>
+  <div class="start"><b>第一步：</b>把课上一处没听懂的话原文贴给它，说“用大一能懂的话讲一遍，再出三道题”。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.icourse163.org" target="_blank">中国大学 MOOC</a><span class="tag">免费旁听</span></span>
+  <span class="url">icourse163.org</span>
+  <div class="why">国内高校的课，讲义和作业齐全。计算机、物理、化学、法学都有成套的。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.xuetangx.com" target="_blank">学堂在线</a><span class="tag">免费旁听</span></span>
+  <span class="url">xuetangx.com</span>
+  <div class="why">清华发起的平台，理工科的课多。有些课带讨论区和作业批改。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://ocw.mit.edu" target="_blank">MIT OpenCourseWare</a><span class="tag">免费 · 英文</span></span>
+  <span class="url">ocw.mit.edu</span>
+  <div class="why">麻省理工的课程资料全公开：讲义、作业、考试题。想看看国外怎么教一门课，来这儿。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://zh.khanacademy.org" target="_blank">可汗学院</a><span class="tag">免费 · 中文</span></span>
+  <span class="url">zh.khanacademy.org</span>
+  <div class="why">数学和物理的基础补漏，从小学到大学低年级，一节十分钟，有练习。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.bilibili.com" target="_blank">B 站</a><span class="tag">免费</span></span>
+  <span class="url">bilibili.com</span>
+  <div class="why">国内最好的自学入口，也是最容易滑走的地方。差别只在搜不搜具体问题。</div>
+  <div class="start"><b>第一步：</b>把首页关掉，只用搜索框。搜“症状”，不搜“学科”。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.xiaoyuzhoufm.com" target="_blank">小宇宙</a><span class="tag">免费</span></span>
+  <span class="url">xiaoyuzhoufm.com</span>
+  <div class="why">播客平台。《天才捕手 FM》《忽左忽右》都在这儿，走路跑步能听。</div>
+</div>
+
+<h2 id="r6"><span class="n">六</span>专业库：以后办案要用的原始出处</h2>
+<p class="hook">这一栏不产生兴趣，但省时间。写论文、查条文、核数字，都从这几个地方进，别从二手文章进。</p>
+
+<div class="site">
+  <span class="name"><a href="https://www.kimi.com" target="_blank">Kimi</a><span class="tag">免费</span></span>
+  <span class="url">kimi.com</span>
+  <div class="why">长文档见长。一份判决书、一本规范、几十页的抽检通告，整份喂进去，按他的问题从里面找。它找到的出处，再到下面的库里对原文。</div>
+  <div class="start"><b>第一步：</b>下载一份市场监管总局的食品抽检通告，问它“这批不合格项目里出现最多的是哪几样”。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://flk.npc.gov.cn" target="_blank">国家法律法规数据库</a><span class="tag">官方</span></span>
+  <span class="url">flk.npc.gov.cn</span>
+  <div class="why">法律、行政法规、地方性法规、司法解释，全在这儿，条文带修订记录。查一条法条，用这个，别用搜索出来的转载。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://wenshu.court.gov.cn" target="_blank">中国裁判文书网</a><span class="tag">官方</span></span>
+  <span class="url">wenshu.court.gov.cn</span>
+  <div class="why">判决书原文。看一个罪名在真实案子里怎么认定、判了几年，比看教材上的构成要件清楚。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.12309.gov.cn" target="_blank">12309 中国检察网</a><span class="tag">官方</span></span>
+  <span class="url">12309.gov.cn</span>
+  <div class="why">案件信息公开、不起诉决定书、检察建议。想看“为什么这个案子没起诉”，来这里。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://openstd.samr.gov.cn" target="_blank">国家标准全文公开系统</a><span class="tag">官方 · 免费</span></span>
+  <span class="url">openstd.samr.gov.cn</span>
+  <div class="why">强制性国标全文免费看。食品、药品、环境这一行，判定合不合格靠的就是这些文本里的限值和检验方法。</div>
+  <div class="start"><b>第一步：</b>搜他专业相关的三个标准，把编号记下来。以后写东西要引。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://data.stats.gov.cn" target="_blank">国家统计局 · 国家数据</a><span class="tag">官方</span></span>
+  <span class="url">data.stats.gov.cn</span>
+  <div class="why">分省、分年、分行业的数据，能直接导出表格。写报告要数字，从这里起。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.samr.gov.cn" target="_blank">市场监管总局</a> · <a href="https://www.nmpa.gov.cn" target="_blank">国家药监局</a><span class="tag">官方</span></span>
+  <span class="url">samr.gov.cn ／ nmpa.gov.cn</span>
+  <div class="why">食品抽检通告、药品医疗器械公告、行政处罚决定。办案前想了解一个行业的日常长什么样，看这些通告最快。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://ourworldindata.org" target="_blank">Our World in Data</a><span class="tag">免费 · 英文</span></span>
+  <span class="url">ourworldindata.org</span>
+  <div class="why">全球数据做成图，每张图都能下载、能查来源。做国际比较的作业，这儿比二手报道可靠。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.sipri.org" target="_blank">SIPRI</a> · <a href="https://www.unodc.org" target="_blank">UNODC</a><span class="tag">国际机构</span></span>
+  <span class="url">sipri.org ／ unodc.org</span>
+  <div class="why">军费数据库每年四月更新；UNODC 出全球凶杀率。这两个是国际比较最常被引用的原始出处。</div>
+</div>
+
+<div class="box">
+  <p class="lab">AI 给的案号和条文，来这里核</p>
+  <p>模型会把没有的判例编得有模有样。北京通州区法院 2025 年 4 月的一份生效判决里，律师把 AI 编的两个案例写进代理意见，案号是真的、案情是编的，被法院写进判决书批评教育，情节重的可参照民事诉讼法第一百一十四条罚款、拘留。AI 给一条线索，他来这些库调原文，对得上才用。</p>
+</div>
+
+<h2 id="r7"><span class="n">七</span>玩：不为有用</h2>
+<p class="hook">这一栏不承担任何功能。做一顿饭、认一遍星座、下盘棋，日子会松一点。</p>
+
+<div class="site">
+  <span class="name"><a href="https://www.xiachufang.com" target="_blank">下厨房</a><span class="tag">免费</span></span>
+  <span class="url">xiachufang.com</span>
+  <div class="why">菜谱按“几人份、多少分钟、有什么锅”筛。学会四个菜，宿舍和出租屋都够用。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://stellarium.org" target="_blank">Stellarium</a><span class="tag">免费软件</span></span>
+  <span class="url">stellarium.org</span>
+  <div class="why">把夜空搬到屏幕上，按时间和地点显示真实星空。装一次，认二十个星座。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://online-go.com" target="_blank">OGS 围棋</a> · <a href="https://lichess.org" target="_blank">Lichess</a><span class="tag">免费</span></span>
+  <span class="url">online-go.com ／ lichess.org</span>
+  <div class="why">在线对弈，都有新手区。围棋练的是长考，国际象棋练的是算路，两样都不占场地。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.chnmuseum.cn" target="_blank">中国国家博物馆</a> · <a href="https://www.dpm.org.cn" target="_blank">故宫博物院</a><span class="tag">免费</span></span>
+  <span class="url">chnmuseum.cn ／ dpm.org.cn</span>
+  <div class="why">线上展厅和藏品数据库。看不懂青铜器不要紧，先看器形和铭文，慢慢就有眼力。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a><span class="tag">免费 · 开源</span></span>
+  <span class="url">openstreetmap.org</span>
+  <div class="why">人人都能编辑的地图。可以给自己家乡补一条路、一个池塘，做完会有一点点“这是我画的”的感觉。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.kepu.net.cn" target="_blank">中国科普博览</a><span class="tag">中文</span></span>
+  <span class="url">kepu.net.cn</span>
+  <div class="why">中科院做的科普站，专题做得扎实。想搞清一个科学问题，比短视频靠谱。</div>
+</div>
+
+<div class="site">
+  <span class="name"><a href="https://www.douban.com" target="_blank">豆瓣</a><span class="tag">免费</span></span>
+  <span class="url">douban.com</span>
+  <div class="why">找书找片先看这里。评分不一定准，短评里的差评往往比好评有用。</div>
+</div>
+
+<h2 id="r8"><span class="n">八</span>三个八周项目：做完一个，再换下一条</h2>
+<p class="hook">八周，每周五小时，四十小时。这个量够做出一个能拿给人看的东西，不够做出一个像样的作品。所以验收标准写在下面，达到就算完成。</p>
+
+<div class="box">
+  <p class="lab">项目一 · 一辆会绕开桌腿的小车</p>
+  <p>第 1–2 周：Tinkercad 里把电路和程序跑通。第 3 周：照物料清单买件。第 4–5 周：接线、装轮子、让车能直走。第 6–7 周：加超声波模块，调转向。第 8 周：调参数。</p>
+  <p><b>验收：</b>放在客厅地上，自己走十分钟，不撞墙、不卡在桌腿中间。</p>
+</div>
+
+<div class="box">
+  <p class="lab">项目二 · 一条三分钟的短片</p>
+  <p>第 1 周：写三句话，谁、遇到什么、最后怎么样。第 2–3 周：拍二十个镜头，每个五秒。第 4–5 周：剪映里粗剪，砍掉一半。第 6 周：加字幕、配音。第 7 周：加音效和音乐。第 8 周：给三个人看，按他们的反应改。</p>
+  <p><b>验收：</b>三个人从头看到尾，没人问“这是拍啥的”。</p>
+</div>
+
+<div class="box">
+  <p class="lab">项目三 · 一个自己的主页，挂在网上</p>
+  <p>第 1 周：在纸上画版面。第 2–3 周：HTML 写结构。第 4–5 周：CSS 调样子，做到手机上不挤。第 6 周：放三样东西，一张照片、三段自我介绍、两个作品链接。第 7 周：传 GitHub，开 Pages。第 8 周：改错、改字。</p>
+  <p><b>验收：</b>手机能打开，加载不超过三秒，发给同学能看，不用解释“他要先下载什么”。</p>
+</div>
+
+<div class="box">
+  <p class="lab">三件别做的事</p>
+  <p><b>一、别先买设备。</b>两千块的开发板套装，最后多数在抽屉里。先用免费仿真跑通，再买最便宜的那一套。</p>
+  <p><b>二、别收藏。</b>这一页存下来就够了。收藏一百个网站，等于一个都没去。</p>
+  <p><b>三、别同时开三条线。</b>八周只做一件。做完再换，那时候手上已经有一样东西了。</p>
+</div>
+
+<div class="pn">
+  <a href="01_课内与课外.html"><span class="ar">‹</span>返回 · 第一章 · 课内与课外</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>

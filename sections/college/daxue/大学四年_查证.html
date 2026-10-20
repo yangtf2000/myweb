@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>查证这件事 · 大学四年课外</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B; --violet:#c084fc;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px 90px}
+.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 -28px;padding:11px 28px;display:flex;gap:13px;overflow-x:auto;white-space:nowrap;
+  font-size:13.5px;letter-spacing:.3px}
+.toc a{color:var(--t3);text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+.hero{padding:54px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px;letter-spacing:2px;color:var(--teal);margin:0 0 16px}
+h1{font-size:33px;line-height:1.38;font-weight:600;margin:0 0 16px;letter-spacing:.5px}
+.lead{font-size:17px;color:var(--t2);margin:0 0 22px}
+.metarow{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--t3)}
+.metarow b{color:var(--t2);font-weight:500}
+h2{font-size:23px;font-weight:600;margin:56px 0 10px;line-height:1.5}
+h2 .n{color:var(--teal);font-size:14.5px;letter-spacing:2px;display:block;margin-bottom:7px;font-weight:500}
+h3{font-size:17.5px;font-weight:600;margin:30px 0 8px;color:var(--t1)}
+.hook{color:var(--t2);font-size:15.5px;margin:0 0 6px;padding-left:13px;border-left:2px solid var(--line2)}
+p{margin:0 0 14px;color:var(--t2)}
+p b,li b{color:#fff;font-weight:500}
+.box{margin:26px 0;padding:19px 23px;background:var(--s3);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.box .lab{font-size:13.5px;letter-spacing:1.5px;color:var(--teal);margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff;font-weight:500}
+.box ol,.box ul{margin:0;padding-left:20px}
+.box li{margin-bottom:8px}
+.steps{counter-reset:st;margin:10px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:11px;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);color:var(--teal);
+  font-size:12px;line-height:21px;text-align:center}
+.card{margin:22px 0;padding:17px 20px;background:var(--s2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0}
+.card .tt{font-size:17px;color:var(--t1);font-weight:600;margin:0 0 8px}
+.card p{margin:0 0 9px;font-size:15px}
+.card p:last-child{margin:0}
+.callout{margin:22px 0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.callout.ok{background:#0d2a24;border-left:3px solid var(--teal)}
+.callout.warn{background:#2a1c12;border-left:3px solid var(--amber)}
+.callout .lab{font-size:13.5px;letter-spacing:1.5px;margin:0 0 7px;font-weight:600}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn .lab{color:var(--amber)}
+.callout p{margin:0}
+.tblwrap{margin:20px 0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;color:var(--t2)}
+th,td{border:1px solid var(--line2);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--s2);color:var(--t1);font-weight:600}
+td b{color:#fff}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.06em;padding:1px 8px;border-radius:20px;
+  color:var(--teal);border:1px solid var(--line2);margin-left:8px;vertical-align:2px}
+.pull{margin:30px 0;padding:22px 26px;background:var(--s3);border:1px solid var(--line2);border-radius:14px;
+  font-size:19px;line-height:1.7;color:var(--t1);position:relative}
+.pull::before{content:"❝";position:absolute;left:14px;top:6px;font-size:34px;color:var(--teal);opacity:.5}
+.pull p{margin:0;padding-left:30px;color:var(--t1)}
+.check{list-style:none;margin:14px 0;padding:0}
+.check li{position:relative;padding:7px 0 7px 28px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--teal)}
+.check li.hd{color:var(--teal);font-size:13.5px;letter-spacing:1px;padding-left:0;border-bottom:1px solid var(--line2)}
+.check li.hd::before{display:none}
+.pn{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.pn a{color:var(--t3);text-decoration:none}
+.pn a:hover{color:var(--teal)}
+.pn .ar{color:var(--teal);margin-right:4px}
+.foot{margin-top:40px;font-size:13.5px;color:var(--t3);line-height:2}
+.foot .ext{color:var(--teal);letter-spacing:1px;margin:0 0 8px}
+.foot a{color:var(--blue);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px;padding:11px 18px;gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px;margin-top:42px}
+  .tblwrap{font-size:13px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .toc{display:none}
+  .box,.card,.callout,.pull{background:#f4f6f9;border-color:#ccc}
+  .pn,.foot{border-color:#ccc}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="02_课本教不会的六样.html">‹ 返回 · 第二章 · 课本教不会的六样</a></nav>
+
+<header class="hero">
+  <p class="kicker">专篇 · 信息把关</p>
+  <h1>查证这件事</h1>
+  <p class="lead">书里把查证法叫「三源核一」：一条说法要信，至少三个互相独立的来源对得上，且能追到一手出处。这一篇把它拆成可照做的四道手续，每周拿一条当周听到的话练手。</p>
+  <div class="metarow">
+    <span><b>来源</b> 校内「课本教不会的六样」章</span>
+    <span><b>节奏</b> 每周一次，九十分钟</span>
+    <span><b>工具</b> 见《工具这件事》</span>
+  </div>
+</header>
+
+<h2 id="s1"><span class="n">前提</span>为什么不能直接信</h2>
+<p>课堂、短视频、群里转的链接，大多是一手出处的转述，转述会丢口径、会夹立场、会改时间。一个数据从原始报告到朋友圈，常被简化成一句顺耳的话。信之前先问一句：这句话最早是谁、在哪份文件里说的，样本和口径是什么。</p>
+
+<div class="box">
+  <p class="lab">一条可验证的主张长这样</p>
+  <p>「二〇二三年全国灵活就业人员约二点八七亿」，可查：出处是国家统计局，口径是「灵活就业」，时间是二〇二三年。能说出这三样的，才叫主张；只说「很多人都在灵活就业」的，是感觉，不是事实。</p>
+</div>
+
+<h2 id="s2"><span class="n">做法</span>四道手续</h2>
+<p>每周挑一条当周看到的说法，用九十分钟走完下面四道。前几周生疏，熟练后三十分钟也能走完。</p>
+
+<ol class="steps">
+  <li><b>拆主张。</b>把模糊的整句拆成可验证的小主张。一句「现在的岗位越来越少了」要拆成：哪个地区、哪类岗位、对比哪一年、数据从哪来。</li>
+  <li><b>找三源。</b>找三个互相独立的来源，且三者互不转引。官方文件、权威媒体、原始数据库各算一个；两个都转自同一篇稿子的，只算一个。</li>
+  <li><b>追一手。</b>顺藤摸到最初出处：政府公告、统计年鉴、裁判文书、学术论文，而不是别人解读过的版本。一手才看得到口径和样本。</li>
+  <li><b>记口径。</b>把数据的口径、时间、样本量、统计主体写下来。同一名词在不同年份口径可能不同，不记清就会被平均数骗。</li>
+</ol>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>三源对上、一手可追、口径写清，这条主张才算站住。三条里缺一条，就标「待核」，不写进作业和发言。</p>
+</div>
+
+<h2 id="s3"><span class="n">来源</span>三源去哪找</h2>
+<p>下面按「要查什么」给入口方向。具体网址收在 <a href="大学四年_资源网站.html">《好玩的网站》</a> 的对应栏里，那里按用途分了类。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>要查的内容</th><th>优先去的一手出处</th></tr>
+  <tr><td>法律、条文</td><td>人大、政府官网的法律法规库</td></tr>
+  <tr><td>统计数据</td><td>国家统计局及地方统计年鉴</td></tr>
+  <tr><td>裁判文书、案例</td><td>裁判文书网、人民法院案例库</td></tr>
+  <tr><td>政策、津贴、编制</td><td>财政部、人社部、地方政府公报</td></tr>
+  <tr><td>学校与专业信息</td><td>学校官网「现任校领导」「招生就业」栏目</td></tr>
+</table>
+</div>
+
+<h2 id="s4"><span class="n">关键</span>追一手的两个动作</h2>
+<p>追一手最容易被偷懒跳过的，是「转引当原文」。两个动作能拦住大多数错误。</p>
+
+<div class="card">
+  <p class="tt">动作一：看引用链</p>
+  <p>一篇文章说「据某报告」，点进它给的链接，确认那篇报告真有这么一句，而不是作者自己归纳的。归纳不等于原文，差一个限定词意思就反了。</p>
+</div>
+
+<div class="card">
+  <p class="tt">动作二：记原始发布时间</p>
+  <p>同一政策常有试行版、正式版、修订版。记清是哪一年的哪一版，引用时才不会用旧版当新版。这点在查公安、编制类文件时尤其要紧。</p>
+</div>
+
+<h2 id="s5"><span class="n">避错</span>几个常见的坑</h2>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>只看一个来源就当真。一个来源再权威，也可能有更新或例外；三源独立对上才稳。另一个坑是把评论当事实：「专家认为」「网友说」是观点，不是数据，引用时要分开。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">查证 · 四项</li>
+  <li>拆完的主张能说出出处、口径、时间三样</li>
+  <li>三个来源互不转引</li>
+  <li>追到了一手文件或数据库，不是解读稿</li>
+  <li>口径和样本量写进了笔记，不是只记了结论</li>
+</ul>
+
+<div class="pull"><p>查证不是较真，是保住自己说话的底。一个被当场指出「这数出处不对」的人，下一次开口就没人信了。</p></div>
+
+<div class="pn">
+  <a href="02_课本教不会的六样.html"><span class="ar">‹</span>返回 · 第二章 · 课本教不会的六样</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>

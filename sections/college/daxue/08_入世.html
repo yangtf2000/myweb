@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第八章 入世 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s81" class="cur">8.1 看清一个行业的代价</a><span class="sp">/</span>
+  <a href="#s82">8.2 自己跑完一次流程</a><span class="sp">/</span>
+  <a href="#s83">8.3 为一件与自己无关的事开口</a><span class="sp">/</span>
+  <a href="#s84">8.4 组织一次公共事务</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第八章</p>
+  <h1>入<span class="em">世</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">联考与选岗都在四年之后，有两层功夫要从现在练起：把事情看清，把事情办成。看清，是知道一个行业收什么代价、一道手续受阻在哪一步；办成，是替不相干的人开一次口、把一次公共事务抓到尾。毕业之后天天遇得上，办过一遍与听人讲十遍，不是一回事。</p>
+  <div class="chipline">
+    <span class="chip">三人访谈</span><span class="chip">三问</span><span class="chip t">三组数据</span><span class="chip t">一次办理</span><span class="chip">开口</span><span class="chip t">组织三件套</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/08.jpg" alt="中国城市街道蓝调时刻，暖色霓虹刚亮起">
+  <figcaption>蓝调时刻的街道，霓虹刚亮起来；这座城市的规则，藏在窗口、印章和那句「还要一份证明」里。</figcaption>
+</figure>
+
+<p>入世两个字，说的是从学校里走出来，看社会的规则怎么运转。跟自己无关的事，多数人不开口；问题多半不在胆量，在于没觉得这件事跟自己有关。这两层意思一层层展开：先看清一个行业收什么代价，再知道一道手续有多难办，才谈得上替不相干的人开一次口；在这件事上迈不出步子的人，往往也守不住自己眼前的那一份。</p>
+
+<blockquote>
+  <p>为天地立心，为生民立命，为往圣继绝学，为万世开太平。</p>
+  <p class="src">张载 · 后世称横渠四句教，讲读书人的去处</p>
+</blockquote>
+
+<h2 id="s81"><span class="n">8.1</span>看清一个行业的代价</h2>
+<p class="sec-lead">宣传材料写前景，代价要靠人来问；问谁、问什么、问完怎么对，都有定法。</p>
+
+<p><a href="大学四年_访谈与数据.html">访谈</a>要找三个人：一位曾经从业后来离开的，一位正在从业的，一位刚入行不久就离开的。完整的图景里一定有代价，而代价只有被问到的人才说得清，写材料的人从来不为代价负责。对食药环专业的人，还要多问一句：技术岗与办案岗走上十年，路通不通，人换不换得动。</p>
+
+<figure>
+<svg viewBox="0 0 480 232" role="img" aria-label="三位访谈对象各自看得见的部分，合成一个行业的真实代价">
+  <g font-family="sans-serif">
+    <rect width="480" height="232" fill="#081226"/>
+    <text x="0" y="14" fill="#b0c0d4" font-size="12.5">三人各看得见这行的一块</text>
+    <rect x="8" y="30" width="150" height="56" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="20" y="52" fill="#ffffff" font-size="12.5">曾经离开的人</text>
+    <text x="20" y="72" fill="#b0c0d4" font-size="12">看得见全貌</text>
+    <rect x="322" y="30" width="150" height="56" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="334" y="52" fill="#ffffff" font-size="12.5">正在从业的人</text>
+    <text x="334" y="72" fill="#b0c0d4" font-size="12">说得清当下</text>
+    <rect x="165" y="166" width="150" height="56" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="177" y="188" fill="#ffffff" font-size="12.5">入行不久就离开的人</text>
+    <text x="177" y="208" fill="#b0c0d4" font-size="12">最劝退那一步</text>
+    <rect x="165" y="88" width="150" height="62" rx="10" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="240" y="112" fill="#3FBFA0" font-size="13" text-anchor="middle" font-weight="600">一个行业的真实代价</text>
+    <text x="240" y="134" fill="#c3d1e3" font-size="12" text-anchor="middle">三份记录才拼得齐</text>
+    <path d="M158 58 C162 70 172 78 180 88" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <path d="M322 58 C318 70 308 78 300 88" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <path d="M240 150 L240 164" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <path d="M234 158 L240 166 L246 158" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+  </g>
+</svg>
+<figcaption>三种位置各看得见一块，拼起来才准。</figcaption>
+</figure>
+
+<div class="card">
+  <p class="tt">访谈四步</p>
+  <ol class="steps">
+    <li><b>找人。</b>三种人各一位，分开约。
+    <span class="why">只找在职的听到的是当下，三样拼齐才是一行整账。</span></li>
+    <li><b>问三件事。</b>一天怎么过，收入从哪来，最难的是什么。
+    <span class="why">先问日常建立事实，再问收入触及利益，最后问难点。</span></li>
+    <li><b>记原话。</b>写「他说连续三周没有休」，不写「他不踏实」。
+    <span class="why">评价会污染记录，复盘与引用靠的是事实那一半。</span></li>
+    <li><b>对数据。</b>谈话与三组数放在一起，矛盾处标出来再问。
+    <span class="why">对不上多是口径不同，也可能是记错，追完才下结论。</span></li>
+  </ol>
+</div>
+
+<h3>问三件事<span class="tag">照着问</span></h3>
+
+<div class="grid3">
+  <div class="card t">
+    <p class="tt">一问 · 一天怎么过</p>
+    <p>加班是常态还是例外，下班后还剩多少。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">二问 · 收入从哪来</p>
+    <p>固定与不确定各占多少，看绩效与年景。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">三问 · 最难的是什么</p>
+    <p>对方沉默的位置就是它；最难那次怎么收场。</p>
+  </div>
+</div>
+
+<h3>三组数据，连着读</h3>
+
+<div class="statrow">
+  <div class="stat"><b>2.87 亿</b><span>灵活就业人员 · 抽样口径</span></div>
+  <div class="stat"><b>27.6%</b><span>失业者再就业薪资降幅</span></div>
+  <div class="stat"><b>70%–90%</b><span>机关事业替代率 · 含年金</span></div>
+  <div class="stat"><b>40%–45%</b><span>企业职工替代率</span></div>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>数字</th><th>口径</th><th>出处与查证</th></tr>
+  <tr><td>约 2.87 亿</td><td>灵活就业人员</td><td>《二〇二五中国蓝领就业报告》抽样调查；统计局口径为二〇二四年底超两亿四千万</td></tr>
+  <tr><td>平均降 27.6%</td><td>失业后再就业薪资</td><td>二〇二四年三季度三十五岁以上组；三十岁以下同期 12.4%</td></tr>
+  <tr><td>70%–90% 对 40%–45%</td><td>养老金替代率</td><td>机关事业含职业年金，企业职工另一口径；差额在年金与计发办法</td></tr>
+</table>
+</div>
+
+<p>三组数要<span class="uw">连着看</span>，不能分开用。只看第一组，会以为灵活就业是自由；只看第三组，会以为体制内是保险箱。连起来只说一件事：没有一份工作占全稳定、高收入、可预期，任何选择都是拿一样换另一样。</p>
+
+<figure>
+<svg viewBox="0 0 480 224" role="img" aria-label="三组数据合起来读，得出没有一种工作三样全占">
+  <g font-family="sans-serif">
+    <rect width="480" height="224" fill="#081226"/>
+    <text x="0" y="14" fill="#b0c0d4" font-size="12.5">三组数要连着读</text>
+    <rect x="4" y="28" width="148" height="62" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="16" y="52" fill="#FFD166" font-size="13" font-weight="600">2.87 亿</text>
+    <text x="16" y="74" fill="#b0c0d4" font-size="12">灵活就业人员</text>
+    <rect x="166" y="28" width="148" height="62" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="178" y="52" fill="#FFD166" font-size="13" font-weight="600">降 27.6%</text>
+    <text x="178" y="74" fill="#b0c0d4" font-size="12">再就业薪资</text>
+    <rect x="328" y="28" width="148" height="62" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="340" y="52" fill="#FFD166" font-size="13" font-weight="600">70–90% / 40–45%</text>
+    <text x="340" y="74" fill="#b0c0d4" font-size="12">养老金替代率</text>
+    <path d="M78 90 L78 108" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M73 103 L78 110 L83 103" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M240 90 L240 108" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M235 103 L240 110 L245 103" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M402 90 L402 108" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <path d="M397 103 L402 110 L407 103" stroke="#2a4066" stroke-width="1.3" fill="none"/>
+    <rect x="30" y="114" width="420" height="56" rx="10" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="138" fill="#ffffff" font-size="13" text-anchor="middle">没有一份工作占全稳定、高收入、可预期</text>
+    <text x="240" y="158" fill="#c3d1e3" font-size="12" text-anchor="middle">任何选择，都是拿一样换另一样</text>
+    <rect x="30" y="182" width="420" height="26" rx="8" fill="#0d2a24" stroke="#1c5a4a" stroke-width="1.2"/>
+    <text x="240" y="199" fill="#3FBFA0" font-size="12.5" text-anchor="middle">连着看：先看清要付的代价，再选</text>
+  </g>
+</svg>
+<figcaption>一组讲盘子，一组讲流动，一组讲退休。</figcaption>
+</figure>
+
+<p>另要承认一件事实：<span class="kw">降薪确实发生了</span>。二〇二一年起各地清理规范津贴补贴，未经批准的自设项目一律取消，文件在<a href="大学四年_资源网站.html">财政部网站</a>查得到；到手少多少没有全国统计，部分地区基层科员一年少<span class="k">五到六万</span>，属口述量级。降薪是真的，<span class="kw">降薪不等于失业</span>，两件事都要认，不能拿一件去否认另一件。</p>
+
+<p class="pull">代价不在宣传材料上，在<span class="q">三个人的三遍讲述里</span>；一页简报，替不了三场谈话。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>三个人都谈完，三问都有记录，说得清这个行业要自己拿什么去换。说得清，才算看清；只背得出前景、说不清代价的，那一趟等于没问，约好的时间和来回车费都白花了。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">8.1 · 四项</li>
+  <li>找齐三位访谈对象：离开的、在职的、早退的</li>
+  <li>谈完三问，每问记原话，不记评价</li>
+  <li>记下三组数的口径与出处</li>
+  <li>查一例本地规范津贴补贴的文件</li>
+</ul>
+
+<h3>以警察这个行业为例<span class="tag">正走进的那一个</span></h3>
+<p>方法说要找三个人问代价，但在开口之前，公开记录已经把框架摆在了面前。这所学校的在校生正走进的警察行当，先把它的来历、层级和当家的人弄清，再去问那三个人，问的才是「材料写的和平常过的，差在哪」。</p>
+
+<h4>来历：从部队到警衔</h4>
+<p>一九四九年十月，中央人民政府公安部成立，罗瑞卿任首任部长；第一次全国公安会议定下从大区到村的公安组织体系。一九五七年《人民警察条例》、一九九五年《人民警察法》先后出台，职责、权限、警衔第一次有了法律依凭。二〇一八年，公安边防、消防、警卫部队退出现役，编制转为人民警察；原武警学院据此转制为中国人民警察大学，加挂公安部国际执法合作学院、中国维和警察培训中心两块牌子。这一改，把「现役军人」变成了「人民警察」，入警的路也从部队提干转向公安院校联考。</p>
+
+<h4>层级：五级，以块为主</h4>
+<p>体制表述是「统一领导、分级管理、条块结合、以块为主」。落到层级是五级：公安部，省（区、市）公安厅（局），市（地）公安局，县（市、区）公安（分）局，再到公安派出所。派出所是县区公安局的派出机构，不是一级政府。运行上有几条规律：公安姓党，党对公安工作绝对领导；法定职责由《人民警察法》划定；警衔表明等级；入警主渠道是公安院校公安专业毕业生的「公安联考」，考笔试、过体测、进面试、再按分数选岗。</p>
+
+<figure>
+<svg viewBox="0 0 480 280" role="img" aria-label="公安体系五级与警大位置">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="12.5">公安体系：统一领导、分级管理、条块结合、以块为主</text>
+    <g fill="#16274a" stroke="#2a4066" stroke-width="1.2">
+      <rect x="50" y="28" width="200" height="34" rx="7"/>
+      <rect x="50" y="76" width="200" height="34" rx="7"/>
+      <rect x="50" y="124" width="200" height="34" rx="7"/>
+      <rect x="50" y="172" width="200" height="34" rx="7"/>
+      <rect x="50" y="220" width="200" height="34" rx="7"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff" text-anchor="middle">
+      <text x="150" y="50">公安部</text><text x="150" y="98">省（区、市）公安厅（局）</text>
+      <text x="150" y="146">市（地）公安局</text><text x="150" y="194">县（市、区）公安（分）局</text>
+      <text x="150" y="242">公安派出所（派出机构）</text>
+    </g>
+    <g stroke="#FF8A3D" stroke-width="1.2" fill="none">
+      <path d="M150 62 L150 74"/><path d="M150 110 L150 122"/><path d="M150 158 L150 170"/><path d="M150 206 L150 218"/>
+    </g>
+    <rect x="300" y="92" width="170" height="104" rx="9" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="312" y="114" fill="#3FBFA0" font-size="12.5" font-weight="600">公安部直属院校</text>
+    <text x="312" y="136" fill="#ffffff" font-size="12">中国人民警察大学</text>
+    <text x="312" y="158" fill="#b0c0d4" font-size="11.5">廊坊校本部 · 广州校区</text>
+    <text x="312" y="180" fill="#b0c0d4" font-size="11.5">食药环侦属公安技术类</text>
+    <path d="M250 112 C272 112 282 132 298 140" stroke="#7FB3E8" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+    <text x="0" y="276" fill="#b0c0d4" font-size="12">派出所是县区公安局的派出机构，不是一级政府；层级之间以业务指导为主。</text>
+  </g>
+</svg>
+<figcaption>公安体系层级与警大位置。层级之间以业务指导为主，具体人财物多归属地。</figcaption>
+</figure>
+
+<h4>这行当的运行规律</h4>
+<p>框架之外是几条运行规律。入警主渠道是公安院校联考，岗位随编制和分数分配，这是既定方式；「以块为主」意味着人财物多归地方，工作地点与属地安排相连；党对公安工作的绝对领导，贯穿从招收、培养到使用的整条线。把它们当事实认下来，再去问那三个人，问的才是「材料写的和平常过的，差在哪」。</p>
+
+<h4>警大在这张网里</h4>
+<p>警大是公安部直属全日制普通高校，校本部在河北廊坊，另设广州校区。前身是中国人民武装警察部队学院，一九八一年建校；二〇一八年转制更名，二〇一九年接收原公安边防部队高等专科学校，组建广州校区。学校下设十七个学院（中心、校区）、二十三个机关处室，开设七个一级学科；食药环侦属公安技术类，由侦查相关学院培养，要的是既懂检测、又懂法律的复合人手。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>项目</th><th>现状（来源：学校官网「现任校领导」页，二〇二六年公开信息）</th></tr>
+  <tr><td>隶属</td><td>公安部直属全日制普通高校</td></tr>
+  <tr><td>校区</td><td>河北廊坊（校本部）· 广东广州</td></tr>
+  <tr><td>沿革</td><td>一九八一年建校，原武警学院；二〇一八年转制更名；二〇一九年并入边防高专组建广州校区</td></tr>
+  <tr><td>学科</td><td>七个一级学科；食药环侦属公安技术类</td></tr>
+  <tr><td>主要现任</td><td>党委书记 张立勋；校长、党委副书记 吴立志；副校长 潘清义、谢朝阳、靳高风、李思成、高士杰；广州校区党委书记 潘慈平；纪委书记 缪爱社；教务长 安晓利</td></tr>
+</table>
+</div>
+
+<p>领导职务随任免调整，上面这串名字以学校官网「现任校领导」页的最新公布为准；查的时候直接去官网看，不要信二手转发。知道谁当家，不是去巴结，是知道这所学校往哪个方向用力、哪些事被当重点。</p>
+
+<p>能用三句话说清这行当归谁管、按什么法、入警走哪条路，再去开口问那三个人，问的才不是客套。</p>
+
+<hr class="deco">
+
+<h2 id="s82"><span class="n">8.2</span>自己跑完一次流程</h2>
+<p class="sec-lead">规则写在文件上是一个样子，执行起来是另一个样子；两边的距离，只有自己跑过一遍才知道。</p>
+
+<p>从户籍、医保、证件、公积金里选一项，<span class="u">本人去办，不托人</span>。托人办当然快；快一次，就永远不知道这道手续本来的麻烦，那种麻烦将来是要补上的，补的地方就在来办事的群众身上。</p>
+
+<h3>四类事项，各有卡点</h3>
+
+<div class="tblwrap">
+<table>
+  <tr><th>事项</th><th>一般去哪办</th><th>最常见的卡点</th></tr>
+  <tr><td>户籍</td><td>政务中心户籍窗口</td><td>材料版本过期；备案未办结</td></tr>
+  <tr><td>医保</td><td>医保经办或政务服务网</td><td>大学生医保与居民医保衔接断档</td></tr>
+  <tr><td>证件</td><td>公安户政出入境窗口</td><td>预约号紧；换证期间用证衔接</td></tr>
+  <tr><td>公积金</td><td>公积金管理中心</td><td>异地转移接续；封存启封时点</td></tr>
+</table>
+</div>
+
+<div class="card t">
+  <p class="tt">办理四步</p>
+  <ol class="steps">
+    <li><b>定一项。</b>选一件与自己有关的事。
+    <span class="why">与自己有关才会认真记，选不相干的容易办成观光。</span></li>
+    <li><b>先查再跑。</b>查办事指南，抄下材料清单；第一趟本人去。
+    <span class="why">第一趟最珍贵，它让人看见指南与现实的第一次差距。</span></li>
+    <li><b>记三样加一样。</b>几趟、材料、卡点；另记经办人怎么答复。
+    <span class="why">当场记，回头补记会漏；答复是流程的真正边界。</span></li>
+    <li><b>三人三说法。</b>同一件事再问两人，三种说法并排写下。
+    <span class="why">说法不同不是敷衍，是权限与理解不同。</span></li>
+  </ol>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 252" role="img" aria-label="一次办理的路线与随身记录卡">
+  <g font-family="sans-serif">
+    <rect width="480" height="252" fill="#081226"/>
+    <text x="0" y="14" fill="#b0c0d4" font-size="12.5">一条路线，一张记录卡</text>
+    <line x1="40" y1="64" x2="440" y2="64" stroke="#2a4066" stroke-width="1.4"/>
+    <g fill="#16274a" stroke="#FF8A3D" stroke-width="1.4">
+      <circle cx="60" cy="64" r="10"/>
+      <circle cx="150" cy="64" r="10"/>
+      <circle cx="240" cy="64" r="10"/>
+      <circle cx="330" cy="64" r="10"/>
+      <circle cx="420" cy="64" r="10"/>
+    </g>
+    <g fill="#FFD166" font-size="12" text-anchor="middle" font-weight="600">
+      <text x="60" y="68">一</text>
+      <text x="150" y="68">二</text>
+      <text x="240" y="68">三</text>
+      <text x="330" y="68">四</text>
+      <text x="420" y="68">五</text>
+    </g>
+    <g fill="#ffffff" font-size="12" text-anchor="middle">
+      <text x="60" y="92">选一项</text>
+      <text x="150" y="92">查指南</text>
+      <text x="240" y="92">第一趟</text>
+      <text x="330" y="92">补材料</text>
+      <text x="420" y="92">办结</text>
+    </g>
+    <rect x="24" y="112" width="432" height="88" rx="12" fill="#132242" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="40" y="136" fill="#FFD166" font-size="12.5">记录卡 · 记当时看到的东西</text>
+    <rect x="40" y="148" width="200" height="26" rx="6" fill="#16274a"/>
+    <text x="52" y="165" fill="#c3d1e3" font-size="12">一 跑了几趟</text>
+    <rect x="252" y="148" width="200" height="26" rx="6" fill="#16274a"/>
+    <text x="264" y="165" fill="#c3d1e3" font-size="12">二 要哪些材料</text>
+    <rect x="40" y="172" width="200" height="26" rx="6" fill="#16274a"/>
+    <text x="52" y="189" fill="#c3d1e3" font-size="12">三 受阻在哪一步</text>
+    <rect x="252" y="172" width="200" height="26" rx="6" fill="#16274a"/>
+    <text x="264" y="189" fill="#c3d1e3" font-size="12">四 经办人答复</text>
+  </g>
+</svg>
+<figcaption>路线人人会跑，记录卡不是人人记。</figcaption>
+</figure>
+
+<div class="panel">
+  <p class="tt">一张记录卡</p>
+  <ul class="dash">
+    <li>跑了几趟：日期与结果</li>
+    <li>要哪些材料：原件复印件几份</li>
+    <li>受阻在哪一步：材料、系统还是分工</li>
+    <li>经办人答复：原话，不概括</li>
+  </ul>
+</div>
+
+<p>同一件事问三个人，可能得到三种说法，三种说法背后是三种理解；窗口里的答复是训练、权限与当天状态的合成，不必然针对谁，却足以影响办事的人一整天。想通这一层，将来坐在窗口里面，话会说得慢一点。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一张记录表，三样齐全：几趟、材料、卡点；外加三种答复原话。把表交给第三个人，他能顺着表复办一遍，这一趟才算没白跑，跑出来的经验下次办同一类事也用得上。</p>
+</div>
+
+<p class="pull">跑完这一趟才知道，<span class="q">自己这句话在群众那里是什么分量</span>；没跑过的人，说出来的体谅都轻。</p>
+
+<ul class="check">
+  <li class="hd">8.2 · 四项</li>
+  <li>选定一项，写清为什么选它</li>
+  <li>抄下办事指南的原始材料清单</li>
+  <li>记全三样：几趟、材料、卡点</li>
+  <li>记下经办人答复原话至少三条</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s83"><span class="n">8.3</span>为一件与自己无关的事开口</h2>
+<p class="sec-lead">担当的最低要求，是在一件与自己无关的事上表过一次态。</p>
+
+<p>三类场合最常见：同学被欺负，围观的多，开口的少；集体里有人敷衍，剩下的人替他补上，谁也不说；公共场合作假，数据改过，材料凑过，签字的人知道，谁都不提。三类场合都小，不开口也过得去；次数一多，闭口就成了集体里默认的规矩。</p>
+
+<h3>三类场合，开口说什么</h3>
+
+<div class="tblwrap">
+<table>
+  <tr><th>场合</th><th>开口说什么</th><th>不开口的代价</th></tr>
+  <tr><td>围观</td><td>先拉开，再报老师或值班员</td><td>下次被围的可能是自己，仍没人拦</td></tr>
+  <tr><td>补漏</td><td>指出没做的那一项，定下补做人选</td><td>敷衍的人一直省力，肯干的人一直吃亏</td></tr>
+  <tr><td>装假</td><td>在签字那一环停下，写明哪一步不符</td><td>材料上去，署名的人担责，没人拦</td></tr>
+</table>
+</div>
+
+<div class="card b">
+  <p class="tt">开口四步</p>
+  <ol class="steps">
+    <li><b>核事实。</b>时间、地点、谁、说了什么。
+    <span class="why">事实不全，开口就变成各说各话，问题从事情本身转到人身上。</span></li>
+    <li><b>选场合。</b>公开场合说事，不当众揭人短。
+    <span class="why">留一层余地，对方才听得进；当众撕破脸，谈的就不是事了。</span></li>
+    <li><b>陈述，不指责。</b>说「这页数据和上个月对不上」，不说「数据是编的」。
+    <span class="why">事实句没法反驳，指责句只会招来辩护，事就停在中途。</span></li>
+    <li><b>说清哪一步不对。</b>指得出那一环，停在那一环。
+    <span class="why">开口是把住经手的这一环，不是审判一个人。</span></li>
+  </ol>
+</div>
+
+<p>反面也常见：一份没有核实的材料被交上去，署名的人承担后果，而这件事本可以在某一环被拦下；错不在一个人，在于每一环的人都觉得那一环不归自己管。开口是在自己经手的那一环把住，这是经手一环的人能做、也最该做的一次拦阻。</p>
+
+<p>判据是事后不追悔。追悔往往来自当时没说；说错是另一回事，说错了可以改、可以道歉、可以下一回说得更准，唯独当时没说的那一句会压很多年。</p>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>把开口当成立场表演。声音大、姿态强硬、当场要人认错，三样占一样，事情就从这件事不对变成这人跟我过不去；克制不是软弱，是把问题留在事情上的唯一办法。</p>
+</div>
+
+<p class="pull">追悔往往来自当时没说，<span class="q">说错是另一回事</span>；没说出口的那一句，多年以后还放不下。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>开口之前过得去三问：事实核过没有，哪一步不对指得出来没有，有没有带上对方的家人与出身。三问都过得去，说错也敢认；有一问心虚，先回去核，核清楚了，说出来的每一句才有分量，也经得起追问。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">8.3 · 四项</li>
+  <li>写下最近目睹的一次不公，开没开口如实记</li>
+  <li>把那次的事按「哪一步不对」重写一遍</li>
+  <li>下一次围观，先开口拦住，再报老师</li>
+  <li>有人敷衍，当面指出那一项，定下补做人选</li>
+</ul>
+
+<hr class="warm">
+
+<h2 id="s84"><span class="n">8.4</span><a href="大学四年_公共事务.html">组织一次公共事务</a></h2>
+<p class="sec-lead">参加一次事情，与组织一次事情，中间隔着一整套能力；这套能力只能在组织里练，练法是一次具体的事。</p>
+
+<p>要做的有三件：招集人员，分配任务，对外沟通，三件都不能省。规模不必大，三十人的班级活动与三百人的赛会服务，组织上的难点是同一类。</p>
+
+<h3>三件套，只做两件的后果</h3>
+
+<div class="tblwrap">
+<table>
+  <tr><th>环节</th><th>要做什么</th><th>只做另外两件的后果</th></tr>
+  <tr><td>招集人员</td><td>定人名、定时点、定名目，人要到场</td><td>事情停在纸面，答应的人各忙各的</td></tr>
+  <tr><td>分配任务</td><td>任务到人、期限到日、标准说清</td><td>人招齐了却没有具体任务，几次之后大家不再把召集当回事</td></tr>
+  <tr><td>对外沟通</td><td>一个出口，一件事一个说法</td><td>消息从两头传递、说法对不上，对外协调先受阻</td></tr>
+</table>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 296" role="img" aria-label="组织三件套的闭环与收尾三样">
+  <g font-family="sans-serif">
+    <rect width="480" height="296" fill="#081226"/>
+    <text x="0" y="14" fill="#b0c0d4" font-size="12.5">三件套转起来是一个环</text>
+    <rect x="170" y="26" width="140" height="50" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="47" fill="#ffffff" font-size="12.5" text-anchor="middle" font-weight="600">招集人员</text>
+    <text x="240" y="66" fill="#b0c0d4" font-size="12" text-anchor="middle">定人名定时点定名目</text>
+    <rect x="30" y="140" width="140" height="50" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="100" y="161" fill="#ffffff" font-size="12.5" text-anchor="middle" font-weight="600">分配任务</text>
+    <text x="100" y="180" fill="#b0c0d4" font-size="12" text-anchor="middle">任务到人期限到日</text>
+    <rect x="310" y="140" width="140" height="50" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="380" y="161" fill="#ffffff" font-size="12.5" text-anchor="middle" font-weight="600">对外沟通</text>
+    <text x="380" y="180" fill="#b0c0d4" font-size="12" text-anchor="middle">一个出口一个说法</text>
+    <text x="240" y="116" fill="#c3d1e3" font-size="12" text-anchor="middle">一次公共事务</text>
+    <path d="M205 76 C150 96 110 104 104 134" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <path d="M98 128 L104 138 L110 128" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <line x1="172" y1="165" x2="308" y2="165" stroke="#FF8A3D" stroke-width="1.3"/>
+    <path d="M302 160 L310 165 L302 170" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <path d="M380 136 C420 100 340 72 314 60" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <path d="M308 54 L316 62 L324 52" stroke="#FF8A3D" stroke-width="1.3" fill="none"/>
+    <text x="408" y="96" fill="#F5A623" font-size="12">下一轮</text>
+    <rect x="8" y="222" width="144" height="56" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="20" y="244" fill="#FFD166" font-size="12.5">账目</text>
+    <text x="20" y="264" fill="#b0c0d4" font-size="12">收支两条线，票据编号</text>
+    <rect x="168" y="222" width="144" height="56" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="180" y="244" fill="#FFD166" font-size="12.5">名单</text>
+    <text x="180" y="264" fill="#b0c0d4" font-size="12">分工表加联系方式</text>
+    <rect x="328" y="222" width="144" height="56" rx="9" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="340" y="244" fill="#FFD166" font-size="12.5">复盘记录</text>
+    <text x="340" y="264" fill="#b0c0d4" font-size="12">问题、原因、改法</text>
+    <text x="240" y="292" fill="#FF6B4A" font-size="13" text-anchor="middle" font-weight="600">先担责，再论原因</text>
+  </g>
+</svg>
+<figcaption>环转起来，事情才往前；三样留给下一次。</figcaption>
+</figure>
+
+<div class="card g">
+  <p class="tt">组织五步</p>
+  <ol class="steps">
+    <li><b>定一件具体的事。</b>志愿服务、赛会服务、班级事务都算，事要小到一次做得完。
+    <span class="why">事太大，第一次必然烂尾；烂尾一次，信心与信用一起赔进去。</span></li>
+    <li><b>招集人员。</b>定人名、定时点、定名目，人要到场。
+    <span class="why">招集是承诺不是广播，到场的人才是资源。</span></li>
+    <li><b>分配任务。</b>任务到人、期限到日、标准说清。
+    <span class="why">「大家帮忙看着弄」是最常见的失败；责任到人才有人负责。</span></li>
+    <li><b>对外沟通。</b>指定一个出口，对上一个说法。
+    <span class="why">多头沟通必然口径不一，外面最先看轻的就是这群人办事不牢。</span></li>
+    <li><b>收尾三样，出事先担责。</b>账目、名单、复盘记录一周内归档；出了问题先认责。
+    <span class="why">一周是记忆的保质期；责任有人先认，大家才肯说真话。</span></li>
+  </ol>
+</div>
+
+<p>出了问题<mark>先承担责任，再论原因</mark>。责任认在先，原因才论得清；没人认账，剩下的人只学会少说话、少经手。愿意先担的人，下一回还有人愿意跟着干，事情也才推进得下去，也才收得了场。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>三样东西交得出来：一页账、一份名单、一份复盘。缺一样，这次组织只完成了一半；三样都在，下一回从这三样起头，力气、弯路与折腾都能省下一半。</p>
+</div>
+
+<p class="pull">出了问题先认责任，再论原因；责任认在先，下次才有人愿意跟着干。</p>
+
+<ul class="check">
+  <li class="hd">8.4 · 五项</li>
+  <li>定一次具体的公共事务，写清事、人、时点</li>
+  <li>招集到人，到场名单留底</li>
+  <li>任务分配到人，期限到日</li>
+  <li>对外只设一个出口，口径一致</li>
+  <li>收尾留三样，复盘写下改法</li>
+</ul>
+
+<hr class="deco">
+
+<div class="callout">
+  <p class="lab">一句话</p>
+  <p class="big">看清代价再选择，跑完流程再体谅，表过态再谈担当，组织过一次再谈成事；四件事的次序，就是入世的次序。</p>
+</div>
+
+<div class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="07_立言.html"><span class="ar">‹</span>第七章 · 立言</a><a href="09_上场.html">第九章 · 上场<span class="ar">›</span></a></p>
+  <p class="by">课表之外的大学 · 第八章　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

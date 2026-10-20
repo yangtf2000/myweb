@@ -36,6 +36,7 @@
     'ai-four':       S + '<rect x="9" y="9" width="13" height="13" rx="2"/><rect x="26" y="9" width="13" height="13" rx="2"/><rect x="9" y="26" width="13" height="13" rx="2"/><rect x="26" y="26" width="13" height="13" rx="2"/><path d="M15.5 15.5 H15.6"/><path d="M32.5 15.5 H32.6"/><path d="M15.5 32.5 H15.6"/><path d="M32.5 32.5 H32.6"/>' + E,
     'cet':           S + '<path d="M9 13 C13.5 11 20 11 24 13.5 C28 11 34.5 11 39 13 V34 C34.5 32 28 32 24 34.5 C20 32 13.5 32 9 34 Z"/><path d="M24 13.5 V34.5"/><path d="M14 19 H20"/><path d="M14 24 H20"/><path d="M28 19 H34"/><path d="M28 24 H34"/>' + E,
     'chem':         S + '<path d="M20 8 H28"/><path d="M22 8 V18 L13 33 A4 4 0 0 0 16.5 39 H31.5 A4 4 0 0 0 35 33 L26 18 V8"/><path d="M17.5 27 H30.5" opacity=".6"/><circle cx="23" cy="33.5" r="1.1"/><circle cx="28" cy="35.5" r=".9" opacity=".7"/>' + E,
+    'daxue':        S + '<path d="M9 36 H17 V30 H25 V24 H33 V18 H39"/><path d="M9 36 V41 H41"/><path d="M17 30 H25"/><path d="M25 24 H33"/><path d="M33 18 H39" opacity=".6"/>' + E,
     '_fallback':     S + '<circle cx="24" cy="24" r="6"/>' + E
   };
 

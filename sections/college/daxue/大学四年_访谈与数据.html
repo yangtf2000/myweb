@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>访谈与数据 · 大学四年课外</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B; --violet:#c084fc;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px 90px}
+.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 -28px;padding:11px 28px;display:flex;gap:13px;overflow-x:auto;white-space:nowrap;
+  font-size:13.5px;letter-spacing:.3px}
+.toc a{color:var(--t3);text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+.hero{padding:54px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px;letter-spacing:2px;color:var(--teal);margin:0 0 16px}
+h1{font-size:33px;line-height:1.38;font-weight:600;margin:0 0 16px;letter-spacing:.5px}
+.lead{font-size:17px;color:var(--t2);margin:0 0 22px}
+.metarow{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--t3)}
+.metarow b{color:var(--t2);font-weight:500}
+h2{font-size:23px;font-weight:600;margin:56px 0 10px;line-height:1.5}
+h2 .n{color:var(--teal);font-size:14.5px;letter-spacing:2px;display:block;margin-bottom:7px;font-weight:500}
+h3{font-size:17.5px;font-weight:600;margin:30px 0 8px;color:var(--t1)}
+.hook{color:var(--t2);font-size:15.5px;margin:0 0 6px;padding-left:13px;border-left:2px solid var(--line2)}
+p{margin:0 0 14px;color:var(--t2)}
+p b,li b{color:#fff;font-weight:500}
+.box{margin:26px 0;padding:19px 23px;background:var(--s3);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.box .lab{font-size:13.5px;letter-spacing:1.5px;color:var(--teal);margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff;font-weight:500}
+.box ol,.box ul{margin:0;padding-left:20px}
+.box li{margin-bottom:8px}
+.steps{counter-reset:st;margin:10px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:11px;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);color:var(--teal);
+  font-size:12px;line-height:21px;text-align:center}
+.card{margin:22px 0;padding:17px 20px;background:var(--s2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0}
+.card .tt{font-size:17px;color:var(--t1);font-weight:600;margin:0 0 8px}
+.card p{margin:0 0 9px;font-size:15px}
+.card p:last-child{margin:0}
+.callout{margin:22px 0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.callout.ok{background:#0d2a24;border-left:3px solid var(--teal)}
+.callout.warn{background:#2a1c12;border-left:3px solid var(--amber)}
+.callout .lab{font-size:13.5px;letter-spacing:1.5px;margin:0 0 7px;font-weight:600}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn .lab{color:var(--amber)}
+.callout p{margin:0}
+.tblwrap{margin:20px 0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;color:var(--t2)}
+th,td{border:1px solid var(--line2);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--s2);color:var(--t1);font-weight:600}
+td b{color:#fff}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.06em;padding:1px 8px;border-radius:20px;
+  color:var(--teal);border:1px solid var(--line2);margin-left:8px;vertical-align:2px}
+.pull{margin:30px 0;padding:22px 26px;background:var(--s3);border:1px solid var(--line2);border-radius:14px;
+  font-size:19px;line-height:1.7;color:var(--t1);position:relative}
+.pull::before{content:"❝";position:absolute;left:14px;top:6px;font-size:34px;color:var(--teal);opacity:.5}
+.pull p{margin:0;padding-left:30px;color:var(--t1)}
+.check{list-style:none;margin:14px 0;padding:0}
+.check li{position:relative;padding:7px 0 7px 28px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--teal)}
+.check li.hd{color:var(--teal);font-size:13.5px;letter-spacing:1px;padding-left:0;border-bottom:1px solid var(--line2)}
+.check li.hd::before{display:none}
+.pn{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.pn a{color:var(--t3);text-decoration:none}
+.pn a:hover{color:var(--teal)}
+.pn .ar{color:var(--teal);margin-right:4px}
+.foot{margin-top:40px;font-size:13.5px;color:var(--t3);line-height:2}
+.foot .ext{color:var(--teal);letter-spacing:1px;margin:0 0 8px}
+.foot a{color:var(--blue);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px;padding:11px 18px;gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px;margin-top:42px}
+  .tblwrap{font-size:13px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .toc{display:none}
+  .box,.card,.callout,.pull{background:#f4f6f9;border-color:#ccc}
+  .pn,.foot{border-color:#ccc}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="08_入世.html">‹ 返回 · 第八章 · 入世</a></nav>
+
+<header class="hero">
+  <p class="kicker">专篇 · 公共调查</p>
+  <h1>访谈与数据</h1>
+  <p class="lead">《口述》向一个人问故事，这一篇为一件公共事务做调查：有提纲、有数据交叉、有整理。组织公共事务前，先会这套，才知道问什么、查什么。</p>
+  <div class="metarow">
+    <span><b>连着</b> 《口述》《查证这件事》《组织一次公共事务》</span>
+    <span><b>来源</b> 见《入世》章</span>
+  </div>
+</header>
+
+<h2 id="s1"><span class="n">定位</span>和口述的不同</h2>
+<p>口述重个人记忆，访谈与数据重公共事务的真相。前者问「您那年怎么过的」，后者问「这件事涉及哪些人、什么数据、受阻在哪一步」。后者要提纲，也要数据来 triangulate 说法。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th></th><th>口述</th><th>访谈与数据</th></tr>
+  <tr><td>对象</td><td>一个亲历者</td><td>一件事的相关多方</td></tr>
+  <tr><td>方法</td><td>听故事、记原话</td><td>提纲+数据交叉</td></tr>
+  <tr><td>产出</td><td>一段记忆</td><td>一份可核的调查</td></tr>
+</table>
+</div>
+
+<h2 id="s2"><span class="n">提纲</span>怎么写</h2>
+<p>提纲围绕一个核心问题展开，问题由宽到窄。开放问题让人说，封闭问题拿事实，两类搭配。</p>
+
+<ol class="steps">
+  <li><b>定核心问题。</b>一句话说清这次要弄清什么，比如「社区这处设施为什么闲置」。</li>
+  <li><b>列问题链。</b>从背景问到关键，每问只问一件，不堆问。</li>
+  <li><b>混开放与封闭。</b>开放：「这事您怎么看」；封闭：「闲置多久、涉及几方」。</li>
+  <li><b>留追问位。</b>关键处标「追问：为何那时停工」，不临时抓瞎。</li>
+</ol>
+
+<div class="box">
+  <p class="lab">提纲样例（社区设施闲置）</p>
+  <p>① 这处设施哪年建、谁管？② 从用到闲，中间发生了什么？③ 涉及哪几方、各自说法？④ 有没有文件或账目可查？⑤ 居民现在怎么看？这五问由事实到看法，最后落回数据。</p>
+</div>
+
+<h2 id="s3"><span class="n">数据</span>查法</h2>
+<p>访谈说的，要用数据核对。查的方向和《查证这件事》一致：政府公报、统计、裁判文书。公共事务还多一处：<strong>账目与公示</strong>，很多事的堵点在钱和公示上。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>访谈的说法和数据对得上，结论才站住。一方说「早就修好了」，公示和现场都不支持，这说法就要标存疑，不能写进调查。</p>
+</div>
+
+<h2 id="s4"><span class="n">整理</span>编码与交叉</h2>
+<p>回来把访谈按主题编码，和数据放一张表对照。说法一致处标「已核」，矛盾处标「待查」，空档处补问或补查。整理完，这份调查才经得起检验。</p>
+
+<div class="card">
+  <p class="tt">一张对照表</p>
+  <p>左列「谁说的」，中列「说了什么」，右列「数据/文件是否支持」。三列填完，真相的轮廓就出来了，不用靠感觉下结论。</p>
+</div>
+
+<h2 id="s5"><span class="n">避错</span>几个常见的坑</h2>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>只访不查，把一方的说法当结论，写出来经不起对质。另一个坑是提纲没核心问题，问了一堆散点，回来拼不出一条线。先定核心，再列问题。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">访谈与数据 · 四项</li>
+  <li>先定一个核心问题，再列问题链</li>
+  <li>开放与封闭问题搭配，留追问位</li>
+  <li>说法用公报、统计、账目交叉核</li>
+  <li>整理出对照表，矛盾处标待查</li>
+</ul>
+
+<div class="pull"><p>公共调查练的是「让说法对上数据」。访谈把亲历者的话捞上来，数据把底下的数摆出来，两样凑齐，结论才可靠。</p></div>
+
+<div class="pn">
+  <a href="08_入世.html"><span class="ar">‹</span>返回 · 第八章 · 入世</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>

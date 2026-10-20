@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章 见天地 · 课表之外的大学</title>
+<style>
+:root{
+  --bg:#050a1a; --bg2:#081226;
+  --card:#101d38; --card2:#132242; --panel:#16274a; --hi:#1b2f56;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --orange:#FF8A3D; --amber:#F5A623; --gold:#FFD166; --coral:#FF6B4A;
+  --teal:#3FBFA0; --blue:#7FB3E8; --rose:#F27E7E;
+  --line:#22385c; --line2:#2f4a75;
+  --sh:0 18px 38px -18px rgba(0,0,0,.8);
+  --sho:0 14px 30px -14px rgba(255,138,61,.30);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:17px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px; margin:0 auto; padding:0 28px 100px}
+
+/* ---------- 顶部导航 ---------- */
+.toc{
+  position:sticky; top:0; z-index:20; background:rgba(5,10,26,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line); margin:0 -28px; padding:12px 28px;
+  display:flex; gap:16px; overflow-x:auto; white-space:nowrap;
+  font-size:13.5px; letter-spacing:.3px;
+}
+.toc a{color:var(--t3); text-decoration:none; padding:2px 0; border-bottom:2px solid transparent}
+.toc a:hover{color:var(--orange); border-bottom-color:var(--orange)}
+.toc .sp{color:var(--line2)}
+.toc .cur{color:var(--gold); border-bottom-color:var(--gold)}
+
+/* ---------- 卷首 ---------- */
+.hero{padding:60px 0 30px}
+.kicker{font-size:14px; letter-spacing:2.5px; color:var(--orange); margin:0 0 20px; text-transform:uppercase}
+.kicker::before{content:""; display:inline-block; width:36px; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:2px; vertical-align:5px; margin-right:12px}
+h1{font-size:52px; line-height:1.28; font-weight:700; margin:0 0 8px; letter-spacing:1px}
+h1 .em{color:var(--gold)}
+.title-rule{width:84px; height:6px; background:linear-gradient(90deg,var(--orange),var(--gold)); border-radius:4px; margin:22px 0 26px}
+.lead{font-size:19px; color:var(--t2); margin:0; line-height:1.92; font-weight:300}
+.lead b{color:#fff; font-weight:600}
+.chipline{margin:20px 0 0}
+.chip{display:inline-block; font-size:12.5px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:999px; padding:3px 12px; margin:0 8px 8px 0}
+.chip.t{border-color:#1c5a4a; background:#0c2620; color:var(--teal)}
+
+/* ---------- 标题 ---------- */
+h2{font-size:32px; font-weight:700; margin:74px 0 10px; line-height:1.4; letter-spacing:.8px; position:relative}
+h2 .n{color:var(--orange); font-size:14px; letter-spacing:3px; display:block; margin-bottom:10px; font-weight:600}
+h2::after{content:""; display:block; width:46px; height:3px; background:var(--orange); border-radius:2px; margin-top:14px}
+h3{font-size:20px; font-weight:700; margin:36px 0 12px; color:#fff; letter-spacing:.4px}
+h3 .tag{font-size:12px; letter-spacing:1.5px; color:var(--gold); border:1px solid #6b5220; background:#221a0c; border-radius:5px; padding:2px 8px; margin-left:9px; vertical-align:3px; font-weight:400}
+h4{font-size:17px; font-weight:600; margin:26px 0 8px; color:var(--gold)}
+p{margin:0 0 18px; color:var(--t1)}
+.sec-lead{color:var(--t2); font-size:17.5px; margin:0 0 8px; line-height:1.92}
+strong{font-weight:700; color:#fff}
+em{font-style:italic; color:var(--t2)}
+
+/* ---------- 强调 ---------- */
+.pull{font-size:24px; line-height:1.7; font-weight:600; color:#fff; margin:40px 0; padding:22px 26px 22px 30px; background:linear-gradient(100deg,#152442,#101d38); border-left:5px solid var(--orange); border-radius:0 16px 16px 0; letter-spacing:.4px; position:relative; box-shadow:var(--sh)}
+.pull::before{content:"❝"; position:absolute; left:14px; top:2px; font-size:34px; color:var(--orange); opacity:.5; font-family:Georgia,serif}
+.pull .q{color:var(--gold)}
+mark{background:linear-gradient(180deg,transparent 56%,rgba(255,138,61,.42) 56%); color:#fff; padding:0 3px; border-radius:2px}
+.k{color:var(--amber); font-weight:700; font-variant-numeric:tabular-nums}
+.kw{color:var(--orange); font-weight:700}
+.bad{color:var(--coral); font-weight:700}
+.it{font-style:italic; color:var(--blue)}
+.big{font-size:21px; font-weight:600; color:#fff; line-height:1.7}
+.u{border-bottom:2px solid var(--orange); padding-bottom:1px}
+.uw{text-decoration:underline; text-decoration-color:var(--amber); text-decoration-thickness:2px; text-underline-offset:5px}
+
+/* ---------- 装饰线 ---------- */
+hr{border:0; height:1px; background:linear-gradient(90deg,transparent,var(--line2),transparent); margin:58px 0}
+hr.deco{position:relative; height:1px; background:linear-gradient(90deg,transparent,var(--line2) 20%,var(--line2) 80%,transparent)}
+hr.deco::after{content:"◆"; position:absolute; left:50%; top:-10px; transform:translateX(-50%); background:var(--bg); padding:0 14px; color:var(--orange); font-size:12px}
+hr.warm{height:2px; background:linear-gradient(90deg,var(--coral),var(--amber),var(--gold),transparent); border-radius:2px}
+
+/* ---------- 图 ---------- */
+figure{margin:30px 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:13.5px; color:var(--t3); margin-top:12px; letter-spacing:.3px; line-height:1.75; font-style:italic}
+figcaption::before{content:"图 · "; color:var(--orange); font-style:normal; letter-spacing:1px}
+.ill{border:1px solid var(--line2); border-radius:18px; overflow:hidden; margin:30px 0; background:#081226; box-shadow:var(--sh)}
+.ill svg{display:block; width:100%; height:auto}
+.shot{margin:32px 0}
+.shot img{width:100%; height:auto; border-radius:18px; border:1px solid var(--line2); box-shadow:var(--sh); display:block}
+.shot figcaption{margin-top:12px}
+.shot.wide img{border-radius:20px}
+
+/* ---------- 数字卡 ---------- */
+.statrow{display:flex; flex-wrap:wrap; gap:14px; margin:28px 0}
+.stat{flex:1 1 0; min-width:136px; background:linear-gradient(165deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:16px; padding:20px 16px 16px; box-shadow:var(--sh); position:relative; overflow:hidden}
+.stat::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--gold))}
+.stat b{display:block; font-size:34px; font-weight:700; color:var(--gold); line-height:1.12; font-variant-numeric:tabular-nums; letter-spacing:-.5px}
+.stat span{font-size:13.5px; color:var(--t3); display:block; margin-top:7px}
+
+/* ---------- 卡片 ---------- */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0}
+.grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:26px 0}
+.card{background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; padding:26px 28px; margin:24px 0; box-shadow:var(--sh); position:relative; overflow:hidden}
+.card h3,.card h4{margin-top:0}
+.card::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--orange),var(--coral))}
+.card.t::before{background:linear-gradient(180deg,var(--teal),#2e8f79)}
+.card.b::before{background:linear-gradient(180deg,var(--blue),#4a7fb5)}
+.card.g::before{background:linear-gradient(180deg,var(--gold),var(--amber))}
+.card .tt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 10px}
+.card p:last-child{margin-bottom:0}
+.panel{background:linear-gradient(160deg,var(--panel),#13203c); border:1px solid var(--line2); border-radius:16px; padding:22px 24px; margin:22px 0; box-shadow:var(--sh)}
+.panel .tt{font-size:13px; letter-spacing:2px; color:var(--orange); margin:0 0 10px}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- 提示块 ---------- */
+.callout{background:linear-gradient(100deg,#221a0c,#181203); border:1px solid #5c4517; border-left:4px solid var(--amber); border-radius:0 16px 16px 0; padding:18px 24px; margin:26px 0}
+.callout .lab{font-size:13px; letter-spacing:2px; color:var(--amber); margin:0 0 8px; font-weight:600}
+.callout .lab::before{content:"▍"; margin-right:7px}
+.callout p{margin:0 0 8px; color:var(--t2); font-size:16px}
+.callout p:last-child{margin-bottom:0}
+.callout.ok{background:linear-gradient(100deg,#0c2620,#081d18); border-color:#1c5a4a; border-left-color:var(--teal)}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn{background:linear-gradient(100deg,#2a1414,#1d0d0d); border-color:#6b2f2f; border-left-color:var(--coral)}
+.callout.warn .lab{color:var(--coral)}
+
+/* ---------- 表格 ---------- */
+.tblwrap{overflow-x:auto; margin:24px 0; -webkit-overflow-scrolling:touch; border:1px solid var(--line2); border-radius:16px; box-shadow:var(--sh)}
+table{width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card)}
+th{text-align:left; font-weight:600; font-size:13px; letter-spacing:1.5px; color:var(--gold); background:linear-gradient(180deg,#1a2c4e,#152441); padding:12px 14px; border-bottom:2px solid var(--orange)}
+td{padding:13px 14px; border-bottom:1px solid var(--line); color:var(--t2); vertical-align:top; line-height:1.8}
+td:first-child{color:var(--t1); font-weight:600}
+th:first-child,td:first-child{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+table .num{color:var(--amber); font-variant-numeric:tabular-nums; font-weight:600}
+table .yes{color:var(--teal); font-weight:600}
+table .no{color:var(--coral); font-weight:600}
+
+/* ---------- 列表 ---------- */
+ol.steps{list-style:none; counter-reset:s; padding:0; margin:20px 0}
+ol.steps>li{counter-increment:s; position:relative; padding-left:48px; margin-bottom:20px; color:var(--t2); line-height:1.9}
+ol.steps>li::before{
+  content:counter(s); position:absolute; left:0; top:4px; width:30px; height:30px;
+  border:2px solid var(--orange); border-radius:10px; color:var(--gold);
+  font-size:14px; font-weight:700; line-height:27px; text-align:center;
+  background:linear-gradient(160deg,#221a0c,#151020);
+}
+ol.steps>li b{color:#fff; font-weight:700}
+ol.steps>li .why{display:block; font-size:14.5px; color:var(--t3); margin-top:5px}
+ol.steps>li .why::before{content:"▸ "; color:var(--orange)}
+
+ul.plain{list-style:none; padding:0; margin:18px 0}
+ul.plain li{position:relative; padding-left:24px; margin-bottom:12px; color:var(--t2)}
+ul.plain li::before{content:""; position:absolute; left:2px; top:13px; width:9px; height:9px; background:linear-gradient(135deg,var(--orange),var(--gold)); border-radius:3px}
+ul.plain li b{color:#fff; font-weight:600}
+
+ul.dash{list-style:none; padding:0; margin:18px 0}
+ul.dash li{position:relative; padding-left:22px; margin-bottom:10px; color:var(--t2)}
+ul.dash li::before{content:"—"; position:absolute; left:0; color:var(--orange); font-weight:700}
+
+.check{list-style:none; padding:0; margin:20px 0; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-radius:18px; box-shadow:var(--sh)}
+.check li{position:relative; padding:14px 22px 14px 52px; border-bottom:1px solid var(--line); color:var(--t2); font-size:16px}
+.check li:last-child{border-bottom:0}
+.check li::before{
+  content:""; position:absolute; left:20px; top:19px; width:17px; height:17px;
+  border:2px solid var(--amber); border-radius:5px; background:#151020;
+}
+.check li b{color:#fff; font-weight:600}
+.check .hd{display:block; font-size:13px; letter-spacing:2px; color:var(--gold); padding:16px 22px 0; font-weight:600}
+
+/* ---------- 引文 ---------- */
+blockquote{margin:28px 0; padding:36px 28px 22px 28px; background:linear-gradient(160deg,var(--card2),var(--card)); border:1px solid var(--line2); border-left:5px solid var(--blue); border-radius:0 18px 18px 0; position:relative; box-shadow:var(--sh)}
+blockquote::before{content:"❝"; position:absolute; left:16px; top:0px; font-size:56px; color:var(--orange); opacity:.45; font-family:Georgia,serif; line-height:1}
+blockquote p{margin:0 0 10px; color:#e8eef7; font-size:19px; line-height:1.82; font-style:italic; letter-spacing:.4px}
+blockquote p:last-of-type{margin:0}
+blockquote .src{font-size:13.5px; color:var(--t3); letter-spacing:.5px; font-style:normal; margin-top:14px; display:block}
+blockquote .src::before{content:"\00b7 "; color:var(--orange)}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:80px; padding-top:28px; border-top:1px solid var(--line); font-size:13.5px; color:var(--t3); line-height:2.1}
+.foot b{color:var(--t2); font-weight:600}
+.foot .xt{font-size:13px; letter-spacing:2px; color:var(--gold); margin:0 0 8px}
+.foot ul{list-style:none; padding:0; margin:0 0 18px}
+.foot li{padding-left:20px; position:relative}
+.foot li::before{content:"›"; position:absolute; left:2px; color:var(--orange)}
+.foot a{color:var(--blue); text-decoration:none; border-bottom:1px dotted #3d5f8a}
+.foot a:hover{color:var(--gold)}
+.foot .by{margin-top:20px; padding-top:16px; border-top:1px dashed var(--line); color:var(--t3)}
+.foot .by b{color:var(--gold); font-weight:600; letter-spacing:1px}
+
+/* ---------- 章间导航 ---------- */
+.pn{display:flex; flex-wrap:wrap; gap:6px 26px; margin:0 0 16px; font-size:13.5px; color:var(--t3)}
+.pn a{color:var(--t2)}
+.pn .ar{color:var(--orange); margin-right:6px}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px; padding:11px 18px; gap:13px; font-size:13px}
+  .hero{padding:40px 0 26px}
+  h1{font-size:33px; letter-spacing:.5px}
+  .title-rule{width:64px; height:5px}
+  .lead{font-size:16.5px}
+  h2{font-size:24px; margin-top:52px}
+  h2 .n{font-size:13px}
+  h3{font-size:18px}
+  .pull{font-size:19px; padding:18px 18px 18px 22px}
+  .pull::before{font-size:26px}
+  .card,.panel{padding:20px 18px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  table{table-layout:fixed; font-size:13px}
+  th{font-size:11.5px; padding:8px 7px; white-space:normal; letter-spacing:.5px}
+  td{padding:9px 7px; word-break:break-word}
+  th:first-child,td:first-child{white-space:normal}
+  .stat{flex:1 1 calc(50% - 7px)}
+  .stat b{font-size:27px}
+  blockquote{padding:30px 18px 18px 18px}
+  blockquote p{font-size:17px}
+  blockquote::before{font-size:44px}
+  ol.steps>li{padding-left:42px}
+  .check li{padding:12px 16px 12px 46px}
+  .check li::before{left:16px; top:17px}
+  .shot img{border-radius:14px}
+}
+@media print{
+  body{background:#fff; color:#111; font-size:11pt}
+  .toc{display:none}
+  .card,.panel,.callout,blockquote,.ill,.stat,.check,.tblwrap{background:#fff; border-color:#bbb; box-shadow:none}
+  h1,h2,h3,h4,p,td,li,blockquote p{color:#111}
+  .sec-lead,td:first-child,figcaption{color:#333}
+  .kicker,h2 .n,.card .tt,.panel .tt,.callout .lab,.foot .xt{color:#8a4b00}
+  a{color:#111; text-decoration:none}
+  figure,table,.card,.callout{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <a href="00_目录.html">目录</a><span class="sp">/</span>
+  <a href="#s31" class="cur">3.1 书单从哪儿来</a><span class="sp">/</span>
+  <a href="#s32">3.2 十个问题十本书</a><span class="sp">/</span>
+  <a href="#s33">3.3 一趟七天以上的自助行</a><span class="sp">/</span>
+  <a href="#s34">3.4 一个亲历者讲他的过程</a><span class="sp">/</span>
+  <a href="#s35">3.5 跟住三五件事</a><span class="sp">/</span>
+  <a href="#s36">3.6 三条链同时收紧</a><span class="sp">/</span>
+  <a href="#s37">3.7 热词是被压缩过的经验</a><span class="sp">/</span>
+  <a href="#s38">3.8 研究在书之外</a><span class="sp">/</span>
+  <a href="#slist">做完打勾</a>
+</nav>
+
+<header class="hero">
+  <p class="kicker">课表之外的大学 · 第三章</p>
+  <h1>见<span class="em">天地</span></h1>
+  <div class="title-rule"></div>
+  <p class="lead">课本、新闻、短视频给出的信息都不完整：课本列结论，新闻播片段，短视频传情绪，前因后果都被略去。思辨力要补的正是这部分：找来源、核来源、横向比较，再作判断。材料分四类：书本是写下来的知识，实地是亲自去的现场，亲历者指亲身经历某件事、能讲出过程的人，正在发生的事是眼下正在走的进程；四类都接触过，判断才可靠。</p>
+  <div class="chipline">
+    <span class="chip">四类材料</span><span class="chip">十本书</span><span class="chip t"><a href="大学四年_行路.html">七天自助行</a></span><span class="chip"><a href="大学四年_口述.html">一年六个亲历者</a></span><span class="chip t">三条链</span><span class="chip">流行语年表</span>
+  </div>
+</header>
+
+<figure class="shot wide">
+  <img src="img/03.jpg" alt="清晨的山脊上，一个背着包的人望着云海与层叠的群山">
+  <figcaption>第三章《见天地》配图：清晨的山脊上，一人背着包远望云海与层叠的群山。</figcaption>
+</figure>
+
+<div class="ill">
+<svg viewBox="0 0 480 226" role="img" aria-label="四类材料与各自的失真方式">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">四类材料，各有局限</text>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="0" y="28" width="206" height="40" rx="8"/>
+      <rect x="0" y="78" width="206" height="40" rx="8"/>
+      <rect x="0" y="128" width="206" height="40" rx="8"/>
+      <rect x="0" y="178" width="206" height="40" rx="8"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff">
+      <text x="12" y="46">书本</text>
+      <text x="12" y="96">实地</text>
+      <text x="12" y="146">亲历者</text>
+      <text x="12" y="196">正在发生的事</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="58" y="46">知识滞后于现实</text>
+      <text x="58" y="96">只看到局部</text>
+      <text x="58" y="146">记忆与立场有偏差</text>
+      <text x="118" y="196">信息不全面</text>
+    </g>
+    <g stroke="#2a4066" stroke-width="1.2" fill="none">
+      <path d="M206 48 L246 48"/>
+      <path d="M206 98 L246 98"/>
+      <path d="M206 148 L246 148"/>
+      <path d="M206 198 L246 198"/>
+    </g>
+    <rect x="246" y="84" width="234" height="60" rx="10" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="363" y="108" fill="#3FBFA0" font-size="13" text-anchor="middle" font-weight="600">四类都碰过</text>
+    <text x="363" y="129" fill="#c3d1e3" font-size="12" text-anchor="middle">判断才可靠</text>
+    <text x="0" y="222" fill="#FFD166" font-size="12">只靠一类材料，判断总不全面；四类交叉，各自的缺口才补得上。</text>
+  </g>
+</svg>
+</div>
+
+<p class="pull">四类材料各有局限。书本从写作到出版要时间，里面的内容往往跟不上当下的现实；一个人实地能去的地方有限，亲眼看到的只是局部；亲历者对过程的记忆受时间和立场影响，讲出来的难免有偏差；一件事还在发展时信息尚不充分，一时难以看清全貌。因此四类都要接触，只依赖其中一种，得出的判断都不牢靠。</p>
+
+<hr class="deco">
+
+<h2 id="s31"><span class="n">3.1</span>书单从哪儿来</h2>
+<p class="sec-lead">推荐<a href="大学四年_读书.html">书单</a>参考价值有限：不少用于送礼凑数，也有列单的人自己没翻完。找书还可以从更可靠的几个来源入手：</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>入口</th><th>怎么用</th><th>从哪儿进</th></tr>
+  <tr><td>豆瓣</td><td>看书页评分与长短评，翻底部「喜欢它的人也喜欢」</td><td><a href="大学四年_资源网站.html">book.douban.com</a></td></tr>
+  <tr><td>出版社年度书目</td><td>商务、三联、中华书局、上海译文、译林的年度目录</td><td>各社官网「新书」栏</td></tr>
+  <tr><td>图书馆新书架</td><td>每月一次，翻纸张、开本与版权页</td><td>本校图书馆二楼</td></tr>
+  <tr><td>课程参考书目</td><td>任课教师开的，五到十本，价值最高</td><td>教学大纲附录</td></tr>
+  <tr><td>参考文献</td><td>好书的参考书目往往比正文更值钱</td><td>书末三十页</td></tr>
+</table>
+</div>
+
+<div class="card">
+  <p class="tt">二十分钟决定法 · 一周一次</p>
+  <ol class="steps">
+    <li><b>翻目录，看结构。</b>如果发现章节比例失衡，多半是因为作者堆了资料。
+    <span class="why">目录管着全书的安排，安排乱了，正文写得再好也救不回来。</span></li>
+    <li><b>翻任意一章的中段，看文字。</b>开头通常改过多遍，中段才见得出作者的真实水平。
+    <span class="why">中段写不顺，多半是作者自己也没想清楚。</span></li>
+    <li><b>翻书末的参考文献与索引。</b>
+    <span class="why">三十页以上参考文献说明交代了依据；没有索引的学术书要留神。</span></li>
+    <li><b>三处过关就借，不过关放回去。</b>
+    <span class="why">一周五本，一年看过两百本，借回二三十本，读完十二本。</span></li>
+  </ol>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 226" role="img" aria-label="找书的四级漏斗">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一年找书的漏斗，四层各拦下一批</text>
+    <path d="M30 28 L450 28 L420 70 L60 70 Z" fill="#16274a" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="54" fill="#ffffff" font-size="12.5" text-anchor="middle">五个入口 · 年榜、课程书目、参考文献、新书架、豆瓣</text>
+    <path d="M60 76 L420 76 L390 114 L90 114 Z" fill="#182c50" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="100" fill="#ffffff" font-size="12.5" text-anchor="middle">一周五本，一年看过两百本</text>
+    <path d="M90 120 L390 120 L360 156 L120 156 Z" fill="#1e3358" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="240" y="143" fill="#ffffff" font-size="12.5" text-anchor="middle">借回二三十本</text>
+    <path d="M120 162 L360 162 L340 198 L140 198 Z" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="240" y="185" fill="#3FBFA0" font-size="12.5" text-anchor="middle" font-weight="600">读完十二本</text>
+    <text x="0" y="220" fill="#FFD166" font-size="12">每一层都在替下一层省时间。</text>
+  </g>
+</svg>
+<figcaption>四层之间没有运气成分，全是手上的动作。</figcaption>
+</figure>
+
+<div class="grid2">
+  <div class="card">
+    <p class="tt">其一 · 先看出版社</p>
+    <p>同一本外文书，不同出版社的译本质量差别很大。学术类的可以找商务印书馆、三联书店，科技类的可以找科学出版社、清华大学出版社。</p>
+  </div>
+  <div class="card t">
+    <p class="tt">其二 · 再看译者</p>
+    <p>译者在前言里说明哪部分还没把握，反而让人放心；把话写得太满、处处不留余地的，往往经不起核对。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">其三 · 看印次</p>
+    <p>三年内印五次以上，说明一直有人在买；停在初版的，要么冷僻要么有问题。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">其四 · 看参考文献与索引</p>
+    <p>交代依据的，才敢顺着依据去查；查不下去的，先放一放。</p>
+  </div>
+</div>
+
+<div class="callout warn">
+  <p class="lab">社科书另看一条</p>
+  <p>田野时间不等于出版时间。一本二〇二〇年出版的书，材料可能停在一九九八年；翻开第一章找田野年份，找不到就查作者简历。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一周之内能凑出五本书，每本说得出从哪个入口来、哪一处动了心；凑不齐，回去各走一遍。</p>
+</div>
+
+<p>完整的必读与延伸书目、一年十二本的排法，见<a href="大学四年_读书.html">《读书：怎么读，读什么》</a>。</p>
+
+<p class="pull">看两百本，借三十本，读十二本。找书的功夫不在读，在筛。</p>
+
+<ul class="check">
+  <li class="hd">3.1 书单从哪儿来</li>
+  <li>五个入口各走一遍，每个记下两本书名与来路</li>
+  <li>用四条规则核对手里最近一本书，写下出版社、译者、印次、参考页数</li>
+  <li>找出一本社科书的田野年份，写在扉页上</li>
+  <li>每周留一次二十分钟，按三处翻看法看五本书</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s32"><span class="n">3.2</span>十个问题，十本书</h2>
+<p class="sec-lead">十本书，每一本对应一个会从心里冒出来的问题；选法看近五年五张榜单的命中情况，不凭印象。</p>
+
+<div class="panel">
+  <p class="tt">五张榜单，只做初筛</p>
+  <p>豆瓣年度读书（2021 至 2025）、文津图书奖（第 19 至 21 届）、中国好书（2024、2025 年度）、深圳读书月年度十大好书（第 24 至 26 届）、清华图书馆年度借阅榜。十本全部上过至少一张榜，两本三榜同在。榜单只回答「被读过」，不回答「适合谁」。</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 286" role="img" aria-label="十个问题分四路">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">十个问题，分四路走</text>
+    <rect x="0" y="38" width="128" height="54" rx="8" fill="#132242" stroke="#FFD166" stroke-width="1.4"/>
+    <text x="64" y="62" fill="#FFD166" font-size="12.5" text-anchor="middle" font-weight="600">十个问题</text>
+    <text x="64" y="82" fill="#c3d1e3" font-size="12" text-anchor="middle">各对一本书</text>
+    <g stroke="#2a4066" stroke-width="1.2" fill="none">
+      <path d="M128 65 C160 65 162 46 190 46"/>
+      <path d="M128 65 C160 65 162 110 190 110"/>
+      <path d="M128 65 C160 65 162 174 190 174"/>
+      <path d="M128 65 C160 65 162 238 190 238"/>
+    </g>
+    <g fill="#101d38" stroke-width="1.2">
+      <rect x="190" y="18" width="290" height="54" rx="8" stroke="#3FBFA0"/>
+      <rect x="190" y="82" width="290" height="54" rx="8" stroke="#7FB3E8"/>
+      <rect x="190" y="146" width="290" height="54" rx="8" stroke="#FF8A3D"/>
+      <rect x="190" y="210" width="290" height="54" rx="8" stroke="#FFD166"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff">
+      <text x="204" y="40">人与成长</text>
+      <text x="204" y="104">制度与办事</text>
+      <text x="204" y="168">证据与专业</text>
+      <text x="204" y="232">技术与思想</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="204" y="60">要有光 · 我看见的世界 · 明亮的夜晚</text>
+      <text x="204" y="124">世上为什么要有图书馆 · 置身事内</text>
+      <text x="204" y="188">满世界寻找敦煌 · 足利女童连续失踪事件</text>
+      <text x="204" y="252">芯片简史 · 中文打字机 · 西方现代思想讲义</text>
+    </g>
+    <text x="0" y="280" fill="#b0c0d4" font-size="12">每一本都是那条路上的第一本。</text>
+  </g>
+</svg>
+<figcaption>分四路是排先后：先碰哪一路，看这一年遇上的是哪个问题。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>书名（作者 · 年份）</th><th>回答的问题</th><th>怎么读</th><th>读完做什么</th></tr>
+  <tr><td>梁鸿《要有光》2025</td><td>一个孩子为什么会被困住</td><td>三个县城孩子的部分，三个晚上；问：从哪一步开始下滑</td><td>写五百字，写身边有无相似的人</td></tr>
+  <tr><td>荣新江《满世界寻找敦煌》2024</td><td>旧纸片凭什么还算数</td><td>两章，一章讲一件文书流散；数清每个判断前的证据</td><td>画一张证据链图</td></tr>
+  <tr><td>杨素秋《世上为什么要有图书馆》2024</td><td>体制内能把一件事做成什么样</td><td>整本，一周；记两栏：哪些事她能定，哪些定不了</td><td>两栏就是将来要认的边界</td></tr>
+  <tr><td>清水洁《足利女童连续失踪事件》2022</td><td>一个人怎么被错判十七年</td><td>整本，两个晚上</td><td>列出被推翻的三个「确凿证据」</td></tr>
+  <tr><td>汪波《芯片简史》2023</td><td>一块芯片是怎么被造出来的</td><td>「光刻」与「代工」两段；问：产业链为何分这么多段</td><td>画分段图，标出谁制约谁</td></tr>
+  <tr><td>刘擎《西方现代思想讲义》2021</td><td>今天这套说法从哪儿来</td><td>每周两讲，十周；每讲写一句解决了哪个问题</td><td>十九句连成问题地图</td></tr>
+  <tr><td>兰小欢《置身事内》2021</td><td>政府在经济里到底做什么</td><td>前四章，重点是「土地财政」</td><td>找本省近三年土地出让收入对照</td></tr>
+  <tr><td>李飞飞《我看见的世界》2024</td><td>一个人怎么走到想去的地方</td><td>整本；标三处：选择、放弃、五年后</td><td>对照自己今年的选择</td></tr>
+  <tr><td>崔恩荣《明亮的夜晚》2023</td><td>上一代人怎么活过来的</td><td>当小说读，两个周末，不做笔记</td><td>问长辈三件事：二十岁做什么、最难哪年</td></tr>
+  <tr><td>墨磊宁《中文打字机》2023</td><td>技术怎么改造一种文字</td><td>前三章，看「常用字表」的思路</td><td>查今天输入法的词库规模</td></tr>
+</table>
+</div>
+
+<div class="card">
+  <p class="tt">另外几条，一并适用</p>
+  <ul class="dash">
+    <li>读到三十页仍无进展，换一本；不相契，与阅读能力未必有关。</li>
+    <li>有些书可以先看影像：纪录片、讲座录像、有声书，都算阅读量。</li>
+    <li>读完在扉页记三行：触动的、不同意的、想起的。</li>
+  </ul>
+</div>
+
+<p>一年十二本，四年四十八本，这是够得着的量：每月一本，寒暑假各补两本。同一门类另有九本，完整书目见<a href="大学四年_读书.html">《读书：怎么读，读什么》</a>。</p>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>十本读完，说得出每本回答哪个问题、同意哪一处、不同意哪一处。把十本书翻完是一回事，能讲清自己同意哪里、不同意哪里，才是把书练过一遍。</p>
+</div>
+
+<p class="pull">一本书读没读进去，看的是合上之后那个问题还留不留得住。</p>
+
+<ul class="check">
+  <li class="hd">3.2 十个问题十本书</li>
+  <li>从十本里先挑两本，一周之内借到手</li>
+  <li>第一本按表里的读法开读，不当成通读任务</li>
+  <li>读完在扉页写三行，标上日期</li>
+  <li>十二本排进日历，寒暑假各留两本的位置</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s33"><span class="n">3.3</span>一趟七天以上的自助行</h2>
+<p class="sec-lead">屏幕上的图像是别人选过的取景框；去哪里、站多久、拍哪一面，都由拍的人定了。实地走一趟，拿到的是没被裁剪过的经验。</p>
+
+<div class="grid2">
+  <div class="card">
+    <p class="tt">钱从哪来</p>
+    <p>一次七天，一千五到两千五够用。提前三个月攒，每月扣三百，存进一张不绑支付软件的卡。</p>
+  </div>
+  <div class="card t">
+    <p class="tt">票怎么买</p>
+    <p>12306 提前十五天放票；学生票每学年四次单程，硬座半价、动车二等座七五折，以购票页现行规定为准。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">住哪儿</p>
+    <p>青旅六十到一百一晚。选它不是为便宜，是公共区域有人，填得上吃饭与等车的空。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">路线怎么定</p>
+    <p>一条主线，一百到三百公里，白天走，晚上住。以长沙为例，七天线列在后面表里。</p>
+  </div>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>天</th><th>行程</th><th>做什么</th></tr>
+  <tr><td>D1</td><td>长沙至怀化，高铁两小时</td><td>逛老城，找一家本地人多的粉店</td></tr>
+  <tr><td>D2</td><td>怀化至洪江，班车两小时</td><td>看古商城，问货物从前怎么走水路</td></tr>
+  <tr><td>D3</td><td>洪江至黔阳，班车一小时</td><td>走一圈古城墙，记一段长度</td></tr>
+  <tr><td>D4</td><td>黔阳至镇远，火车三小时</td><td>空白日，不作安排</td></tr>
+  <tr><td>D5</td><td>镇远城内</td><td>走完一条巷子，翻一小时县志</td></tr>
+  <tr><td>D6</td><td>镇远至凯里，火车一小时</td><td>逛集市，记十样不认识的物产</td></tr>
+  <tr><td>D7</td><td>凯里返长沙</td><td>路上把账结清</td></tr>
+</table>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 216" role="img" aria-label="七天行程时间轴，两天留空">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一条七天线，两天故意留空</text>
+    <line x1="20" y1="108" x2="460" y2="108" stroke="#2a4066" stroke-width="1.4"/>
+    <g fill="#16274a" stroke="#3FBFA0" stroke-width="1.4">
+      <circle cx="20" cy="108" r="11"/>
+      <circle cx="93" cy="108" r="11"/>
+      <circle cx="166" cy="108" r="11"/>
+      <circle cx="385" cy="108" r="11"/>
+      <circle cx="458" cy="108" r="11"/>
+    </g>
+    <g fill="#132242" stroke="#FFD166" stroke-width="1.4" stroke-dasharray="3 2">
+      <circle cx="239" cy="108" r="11"/>
+      <circle cx="312" cy="108" r="11"/>
+    </g>
+    <g fill="#FFD166" font-size="12.5" text-anchor="middle">
+      <text x="20" y="92">D1</text>
+      <text x="93" y="92">D2</text>
+      <text x="166" y="92">D3</text>
+      <text x="239" y="92">D4</text>
+      <text x="312" y="92">D5</text>
+      <text x="385" y="92">D6</text>
+      <text x="458" y="92">D7</text>
+    </g>
+    <g font-size="12" text-anchor="middle">
+      <text x="20" y="72" fill="#b0c0d4">老城</text>
+      <text x="93" y="72" fill="#b0c0d4">古商城</text>
+      <text x="166" y="72" fill="#b0c0d4">古城墙</text>
+      <text x="239" y="72" fill="#FFD166">空白日</text>
+      <text x="312" y="72" fill="#b0c0d4">县志</text>
+      <text x="385" y="72" fill="#b0c0d4">集市</text>
+      <text x="458" y="72" fill="#b0c0d4">结账</text>
+    </g>
+    <g font-size="12" fill="#c3d1e3" text-anchor="middle">
+      <text x="20" y="134">长沙</text>
+      <text x="93" y="134">怀化</text>
+      <text x="166" y="134">洪江</text>
+      <text x="239" y="134">黔阳</text>
+      <text x="312" y="134">镇远</text>
+      <text x="385" y="134">凯里</text>
+      <text x="458" y="134">长沙</text>
+    </g>
+    <g stroke="#FFD166" stroke-width="1.2" fill="none">
+      <path d="M239 152 L239 160 L312 160 L312 152"/>
+    </g>
+    <text x="275" y="178" fill="#FFD166" font-size="12" text-anchor="middle">两天不作安排</text>
+    <text x="0" y="208" fill="#b0c0d4" font-size="12">主线一百到三百公里，班次票价以出发前的查询为准。</text>
+  </g>
+</svg>
+<figcaption>留空的两天往往最有收获：走错一次路，跟本地人聊上半天，都是排不进日程的东西。</figcaption>
+</figure>
+
+<div class="panel">
+  <p class="tt">每天做两件事</p>
+  <p>一天记账，一天写五百字。账分四栏：交通、住宿、吃饭、其它，一天一结。字写三样：走了哪条路，见了什么，哪一处与想象的不一样。</p>
+</div>
+
+<div class="callout warn">
+  <p class="lab">安全三条</p>
+  <p>行程发给两个人，每到一个地方发一次定位；住宿只订有前台、能开票的；夜里不坐黑车，不跟刚认识的人去第二个地方。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>回来拿出三样东西：一本账、七篇字、一条自己走出来的路线图。只有照片，算旅游。</p>
+</div>
+
+<p class="pull">行程里必须留两天不作安排；走错一次路，临时改一次目的地，都是计划之外才有的收获。</p>
+
+<ul class="check">
+  <li class="hd">3.3 一趟七天以上的自助行</li>
+  <li>定一条一百到三百公里的主线，写进日历</li>
+  <li>按月扣三百，攒满三个月，存进不绑支付软件的卡</li>
+  <li>填好学生票优惠区间，提前十五天买去程票</li>
+  <li>排出七天表，两天故意留空，行程发给两个人</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s34"><span class="n">3.4</span>一个亲历者讲他的过程</h2>
+<p class="sec-lead">书上写的是结果，人讲的是过程。结果清楚，过程里才有真东西：哪一步差点办砸，哪一句话说错了，哪个环节靠人情才过去。这些书里通常不写。</p>
+
+<div class="grid3">
+  <div class="card t">
+    <p class="tt">师兄师姐</p>
+    <p>已工作三到五年的，还记得自己刚入职时的样子。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">带教师傅</p>
+    <p>实习单位的，知道哪一环卡人，哪句话省半天。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">相邻从业者</p>
+    <p>市场监管、生态环境、检察院的，同一件事的另一个侧面。</p>
+  </div>
+</div>
+
+<div class="card">
+  <p class="tt">怎么开口 · 当面或邮件</p>
+  <p>当面走过去问，比发微信有效；三句话说完：哪个专业哪一级，对哪件事有兴趣，占用二十分钟。邮件控制在两百字以内，模板如下。</p>
+</div>
+
+<blockquote>
+  <p>某老师：我是食品药品环境犯罪侦查技术专业二〇二六级学生某某某。您在课上提到某某案，我想请教三个问题，能否占用二十分钟，地点时间都随您；若不方便，能否推荐一位更合适的老师，谢谢。</p>
+</blockquote>
+
+<div class="tblwrap">
+<table>
+  <tr><th>十个问题</th><th>这一问在问什么</th></tr>
+  <tr><td>刚入职的头三个月，主要在做哪些事</td><td>入门三个月最真实的状态</td></tr>
+  <tr><td>这一年里最费时间的是哪一类工作</td><td>时间到底耗在哪</td></tr>
+  <tr><td>有没有一件事，做之前没想到会这么难</td><td>难处的分布</td></tr>
+  <tr><td>最被看重的能力是什么，写材料算不算</td><td>评价标准的权重</td></tr>
+  <tr><td>哪门课最有用，哪门几乎没用上</td><td>课程与岗位的对应</td></tr>
+  <tr><td>重读一次大学，会多做什么、少做什么</td><td>事后视角的取舍</td></tr>
+  <tr><td>这一行最容易出错的地方在哪里</td><td>风险点在哪</td></tr>
+  <tr><td>哪件事被外面的人普遍误解</td><td>内外的信息差</td></tr>
+  <tr><td>最近在读什么，或看哪一类材料</td><td>这一行的信息源</td></tr>
+  <tr><td>想往这个方向走，两年该准备什么</td><td>可执行的建议</td></tr>
+</table>
+</div>
+
+<div class="panel">
+  <p class="tt">记什么 · 六列</p>
+  <p>当场记关键词，当天整理成六列：姓名、单位与岗位、日期、我问了什么、原话三句、下一步做什么。原话不转述，转述会把自己的理解掺进去。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年六个人，每人六列记满；至少两个的说法与常识不一样，全一样就换一类人去找。</p>
+</div>
+
+<p class="pull">结果人人都会讲，过程要一个一个问出来；问出来的过程，比书上的结论更经得起对照。</p>
+
+<ul class="check">
+  <li class="hd">3.4 一个亲历者讲他的过程</li>
+  <li>列出六个可找的人，按三类各两个排好顺序</li>
+  <li>把三句开口的话练到脱口而出</li>
+  <li>邮件模板存进草稿箱，控制在两百字以内</li>
+  <li>访谈当天建六列表，原话留三句</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s35"><span class="n">3.5</span>跟住三五件事</h2>
+<p class="sec-lead">看新闻的人多，<a href="大学四年_跟事.html">跟事</a>的人少。看是消费，跟是研究。方法只有一句：<span class="u">每条消息回到原始文件</span>，<span class="uw">每次判断写下日期</span>。</p>
+
+<div class="card">
+  <p class="tt">选哪几件 · 四个标准同时满足</p>
+  <ol class="steps">
+    <li><b>与自己的专业或将来岗位有关。</b>
+    <span class="why">无关的热闹，跟一个月就断了。</span></li>
+    <li><b>有公开的原始材料。</b>通报、判决、标准、统计表都算。
+    <span class="why">没有原始材料，跟下去只剩层层转述。</span></li>
+    <li><b>时间跨度在一年以上。</b>看得出前后变化。
+    <span class="why">跨度不够，看不出谁改了主意。</span></li>
+    <li><b>有明确的结果。</b>判了、罚了、改了、停了，四者之一。
+    <span class="why">没有结果的事，无从校验判断。</span></li>
+  </ol>
+</div>
+
+<ul class="dash">
+  <li><b>一个案子。</b>从立案通报跟到判决，食药环领域的案子材料多、周期清楚。</li>
+  <li><b>一项政策或标准。</b>某类食品添加剂使用标准的修订，某类污染物排放限值的调整。</li>
+  <li><b>一个地方。</b>本县或本市的一类案件，连续几年看数量与类型的变化。</li>
+</ul>
+
+<div class="panel">
+  <p class="tt">每周三个固定时段 · 共八十分钟</p>
+  <p>周一扫三个源，只记标题与链接；周三挑一条，找原始文件，摘三段原文；周日写两百字：这件事走到哪一步，与上次的判断差在哪。</p>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>编号</th><th>日期</th><th>事件</th><th>首报来源</th><th>原始文件</th><th>关键数字</th><th>当时的判断</th><th>后来实际</th><th>偏差原因</th></tr>
+  <tr><td>A-03</td><td>2026-04-11</td><td>某地通报一起生产销售不符合安全标准食品案</td><td>市市场监管局官网</td><td>行政处罚决定书〔2026〕XX 号</td><td>涉案货值 18 万元</td><td>会移送公安</td><td>已移送，5 月立案</td><td>判断对了，慢了二十天</td></tr>
+</table>
+</div>
+
+<div class="callout warn">
+  <p class="lab">有一列不能空</p>
+  <p>「<mark>我当时的判断</mark>」这一列不能空。空着，一年之后就没有可比的东西，这套方法退化成剪报。错了要写清错在哪：量看小了、环节看漏了，还是信了第一版报道。</p>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 176" role="img" aria-label="一个案子分四步">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一个案子，四步走完</text>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="0" y="34" width="96" height="70" rx="8"/>
+      <rect x="126" y="34" width="96" height="70" rx="8"/>
+      <rect x="252" y="34" width="96" height="70" rx="8"/>
+      <rect x="378" y="34" width="96" height="70" rx="8"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff" text-anchor="middle">
+      <text x="48" y="56">通报阶段</text>
+      <text x="174" y="56">侦查批捕</text>
+      <text x="300" y="56">起诉阶段</text>
+      <text x="426" y="56">判决阶段</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4" text-anchor="middle">
+      <text x="48" y="76">时间地点</text>
+      <text x="174" y="76">罪名从</text>
+      <text x="300" y="76">指控事实</text>
+      <text x="426" y="76">认定的金额</text>
+      <text x="48" y="92">物品金额措施</text>
+      <text x="174" y="92">哪一条起</text>
+      <text x="300" y="92">与通报对照</text>
+      <text x="426" y="92">量刑情节理由</text>
+    </g>
+    <g stroke="#3FBFA0" stroke-width="1.3" fill="none">
+      <path d="M96 70 L120 70"/><path d="M115 65 L122 70 L115 75"/>
+      <path d="M222 70 L246 70"/><path d="M241 65 L248 70 L241 75"/>
+      <path d="M348 70 L372 70"/><path d="M367 65 L374 70 L367 75"/>
+    </g>
+    <text x="0" y="134" fill="#FFD166" font-size="12">通报与判决之间往往隔着一年以上。</text>
+    <text x="0" y="156" fill="#b0c0d4" font-size="12">每步只抄要素与原文，不作评价。</text>
+  </g>
+</svg>
+<figcaption>罪名的变化往往就是案件的转折点，把它和通报里的罪名并排放，转折点自己会显出来。</figcaption>
+</figure>
+
+<div class="tblwrap">
+<table>
+  <tr><th>事</th><th>入口</th><th>网址</th></tr>
+  <tr><td>判例与裁判要旨</td><td>人民法院案例库</td><td>rmfyalk.court.gov.cn</td></tr>
+  <tr><td>判决文书</td><td>中国裁判文书网</td><td>wenshu.court.gov.cn</td></tr>
+  <tr><td>食品、药品、特种设备处罚与抽检</td><td>市场监管总局</td><td>samr.gov.cn</td></tr>
+  <tr><td>药品与医疗器械</td><td>国家药监局</td><td>nmpa.gov.cn</td></tr>
+  <tr><td>环境案件与处罚</td><td>生态环境部</td><td>mee.gov.cn</td></tr>
+  <tr><td>刑事案件办理动态</td><td>最高人民检察院</td><td>spp.gov.cn</td></tr>
+  <tr><td>本地案件与人事</td><td>本市公安局、检察院、法院官网「通报」栏</td><td>各市官网</td></tr>
+</table>
+</div>
+
+<div class="panel">
+  <p class="tt">文件怎么存</p>
+  <p>一件事一个文件夹，命名统一为 2026_A某案；文件按「日期_内容_来源」命名，如 20260411_行政处罚决定书_市监局.pdf。四年下来，这就是对某类案件的全部积累。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年之后，每件事能写出八百字复盘，表里至少有三条当初的判断与后来实际不符；一条不符都没有，是判断写得太含糊。</p>
+</div>
+
+<p class="pull">每条消息回到原始文件，每次判断写下日期；两件事都做到，才称得上跟住一件事。</p>
+
+<ul class="check">
+  <li class="hd">3.5 跟住三五件事</li>
+  <li>按四个标准选定三到五件事，写清原始材料入口</li>
+  <li>建一张九列表，第一行先填编号与日期</li>
+  <li>每周留出三个固定时段，按表执行</li>
+  <li>第一个月内把一件事的四步走完一遍</li>
+  <li>文件夹按 2026_A某案 的规则建好</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s36"><span class="n">3.6</span>这十年，三条链同时收紧</h2>
+<p class="sec-lead">数据本身给不出答案，同一个数可以支持相反的结论。判断一个数有没有用，看它能不能嵌进一条因果链；嵌不进去的数，只是谈资。</p>
+
+<figure>
+<svg viewBox="0 0 480 292" role="img" aria-label="三条链汇成一个交点">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">三条链，一个交点</text>
+    <g fill="#101d38" stroke-width="1.2">
+      <rect x="0" y="28" width="204" height="52" rx="8" stroke="#3FBFA0"/>
+      <rect x="0" y="94" width="204" height="52" rx="8" stroke="#7FB3E8"/>
+      <rect x="0" y="160" width="204" height="52" rx="8" stroke="#FFD166"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff">
+      <text x="12" y="48">第一条链 · 人的再生产</text>
+      <text x="12" y="114">第二条链 · 上升通道</text>
+      <text x="12" y="180">第三条链 · 注意力</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4">
+      <text x="12" y="68">每一环成本在涨，回报在跌</text>
+      <text x="12" y="134">学历供给先到，岗位后到</text>
+      <text x="12" y="200">停留时长就是平台的收入</text>
+    </g>
+    <g stroke="#2a4066" stroke-width="1.2" fill="none">
+      <path d="M204 54 C224 54 226 116 246 116"/>
+      <path d="M204 120 L246 120"/>
+      <path d="M204 186 C224 186 226 124 246 124"/>
+    </g>
+    <rect x="246" y="88" width="124" height="76" rx="10" fill="#0d2a24" stroke="#3FBFA0" stroke-width="1.4"/>
+    <text x="308" y="114" fill="#3FBFA0" font-size="13" text-anchor="middle" font-weight="600">交点</text>
+    <text x="308" y="134" fill="#ffffff" font-size="12" text-anchor="middle">不确定性上升</text>
+    <text x="308" y="152" fill="#FFD166" font-size="12" text-anchor="middle">确定性被重新定价</text>
+    <path d="M370 126 L394 126" stroke="#3FBFA0" stroke-width="1.3" fill="none"/>
+    <path d="M389 121 L396 126 L389 131" fill="none" stroke="#3FBFA0" stroke-width="1.3"/>
+    <rect x="396" y="88" width="84" height="76" rx="8" fill="#101d38" stroke="#2a4066" stroke-width="1.2"/>
+    <text x="438" y="120" fill="#ffffff" font-size="12.5" text-anchor="middle">七种现象</text>
+    <text x="438" y="142" fill="#b0c0d4" font-size="12" text-anchor="middle">各得一句解释</text>
+    <rect x="0" y="230" width="480" height="38" rx="8" fill="#182c50"/>
+    <text x="240" y="253" fill="#c3d1e3" font-size="12" text-anchor="middle">考公买确定性，躺平退出竞价，搭子降维护成本，活人感补偿真实</text>
+    <text x="0" y="286" fill="#FF6B4A" font-size="12">这套解释只管时点，不管历史。</text>
+  </g>
+</svg>
+<figcaption>三条链各走各的，最后交在同一个点上；交点上的现象看起来互不相关，账是同一笔。</figcaption>
+</figure>
+
+<div class="card t">
+  <p class="tt">第一条链 · 人的再生产</p>
+  <p>结婚、生育、养育、教育、就业，每一环的成本在涨，回报在跌；户籍与公共服务把「安家」变成一道障碍。账算不过来，婚育就往后推、往小里缩。</p>
+</div>
+
+<div class="card b">
+  <p class="tt">第二条链 · 上升通道</p>
+  <p>学历扩张在先，岗位结构在后，回报期被拉长；民营部门预期收缩，使「稳定」产生溢价。国考超过考研，比的不是价值观，是回收期。</p>
+</div>
+
+<div class="card g">
+  <p class="tt">第三条链 · 注意力</p>
+  <p>平台靠停留时长挣钱，推荐回路强化既有偏好，比较范围从熟人扩到全网。共同经验被拆成分众经验，同一届人看到的世界不一样。</p>
+</div>
+
+<div class="statrow">
+  <div class="stat"><b>792</b><span>2025 年出生人口（万人）</span></div>
+  <div class="stat"><b>1131</b><span>2025 年死亡人口（万人）</span></div>
+  <div class="stat"><b>339</b><span>2025 年人口减少（万人）</span></div>
+  <div class="stat"><b>371.8</b><span>2026 国考过审（万人）</span></div>
+  <div class="stat"><b>98:1</b><span>2026 国考报录比</span></div>
+</div>
+
+<div class="tblwrap">
+<table>
+  <tr><th>数据</th><th>口径与年份</th><th>出处</th></tr>
+  <tr><td>出生 792 万、死亡 1131 万、减少 339 万人</td><td>2025 年全年</td><td>国家统计局统计公报，2026 年 2 月</td></tr>
+  <tr><td>结婚登记 676.3 万对，增加 65.7 万对</td><td>2025 年全年</td><td>民政部，2026 年 2 月</td></tr>
+  <tr><td>家庭户均规模 2.62 人；2010 年 3.10 人</td><td>七普、六普</td><td>国家统计局普查公报</td></tr>
+  <tr><td>常住人口城镇化率 67.89%</td><td>2025 年末</td><td>国家统计局，2026 年 1 月</td></tr>
+  <tr><td>高校毕业生 1270 万人，同比增加 48 万</td><td>2026 届</td><td>教育部，2025 年 11 月</td></tr>
+  <tr><td>国考过审 371.8 万，报录比约 98 比 1，招录 3.81 万人</td><td>2026 年度</td><td>国家公务员局，2025 年 10 月</td></tr>
+  <tr><td>考研报名 343 万；2023 年峰值 474 万，三年少 131 万</td><td>2026 年考试</td><td>教育部，2025 年 11 月</td></tr>
+  <tr><td>人均单日 201 分钟，微短剧 129 分钟</td><td>2025 年 12 月</td><td>中国网络视听协会研究报告（2026），2026 年 4 月</td></tr>
+</table>
+</div>
+
+<div class="callout warn">
+  <p class="lab">查不到</p>
+  <p>两条流传较广的说法，公开渠道检索不到原始出处与口径：「日本漫画在头部视频中的占比从近六成降到不足一成」，以及「国创内容占比上升」的量化版本。按规矩记「查不到」，不写进正文。</p>
+</div>
+
+<p>过审不等于参考，参考不等于录用。2026 年度国考的 3.81 万个计划里，2.8 万余个在县（区）级及以下机构；报名热与到岗冷同时存在。交点上的现象各得一句：考公是买确定性，躺平是退出竞价，全职儿女是家庭内部消化，轻体力活是降成本换确定，谷子与演唱会是小额即时的回报，搭子是降低关系的维护成本，活人感是对真实性的补偿。这套解释只管时点，不管历史：用二〇一二年的同一套数据，会得出相反的结论。</p>
+
+<div class="panel">
+  <p class="tt">三条自查路径 · 各两小时</p>
+  <ol class="steps">
+    <li><b>打开《中国统计年鉴》。</b>抄近十年的出生率、死亡率、自然增长率，看趋势是不是一条直线。
+    <span class="why">直线与折线说明的是两回事。</span></li>
+    <li><b>找失业率那张表。</b>看 16 至 24 岁那一段与总体差多少。
+    <span class="why">登记与调查两个口径并存，先弄清自己在看哪一个。</span></li>
+    <li><b>打开 CNNIC 历年报告。</b>找网民规模与人均上网时长，与自己每天的手机使用时间对一下。
+    <span class="why">平均数与个人时间对得上，这条链才落在自己身上。</span></li>
+  </ol>
+</div>
+
+<div class="callout warn">
+  <p class="lab">口径</p>
+  <p>每个数回到原文，先问口径：常住还是户籍，含不含在校生，全年还是年末，全国还是城镇。口径不问清，这个数就是别人的论据。</p>
+</div>
+
+<p class="pull">三条链同时收紧，交点只有一个：不确定性上升，确定性被重新定价。</p>
+
+<ul class="check">
+  <li class="hd">3.6 这十年三条链同时收紧</li>
+  <li>抄一行近十年的出生率、死亡率、自然增长率</li>
+  <li>抄一张 16 至 24 岁失业率与总体的对照表</li>
+  <li>把国考过审、考研报名、毕业生三个数排成三年</li>
+  <li>给自己每天的手机使用时间记一周，与人均上网时长对照</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s37"><span class="n">3.7</span>热词是被压缩过的社会经验</h2>
+<p class="sec-lead">一个词能传开，说明很多人有同一件说不出口的事。热词的功能是命名处境，不是表达个性。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>年份</th><th>当年的热词</th><th>处在哪一层</th></tr>
+  <tr><td>2021</td><td>躺平、破防、鸡娃</td><td>「我不要」</td></tr>
+  <tr><td>2022</td><td>精神内耗、雪糕刺客</td><td>「我累」</td></tr>
+  <tr><td>2023</td><td>搭子、情绪价值、特种兵式旅游、显眼包</td><td>要一点确定的舒服</td></tr>
+  <tr><td>2024</td><td>班味、松弛感、<span class="it">city 不 city</span></td><td>要一点确定的舒服</td></tr>
+  <tr><td>2025</td><td>韧性、谷子、活人感、赛博对账、数字游民</td><td>「我要真的」</td></tr>
+</table>
+</div>
+
+<p>五年连起来是一条线：从「我不要」，到「我累」，到「我要一点确定的舒服」，再到「我要真的」。抵抗的口气在减弱，自我照料的口气在增强，最后落到真假上。这并非人变软了；同一个结构压了五年，人的应对跟着换了方式。</p>
+
+<figure>
+<svg viewBox="0 0 480 226" role="img" aria-label="热词拆解树">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">一个热词，拆成三层</text>
+    <rect x="150" y="24" width="180" height="36" rx="18" fill="#132242" stroke="#FFD166" stroke-width="1.4"/>
+    <text x="240" y="47" fill="#FFD166" font-size="12.5" text-anchor="middle" font-weight="600">躺平</text>
+    <g stroke="#2a4066" stroke-width="1.2" fill="none">
+      <path d="M240 60 C220 60 120 62 75 88"/>
+      <path d="M240 60 L240 88"/>
+      <path d="M240 60 C260 60 360 62 405 88"/>
+    </g>
+    <g fill="#101d38" stroke-width="1.2">
+      <rect x="0" y="88" width="150" height="62" rx="8" stroke="#3FBFA0"/>
+      <rect x="165" y="88" width="150" height="62" rx="8" stroke="#7FB3E8"/>
+      <rect x="330" y="88" width="150" height="62" rx="8" stroke="#FF8A3D"/>
+    </g>
+    <g font-size="12.5" fill="#ffffff" text-anchor="middle">
+      <text x="75" y="112">情绪层</text>
+      <text x="240" y="112">结构层</text>
+      <text x="405" y="112">使用层</text>
+    </g>
+    <g font-size="12" fill="#b0c0d4" text-anchor="middle">
+      <text x="75" y="134">它说的情绪</text>
+      <text x="240" y="134">造成它的结构</text>
+      <text x="405" y="134">谁在用它，谁不用</text>
+    </g>
+    <g stroke="#2a4066" stroke-width="1.2">
+      <line x1="75" y1="150" x2="75" y2="162"/>
+      <line x1="240" y1="150" x2="240" y2="162"/>
+      <line x1="405" y1="150" x2="405" y2="162"/>
+    </g>
+    <g fill="#101d38" stroke="#2a4066" stroke-width="1.2">
+      <rect x="0" y="162" width="150" height="38" rx="8"/>
+      <rect x="165" y="162" width="150" height="38" rx="8"/>
+      <rect x="330" y="162" width="150" height="38" rx="8"/>
+    </g>
+    <g font-size="12" fill="#c3d1e3" text-anchor="middle">
+      <text x="75" y="185">问：因哪件事传开</text>
+      <text x="240" y="185">问：替代了哪个旧词</text>
+      <text x="405" y="185">问：有没有对应产品</text>
+    </g>
+    <text x="0" y="218" fill="#FFD166" font-size="12">三个问题问完，才看得见分层。</text>
+  </g>
+</svg>
+<figcaption>最后一步最要紧：谁在用它、对谁用、谁不用。这一步最容易被跳过，也最能看出分层。</figcaption>
+</figure>
+
+<div class="card">
+  <p class="tt">每年十二月，存榜单</p>
+  <p>两个来源固定看：《咬文嚼字》的年度十大流行语，国家语言资源监测与研究中心发布的年度十大流行语。两份都存，命名 2026_流行语；四年四个文件夹，就是自己这一届人的情绪年表。</p>
+</div>
+
+<div class="panel">
+  <p class="tt">四个问题，每个词都问一遍</p>
+  <ol class="steps">
+    <li><b>第一次大规模出现在什么时候，因为哪件事。</b>
+    <span class="why">时间点对不上，用法就变了味。</span></li>
+    <li><b>它替代了哪个旧词，新旧的差别在哪。</b>
+    <span class="why">新旧之差，往往就是处境的差别。</span></li>
+    <li><b>谁在用它，谁不用它。</b>父母那一辈用不用，用人单位用不用。
+    <span class="why">这一步最容易被跳过，也最能看出分层。</span></li>
+    <li><b>它有没有对应的商业产品。</b>
+    <span class="why">有产品，说明已经被市场收编。</span></li>
+  </ol>
+</div>
+
+<ul class="dash">
+  <li>不把热词当结论。词是入口，不是答案。</li>
+  <li>不用热词替代调查。一个词再准，也替不了一份原始文件。</li>
+  <li>不只在自己的信息流里取样。在首页上刷屏，可能只是算法认为这个人爱看。</li>
+</ul>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>每年十二月两个榜单各存一份；对当年任意一个热词，能回答清四个问题，且说得出它对应哪一层结构。第三问答不出，说明取样还停在一层。</p>
+</div>
+
+<p class="pull">一个词能传开，是因为很多人有同一件说不出口的事；解压的办法是回到结构。</p>
+
+<ul class="check">
+  <li class="hd">3.7 热词是被压缩过的社会经验</li>
+  <li>建一个文件夹，命名 2026_流行语，存两份年度榜单</li>
+  <li>从当年榜单里选三个词，各回答一遍四个问题</li>
+  <li>给每个词写三行：情绪、结构、谁在用</li>
+  <li>把常看的十个账号列出来，标出各自喂什么</li>
+</ul>
+
+<hr class="deco">
+
+<h2 id="s38"><span class="n">3.8</span>研究在书之外</h2>
+<p class="sec-lead">书永远滞后于现象。一本田野研究从进场到出版通常要三到五年：进场半年，整理一年，写作一年，审稿排版又一年。读到一本「讲当下」的书，那个当下往往已经是三五年前。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>类型</th><th>来源</th><th>优点</th><th>坑</th></tr>
+  <tr><td>官方统计</td><td>国家统计局年度公报与年鉴，stats.gov.cn</td><td>口径最硬，可逐年比</td><td>滞后半年以上，粒度粗</td></tr>
+  <tr><td>部门数据</td><td>教育部 moe.gov.cn、人社部 mohrss.gov.cn</td><td>有分项，有口径说明</td><td>各年口径会变，需看脚注</td></tr>
+  <tr><td>行业报告</td><td>CNNIC 报告，cnnic.net.cn；《中国网络视听发展研究报告》</td><td>一年一次，附抽样方法</td><td>行业自己发布，有立场</td></tr>
+  <tr><td>平台报告</td><td>B 站、小红书、抖音的年度报告</td><td>最新最快</td><td>先看它想卖什么</td></tr>
+  <tr><td>学术蓝皮书</td><td>《青少年蓝皮书》《青年发展报告》、复旦《中国青年网民社会心态调查报告》</td><td>有抽样、有编码</td><td>周期长，结论保守</td></tr>
+  <tr><td>期刊论文</td><td>《中国青年研究》《青年探索》《中国青年社会科学》，国家哲学社会科学文献中心 ncpssd.org</td><td>有方法，有综述</td><td>单篇样本小，别当定论</td></tr>
+</table>
+</div>
+
+<figure>
+<svg viewBox="0 0 480 244" role="img" aria-label="六类材料按更新速度与口径硬度的分布">
+  <g font-family="sans-serif">
+    <text x="0" y="14" fill="#b0c0d4" font-size="13">六类材料：更新速度与口径硬度</text>
+    <line x1="60" y1="206" x2="470" y2="206" stroke="#2a4066" stroke-width="1.2"/>
+    <line x1="60" y1="206" x2="60" y2="30" stroke="#2a4066" stroke-width="1.2"/>
+    <g stroke="#1f3355" stroke-width="1">
+      <line x1="160" y1="206" x2="160" y2="30"/>
+      <line x1="260" y1="206" x2="260" y2="30"/>
+      <line x1="360" y1="206" x2="360" y2="30"/>
+      <line x1="60" y1="156" x2="470" y2="156"/>
+      <line x1="60" y1="106" x2="470" y2="106"/>
+      <line x1="60" y1="56" x2="470" y2="56"/>
+    </g>
+    <text x="470" y="224" fill="#b0c0d4" font-size="12" text-anchor="end">更新速度 →</text>
+    <text x="60" y="24" fill="#b0c0d4" font-size="12">↑ 口径硬度</text>
+    <text x="68" y="44" fill="#b0c0d4" font-size="12">又硬又慢，适合打底</text>
+    <text x="344" y="198" fill="#b0c0d4" font-size="12">又新又快，先看想卖什么</text>
+    <g fill="#3FBFA0"><circle cx="100" cy="52" r="5.5"/></g>
+    <text x="112" y="56" fill="#c3d1e3" font-size="12">官方统计</text>
+    <g fill="#7FB3E8"><circle cx="140" cy="72" r="5.5"/><circle cx="172" cy="88" r="5.5"/></g>
+    <text x="152" y="76" fill="#c3d1e3" font-size="12">学术蓝皮书</text>
+    <text x="184" y="92" fill="#c3d1e3" font-size="12">期刊论文</text>
+    <g fill="#FFD166"><circle cx="236" cy="104" r="5.5"/></g>
+    <text x="248" y="108" fill="#c3d1e3" font-size="12">部门数据</text>
+    <g fill="#F5A623"><circle cx="268" cy="124" r="5.5"/></g>
+    <text x="280" y="128" fill="#c3d1e3" font-size="12">行业报告</text>
+    <g fill="#FF6B4A"><circle cx="410" cy="172" r="5.5"/></g>
+    <text x="398" y="176" fill="#c3d1e3" font-size="12" text-anchor="end">平台报告</text>
+    <text x="0" y="238" fill="#FF8A3D" font-size="12">六类没有一类占全；搭配着读，短的互补。</text>
+  </g>
+</svg>
+<figcaption>横轴越靠右越快，纵轴越靠上越硬；没有一类材料同时占两样，这是读材料先要认的账。</figcaption>
+</figure>
+
+<div class="card">
+  <p class="tt">每周九十分钟 · 四个动作</p>
+  <ol class="steps">
+    <li><b>看官方统计的新发布。</b>只记标题，不记结论。
+    <span class="why">只记标题，是防把发布会当结论。</span></li>
+    <li><b>读一份行业报告的摘要与方法。</b>正文跳读。
+    <span class="why">方法与摘要决定这份报告能信到什么程度。</span></li>
+    <li><b>读一篇论文。</b>只读摘要、方法、结论三段。
+    <span class="why">三段读完能听出争论在哪。</span></li>
+    <li><b>写两百字。</b>这一周最反常识的一个数是什么，为什么反常识。
+    <span class="why">反常识的数最经得起追问，也最容易被滑过去。</span></li>
+  </ol>
+</div>
+
+<ul class="dash">
+  <li>《中国青年研究》《青年探索》《中国青年社会科学》，三种期刊常备。</li>
+  <li>中国社科院青少年与社会问题研究室，复旦发展研究院传播与国家治理研究中心。</li>
+  <li>四五个来源即可，多了看不过来；看不过来的来源，等于没有。</li>
+</ul>
+
+<div class="grid3">
+  <div class="card t">
+    <p class="tt">AI 陪伴与情感替代</p>
+    <p>工具能接住多少，关系会不会变薄。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">算法与青少年心理</p>
+    <p>海特那本书引起的争论还在继续。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">平台劳动与零工保障</p>
+    <p>灵活与保障之间的账，怎么算都有人吃亏。</p>
+  </div>
+  <div class="card t">
+    <p class="tt">「断亲」与家庭结构</p>
+    <p>是关系淡漠，还是居住方式变了。</p>
+  </div>
+  <div class="card b">
+    <p class="tt">县域教育与阶层再生产</p>
+    <p>教育还能不能改命，数据给了两种答案。</p>
+  </div>
+  <div class="card g">
+    <p class="tt">情绪经济与谷子、卡牌</p>
+    <p>小额、即时、确定的回报，长成了大市场。</p>
+  </div>
+</div>
+
+<p>每个议题都能在国家哲学社会科学文献中心或知网找到十篇以上文献，选三篇读，就能听出争论在哪；三个来源说同一套话，多半都是转的第四手。</p>
+
+<div class="callout warn">
+  <p class="lab">纪律</p>
+  <p>平台报告先看它想卖什么，学术报告先看它怎么取样。两份都读，才知道一个数是事实还是话术。</p>
+</div>
+
+<div class="callout ok">
+  <p class="lab">判据</p>
+  <p>一年之后，手里有一个自己的材料库：六个来源各存三份，每份说得出口径与立场，外加十二篇「最反常识的一个数」。</p>
+</div>
+
+<p class="pull">书的滞后有三五年，研究的入口就在这三五年的缝里。</p>
+
+<ul class="check">
+  <li class="hd">3.8 研究在书之外</li>
+  <li>建六个来源的收藏夹，每个放三份今年的报告</li>
+  <li>每周留出一段九十分钟，按四个动作走一遍</li>
+  <li>给每份材料写三行：口径、立场、能信到什么程度</li>
+  <li>选一个议题，找三篇文献，写出争论在哪</li>
+  <li>攒够十二篇「最反常识的一个数」</li>
+</ul>
+
+<hr class="warm">
+
+<h2 id="slist">做完打勾</h2>
+<p class="sec-lead">做完打勾，做不完的写上下一步的日期。清单不写形容词，只写动作。</p>
+
+<ul class="check">
+  <li class="hd">第三章 · 做完打勾</li>
+  <li>五个找书入口各走一遍，二十分钟决定法用过五次</li>
+  <li>十本书读完，每本在扉页留三行，标上日期</li>
+  <li>一趟七天以上的自助行走完，一本账、七篇字、一张路线图齐了</li>
+  <li>六个亲历者问完，六列表记满，原话各留三句</li>
+  <li>三到五件事跟满一年，每件事一篇八百字复盘</li>
+  <li>三条链的数据各抄一行，交点上的现象各有一句解释</li>
+  <li>两份年度流行语榜单存进文件夹，三个词答完四个问题</li>
+  <li>六个材料来源各存三份，十二篇「最反常识的一个数」攒够</li>
+</ul>
+
+<div class="callout">
+  <p class="lab">一句话</p>
+  <p class="big">本章的要义，是让四类材料交叉使用。读书提供系统知识，实地提供现场观察，亲历者提供过程信息，正在发生的事提供当下情况；四类都接触过，判断才可靠。</p>
+</div>
+
+<div class="foot">
+  <p class="pn"><a href="00_目录.html"><span class="ar">‹</span>目录</a><a href="02_课本教不会的六样.html"><span class="ar">‹</span>第二章 · 课本教不会的六样</a><a href="04_见自己.html">第四章 · 见自己<span class="ar">›</span></a></p>
+  <p class="by">课表之外的大学 · 第三章　<b>BY ytf2000@sina.com</b></p>
+</div>
+
+</div>
+</body>
+</html>

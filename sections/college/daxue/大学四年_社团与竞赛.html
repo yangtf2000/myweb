@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社团与竞赛 · 大学四年课外</title>
+<style>
+:root{
+  --bg:#050a1a; --s1:#101d38; --s2:#16274a; --s3:#182c50;
+  --t1:#ffffff; --t2:#c3d1e3; --t3:#b0c0d4;
+  --teal:#5DCAA5; --amber:#EF9F27; --blue:#85B7EB; --rose:#F0997B; --violet:#c084fc;
+  --line:#1f3355; --line2:#2a4066;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--t1);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",sans-serif;
+  font-size:16.5px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 28px 90px}
+.toc{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 -28px;padding:11px 28px;display:flex;gap:13px;overflow-x:auto;white-space:nowrap;
+  font-size:13.5px;letter-spacing:.3px}
+.toc a{color:var(--t3);text-decoration:none}
+.toc a:hover{color:var(--teal)}
+.toc .sp{color:var(--line2)}
+.hero{padding:54px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13.5px;letter-spacing:2px;color:var(--teal);margin:0 0 16px}
+h1{font-size:33px;line-height:1.38;font-weight:600;margin:0 0 16px;letter-spacing:.5px}
+.lead{font-size:17px;color:var(--t2);margin:0 0 22px}
+.metarow{display:flex;flex-wrap:wrap;gap:18px;font-size:13.5px;color:var(--t3)}
+.metarow b{color:var(--t2);font-weight:500}
+h2{font-size:23px;font-weight:600;margin:56px 0 10px;line-height:1.5}
+h2 .n{color:var(--teal);font-size:14.5px;letter-spacing:2px;display:block;margin-bottom:7px;font-weight:500}
+h3{font-size:17.5px;font-weight:600;margin:30px 0 8px;color:var(--t1)}
+.hook{color:var(--t2);font-size:15.5px;margin:0 0 6px;padding-left:13px;border-left:2px solid var(--line2)}
+p{margin:0 0 14px;color:var(--t2)}
+p b,li b{color:#fff;font-weight:500}
+.box{margin:26px 0;padding:19px 23px;background:var(--s3);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.box .lab{font-size:13.5px;letter-spacing:1.5px;color:var(--teal);margin:0 0 8px}
+.box p{margin:0 0 9px}
+.box p:last-child{margin:0}
+.box b{color:#fff;font-weight:500}
+.box ol,.box ul{margin:0;padding-left:20px}
+.box li{margin-bottom:8px}
+.steps{counter-reset:st;margin:10px 0 0;padding:0;list-style:none}
+.steps li{position:relative;padding:9px 0 9px 34px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:none}
+.steps li::before{counter-increment:st;content:counter(st);position:absolute;left:0;top:11px;
+  width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);color:var(--teal);
+  font-size:12px;line-height:21px;text-align:center}
+.card{margin:22px 0;padding:17px 20px;background:var(--s2);border-left:3px solid var(--amber);border-radius:0 12px 12px 0}
+.card .tt{font-size:17px;color:var(--t1);font-weight:600;margin:0 0 8px}
+.card p{margin:0 0 9px;font-size:15px}
+.card p:last-child{margin:0}
+.callout{margin:22px 0;padding:16px 20px;border-radius:0 12px 12px 0;font-size:15px;color:var(--t2)}
+.callout.ok{background:#0d2a24;border-left:3px solid var(--teal)}
+.callout.warn{background:#2a1c12;border-left:3px solid var(--amber)}
+.callout .lab{font-size:13.5px;letter-spacing:1.5px;margin:0 0 7px;font-weight:600}
+.callout.ok .lab{color:var(--teal)}
+.callout.warn .lab{color:var(--amber)}
+.callout p{margin:0}
+.tblwrap{margin:20px 0;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14.5px;color:var(--t2)}
+th,td{border:1px solid var(--line2);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--s2);color:var(--t1);font-weight:600}
+td b{color:#fff}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.06em;padding:1px 8px;border-radius:20px;
+  color:var(--teal);border:1px solid var(--line2);margin-left:8px;vertical-align:2px}
+.pull{margin:30px 0;padding:22px 26px;background:var(--s3);border:1px solid var(--line2);border-radius:14px;
+  font-size:19px;line-height:1.7;color:var(--t1);position:relative}
+.pull::before{content:"❝";position:absolute;left:14px;top:6px;font-size:34px;color:var(--teal);opacity:.5}
+.pull p{margin:0;padding-left:30px;color:var(--t1)}
+.check{list-style:none;margin:14px 0;padding:0}
+.check li{position:relative;padding:7px 0 7px 28px;font-size:15px;color:var(--t2);border-bottom:1px solid var(--line)}
+.check li:last-child{border-bottom:none}
+.check li::before{content:"";position:absolute;left:4px;top:15px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--teal)}
+.check li.hd{color:var(--teal);font-size:13.5px;letter-spacing:1px;padding-left:0;border-bottom:1px solid var(--line2)}
+.check li.hd::before{display:none}
+.pn{margin-top:54px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px}
+.pn a{color:var(--t3);text-decoration:none}
+.pn a:hover{color:var(--teal)}
+.pn .ar{color:var(--teal);margin-right:4px}
+.foot{margin-top:40px;font-size:13.5px;color:var(--t3);line-height:2}
+.foot .ext{color:var(--teal);letter-spacing:1px;margin:0 0 8px}
+.foot a{color:var(--blue);text-decoration:none}
+.foot a:hover{text-decoration:underline}
+@media (max-width:640px){
+  .wrap{padding:0 18px 70px}
+  .toc{margin:0 -18px;padding:11px 18px;gap:11px}
+  h1{font-size:25px}
+  h2{font-size:20px;margin-top:42px}
+  .tblwrap{font-size:13px}
+}
+@media print{
+  body{background:#fff;color:#111;font-size:11pt}
+  .toc{display:none}
+  .box,.card,.callout,.pull{background:#f4f6f9;border-color:#ccc}
+  .pn,.foot{border-color:#ccc}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc"><a href="05_见众生.html">‹ 返回 · 第五章 · 见众生</a></nav>
+
+<header class="hero">
+  <p class="kicker">专篇 · 课外怎么选</p>
+  <h1>社团与竞赛</h1>
+  <p class="lead">社团和竞赛是课外最占时间的两类事。选对了长本事，选错了耗掉主业。这一篇把社团分成三类，给一个选法、一个退出线，再说说竞赛怎么挑。</p>
+  <div class="metarow">
+    <span><b>连着</b> 《组队这件事》《上场》</span>
+    <span><b>来源</b> 见《见众生》章</span>
+  </div>
+</header>
+
+<h2 id="s1"><span class="n">分辨</span>三类社团</h2>
+<p>社团看着都热闹，按和成长的关系分三类，待遇不同。</p>
+
+<div class="tblwrap">
+<table>
+  <tr><th>类</th><th>特征</th><th>对待</th></tr>
+  <tr><td>学术 / 专业类</td><td>和主业或方向直接相关，有指导老师、有产出</td><td>优先进，能扛事就扛</td></tr>
+  <tr><td>兴趣类</td><td>体育、艺术、公益，纯凭爱好</td><td>留一两个调剂，不贪多</td></tr>
+  <tr><td>综测 / 功利类</td><td>主要为加分、凑履历，活动空泛</td><td>算清性价比，不盲从</td></tr>
+</table>
+</div>
+
+<div class="box">
+  <p class="lab">警校生的权重</p>
+  <p>联考、体测、专业课是主业，占去大部分精力。社团的总量要控制在「不影响主业还能有余」的限度内。一类社团最多一个，兴趣类最多一个，功利类能免则免。</p>
+</div>
+
+<h2 id="s2"><span class="n">选法</span>怎么进、怎么待</h2>
+<p>进社团看两件事：有没有真产出，能不能碰到比自己强的人。只有拍照和例会的，待着长不了什么。进去之后从具体活干起，别一上来想当头，把一件小事做漂亮，机会自然来。</p>
+
+<ol class="steps">
+  <li><b>看产出。</b>问一句「这个社团去年做出了什么」，答不上来的，多半是空转。</li>
+  <li><b>看人。</b>有没有指导老师、有没有高年级能手带着，这比名字好听重要。</li>
+  <li><b>从小事做起。</b>先接一个具体任务做完，再谈别的。</li>
+</ol>
+
+<h2 id="s3"><span class="n">退出</span>什么时候该走</h2>
+<p>社团不是签了约不能退。三条线到了，体面退出比硬撑划算。</p>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>挂名不做事最亏：名单上有名字，时间被例会占着，履历上却写不出一件具体成果。要退就干净退，别留个挂名身份耗着。</p>
+</div>
+
+<ul class="check">
+  <li class="hd">退出 · 三条线</li>
+  <li>占了主业时间，课业或体测开始滑坡</li>
+  <li>待了一学期，写不出一件自己做成的事</li>
+  <li>只剩凑人头、拍合影，没有真活</li>
+</ul>
+
+<h2 id="s4"><span class="n">竞赛</span>怎么挑值得的</h2>
+<p>竞赛和社团同理，看产出和含金量。优先选有指导、有往届作品、能写进材料的；纯凑人数、奖状人人有的，性价比低。组队参赛的方法另立 <a href="大学四年_组队.html">《组队这件事》</a>，里面讲分工与复盘表。</p>
+
+<div class="card">
+  <p class="tt">参赛前问三句</p>
+  <p>「这个比赛往届作品长什么样？」「指导老师肯不肯带、怎么带？」「赢了能写进哪类材料？」三句都答得清，再投入时间。</p>
+</div>
+
+<h2 id="s5"><span class="n">避错</span>一个总坑</h2>
+
+<div class="callout warn">
+  <p class="lab">坑</p>
+  <p>社团竞赛一股脑全加，开学热闹、期中难以为继。总量失控时，先减掉功利类和兴趣类，保住主业和那一两个真出产的学术类。挂名身份一个不留。</p>
+</div>
+
+<div class="pull"><p>课外是主业的延伸，不是主业的对手。选得准，它替主业加分；选得滥，它先把主业拖垮。</p></div>
+
+<div class="pn">
+  <a href="05_见众生.html"><span class="ar">‹</span>返回 · 第五章 · 见众生</a>
+</div>
+
+<div class="foot">
+  <p class="by">BY ytf2000@sina.com</p>
+</div>
+
+</div>
+</body>
+</html>
