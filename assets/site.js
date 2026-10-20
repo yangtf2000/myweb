@@ -123,8 +123,7 @@
       crumb += '<span class="crumb"><a href="' + root + 'index.html">首页</a> &nbsp;/&nbsp; ' + escHtml(name) + '</span>';
     }
     top.innerHTML = crumb + '<span class="spacer"></span>'
-      + '<button class="sound-btn" id="soundBtn" type="button" aria-label="音效开关">🔊 音效</button>'
-      + '<a class="home" href="' + root + 'index.html">YTF 首页 ↗</a>';
+      + '<button class="sound-btn" id="soundBtn" type="button" aria-label="音效开关">🔊 音效</button>';
     document.body.insertBefore(top, document.body.firstChild);
   }
   var sb = document.getElementById('soundBtn');
