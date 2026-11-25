@@ -1,0 +1,1200 @@
+<!
+
+
+
+
+
+DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>城正街历史文化街区GIS平台 V1.0</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js">
+</script>
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js">
+</script>
+<script src="buildings_gcj02.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "Microsoft YaHei", "Segoe UI", Roboto, sans-serif; background:#f5f5f5; overflow:hidden; }
+  
+  .sidebar { position:absolute; top:0; left:0; width:320px; height:100vh; background:#fff; box-shadow:2px 0 8px rgba(0,0,0,.15); z-index:1000; display:flex; flex-direction:column; }
+  .sidebar-header { padding:16px; background:#1a73e8; color:#fff; }
+  .sidebar-header h1 { font-size:16px; font-weight:500; }
+  .sidebar-header .subtitle { font-size:12px; opacity:0.8; margin-top:4px; }
+  
+  .search-box { padding:12px 16px; border-bottom:1px solid #eee; }
+  .search-box input { width:100%; padding:8px 12px; border:1px solid #ddd; border-radius:4px; font-size:13px; outline:none; }
+  .search-box input:focus { border-color:#1a73e8; }
+  
+  .stats-bar { display:flex; padding:10px 16px; background:#f8f9fa; border-bottom:1px solid #eee; font-size:12px; color:#666; }
+  .stats-bar .stat { flex:1; text-align:center; }
+  .stats-bar .stat-num { font-size:16px; font-weight:600; color:#1a73e8; }
+  
+  .layer-section { padding:12px 16px; border-bottom:1px solid #eee; }
+  .layer-title { font-size:13px; font-weight:600; color:#333; margin-bottom:8px; }
+  .layer-item { display:flex; align-items:center; padding:6px 0; font-size:13px; color:#555; cursor:pointer; }
+  .layer-item input { margin-right:8px; }
+  .layer-item .color { width:12px; height:12px; border-radius:2px; margin-right:8px; }
+  .layer-item .count { margin-left:auto; color:#999; font-size:11px; }
+  
+  .poi-list { flex:1; overflow-y:auto; }
+  .poi-list-header { padding:10px 16px; font-size:12px; color:#999; background:#f8f9fa; border-bottom:1px solid #eee; position:sticky; top:0; }
+  .poi-item { padding:10px 16px; border-bottom:1px solid #f0f0f0; cursor:pointer; transition:background 0.15s; }
+  .poi-item:hover { background:#f0f7ff; }
+  .poi-item.active { background:#e3f2fd; border-left:3px solid #1a73e8; }
+  .poi-name { font-size:13px; color:#333; font-weight:500; }
+  .poi-addr { font-size:11px; color:#999; margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  
+  #map { position:absolute; top:0; left:320px; right:0; bottom:0; }
+  
+  .map-controls { position:absolute; top:12px; right:12px; z-index:999; display:flex; flex-direction:column; gap:8px; }
+  .map-btn { width:36px; height:36px; border-radius:4px; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.3); border:none; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
+  .map-btn:hover { background:#f5f5f5; }
+  
+  .popup-content { font-size:13px; min-width:200px; }
+  .popup-content h4 { color:#1a73e8; margin-bottom:8px; font-size:14px; }
+  .popup-row { display:flex; margin-bottom:4px; }
+  .popup-label { color:#666; width:70px; flex-shrink:0; }
+  .popup-value { color:#333; flex:1; }
+  
+  .custom-poi-icon { background:transparent; border:none; }
+  .poi-dot { width:12px; height:12px; border-radius:50%; background:#ff5722; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,.3); }
+  
+  .legend { position:absolute; bottom:20px; right:12px; z-index:999; background:rgba(255,255,255,.95); padding:10px 12px; border-radius:6px; box-shadow:0 1px 4px rgba(0,0,0,.2); font-size:12px; }
+  .legend-item { display:flex; align-items:center; margin-bottom:4px; }
+  .legend-item:last-child { margin-bottom:0; }
+  .legend-color { width:14px; height:14px; border-radius:2px; margin-right:8px; }
+</style>
+
+<script src="buildings_gcj02.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h1>🏘️ 城正街历史文化街区</h1>
+    <div class="subtitle">小区POI分布 GIS平台 V1.0</div>
+  </div>
+  
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索小区名称..." oninput="filterPOI()">
+  </div>
+  
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num" id="totalCount">0</div>
+      <div>总小区数</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="visibleCount">0</div>
+      <div>显示中</div>
+    </div>
+  </div>
+  
+  <div class="layer-section">
+    <div class="layer-title">图层控制</div>
+    <div class="layer-item">
+      <input type="checkbox" id="layerImportedBoundary" checked onchange="toggleImportedBoundary(this.checked)">
+      <div class="color" style="background:#ff0000;"></div>
+      <span>片区范围线</span>
+    </div>
+    <div class="layer-item">
+      <input type="checkbox" id="layerImportedCommunity" checked onchange="toggleImportedCommunity(this.checked)">
+      <div class="color" style="background:#4caf50;"></div>
+      <span>社区范围线</span>
+    </div>
+    <div class="layer-item">
+      <input type="checkbox" id="layerStreetBoundary" checked onchange="toggleStreetBoundary(this.checked)">
+      <div class="color" style="background:#2196f3;"></div>
+      <span>街道分界线</span>
+    </div>
+    <div class="layer-item">
+      <input type="checkbox" id="layerBuildings" onchange="toggleBuildings(this.checked)">
+      <div class="color" style="background:#9e9e9e;"></div>
+      <span>建筑轮廓</span>
+    </div>
+    <div class="layer-item">
+      <input type="checkbox" checked onchange="toggleHistoricalLayer(this.checked)">
+      <div class="color" style="background:#9c27b0;"></div>
+      <span>历史地标</span>
+      <span class="count">10</span>
+    </div>
+    <div class="layer-item">
+      <input type="checkbox" checked onchange="togglePOILayer(this.checked)">
+      <div class="color" style="background:#ff5722;"></div>
+      <span>住宅小区</span>
+      <span class="count">40</span>
+    </div>
+  </div>
+  
+  <div class="poi-list">
+    <div class="poi-list-header">小区列表</div>
+    <div id="poiList">
+      <div style="padding:6px 12px;background:#e3f2fd;font-weight:600;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 雨湖路街道</div>
+      <div style="display:none;">
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 1. 风车坪社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.859225,112.903925],16);L.popup().setLatLng([27.859225,112.903925]).setContent('<b>1-1 雨湖城市盒子</b><br>所属社区：风车坪社区<br>地址：风车坪巷与民主路交叉口西北160米').openOn(map)">1-1 雨湖城市盒子</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.855462,112.90635],16);L.popup().setLatLng([27.855462,112.90635]).setContent('<b>1-2 九汇小区</b><br>所属社区：风车坪社区<br>地址：人民路与新梁街交叉口西北40米').openOn(map)">1-2 九汇小区</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 2. 车站路社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.860785,112.908466],16);L.popup().setLatLng([27.860785,112.908466]).setContent('<b>2-1 新景公寓</b><br>所属社区：车站路社区<br>地址：幸福湾巷与车站路交叉口西60米').openOn(map)">2-1 新景公寓</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.861447,112.90971],16);L.popup().setLatLng([27.861447,112.90971]).setContent('<b>2-2 惠景院区</b><br>所属社区：车站路社区<br>地址：车站路与幸福湾巷交叉口东北80米').openOn(map)">2-2 惠景院区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.8653,112.909602],16);L.popup().setLatLng([27.8653,112.909602]).setContent('<b>2-3 电业局云塘小区</b><br>所属社区：车站路社区<br>地址：车站路43号').openOn(map)">2-3 电业局云塘小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.86132,112.912729],16);L.popup().setLatLng([27.86132,112.912729]).setContent('<b>2-4 五景花园小区</b><br>所属社区：车站路社区<br>地址：雨湖路208号').openOn(map)">2-4 五景花园小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.860453,112.912496],16);L.popup().setLatLng([27.860453,112.912496]).setContent('<b>2-5 工人新村</b><br>所属社区：车站路社区<br>地址：工人新村巷与雨湖路交叉口北120米').openOn(map)">2-5 工人新村</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 3. 和平桥社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.861956,112.915183],16)">3-1 和平新村</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.858341,112.914794],16)">3-2 雨湖花苑</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.856614,112.913728],16)">3-3 平湖小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.8558,112.912543],16)">3-4 湖园公寓</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 4. 雨湖路社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.867084,112.91305],16)">4-1 杨家湾公安小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.867661,112.912702],16)">4-2 湘压新村</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.865575,112.913375],16)">4-3 亭子塘小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.865313,112.91306],16)">4-4 基建营东</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.863554,112.911039],16)">4-5 粮贸小区</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 5. 关圣殿社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.868066,112.906126],16)">5-1 鸿元小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.85781,112.901934],16)">5-2 大庆新村</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.867107,112.922799],16)">5-3 梦真园</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 6. 古梁巷社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;color:#999;">（片区外围点位，已移出）</div>
+        </div>
+      </div>
+      <div style="padding:6px 12px;background:#e8f5e9;font-weight:600;font-size:12px;cursor:pointer;margin-top:4px;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 城正街街道</div>
+      <div style="display:none;">
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 7. 熙春路社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.865567,112.93134],16)">7-1 新景家园</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.868494,112.934771],16)">7-2 旺城天誉</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.866256,112.928142],16)">7-3 城郊香樟园南院</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.868618,112.92706],16)">7-4 百姓家园</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.866606,112.918662],16)">7-5 大同花苑</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.867114,112.92554],16)">7-6 龙岸家园</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 8. 瞻岳门社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.860134,112.921311],16)">8-1 文西小区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.862495,112.924771],16)">8-2 泗州庵</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.864777,112.923818],16)">8-3 金果小区</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 9. 泗洲庵社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.865255,112.926329],16)">9-1 城发潭州壹号院</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.864205,112.929101],16)">9-2 潭州壹号院一期</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.867454,112.930721],16)">9-3 新景家园文昌苑</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 10. 洗脚桥社区</div>
+        <div style="display:none;font-size:12px;">
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.867526,112.928609],16)">10-1 洗脚桥社区</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.864182,112.91727],16)">10-2 蔚霞新村</div>
+          <div style="padding:3px 28px;cursor:pointer;" onclick="map.setView([27.864306,112.918244],16)">10-3 繁城西村</div>
+        </div>
+        <div style="padding:4px 16px;background:#f8f8f8;font-size:12px;cursor:pointer;" onclick="var i=this.nextElementSibling;i.style.display=i.style.display==='none'?'block':'none'">▶ 11. 三义井社区</div>
+        <div style="display:none;font-size:12px;color:#999;">
+          <div style="padding:3px 28px;">（无片区内点位）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div class="map-controls">
+  <button class="map-btn" onclick="zoomIn()" title="放大">+</button>
+  <button class="map-btn" onclick="zoomOut()" title="缩小">−</button>
+  <button class="map-btn" onclick="resetView()" title="复位">⌂</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-color" style="background:#ff5722;"></div>
+    <span>住宅小区</span>
+  </div>
+</div>
+
+<script>
+
+
+
+// 城正街片区中心
+const CENTER = [27.863, 112.915]; // 纬度, 经度
+const DEFAULT_ZOOM = 14;
+
+var streetBoundaryData = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"JDMC": "JDMC", "MJ": "MJ", "MH": "MH"}, "geometry": {"type": "Polygon", "coordinates": [[[112.9362486, 27.86981789], [112.93531749, 27.86926493], [112.93410405, 27.86869506], [112.93233694, 27.86779788], [112.9314396, 27.8673655], [112.93093207, 27.86714736], [112.93085395, 27.86711378], [112.92987452, 27.8668542], [112.92804939, 27.86643185], [112.92771261, 27.86636112], [112.92742264, 27.86630599], [112.92674748, 27.86615755], [112.92596963, 27.86593573], [112.92487098, 27.86552009], [112.92350859, 27.86491242], [112.92230074, 27.86435143], [112.92085666, 27.86373129], [112.92084572, 27.86375194], [112.9208111, 27.86381383], [112.92072319, 27.86394717], [112.92070954, 27.86396392], [112.9204382, 27.86421517], [112.9204178, 27.8642362], [112.92013675, 27.86458355], [112.9200352, 27.86469171], [112.92002259, 27.86470153], [112.92000866, 27.86470935], [112.9199301, 27.86474297], [112.9199194, 27.86474671], [112.91971702, 27.86479933], [112.9194688, 27.86486291], [112.91906699, 27.8649803], [112.91862219, 27.86510543], [112.91827303, 27.86520552], [112.91790771, 27.86529802], [112.91785515, 27.865308], [112.9178252, 27.86531247], [112.91780221, 27.86531337], [112.91778503, 27.86531145], [112.9177109, 27.86529846], [112.9175699, 27.86527108], [112.91740522, 27.86523612], [112.91708339, 27.86516999], [112.91684876, 27.86512182], [112.91630949, 27.8649989], [112.91562068, 27.86485437], [112.91538348, 27.86482493], [112.91511455, 27.86480073], [112.91496305, 27.86541068], [112.91702035, 27.86662532], [112.91694421, 27.86671285], [112.91694205, 27.86671533], [112.91684037, 27.86684032], [112.91678281, 27.86690401], [112.91667648, 27.86704632], [112.91663103, 27.86711268], [112.91657176, 27.86716951], [112.91656637, 27.86721435], [112.91656622, 27.86722598], [112.91657931, 27.86722577], [112.91658206, 27.86729482], [112.91658658, 27.86729467], [112.91658744, 27.86731782], [112.91658214, 27.86731783], [112.91657781, 27.86731784], [112.91661501, 27.86737052], [112.9166179, 27.86737423], [112.91659743, 27.86739402], [112.91663805, 27.86745656], [112.91673214, 27.86765085], [112.91671754, 27.86774419], [112.91671993, 27.86774477], [112.91677598, 27.86777978], [112.91681463, 27.86781258], [112.91691053, 27.8678939], [112.91694166, 27.86795735], [112.91696995, 27.86803856], [112.91697644, 27.86805968], [112.91699746, 27.8681123], [112.91701776, 27.86815983], [112.91704934, 27.86815113], [112.9170759, 27.8682209], [112.91710959, 27.86831008], [112.91714504, 27.86840376], [112.91710616, 27.8684156], [112.9171136, 27.8684401], [112.91712213, 27.86846818], [112.917086, 27.86847273], [112.91708728, 27.86847717], [112.91683615, 27.86896661], [112.9167293, 27.86917601], [112.91673282, 27.86917815], [112.91671176, 27.86922215], [112.916715, 27.86927686], [112.91681718, 27.86929815], [112.91681983, 27.86929928], [112.91688757, 27.86932816], [112.91694274, 27.86935168], [112.91695285, 27.86938768], [112.91696498, 27.86943089], [112.91696469, 27.86943143], [112.91696167, 27.86943178], [112.91685754, 27.86962623], [112.91677191, 27.86978189], [112.9167733, 27.86978371], [112.91675286, 27.86987314], [112.91675197, 27.86987703], [112.9166853, 27.86998426], [112.91661242, 27.8700853], [112.91650927, 27.87018045], [112.9164623, 27.87020144], [112.91638508, 27.87022311], [112.91630111, 27.87023584], [112.91626469, 27.87024426], [112.91625204, 27.87024816], [112.91623991, 27.87025345], [112.91623264, 27.87025801], [112.91622864, 27.87026354], [112.9162254, 27.87027111], [112.91622085, 27.87029348], [112.91621924, 27.8703063], [112.91621942, 27.87035301], [112.91622207, 27.87038367], [112.91622511, 27.87039893], [112.91624564, 27.87045896], [112.91626395, 27.87050402], [112.9162708, 27.87051592], [112.91630083, 27.8705467], [112.91634186, 27.87058767], [112.91638052, 27.87062435], [112.91638791, 27.87063294], [112.9164051, 27.87065864], [112.91641028, 27.87067064], [112.91641331, 27.87070975], [112.91641681, 27.87078041], [112.91641814, 27.87084821], [112.91643021, 27.87090835], [112.91645736, 27.87097896], [112.916496, 27.87104435], [112.9165027, 27.87105217], [112.91652757, 27.87107339], [112.91653726, 27.87107943], [112.91654182, 27.87108173], [112.91655689, 27.87111064], [112.91649154, 27.87122979], [112.9165652, 27.87125999], [112.91656385, 27.87126356], [112.91648049, 27.87141889], [112.91730719, 27.87175195], [112.91841464, 27.87220788], [112.91953924, 27.87262753], [112.91976342, 27.87218774], [112.92007101, 27.87161788], [112.92030164, 27.87117617], [112.92078645, 27.87026213], [112.92112178, 27.86963301], [112.92119654, 27.86949533], [112.92153065, 27.86965698], [112.92189486, 27.86981094], [112.922828, 27.87019293], [112.92363188, 27.87052364], [112.92440348, 27.87084489], [112.92477858, 27.87101796], [112.92523771, 27.87121379], [112.92539522, 27.8712721], [112.92577341, 27.8714121], [112.92649382, 27.87170237], [112.92699436, 27.87190948], [112.92772514, 27.8722099], [112.92825543, 27.87242093], [112.9288914, 27.87268144], [112.92903536, 27.87274184], [112.92929025, 27.8728488], [112.93004698, 27.87315496], [112.93041992, 27.87329564], [112.93070441, 27.873383], [112.93130568, 27.87355768], [112.93136786, 27.87357529], [112.93198239, 27.87374943], [112.93214649, 27.87377961], [112.93245553, 27.87383646], [112.93270436, 27.87388283], [112.93333353, 27.87399014], [112.93367054, 27.87403976], [112.93396247, 27.87409372], [112.93419633, 27.87415923], [112.93441737, 27.87424864], [112.93454573, 27.87432017], [112.93465966, 27.87439], [112.93470168, 27.87441936], [112.93485633, 27.87454341], [112.93497767, 27.87464599], [112.93540839, 27.875106], [112.93541513, 27.87511371], [112.93542402, 27.87512387], [112.93544389, 27.87511398], [112.93553699, 27.87506764], [112.9356273, 27.8750198], [112.93574639, 27.87495672], [112.93594229, 27.87484948], [112.93612836, 27.87473971], [112.93627266, 27.87464518], [112.93635915, 27.87458744], [112.93635941, 27.87458727], [112.93644308, 27.87453141], [112.93659604, 27.87442797], [112.93670261, 27.87434511], [112.93683206, 27.87424262], [112.9368326, 27.8742422], [112.93684682, 27.87423094], [112.93695434, 27.87414371], [112.93697725, 27.87412453], [112.93707389, 27.87404364], [112.93712296, 27.87399704], [112.93713668, 27.87398401], [112.93724941, 27.87387001], [112.93725518, 27.87386433], [112.93737149, 27.87374976], [112.93738384, 27.87373759], [112.9373875, 27.87373399], [112.93739677, 27.87372724], [112.93743033, 27.87369026], [112.93745517, 27.87366041], [112.93770842, 27.87339033], [112.93783219, 27.87324475], [112.93809249, 27.87291702], [112.93817051, 27.87280286], [112.93828996, 27.87262808], [112.93855874, 27.87220222], [112.93887576, 27.87172017], [112.93899916, 27.87153061], [112.93778831, 27.87089225], [112.93713821, 27.87049226], [112.9362486, 27.86981789]]]}}, {"type": "Feature", "properties": {"JDMC": "JDMC", "MJ": "MJ", "MH": "MH"}, "geometry": {"type": "Polygon", "coordinates": [[[112.9170759, 27.8682209], [112.91705144, 27.86815666], [112.91703927, 27.86816002], [112.91703693, 27.86815455], [112.91701776, 27.86815983], [112.91699746, 27.8681123], [112.91697644, 27.86805968], [112.91696995, 27.86803856], [112.91696552, 27.86802585], [112.91694166, 27.86795735], [112.91691053, 27.8678939], [112.91681463, 27.86781258], [112.91677598, 27.86777978], [112.91675271, 27.86776524], [112.91671993, 27.86774477], [112.91671754, 27.86774419], [112.91673214, 27.86765085], [112.91672359, 27.8676332], [112.91664604, 27.86747306], [112.91663805, 27.86745656], [112.91659743, 27.86739402], [112.9166179, 27.86737423], [112.91661501, 27.86737052], [112.91657781, 27.86731784], [112.91658214, 27.86731783], [112.91658744, 27.86731782], [112.91658658, 27.86729467], [112.91658206, 27.86729482], [112.91657931, 27.86722577], [112.91656622, 27.86722598], [112.91656637, 27.86721435], [112.91657176, 27.86716951], [112.91663103, 27.86711268], [112.91667648, 27.86704632], [112.91678281, 27.86690401], [112.91684037, 27.86684032], [112.91686324, 27.8668122], [112.91694205, 27.86671533], [112.91694421, 27.86671285], [112.91702035, 27.86662532], [112.91660299, 27.86637891], [112.91637701, 27.86624549], [112.91498094, 27.86542125], [112.91498455, 27.86541086], [112.91496498, 27.8654029], [112.91511455, 27.86480073], [112.91513562, 27.86480263], [112.91513605, 27.86480092], [112.91539077, 27.86482384], [112.91540498, 27.86482512], [112.91564218, 27.86485455], [112.916331, 27.86499908], [112.91687027, 27.865122], [112.9171049, 27.86517018], [112.91742672, 27.8652363], [112.91759141, 27.86527127], [112.9177324, 27.86529864], [112.91780654, 27.86531164], [112.91782371, 27.86531356], [112.91784671, 27.86531265], [112.91787666, 27.86530819], [112.91792922, 27.8652982], [112.91829454, 27.86520571], [112.9186437, 27.86510561], [112.9190885, 27.86498048], [112.91949031, 27.86486309], [112.91973853, 27.86479952], [112.91994091, 27.86474689], [112.91995161, 27.86474315], [112.92003017, 27.86470954], [112.9200441, 27.86470172], [112.92005671, 27.8646919], [112.92015826, 27.86458374], [112.92043931, 27.86423639], [112.92045971, 27.86421536], [112.92073105, 27.86396411], [112.9207447, 27.86394736], [112.92083261, 27.86381401], [112.92086723, 27.86375213], [112.92088349, 27.86372142], [112.91900587, 27.86293556], [112.91649838, 27.8620354], [112.91519177, 27.86150855], [112.91198237, 27.85989618], [112.90962773, 27.85886186], [112.90942057, 27.85861663], [112.90696151, 27.85772819], [112.90692706, 27.85771575], [112.90679024, 27.85791952], [112.90659592, 27.85826314], [112.90637415, 27.85859799], [112.90618969, 27.85884918], [112.90607654, 27.85898244], [112.90601598, 27.85907264], [112.90599473, 27.85910429], [112.90572402, 27.85934966], [112.90519932, 27.85986918], [112.9047232, 27.86033958], [112.90429664, 27.86088526], [112.90427971, 27.86115544], [112.90425438, 27.86181194], [112.90423242, 27.86252098], [112.90422992, 27.86253073], [112.90421916, 27.86257279], [112.90404501, 27.8630239], [112.90386941, 27.86348757], [112.90365911, 27.86401342], [112.90352057, 27.86432896], [112.90331508, 27.86470199], [112.90307454, 27.86504408], [112.90275391, 27.86552248], [112.90239577, 27.86602726], [112.90200494, 27.86659338], [112.90175956, 27.86699291], [112.90178798, 27.86700442], [112.90284335, 27.86725158], [112.90500819, 27.86776862], [112.90545329, 27.86786351], [112.90574727, 27.86793641], [112.9058493, 27.86796171], [112.90668424, 27.86814341], [112.90755469, 27.86835454], [112.90765798, 27.8683796], [112.90868769, 27.86862332], [112.90957113, 27.86883498], [112.91036639, 27.86903161], [112.91044202, 27.86905447], [112.91046383, 27.86906106], [112.91052093, 27.86907832], [112.91088173, 27.86918738], [112.91102911, 27.86924536], [112.91129669, 27.86935057], [112.91152456, 27.86944016], [112.91179143, 27.86954404], [112.91191282, 27.86959811], [112.91193064, 27.86960622], [112.91245014, 27.86980197], [112.91387817, 27.8703401], [112.9164843, 27.8714118], [112.91656385, 27.87126356], [112.9165652, 27.87125999], [112.91649154, 27.87122979], [112.91655689, 27.87111064], [112.91654182, 27.87108173], [112.91653726, 27.87107943], [112.91652757, 27.87107339], [112.9165027, 27.87105217], [112.916496, 27.87104435], [112.91645736, 27.87097896], [112.91643021, 27.87090835], [112.91641814, 27.87084821], [112.91641681, 27.87078041], [112.91641331, 27.87070975], [112.91641028, 27.87067064], [112.9164051, 27.87065864], [112.91638791, 27.87063294], [112.91638052, 27.87062435], [112.91634356, 27.87058929], [112.91634186, 27.87058767], [112.91630083, 27.8705467], [112.9162708, 27.87051592], [112.91626395, 27.87050402], [112.91624564, 27.87045896], [112.91622511, 27.87039893], [112.91622207, 27.87038367], [112.91621942, 27.87035301], [112.91621924, 27.8703063], [112.91622085, 27.87029348], [112.9162254, 27.87027111], [112.91622864, 27.87026354], [112.91623264, 27.87025801], [112.91623991, 27.87025345], [112.91625204, 27.87024816], [112.91626469, 27.87024426], [112.91630111, 27.87023584], [112.91638508, 27.87022311], [112.9164623, 27.87020144], [112.91650927, 27.87018045], [112.91661242, 27.8700853], [112.9166853, 27.86998426], [112.91675197, 27.86987703], [112.91675286, 27.86987314], [112.9167733, 27.86978371], [112.91677191, 27.86978189], [112.91682245, 27.86969003], [112.91685754, 27.86962623], [112.91696167, 27.86943178], [112.91696469, 27.86943143], [112.91696498, 27.86943089], [112.91695285, 27.86938768], [112.91694274, 27.86935168], [112.91688757, 27.86932816], [112.91681983, 27.86929928], [112.91681718, 27.86929815], [112.91672768, 27.8692795], [112.916715, 27.86927686], [112.91671176, 27.86922215], [112.91673282, 27.86917815], [112.9167293, 27.86917601], [112.91683615, 27.86896661], [112.91684411, 27.86895109], [112.91699259, 27.86866172], [112.91708728, 27.86847717], [112.917086, 27.86847273], [112.91712213, 27.86846818], [112.9171136, 27.8684401], [112.91710616, 27.8684156], [112.91714504, 27.86840376], [112.91710959, 27.86831008], [112.9170759, 27.8682209]]]}}]};
+
+// 初始化地图
+const map = L.map('map', {
+  center: CENTER,
+  zoom: DEFAULT_ZOOM,
+  zoomControl: false
+});
+
+// 高德卫星地图底图
+L.tileLayer('https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}', {
+  subdomains: ['1', '2', '3', '4'],
+  maxZoom: 19,
+  attribution: '© 高德卫星影像'
+}).addTo(map);
+
+// 建筑轮廓图层（默认不显示）
+if (typeof buildingsData !== 'undefined') {
+  window.buildingsLayer = L.geoJSON(buildingsData, {
+    style: {color: '#888888', weight: 0.5, fillColor: '#cccccc', fillOpacity: 0.35}
+  });
+}
+
+// 高德卫星路网标注层（可选）
+const labelLayer = L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+  subdomains: ['1', '2', '3', '4'],
+  maxZoom: 19,
+  opacity: 0.3
+});
+
+
+// POI数据（从CSV读取的前200个核心小区）
+const poiData = [
+  {name:"新景家园", location:"112.931340,27.865567", address:"湘潭三大桥与文星门路交叉口西南240米"},
+  {name:"城郊·香樟园南院", location:"112.928142,27.866256", address:"熙春路步步高旁"},
+  {name:"百姓家园", location:"112.927060,27.868618", address:"韶山东路"},
+  {name:"大同花苑", location:"112.918662,27.866606", address:"韶山东路28号"},
+  {name:"龙岸家园", location:"112.925540,27.867114", address:"熙春路59号"},
+  {name:"杨家湾公安小区", location:"112.913050,27.867084", address:""},
+  {name:"新景公寓", location:"112.908466,27.860785", address:"幸福湾巷与车站路交叉口西60米"},
+  {name:"梦真园", location:"112.922799,27.867107", address:"城镇街建城路98号"},
+  {name:"雨湖花苑", location:"112.914794,27.858341", address:"平政路8号"},
+  {name:"嘉园小区", location:"112.915927,27.865507", address:"韶山东路18号"},
+  {name:"百姓家园同馨园", location:"112.923980,27.867570", address:"熙春路"},
+  {name:"平湖小区", location:"112.913728,27.856614", address:"平政路290号"},
+  {name:"滨湖东郡", location:"112.926350,27.865823", address:"熙春路"},
+  {name:"五景花园小区", location:"112.912729,27.861320", address:"雨湖路208号"},
+  {name:"怡美园", location:"112.916733,27.868044", address:"韶山东路"},
+  {name:"丽江花苑", location:"112.929208,27.868315", address:"熙春路88号"},
+  {name:"永阳·熙春园", location:"112.924200,27.864111", address:"熙春路107号"},
+  {name:"金荣广场", location:"112.921853,27.865369", address:"熙春门路与泗洲庵巷交叉口北40米"},
+  {name:"公园雅筑", location:"112.917339,27.864906", address:"泗洲路逸夫小学前行100米处"},
+  {name:"电业局云塘小区", location:"112.909602,27.865300", address:"车站路43号"},
+  {name:"湘压新村", location:"112.912702,27.867661", address:"车站路328号"},
+  {name:"惠景院区", location:"112.909710,27.861447", address:"车站路与幸福湾巷交叉口东北80米"},
+  {name:"百姓家园同沁园", location:"112.925444,27.868210", address:"环城路与观湘门路交叉口东100米"},
+  {name:"和平新村", location:"112.915183,27.861956", address:"和平路"},
+  {name:"新景家园云帆苑", location:"112.930551,27.864822", address:"湘潭三大桥与文星门路交叉口西南360米"},
+  {name:"红城公寓", location:"112.926817,27.862498", address:"城正街235号"},
+  {name:"城发·潭州壹号院", location:"112.926329,27.865255", address:"城正街178号"},
+  {name:"万人新村", location:"112.910518,27.865614", address:"车站路"},
+  {name:"金果小区", location:"112.923818,27.864777", address:"熙春门路与泗洲庵巷交叉口东180米"},
+  {name:"城发·潭州壹号院一期", location:"112.929101,27.864205", address:"城正街169号"},
+  {name:"洗脚桥社区", location:"112.928609,27.867526", address:"熙春门路与城墙东巷交叉口西南40米"},
+  {name:"蔚霞新村", location:"112.917270,27.864182", address:"熙春路15号"},
+  {name:"瞻岳门社区", location:"112.919086,27.861975", address:"瞻岳门路与繁城路交叉口南60米"},
+  {name:"熙春路社区", location:"112.916514,27.866288", address:"熙春路与繁城路交叉口北50米"},
+  {name:"繁城西村", location:"112.918244,27.864306", address:"熙春路社区"},
+  {name:"工人新村", location:"112.912496,27.860453", address:"工人新村巷与雨湖路交叉口北120米"},
+  {name:"亭子塘小区", location:"112.913375,27.865575", address:"建城路与韶山东路交叉口东北240米"},
+  {name:"新景家园文昌苑", location:"112.930721,27.867454", address:"城正街与熙春门路交叉口南120米"},
+  {name:"熙春华庭小区", location:"112.922025,27.864275", address:"泗洲庵巷与熙春门路交叉口南80米"},
+  {name:"文西小区", location:"112.921311,27.860134", address:"城正街与学坪路交叉口西南80米"},
+  {name:"熙园小区", location:"112.925925,27.866525", address:"熙春门路与观湘门路交叉口东60米"},
+  {name:"泗州庵", location:"112.924771,27.862495", address:"泗洲庵巷与城正街交叉口北80米"},
+  {name:"基建营东", location:"112.913060,27.865313", address:"建城路与韶山东路交叉口东北200米"},
+  {name:"和平桥社区", location:"112.916325,27.862275", address:"和平桥衡巷与和平桥巷交叉口东南80米"},
+  {name:"粮贸小区", location:"112.911039,27.863554", address:"车站路与韶山东路交叉口东南80米"}
+];
+
+let markers = [];
+let labelsLayer = null;
+
+// 判断点在多边形内（射线法）
+function pointInPolygon(point, polygon) {
+  const [x, y] = point;
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const [xi, yi] = polygon[i];
+    const [xj, yj] = polygon[j];
+    const intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+
+// 创建POI标注
+function createMarkers() {
+  poiData.forEach((poi, idx) => {
+    const [lng, lat] = poi.location.split(',').map(Number);
+    poi.community = '未分区';
+    poi.communityIdx = 0;
+    
+    communityData.features.forEach((comm, cIdx) => {
+      const polygon = comm.geometry.coordinates[0];
+      if (pointInPolygon([lng, lat], polygon)) {
+        poi.community = comm.properties['社区名'];
+        poi.communityIdx = cIdx + 1;
+      }
+    });
+  });
+
+  // 第二步：按社区分组
+  const communityGroups = {};
+  poiData.forEach((poi, idx) => {
+    const comm = poi.community;
+    if (!communityGroups[comm]) communityGroups[comm] = [];
+    communityGroups[comm].push({...poi, poiIndex: idx});
+  });
+
+  // 给每个POI编号（社区号-小区号）
+  const sortedCommunities = Object.keys(communityGroups).sort((a, b) => {
+    const aNum = communityGroups[a][0].communityIdx || 99;
+    const bNum = communityGroups[b][0].communityIdx || 99;
+    return aNum - bNum;
+  });
+
+  sortedCommunities.forEach((commName, cIdx) => {
+    const commNum = cIdx + 1;
+    let poiNum = 0;
+    communityGroups[commName].forEach(poi => {
+      poiNum++;
+      poi.code = `${commNum}-${poiNum}`;
+    });
+  });
+
+  window.communityGroups = communityGroups;
+
+  poiData.forEach((poi, idx) => {
+    // 直接跳过不属于任何社区的点（街道未知、社区未分区）
+    if (poi.community === '未分区') return;
+    const [lng, lat] = poi.location.split(',').map(Number);
+    const stats = communityStats[poi.community] || {};
+    const street = stats.street || '';
+    
+    // 两个街道用不同颜色
+    const dotColor = street.includes('雨湖') ? '#e64a19' : '#2e7d32';  // 雨湖=橙红，城正街=绿色
+    const labelColor = street.includes('雨湖') ? '#e64a19' : '#2e7d32';
+    
+    const icon = L.divIcon({
+      className: 'custom-poi-icon',
+      html: `<div style="position:relative;">
+        <div style="width:12px; height:12px; background:${dotColor}; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,0.4);"></div>
+        <div style="position:absolute; top:-8px; left:14px; font-size:10px; font-weight:500; color:#333; background:rgba(255,255,255,0.9); padding:1px 4px; border-radius:2px; border:1px solid #eee; white-space:nowrap; box-shadow:0 1px 2px rgba(0,0,0,0.1);">
+          <span style="color:${labelColor}; font-weight:700; margin-right:3px;">${poi.code || ''}</span>${poi.name}
+        </div>
+      </div>`,
+      iconSize: [120, 12],
+      iconAnchor: [6, 6]
+    });
+    
+    const marker = L.marker([lat, lng], { icon: icon });
+    const commStats = communityStats[poi.community] || {};
+    marker.bindPopup(`
+      <div class="popup-content">
+        <h4>🏠 ${poi.name}</h4>
+        <div class="popup-row"><span class="popup-label">所属街道:</span><span class="popup-value">${commStats.street || '未知'}</span></div>
+        <div class="popup-row"><span class="popup-label">所属社区:</span><span class="popup-value" style="color:#ff9800;font-weight:500;">${poi.community}</span></div>
+        <div class="popup-row"><span class="popup-label">详细地址:</span><span class="popup-value">${poi.address || '未知'}</span></div>
+      </div>
+    `);
+    
+    marker.poiData = poi;
+    marker.poiIndex = idx;
+    markers.push(marker);
+  });
+  
+  // 默认显示所有
+  showAllMarkers();
+  updateCounts();
+  renderPOIList();
+  buildCommunityFilter();
+}
+
+function showAllMarkers() {
+  markers.forEach(m => m.addTo(map));
+}
+
+function clearMarkers() {
+  markers.forEach(m => map.removeLayer(m));
+}
+
+
+function toggleImportedBoundary(checked) {
+  if (checked) {
+    importedBoundaryLayer.addTo(map);
+  } else {
+    map.removeLayer(importedBoundaryLayer);
+  }
+}
+
+function toggleImportedCommunity(checked) {
+  if (checked) {
+    importedCommunityLayer.addTo(map);
+  } else {
+    map.removeLayer(importedCommunityLayer);
+  }
+}
+
+function toggleStreetBoundary(checked) {
+  if (checked && window.streetBoundaryLayer) {
+    window.streetBoundaryLayer.addTo(map);
+  } else if (window.streetBoundaryLayer) {
+    map.removeLayer(window.streetBoundaryLayer);
+  }
+}
+
+function toggleBuildings(checked) {
+  if (checked && window.buildingsLayer) {
+    window.buildingsLayer.addTo(map);
+  } else if (window.buildingsLayer) {
+    map.removeLayer(window.buildingsLayer);
+  }
+}
+
+function toggleStreetBoundary(checked) {
+  if (checked) {
+    window.streetBoundaryLayer.addTo(map);
+  } else {
+    map.removeLayer(window.streetBoundaryLayer);
+  }
+}
+
+function toggleBuildings(checked) {
+  if (checked) {
+    window.buildingsLayer.addTo(map);
+  } else {
+    map.removeLayer(window.buildingsLayer);
+  }
+}
+
+function toggleDrawnLayers(checked) {
+  if (checked) {
+    drawnLayers.forEach(l => {
+      if (l.visible) l.layer.addTo(map);
+    });
+  } else {
+    drawnLayers.forEach(l => {
+      map.removeLayer(l.layer);
+    });
+  }
+}
+
+function toggleCommunityLabels(checked) {
+  if (checked) {
+    communityLayer.addTo(map);
+  } else {
+    map.removeLayer(communityLayer);
+  }
+}
+
+
+
+function toggleLayer(layerName, checked) {
+  if (checked) {
+    window[layerName].addTo(map);
+  } else {
+    map.removeLayer(window[layerName]);
+  }
+}
+function toggleHistoricalLayer(checked) {
+  if (checked) {
+    historicalLayer.addTo(map);
+  } else {
+    map.removeLayer(historicalLayer);
+  }
+}
+function togglePOILayer(checked) {
+  if (checked) {
+    showAllMarkers();
+    document.querySelector('.poi-list').style.display = 'block';
+  } else {
+    clearMarkers();
+    document.querySelector('.poi-list').style.display = 'none';
+  }
+  updateCounts();
+}
+
+// 社区筛选（多选）
+function buildCommunityFilter() {
+  const container = document.getElementById('communityMultiFilter');
+  const groups = window.communityGroups || {};
+  const sortedCommunities = Object.keys(groups).sort((a, b) => {
+    const aNum = groups[a][0].communityIdx || 99;
+    const bNum = groups[b][0].communityIdx || 99;
+    return aNum - bNum;
+  });
+
+  sortedCommunities.forEach(commName => {
+    const pois = groups[commName];
+    const label = document.createElement('label');
+    label.style.cssText = 'display:block; padding:2px 0 2px 16px; cursor:pointer;';
+    label.innerHTML = `<input type="checkbox" checked data-community="${commName}" onchange="applyCommunityFilter()"> ${commName} <span style="color:#999;">(${pois.length})</span>`;
+    container.appendChild(label);
+  });
+}
+
+function toggleAllCommunities(checked) {
+  document.querySelectorAll('#communityMultiFilter input[type=checkbox][data-community]').forEach(cb => {
+    cb.checked = checked;
+  });
+  applyCommunityFilter();
+}
+
+function applyCommunityFilter() {
+  // 获取选中的社区
+  const selected = [];
+  document.querySelectorAll('#communityMultiFilter input[type=checkbox][data-community]:checked').forEach(cb => {
+    selected.push(cb.dataset.community);
+  });
+
+  // 过滤地图上的点
+  markers.forEach((marker, idx) => {
+    const poi = poiData[idx];
+    if (selected.includes(poi.community)) {
+      marker.addTo(map);
+    } else {
+      map.removeLayer(marker);
+    }
+  });
+
+  // 同步过滤左边列表
+  renderPOIList(selected);
+}
+
+function toggleLabels(checked) {
+  if (labelsLayer) {
+    map.removeLayer(labelsLayer);
+    labelsLayer = null;
+  }
+  if (checked) {
+    labelsLayer = L.layerGroup();
+    poiData.forEach((poi, idx) => {
+      const [lng, lat] = poi.location.split(',').map(Number);
+      const label = L.marker([lat, lng], {
+        icon: L.divIcon({
+          className: 'poi-label',
+          html: poi.name,
+          iconSize: [null, null],
+          iconAnchor: [0, -10]
+        }),
+        interactive: false
+      });
+      labelsLayer.addLayer(label);
+    });
+    labelsLayer.addTo(map);
+  }
+}
+
+function filterPOI() {
+  const keyword = document.getElementById('searchInput').value.toLowerCase();
+  const listEl = document.getElementById('poiList');
+  listEl.innerHTML = '';
+  
+  let visibleCount = 0;
+  markers.forEach((marker, idx) => {
+    const poi = marker.poiData;
+    const match = poi.name.toLowerCase().includes(keyword) || 
+                  (poi.address && poi.address.toLowerCase().includes(keyword));
+    
+    if (match) {
+      marker.addTo(map);
+      visibleCount++;
+      
+      const item = document.createElement('div');
+      item.className = 'poi-item';
+      item.innerHTML = `
+        <div class="poi-name">${poi.name}</div>
+        <div class="poi-addr">${poi.address || '暂无地址'}</div>
+      `;
+      item.onclick = () => {
+        const [lng, lat] = poi.location.split(',').map(Number);
+        map.setView([lat, lng], 16);
+        marker.openPopup();
+        
+        document.querySelectorAll('.poi-item').forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+      };
+      listEl.appendChild(item);
+    } else {
+      map.removeLayer(marker);
+    }
+  });
+  
+  document.getElementById('visibleCount').textContent = visibleCount;
+}
+
+function renderPOIList(filterCommunities = null) {
+  const listEl = document.getElementById('poiList');
+  listEl.innerHTML = '';
+  
+  const groups = window.communityGroups || {};
+  let sortedCommunities = Object.keys(groups).sort((a, b) => {
+    const aNum = groups[a][0].communityIdx || 99;
+    const bNum = groups[b][0].communityIdx || 99;
+    return aNum - bNum;
+  });
+
+  // 只显示选中的社区
+  if (filterCommunities) {
+    sortedCommunities = sortedCommunities.filter(c => filterCommunities.includes(c));
+  }
+
+  sortedCommunities.forEach((commName, cIdx) => {
+    const commNum = cIdx + 1;
+    const pois = groups[commName];
+    const stats = communityStats[commName] || {};
+    const street = stats.street || '';
+    
+    // 社区分组头（可折叠）
+    const groupHeader = document.createElement('div');
+    const headerColor = street.includes('雨湖') ? '#fff3e0' : '#e8f5e9';
+    const borderColor = street.includes('雨湖') ? '#ffcc80' : '#a5d6a7';
+    groupHeader.style.cssText = `padding:8px 12px; background:${headerColor}; font-weight:600; font-size:13px; cursor:pointer; border-bottom:1px solid ${borderColor}; display:flex; justify-content:space-between; align-items:center;`;
+    groupHeader.innerHTML = `<div>
+      <div style="font-size:13px;">${commNum}. ${commName}</div>
+      <div style="font-size:11px; color:#666; font-weight:normal; margin-top:2px;">
+        ${street} · ${stats.area_ha || '?'}公顷 · ${stats.pop_wan || '?'}万人
+      </div>
+    </div><span style="color:#666;font-weight:normal; font-size:12px;">${pois.length}个小区</span>`;
+    
+    const groupContent = document.createElement('div');
+    groupContent.style.cssText = 'display:none;';
+    
+    groupHeader.onclick = () => {
+      groupContent.style.display = groupContent.style.display === 'none' ? 'block' : 'none';
+    };
+    
+    listEl.appendChild(groupHeader);
+    listEl.appendChild(groupContent);
+
+    // 社区下的小区
+    pois.forEach((poi, pIdx) => {
+      const poiNum = pIdx + 1;
+      const item = document.createElement('div');
+      item.className = 'poi-item';
+      item.style.cssText = 'padding-left:24px;';
+      item.innerHTML = `
+        <div class="poi-name" style="font-size:12px;"><span style="color:${street.includes('雨湖') ? '#e64a19' : '#2e7d32'}; font-weight:600; margin-right:6px;">${commNum}-${poiNum}</span>${poi.name}</div>
+      `;
+      item.onclick = () => {
+        const [lng, lat] = poi.location.split(',').map(Number);
+        map.setView([lat, lng], 16);
+        markers[poi.poiIndex].openPopup();
+        
+        document.querySelectorAll('.poi-item').forEach(el => el.classList.remove('active'));
+        item.classList.add('active');
+      };
+      groupContent.appendChild(item);
+    });
+  });
+}
+
+function updateCounts() {
+  document.getElementById('totalCount').textContent = poiData.length;
+  document.getElementById('poiCount').textContent = poiData.length;
+  document.getElementById('visibleCount').textContent = poiData.length;
+}
+
+function zoomIn() { map.zoomIn(); }
+function zoomOut() { map.zoomOut(); }
+function resetView() { map.setView(CENTER, DEFAULT_ZOOM); }
+
+// 绘制边界功能
+let drawnLayers = [];  // 存储所有已绘制的图层 {name, layer, visible}
+let currentDrawName = '';
+
+let dividerLines = [];
+let dividerLayer = L.layerGroup().addTo(map);
+
+function startDrawDivider() {
+  const drawOptions = {
+    shapeOptions: {
+      color: '#ff9800',
+      weight: 3,
+      dashArray: '5, 5'
+    }
+  };
+  
+  new L.Draw.Polyline(map, drawOptions).enable();
+}
+
+map.on(L.Draw.Event.CREATED, function(e) {
+  if (e.layer instanceof L.Polyline && !(e.layer instanceof L.Polygon)) {
+    // 是分隔线
+    dividerLayer.addLayer(e.layer);
+    dividerLines.push(e.layer);
+  } else if (e.layer instanceof L.Polygon) {
+    // 是多边形，走原来的逻辑
+    const layer = e.layer;
+    const name = currentDrawName || `图层${drawnLayers.length + 1}`;
+    
+    layer.addTo(map);
+    
+    drawnLayers.push({
+      name: name,
+      layer: layer,
+      visible: true
+    });
+    
+    renderDrawnLayersList();
+    saveDrawnLayers();
+    
+    // 提取顶点坐标
+    const latlngs = layer.getLatLngs()[0];
+    let coordsText = '<div style="margin:10px 16px; padding:10px; background:#f0f7ff; border-radius:4px; font-size:11px;">';
+    coordsText += `<b>「${name}」顶点坐标（纬度,经度）：</b><br>`;
+    latlngs.forEach((pt, i) => {
+      coordsText += `${i+1}. ${pt.lat.toFixed(6)}, ${pt.lng.toFixed(6)}<br>`;
+    });
+    coordsText += `共 ${latlngs.length} 个顶点`;
+    coordsText += '</div>';
+    
+    document.getElementById('boundaryCoords').innerHTML = coordsText;
+    
+    // 如果是片区边界，自动筛选POI
+    if (name === '片区边界') {
+      setTimeout(filterPOIByBoundary, 100);
+    }
+    
+    currentDrawName = '';
+  }
+});
+
+function generateCommunitiesFromDividers() {
+  // 找到片区边界
+  const boundary = drawnLayers.find(l => l.name === '片区边界');
+  if (!boundary) {
+    alert('请先绘制「片区边界」！');
+    return;
+  }
+  
+  if (dividerLines.length === 0) {
+    alert('请先画几条社区分隔线！');
+    return;
+  }
+  
+  // 用turf切割多边形
+  const boundaryCoords = boundary.layer.getLatLngs()[0].map(pt => [pt.lng, pt.lat]);
+  const polygon = turf.polygon([boundaryCoords]);
+  
+  let result = polygon;
+  
+  dividerLines.forEach(line => {
+    const lineCoords = line.getLatLngs().map(pt => [pt.lng, pt.lat]);
+    const lineGeo = turf.lineString(lineCoords);
+    result = turf.split(result, lineGeo);
+  });
+  
+  // 把结果转成Leaflet图层
+  result.features.forEach((feature, idx) => {
+    if (feature.geometry.type === 'Polygon') {
+      const coords = feature.geometry.coordinates[0].map(pt => [pt[1], pt[0]]);
+      const communityLayer = L.polygon(coords, {
+        color: '#4caf50',
+        weight: 2,
+        fillOpacity: 0.1,
+        dashArray: '5, 5'
+      }).addTo(map);
+      
+      drawnLayers.push({
+        name: `社区${idx+1}`,
+        layer: communityLayer,
+        visible: true
+      });
+    }
+  });
+  
+  renderDrawnLayersList();
+  saveDrawnLayers();
+  
+  alert(`成功生成 ${result.features.length} 个社区分区！\n你可以在图层列表里改名字、调整顶点。`);
+}
+
+function startDrawingWithName() {
+  const nameInput = document.getElementById('layerName');
+  const name = nameInput.value.trim();
+  
+  if (!name) {
+    alert('请先输入图层名称！');
+    nameInput.focus();
+    return;
+  }
+  
+  currentDrawName = name;
+  
+  const drawOptions = {
+    allowIntersection: false,
+    showArea: true,
+    shapeOptions: {
+      color: '#ff0000',
+      weight: 3,
+      dashArray: '10, 8',
+      fillOpacity: 0.1
+    }
+  };
+  
+  new L.Draw.Polygon(map, drawOptions).enable();
+  
+  // 清空输入框
+  nameInput.value = '';
+}
+
+function toggleLayerVisibility(index) {
+  const layerInfo = drawnLayers[index];
+  if (layerInfo.visible) {
+    map.removeLayer(layerInfo.layer);
+    layerInfo.visible = false;
+  } else {
+    layerInfo.layer.addTo(map);
+    layerInfo.visible = true;
+  }
+  renderDrawnLayersList();
+  saveDrawnLayers();
+  
+  // 如果是片区边界，重新筛选POI
+  if (layerInfo.name === '片区边界') {
+    filterPOIByBoundary();
+  }
+}
+
+function deleteLayer(index) {
+  const layerInfo = drawnLayers[index];
+  const isBoundary = layerInfo.name === '片区边界';
+  
+  map.removeLayer(layerInfo.layer);
+  drawnLayers.splice(index, 1);
+  renderDrawnLayersList();
+  saveDrawnLayers();
+  
+  // 如果删除的是片区边界，恢复显示所有POI
+  if (isBoundary) {
+    markers.forEach(m => m.addTo(map));
+    document.getElementById('visibleCount').textContent = markers.length;
+    renderPOIList();
+  }
+}
+
+let editHandler = null;
+
+function editLayer(index) {
+  const layerInfo = drawnLayers[index];
+  
+  // 如果已经在编辑，先停止
+  if (editHandler) {
+    editHandler.disable();
+    editHandler = null;
+    document.getElementById('boundaryCoords').innerHTML = '';
+  }
+  
+  // 启用编辑模式
+  editHandler = new L.Edit.Poly(map, layerInfo.layer);
+  editHandler.enable();
+  
+  // 编辑完成后更新坐标显示
+  layerInfo.layer.on('edit', function() {
+    const latlngs = layerInfo.layer.getLatLngs()[0];
+    let coordsText = '<div style="margin:10px 16px; padding:10px; background:#f0f7ff; border-radius:4px; font-size:11px;">';
+    coordsText += `<b>「${layerInfo.name}」顶点坐标（已更新，纬度,经度）：</b><br>`;
+    latlngs.forEach((pt, i) => {
+      coordsText += `${i+1}. ${pt.lat.toFixed(6)}, ${pt.lng.toFixed(6)}<br>`;
+    });
+    coordsText += `共 ${latlngs.length} 个顶点`;
+    coordsText += '</div>';
+    
+    document.getElementById('boundaryCoords').innerHTML = coordsText;
+    saveDrawnLayers();
+    
+    // 如果是片区边界，重新筛选POI
+    if (layerInfo.name === '片区边界') {
+      filterPOIByBoundary();
+    }
+  });
+  
+  alert(`正在编辑「${layerInfo.name}」，拖拽顶点调整边界形状`);
+}
+
+function renderDrawnLayersList() {
+  const listEl = document.getElementById('drawnLayersList');
+  
+  if (drawnLayers.length === 0) {
+    listEl.innerHTML = '<div style="font-size:12px; color:#999; padding:8px 0;">暂无绘制</div>';
+    return;
+  }
+  
+  listEl.innerHTML = '';
+  drawnLayers.forEach((layerInfo, index) => {
+    const item = document.createElement('div');
+    item.style.cssText = 'display:flex; align-items:center; padding:6px 0; border-bottom:1px solid #f0f0f0;';
+    
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = layerInfo.visible;
+    checkbox.style.marginRight = '8px';
+    checkbox.onchange = () => toggleLayerVisibility(index);
+    
+    const name = document.createElement('span');
+    name.style.cssText = 'flex:1; font-size:12px; color:#333;';
+    name.textContent = layerInfo.name;
+    
+    const editBtn = document.createElement('button');
+    editBtn.textContent = '✏️';
+    editBtn.title = '编辑顶点';
+    editBtn.style.cssText = 'border:none; background:none; cursor:pointer; font-size:14px; padding:0 4px;';
+    editBtn.onclick = () => editLayer(index);
+    
+    const delBtn = document.createElement('button');
+    delBtn.textContent = '×';
+    delBtn.title = '删除';
+    delBtn.style.cssText = 'border:none; background:none; color:#f44336; cursor:pointer; font-size:16px; padding:0 4px;';
+    delBtn.onclick = () => deleteLayer(index);
+    
+    item.appendChild(checkbox);
+    item.appendChild(name);
+    item.appendChild(editBtn);
+    item.appendChild(delBtn);
+    listEl.appendChild(item);
+  });
+}
+
+// 判断点是否在多边形内（射线法）
+function isPointInPolygon(point, polygon) {
+  const x = point.lng, y = point.lat;
+  let inside = false;
+  
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const xi = polygon[i].lng, yi = polygon[i].lat;
+    const xj = polygon[j].lng, yj = polygon[j].lat;
+    
+    const intersect = ((yi > y) != (yj > y)) &&
+      (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    
+    if (intersect) inside = !inside;
+  }
+  
+  return inside;
+}
+
+// 根据边界筛选POI
+function filterPOIByBoundary() {
+  // 找到名为"片区边界"的图层
+  const boundaryLayer = drawnLayers.find(l => l.name === '片区边界');
+  
+  if (!boundaryLayer || !boundaryLayer.visible) {
+    // 没有边界，显示所有POI
+    markers.forEach(m => m.addTo(map));
+    document.getElementById('visibleCount').textContent = markers.length;
+    return;
+  }
+  
+  // 获取边界多边形顶点
+  const polygon = boundaryLayer.layer.getLatLngs()[0];
+  
+  // 筛选POI
+  let visibleCount = 0;
+  markers.forEach((marker, idx) => {
+    const poi = marker.poiData;
+    const [lng, lat] = poi.location.split(',').map(Number);
+    const point = {lat: lat, lng: lng};
+    
+    if (isPointInPolygon(point, polygon)) {
+      marker.addTo(map);
+      visibleCount++;
+    } else {
+      map.removeLayer(marker);
+    }
+  });
+  
+  document.getElementById('visibleCount').textContent = visibleCount;
+  
+  // 更新侧边栏列表
+  const listEl = document.getElementById('poiList');
+  listEl.innerHTML = '';
+  
+  markers.forEach((marker, idx) => {
+    const poi = marker.poiData;
+    const [lng, lat] = poi.location.split(',').map(Number);
+    const point = {lat: lat, lng: lng};
+    
+    if (isPointInPolygon(point, polygon)) {
+      const item = document.createElement('div');
+      item.className = 'poi-item';
+      item.innerHTML = `
+        <div class="poi-name">${poi.name}</div>
+        <div class="poi-addr">${poi.address || '暂无地址'}</div>
+      `;
+      item.onclick = () => {
+        map.setView([lat, lng], 16);
+        marker.openPopup();
+      };
+      listEl.appendChild(item);
+    }
+  });
+}
+
+// 保存到本地存储
+function saveDrawnLayers() {
+  const data = drawnLayers.map(l => ({
+    name: l.name,
+    latlngs: l.layer.getLatLngs()[0].map(pt => [pt.lat, pt.lng]),
+    visible: l.visible
+  }));
+  localStorage.setItem('chengzheng_boundaries', JSON.stringify(data));
+}
+
+// 从本地存储加载
+function loadDrawnLayers() {
+  const saved = localStorage.getItem('chengzheng_boundaries');
+  if (!saved) return;
+  
+  try {
+    const data = JSON.parse(saved);
+    data.forEach(layerData => {
+      const latlngs = layerData.latlngs.map(pt => [pt[0], pt[1]]);
+      const layer = L.polygon(latlngs, {
+        color: '#ff0000',
+        weight: 3,
+        dashArray: '10, 8',
+        fillOpacity: 0.1
+      });
+      
+      if (layerData.visible) {
+        layer.addTo(map);
+      }
+      
+      drawnLayers.push({
+        name: layerData.name,
+        layer: layer,
+        visible: layerData.visible
+      });
+    });
+    
+    renderDrawnLayersList();
+    
+    // 如果有片区边界，自动筛选POI
+    const hasBoundary = drawnLayers.find(l => l.name === '片区边界' && l.visible);
+    if (hasBoundary) {
+      setTimeout(filterPOIByBoundary, 100);
+    }
+  } catch (e) {
+    console.error('加载边界失败', e);
+  }
+}
+
+
+
+
+
+const communityStats = {"关圣殿社区": {"street": "雨湖城区", "area_ha": 42.0, "pop_wan": 0.794524}, "古梁巷社区": {"street": "雨湖城区", "area_ha": 19.6, "pop_wan": 1.732279}, "风车坪社区": {"street": "雨湖城区", "area_ha": 15.7, "pop_wan": 2.09359}, "车站路社区": {"street": "雨湖城区", "area_ha": 17.0, "pop_wan": 1.66746}, "雨湖路社区": {"street": "雨湖城区", "area_ha": 28.2, "pop_wan": 1.466264}, "和平桥社区": {"street": "雨湖城区", "area_ha": 20.8, "pop_wan": 3.259923}, "三义井社区": {"street": "城正街社区", "area_ha": 85.4, "pop_wan": 1.588004}, "洗脚桥社区": {"street": "城正街社区", "area_ha": 39.2, "pop_wan": 1.571303}, "熙春路社区": {"street": "城正街社区", "area_ha": 18.3, "pop_wan": 2.787514}, "泗洲庵社区": {"street": "城正街社区", "area_ha": 49.7, "pop_wan": 1.479187}, "瞻岳门社区": {"street": "城正街社区", "area_ha": 28.9, "pop_wan": 1.921525}};
+
+// 加载导入的GIS数据（GCJ-02火星坐标，适配高德底图）
+const boundaryData = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.90773156057821, 27.851460624017058], [112.90733887942338, 27.85210406870071], [112.90691098962928, 27.85285921325669], [112.90696150710367, 27.852881390038483], [112.90692705916634, 27.852868956624544], [112.90679023672453, 27.85307272757252], [112.90659592112803, 27.85341634751349], [112.9063741530315, 27.853751198348615], [112.90618968978137, 27.85400239123139], [112.90607653787887, 27.85413566624173], [112.90597323367679, 27.85425734297503], [112.9059514481203, 27.85428010932354], [112.90570252988178, 27.854502743177218], [112.90569174003143, 27.8545134273732], [112.9051778314899, 27.855022312589956], [112.90490736602699, 27.855266608999745], [112.90461569581454, 27.85558736097041], [112.9044284733387, 27.855817088742945], [112.90431818462798, 27.8559661904988], [112.90429642977493, 27.85599885935654], [112.90427514754504, 27.856038467608872], [112.9042700705985, 27.856054451572177], [112.9042673736929, 27.856071353665833], [112.90424364545656, 27.85668656503331], [112.90422159619703, 27.857257157838937], [112.90422872893676, 27.857472590183367], [112.90422860783345, 27.857546601809112], [112.90422553343515, 27.857568739558346], [112.90421092637631, 27.857673920181373], [112.90419767124025, 27.857725724399163], [112.90402351980048, 27.85817680466835], [112.90384791822486, 27.858640441374266], [112.90363762159109, 27.85916625076973], [112.903499083598, 27.859481774037068], [112.90329358996472, 27.859854793570303], [112.90305305282622, 27.86019688960464], [112.90273242343073, 27.860675300348625], [112.90237427849102, 27.86118008781089], [112.90198345304687, 27.861746211887944], [112.90173806556777, 27.86214574002579], [112.90178797981143, 27.862157412861084], [112.90284334665483, 27.86240423215557], [112.90500819115367, 27.86292059454507], [112.90545328758829, 27.86301534754409], [112.90574727184836, 27.863088157101664], [112.90584929548918, 27.863113425233145], [112.90668424327914, 27.86329486412522], [112.90755468538369, 27.863505720652185], [112.90765797584518, 27.863530742994875], [112.90868768969884, 27.863774136235453], [112.9095711257472, 27.86398551575452], [112.91036638529616, 27.864181893682353], [112.91044202393147, 27.86420473254177], [112.91046383313875, 27.864211317745653], [112.91052092642084, 27.864228556882313], [112.91088173128416, 27.864337502314715], [112.91102910907044, 27.86439543416895], [112.91129668999494, 27.864500547493382], [112.91152456449677, 27.8645900639293], [112.91179143292119, 27.864693853690152], [112.91191282350454, 27.864747880334143], [112.91193063552143, 27.86475597477355], [112.91245013757573, 27.864951554265946], [112.91387817062946, 27.86548919462202], [112.91648430041796, 27.866559994262605], [112.91648049340735, 27.86656708855821], [112.91730719069461, 27.86689986348415], [112.91841464478091, 27.86735541209398], [112.91953924036856, 27.867774681002683], [112.91976342442932, 27.867334901561478], [112.92007100610614, 27.866765061169325], [112.92030163715687, 27.866323361128416], [112.92078645124111, 27.86540935521977], [112.9211217768631, 27.8647802586335], [112.92119654066836, 27.864642582366063], [112.92153065107375, 27.86480411250494], [112.92189485956659, 27.864957937803023], [112.92282799560297, 27.865339605337024], [112.92363187529116, 27.8656700391223], [112.92440347782305, 27.865991022142616], [112.92477858204444, 27.86616395970803], [112.92523770773043, 27.86635963080582], [112.92539521747062, 27.86641788609351], [112.92577340608369, 27.86655776280467], [112.92649381913921, 27.866847777875538], [112.92699436265877, 27.86705472187662], [112.92772514051632, 27.867354882837446], [112.92825543078655, 27.867565730943365], [112.92889139894052, 27.86782602113013], [112.92903535928934, 27.86788637665119], [112.9292902534038, 27.867993242218507], [112.93004698087384, 27.868299141771285], [112.93041992496065, 27.86843969768197], [112.93070440951232, 27.86852696708859], [112.93130568198576, 27.86870144626216], [112.93136786307026, 27.8687190455303], [112.93198238646475, 27.868892979504388], [112.93214649310742, 27.8689231135661], [112.93245552929052, 27.86897986344995], [112.93270435993465, 27.86902616421615], [112.93333353258959, 27.86913328361443], [112.93367053722801, 27.869182799100273], [112.93396247284248, 27.869236667723616], [112.93419632970011, 27.869302107726178], [112.93441736850569, 27.869391445291047], [112.93454572806999, 27.86946292319408], [112.93465966135663, 27.86953270787921], [112.93470168178595, 27.869562054707355], [112.93485632923311, 27.869686037523874], [112.93497767282258, 27.869788564801404], [112.93540839307192, 27.870248383235925], [112.93541513388588, 27.870256085853327], [112.93542401997681, 27.870266239311533], [112.93544389293069, 27.870256344911713], [112.93553698725303, 27.87020999398944], [112.93562729741764, 27.87016213786928], [112.93574638876008, 27.870099030930405], [112.9359422886884, 27.86999175735762], [112.93612836446212, 27.869881956140617], [112.93627265740338, 27.86978740920392], [112.93635914958652, 27.869729652373877], [112.93635940964514, 27.86972947880592], [112.93644307829919, 27.86967360745523], [112.93659603582232, 27.869570148812993], [112.93670261048852, 27.869487271349886], [112.93683206472029, 27.869384766875775], [112.9368326049546, 27.869384339639815], [112.9368468162404, 27.869373085954248], [112.93695433568729, 27.869285838974008], [112.93697724724574, 27.869266657631346], [112.93707389031648, 27.869185749374267], [112.9371229636107, 27.869139149109568], [112.93713668169408, 27.869126121091128], [112.93724941404233, 27.869012101727773], [112.93725517600589, 27.869006425363548], [112.93737148678046, 27.868891838998945], [112.93738383859268, 27.868879670173737], [112.93738749503532, 27.86887606860941], [112.93739677486093, 27.868869321769846], [112.93743032757035, 27.868832339703353], [112.93745516536256, 27.868802487618318], [112.93770842456905, 27.868532388306818], [112.9378321872684, 27.868386793521008], [112.93809248653811, 27.868059059487535], [112.93817050534126, 27.867944898422028], [112.93828995788994, 27.86777010904454], [112.93855874335874, 27.867344254368557], [112.93887575922365, 27.866862207307346], [112.93899916185536, 27.866672642482975], [112.93945951851904, 27.86594620815154], [112.93929554522136, 27.865863528176053], [112.939247896585, 27.86585128230542], [112.93913236022355, 27.865821589201122], [112.93913294052473, 27.865820811439193], [112.93913299417397, 27.86582073434472], [112.93913309937645, 27.865820586451623], [112.93913314888219, 27.865820516987526], [112.93905570961105, 27.86578018763886], [112.93905663908781, 27.865779018375093], [112.93907544264336, 27.86575190313205], [112.93620719150385, 27.8642236055322], [112.93607208720084, 27.864172818848647], [112.93595846836438, 27.864123101719855], [112.93577981719989, 27.864008826723907], [112.9354566197439, 27.86385743007462], [112.93544367218306, 27.86385136502541], [112.935118039816, 27.863703376484438], [112.93509681535288, 27.863695684735795], [112.93509588147235, 27.86369529022177], [112.93509583224973, 27.863695383602288], [112.93499887684195, 27.86366033253394], [112.93497715289402, 27.863652479001633], [112.93490860372707, 27.863614534590283], [112.93455084767871, 27.86344780507756], [112.93454960799974, 27.863447379872017], [112.93453549262557, 27.86344253503052], [112.93450292155894, 27.8634254729045], [112.93435993826643, 27.863358850029392], [112.93226844221962, 27.862408380773566], [112.93161712721376, 27.86208087920748], [112.93102426461355, 27.861804653637172], [112.93089687639738, 27.861745301200834], [112.93083624536366, 27.86168823150422], [112.93025810202624, 27.86139752891564], [112.93022328652107, 27.86138586685587], [112.93016146551966, 27.861348938297724], [112.9292967908633, 27.860914167045927], [112.92826852756605, 27.860600116255753], [112.92818107327477, 27.860598820515445], [112.92729164819815, 27.860334305267347], [112.92723593230754, 27.86028476407519], [112.92664170958835, 27.86010329972177], [112.92443003220015, 27.859368111300192], [112.92338309751638, 27.85893706875288], [112.92333987331791, 27.85893128515366], [112.92326155146678, 27.85891778735738], [112.92314009784624, 27.858896857142483], [112.92312424458964, 27.858887729011638], [112.92308128402657, 27.858882394054376], [112.92304533017499, 27.858877929180956], [112.92293919727685, 27.858868667456093], [112.92287201916774, 27.858863319450354], [112.92284162993168, 27.858853965395575], [112.92275804205428, 27.858828237939868], [112.9227124980288, 27.858814219583987], [112.92260292098352, 27.858745256124784], [112.92253215977011, 27.858694527172357], [112.92248947625669, 27.858670747584746], [112.92238640333443, 27.85861332206176], [112.9223426014569, 27.858566977319985], [112.92232386044729, 27.858547148181863], [112.92220724823987, 27.858510352343526], [112.92216068907629, 27.858492040197333], [112.92203045508687, 27.85844081889198], [112.92174959454273, 27.858426097597004], [112.92172728818285, 27.858417763466218], [112.9215861661277, 27.858365035885274], [112.92130580297781, 27.858164541807497], [112.92127355145885, 27.858149032846555], [112.92125443726793, 27.858139841181636], [112.92108090844333, 27.85805639816559], [112.92105145713184, 27.858042236196546], [112.92099737436934, 27.85801622839135], [112.92062872320169, 27.857838959152982], [112.92039306817462, 27.857741489730735], [112.92013861982745, 27.857641476719248], [112.92003899042037, 27.85757848023695], [112.91986303429798, 27.85750918614849], [112.91973423123238, 27.857478143296156], [112.91959485630414, 27.8574035746396], [112.9180824863156, 27.856808006635966], [112.91515363252581, 27.85531571682695], [112.91495222618292, 27.855212454344866], [112.91492578859668, 27.855201521474232], [112.91457513732243, 27.855053031162495], [112.9143934859883, 27.85493935103754], [112.91433208135724, 27.85489450340864], [112.91054087500858, 27.852950793404332], [112.90830661906983, 27.851689079381053], [112.90821021946056, 27.851648933161023], [112.90782577084684, 27.85148882893445], [112.90773156057821, 27.851460624017058]]]}, "properties": {"类型": "历史活化片区", "DYMC": "城正街雨湖路更新片", "MJ": 3168267.04, "BZ": "雨湖区", "负责人": "", "分期": "1"}}]};
+const communityData = {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.92088349167939, 27.858869765597085], [112.91900587061524, 27.858084562592236], [112.91649837710895, 27.85718523699245], [112.91519176736074, 27.856658844697602], [112.91198237236776, 27.855047627695424], [112.90962773177246, 27.85401413305306], [112.90816583727495, 27.85670917861174], [112.90949495990122, 27.857622093978982], [112.91072716487942, 27.858562933009274], [112.91120817413945, 27.858838937658952], [112.91286063488886, 27.859697354842385], [112.91498454885067, 27.860560527676967], [112.91513605011329, 27.859950643695566], [112.91540498394382, 27.85997476840342], [112.91564218168072, 27.860004134556746], [112.91633099620526, 27.860148449542578], [112.91687026503169, 27.860271201050388], [112.91710490075722, 27.86031930266953], [112.917426723661, 27.860385327098363], [112.91759140856328, 27.860420240588645], [112.91773240462989, 27.860447576868065], [112.9178065396629, 27.86046054628045], [112.91782371481524, 27.86046246334662], [112.91784671107895, 27.8604615512147], [112.917876659572, 27.860457079592617], [112.9179292203837, 27.860447081882796], [112.91829453962991, 27.86035450285512], [112.91864370272387, 27.8602543299238], [112.91908849954103, 27.860129100235387], [112.91949031244638, 27.86001162012991], [112.91973852917168, 27.859947993379876], [112.91994090911933, 27.859895318736136], [112.91995161271623, 27.859891575781344], [112.92003016641422, 27.85985794600068], [112.92004410349284, 27.859850123801117], [112.92005670975638, 27.859840302960105], [112.92015825648215, 27.859732131270363], [112.92043930832104, 27.859384768109944], [112.92045970866994, 27.85936373562268], [112.92073105434287, 27.859112452016635], [112.92074469892154, 27.85909570640388], [112.92083260618543, 27.85896235845653], [112.92086722616033, 27.858900476690405], [112.92088349167939, 27.858869765597085]]]}, "properties": {"OBJECTID": 258, "社区名": "关圣殿社区", "街道名": "雨湖城区", "Shape_Leng": 3071.07713752, "Shape_Area": 420163.902004, "SQMC": "关圣殿社区", "JQMC": "雨湖城区", "人口": 0.794524, "分类": "0-0.7", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.90942057311638, 27.853768999853585], [112.90692705916635, 27.852868956624455], [112.9059947265562, 27.854257513105395], [112.9057240225223, 27.854502913097747], [112.9051993236771, 27.85502248210532], [112.90472320413086, 27.85549293713815], [112.90429663897994, 27.856038636430494], [112.90427971433459, 27.856308775216814], [112.90425437779949, 27.856965164773868], [112.9042324180662, 27.857674088962515], [112.90422992388554, 27.85768383595557], [112.90663340378126, 27.858938288015036], [112.9079680789107, 27.856600186491004], [112.90816583727495, 27.85670917861174], [112.90962773177246, 27.85401413305306], [112.90942057311638, 27.853768999853585]]]}, "properties": {"OBJECTID": 260, "社区名": "古梁巷社区", "街道名": "雨湖城区", "Shape_Leng": 1839.67150455, "Shape_Area": 196433.10879, "SQMC": "古梁巷社区", "JQMC": "雨湖城区", "人口": 1.732279, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.90663340378126, 27.858938288015036], [112.90422992388554, 27.85768383595557], [112.90421916292641, 27.857725893170358], [112.90404501139227, 27.858176973307707], [112.90386940972357, 27.85864060988099], [112.90365911297275, 27.85916641911751], [112.90352057489655, 27.859481942280112], [112.90331508112166, 27.859854961657522], [112.90307454379875, 27.860197057509414], [112.90275391416274, 27.860675468010918], [112.90239576894912, 27.861180255202555], [112.9020049432099, 27.861746378985472], [112.90175955555495, 27.862145906939308], [112.90219321748025, 27.862321451111185], [112.90545328758827, 27.86301534754406], [112.9062102922836, 27.860405274647416], [112.90663340378126, 27.858938288015036]]]}, "properties": {"OBJECTID": 261, "社区名": "风车坪社区", "街道名": "雨湖城区", "Shape_Leng": 1672.20295062, "Shape_Area": 157292.795442, "SQMC": "风车坪社区", "JQMC": "雨湖城区", "人口": 2.09359, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.90663340378126, 27.858938288015036], [112.9062102922836, 27.860405274647416], [112.90545328758827, 27.86301534754406], [112.910471446708, 27.86425844465998], [112.91028919966871, 27.86313034688065], [112.90982881262595, 27.861866340197807], [112.90910990671988, 27.860657550736825], [112.90838951501426, 27.859601530450217], [112.90800411543661, 27.85944568533676], [112.90663340378126, 27.858938288015036]]]}, "properties": {"OBJECTID": 262, "社区名": "车站路社区", "街道名": "雨湖城区", "Shape_Leng": 1729.48434853, "Shape_Area": 169852.460544, "SQMC": "车站路社区", "JQMC": "雨湖城区", "人口": 1.66746, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.91498454885067, 27.860560527676967], [112.91286063488886, 27.859697354842385], [112.91120817413945, 27.858838937658952], [112.91072716487942, 27.858562933009274], [112.90949495990122, 27.857622093978982], [112.90816583727495, 27.85670917861174], [112.9079680789107, 27.856600186491004], [112.90663340378126, 27.858938288015036], [112.90800411543661, 27.85944568533676], [112.90838951501426, 27.859601530450217], [112.90910990671988, 27.860657550736825], [112.90982881262595, 27.861866340197807], [112.91028919966871, 27.86313034688065], [112.910471446708, 27.86425844465998], [112.91128596379954, 27.864513277978393], [112.91230868215398, 27.86329948976957], [112.91369791727418, 27.86199326474171], [112.91465335016208, 27.86106544188958], [112.91491442890715, 27.860762067254534], [112.91498454885067, 27.860560527676967]]]}, "properties": {"OBJECTID": 263, "社区名": "雨湖路社区", "街道名": "雨湖城区", "Shape_Leng": 2520.90693318, "Shape_Area": 282001.395333, "SQMC": "雨湖路社区", "JQMC": "雨湖城区", "人口": 1.466264, "分类": "0.7-1.5", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.91128596379954, 27.864513277978393], [112.91387817062946, 27.865489194621997], [112.9165020000876, 27.86656726715138], [112.91658535840891, 27.866411943268123], [112.91658670873754, 27.86640837298633], [112.91651304817809, 27.866378191669035], [112.91657839487516, 27.866259047394703], [112.91656332708665, 27.866230143927627], [112.9165587701771, 27.866227848016088], [112.91654907829256, 27.86622181247885], [112.91652420875964, 27.866200603174224], [112.916517506726, 27.866192790002245], [112.91647887129719, 27.86612742208753], [112.91645171213035, 27.866056832288113], [112.91643964929904, 27.865996707280676], [112.91643831259032, 27.865928916519056], [112.91643481351159, 27.86585826696209], [112.91643179068832, 27.865819164722538], [112.91642661074441, 27.865807168350646], [112.91640941605287, 27.865781475172923], [112.91640202464242, 27.865772895802156], [112.9163633617072, 27.865736228540264], [112.91632233629376, 27.865695275505747], [112.916292308755, 27.8656645159522], [112.91628545846902, 27.865652613104377], [112.91626714839347, 27.865607570662483], [112.91624661853639, 27.865547552319654], [112.91624357333338, 27.86553230072199], [112.91624092901057, 27.86550164929132], [112.91624074864002, 27.865454946652708], [112.91624235135112, 27.865442126988082], [112.91624690722112, 27.865419757394545], [112.91625014762616, 27.865412182831374], [112.91625414605853, 27.865406653395524], [112.91626141783355, 27.865402101068078], [112.91627354589568, 27.865396802361552], [112.91628619253832, 27.865392899966604], [112.91632261643726, 27.86538447034705], [112.9164065896956, 27.865371721739827], [112.91648380538935, 27.865350039310254], [112.91653077687114, 27.865329032396254], [112.91663392542789, 27.865233878889505], [112.91670680437267, 27.86513283667828], [112.91677347435387, 27.865025603963286], [112.9167743634797, 27.865021713202836], [112.91679480660676, 27.864932292421287], [112.91679342133568, 27.8649304784241], [112.91687904439694, 27.864774818734713], [112.91698317841433, 27.864580372410696], [112.91698619267287, 27.86458002581343], [112.9169864886184, 27.864579488795698], [112.91697435287448, 27.864536284381515], [112.91696424487502, 27.864500295033466], [112.91690907438934, 27.864476792595692], [112.91684134094545, 27.86444793712631], [112.91683868888471, 27.864446807240082], [112.91673650788411, 27.86442554487434], [112.91673326478498, 27.864370848137384], [112.91675432276341, 27.864326850734894], [112.91675081095448, 27.864324709626334], [112.91685765203808, 27.864115316955516], [112.91710878820999, 27.863625900234805], [112.91710750216834, 27.8636214582059], [112.9171436334971, 27.863616897436778], [112.91713510823435, 27.863588826664877], [112.91712767030543, 27.86356433382316], [112.91716654744887, 27.863552483187966], [112.9171310960161, 27.863458830698743], [112.91709740980802, 27.863369675695495], [112.91707084425396, 27.863299923739188], [112.91703926793167, 27.86330863448689], [112.91701896368791, 27.863261121076967], [112.91699794893972, 27.863208515492968], [112.91699145614555, 27.86318739824899], [112.91696316716484, 27.86310621274293], [112.91693203675639, 27.8630427830386], [112.91683613541056, 27.862961502533928], [112.9167974827348, 27.862928711222185], [112.91674143989424, 27.862893723027874], [112.91673904653628, 27.862893151021748], [112.91675364171269, 27.862799816757715], [112.91665955579988, 27.862605588463452], [112.91661893888082, 27.86254307715916], [112.91663940251479, 27.862523284582142], [112.91663651296537, 27.86251957532321], [112.91659931098728, 27.862466915846746], [112.91660364780535, 27.86246690496322], [112.91660894282535, 27.862466892117272], [112.916608082367, 27.862443742318945], [112.91660356129613, 27.862443889698813], [112.9166008132176, 27.862374856610447], [112.91658772781739, 27.86237507087489], [112.91658787476511, 27.862363441680056], [112.91659326919942, 27.86231861394491], [112.9166525365665, 27.862261768003243], [112.91669798703354, 27.86219540883801], [112.91680431223982, 27.862053102907396], [112.91686187290648, 27.861989399577123], [112.91696356090047, 27.861864412008753], [112.91696571833225, 27.861861931928537], [112.91704185867765, 27.861774396521916], [112.91498454885067, 27.860560527676967], [112.91491442890715, 27.860762067254534], [112.91465335016208, 27.86106544188958], [112.91369791727418, 27.86199326474171], [112.91230868215398, 27.86329948976957], [112.91128596379954, 27.864513277978393]]]}, "properties": {"OBJECTID": 264, "社区名": "和平桥社区", "街道名": "雨湖城区", "Shape_Leng": 2028.01194233, "Shape_Area": 208070.654759, "SQMC": "和平桥社区", "JQMC": "雨湖城区", "人口": 3.259923, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.93899916185535, 27.866672642482982], [112.938734082288, 27.866516789880894], [112.93817135859453, 27.866261036246406], [112.93765730266834, 27.865984253279283], [112.93705557398941, 27.865592112533697], [112.93659904028516, 27.86521561894612], [112.9360617923981, 27.864838404177192], [112.93558002113667, 27.86456911115947], [112.93503340547186, 27.864327886652106], [112.93462028708598, 27.86415382374969], [112.93439022242889, 27.864057163768422], [112.93391621990534, 27.863823773043446], [112.93344293083364, 27.863518788922057], [112.93274449908836, 27.863125877441], [112.9320531156522, 27.86284045804969], [112.93143146560367, 27.8625311452065], [112.93135737218003, 27.862720757515927], [112.93134886260195, 27.8627446692791], [112.93136123206226, 27.862800156048447], [112.93141026526862, 27.862848328185688], [112.93150868658249, 27.862908397033113], [112.93191018541945, 27.863087634946684], [112.93190469461733, 27.86312081219175], [112.93184404520251, 27.86311569107396], [112.9317784354175, 27.86322166215519], [112.9317162378848, 27.86324287922174], [112.93154719580643, 27.863228777614346], [112.93154297285353, 27.863264256708632], [112.93153504529741, 27.863282518025592], [112.93126331723337, 27.86320449447338], [112.93126363160187, 27.863172417005256], [112.93063655139454, 27.86287750049052], [112.93052427472851, 27.863050607906985], [112.93052011755258, 27.863084241947657], [112.9305098851294, 27.86332386849291], [112.9302368367135, 27.863595163585607], [112.93020692735172, 27.863624881813294], [112.930403423235, 27.86378596276352], [112.93020832609947, 27.863951017376795], [112.93007648485205, 27.864050603500857], [112.92995987299817, 27.864113294944016], [112.92994152107485, 27.86421376841193], [112.92994656088977, 27.864240970017626], [112.92998082555276, 27.86428841052941], [112.93013511076009, 27.864529090219587], [112.92979229072257, 27.864745407212734], [112.9297742310897, 27.8647686318814], [112.92987172524263, 27.864902854600732], [112.92953642338709, 27.86509118155621], [112.92943090817212, 27.865154525762076], [112.92941464740733, 27.86516428754191], [112.9293342519865, 27.865212552451034], [112.92919549275842, 27.865288653336275], [112.92918795954061, 27.865292784892752], [112.92910237620869, 27.86534012084919], [112.92907884528685, 27.865353136225973], [112.92903967106255, 27.865374979909905], [112.92901205406541, 27.865375854545675], [112.92913633810988, 27.865529136393647], [112.92927222527544, 27.865817512889425], [112.92929213102914, 27.865859757310815], [112.92931343227569, 27.86590496220488], [112.92937143983272, 27.866134616026855], [112.92938864104134, 27.866198821991265], [112.92939050172458, 27.866205766795428], [112.92945047613406, 27.86642963817142], [112.92945386991748, 27.866442305211788], [112.92954334630998, 27.86677629900329], [112.92954723366451, 27.86680467129068], [112.92956744568004, 27.86695218966982], [112.9296221825723, 27.867146033530354], [112.92966998909107, 27.867315330579466], [112.92971241588194, 27.86737833591578], [112.92976773062335, 27.86745672437715], [112.92977036337072, 27.867462715216256], [112.92976952630555, 27.867479416440545], [112.92976539715637, 27.86748892748986], [112.929731081137, 27.867512866174028], [112.929170942773, 27.867748944683246], [112.92903535935055, 27.86788637653608], [112.92929025340382, 27.867993242218514], [112.93004698087384, 27.86829914177125], [112.93041992496065, 27.868439697681943], [112.93070440951232, 27.86852696708859], [112.93130568198575, 27.868701446262172], [112.93136786303766, 27.868719045621297], [112.93198238646475, 27.86889297950436], [112.93214649310741, 27.8689231135661], [112.93245552929052, 27.86897986344994], [112.93270435993465, 27.869026164216134], [112.93333353258957, 27.869133283614406], [112.93367053722801, 27.869182799100233], [112.9339624728425, 27.869236667723616], [112.93419632970007, 27.869302107726156], [112.9344173685057, 27.86939144529102], [112.93454572806998, 27.86946292319407], [112.93465966135659, 27.86953270787921], [112.93470168178594, 27.869562054707362], [112.93485632923309, 27.869686037523856], [112.93497767282258, 27.869788564801397], [112.93540839307195, 27.87024838323593], [112.93541513370751, 27.870256085976052], [112.93542401997681, 27.870266239311526], [112.93544389293069, 27.870256344911716], [112.93553698725303, 27.870209993989437], [112.93562729741765, 27.870162137869276], [112.93574638876008, 27.870099030930408], [112.9359422886884, 27.869991757357624], [112.93612836446214, 27.86988195614062], [112.93627265740339, 27.86978740920392], [112.93635914958651, 27.869729652373874], [112.93635940964514, 27.86972947880592], [112.93644307829918, 27.86967360745523], [112.93659603582233, 27.869570148812986], [112.93670261048852, 27.869487271349886], [112.9368320647203, 27.869384766875772], [112.93683260495462, 27.869384339639822], [112.9368468162404, 27.869373085954248], [112.93695433568728, 27.869285838974015], [112.93697724724574, 27.869266657631343], [112.9370738903165, 27.86918574937427], [112.93712296361069, 27.869139149109568], [112.93713668169411, 27.86912612109113], [112.93724941404233, 27.869012101727783], [112.9372551760059, 27.86900642536354], [112.93737148678046, 27.868891838998945], [112.93738383859268, 27.868879670173726], [112.93738749503532, 27.868876068609417], [112.93739677486093, 27.868869321769846], [112.93743032757035, 27.868832339703346], [112.93745516536256, 27.86880248761832], [112.93770842456905, 27.86853238830681], [112.93783218726838, 27.868386793521008], [112.93809248653811, 27.86805905948754], [112.93817050534128, 27.867944898422028], [112.93828995788994, 27.867770109044542], [112.93855874335873, 27.867344254368557], [112.93887575922366, 27.866862207307346], [112.93899916185535, 27.866672642482982]]]}, "properties": {"OBJECTID": 1, "社区名": "三义井社区", "街道名": "城正街社区", "Shape_Leng": 4008.06955555, "Shape_Area": 854089.392421, "SQMC": "三义井社区", "JQMC": "城正街社区", "人口": 1.588004, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.93143146560034, 27.86253114520546], [112.93089003417863, 27.862303835834346], [112.93040721601355, 27.86215635706195], [112.92986376833439, 27.862020287824265], [112.92908537888202, 27.861840396230004], [112.92826638241597, 27.86169000853954], [112.92740549513013, 27.861505291835083], [112.92720623201159, 27.862123331885734], [112.9268509690832, 27.863237323646366], [112.92665696556651, 27.863818048736352], [112.92641605143666, 27.86424560462151], [112.92628928442647, 27.86422930603462], [112.92601187588731, 27.86419093407965], [112.92546809487239, 27.864096342341934], [112.92539971017443, 27.86432446387565], [112.92547512990708, 27.864373592884295], [112.92582760883109, 27.86449154534771], [112.92608523910467, 27.864531175795133], [112.92620868201995, 27.86454455956591], [112.92582561050466, 27.865204807379026], [112.9256224946362, 27.86561837561205], [112.92540164321491, 27.866194102896092], [112.92523770773037, 27.866359630805796], [112.92539521747062, 27.8664178860935], [112.92577340608365, 27.866557762804657], [112.9264938191392, 27.866847777875538], [112.92699436265876, 27.86705472187662], [112.92772514051627, 27.86735488283744], [112.92825543078654, 27.86756573094335], [112.92889139894046, 27.86782602113013], [112.92903535935055, 27.86788637653608], [112.929170942773, 27.867748944683246], [112.929731081137, 27.867512866174028], [112.92976539715637, 27.86748892748986], [112.92976952630555, 27.867479416440545], [112.92977036337072, 27.867462715216256], [112.92976773062335, 27.86745672437715], [112.92971241588194, 27.86737833591578], [112.92966998909107, 27.867315330579466], [112.9296221825723, 27.867146033530354], [112.92956744568004, 27.86695218966982], [112.92954723366451, 27.86680467129068], [112.92954334630998, 27.86677629900329], [112.92945386991748, 27.866442305211788], [112.92945047613406, 27.86642963817142], [112.92939050172458, 27.866205766795428], [112.92938864104134, 27.866198821991265], [112.92937143983272, 27.866134616026855], [112.92931343227569, 27.86590496220488], [112.92929213102914, 27.865859757310815], [112.92927222527544, 27.865817512889425], [112.92913633810988, 27.865529136393647], [112.92901205406541, 27.865375854545675], [112.92903967106255, 27.865374979909905], [112.92907884528685, 27.865353136225973], [112.92910237620869, 27.86534012084919], [112.92918795954061, 27.865292784892752], [112.92919549275842, 27.865288653336275], [112.9293342519865, 27.865212552451034], [112.92941464740733, 27.86516428754191], [112.92943090817212, 27.865154525762076], [112.92953642338709, 27.86509118155621], [112.92987172524263, 27.864902854600732], [112.9297742310897, 27.8647686318814], [112.92979229072257, 27.864745407212734], [112.93013511076009, 27.864529090219587], [112.92998082555276, 27.86428841052941], [112.92994656088977, 27.864240970017626], [112.92994152107485, 27.86421376841193], [112.92995987299817, 27.864113294944016], [112.93007648485205, 27.864050603500857], [112.93020832609947, 27.863951017376795], [112.930403423235, 27.86378596276352], [112.93020692735172, 27.863624881813294], [112.9302368367135, 27.863595163585607], [112.9305098851294, 27.86332386849291], [112.93052011755258, 27.863084241947657], [112.93052427472851, 27.863050607906985], [112.93063655139454, 27.86287750049052], [112.93126363160187, 27.863172417005256], [112.93126331723337, 27.86320449447338], [112.93153504529741, 27.863282518025592], [112.93154297285353, 27.863264256708632], [112.93154719580643, 27.863228777614346], [112.9317162378848, 27.86324287922174], [112.9317784354175, 27.86322166215519], [112.93184404520251, 27.86311569107396], [112.93190469461733, 27.86312081219175], [112.93191018541945, 27.863087634946684], [112.93150868658249, 27.862908397033113], [112.93141026526862, 27.862848328185688], [112.93136123206226, 27.862800156048447], [112.93134886260195, 27.8627446692791], [112.93135737218003, 27.862720757515927], [112.93143146560034, 27.86253114520546]]]}, "properties": {"OBJECTID": 2, "社区名": "洗脚桥社区", "街道名": "城正街社区", "Shape_Leng": 3402.06429123, "Shape_Area": 391997.117806, "SQMC": "洗脚城社区", "JQMC": "城正街社区", "人口": 1.571303, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.91702035235257, 27.861774217517354], [112.91694421207332, 27.861861752985305], [112.9169420546435, 27.861864233067248], [112.91684036673628, 27.861989220717472], [112.91678280612003, 27.86205292409411], [112.91667648100217, 27.86219523011022], [112.91663103057184, 27.86226158931197], [112.91657176325846, 27.862318435301408], [112.9165663688212, 27.862363263040674], [112.91656622187134, 27.862374892235568], [112.91657930725725, 27.862374677960513], [112.91658205531917, 27.862443711046268], [112.9165865763851, 27.862443563662723], [112.91658743683793, 27.862466713460222], [112.91658214182371, 27.86246672631047], [112.9165778050104, 27.862466737197526], [112.91661500693732, 27.8625193966435], [112.91661789648286, 27.862523105900067], [112.91659743286739, 27.862542898493572], [112.91663804972961, 27.86260540976457], [112.91673213550095, 27.862799637981386], [112.91671754032217, 27.862892972256727], [112.91671993367731, 27.86289354426092], [112.91677597644954, 27.862928532409548], [112.91681462907646, 27.862961323689746], [112.91691053030118, 27.86304260411611], [112.91694166066291, 27.86310603379481], [112.91696994959658, 27.86318721927746], [112.91697644237946, 27.863208336516042], [112.9169974570942, 27.86326094208268], [112.91701776130634, 27.863308455475863], [112.9170493375957, 27.86329974470257], [112.91707590310696, 27.863369496636917], [112.91710958926043, 27.863458651612312], [112.91714504063582, 27.863552304072225], [112.91710616353265, 27.86356415473892], [112.91711360144858, 27.863588647574456], [112.91712212669643, 27.863616718339284], [112.9170859954064, 27.86362127913772], [112.91708728144576, 27.86362572116555], [112.91683614545245, 27.864115138087413], [112.91672930444466, 27.86432453084378], [112.91673281624932, 27.864326671949478], [112.9167117582852, 27.86437066936882], [112.91671500136998, 27.864425366102832], [112.91681718225446, 27.864446628385515], [112.916819834312, 27.864447758269584], [112.91688756767593, 27.864476613683816], [112.91694273809658, 27.86450011607668], [112.91695284607783, 27.864536105416324], [112.91696498179985, 27.864579309820414], [112.91696468585454, 27.864579846838385], [112.91696167159924, 27.864580193438098], [112.91685753765758, 27.86477463984556], [112.91677191465949, 27.86493029960358], [112.91677329992861, 27.86493211359963], [112.91675285680628, 27.865021534397272], [112.91675196768065, 27.86502542515841], [112.91668529775133, 27.865132657926928], [112.91661241886648, 27.865233700196736], [112.91650927040392, 27.865328853786643], [112.91646229896946, 27.865349860738633], [112.91638508335609, 27.865371543230722], [112.91630111018723, 27.865384291905986], [112.91626468632646, 27.865392721555025], [112.9162520396969, 27.86539662396022], [112.91623991164701, 27.865401922676547], [112.91623263987906, 27.865406475009877], [112.91622864144996, 27.865412004448928], [112.91622540104706, 27.865419579014688], [112.91622084517755, 27.86544194861179], [112.91621924246567, 27.865454768277644], [112.9162194228268, 27.865501470915863], [112.91622206714065, 27.865532122344202], [112.91622511233732, 27.86554737393932], [112.91624564216005, 27.865607392265158], [112.91626395220663, 27.865652434691956], [112.91627080248277, 27.86566433753416], [112.91630082998257, 27.86569509706318], [112.91634185534296, 27.865736050064186], [112.91638051822868, 27.86577271729451], [112.91638790962925, 27.86578129665923], [112.91640510429687, 27.865806989822865], [112.91641028423274, 27.86581898619049], [112.91641330704498, 27.865858088427377], [112.9164168061059, 27.865928737981097], [112.91641814279977, 27.865996528741256], [112.91643020560599, 27.866056653738575], [112.91645736472913, 27.866127243515567], [112.91649600010268, 27.866192611398574], [112.91650270212746, 27.866200424565072], [112.91652757162892, 27.866221633849406], [112.91653726350167, 27.866227669378734], [112.91654182040574, 27.866229965286568], [112.91655688817205, 27.86625886874125], [112.91649154152302, 27.86637801306794], [112.91656520199581, 27.866408194325302], [112.91656385166793, 27.86641176460817], [112.9164804934073, 27.86656708855819], [112.91730719069463, 27.866899863484125], [112.91841464478091, 27.867355412093985], [112.91953924036856, 27.867774681002633], [112.91976342442933, 27.86733490156144], [112.92007100610608, 27.866765061169286], [112.92030163715687, 27.86632336112838], [112.92078645124113, 27.865409355219743], [112.9211217768631, 27.86478025863348], [112.9211965406683, 27.864642582366063], [112.91702035235257, 27.861774217517354]]]}, "properties": {"OBJECTID": 3, "社区名": "熙春路社区", "街道名": "城正街社区", "Shape_Leng": 1883.47284541, "Shape_Area": 182576.891663, "SQMC": "熙春路社区", "JQMC": "城正街社区", "人口": 2.787514, "分类": "1.5以上", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.92740549513013, 27.861505291835083], [112.9268910248267, 27.8613617522533], [112.92611972017859, 27.86115813830688], [112.925462923527, 27.860937633404763], [112.92471302611361, 27.860614898404126], [112.92416884505566, 27.86039139198052], [112.92350823455543, 27.860060549785356], [112.92279953609825, 27.861465233505125], [112.92212484371527, 27.861188907377176], [112.92221411626078, 27.861027565930687], [112.92224249471762, 27.860980219579393], [112.92235943841452, 27.860773604787077], [112.92253483535285, 27.860519288328735], [112.9228187306304, 27.8599560092916], [112.92249353915028, 27.859799277211145], [112.92208416393359, 27.859641810750553], [112.92195408914381, 27.85984247825232], [112.92186998858209, 27.86008045570625], [112.92215316386643, 27.86021334052305], [112.92215081653987, 27.8602587687261], [112.9220176838417, 27.860539534607927], [112.92179324898696, 27.860435936111042], [112.9215248756352, 27.86033266464091], [112.92126309761402, 27.86025393417381], [112.92112806103465, 27.860186036938572], [112.92109159344808, 27.860248969012506], [112.92103044996895, 27.860347042542596], [112.92086545944619, 27.860660517525268], [112.92085235083174, 27.860655412279968], [112.92081864165486, 27.860728725569732], [112.92085857325344, 27.86074321372568], [112.92083816474181, 27.860777444182272], [112.92077443048116, 27.86094585087593], [112.92075563909226, 27.860980270093737], [112.92073980696274, 27.861033000805953], [112.92074500033293, 27.861034432247937], [112.92097022746724, 27.861094431678872], [112.9209557546579, 27.861137338612846], [112.921073252156, 27.8611653857295], [112.92107186845955, 27.86116903219409], [112.92103682646254, 27.861261361905115], [112.9210355805036, 27.861264645974796], [112.92100298866046, 27.861350520001217], [112.92096464187065, 27.8614515581555], [112.92082236625923, 27.861403045937358], [112.92075210917749, 27.861530228134235], [112.9207041656649, 27.861513513520336], [112.92058527844728, 27.861634673421857], [112.92054408502891, 27.86160948641423], [112.92054172479237, 27.86161240293471], [112.92048499089334, 27.861682487151263], [112.9202138897275, 27.861614861172704], [112.9201963599862, 27.86162132589498], [112.92008243283111, 27.86201652688762], [112.92007630971625, 27.86208214760766], [112.91996700022638, 27.862428887890832], [112.91989772686873, 27.86260333568489], [112.91996061408399, 27.862632576624407], [112.91999548644678, 27.862682080797388], [112.92025467070725, 27.862832002957845], [112.92025308556856, 27.862834336947916], [112.92023157117129, 27.862866018964674], [112.92026202030164, 27.8628811172158], [112.92016246810401, 27.863026257844698], [112.92018099808833, 27.863036325192695], [112.92015939944551, 27.863067792745532], [112.92013198848507, 27.863053274167157], [112.92012470048243, 27.86306705423326], [112.92002231112517, 27.86311866075433], [112.9199891529511, 27.863099658911214], [112.91988550833852, 27.863308930008664], [112.91981267875619, 27.863323115778147], [112.91973479485159, 27.86332330572857], [112.9196479404373, 27.863448842498123], [112.91987808151879, 27.86361546137009], [112.9199333421604, 27.863544487531865], [112.92008592331304, 27.863525086622875], [112.92040629750763, 27.863459225373763], [112.92041529565036, 27.863418061771377], [112.92045179906482, 27.86342672228937], [112.92047123395153, 27.863361598501847], [112.9205046627204, 27.8633673200865], [112.92052983026457, 27.86324922769149], [112.92058275648256, 27.86317898963025], [112.92062727221067, 27.86305363991456], [112.9208363880609, 27.863072552846646], [112.92083628345425, 27.86304552106258], [112.9211281154423, 27.86307808421342], [112.92106437111872, 27.863515960875947], [112.92106765265659, 27.863551441081327], [112.92103584998559, 27.863743348681975], [112.92145676786164, 27.86379810976826], [112.92159484702908, 27.86385307164202], [112.9211965406683, 27.864642582366063], [112.92153065107372, 27.86480411250494], [112.92189485956659, 27.86495793780301], [112.92282799560299, 27.865339605337024], [112.92363187529119, 27.865670039122286], [112.92440347782305, 27.86599102214262], [112.92477858204444, 27.866163959708015], [112.92523770773037, 27.866359630805796], [112.92540164321491, 27.866194102896092], [112.9256224946362, 27.86561837561205], [112.92582561050466, 27.865204807379026], [112.92620868201995, 27.86454455956591], [112.92608523910467, 27.864531175795133], [112.92582760883109, 27.86449154534771], [112.92547512990708, 27.864373592884295], [112.92539971017443, 27.86432446387565], [112.92544866599465, 27.86416115587288], [112.92546809487239, 27.864096342341934], [112.92601187385425, 27.864190934062048], [112.92628928442647, 27.86422930603462], [112.92641605143666, 27.86424560462151], [112.92665696556651, 27.863818048736352], [112.9268509690832, 27.863237323646366], [112.9270463634435, 27.8626246282029], [112.92704712397074, 27.862622243234185], [112.92720623201159, 27.862123331885734], [112.92740549513013, 27.861505291835083]]]}, "properties": {"OBJECTID": 4, "社区名": "泗洲庵社区", "街道名": "城正街社区", "Shape_Leng": 4135.89064152, "Shape_Area": 497275.187997, "SQMC": "泗洲庵社区", "JQMC": "城正街社区", "人口": 1.479187, "分类": "0.7-1.5", "国集": "国有用地"}}, {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [[[112.92350823455543, 27.860060549785356], [112.92186165865205, 27.85932483180729], [112.92086580312916, 27.85886236819428], [112.92084571620529, 27.858900294591503], [112.92081109625616, 27.85896217638545], [112.92072318906243, 27.85909552440357], [112.92070954449542, 27.85911227002735], [112.92043819907069, 27.85936355385272], [112.92041779874002, 27.859384586356448], [112.92013674714102, 27.859731949743594], [112.92003520050532, 27.85984012151535], [112.92002259425377, 27.859849942366562], [112.92000865718882, 27.859857764577402], [112.91993010357044, 27.859891394421826], [112.91991939998454, 27.8598951373853], [112.91971702024873, 27.859947812193372], [112.91946880378325, 27.86001143914498], [112.91906699129574, 27.860128919576642], [112.91862219494207, 27.86025414962609], [112.91827303221142, 27.860354322840728], [112.9179077133477, 27.86044690216484], [112.91785515259168, 27.860456899917306], [112.9178252041306, 27.860461371563733], [112.91780220789194, 27.86046228371431], [112.91778503275881, 27.860460366662117], [112.91771089780968, 27.86044739731006], [112.91756990190319, 27.86042006114531], [112.9174052171884, 27.860385147789017], [112.91708339465052, 27.86031912362191], [112.9168487591916, 27.860271022193523], [112.91630949098035, 27.860148271123965], [112.91562067723838, 27.860003956697316], [112.91538347976682, 27.85997459073626], [112.91511454623519, 27.859950466246254], [112.91496304501776, 27.86056035034686], [112.91702035235257, 27.861774217517354], [112.9211965406683, 27.864642582366063], [112.92159484702908, 27.86385307164202], [112.92145676786164, 27.86379810976826], [112.92103584998559, 27.863743348681975], [112.92106765265659, 27.863551441081327], [112.92106437111872, 27.863515960875947], [112.9211281154423, 27.86307808421342], [112.92083628345425, 27.86304552106258], [112.9208363880609, 27.863072552846646], [112.92062727221067, 27.86305363991456], [112.92058275648256, 27.86317898963025], [112.92052983026457, 27.86324922769149], [112.9205046627204, 27.8633673200865], [112.92047123395153, 27.863361598501847], [112.92045179906482, 27.86342672228937], [112.92041529565036, 27.863418061771377], [112.92040629750763, 27.863459225373763], [112.92008592331304, 27.863525086622875], [112.9199333421604, 27.863544487531865], [112.91987808151879, 27.86361546137009], [112.9196479404373, 27.863448842498123], [112.91973479485159, 27.86332330572857], [112.91981267875619, 27.863323115778147], [112.91988550833852, 27.863308930008664], [112.9199891529511, 27.863099658911214], [112.92002231112517, 27.86311866075433], [112.92012470048243, 27.86306705423326], [112.92013198848507, 27.863053274167157], [112.92015939944551, 27.863067792745532], [112.92018099808833, 27.863036325192695], [112.92016246810401, 27.863026257844698], [112.92026202030164, 27.8628811172158], [112.92023157117129, 27.862866018964674], [112.92025308556856, 27.862834336947916], [112.92025467070725, 27.862832002957845], [112.91999548644678, 27.862682080797388], [112.91996061408399, 27.862632576624407], [112.91989772686873, 27.86260333568489], [112.91996700022638, 27.862428887890832], [112.92007630971625, 27.86208214760766], [112.92008243283111, 27.86201652688762], [112.9201963599862, 27.86162132589498], [112.9202138897275, 27.861614861172704], [112.92048499089334, 27.861682487151263], [112.92054172479237, 27.86161240293471], [112.92054408502891, 27.86160948641423], [112.92058527844728, 27.861634673421857], [112.9207041656649, 27.861513513520336], [112.92075210917749, 27.861530228134235], [112.92082236625923, 27.861403045937358], [112.92096464187065, 27.8614515581555], [112.92100298866046, 27.861350520001217], [112.9210355805036, 27.861264645974796], [112.92103682646254, 27.861261361905115], [112.92107186845955, 27.86116903219409], [112.921073252156, 27.8611653857295], [112.9209557546579, 27.861137338612846], [112.92097022746724, 27.861094431678872], [112.92074500033293, 27.861034432247937], [112.92073980696274, 27.861033000805953], [112.92075563909226, 27.860980270093737], [112.92077443048116, 27.86094585087593], [112.92083816474181, 27.860777444182272], [112.92085857325344, 27.86074321372568], [112.92081864165486, 27.860728725569732], [112.92085235083174, 27.860655412279968], [112.92086545944619, 27.860660517525268], [112.92103044996895, 27.860347042542596], [112.92109159344808, 27.860248969012506], [112.92112806103465, 27.860186036938572], [112.92126309761402, 27.86025393417381], [112.9215248756352, 27.86033266464091], [112.92179324898696, 27.860435936111042], [112.9220176838417, 27.860539534607927], [112.92215081653987, 27.8602587687261], [112.92215316386643, 27.86021334052305], [112.92186998858209, 27.86008045570625], [112.92195408914381, 27.85984247825232], [112.92208416393359, 27.859641810750553], [112.92249353915028, 27.859799277211145], [112.9228187306304, 27.8599560092916], [112.92253483535285, 27.860519288328735], [112.92235943841452, 27.860773604787077], [112.92224249471762, 27.860980219579393], [112.92221411626078, 27.861027565930687], [112.92212484371527, 27.861188907377176], [112.92279953609825, 27.861465233505125], [112.92350823455543, 27.860060549785356]]]}, "properties": {"OBJECTID": 5, "社区名": "瞻岳门社区", "街道名": "城正街社区", "Shape_Leng": 4240.03672064, "Shape_Area": 289120.748387, "SQMC": "瞻岳门社区", "JQMC": "城正街社区", "人口": 1.921525, "分类": "1.5以上", "国集": "国有用地"}}]};
+
+// 片区范围线图层
+const importedBoundaryLayer = L.geoJSON(boundaryData, {
+  style: {
+    color: '#ff0000',
+    weight: 3,
+    dashArray: '10, 8',
+    fillOpacity: 0
+  }
+}).addTo(map);
+
+// 社区范围线图层
+const importedCommunityLayer = L.layerGroup().addTo(map);
+
+const communityColors = ['#e91e63', '#9c27b0', '#3f51b5', '#00bcd4', '#4caf50', '#ffeb3b', '#ff9800', '#795548', '#607d8b', '#f06292', '#8bc34a'];
+
+communityData.features.forEach((feature, idx) => {
+  const layer = L.geoJSON(feature, {
+    style: {
+      color: communityColors[idx % communityColors.length],
+      weight: 2,
+      fillOpacity: 0
+    }
+  });
+  
+  // 计算社区几何中心（质心）
+  const coords = feature.geometry.coordinates[0];
+  let area = 0, centerLat = 0, centerLng = 0;
+  for (let i = 0; i < coords.length - 1; i++) {
+    const [x1, y1] = coords[i];
+    const [x2, y2] = coords[i+1];
+    const cross = x1 * y2 - x2 * y1;
+    area += cross;
+    centerLng += (x1 + x2) * cross;
+    centerLat += (y1 + y2) * cross;
+  }
+  area = area / 2;
+  centerLng = centerLng / (6 * area);
+  centerLat = centerLat / (6 * area);
+  
+  const name = feature.properties['社区名'] || `社区${idx+1}`;
+  
+  const label = L.marker([centerLat, centerLng], {
+    icon: L.divIcon({
+      className: 'community-imported-label',
+      html: `<div style="position:relative; display:flex; align-items:center; gap:5px; font-size:14px; font-weight:600; color:#ff9800; white-space:nowrap; text-shadow: 0 0 4px #fff, 0 0 4px #fff, 0 0 4px #fff, 0 0 4px #fff;">
+        <div style="width:12px; height:12px; background:#ff9800; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,0.5);"></div>
+        ${name}
+      </div>`,
+      iconSize: [120, 20],
+      iconAnchor: [60, 10]
+    })
+  }).addTo(importedCommunityLayer);
+});
+
+const historicalData = [
+  {name:"北五省会馆", location:"112.918662,27.865667", address:"省级文保单位"},
+  {name:"关圣殿", location:"112.917532,27.863921", address:"市级文保单位"},
+  {name:"昭潭书院", location:"112.926453,27.860123", address:"清代书院遗址"},
+  {name:"文庙", location:"112.924469,27.860432", address:"清代孔庙建筑"},
+  {name:"城正街主街", location:"112.927029,27.862846", address:"历史文化街区主街"},
+  {name:"雨湖公园", location:"112.915005,27.859665", address:"城市历史公园"},
+  {name:"观湘门", location:"112.927559,27.861013", address:"古城门遗址"}
+];
+
+const historicalLayer = L.layerGroup().addTo(map);
+
+historicalData.forEach((poi, idx) => {
+  const [lng, lat] = poi.location.split(',').map(Number);
+  const icon = L.divIcon({
+    className: 'custom-historical-icon',
+    html: `<div style="width:16px; height:16px; background:#9c27b0; clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,0.5);"></div>
+           <div style="position:absolute; top:-4px; left:20px; font-size:11px; font-weight:600; color:#7b1fa2; background:rgba(255,255,255,0.9); padding:1px 4px; border-radius:2px; border:1px solid #e1bee7; white-space:nowrap;">${poi.name}</div>`,
+    iconSize: [120, 16],
+    iconAnchor: [8, 8]
+  });
+  
+  const marker = L.marker([lat, lng], { icon: icon });
+  marker.bindPopup(`
+    <div class="popup-content">
+      <h4>🏛️ ${poi.name}</h4>
+      <div class="popup-row"><span class="popup-label">类型:</span><span class="popup-value" style="color:#9c27b0;">历史地标</span></div>
+      <div class="popup-row"><span class="popup-label">说明:</span><span class="popup-value">${poi.address}</span></div>
+    </div>
+  `);
+  marker.addTo(historicalLayer);
+});
+
+
+// 初始化
+createMarkers();
+loadDrawnLayers();
+</script>
+
+</body>
+</html>
+
