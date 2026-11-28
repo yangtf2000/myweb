@@ -8,6 +8,7 @@
 --line:#2C4A66;--line2:#375A78;--txtbg:#16283B;--keybg:#2A2440;--refbg:#101D2C;
 --h-chapter:32px;--h-section:22px;--h-sub:17px;--body:15px;--ref:12.5px;--table:13px;}
 *{box-sizing:border-box;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+html,body{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;}
 body{background:var(--bg);color:var(--ink);margin:0;font-family:"Microsoft YaHei","Noto Sans SC",sans-serif;
 font-size:var(--body);line-height:1.85;text-align:justify;}
 .wrap{max-width:1160px;margin:0 auto;padding:0 52px 60px;}
@@ -92,7 +93,9 @@ padding-bottom:6px;border-bottom:1px solid var(--line);break-after:avoid;}
 .table-cap{font-size:15px;font-weight:600;color:var(--ink2);margin:20px 0 9px;break-after:avoid;}
 .table-wrap{width:100%;overflow-x:auto;margin:0 0 14px;background:var(--txtbg);
 border:1px solid var(--line2);border-radius:5px;break-inside:avoid;}
-table{width:100%;border-collapse:collapse;font-size:var(--table);}
+table{width:100%;border-collapse:collapse;font-size:var(--table);-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+/* 表格内所有文字（含加粗）一律锁定为表格字号，绝不继承正文/关键句的大字号，也不被手机浏览器擅自放大 */
+table td,table th,table td strong,table th strong,table td em,table th em{font-size:var(--table);-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 th{background:var(--l3);color:var(--ink);text-align:left;font-weight:600;}
 td,th{border-bottom:1px solid var(--line);padding:8px 10px;line-height:1.6;vertical-align:top;}
 tbody tr:nth-child(even){background:rgba(40,64,90,.4);}
