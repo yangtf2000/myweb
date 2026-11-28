@@ -35,7 +35,7 @@ font-family:Arial,sans-serif;flex:none;}
 border:0;padding:0;break-after:avoid;}
 
 /* 第3层：节中框 */
-.sect{background:var(--l2);border:1px solid var(--line2);border-left:3px solid var(--blue);
+.sect{background:var(--l2);border:1px solid var(--line2);border-left:0;
 border-radius:6px;padding:0 20px 18px;margin:0 0 20px;break-inside:auto;}
 .sect-hd{font-size:var(--h-section);font-weight:600;color:var(--ink);margin:0 -20px 16px;
 padding:12px 20px;border-bottom:1px solid var(--line2);border-radius:5px 5px 0 0;
@@ -90,10 +90,10 @@ letter-spacing:.3px;margin:0 0 5px;line-height:1.5;}
 ol li{padding-left:4px;}
 .mini-title{font-size:16px;font-weight:600;color:var(--blue);margin:18px 0 10px;
 padding-bottom:6px;border-bottom:1px solid var(--line);break-after:avoid;}
-.table-cap{font-size:15px;font-weight:600;color:var(--ink2);margin:20px 0 9px;break-after:avoid;}
+.table-cap{font-size:15px;font-weight:600;color:var(--ink2);margin:20px 0 9px;break-after:avoid;text-align:center;}
 .table-wrap{width:100%;overflow-x:auto;margin:0 0 14px;background:var(--txtbg);
 border:1px solid var(--line2);border-radius:5px;break-inside:avoid;}
-table{width:100%;border-collapse:collapse;font-size:var(--table);-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+table{width:100%;margin:0 auto;border-collapse:collapse;font-size:var(--table);-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 /* 表格内所有文字（含加粗）一律锁定为表格字号，绝不继承正文/关键句的大字号，也不被手机浏览器擅自放大 */
 table td,table th,table td strong,table th strong,table td em,table th em{font-size:var(--table);-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 th{background:var(--l3);color:var(--ink);text-align:left;font-weight:600;}
@@ -103,9 +103,9 @@ td.num{text-align:right;font-variant-numeric:tabular-nums;font-family:Arial,sans
 td strong{color:var(--accent);}
 figure{margin:18px 0;text-align:center;break-inside:avoid;background:var(--txtbg);
 border:1px solid var(--line2);border-radius:5px;padding:14px;}
-figure img{max-width:70%;height:auto;border:1px solid var(--blue);border-radius:4px;display:inline-block;}
+figure img{max-width:70%;height:auto;border:1px solid var(--blue);border-radius:4px;display:block;margin:0 auto;}
 figcaption{font-size:12px;color:var(--ink3);margin-top:8px;line-height:1.6;}
-figure[data-side]{text-align:left;}
+figure[data-side]{text-align:center;}
 figure[data-side] img{max-width:100%;}
 /* 长沙两图并排：等高裁切，各占一半，图题在图下 */
 .figure-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 16px;break-inside:avoid;}
@@ -126,80 +126,82 @@ border-radius:5px;padding:18px 30px;margin:16px 0 12px;text-align:center;line-he
 .flow-step{display:block;color:var(--ink);font-size:14px;font-weight:600;}
 .flow-arrow{color:var(--accent);font-weight:600;font-size:15px;}
 /* ===== 屏幕端响应式：手机 / 平板 ===== */
-@media screen and (max-width:820px){
+/* ===== 屏幕端：层级压平。章为唯一外框，节不再画框，内容框贴章边，列表缩进留一个符号位 ===== */
+@media screen and (max-width:1300px){
   :root{--h-chapter:24px;--h-section:19px;--h-sub:16px;--body:14px;--ref:12px;--table:12.5px;}
-  .wrap{padding:0 16px 40px;}
+  .wrap{padding:0 12px 40px;}
   h1{font-size:26px;letter-spacing:1px;margin:26px 0 20px;padding-bottom:18px;}
   .toc{padding:16px 16px;margin-bottom:24px;}
   .toc-t{font-size:17px;}
   .toc ol{columns:1;}
-  .chapter{padding:0 14px 16px;margin-bottom:22px;border-radius:6px;}
-  .ch-head{gap:10px;margin:0 -14px 16px;padding:12px 14px;flex-wrap:wrap;}
+  .chapter{padding:0 0 14px;margin-bottom:20px;border-radius:6px;}
+  .ch-head{gap:10px;margin:0 0 14px;padding:12px 14px;flex-wrap:wrap;border-radius:5px 5px 0 0;}
   .ch-badge{min-width:36px;height:36px;font-size:16px;}
   .ch-kind{font-size:11px;letter-spacing:2px;}
-  /* 节这一层不再留蓝色竖线，也不再左右缩进，避免三层框层层往里缩 */
-  .sect{padding:0 0 14px;margin-bottom:16px;border-left:0;}
-  .sect-hd{margin:0 0 12px;padding:10px 12px;}
-  h4,.sub-hd{font-size:17px;margin:16px 0 6px;padding:7px 11px;}
-  .blk{padding:10px 12px;}
-  .blk.list{padding:10px 12px 10px 14px;}
-  /* 列表缩进压到最小：外框只留一条项目符号位，正文宽度尽量留给文字 */
+  /* 节：不画框、不留底色、不留竖线，只保留标题，宽度与章框齐平 */
+  .sect{padding:0 8px 12px;margin:0 0 14px;background:transparent;border:1px solid var(--line2);border-left:0;}
+  .sect-hd{margin:0 0 10px;padding:8px 12px;background:rgba(111,179,224,.07);
+    border:0;border-bottom:1px solid var(--line2);border-radius:0;}
+  h4,.sub-hd{font-size:17px;margin:14px 0 6px;padding:6px 10px;border-left-width:3px;}
+  /* 内容框：贴章边、紧贴上层，框间只留一条细缝 */
+  .blk{padding:8px 10px;margin:0 0 8px;}
+  .blk.list{padding:8px 10px;}
   .blk ul,.blk ol{padding-left:0;}
-  ul li,.blk.list li{padding-left:16px;}
-  ol li{padding-left:20px;}
+  ul li,.blk.list li{padding-left:13px;}
+  ol li{padding-left:16px;}
   ul li::before{left:0;}
-  /* 小节标题并入下方内容框：与内容同底色、同宽，去掉浅蓝横条，少一层 */
+  /* 小节标题与下方内容共用一个框，去掉独立底色横条 */
   .mini-title{background:var(--txtbg);border:1px solid var(--line);border-radius:5px;
-    padding:8px 12px;margin:14px 0 8px;color:var(--blue);}
-  .mini-title + .blk{border-top:0;border-radius:0 0 5px 5px;margin-top:-9px;}
-  .blk.key-lead{font-size:16px;padding:14px;}
-  .blk.lead{font-size:14px;}
-  .blk.ref{margin-left:6px;}
+    padding:7px 10px;margin:12px 0 7px;color:var(--blue);font-size:15px;}
+  .mini-title + .blk{border-top:0;border-radius:0 0 5px 5px;margin-top:-8px;}
+  .blk.key-lead{font-size:16px;padding:12px;border-left:0;}
+  .blk.lead{font-size:14px;border-left:0;}
+  .blk.ref{margin-left:0;}
   .blk.list li > strong:first-child{font-size:15px;}
   .blk.txt > strong:first-child{font-size:15.5px;}
-  .pt-ch{font-size:15.5px;padding:12px;}
-  .pt-sec{font-size:15px;padding:10px 12px;}
+  .pt-ch{font-size:15.5px;padding:12px;margin-left:0;margin-right:0;}
+  .pt-sec{font-size:15px;padding:10px 12px;margin-left:0;margin-right:0;}
   .pt-num{min-width:20px;height:20px;font-size:11px;}
-  .mini-title{font-size:15px;}
-  .table-cap{font-size:14px;}
+  .table-cap{font-size:14px;margin:14px 0 7px;}
   /* 表格窄屏横向滚动，不压成竖条 */
-  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:10px;}
   table{min-width:520px;width:max-content;max-width:none;}
   td,th{padding:6px 8px;}
-  /* 图：并排拆上下，侧置复位为通栏 */
-  figure{padding:10px;margin:14px 0;}
-  figure img{max-width:100%;}
+  /* 图：并排拆上下，侧置复位为通栏；图片本体居中留白 */
+  figure{padding:10px;margin:12px 0;}
+  figure img,figure[data-side] img{max-width:82%;}
   .figure-pair{grid-template-columns:1fr;gap:14px;}
-  .figure-pair .pair-cell img{height:auto;max-height:320px;object-fit:contain;}
+  .figure-pair .pair-cell img{max-width:100%;height:auto;max-height:320px;object-fit:contain;}
   .figure-side{display:block;}
-  .figure-side figure{margin:14px 0;}
-  figure.figure-wide img{width:100%;}
+  .figure-side figure{margin:12px 0;}
+  figure.figure-wide img{width:100%;max-width:100%;}
   .flow-box{padding:14px 12px;}
-  .dataviz{padding:8px;}
+  .dataviz{padding:8px;margin:12px 0;}
   .dataviz svg{width:100%;height:auto;}
 }
 @media screen and (max-width:480px){
-  /* 手机端：四层盒子层层吃内边距，正文被挤成窄条。把外层 padding 压到极小，宽度尽量留给文字。 */
-  .wrap{padding:0 6px 28px;}
-  .chapter{padding:0 2px 14px;margin-bottom:16px;}
-  .ch-head{margin:0 -2px 12px;padding:12px 10px;}
-  .sect{padding:0 0 12px;margin-bottom:14px;border-left:0;}
-  .sect-hd{margin:0 0 10px;padding:10px;}
-  .blk{padding:10px 9px;}
-  .blk.list{padding:10px 9px 10px 12px;}
-  /* 手机窄屏：列表左侧只保留一个项目符号的宽度 */
+  /* 手机：章框即最外层，左右不再留白；节、块逐级贴边，宽度尽量一致 */
+  .wrap{padding:0 4px 24px;}
+  .chapter{padding:0 0 10px;margin-bottom:14px;}
+  .ch-head{margin:0 0 10px;padding:10px 9px;}
+  .sect{padding:0 6px 10px;margin-bottom:10px;}
+  .sect-hd{margin:0 0 8px;padding:7px 9px;}
+  h4,.sub-hd{margin:12px 0 5px;padding:6px 8px;}
+  /* 内容框左右内边距压到最小，列表只留一个项目符号位 */
+  .blk{padding:8px 7px;margin-bottom:7px;}
+  .blk.list{padding:8px 7px;}
   .blk ul,.blk ol{padding-left:0;}
-  ul li,.blk.list li{padding-left:15px;}
-  ol li{padding-left:18px;}
+  ul li,.blk.list li{padding-left:11px;}
+  ol li{padding-left:13px;}
   ul li::before{left:0;}
-  .mini-title{padding:8px 9px;margin:12px 0 8px;}
-  .mini-title + .blk{margin-top:-9px;}
-  .blk.key-lead{padding:12px 10px;}
+  .mini-title{padding:7px 7px;margin:10px 0 6px;}
+  .mini-title + .blk{margin-top:-8px;}
+  .blk.key-lead{padding:10px 8px;}
   h1{font-size:22px;}
   .ch-head h2{font-size:21px;}
   .sect-hd{font-size:17px;}
-  .pt-ch{font-size:14.5px;padding:12px 10px;}
-  .pt-sec{font-size:14px;padding:10px;}
+  .pt-ch{font-size:14.5px;padding:10px 8px;}
+  .pt-sec{font-size:14px;padding:9px 8px;}
   .blk.txt > strong:first-child{font-size:15px;}
   .blk.list li > strong:first-child{font-size:14.5px;}
   table{min-width:460px;}
