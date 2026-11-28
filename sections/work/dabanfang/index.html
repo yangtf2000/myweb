@@ -169,12 +169,20 @@ border-radius:5px;padding:18px 30px;margin:16px 0 12px;text-align:center;line-he
   .dataviz svg{width:100%;height:auto;}
 }
 @media screen and (max-width:480px){
-  .wrap{padding:0 12px 32px;}
+  /* 手机端：四层盒子层层吃内边距，正文被挤成窄条。把外层 padding 压到极小，宽度尽量留给文字。 */
+  .wrap{padding:0 6px 28px;}
+  .chapter{padding:0 2px 14px;margin-bottom:16px;}
+  .ch-head{margin:0 -2px 12px;padding:12px 10px;}
+  .sect{padding:0 2px 12px;margin-bottom:14px;border-left-width:2px;}
+  .sect-hd{margin:0 -2px 10px;padding:10px;}
+  .blk{padding:10px 9px;}
+  .blk.list{padding:10px 9px 10px 20px;}
+  .blk.key-lead{padding:12px 10px;}
   h1{font-size:22px;}
   .ch-head h2{font-size:21px;}
   .sect-hd{font-size:17px;}
-  .pt-ch{font-size:14.5px;}
-  .pt-sec{font-size:14px;}
+  .pt-ch{font-size:14.5px;padding:12px 10px;}
+  .pt-sec{font-size:14px;padding:10px;}
   .blk.txt > strong:first-child{font-size:15px;}
   .blk.list li > strong:first-child{font-size:14.5px;}
   table{min-width:460px;}
