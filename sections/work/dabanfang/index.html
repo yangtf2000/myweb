@@ -137,11 +137,21 @@ border-radius:5px;padding:18px 30px;margin:16px 0 12px;text-align:center;line-he
   .ch-head{gap:10px;margin:0 -14px 16px;padding:12px 14px;flex-wrap:wrap;}
   .ch-badge{min-width:36px;height:36px;font-size:16px;}
   .ch-kind{font-size:11px;letter-spacing:2px;}
-  .sect{padding:0 12px 14px;margin-bottom:16px;}
-  .sect-hd{margin:0 -12px 12px;padding:10px 12px;}
+  /* 节这一层不再留蓝色竖线，也不再左右缩进，避免三层框层层往里缩 */
+  .sect{padding:0 0 14px;margin-bottom:16px;border-left:0;}
+  .sect-hd{margin:0 0 12px;padding:10px 12px;}
   h4,.sub-hd{font-size:17px;margin:16px 0 6px;padding:7px 11px;}
   .blk{padding:10px 12px;}
-  .blk.list{padding:10px 12px 10px 22px;}
+  .blk.list{padding:10px 12px 10px 14px;}
+  /* 列表缩进压到最小：外框只留一条项目符号位，正文宽度尽量留给文字 */
+  .blk ul,.blk ol{padding-left:0;}
+  ul li,.blk.list li{padding-left:16px;}
+  ol li{padding-left:20px;}
+  ul li::before{left:0;}
+  /* 小节标题并入下方内容框：与内容同底色、同宽，去掉浅蓝横条，少一层 */
+  .mini-title{background:var(--txtbg);border:1px solid var(--line);border-radius:5px;
+    padding:8px 12px;margin:14px 0 8px;color:var(--blue);}
+  .mini-title + .blk{border-top:0;border-radius:0 0 5px 5px;margin-top:-9px;}
   .blk.key-lead{font-size:16px;padding:14px;}
   .blk.lead{font-size:14px;}
   .blk.ref{margin-left:6px;}
@@ -173,10 +183,17 @@ border-radius:5px;padding:18px 30px;margin:16px 0 12px;text-align:center;line-he
   .wrap{padding:0 6px 28px;}
   .chapter{padding:0 2px 14px;margin-bottom:16px;}
   .ch-head{margin:0 -2px 12px;padding:12px 10px;}
-  .sect{padding:0 2px 12px;margin-bottom:14px;border-left-width:2px;}
-  .sect-hd{margin:0 -2px 10px;padding:10px;}
+  .sect{padding:0 0 12px;margin-bottom:14px;border-left:0;}
+  .sect-hd{margin:0 0 10px;padding:10px;}
   .blk{padding:10px 9px;}
-  .blk.list{padding:10px 9px 10px 20px;}
+  .blk.list{padding:10px 9px 10px 12px;}
+  /* 手机窄屏：列表左侧只保留一个项目符号的宽度 */
+  .blk ul,.blk ol{padding-left:0;}
+  ul li,.blk.list li{padding-left:15px;}
+  ol li{padding-left:18px;}
+  ul li::before{left:0;}
+  .mini-title{padding:8px 9px;margin:12px 0 8px;}
+  .mini-title + .blk{margin-top:-9px;}
   .blk.key-lead{padding:12px 10px;}
   h1{font-size:22px;}
   .ch-head h2{font-size:21px;}
